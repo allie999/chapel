@@ -353,6 +353,15 @@ Expr* buildDotExpr(BaseAST* base, const char* member) {
                         new CallExpr(PRIM_WIDE_GET_LOCALE, base));
   else
     return new CallExpr(".", base, new_CStringSymbol(member));
+
+  
+  if (!strcmp("gpu", member))
+  { 
+    // "x.gpu"
+    /* using gpu sublocale, set some global variable? pass down to expr*/
+    
+  }
+  
 }
 
 
@@ -2200,8 +2209,6 @@ static Expr* extractLocaleID(Expr* expr) {
 BlockStmt*
 buildOnStmt(Expr* expr, Expr* stmt) {
   checkControlFlow(stmt, "on statement");
-  // Determine the locale is running on GPU or CPU
-  printf(expr.is);
 
   CallExpr* onExpr = new CallExpr(PRIM_DEREF, extractLocaleID(expr));
   
