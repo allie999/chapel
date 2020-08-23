@@ -2200,9 +2200,11 @@ static Expr* extractLocaleID(Expr* expr) {
 BlockStmt*
 buildOnStmt(Expr* expr, Expr* stmt) {
   checkControlFlow(stmt, "on statement");
+  // Determine the locale is running on GPU or CPU
+  printf(expr.is);
 
   CallExpr* onExpr = new CallExpr(PRIM_DEREF, extractLocaleID(expr));
-
+  
   BlockStmt* body = toBlockStmt(stmt);
 
   //

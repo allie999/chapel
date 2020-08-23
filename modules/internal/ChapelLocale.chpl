@@ -353,6 +353,7 @@ module ChapelLocale {
 
     pragma "no doc"
     proc localeid : chpl_localeID_t return __primitive("_wide_get_locale", this);
+    proc sublocid : chpl_sublocID_t return chpl_sublocFromLocaleID(localeid);
 
     proc hostname: string {
       extern proc chpl_nodeName(): c_string;
@@ -430,6 +431,8 @@ module ChapelLocale {
       HaltWrappers.pureVirtualMethodHalt();
       return chpl_buildLocaleID(-1:chpl_nodeID_t, c_sublocid_none);
     }
+
+    
 
     pragma "no doc"
     proc chpl_name() : string {
@@ -780,6 +783,26 @@ module ChapelLocale {
   export
   proc chpl_getLocaleID(ref localeID: chpl_localeID_t) {
     localeID = here_id;
+  }
+  
+  // Add GPU and CPU sublocales.
+  pragma "no doc"
+  extern proc chpl_task_getRequestedSubloc(): chpl_sublocID_t;
+
+  pragma "no doc"
+  pragma "insert line file info"
+  export
+  proc chpl_getSublocaleID(ref sublocaleID: chpl_sublocID_t) {
+    sublocaleID = chpl_task_getRequestedSubloc();
+  }
+
+  pragma "no doc"
+  export
+  proc chpl_isGPUSublocale(ref isGPU: bool ) {
+    if chpl_task_getRequestedSubloc() == 1 then
+       isGPU = true;
+    else
+       isGPU = false;
   }
 
   // Return the locale ID of the current locale

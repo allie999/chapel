@@ -47,6 +47,7 @@ extern AggregateType* dtDist;
 extern AggregateType* dtError;
 extern AggregateType* dtExternalArray;
 extern AggregateType* dtLocaleID;
+extern AggregateType* dtLocaleIsGpu;
 extern AggregateType* dtMainArgument;
 extern AggregateType* dtOnBundleRecord;
 extern AggregateType* dtOpaqueArray;

@@ -35,6 +35,7 @@ AggregateType* dtDist;
 AggregateType* dtError;
 AggregateType* dtExternalArray;
 AggregateType* dtLocaleID;
+AggregateType* dtLocaleIsGpu;
 AggregateType* dtMainArgument;
 AggregateType* dtOnBundleRecord;
 AggregateType* dtOpaqueArray;
@@ -132,6 +133,7 @@ static WellKnownAggregateType sWellKnownAggregateTypes[] = {
   { "CFI_cdesc_t",           &dtCFI_cdesc_t,      false },
   { "chpl_external_array",   &dtExternalArray,    false },
   { "chpl_localeID_t",       &dtLocaleID,         false },
+  { "chpl_localeIsGpu_t",    &dtLocaleIsGpu,      false },
   { "chpl_main_argument",    &dtMainArgument,     false },
   { "chpl_comm_on_bundle_t", &dtOnBundleRecord,   false },
   { "chpl_opaque_array",     &dtOpaqueArray,      false },
