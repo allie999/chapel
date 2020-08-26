@@ -2134,6 +2134,11 @@ processInvalidToken(yyscanner);
 case 182:
 YY_RULE_SETUP
 #line 331 "chapel.lex"
+case 187:
+YY_RULE_SETUP
+#line 224 "chapel.lex"
+return processToken(yyscanner, TGPU);
+	YY_BREAK
 ECHO;
 	YY_BREAK
 #line 2139 "flex-chapel.cpp"

@@ -25,6 +25,8 @@
 #include "passes.h"
 #include "stringutil.h"
 #include "wellknown.h"
+// for debugging
+#include <iostream> 
 
 
 static void callExprHelper(CallExpr* call, BaseAST* arg);
@@ -35,6 +37,7 @@ CallExpr::CallExpr(BaseAST* base,
                    BaseAST* arg3,
                    BaseAST* arg4,
                    BaseAST* arg5) : Expr(E_CallExpr) {
+  // std::cout<< "CallExpr 1 " << std::endl;
   primitive  = NULL;
   baseExpr   = NULL;
   partialTag = false;
@@ -116,6 +119,7 @@ CallExpr::CallExpr(const char* name,
                    BaseAST*    arg3,
                    BaseAST*    arg4,
                    BaseAST*    arg5) : Expr(E_CallExpr) {
+//  std::cout<< "CallExpr 2 with name  "  << name << " " << arg1 << " " << arg2 << std::endl;
   primitive  = NULL;
   baseExpr   = new UnresolvedSymExpr(name);
   partialTag = false;

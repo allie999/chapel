@@ -14,5 +14,4 @@ if printLocaleInfo then
               " GB of memory");
       writeln("  ...has ", here.maxTaskPar, " maximum parallelism");
     }
-
 writeln();

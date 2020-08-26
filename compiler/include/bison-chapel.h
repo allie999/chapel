@@ -244,6 +244,7 @@ extern int yydebug;
      TFOR = 295,
      TFORALL = 296,
      TFORWARDING = 297,
+     TGPU = 430,
      TIF = 298,
      TIMAG = 299,
      TIMPORT = 300,

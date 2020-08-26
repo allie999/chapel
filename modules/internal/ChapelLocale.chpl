@@ -28,43 +28,26 @@
   defined as a single locale, while in a system consisting of a
   group of network-connected multicore nodes or SMPs each node
   would be defined as a locale.
-
   Chapel provides several predefined methods on locales, as well as
   a few variables that describe the locales upon which a program is
   running.
-
   In addition to what is documented below, ``numLocales``, ``LocaleSpace``,
   and ``Locales`` are available as global variables.
-
   ``numLocales`` is the number of top-level (network connected) locales.
-
   .. code-block:: chapel
-
     config const numLocales: int;
-
   ``LocaleSpace`` is the domain over which the global ``Locales`` array is
   defined.
-
   .. code-block:: chapel
-
     const LocaleSpace = {0..numLocales-1};
-
   The global ``Locales`` array contains an entry for each top-level locale.
-
   .. code-block:: chapel
-
     const Locales: [LocaleSpace] locale;
-
-
   One common code idiom in Chapel is the following, which spreads parallel
   tasks across the network-connected locales upon which the program is running:
-
     .. code-block:: chapel
-
       coforall loc in Locales { on loc { ... } }
-
   The default value for a ``locale`` variable is ``Locales[0]``
-
  */
 module ChapelLocale {
 
@@ -206,7 +189,6 @@ module ChapelLocale {
 
   /*
     This returns the locale from which the call is made.
-
     :return: current locale
     :rtype: locale
   */
@@ -214,15 +196,21 @@ module ChapelLocale {
     return chpl_localeID_to_locale(here_id);
   }
 
+  // Temp for testing
+  inline proc GPU{
+    writeln("debug: ChapelLocale GPU line 201");
+    return chpl_localeID_to_locale(here_id);
+  }
+
   // Locale methods we want to have show up in chpldoc start here:
 
   /*
     Get the hostname of this locale.
-
     :returns: the hostname of the compute node associated with the locale
     :rtype: string
   */
   inline proc locale.hostname {
+    writeln("in locale.hostname line 212");
     return this._value.hostname;
   }
 
@@ -230,7 +218,6 @@ module ChapelLocale {
     Get the name of this locale.  In practice, this is often the
     same as the hostname, though in some cases (like when using
     local launchers), it may be modified.
-
     :returns: locale name
     :rtype: string
   */
@@ -240,7 +227,6 @@ module ChapelLocale {
 
   /*
     Get the integer identifier for this locale.
-
     :returns: locale number, in the range ``0..numLocales-1``
     :rtype: int
   */
@@ -270,7 +256,6 @@ module ChapelLocale {
     It can also either take into account any OS limits on which PUs
     the program has access to or do its best to ignore such limits.
     By default it returns the number of accessible physical cores.
-
     :arg logical: Count logical PUs (hyperthreads and the like),
                   or physical ones (cores)?  Defaults to `false`,
                   for cores.
@@ -280,7 +265,6 @@ module ChapelLocale {
     :type accessible: `bool`
     :returns: number of PUs
     :rtype: `int`
-
     There are several things that can cause the OS to limit the
     processor resources available to a Chapel program.  On plain
     Linux systems using the ``taskset(1)`` command will do it.  On
@@ -350,10 +334,10 @@ module ChapelLocale {
     var callStackSize: size_t;
 
     proc id : int return chpl_nodeFromLocaleID(__primitive("_wide_get_locale", this));
+    proc GPU : locale return chpl_localeID_to_locale(here_id);
 
     pragma "no doc"
     proc localeid : chpl_localeID_t return __primitive("_wide_get_locale", this);
-    proc sublocid : chpl_sublocID_t return chpl_sublocFromLocaleID(localeid);
 
     proc hostname: string {
       extern proc chpl_nodeName(): c_string;
@@ -431,8 +415,6 @@ module ChapelLocale {
       HaltWrappers.pureVirtualMethodHalt();
       return chpl_buildLocaleID(-1:chpl_nodeID_t, c_sublocid_none);
     }
-
-    
 
     pragma "no doc"
     proc chpl_name() : string {
@@ -783,26 +765,6 @@ module ChapelLocale {
   export
   proc chpl_getLocaleID(ref localeID: chpl_localeID_t) {
     localeID = here_id;
-  }
-  
-  // Add GPU and CPU sublocales.
-  pragma "no doc"
-  extern proc chpl_task_getRequestedSubloc(): chpl_sublocID_t;
-
-  pragma "no doc"
-  pragma "insert line file info"
-  export
-  proc chpl_getSublocaleID(ref sublocaleID: chpl_sublocID_t) {
-    sublocaleID = chpl_task_getRequestedSubloc();
-  }
-
-  pragma "no doc"
-  export
-  proc chpl_isGPUSublocale(ref isGPU: bool ) {
-    if chpl_task_getRequestedSubloc() == 1 then
-       isGPU = true;
-    else
-       isGPU = false;
   }
 
   // Return the locale ID of the current locale

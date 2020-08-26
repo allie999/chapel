@@ -41,6 +41,8 @@
 
 #include <map>
 #include <utility>
+// for debugging
+#include <iostream> 
 
 static BlockStmt* findStmtWithTag(PrimitiveTag tag, BlockStmt* blockStmt);
 
@@ -351,21 +353,19 @@ Expr* buildDotExpr(BaseAST* base, const char* member) {
     // chpl_localeID_to_locale(_wide_get_node(x)).
     return new CallExpr("chpl_localeID_to_locale",
                         new CallExpr(PRIM_WIDE_GET_LOCALE, base));
-  else
-    return new CallExpr(".", base, new_CStringSymbol(member));
 
-  
-  if (!strcmp("gpu", member))
-  { 
-    // "x.gpu"
-    /* using gpu sublocale, set some global variable? pass down to expr*/
-    
+  if (!strcmp("GPU", member)){
+    // "x.GPU" e.g "here.GPU" "locales[0].GPU"
+      // assert(false);
+      std::cout << "LINE 361 member is GPU" << std::endl;
   }
-  
+
+  return new CallExpr(".", base, new_CStringSymbol(member));
 }
 
 
 Expr* buildDotExpr(const char* base, const char* member) {
+  std::cout << "base is " << base << "member is " << member << std::endl;
   return buildDotExpr(new UnresolvedSymExpr(base), member);
 }
 
@@ -1420,6 +1420,7 @@ CallExpr* buildReduceExpr(Expr* opExpr, Expr* dataExpr, bool zippered) {
                           toCallExpr(dataExpr)->isPrimitive(PRIM_ZIP)));
 
   adjustMinMaxReduceOp(opExpr);
+  std::cout<< "in buildReduceExpr" << std::endl;
   return new CallExpr(PRIM_REDUCE, opExpr, dataExpr,
                       zippered ? gTrue : gFalse);
 }
@@ -2205,9 +2206,18 @@ static Expr* extractLocaleID(Expr* expr) {
   return new CallExpr(PRIM_WIDE_GET_LOCALE, expr);
 }
 
+BlockStmt*
+buildOnStmt(Expr* expr, Expr* stmt, bool isGPU){
+  if (isGPU){
+    // create and pass a context to all the expr inside the code block;
+    std::cout << "in buildOnStmt check isGPU " << std::endl;
+  }
+  return buildOnStmt(expr, stmt);
+}
 
 BlockStmt*
 buildOnStmt(Expr* expr, Expr* stmt) {
+  std::cout << "in buildOnStmt without isGPU" << std::endl;
   checkControlFlow(stmt, "on statement");
 
   CallExpr* onExpr = new CallExpr(PRIM_DEREF, extractLocaleID(expr));

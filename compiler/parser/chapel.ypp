@@ -318,6 +318,7 @@
 %token TDEFER TDELETE TDMAPPED TDO TDOMAIN
 %token TELSE TENUM TEXCEPT TEXPORT TEXTERN
 %token TFALSE TFOR TFORALL TFORWARDING
+%token TGPU
 %token TIF TIMAG TIMPORT TIN TINCLUDE
 %token TINDEX TINLINE TINOUT TINT TITER TINITEQUALS
 %token TLABEL TLAMBDA TLET TLIFETIME TLOCAL TLOCALE
@@ -554,6 +555,7 @@ stmt:
 | TLOCAL expr do_stmt                  { $$ = buildLocalStmt($2, $3); }
 | TLOCAL do_stmt                       { $$ = buildLocalStmt($2); }
 | TON expr do_stmt                     { $$ = buildOnStmt($2, $3); }
+| TON TGPU expr do_stmt                { $$ = buildOnStmt($3, $4, true); }
 | TSERIAL expr do_stmt                 { $$ = buildSerialStmt($2, $3); }
 | TSERIAL do_stmt                      { $$ = buildSerialStmt(new SymExpr(gTrue), $2); }
 | TSYNC stmt                           { $$ = buildSyncStmt($2); }
