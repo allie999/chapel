@@ -2207,11 +2207,10 @@ static Expr* extractLocaleID(Expr* expr) {
 }
 
 BlockStmt*
-buildOnStmt(Expr* expr, Expr* stmt, bool isGPU){
-  if (isGPU){
+buildOnGPUStmt(Expr* expr, Expr* stmt){
     // create and pass a context to all the expr inside the code block;
-    std::cout << "in buildOnStmt check isGPU " << std::endl;
-  }
+    std::cout << "in buildOnGPUStmt" << std::endl;
+
   return buildOnStmt(expr, stmt);
 }
 

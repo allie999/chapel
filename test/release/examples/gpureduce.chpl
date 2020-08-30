@@ -1,4 +1,4 @@
 
-on GPU Locales[0] do {
+on GPU here do {
 
 }

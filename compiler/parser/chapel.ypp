@@ -325,7 +325,7 @@
 %token TMINUSMINUS TMODULE
 %token TNEW TNIL TNOINIT TNONE TNOTHING
 %token TON TONLY TOTHERWISE TOUT TOVERRIDE TOWNED
-%token TPARAM TPLUSPLUS TPRAGMA TPRIMITIVE TPRI VATE TPROC TPROTOTYPE TPUBLIC
+%token TPARAM TPLUSPLUS TPRAGMA TPRIMITIVE TPRIVATE TPROC TPROTOTYPE TPUBLIC
 %token TREAL TRECORD TREDUCE TREF TREQUIRE TRETURN
 %token TSCAN TSELECT TSERIAL TSHARED TSINGLE TSPARSE TSTRING TSUBDOMAIN TSYNC
 %token TTHEN TTHIS TTHROW TTHROWS TTRUE TTRY TTRYBANG TTYPE
@@ -555,7 +555,7 @@ stmt:
 | TLOCAL expr do_stmt                  { $$ = buildLocalStmt($2, $3); }
 | TLOCAL do_stmt                       { $$ = buildLocalStmt($2); }
 | TON expr do_stmt                     { $$ = buildOnStmt($2, $3); }
-| TON TGPU expr do_stmt                { $$ = buildOnStmt($3, $4, true); }
+| TON TGPU expr do_stmt                { $$ = buildOnGPUStmt($3, $4); }
 | TSERIAL expr do_stmt                 { $$ = buildSerialStmt($2, $3); }
 | TSERIAL do_stmt                      { $$ = buildSerialStmt(new SymExpr(gTrue), $2); }
 | TSYNC stmt                           { $$ = buildSyncStmt($2); }

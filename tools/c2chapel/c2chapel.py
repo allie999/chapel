@@ -111,7 +111,7 @@ foundTypes = set()
 # replaced.
 chapelKeywords = set(["align","as","atomic","begin","break","by","class",
     "cobegin","coforall","config","const","continue","delete","dmapped","do",
-    "domain","else","enum","except","export","extern","for","forall","if",
+    "domain","else","enum","except","export","extern","for","forall","GPU","if",
     "in","index","inline","inout","iter","label","lambda","let","local","module","new",
     "nil","noinit","on","only","otherwise","out","param","private","proc",
     "public","record","reduce","ref","require","return","scan","select",
