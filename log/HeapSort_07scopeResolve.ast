@@ -1,0 +1,52 @@
+AST dump for HeapSort after pass scopeResolve.
+Module use list: ChapelStandard Sort 
+
+{ function heapSort[269575](arg Data[269572] :(269570 call chpl__buildArrayRuntimeType unknown Dom[269565] unknown eltType[269568]), arg comparator[269580] : unknown rec[269577] = defaultComparator[267894]) : _unknown[51]
+  {(269588 call chpl_check_comparator comparator[269580] eltType[269568])
+    if(269620 call _cond_test(269596 call !=(269592 call . Dom[269565] c"rank") 1))
+    {(269617 call compilerError "heapSort() requires 1-D array")
+    } const low[269628] "const"(269625 call . Dom[269565] c"alignedLow") const high[269635] "const"(269632 call . Dom[269565] c"alignedHigh") const size[269642] "const"(269639 call . Dom[269565] c"size") const stride[269652] "const"(269651 call abs(269647 call . Dom[269565] c"stride"))(269655 'end of statement') unknown start[269697](269694 IfExpr (269658 call == high[269635] low[269628]) then
+    { scopeless high[269635]
+    } else
+    { scopeless(269691 IfExpr (269663 call % size[269642] 2) then
+      { scopeless(269676 call + low[269628](269674 call *(269671 call /(269668 call - size[269642] 1) 2) stride[269652]))
+      } else
+      { scopeless(269689 call + low[269628](269687 call *(269684 call -(269681 call / size[269642] 2) 1) stride[269652]))
+      } )
+    } )(269700 'end of statement')
+    { unknown tmp[269721] "temp"(269745 'move' tmp[269721](269740 call _cond_test(269742 call >= start[269697] low[269628])))
+      WhileDo[269726]
+      {
+        {(269710 call SiftDown start[269697] high[269635] comparator[269580])(269718 call = start[269697](269716 call - start[269697] stride[269652]))
+        } label _continueLabel[269724](269735 'move' tmp[269721](269730 call _cond_test(269732 call >= start[269697] low[269628]))) tmp[269721]
+      } label _breakLabel[269725]
+    } unknown end[269749] high[269635](269752 'end of statement')
+    { unknown tmp[269784] "temp"(269808 'move' tmp[269784](269803 call _cond_test(269805 call > end[269749] low[269628])))
+      WhileDo[269789]
+      {
+        {(269765 call <=>(269760 call Data[269572] end[269749])(269764 call Data[269572] low[269628]))(269774 call = end[269749](269772 call - end[269749] stride[269652]))(269782 call SiftDown low[269628] end[269749] comparator[269580])
+        } label _continueLabel[269787](269798 'move' tmp[269784](269793 call _cond_test(269795 call > end[269749] low[269628]))) tmp[269784]
+      } label _breakLabel[269788]
+    } function SiftDown[269815](arg start[269813]:_any[178](?), arg end[269817]:_any[178](?), arg comparator[269822] : unknown rec[269819] = defaultComparator[267894]) : _unknown[51] "no return value for void"
+    { unknown root[269827] start[269813](269830 'end of statement')
+      { unknown tmp[269958] "temp"(270000 'move' tmp[269958](269986 call _cond_test(269988 call <=(269990 call +(269992 call -(269994 call * 2 root[269827]) low[269628]) stride[269652]) end[269817])))
+        WhileDo[269963]
+        {
+          { const child[269855] "const"(269853 call +(269850 call -(269847 call * 2 root[269827]) low[269628]) stride[269652])(269858 'end of statement') unknown swap[269861] root[269827](269864 'end of statement')
+            if(269885 call _cond_test(269878 call <(269876 call chpl_compare(269869 call Data[269572] swap[269861])(269874 call Data[269572] child[269855]) comparator[269822]) 0))
+            {(269882 call = swap[269861] child[269855])
+            }
+            if(269925 call _cond_test(269915 call &&(269895 call <=(269892 call + child[269855] stride[269652]) end[269817])(269913 call <(269911 call chpl_compare(269901 call Data[269572] swap[269861])(269909 call Data[269572](269906 call + child[269855] stride[269652])) comparator[269822]) 0)))
+            {(269922 call = swap[269861](269920 call + child[269855] stride[269652]))
+            }
+            if(269954 call _cond_test(269932 call != swap[269861] root[269827]))
+            {(269942 call <=>(269937 call Data[269572] root[269827])(269941 call Data[269572] swap[269861]))(269948 call = root[269827] swap[269861])
+            }
+            {(269951 return _void[55])
+            }
+          } label _continueLabel[269961](269981 'move' tmp[269958](269967 call _cond_test(269969 call <=(269971 call +(269973 call -(269975 call * 2 root[269827]) low[269628]) stride[269652]) end[269817]))) tmp[269958]
+        } label _breakLabel[269962]
+      }
+    }
+  }(355392 'used modules list'(353079 'use' ChapelStandard[20264])(269560 'import' Sort[267885].{defaultComparator, chpl_check_comparator, chpl_compare}))
+}

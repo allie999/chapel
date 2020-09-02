@@ -1,0 +1,2101 @@
+AST dump for Math after pass scopeResolve.
+Module use list: ChapelStandard HaltWrappers SysCTypes 
+
+{
+  unknown e[215786] "param" 2.71828
+  (215789 'end of statement')
+  unknown log2_e[215793] "param" 1.4427
+  (215796 'end of statement')
+  unknown log10_e[215800] "param" 0.434294
+  (215803 'end of statement')
+  unknown ln_2[215807] "param" 0.693147
+  (215810 'end of statement')
+  unknown ln_10[215814] "param" 2.30259
+  (215817 'end of statement')
+  unknown pi[215821] "param" 3.14159
+  (215824 'end of statement')
+  unknown half_pi[215828] "param" 1.5708
+  (215831 'end of statement')
+  unknown quarter_pi[215835] "param" 0.785398
+  (215838 'end of statement')
+  unknown recipr_pi[215842] "param" 0.31831
+  (215845 'end of statement')
+  unknown twice_recipr_pi[215849] "param" 0.63662
+  (215852 'end of statement')
+  unknown twice_recipr_sqrt_pi[215856] "param" 1.12838
+  (215859 'end of statement')
+  unknown sqrt_2[215863] "param" 1.41421
+  (215866 'end of statement')
+  unknown recipr_sqrt_2[215870] "param" 0.707107
+  (215873 'end of statement')
+  function chpl_macro_double_isinf[215883](arg x[215880] :
+  (215879 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "private" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    c_int[20549]
+  }
+  function chpl_macro_float_isinf[215898](arg x[215895] :
+  (215894 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "private" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    c_int[20549]
+  }
+  function chpl_macro_double_isfinite[215913](arg x[215910] :
+  (215909 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "private" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    c_int[20549]
+  }
+  function chpl_macro_float_isfinite[215928](arg x[215925] :
+  (215924 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "private" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    c_int[20549]
+  }
+  function chpl_macro_double_isnan[215943](arg x[215940] :
+  (215939 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "private" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    c_int[20549]
+  }
+  function chpl_macro_float_isnan[215958](arg x[215955] :
+  (215954 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "private" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    c_int[20549]
+  }
+  function fabs[215973](arg x[215970] :
+  (215969 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "private" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (215978 call real(64)[16] 64)
+  }
+  function _logBasePow2Help[215986](in arg val[215984]:_any[178](?), arg baseLog2[215988]:_any[178](?)) : _unknown[51] "inline" "private"
+  {
+    function chpl_bitops_clz_32[215996](arg x[215993] :
+    c_uint[20556]) : _unknown[51] "extern" "local args" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216001 call uint(64)[115] 32)
+    }
+    function chpl_bitops_clz_64[216012](arg x[216009] :
+    c_ulonglong[20584]) : _unknown[51] "extern" "local args" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216017 call uint(64)[115] 64)
+    }
+    unknown lg2[216022] 0
+    (216025 'end of statement')
+    if(216134 call _cond_test(216032 call <=(216030 call numBits(216028 'typeof' val[215984])) 32))
+    {
+      unknown tmp[216045](216043 call _cast(216042 call uint(64)[115] 32) val[215984])(216037 call uint(64)[115] 32)
+      (216048 'end of statement')
+      (216064 call = lg2[216022](216062 call -(216053 call - 32 1)(216060 call _cast int(64)[13](216058 call chpl_bitops_clz_32 tmp[216045]))))
+    }
+    {
+      if(216130 call _cond_test(216073 call ==(216071 call numBits(216069 'typeof' val[215984])) 64))
+      {
+        unknown tmp[216086](216084 call _cast(216083 call uint(64)[115] 64) val[215984])(216078 call uint(64)[115] 64)
+        (216089 'end of statement')
+        (216105 call = lg2[216022](216103 call -(216094 call - 64 1)(216101 call _cast int(64)[13](216099 call chpl_bitops_clz_64 tmp[216086]))))
+      }
+      {
+        (216127 call compilerError "Integer width not handled in logBasePow2")
+      }
+    }
+    (216143 return(216141 call / lg2[216022] baseLog2[215988]))
+  }
+  function abs[216157](arg i[216154] :
+  (216153 call int(64)[13] unknown w[216150])) : _unknown[51] "inline"
+  {
+    (216170 return(216167 IfExpr (216161 call < i[216154] 0) then
+    { scopeless
+      (216164 call - i[216154])
+    } else
+    { scopeless
+      i[216154]
+    } ))
+  }
+  function abs[216185](arg i[216182] :
+  (216181 call uint(64)[115] unknown w[216178])) : _unknown[51] "inline"
+  {
+    (216188 return i[216182])
+  }
+  function abs[216199](param arg i[216196] :
+  integral[199](?)) param : _unknown[51]
+  {
+    (216212 return(216209 IfExpr (216203 call < i[216196] 0) then
+    { scopeless
+      (216206 call - i[216196])
+    } else
+    { scopeless
+      i[216196]
+    } ))
+  }
+  function abs[216226](arg r[216223] :
+  (216222 call real(64)[16] 64)) : _unknown[51] "inline"
+  {
+    (216236 return(216235 call fabs r[216223]))
+  }
+  { scopeless type
+    (216231 call real(64)[16] 64)
+  }
+  function abs[216251](arg x[216248] :
+  (216247 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function fabsf[216266](arg x[216263] :
+    (216262 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216271 call real(64)[16] 32)
+    }
+    (216280 return(216279 call fabsf x[216248]))
+  }
+  { scopeless type
+    (216256 call real(64)[16] 32)
+  }
+  function abs[216294](arg im[216291] :
+  (216290 call imag(64)[130] 64)) : _unknown[51] "inline"
+  {
+    (216307 return(216306 call fabs(216304 call _i2r im[216291])))
+  }
+  { scopeless type
+    (216299 call real(64)[16] 64)
+  }
+  function abs[216322](arg im[216319] :
+  (216318 call imag(64)[130] 32)) : _unknown[51] "inline"
+  {
+    function fabsf[216337](arg x[216334] :
+    (216333 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216342 call real(64)[16] 32)
+    }
+    (216354 return(216353 call fabsf(216351 call _i2r im[216319])))
+  }
+  { scopeless type
+    (216327 call real(64)[16] 32)
+  }
+  function abs[216369](arg z[216366] :
+  (216365 call complex(128)[140] unknown w[216362])) : _unknown[51] "inline"
+  {
+    function cabsf[216387](arg z[216384] :
+    (216383 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216392 call real(64)[16] 32)
+    }
+    function cabs[216406](arg z[216403] :
+    (216402 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216411 call real(64)[16] 64)
+    }
+    if(216431 call _cond_test(216417 call == w[216362] 64))
+    {
+      (216423 return(216422 call cabsf z[216366]))
+    }
+    {
+      (216429 return(216428 call cabs z[216366]))
+    }
+  }
+  { scopeless type
+    (216377 call real(64)[16](216374 call / w[216362] 2))
+  }
+  function carg[216450](arg z[216447] :
+  (216446 call complex(128)[140] unknown w[216443])) : _unknown[51] "inline"
+  {
+    function cargf[216468](arg z[216465] :
+    (216464 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216473 call real(64)[16] 32)
+    }
+    function carg[216487](arg z[216484] :
+    (216483 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216492 call real(64)[16] 64)
+    }
+    if(216512 call _cond_test(216498 call == w[216443] 64))
+    {
+      (216504 return(216503 call cargf z[216447]))
+    }
+    {
+      (216510 return(216509 call carg z[216447]))
+    }
+  }
+  { scopeless type
+    (216458 call real(64)[16](216455 call / w[216443] 2))
+  }
+  function acos[216530](arg x[216527] :
+  (216526 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (216535 call real(64)[16] 64)
+  }
+  function acos[216548](arg x[216545] :
+  (216544 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function acosf[216563](arg x[216560] :
+    (216559 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216568 call real(64)[16] 32)
+    }
+    (216577 return(216576 call acosf x[216545]))
+  }
+  { scopeless type
+    (216553 call real(64)[16] 32)
+  }
+  function acos[216591](arg z[216588] :
+  (216587 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function cacosf[216606](arg z[216603] :
+    (216602 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216611 call complex(128)[140] 64)
+    }
+    (216620 return(216619 call cacosf z[216588]))
+  }
+  { scopeless type
+    (216596 call complex(128)[140] 64)
+  }
+  function acos[216634](arg z[216631] :
+  (216630 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function cacos[216649](arg z[216646] :
+    (216645 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216654 call complex(128)[140] 128)
+    }
+    (216663 return(216662 call cacos z[216631]))
+  }
+  { scopeless type
+    (216639 call complex(128)[140] 128)
+  }
+  function acosh[216677](arg x[216674] :
+  (216673 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (216682 call real(64)[16] 64)
+  }
+  function acosh[216695](arg x[216692] :
+  (216691 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function acoshf[216710](arg x[216707] :
+    (216706 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216715 call real(64)[16] 32)
+    }
+    (216724 return(216723 call acoshf x[216692]))
+  }
+  { scopeless type
+    (216700 call real(64)[16] 32)
+  }
+  function acosh[216738](arg z[216735] :
+  (216734 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function cacoshf[216753](arg z[216750] :
+    (216749 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216758 call complex(128)[140] 64)
+    }
+    (216767 return(216766 call cacoshf z[216735]))
+  }
+  { scopeless type
+    (216743 call complex(128)[140] 64)
+  }
+  function acosh[216781](arg z[216778] :
+  (216777 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function cacosh[216796](arg z[216793] :
+    (216792 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216801 call complex(128)[140] 128)
+    }
+    (216810 return(216809 call cacosh z[216778]))
+  }
+  { scopeless type
+    (216786 call complex(128)[140] 128)
+  }
+  function asin[216824](arg x[216821] :
+  (216820 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (216829 call real(64)[16] 64)
+  }
+  function asin[216842](arg x[216839] :
+  (216838 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function asinf[216857](arg x[216854] :
+    (216853 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216862 call real(64)[16] 32)
+    }
+    (216871 return(216870 call asinf x[216839]))
+  }
+  { scopeless type
+    (216847 call real(64)[16] 32)
+  }
+  function asin[216885](arg z[216882] :
+  (216881 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function casinf[216900](arg z[216897] :
+    (216896 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216905 call complex(128)[140] 64)
+    }
+    (216914 return(216913 call casinf z[216882]))
+  }
+  { scopeless type
+    (216890 call complex(128)[140] 64)
+  }
+  function asin[216928](arg z[216925] :
+  (216924 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function casin[216943](arg z[216940] :
+    (216939 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (216948 call complex(128)[140] 128)
+    }
+    (216957 return(216956 call casin z[216925]))
+  }
+  { scopeless type
+    (216933 call complex(128)[140] 128)
+  }
+  function asinh[216971](arg x[216968] :
+  (216967 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (216976 call real(64)[16] 64)
+  }
+  function asinh[216989](arg x[216986] :
+  (216985 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function asinhf[217004](arg x[217001] :
+    (217000 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217009 call real(64)[16] 32)
+    }
+    (217018 return(217017 call asinhf x[216986]))
+  }
+  { scopeless type
+    (216994 call real(64)[16] 32)
+  }
+  function asinh[217032](arg z[217029] :
+  (217028 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function casinhf[217047](arg z[217044] :
+    (217043 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217052 call complex(128)[140] 64)
+    }
+    (217061 return(217060 call casinhf z[217029]))
+  }
+  { scopeless type
+    (217037 call complex(128)[140] 64)
+  }
+  function asinh[217075](arg z[217072] :
+  (217071 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function casinh[217090](arg z[217087] :
+    (217086 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217095 call complex(128)[140] 128)
+    }
+    (217104 return(217103 call casinh z[217072]))
+  }
+  { scopeless type
+    (217080 call complex(128)[140] 128)
+  }
+  function atan[217118](arg x[217115] :
+  (217114 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (217123 call real(64)[16] 64)
+  }
+  function atan[217136](arg x[217133] :
+  (217132 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function atanf[217151](arg x[217148] :
+    (217147 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217156 call real(64)[16] 32)
+    }
+    (217165 return(217164 call atanf x[217133]))
+  }
+  { scopeless type
+    (217141 call real(64)[16] 32)
+  }
+  function atan[217179](arg z[217176] :
+  (217175 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function catanf[217194](arg z[217191] :
+    (217190 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217199 call complex(128)[140] 64)
+    }
+    (217208 return(217207 call catanf z[217176]))
+  }
+  { scopeless type
+    (217184 call complex(128)[140] 64)
+  }
+  function atan[217222](arg z[217219] :
+  (217218 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function catan[217237](arg z[217234] :
+    (217233 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217242 call complex(128)[140] 128)
+    }
+    (217251 return(217250 call catan z[217219]))
+  }
+  { scopeless type
+    (217227 call complex(128)[140] 128)
+  }
+  function atan2[217265](arg y[217262] :
+  (217261 call real(64)[16] 64), arg x[217271] :
+  (217270 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (217277 call real(64)[16] 64)
+  }
+  function atan2[217290](arg y[217287] :
+  (217286 call real(64)[16] 32), arg x[217296] :
+  (217295 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function atan2f[217312](arg y[217309] :
+    (217308 call real(64)[16] 32), arg x[217318] :
+    (217317 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217324 call real(64)[16] 32)
+    }
+    (217334 return(217333 call atan2f y[217287] x[217296]))
+  }
+  { scopeless type
+    (217302 call real(64)[16] 32)
+  }
+  function atanh[217348](arg x[217345] :
+  (217344 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (217353 call real(64)[16] 64)
+  }
+  function atanh[217366](arg x[217363] :
+  (217362 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function atanhf[217381](arg x[217378] :
+    (217377 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217386 call real(64)[16] 32)
+    }
+    (217395 return(217394 call atanhf x[217363]))
+  }
+  { scopeless type
+    (217371 call real(64)[16] 32)
+  }
+  function atanh[217409](arg z[217406] :
+  (217405 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function catanhf[217424](arg z[217421] :
+    (217420 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217429 call complex(128)[140] 64)
+    }
+    (217438 return(217437 call catanhf z[217406]))
+  }
+  { scopeless type
+    (217414 call complex(128)[140] 64)
+  }
+  function atanh[217452](arg z[217449] :
+  (217448 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function catanh[217467](arg z[217464] :
+    (217463 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217472 call complex(128)[140] 128)
+    }
+    (217481 return(217480 call catanh z[217449]))
+  }
+  { scopeless type
+    (217457 call complex(128)[140] 128)
+  }
+  function cbrt[217495](arg x[217492] :
+  (217491 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (217500 call real(64)[16] 64)
+  }
+  function cbrt[217513](arg x[217510] :
+  (217509 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function cbrtf[217528](arg x[217525] :
+    (217524 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217533 call real(64)[16] 32)
+    }
+    (217542 return(217541 call cbrtf x[217510]))
+  }
+  { scopeless type
+    (217518 call real(64)[16] 32)
+  }
+  function ceil[217556](arg x[217553] :
+  (217552 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (217561 call real(64)[16] 64)
+  }
+  function ceil[217574](arg x[217571] :
+  (217570 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function ceilf[217589](arg x[217586] :
+    (217585 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217594 call real(64)[16] 32)
+    }
+    (217603 return(217602 call ceilf x[217571]))
+  }
+  { scopeless type
+    (217579 call real(64)[16] 32)
+  }
+  function conjg[217618](arg z[217615] :
+  (217614 call complex(128)[140] unknown w[217611])) : _unknown[51] "inline"
+  {
+    function conjf[217629](arg z[217626] :
+    (217625 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217634 call complex(128)[140] 64)
+    }
+    function conj[217648](arg z[217645] :
+    (217644 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217653 call complex(128)[140] 128)
+    }
+    if(217673 call _cond_test(217659 call == w[217611] 64))
+    {
+      (217665 return(217664 call conjf z[217615]))
+    }
+    {
+      (217671 return(217670 call conj z[217615]))
+    }
+  }
+  function conjg[217691](arg z[217688] :
+  (217687 call imag(64)[130] unknown w[217684])) : _unknown[51] "inline"
+  {
+    (217696 return(217694 call - z[217688]))
+  }
+  function conjg[217711](arg z[217708] :
+  (217707 call int(64)[13] unknown w[217704])) : _unknown[51] "inline"
+  {
+    (217714 return z[217708])
+  }
+  function conjg[217729](arg z[217726] :
+  (217725 call uint(64)[115] unknown w[217722])) : _unknown[51] "inline"
+  {
+    (217732 return z[217726])
+  }
+  function conjg[217747](arg z[217744] :
+  (217743 call real(64)[16] unknown w[217740])) : _unknown[51] "inline"
+  {
+    (217750 return z[217744])
+  }
+  function cproj[217765](arg z[217762] :
+  (217761 call complex(128)[140] unknown w[217758])) : _unknown[51] "inline"
+  {
+    function cprojf[217783](arg z[217780] :
+    (217779 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217788 call real(64)[16] 32)
+    }
+    function cproj[217802](arg z[217799] :
+    (217798 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217807 call real(64)[16] 64)
+    }
+    if(217827 call _cond_test(217813 call == w[217758] 64))
+    {
+      (217819 return(217818 call cprojf z[217762]))
+    }
+    {
+      (217825 return(217824 call cproj z[217762]))
+    }
+  }
+  { scopeless type
+    (217773 call real(64)[16](217770 call / w[217758] 2))
+  }
+  function cos[217845](arg x[217842] :
+  (217841 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (217850 call real(64)[16] 64)
+  }
+  function cos[217863](arg x[217860] :
+  (217859 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function cosf[217878](arg x[217875] :
+    (217874 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217883 call real(64)[16] 32)
+    }
+    (217892 return(217891 call cosf x[217860]))
+  }
+  { scopeless type
+    (217868 call real(64)[16] 32)
+  }
+  function cos[217906](arg z[217903] :
+  (217902 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function ccosf[217921](arg z[217918] :
+    (217917 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217926 call complex(128)[140] 64)
+    }
+    (217935 return(217934 call ccosf z[217903]))
+  }
+  { scopeless type
+    (217911 call complex(128)[140] 64)
+  }
+  function cos[217949](arg z[217946] :
+  (217945 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function ccos[217964](arg z[217961] :
+    (217960 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (217969 call complex(128)[140] 128)
+    }
+    (217978 return(217977 call ccos z[217946]))
+  }
+  { scopeless type
+    (217954 call complex(128)[140] 128)
+  }
+  function cosh[217992](arg x[217989] :
+  (217988 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (217997 call real(64)[16] 64)
+  }
+  function cosh[218010](arg x[218007] :
+  (218006 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function coshf[218025](arg x[218022] :
+    (218021 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (218030 call real(64)[16] 32)
+    }
+    (218039 return(218038 call coshf x[218007]))
+  }
+  { scopeless type
+    (218015 call real(64)[16] 32)
+  }
+  function cosh[218053](arg z[218050] :
+  (218049 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function ccoshf[218068](arg z[218065] :
+    (218064 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (218073 call complex(128)[140] 64)
+    }
+    (218082 return(218081 call ccoshf z[218050]))
+  }
+  { scopeless type
+    (218058 call complex(128)[140] 64)
+  }
+  function cosh[218096](arg z[218093] :
+  (218092 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function ccosh[218111](arg z[218108] :
+    (218107 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (218116 call complex(128)[140] 128)
+    }
+    (218125 return(218124 call ccosh z[218093]))
+  }
+  { scopeless type
+    (218101 call complex(128)[140] 128)
+  }
+  function divceil[218136](param arg m[218133] :
+  integral[199](?), param arg n[218139] :
+  integral[199](?)) param : _unknown[51]
+  {
+    (218191 return(218188 IfExpr (218145 call isNonnegative m[218133]) then
+    { scopeless(218164 IfExpr (218149 call isNonnegative n[218139]) then
+      { scopeless
+        (218158 call /(218155 call -(218152 call + m[218133] n[218139]) 1) n[218139])
+      } else
+      { scopeless
+        (218162 call / m[218133] n[218139])
+      } )
+    } else
+    { scopeless(218185 IfExpr (218170 call isNonnegative n[218139]) then
+      { scopeless
+        (218173 call / m[218133] n[218139])
+      } else
+      { scopeless
+        (218183 call /(218180 call +(218177 call + m[218133] n[218139]) 1) n[218139])
+      } )
+    } ))
+  }
+  function divceil[218202](arg m[218199] :
+  integral[199](?), arg n[218205] :
+  integral[199](?)) : _unknown[51]
+  {
+    (218257 return(218254 IfExpr (218211 call isNonnegative m[218199]) then
+    { scopeless(218230 IfExpr (218215 call isNonnegative n[218205]) then
+      { scopeless
+        (218224 call /(218221 call -(218218 call + m[218199] n[218205]) 1) n[218205])
+      } else
+      { scopeless
+        (218228 call / m[218199] n[218205])
+      } )
+    } else
+    { scopeless(218251 IfExpr (218236 call isNonnegative n[218205]) then
+      { scopeless
+        (218239 call / m[218199] n[218205])
+      } else
+      { scopeless
+        (218249 call /(218246 call +(218243 call + m[218199] n[218205]) 1) n[218205])
+      } )
+    } ))
+  }
+  function divceilpos[218268](arg m[218265] :
+  integral[199](?), arg n[218271] :
+  integral[199](?)) : _unknown[51]
+  {
+    if(218311 call _cond_test(218288 call ||(218279 call !(218278 call isIntType(218276 'typeof' m[218265])))(218286 call !(218285 call isIntType(218283 'typeof' n[218271])))))
+    {
+      (218309 call compilerError "divceilpos() accepts only arguments of signed integer types")
+    }
+    (218327 return(218325 call +(218322 call /(218319 call - m[218265] 1) n[218271]) 1))
+  }
+  function divfloor[218337](param arg m[218334] :
+  integral[199](?), param arg n[218340] :
+  integral[199](?)) param : _unknown[51]
+  {
+    (218392 return(218389 IfExpr (218346 call isNonnegative m[218334]) then
+    { scopeless(218365 IfExpr (218350 call isNonnegative n[218340]) then
+      { scopeless
+        (218353 call / m[218334] n[218340])
+      } else
+      { scopeless
+        (218363 call /(218360 call -(218357 call - m[218334] n[218340]) 1) n[218340])
+      } )
+    } else
+    { scopeless(218386 IfExpr (218371 call isNonnegative n[218340]) then
+      { scopeless
+        (218380 call /(218377 call +(218374 call - m[218334] n[218340]) 1) n[218340])
+      } else
+      { scopeless
+        (218384 call / m[218334] n[218340])
+      } )
+    } ))
+  }
+  function divfloor[218403](arg m[218400] :
+  integral[199](?), arg n[218406] :
+  integral[199](?)) : _unknown[51]
+  {
+    (218458 return(218455 IfExpr (218412 call isNonnegative m[218400]) then
+    { scopeless(218431 IfExpr (218416 call isNonnegative n[218406]) then
+      { scopeless
+        (218419 call / m[218400] n[218406])
+      } else
+      { scopeless
+        (218429 call /(218426 call -(218423 call - m[218400] n[218406]) 1) n[218406])
+      } )
+    } else
+    { scopeless(218452 IfExpr (218437 call isNonnegative n[218406]) then
+      { scopeless
+        (218446 call /(218443 call +(218440 call - m[218400] n[218406]) 1) n[218406])
+      } else
+      { scopeless
+        (218450 call / m[218400] n[218406])
+      } )
+    } ))
+  }
+  function divfloorpos[218469](arg m[218466] :
+  integral[199](?), arg n[218472] :
+  integral[199](?)) : _unknown[51]
+  {
+    if(218512 call _cond_test(218489 call ||(218480 call !(218479 call isIntType(218477 'typeof' m[218466])))(218487 call !(218486 call isIntType(218484 'typeof' n[218472])))))
+    {
+      (218510 call compilerError "divfloorpos() accepts only arguments of signed integer types")
+    }
+    (218522 return(218520 call / m[218466] n[218472]))
+  }
+  function erf[218535](arg x[218532] :
+  (218531 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (218540 call real(64)[16] 64)
+  }
+  function erf[218553](arg x[218550] :
+  (218549 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function erff[218568](arg x[218565] :
+    (218564 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (218573 call real(64)[16] 32)
+    }
+    (218582 return(218581 call erff x[218550]))
+  }
+  { scopeless type
+    (218558 call real(64)[16] 32)
+  }
+  function erfc[218596](arg x[218593] :
+  (218592 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (218601 call real(64)[16] 64)
+  }
+  function erfc[218614](arg x[218611] :
+  (218610 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function erfcf[218629](arg x[218626] :
+    (218625 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (218634 call real(64)[16] 32)
+    }
+    (218643 return(218642 call erfcf x[218611]))
+  }
+  { scopeless type
+    (218619 call real(64)[16] 32)
+  }
+  function exp[218657](arg x[218654] :
+  (218653 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (218662 call real(64)[16] 64)
+  }
+  function exp[218675](arg x[218672] :
+  (218671 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function expf[218690](arg x[218687] :
+    (218686 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (218695 call real(64)[16] 32)
+    }
+    (218704 return(218703 call expf x[218672]))
+  }
+  { scopeless type
+    (218680 call real(64)[16] 32)
+  }
+  function exp[218718](arg z[218715] :
+  (218714 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function cexpf[218733](arg z[218730] :
+    (218729 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (218738 call complex(128)[140] 64)
+    }
+    (218747 return(218746 call cexpf z[218715]))
+  }
+  { scopeless type
+    (218723 call complex(128)[140] 64)
+  }
+  function exp[218761](arg z[218758] :
+  (218757 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function cexp[218776](arg z[218773] :
+    (218772 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (218781 call complex(128)[140] 128)
+    }
+    (218790 return(218789 call cexp z[218758]))
+  }
+  { scopeless type
+    (218766 call complex(128)[140] 128)
+  }
+  function exp2[218804](arg x[218801] :
+  (218800 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (218809 call real(64)[16] 64)
+  }
+  function exp2[218822](arg x[218819] :
+  (218818 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function exp2f[218837](arg x[218834] :
+    (218833 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (218842 call real(64)[16] 32)
+    }
+    (218851 return(218850 call exp2f x[218819]))
+  }
+  { scopeless type
+    (218827 call real(64)[16] 32)
+  }
+  function expm1[218865](arg x[218862] :
+  (218861 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (218870 call real(64)[16] 64)
+  }
+  function expm1[218883](arg x[218880] :
+  (218879 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function expm1f[218898](arg x[218895] :
+    (218894 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (218903 call real(64)[16] 32)
+    }
+    (218912 return(218911 call expm1f x[218880]))
+  }
+  { scopeless type
+    (218888 call real(64)[16] 32)
+  }
+  function floor[218926](arg x[218923] :
+  (218922 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (218931 call real(64)[16] 64)
+  }
+  function floor[218944](arg x[218941] :
+  (218940 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function floorf[218959](arg x[218956] :
+    (218955 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (218964 call real(64)[16] 32)
+    }
+    (218973 return(218972 call floorf x[218941]))
+  }
+  { scopeless type
+    (218949 call real(64)[16] 32)
+  }
+  function INFINITY[218980]() param : _unknown[51] "inline" "no parens"
+  {
+    (218987 return INFINITY)
+  }
+  { scopeless type
+    (218985 call real(64)[16] 64)
+  }
+  function isfinite[219002](arg x[218999] :
+  (218998 call real(64)[16] 64)) : _unknown[51] "inline"
+  {
+    (219012 return(219010 call _cast bool[10](219008 call chpl_macro_double_isfinite x[218999])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function isfinite[219027](arg x[219024] :
+  (219023 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    (219037 return(219035 call _cast bool[10](219033 call chpl_macro_float_isfinite x[219024])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function isinf[219052](arg x[219049] :
+  (219048 call real(64)[16] 64)) : _unknown[51] "inline"
+  {
+    (219062 return(219060 call _cast bool[10](219058 call chpl_macro_double_isinf x[219049])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function isinf[219077](arg x[219074] :
+  (219073 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    (219087 return(219085 call _cast bool[10](219083 call chpl_macro_float_isinf x[219074])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function isnan[219102](arg x[219099] :
+  (219098 call real(64)[16] 64)) : _unknown[51] "inline"
+  {
+    (219112 return(219110 call _cast bool[10](219108 call chpl_macro_double_isnan x[219099])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function isnan[219127](arg x[219124] :
+  (219123 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    (219137 return(219135 call _cast bool[10](219133 call chpl_macro_float_isnan x[219124])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function ldexp[219152](arg x[219149] :
+  (219148 call real(64)[16] 64), arg n[219158] :
+  (219157 call int(64)[13] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (219164 call real(64)[16] 64)
+  }
+  function ldexp[219177](arg x[219174] :
+  (219173 call real(64)[16] 32), arg n[219183] :
+  (219182 call int(64)[13] 32)) : _unknown[51] "inline"
+  {
+    function ldexpf[219199](arg x[219196] :
+    (219195 call real(64)[16] 32), arg n[219205] :
+    (219204 call int(64)[13] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (219211 call real(64)[16] 32)
+    }
+    (219221 return(219220 call ldexpf x[219174] n[219183]))
+  }
+  { scopeless type
+    (219189 call real(64)[16] 32)
+  }
+  function lgamma[219235](arg x[219232] :
+  (219231 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (219240 call real(64)[16] 64)
+  }
+  function lgamma[219253](arg x[219250] :
+  (219249 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function lgammaf[219268](arg x[219265] :
+    (219264 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (219273 call real(64)[16] 32)
+    }
+    (219282 return(219281 call lgammaf x[219250]))
+  }
+  { scopeless type
+    (219258 call real(64)[16] 32)
+  }
+  function log[219296](arg x[219293] :
+  (219292 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (219301 call real(64)[16] 64)
+  }
+  function log[219314](arg x[219311] :
+  (219310 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function logf[219329](arg x[219326] :
+    (219325 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (219334 call real(64)[16] 32)
+    }
+    (219343 return(219342 call logf x[219311]))
+  }
+  { scopeless type
+    (219319 call real(64)[16] 32)
+  }
+  function log[219357](arg z[219354] :
+  (219353 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function clogf[219372](arg z[219369] :
+    (219368 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (219377 call complex(128)[140] 64)
+    }
+    (219386 return(219385 call clogf z[219354]))
+  }
+  { scopeless type
+    (219362 call complex(128)[140] 64)
+  }
+  function log[219400](arg z[219397] :
+  (219396 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function clog[219415](arg z[219412] :
+    (219411 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (219420 call complex(128)[140] 128)
+    }
+    (219429 return(219428 call clog z[219397]))
+  }
+  { scopeless type
+    (219405 call complex(128)[140] 128)
+  }
+  function log10[219443](arg x[219440] :
+  (219439 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (219448 call real(64)[16] 64)
+  }
+  function log10[219461](arg x[219458] :
+  (219457 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function log10f[219476](arg x[219473] :
+    (219472 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (219481 call real(64)[16] 32)
+    }
+    (219490 return(219489 call log10f x[219458]))
+  }
+  { scopeless type
+    (219466 call real(64)[16] 32)
+  }
+  function log1p[219504](arg x[219501] :
+  (219500 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (219509 call real(64)[16] 64)
+  }
+  function log1p[219522](arg x[219519] :
+  (219518 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function log1pf[219537](arg x[219534] :
+    (219533 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (219542 call real(64)[16] 32)
+    }
+    (219551 return(219550 call log1pf x[219519]))
+  }
+  { scopeless type
+    (219527 call real(64)[16] 32)
+  }
+  function logBasePow2[219566](arg val[219563] :
+  (219562 call int(64)[13] unknown w[219559]), arg baseLog2[219568]:_any[178](?)) : _unknown[51] "inline"
+  {
+    if(219596 call _cond_test(219572 call < val[219563] 1))
+    {
+      (219593 call halt "Can't take the log() of a non-positive integer")
+    }
+    (219606 return(219605 call _logBasePow2Help val[219563] baseLog2[219568]))
+  }
+  function logBasePow2[219620](arg val[219617] :
+  (219616 call uint(64)[115] unknown w[219613]), arg baseLog2[219622]:_any[178](?)) : _unknown[51] "inline"
+  {
+    (219629 return(219628 call _logBasePow2Help val[219617] baseLog2[219622]))
+  }
+  function log2[219643](arg x[219640] :
+  (219639 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (219648 call real(64)[16] 64)
+  }
+  function log2[219661](arg x[219658] :
+  (219657 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function log2f[219676](arg x[219673] :
+    (219672 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (219681 call real(64)[16] 32)
+    }
+    (219690 return(219689 call log2f x[219658]))
+  }
+  { scopeless type
+    (219666 call real(64)[16] 32)
+  }
+  function log2[219705](arg val[219702] :
+  (219701 call int(64)[13] unknown w[219698])) : _unknown[51] "inline"
+  {
+    (219712 return(219711 call logBasePow2 val[219702] 1))
+  }
+  function log2[219727](arg val[219724] :
+  (219723 call uint(64)[115] unknown w[219720])) : _unknown[51] "inline"
+  {
+    (219734 return(219733 call logBasePow2 val[219724] 1))
+  }
+  function mod[219745](param arg m[219742] :
+  integral[199](?), param arg n[219748] :
+  integral[199](?)) param : _unknown[51]
+  {
+    unknown temp[219755] "param"(219753 call % m[219742] n[219748])
+    (219758 'end of statement')
+    (219800 return(219797 IfExpr (219763 call isNonnegative n[219748]) then
+    { scopeless(219782 IfExpr (219768 call isUintType(219766 'typeof' m[219742])) then
+      { scopeless
+        temp[219755]
+      } else
+      { scopeless(219779 IfExpr (219772 call >= temp[219755] 0) then
+        { scopeless
+          temp[219755]
+        } else
+        { scopeless
+          (219777 call + temp[219755] n[219748])
+        } )
+      } )
+    } else
+    { scopeless(219794 IfExpr (219787 call <= temp[219755] 0) then
+      { scopeless
+        temp[219755]
+      } else
+      { scopeless
+        (219792 call + temp[219755] n[219748])
+      } )
+    } ))
+  }
+  function mod[219810](arg m[219807] :
+  integral[199](?), arg n[219813] :
+  integral[199](?)) : _unknown[51]
+  {
+    const temp[219820] "const"(219818 call % m[219807] n[219813])
+    (219823 'end of statement')
+    (219865 return(219862 IfExpr (219828 call isNonnegative n[219813]) then
+    { scopeless(219847 IfExpr (219833 call isUintType(219831 'typeof' m[219807])) then
+      { scopeless
+        temp[219820]
+      } else
+      { scopeless(219844 IfExpr (219837 call >= temp[219820] 0) then
+        { scopeless
+          temp[219820]
+        } else
+        { scopeless
+          (219842 call + temp[219820] n[219813])
+        } )
+      } )
+    } else
+    { scopeless(219859 IfExpr (219852 call <= temp[219820] 0) then
+      { scopeless
+        temp[219820]
+      } else
+      { scopeless
+        (219857 call + temp[219820] n[219813])
+      } )
+    } ))
+  }
+  function mod[219879](arg x[219876] :
+  (219875 call real(64)[16] unknown w[219872]), arg y[219885] :
+  (219884 call real(64)[16] w[219872])) : _unknown[51]
+  {
+    (219905 return(219903 call - x[219876](219901 call * y[219885](219900 call floor(219897 call / x[219876] y[219885])))))
+  }
+  { scopeless type
+    (219891 call real(64)[16] w[219872])
+  }
+  function NAN[219913]() param : _unknown[51] "inline" "no parens"
+  {
+    (219920 return NAN)
+  }
+  { scopeless type
+    (219918 call real(64)[16] 64)
+  }
+  function nearbyint[219935](arg x[219932] :
+  (219931 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (219940 call real(64)[16] 64)
+  }
+  function nearbyint[219953](arg x[219950] :
+  (219949 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function nearbyintf[219968](arg x[219965] :
+    (219964 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (219973 call real(64)[16] 32)
+    }
+    (219982 return(219981 call nearbyintf x[219950]))
+  }
+  { scopeless type
+    (219958 call real(64)[16] 32)
+  }
+  function rint[219996](arg x[219993] :
+  (219992 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (220001 call real(64)[16] 64)
+  }
+  function rint[220014](arg x[220011] :
+  (220010 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function rintf[220029](arg x[220026] :
+    (220025 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220034 call real(64)[16] 32)
+    }
+    (220043 return(220042 call rintf x[220011]))
+  }
+  { scopeless type
+    (220019 call real(64)[16] 32)
+  }
+  function round[220057](arg x[220054] :
+  (220053 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (220062 call real(64)[16] 64)
+  }
+  function round[220075](arg x[220072] :
+  (220071 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function roundf[220090](arg x[220087] :
+    (220086 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220095 call real(64)[16] 32)
+    }
+    (220104 return(220103 call roundf x[220072]))
+  }
+  { scopeless type
+    (220080 call real(64)[16] 32)
+  }
+  function sgn[220119](arg i[220116] :
+  (220115 call int(64)[13] unknown w[220112])) : _unknown[51] "inline"
+  {
+    (220153 return(220151 call _cast(220150 call int(64)[13] 8)(220145 call -(220133 call _cast(220132 call int(64)[13] 8)(220127 call > i[220116] 0))(220143 call _cast(220142 call int(64)[13] 8)(220137 call < i[220116] 0)))))
+  }
+  { scopeless type
+    (220124 call int(64)[13] 8)
+  }
+  function sgn[220169](arg i[220166] :
+  (220165 call uint(64)[115] unknown w[220162])) : _unknown[51] "inline"
+  {
+    (220185 return(220183 call _cast(220182 call uint(64)[115] 8)(220177 call > i[220166] 0)))
+  }
+  { scopeless type
+    (220174 call uint(64)[115] 8)
+  }
+  function sgn[220197](param arg i[220194] :
+  integral[199](?)) param : _unknown[51]
+  {
+    (220218 return(220215 IfExpr (220201 call > i[220194] 0) then
+    { scopeless
+      1
+    } else
+    { scopeless(220212 IfExpr (220206 call == i[220194] 0) then
+      { scopeless
+        0
+      } else
+      { scopeless
+        (220210 call - 1)
+      } )
+    } ))
+  }
+  function sgn[220233](arg x[220230] :
+  (220229 call real(64)[16] unknown w[220226])) : _unknown[51] "inline"
+  {
+    (220267 return(220265 call _cast(220264 call int(64)[13] 8)(220259 call -(220247 call _cast(220246 call int(64)[13] 8)(220241 call > x[220230] 0.0))(220257 call _cast(220256 call int(64)[13] 8)(220251 call < x[220230] 0.0)))))
+  }
+  { scopeless type
+    (220238 call int(64)[13] 8)
+  }
+  function sin[220282](arg x[220279] :
+  (220278 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (220287 call real(64)[16] 64)
+  }
+  function sin[220300](arg x[220297] :
+  (220296 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function sinf[220315](arg x[220312] :
+    (220311 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220320 call real(64)[16] 32)
+    }
+    (220329 return(220328 call sinf x[220297]))
+  }
+  { scopeless type
+    (220305 call real(64)[16] 32)
+  }
+  function sin[220343](arg z[220340] :
+  (220339 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function csinf[220358](arg z[220355] :
+    (220354 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220363 call complex(128)[140] 64)
+    }
+    (220372 return(220371 call csinf z[220340]))
+  }
+  { scopeless type
+    (220348 call complex(128)[140] 64)
+  }
+  function sin[220386](arg z[220383] :
+  (220382 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function csin[220401](arg z[220398] :
+    (220397 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220406 call complex(128)[140] 128)
+    }
+    (220415 return(220414 call csin z[220383]))
+  }
+  { scopeless type
+    (220391 call complex(128)[140] 128)
+  }
+  function sinh[220429](arg x[220426] :
+  (220425 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (220434 call real(64)[16] 64)
+  }
+  function sinh[220447](arg x[220444] :
+  (220443 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function sinhf[220462](arg x[220459] :
+    (220458 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220467 call real(64)[16] 32)
+    }
+    (220476 return(220475 call sinhf x[220444]))
+  }
+  { scopeless type
+    (220452 call real(64)[16] 32)
+  }
+  function sinh[220490](arg z[220487] :
+  (220486 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function csinhf[220505](arg z[220502] :
+    (220501 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220510 call complex(128)[140] 64)
+    }
+    (220519 return(220518 call csinhf z[220487]))
+  }
+  { scopeless type
+    (220495 call complex(128)[140] 64)
+  }
+  function sinh[220533](arg z[220530] :
+  (220529 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function csinh[220548](arg z[220545] :
+    (220544 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220553 call complex(128)[140] 128)
+    }
+    (220562 return(220561 call csinh z[220530]))
+  }
+  { scopeless type
+    (220538 call complex(128)[140] 128)
+  }
+  function sqrt[220576](arg x[220573] :
+  (220572 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (220581 call real(64)[16] 64)
+  }
+  function sqrt[220594](arg x[220591] :
+  (220590 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function sqrtf[220609](arg x[220606] :
+    (220605 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220614 call real(64)[16] 32)
+    }
+    (220623 return(220622 call sqrtf x[220591]))
+  }
+  { scopeless type
+    (220599 call real(64)[16] 32)
+  }
+  function sqrt[220637](arg z[220634] :
+  (220633 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function csqrtf[220652](arg z[220649] :
+    (220648 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220657 call complex(128)[140] 64)
+    }
+    (220666 return(220665 call csqrtf z[220634]))
+  }
+  { scopeless type
+    (220642 call complex(128)[140] 64)
+  }
+  function sqrt[220680](arg z[220677] :
+  (220676 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function csqrt[220695](arg z[220692] :
+    (220691 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220700 call complex(128)[140] 128)
+    }
+    (220709 return(220708 call csqrt z[220677]))
+  }
+  { scopeless type
+    (220685 call complex(128)[140] 128)
+  }
+  function tan[220723](arg x[220720] :
+  (220719 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (220728 call real(64)[16] 64)
+  }
+  function tan[220741](arg x[220738] :
+  (220737 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function tanf[220756](arg x[220753] :
+    (220752 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220761 call real(64)[16] 32)
+    }
+    (220770 return(220769 call tanf x[220738]))
+  }
+  { scopeless type
+    (220746 call real(64)[16] 32)
+  }
+  function tan[220784](arg z[220781] :
+  (220780 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function ctanf[220799](arg z[220796] :
+    (220795 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220804 call complex(128)[140] 64)
+    }
+    (220813 return(220812 call ctanf z[220781]))
+  }
+  { scopeless type
+    (220789 call complex(128)[140] 64)
+  }
+  function tan[220827](arg z[220824] :
+  (220823 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function ctan[220842](arg z[220839] :
+    (220838 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220847 call complex(128)[140] 128)
+    }
+    (220856 return(220855 call ctan z[220824]))
+  }
+  { scopeless type
+    (220832 call complex(128)[140] 128)
+  }
+  function tanh[220870](arg x[220867] :
+  (220866 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (220875 call real(64)[16] 64)
+  }
+  function tanh[220888](arg x[220885] :
+  (220884 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function tanhf[220903](arg x[220900] :
+    (220899 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220908 call real(64)[16] 32)
+    }
+    (220917 return(220916 call tanhf x[220885]))
+  }
+  { scopeless type
+    (220893 call real(64)[16] 32)
+  }
+  function tanh[220931](arg z[220928] :
+  (220927 call complex(128)[140] 64)) : _unknown[51] "inline"
+  {
+    function ctanhf[220946](arg z[220943] :
+    (220942 call complex(128)[140] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220951 call complex(128)[140] 64)
+    }
+    (220960 return(220959 call ctanhf z[220928]))
+  }
+  { scopeless type
+    (220936 call complex(128)[140] 64)
+  }
+  function tanh[220974](arg z[220971] :
+  (220970 call complex(128)[140] 128)) : _unknown[51] "inline"
+  {
+    function ctanh[220989](arg z[220986] :
+    (220985 call complex(128)[140] 128)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (220994 call complex(128)[140] 128)
+    }
+    (221003 return(221002 call ctanh z[220971]))
+  }
+  { scopeless type
+    (220979 call complex(128)[140] 128)
+  }
+  function tgamma[221017](arg x[221014] :
+  (221013 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (221022 call real(64)[16] 64)
+  }
+  function tgamma[221035](arg x[221032] :
+  (221031 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function tgammaf[221050](arg x[221047] :
+    (221046 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (221055 call real(64)[16] 32)
+    }
+    (221064 return(221063 call tgammaf x[221032]))
+  }
+  { scopeless type
+    (221040 call real(64)[16] 32)
+  }
+  function trunc[221078](arg x[221075] :
+  (221074 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    (221083 call real(64)[16] 64)
+  }
+  function trunc[221096](arg x[221093] :
+  (221092 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function truncf[221111](arg x[221108] :
+    (221107 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (221116 call real(64)[16] 32)
+    }
+    (221125 return(221124 call truncf x[221093]))
+  }
+  { scopeless type
+    (221101 call real(64)[16] 32)
+  }
+  function gcd[221136](in arg a[221133] :
+  int(64)[13], in arg b[221139] :
+  int(64)[13]) : _unknown[51]
+  {
+    (221148 call = a[221133](221147 call abs a[221133]))
+    (221157 call = b[221139](221156 call abs b[221139]))
+    unknown r[221161] int(64)[13]
+    (221164 'end of statement')
+    {
+      unknown tmp[221188] "temp"
+      (221212 'move' tmp[221188](221207 call _cond_test(221209 call != b[221139] 0)))
+      WhileDo[221193]
+      {
+        {
+          (221174 call = r[221161](221172 call % a[221133] b[221139]))
+          (221180 call = a[221133] b[221139])
+          (221185 call = b[221139] r[221161])
+        }
+        label _continueLabel[221191]
+        (221202 'move' tmp[221188](221197 call _cond_test(221199 call != b[221139] 0)))
+        tmp[221188]
+      }
+      label _breakLabel[221192]
+    }
+    (221216 return a[221133])
+  }
+  { scopeless type
+    int(64)[13]
+  }
+  function isclose[221225](arg x[221223]:_any[178](?), arg y[221227]:_any[178](?), arg rtol[221232] =
+  1e-05, arg atol[221236] =
+  0.0) : _unknown[51] "inline"
+  {
+    if(221271 call _cond_test(221245 call && 1(221243 call < rtol[221232] 0)))
+    {
+      (221269 call boundsCheckHalt module=[255] HaltWrappers[209915] "Input value for rtol must be positive")
+      (363138 'referenced modules list' HaltWrappers[209915])
+    }
+    if(221308 call _cond_test(221282 call && 1(221280 call < atol[221236] 0)))
+    {
+      (221306 call boundsCheckHalt module=[255] HaltWrappers[209915] "Input value for atol must be positive")
+      (363144 'referenced modules list' HaltWrappers[209915])
+    }
+    unknown diff[221321](221320 call abs(221317 call - x[221223] y[221227])) real(64)[16]
+    (221324 'end of statement')
+    (221353 return(221351 call ||(221345 call ||(221333 call <= diff[221321](221332 call abs(221329 call * rtol[221232] y[221227])))(221343 call <= diff[221321](221342 call abs(221339 call * rtol[221232] x[221223]))))(221349 call <= diff[221321] atol[221236])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function j0[221367](arg x[221364] :
+  (221363 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function chpl_float_j0[221382](arg x[221379] :
+    (221378 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (221387 call real(64)[16] 32)
+    }
+    (221396 return(221395 call chpl_float_j0 x[221364]))
+  }
+  { scopeless type
+    (221372 call real(64)[16] 32)
+  }
+  function j0[221410](arg x[221407] :
+  (221406 call real(64)[16] 64)) : _unknown[51] "inline"
+  {
+    function j0[221425](arg x[221422] :
+    (221421 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (221430 call real(64)[16] 64)
+    }
+    (221439 return(221438 call j0 x[221407]))
+  }
+  { scopeless type
+    (221415 call real(64)[16] 64)
+  }
+  function j1[221453](arg x[221450] :
+  (221449 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function chpl_float_j1[221468](arg x[221465] :
+    (221464 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (221473 call real(64)[16] 32)
+    }
+    (221482 return(221481 call chpl_float_j1 x[221450]))
+  }
+  { scopeless type
+    (221458 call real(64)[16] 32)
+  }
+  function j1[221496](arg x[221493] :
+  (221492 call real(64)[16] 64)) : _unknown[51] "inline"
+  {
+    function j1[221511](arg x[221508] :
+    (221507 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (221516 call real(64)[16] 64)
+    }
+    (221525 return(221524 call j1 x[221493]))
+  }
+  { scopeless type
+    (221501 call real(64)[16] 64)
+  }
+  function jn[221536](arg n[221533] :
+  int(64)[13], arg x[221542] :
+  (221541 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function chpl_float_jn[221555](arg n[221552] :
+    c_int[20549], arg x[221561] :
+    (221560 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (221567 call real(64)[16] 32)
+    }
+    (221583 return(221582 call chpl_float_jn(221579 call(221574 call . n[221533] c"safeCast") c_int[20549]) x[221542]))
+  }
+  { scopeless type
+    (221548 call real(64)[16] 32)
+  }
+  function jn[221594](arg n[221591] :
+  int(64)[13], arg x[221600] :
+  (221599 call real(64)[16] 64)) : _unknown[51] "inline"
+  {
+    function jn[221613](arg n[221610] :
+    c_int[20549], arg x[221619] :
+    (221618 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (221625 call real(64)[16] 64)
+    }
+    (221641 return(221640 call jn(221637 call(221632 call . n[221591] c"safeCast") c_int[20549]) x[221600]))
+  }
+  { scopeless type
+    (221606 call real(64)[16] 64)
+  }
+  function y0[221655](arg x[221652] :
+  (221651 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    if(221692 call _cond_test(221666 call && 1(221664 call < x[221652] 0)))
+    {
+      (221690 call boundsCheckHalt module=[255] HaltWrappers[209915] "Input value for y0() must be non-negative")
+      (363152 'referenced modules list' HaltWrappers[209915])
+    }
+    function chpl_float_y0[221707](arg x[221704] :
+    (221703 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (221712 call real(64)[16] 32)
+    }
+    (221720 return(221719 call chpl_float_y0 x[221652]))
+  }
+  { scopeless type
+    (221660 call real(64)[16] 32)
+  }
+  function y0[221734](arg x[221731] :
+  (221730 call real(64)[16] 64)) : _unknown[51] "inline"
+  {
+    if(221755 call _cond_test(221745 call && 1(221743 call < x[221731] 0)))
+    {
+      (221753 call boundsCheckHalt module=[255] HaltWrappers[209915] "Input value for y0() must be non-negative")
+      (363158 'referenced modules list' HaltWrappers[209915])
+    }
+    function y0[221770](arg x[221767] :
+    (221766 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (221775 call real(64)[16] 64)
+    }
+    (221783 return(221782 call y0 x[221731]))
+  }
+  { scopeless type
+    (221739 call real(64)[16] 64)
+  }
+  function y1[221797](arg x[221794] :
+  (221793 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    if(221834 call _cond_test(221808 call && 1(221806 call < x[221794] 0)))
+    {
+      (221832 call boundsCheckHalt module=[255] HaltWrappers[209915] "Input value for y1() must be non-negative")
+      (363164 'referenced modules list' HaltWrappers[209915])
+    }
+    function chpl_float_y1[221849](arg x[221846] :
+    (221845 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (221854 call real(64)[16] 32)
+    }
+    (221862 return(221861 call chpl_float_y1 x[221794]))
+  }
+  { scopeless type
+    (221802 call real(64)[16] 32)
+  }
+  function y1[221876](arg x[221873] :
+  (221872 call real(64)[16] 64)) : _unknown[51] "inline"
+  {
+    if(221897 call _cond_test(221887 call && 1(221885 call < x[221873] 0)))
+    {
+      (221895 call boundsCheckHalt module=[255] HaltWrappers[209915] "Input value for y1() must be non-negative")
+      (363170 'referenced modules list' HaltWrappers[209915])
+    }
+    function y1[221912](arg x[221909] :
+    (221908 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (221917 call real(64)[16] 64)
+    }
+    (221925 return(221924 call y1 x[221873]))
+  }
+  { scopeless type
+    (221881 call real(64)[16] 64)
+  }
+  function yn[221936](arg n[221933] :
+  int(64)[13], arg x[221942] :
+  (221941 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    if(221980 call _cond_test(221954 call && 1(221952 call < x[221942] 0)))
+    {
+      (221978 call boundsCheckHalt module=[255] HaltWrappers[209915] "Input value for yn() must be non-negative")
+      (363176 'referenced modules list' HaltWrappers[209915])
+    }
+    function chpl_float_yn[221992](arg n[221989] :
+    c_int[20549], arg x[221998] :
+    (221997 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (222004 call real(64)[16] 32)
+    }
+    (222019 return(222018 call chpl_float_yn(222015 call(222010 call . n[221933] c"safeCast") c_int[20549]) x[221942]))
+  }
+  { scopeless type
+    (221948 call real(64)[16] 32)
+  }
+  function yn[222030](arg n[222027] :
+  int(64)[13], arg x[222036] :
+  (222035 call real(64)[16] 64)) : _unknown[51] "inline"
+  {
+    if(222058 call _cond_test(222048 call && 1(222046 call < x[222036] 0)))
+    {
+      (222056 call boundsCheckHalt module=[255] HaltWrappers[209915] "Input value for yn() must be non-negative")
+      (363183 'referenced modules list' HaltWrappers[209915])
+    }
+    function yn[222070](arg n[222067] :
+    c_int[20549], arg x[222076] :
+    (222075 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (222082 call real(64)[16] 64)
+    }
+    (222097 return(222096 call yn(222093 call(222088 call . n[222027] c"safeCast") c_int[20549]) x[222036]))
+  }
+  { scopeless type
+    (222042 call real(64)[16] 64)
+  }
+  function signbit[222111](arg x[222108] :
+  (222107 call real(64)[16] 32)) : _unknown[51] "inline"
+  {
+    function chpl_macro_float_signbit[222123](arg x[222120] :
+    (222119 call real(64)[16] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      c_int[20549]
+    }
+    (222137 return(222135 call _cast bool[10](222133 call chpl_macro_float_signbit x[222108])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function signbit[222151](arg x[222148] :
+  (222147 call real(64)[16] 64)) : _unknown[51] "inline"
+  {
+    function chpl_macro_double_signbit[222163](arg x[222160] :
+    (222159 call real(64)[16] 64)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      c_int[20549]
+    }
+    (222177 return(222175 call _cast bool[10](222173 call chpl_macro_double_signbit x[222148])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  (355343 'used modules list'(353057 'use' ChapelStandard[20264])(215777 'import' HaltWrappers[209915])(215781 'use' SysCTypes[20940]))
+}

@@ -1,0 +1,1154 @@
+AST dump for Atomics after pass flattenClasses.
+Module use list: ChapelBase MemConsistency 
+
+{
+  function chpl_atomic_thread_fence[43975](arg order[43972] :
+  memory_order[186619]) : void[4] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no doc" "no return value for void"
+  {
+  }
+  function atomic_fence[43987](arg order[43983] :
+  memory_order[186619] =
+  memory_order_seq_cst[186963]) : _unknown[51] "no doc" "no return value for void"
+  {
+    (43992 call chpl_atomic_thread_fence order[43983])
+    if(44001 call _cond_test CHPL_CACHE_REMOTE[367])
+    {
+      (43999 call chpl_rmem_consist_fence order[43983])
+    }
+  }
+  function atomicFence[44021](param arg order[44017] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "inline" "no return value for void"
+  {
+    (44029 call atomic_fence(44027 call c_memory_order order[44017]))
+  }
+  function isSupported[44038](arg T[44036]:_any[178](?)) param : _unknown[51] "private"
+  {
+    (44062 return(44060 call ||(44054 call ||(44048 call ||(44042 call == T[44036] bool[10])(44047 call isInt T[44036]))(44053 call isUint T[44036]))(44059 call isReal T[44036])))
+  }
+  function externT[44071](arg T[44069]:_any[178](?)) type : _unknown[51] "private"
+  {
+    type atomic_bool[44077]
+    type atomic_int_least8_t[44084]
+    type atomic_int_least16_t[44090]
+    type atomic_int_least32_t[44096]
+    type atomic_int_least64_t[44102]
+    type atomic_uint_least8_t[44108]
+    type atomic_uint_least16_t[44114]
+    type atomic_uint_least32_t[44120]
+    type atomic_uint_least64_t[44126]
+    type atomic__real64[44132]
+    type atomic__real32[44138]
+    {
+      unknown tmp[44261] "expr temp" "maybe param" "maybe type" "temp"
+      (44263 'move' tmp[44261] T[44069])
+      if(44268 call _cond_test(44265 call == tmp[44261] bool[10]))
+      {
+        (44145 return atomic_bool[44077])
+      }
+      {
+        if(44274 call _cond_test(44271 call == tmp[44261](44153 call int(64)[13] 8)))
+        {
+          (44156 return atomic_int_least8_t[44084])
+        }
+        {
+          if(44281 call _cond_test(44278 call == tmp[44261](44164 call int(64)[13] 16)))
+          {
+            (44167 return atomic_int_least16_t[44090])
+          }
+          {
+            if(44288 call _cond_test(44285 call == tmp[44261](44175 call int(64)[13] 32)))
+            {
+              (44178 return atomic_int_least32_t[44096])
+            }
+            {
+              if(44295 call _cond_test(44292 call == tmp[44261](44186 call int(64)[13] 64)))
+              {
+                (44189 return atomic_int_least64_t[44102])
+              }
+              {
+                if(44302 call _cond_test(44299 call == tmp[44261](44197 call uint(64)[115] 8)))
+                {
+                  (44200 return atomic_uint_least8_t[44108])
+                }
+                {
+                  if(44309 call _cond_test(44306 call == tmp[44261](44208 call uint(64)[115] 16)))
+                  {
+                    (44211 return atomic_uint_least16_t[44114])
+                  }
+                  {
+                    if(44316 call _cond_test(44313 call == tmp[44261](44219 call uint(64)[115] 32)))
+                    {
+                      (44222 return atomic_uint_least32_t[44120])
+                    }
+                    {
+                      if(44323 call _cond_test(44320 call == tmp[44261](44230 call uint(64)[115] 64)))
+                      {
+                        (44233 return atomic_uint_least64_t[44126])
+                      }
+                      {
+                        if(44330 call _cond_test(44327 call == tmp[44261](44241 call real(64)[16] 32)))
+                        {
+                          (44244 return atomic__real32[44138])
+                        }
+                        {
+                          if(44337 call _cond_test(44334 call == tmp[44261](44252 call real(64)[16] 64)))
+                          {
+                            (44255 return atomic__real64[44132])
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  function externTString[44348](arg T[44346]:_any[178](?)) param : _unknown[51] "private"
+  {
+    if(44373 call _cond_test(44352 call == T[44346] bool[10]))
+    {
+      (44371 return "bool")
+    }
+    if(44430 call _cond_test(44382 call isInt T[44346]))
+    {
+      (44428 return(44426 call +(44407 call + "int_least"(44405 call _cast string[26](44403 call numBits T[44346]))) "_t"))
+    }
+    if(44470 call _cond_test(44438 call isUint T[44346]))
+    {
+      (44468 return(44466 call +(44463 call + "uint_least"(44461 call _cast string[26](44459 call numBits T[44346]))) "_t"))
+    }
+    if(44507 call _cond_test(44478 call isReal T[44346]))
+    {
+      (44505 return(44503 call + "_real"(44501 call _cast string[26](44499 call numBits T[44346]))))
+    }
+  }
+  function externFunc[44520](param arg s[44517] :
+  string[26], arg T[44522]:_any[178](?), param arg explicit[44525] =
+  1) param : _unknown[51] "private"
+  {
+    if(44607 call _cond_test explicit[44525])
+    {
+      (44574 return(44572 call +(44566 call +(44547 call + "atomic_" s[44517]) "_explicit_")(44571 call externTString T[44522])))
+    }
+    {
+      (44605 return(44603 call +(44597 call +(44578 call + "atomic_" s[44517]) "_")(44602 call externTString T[44522])))
+    }
+  }
+  function chpl__processorAtomicType[44620](arg T[44618]:_any[178](?)) type : _unknown[51] "no doc"
+  {
+    if(44672 call _cond_test(44624 call == T[44618] bool[10]))
+    {
+      (44627 return AtomicBool[45874])
+    }
+    {
+      if(44666 call _cond_test(44632 call isSupported T[44618]))
+      {
+        (44637 return(44636 call AtomicT[48077](?) T[44618]))
+      }
+      {
+        (44664 call compilerError(44661 call + "Unsupported atomic type: "(44659 call _cast string[26] T[44618])))
+      }
+    }
+  }
+  function chpl__atomicType[44685](arg T[44683]:_any[178](?)) type : _unknown[51] "no doc"
+  {
+    if(44705 call _cond_test(44689 call == CHPL_NETWORK_ATOMICS[21517] "none"))
+    {
+      (44695 return(44694 call chpl__processorAtomicType T[44683]))
+    }
+    {
+      (44702 return(44701 call chpl__networkAtomicType T[44683]))
+    }
+  }
+  function AtomicBool[45874].init_helper[44727](arg _mt[45878]:_MT[238], arg this[45876]:AtomicBool[45874], arg value[44724] :
+  bool[10]) : _unknown[51] "atomic type" "method" "primary method" "no doc" "no return value for void"
+  {
+    function atomic_init[44759](ref arg obj[44756] :
+    (44755 call externT bool[10]), arg value[44762] :
+    bool[10], arg _chpl_cname[44770] :
+    string[26] =
+    (44749 call externFunc "init" bool[10](explicit = 0))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      void[4]
+    }
+    (44779 call atomic_init(370930 call . this[45876] c"_v") value[44724])
+  }
+  function AtomicBool[45874].init[44785](arg _mt[45882]:_MT[238], arg this[45880]:AtomicBool[45874]) : _unknown[51] "atomic type" "method" "primary method" "no doc" "no return value for void"
+  {
+    (44792 call(44788 call . this[45880] c"complete"))
+    const default[44796] "const" bool[10]
+    (44799 'end of statement')
+    (44803 call(370937 call . this[45880] c"init_helper") default[44796])
+  }
+  function AtomicBool[45874].init=[44813](arg _mt[45886]:_MT[238], arg this[45884]:AtomicBool[45874], arg other[44810] :
+  AtomicBool[45874]) : _unknown[51] "atomic type" "method" "primary method" "no doc" "no return value for void"
+  {
+    (44820 call(44816 call . this[45884] c"complete"))
+    (44831 call(370943 call . this[45884] c"init_helper")(44829 call(44825 call . other[44810] c"read")))
+  }
+  function AtomicBool[45874].init=[44841](arg _mt[45890]:_MT[238], arg this[45888]:AtomicBool[45874], arg other[44838] :
+  bool[10]) : _unknown[51] "atomic type" "method" "primary method" "no doc" "no return value for void"
+  {
+    (44848 call(44844 call . this[45888] c"complete"))
+    (44854 call(370947 call . this[45888] c"init_helper") other[44838])
+  }
+  function AtomicBool[45874].deinit[44860](arg _mt[45894]:_MT[238], arg this[45892]:AtomicBool[45874]) : _unknown[51] "atomic type" "destructor" "method" "primary method" "no doc" "no return value for void"
+  {
+    function atomic_destroy[44894](ref arg obj[44891] :
+    (44890 call externT bool[10]), arg _chpl_cname[44901] :
+    string[26] =
+    (44884 call externFunc "destroy" bool[10](explicit = 0))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      void[4]
+    }
+    {
+      const tmp[44915] "const" "temp"
+      (44916 'move' tmp[44915](44913 'deref'(44912 '_wide_get_locale' this[45892])))
+      (44910 call atomic_destroy(370954 call . this[45892] c"_v"))
+      (44919 'elided on block' 0 tmp[44915])
+    }
+  }
+  function AtomicBool[45874].read[44936](arg _mt[45898]:_MT[238], const arg this[45896]:AtomicBool[45874], param arg order[44932] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    function atomic_load[44969](const  ref arg obj[44966] :
+    (44965 call externT bool[10]), arg order[44972] :
+    memory_order[186619], arg _chpl_cname[44980] :
+    string[26] =
+    (44959 call externFunc "load" bool[10])) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      bool[10]
+    }
+    unknown ret[44986] bool[10]
+    (44989 'end of statement')
+    {
+      const tmp[45006] "const" "temp"
+      (45007 'move' tmp[45006](45004 'deref'(45003 '_wide_get_locale' this[45896])))
+      (45000 call = ret[44986](44999 call atomic_load(370963 call . this[45896] c"_v")(44998 call c_memory_order order[44932])))
+      (45010 'elided on block' 0 tmp[45006])
+    }
+    (45015 return ret[44986])
+  }
+  { scopeless type
+    bool[10]
+  }
+  function AtomicBool[45874].write[45026](arg _mt[45902]:_MT[238], arg this[45900]:AtomicBool[45874], arg value[45023] :
+  bool[10], param arg order[45033] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method" "no return value for void"
+  {
+    function atomic_store[45068](ref arg obj[45065] :
+    (45064 call externT bool[10]), arg value[45071] :
+    bool[10], arg order[45075] :
+    memory_order[186619], arg _chpl_cname[45083] :
+    string[26] =
+    (45058 call externFunc "store" bool[10])) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      void[4]
+    }
+    {
+      const tmp[45102] "const" "temp"
+      (45103 'move' tmp[45102](45100 'deref'(45099 '_wide_get_locale' this[45900])))
+      (45097 call atomic_store(370973 call . this[45900] c"_v") value[45023](45096 call c_memory_order order[45033]))
+      (45106 'elided on block' 0 tmp[45102])
+    }
+  }
+  { scopeless type
+    void[4]
+  }
+  function AtomicBool[45874].exchange[45119](arg _mt[45906]:_MT[238], arg this[45904]:AtomicBool[45874], arg value[45116] :
+  bool[10], param arg order[45126] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    function atomic_exchange[45161](ref arg obj[45158] :
+    (45157 call externT bool[10]), arg value[45164] :
+    bool[10], arg order[45168] :
+    memory_order[186619], arg _chpl_cname[45176] :
+    string[26] =
+    (45151 call externFunc "exchange" bool[10])) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      bool[10]
+    }
+    unknown ret[45182] bool[10]
+    (45185 'end of statement')
+    {
+      const tmp[45203] "const" "temp"
+      (45204 'move' tmp[45203](45201 'deref'(45200 '_wide_get_locale' this[45904])))
+      (45197 call = ret[45182](45196 call atomic_exchange(370984 call . this[45904] c"_v") value[45116](45195 call c_memory_order order[45126])))
+      (45207 'elided on block' 0 tmp[45203])
+    }
+    (45212 return ret[45182])
+  }
+  { scopeless type
+    bool[10]
+  }
+  function AtomicBool[45874].compareExchange[45223](arg _mt[45910]:_MT[238], arg this[45908]:AtomicBool[45874], ref arg expected[45220] :
+  bool[10], arg desired[45226] :
+  bool[10], param arg order[45234] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    (45254 return(45253 call(45242 call . this[45908] c"compareExchange") expected[45220] desired[45226] order[45234](45252 call readableOrder order[45234])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function AtomicBool[45874].compareExchange[45266](arg _mt[45914]:_MT[238], arg this[45912]:AtomicBool[45874], ref arg expected[45263] :
+  bool[10], arg desired[45269] :
+  bool[10], param arg success[45273] :
+  memoryOrder[186978], param arg failure[45277] :
+  memoryOrder[186978]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    function atomic_compare_exchange_strong[45311](ref arg obj[45308] :
+    (45307 call externT bool[10]), ref arg expected[45314] :
+    bool[10], arg desired[45318] :
+    bool[10], arg succ[45322] :
+    memory_order[186619], arg fail[45326] :
+    memory_order[186619], arg _chpl_cname[45334] :
+    string[26] =
+    (45301 call externFunc "compare_exchange_strong" bool[10])) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      bool[10]
+    }
+    unknown ret[45340] bool[10]
+    (45343 'end of statement')
+    {
+      const tmp[45385] "const" "temp"
+      (45386 'move' tmp[45385](45383 'deref'(45382 '_wide_get_locale' this[45912])))
+      {
+        unknown localizedExpected[45346] expected[45263]
+        (45349 'end of statement')
+        (45366 call = ret[45340](45365 call atomic_compare_exchange_strong(371004 call . this[45912] c"_v") localizedExpected[45346] desired[45269](45360 call c_memory_order success[45273])(45364 call c_memory_order failure[45277])))
+        if(45377 call _cond_test(45370 call ! ret[45340]))
+        {
+          (45374 call = expected[45263] localizedExpected[45346])
+        }
+      }
+      (45389 'elided on block' 0 tmp[45385])
+    }
+    (45394 return ret[45340])
+  }
+  { scopeless type
+    bool[10]
+  }
+  function AtomicBool[45874].compareExchangeWeak[45405](arg _mt[45918]:_MT[238], arg this[45916]:AtomicBool[45874], ref arg expected[45402] :
+  bool[10], arg desired[45408] :
+  bool[10], param arg order[45416] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    (45436 return(45435 call(45424 call . this[45916] c"compareExchangeWeak") expected[45402] desired[45408] order[45416](45434 call readableOrder order[45416])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function AtomicBool[45874].compareExchangeWeak[45448](arg _mt[45922]:_MT[238], arg this[45920]:AtomicBool[45874], ref arg expected[45445] :
+  bool[10], arg desired[45451] :
+  bool[10], param arg success[45455] :
+  memoryOrder[186978], param arg failure[45459] :
+  memoryOrder[186978]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    function atomic_compare_exchange_weak[45492](ref arg obj[45489] :
+    (45488 call externT bool[10]), ref arg expected[45495] :
+    bool[10], arg desired[45499] :
+    bool[10], arg succ[45503] :
+    memory_order[186619], arg fail[45507] :
+    memory_order[186619], arg _chpl_cname[45515] :
+    string[26] =
+    (45482 call externFunc "compare_exchange_weak" bool[10])) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      bool[10]
+    }
+    unknown ret[45521] bool[10]
+    (45524 'end of statement')
+    {
+      const tmp[45566] "const" "temp"
+      (45567 'move' tmp[45566](45564 'deref'(45563 '_wide_get_locale' this[45920])))
+      {
+        unknown localizedExpected[45527] expected[45445]
+        (45530 'end of statement')
+        (45547 call = ret[45521](45546 call atomic_compare_exchange_weak(371029 call . this[45920] c"_v") localizedExpected[45527] desired[45451](45541 call c_memory_order success[45455])(45545 call c_memory_order failure[45459])))
+        if(45558 call _cond_test(45551 call ! ret[45521]))
+        {
+          (45555 call = expected[45445] localizedExpected[45527])
+        }
+      }
+      (45570 'elided on block' 0 tmp[45566])
+    }
+    (45575 return ret[45521])
+  }
+  function AtomicBool[45874].compareAndSwap[45585](arg _mt[45926]:_MT[238], arg this[45924]:AtomicBool[45874], arg expected[45582] :
+  bool[10], arg desired[45588] :
+  bool[10], param arg order[45596] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    function atomic_compare_exchange_strong[45615](ref arg obj[45612] :
+    (45611 call externT bool[10]), ref arg expected[45618] :
+    bool[10], arg desired[45622] :
+    bool[10], arg succ[45626] :
+    memory_order[186619], arg fail[45630] :
+    memory_order[186619], arg _chpl_cname[45638] :
+    string[26] =
+    (45605 call externFunc "compare_exchange_strong" bool[10])) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      bool[10]
+    }
+    unknown ret[45644] bool[10]
+    (45647 'end of statement')
+    {
+      const tmp[45679] "const" "temp"
+      (45680 'move' tmp[45679](45677 'deref'(45676 '_wide_get_locale' this[45924])))
+      {
+        unknown mutableExpected[45650] expected[45582]
+        (45653 'end of statement')
+        (45673 call = ret[45644](45672 call atomic_compare_exchange_strong(371048 call . this[45924] c"_v") mutableExpected[45650] desired[45588](45664 call c_memory_order order[45596])(45671 call c_memory_order(45669 call readableOrder order[45596]))))
+      }
+      (45683 'elided on block' 0 tmp[45679])
+    }
+    (45688 return ret[45644])
+  }
+  { scopeless type
+    bool[10]
+  }
+  function AtomicBool[45874].testAndSet[45704](arg _mt[45930]:_MT[238], arg this[45928]:AtomicBool[45874], param arg order[45700] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    (45715 return(45714 call(45708 call . this[45928] c"exchange") 1 order[45700]))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function AtomicBool[45874].clear[45732](arg _mt[45934]:_MT[238], arg this[45932]:AtomicBool[45874], param arg order[45728] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method" "no return value for void"
+  {
+    (45742 call(45736 call . this[45932] c"write") 0 order[45728])
+  }
+  { scopeless type
+    void[4]
+  }
+  function AtomicBool[45874].waitFor[45754](arg _mt[45938]:_MT[238], const arg this[45936]:AtomicBool[45874], arg value[45751] :
+  bool[10], param arg order[45761] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method" "no return value for void"
+  {
+    {
+      const tmp[45845] "const" "temp"
+      (45846 'move' tmp[45845](45843 'deref'(45842 '_wide_get_locale' this[45936])))
+      {
+        {
+          unknown tmp[45788] "temp"
+          (45830 'move' tmp[45788](45816 call _cond_test(45818 call !=(45823 call(45820 call . this[45936] c"read")(order = relaxed[186976])) value[45751])))
+          WhileDo[45793]
+          {
+            {
+              (45785 call chpl_task_yield)
+            }
+            label _continueLabel[45791]
+            (45811 'move' tmp[45788](45797 call _cond_test(45799 call !=(45804 call(45801 call . this[45936] c"read")(order = relaxed[186976])) value[45751])))
+            tmp[45788]
+          }
+          label _breakLabel[45792]
+        }
+        (45840 call chpl_atomic_thread_fence(45838 call c_memory_order order[45761]))
+      }
+      (45849 'elided on block' 0 tmp[45845])
+    }
+  }
+  { scopeless type
+    void[4]
+  }
+  function AtomicBool[45874].writeThis[45861](arg _mt[45942]:_MT[238], const arg this[45940]:AtomicBool[45874], arg x[45859]:_any[178](?)) : _unknown[51] throws "atomic type" "method" "primary method" "no doc" "no return value for void"
+  {
+    (45867 call <~> x[45859](45866 call(371067 call . this[45940] c"read")))
+  }
+  type AtomicBool[45874] unknown _v[44717] "no doc"(44716 call externT bool[10])
+  function AtomicT[48077](?).init_helper[45963](arg _mt[48081]:_MT[238], arg this[48079]:AtomicT[48077](?), arg value[45960] :
+  (371073 call . this[48079] c"T")) : _unknown[51] "atomic type" "method" "primary method" "no doc" "no return value for void"
+  {
+    function atomic_init[45981](ref arg obj[45978] :
+    (45977 call externT(371083 call . this[48079] c"T")), arg value[45984] :
+    (371088 call . this[48079] c"T"), arg _chpl_cname[45992] :
+    string[26] =
+    (45971 call externFunc "init"(371078 call . this[48079] c"T")(explicit = 0))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      void[4]
+    }
+    (46001 call atomic_init(371093 call . this[48079] c"_v") value[45960])
+  }
+  function AtomicT[48077](?).init[46009](arg _mt[48085]:_MT[238], arg this[48083]:AtomicT[48077](?), arg T[46007]:_any[178](?)) : _unknown[51] "atomic type" "method" "primary method" "no doc" "no return value for void"
+  {
+    (46018 call =(46014 call . this[48083] c"T") T[46007])
+    (46027 call(46023 call . this[48083] c"complete"))
+    const default[46030] "const" T[46007]
+    (46033 'end of statement')
+    (46037 call(371100 call . this[48083] c"init_helper") default[46030])
+  }
+  function AtomicT[48077](?).init=[46048](arg _mt[48089]:_MT[238], arg this[48087]:AtomicT[48077](?), const  ref arg other[46045] :
+  (46044 'typeof' this[48087])) : _unknown[51] "atomic type" "method" "primary method" "no doc" "no return value for void"
+  {
+    (46058 call =(46051 call . this[48087] c"T")(46055 call . other[46045] c"T"))
+    (46067 call(46063 call . this[48087] c"complete"))
+    (46077 call(371106 call . this[48087] c"init_helper")(46075 call(46071 call . other[46045] c"read")))
+  }
+  function AtomicT[48077](?).init=[46091](arg _mt[48093]:_MT[238], arg this[48091]:AtomicT[48077](?), arg other[46088] :
+  (46085 call .(46084 'typeof' this[48091]) c"T")) : _unknown[51] "atomic type" "method" "primary method" "no doc" "no return value for void"
+  {
+    (46099 call =(46094 call . this[48091] c"T")(46098 'typeof' other[46088]))
+    (46108 call(46104 call . this[48091] c"complete"))
+    (46113 call(371112 call . this[48091] c"init_helper") other[46088])
+  }
+  function AtomicT[48077](?).deinit[46119](arg _mt[48097]:_MT[238], arg this[48095]:AtomicT[48077](?)) : _unknown[51] "atomic type" "destructor" "method" "primary method" "no doc" "no return value for void"
+  {
+    function atomic_destroy[46137](ref arg obj[46134] :
+    (46133 call externT(371123 call . this[48095] c"T")), arg _chpl_cname[46144] :
+    string[26] =
+    (46127 call externFunc "destroy"(371118 call . this[48095] c"T")(explicit = 0))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      void[4]
+    }
+    {
+      const tmp[46158] "const" "temp"
+      (46159 'move' tmp[46158](46156 'deref'(46155 '_wide_get_locale' this[48095])))
+      (46153 call atomic_destroy(371129 call . this[48095] c"_v"))
+      (46162 'elided on block' 0 tmp[46158])
+    }
+  }
+  function AtomicT[48077](?).read[46179](arg _mt[48101]:_MT[238], const arg this[48099]:AtomicT[48077](?), param arg order[46175] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    function atomic_load[46196](const  ref arg obj[46193] :
+    (46192 call externT(371145 call . this[48099] c"T")), arg order[46199] :
+    memory_order[186619], arg _chpl_cname[46207] :
+    string[26] =
+    (46186 call externFunc "load"(371140 call . this[48099] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (371151 call . this[48099] c"T")
+    }
+    unknown ret[46213](371156 call . this[48099] c"T")
+    (46216 'end of statement')
+    {
+      const tmp[46233] "const" "temp"
+      (46234 'move' tmp[46233](46231 'deref'(46230 '_wide_get_locale' this[48099])))
+      (46227 call = ret[46213](46226 call atomic_load(371163 call . this[48099] c"_v")(46225 call c_memory_order order[46175])))
+      (46237 'elided on block' 0 tmp[46233])
+    }
+    (46242 return ret[46213])
+  }
+  { scopeless type
+    (371135 call . this[48099] c"T")
+  }
+  function AtomicT[48077](?).write[46253](arg _mt[48105]:_MT[238], arg this[48103]:AtomicT[48077](?), arg value[46250] :
+  (371170 call . this[48103] c"T"), param arg order[46260] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method" "no return value for void"
+  {
+    function atomic_store[46279](ref arg obj[46276] :
+    (46275 call externT(371181 call . this[48103] c"T")), arg value[46282] :
+    (371186 call . this[48103] c"T"), arg order[46286] :
+    memory_order[186619], arg _chpl_cname[46294] :
+    string[26] =
+    (46269 call externFunc "store"(371176 call . this[48103] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      void[4]
+    }
+    {
+      const tmp[46313] "const" "temp"
+      (46314 'move' tmp[46313](46311 'deref'(46310 '_wide_get_locale' this[48103])))
+      (46308 call atomic_store(371193 call . this[48103] c"_v") value[46250](46307 call c_memory_order order[46260]))
+      (46317 'elided on block' 0 tmp[46313])
+    }
+  }
+  { scopeless type
+    void[4]
+  }
+  function AtomicT[48077](?).exchange[46330](arg _mt[48109]:_MT[238], arg this[48107]:AtomicT[48077](?), arg value[46327] :
+  (371200 call . this[48107] c"T"), param arg order[46337] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    function atomic_exchange[46356](ref arg obj[46353] :
+    (46352 call externT(371216 call . this[48107] c"T")), arg value[46359] :
+    (371221 call . this[48107] c"T"), arg order[46363] :
+    memory_order[186619], arg _chpl_cname[46371] :
+    string[26] =
+    (46346 call externFunc "exchange"(371211 call . this[48107] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (371227 call . this[48107] c"T")
+    }
+    unknown ret[46377](371232 call . this[48107] c"T")
+    (46380 'end of statement')
+    {
+      const tmp[46398] "const" "temp"
+      (46399 'move' tmp[46398](46396 'deref'(46395 '_wide_get_locale' this[48107])))
+      (46392 call = ret[46377](46391 call atomic_exchange(371239 call . this[48107] c"_v") value[46327](46390 call c_memory_order order[46337])))
+      (46402 'elided on block' 0 tmp[46398])
+    }
+    (46407 return ret[46377])
+  }
+  { scopeless type
+    (371206 call . this[48107] c"T")
+  }
+  function AtomicT[48077](?).compareExchange[46418](arg _mt[48113]:_MT[238], arg this[48111]:AtomicT[48077](?), ref arg expected[46415] :
+  (371247 call . this[48111] c"T"), arg desired[46421] :
+  (371252 call . this[48111] c"T"), param arg order[46429] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    (46447 return(46446 call(46435 call . this[48111] c"compareExchange") expected[46415] desired[46421] order[46429](46445 call readableOrder order[46429])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function AtomicT[48077](?).compareExchange[46459](arg _mt[48117]:_MT[238], arg this[48115]:AtomicT[48077](?), ref arg expected[46456] :
+  (371262 call . this[48115] c"T"), arg desired[46462] :
+  (371267 call . this[48115] c"T"), param arg success[46466] :
+  memoryOrder[186978], param arg failure[46470] :
+  memoryOrder[186978]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    function atomic_compare_exchange_strong[46488](ref arg obj[46485] :
+    (46484 call externT(371279 call . this[48115] c"T")), ref arg expected[46491] :
+    (371284 call . this[48115] c"T"), arg desired[46495] :
+    (371289 call . this[48115] c"T"), arg succ[46499] :
+    memory_order[186619], arg fail[46503] :
+    memory_order[186619], arg _chpl_cname[46511] :
+    string[26] =
+    (46478 call externFunc "compare_exchange_strong"(371274 call . this[48115] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      bool[10]
+    }
+    unknown ret[46517] bool[10]
+    (46520 'end of statement')
+    {
+      const tmp[46562] "const" "temp"
+      (46563 'move' tmp[46562](46560 'deref'(46559 '_wide_get_locale' this[48115])))
+      {
+        unknown localizedExpected[46523] expected[46456]
+        (46526 'end of statement')
+        (46543 call = ret[46517](46542 call atomic_compare_exchange_strong(371299 call . this[48115] c"_v") localizedExpected[46523] desired[46462](46537 call c_memory_order success[46466])(46541 call c_memory_order failure[46470])))
+        if(46554 call _cond_test(46547 call ! ret[46517]))
+        {
+          (46551 call = expected[46456] localizedExpected[46523])
+        }
+      }
+      (46566 'elided on block' 0 tmp[46562])
+    }
+    (46571 return ret[46517])
+  }
+  { scopeless type
+    bool[10]
+  }
+  function AtomicT[48077](?).compareExchangeWeak[46582](arg _mt[48121]:_MT[238], arg this[48119]:AtomicT[48077](?), ref arg expected[46579] :
+  (371312 call . this[48119] c"T"), arg desired[46585] :
+  (371317 call . this[48119] c"T"), param arg order[46593] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    (46611 return(46610 call(46599 call . this[48119] c"compareExchangeWeak") expected[46579] desired[46585] order[46593](46609 call readableOrder order[46593])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function AtomicT[48077](?).compareExchangeWeak[46623](arg _mt[48125]:_MT[238], arg this[48123]:AtomicT[48077](?), ref arg expected[46620] :
+  (371327 call . this[48123] c"T"), arg desired[46626] :
+  (371332 call . this[48123] c"T"), param arg success[46630] :
+  memoryOrder[186978], param arg failure[46634] :
+  memoryOrder[186978]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    function atomic_compare_exchange_weak[46652](ref arg obj[46649] :
+    (46648 call externT(371344 call . this[48123] c"T")), ref arg expected[46655] :
+    (371349 call . this[48123] c"T"), arg desired[46659] :
+    (371354 call . this[48123] c"T"), arg succ[46663] :
+    memory_order[186619], arg fail[46667] :
+    memory_order[186619], arg _chpl_cname[46675] :
+    string[26] =
+    (46642 call externFunc "compare_exchange_weak"(371339 call . this[48123] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      bool[10]
+    }
+    unknown ret[46681] bool[10]
+    (46684 'end of statement')
+    {
+      const tmp[46726] "const" "temp"
+      (46727 'move' tmp[46726](46724 'deref'(46723 '_wide_get_locale' this[48123])))
+      {
+        unknown localizedExpected[46687] expected[46620]
+        (46690 'end of statement')
+        (46707 call = ret[46681](46706 call atomic_compare_exchange_weak(371364 call . this[48123] c"_v") localizedExpected[46687] desired[46626](46701 call c_memory_order success[46630])(46705 call c_memory_order failure[46634])))
+        if(46718 call _cond_test(46711 call ! ret[46681]))
+        {
+          (46715 call = expected[46620] localizedExpected[46687])
+        }
+      }
+      (46730 'elided on block' 0 tmp[46726])
+    }
+    (46735 return ret[46681])
+  }
+  { scopeless type
+    bool[10]
+  }
+  function AtomicT[48077](?).compareAndSwap[46746](arg _mt[48129]:_MT[238], arg this[48127]:AtomicT[48077](?), arg expected[46743] :
+  (371377 call . this[48127] c"T"), arg desired[46749] :
+  (371382 call . this[48127] c"T"), param arg order[46757] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    function atomic_compare_exchange_strong[46776](ref arg obj[46773] :
+    (46772 call externT(371393 call . this[48127] c"T")), ref arg expected[46779] :
+    (371398 call . this[48127] c"T"), arg desired[46783] :
+    (371403 call . this[48127] c"T"), arg succ[46787] :
+    memory_order[186619], arg fail[46791] :
+    memory_order[186619], arg _chpl_cname[46799] :
+    string[26] =
+    (46766 call externFunc "compare_exchange_strong"(371388 call . this[48127] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      bool[10]
+    }
+    unknown ret[46805] bool[10]
+    (46808 'end of statement')
+    {
+      const tmp[46840] "const" "temp"
+      (46841 'move' tmp[46840](46838 'deref'(46837 '_wide_get_locale' this[48127])))
+      {
+        unknown mutableExpected[46811] expected[46743]
+        (46814 'end of statement')
+        (46834 call = ret[46805](46833 call atomic_compare_exchange_strong(371413 call . this[48127] c"_v") mutableExpected[46811] desired[46749](46825 call c_memory_order order[46757])(46832 call c_memory_order(46830 call readableOrder order[46757]))))
+      }
+      (46844 'elided on block' 0 tmp[46840])
+    }
+    (46849 return ret[46805])
+  }
+  { scopeless type
+    bool[10]
+  }
+  function AtomicT[48077](?).fetchAdd[46860](arg _mt[48133]:_MT[238], arg this[48131]:AtomicT[48077](?), arg value[46857] :
+  (371423 call . this[48131] c"T"), param arg order[46867] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    function atomic_fetch_add[46902](ref arg obj[46899] :
+    (46898 call externT(371439 call . this[48131] c"T")), arg operand[46905] :
+    (371444 call . this[48131] c"T"), arg order[46909] :
+    memory_order[186619], arg _chpl_cname[46917] :
+    string[26] =
+    (46892 call externFunc "fetch_add"(371434 call . this[48131] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (371450 call . this[48131] c"T")
+    }
+    unknown ret[46923](371455 call . this[48131] c"T")
+    (46926 'end of statement')
+    {
+      const tmp[46944] "const" "temp"
+      (46945 'move' tmp[46944](46942 'deref'(46941 '_wide_get_locale' this[48131])))
+      (46938 call = ret[46923](46937 call atomic_fetch_add(371462 call . this[48131] c"_v") value[46857](46936 call c_memory_order order[46867])))
+      (46948 'elided on block' 0 tmp[46944])
+    }
+    (46953 return ret[46923])
+  }
+  { scopeless type
+    (371429 call . this[48131] c"T")
+  }
+  function AtomicT[48077](?).add[46964](arg _mt[48137]:_MT[238], arg this[48135]:AtomicT[48077](?), arg value[46961] :
+  (371470 call . this[48135] c"T"), param arg order[46971] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method" "no return value for void"
+  {
+    function atomic_fetch_add[46990](ref arg obj[46987] :
+    (46986 call externT(371481 call . this[48135] c"T")), arg operand[46993] :
+    (371486 call . this[48135] c"T"), arg order[46997] :
+    memory_order[186619], arg _chpl_cname[47005] :
+    string[26] =
+    (46980 call externFunc "fetch_add"(371476 call . this[48135] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (371492 call . this[48135] c"T")
+    }
+    {
+      const tmp[47024] "const" "temp"
+      (47025 'move' tmp[47024](47022 'deref'(47021 '_wide_get_locale' this[48135])))
+      (47019 call atomic_fetch_add(371498 call . this[48135] c"_v") value[46961](47018 call c_memory_order order[46971]))
+      (47028 'elided on block' 0 tmp[47024])
+    }
+  }
+  { scopeless type
+    void[4]
+  }
+  function AtomicT[48077](?).fetchSub[47041](arg _mt[48141]:_MT[238], arg this[48139]:AtomicT[48077](?), arg value[47038] :
+  (371505 call . this[48139] c"T"), param arg order[47048] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    function atomic_fetch_sub[47083](ref arg obj[47080] :
+    (47079 call externT(371521 call . this[48139] c"T")), arg operand[47086] :
+    (371526 call . this[48139] c"T"), arg order[47090] :
+    memory_order[186619], arg _chpl_cname[47098] :
+    string[26] =
+    (47073 call externFunc "fetch_sub"(371516 call . this[48139] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (371532 call . this[48139] c"T")
+    }
+    unknown ret[47104](371537 call . this[48139] c"T")
+    (47107 'end of statement')
+    {
+      const tmp[47125] "const" "temp"
+      (47126 'move' tmp[47125](47123 'deref'(47122 '_wide_get_locale' this[48139])))
+      (47119 call = ret[47104](47118 call atomic_fetch_sub(371544 call . this[48139] c"_v") value[47038](47117 call c_memory_order order[47048])))
+      (47129 'elided on block' 0 tmp[47125])
+    }
+    (47134 return ret[47104])
+  }
+  { scopeless type
+    (371511 call . this[48139] c"T")
+  }
+  function AtomicT[48077](?).sub[47145](arg _mt[48145]:_MT[238], arg this[48143]:AtomicT[48077](?), arg value[47142] :
+  (371552 call . this[48143] c"T"), param arg order[47152] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method" "no return value for void"
+  {
+    function atomic_fetch_sub[47171](ref arg obj[47168] :
+    (47167 call externT(371563 call . this[48143] c"T")), arg operand[47174] :
+    (371568 call . this[48143] c"T"), arg order[47178] :
+    memory_order[186619], arg _chpl_cname[47186] :
+    string[26] =
+    (47161 call externFunc "fetch_sub"(371558 call . this[48143] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (371574 call . this[48143] c"T")
+    }
+    {
+      const tmp[47205] "const" "temp"
+      (47206 'move' tmp[47205](47203 'deref'(47202 '_wide_get_locale' this[48143])))
+      (47200 call atomic_fetch_sub(371580 call . this[48143] c"_v") value[47142](47199 call c_memory_order order[47152]))
+      (47209 'elided on block' 0 tmp[47205])
+    }
+  }
+  { scopeless type
+    void[4]
+  }
+  function AtomicT[48077](?).fetchOr[47222](arg _mt[48149]:_MT[238], arg this[48147]:AtomicT[48077](?), arg value[47219] :
+  (371587 call . this[48147] c"T"), param arg order[47229] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    if(47261 call _cond_test(47238 call !(47237 call isIntegral(371598 call . this[48147] c"T"))))
+    {
+      (47259 call compilerError "fetchOr is only defined for integer atomic types")
+    }
+    function atomic_fetch_or[47297](ref arg obj[47294] :
+    (47293 call externT(371608 call . this[48147] c"T")), arg operand[47300] :
+    (371613 call . this[48147] c"T"), arg order[47304] :
+    memory_order[186619], arg _chpl_cname[47312] :
+    string[26] =
+    (47287 call externFunc "fetch_or"(371603 call . this[48147] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (371619 call . this[48147] c"T")
+    }
+    unknown ret[47317](371624 call . this[48147] c"T")
+    (47320 'end of statement')
+    {
+      const tmp[47338] "const" "temp"
+      (47339 'move' tmp[47338](47336 'deref'(47335 '_wide_get_locale' this[48147])))
+      (47332 call = ret[47317](47331 call atomic_fetch_or(371631 call . this[48147] c"_v") value[47219](47330 call c_memory_order order[47229])))
+      (47342 'elided on block' 0 tmp[47338])
+    }
+    (47347 return ret[47317])
+  }
+  { scopeless type
+    (371593 call . this[48147] c"T")
+  }
+  function AtomicT[48077](?).or[47358](arg _mt[48153]:_MT[238], arg this[48151]:AtomicT[48077](?), arg value[47355] :
+  (371639 call . this[48151] c"T"), param arg order[47365] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method" "no return value for void"
+  {
+    if(47399 call _cond_test(47374 call !(47373 call isIntegral(371645 call . this[48151] c"T"))))
+    {
+      (47397 call compilerError "or is only defined for integer atomic types")
+    }
+    function atomic_fetch_or[47419](ref arg obj[47416] :
+    (47415 call externT(371655 call . this[48151] c"T")), arg operand[47422] :
+    (371660 call . this[48151] c"T"), arg order[47426] :
+    memory_order[186619], arg _chpl_cname[47434] :
+    string[26] =
+    (47409 call externFunc "fetch_or"(371650 call . this[48151] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (371666 call . this[48151] c"T")
+    }
+    {
+      const tmp[47452] "const" "temp"
+      (47453 'move' tmp[47452](47450 'deref'(47449 '_wide_get_locale' this[48151])))
+      (47447 call atomic_fetch_or(371672 call . this[48151] c"_v") value[47355](47446 call c_memory_order order[47365]))
+      (47456 'elided on block' 0 tmp[47452])
+    }
+  }
+  { scopeless type
+    void[4]
+  }
+  function AtomicT[48077](?).fetchAnd[47469](arg _mt[48157]:_MT[238], arg this[48155]:AtomicT[48077](?), arg value[47466] :
+  (371679 call . this[48155] c"T"), param arg order[47476] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    if(47508 call _cond_test(47485 call !(47484 call isIntegral(371690 call . this[48155] c"T"))))
+    {
+      (47506 call compilerError "fetchAnd is only defined for integer atomic types")
+    }
+    function atomic_fetch_and[47544](ref arg obj[47541] :
+    (47540 call externT(371700 call . this[48155] c"T")), arg operand[47547] :
+    (371705 call . this[48155] c"T"), arg order[47551] :
+    memory_order[186619], arg _chpl_cname[47559] :
+    string[26] =
+    (47534 call externFunc "fetch_and"(371695 call . this[48155] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (371711 call . this[48155] c"T")
+    }
+    unknown ret[47564](371716 call . this[48155] c"T")
+    (47567 'end of statement')
+    {
+      const tmp[47585] "const" "temp"
+      (47586 'move' tmp[47585](47583 'deref'(47582 '_wide_get_locale' this[48155])))
+      (47579 call = ret[47564](47578 call atomic_fetch_and(371723 call . this[48155] c"_v") value[47466](47577 call c_memory_order order[47476])))
+      (47589 'elided on block' 0 tmp[47585])
+    }
+    (47594 return ret[47564])
+  }
+  { scopeless type
+    (371685 call . this[48155] c"T")
+  }
+  function AtomicT[48077](?).and[47605](arg _mt[48161]:_MT[238], arg this[48159]:AtomicT[48077](?), arg value[47602] :
+  (371731 call . this[48159] c"T"), param arg order[47612] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method" "no return value for void"
+  {
+    if(47644 call _cond_test(47621 call !(47620 call isIntegral(371737 call . this[48159] c"T"))))
+    {
+      (47642 call compilerError "and is only defined for integer atomic types")
+    }
+    function atomic_fetch_and[47664](ref arg obj[47661] :
+    (47660 call externT(371747 call . this[48159] c"T")), arg operand[47667] :
+    (371752 call . this[48159] c"T"), arg order[47671] :
+    memory_order[186619], arg _chpl_cname[47679] :
+    string[26] =
+    (47654 call externFunc "fetch_and"(371742 call . this[48159] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (371758 call . this[48159] c"T")
+    }
+    {
+      const tmp[47697] "const" "temp"
+      (47698 'move' tmp[47697](47695 'deref'(47694 '_wide_get_locale' this[48159])))
+      (47692 call atomic_fetch_and(371764 call . this[48159] c"_v") value[47602](47691 call c_memory_order order[47612]))
+      (47701 'elided on block' 0 tmp[47697])
+    }
+  }
+  { scopeless type
+    void[4]
+  }
+  function AtomicT[48077](?).fetchXor[47714](arg _mt[48165]:_MT[238], arg this[48163]:AtomicT[48077](?), arg value[47711] :
+  (371771 call . this[48163] c"T"), param arg order[47721] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method"
+  {
+    if(47753 call _cond_test(47730 call !(47729 call isIntegral(371782 call . this[48163] c"T"))))
+    {
+      (47751 call compilerError "fetchXor is only defined for integer atomic types")
+    }
+    function atomic_fetch_xor[47789](ref arg obj[47786] :
+    (47785 call externT(371792 call . this[48163] c"T")), arg operand[47792] :
+    (371797 call . this[48163] c"T"), arg order[47796] :
+    memory_order[186619], arg _chpl_cname[47804] :
+    string[26] =
+    (47779 call externFunc "fetch_xor"(371787 call . this[48163] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (371803 call . this[48163] c"T")
+    }
+    unknown ret[47809](371808 call . this[48163] c"T")
+    (47812 'end of statement')
+    {
+      const tmp[47830] "const" "temp"
+      (47831 'move' tmp[47830](47828 'deref'(47827 '_wide_get_locale' this[48163])))
+      (47824 call = ret[47809](47823 call atomic_fetch_xor(371815 call . this[48163] c"_v") value[47711](47822 call c_memory_order order[47721])))
+      (47834 'elided on block' 0 tmp[47830])
+    }
+    (47839 return ret[47809])
+  }
+  { scopeless type
+    (371777 call . this[48163] c"T")
+  }
+  function AtomicT[48077](?).xor[47850](arg _mt[48169]:_MT[238], arg this[48167]:AtomicT[48077](?), arg value[47847] :
+  (371823 call . this[48167] c"T"), param arg order[47857] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method" "no return value for void"
+  {
+    if(47889 call _cond_test(47866 call !(47865 call isIntegral(371829 call . this[48167] c"T"))))
+    {
+      (47887 call compilerError "xor is only defined for integer atomic types")
+    }
+    function atomic_fetch_xor[47909](ref arg obj[47906] :
+    (47905 call externT(371839 call . this[48167] c"T")), arg operand[47912] :
+    (371844 call . this[48167] c"T"), arg order[47916] :
+    memory_order[186619], arg _chpl_cname[47924] :
+    string[26] =
+    (47899 call externFunc "fetch_xor"(371834 call . this[48167] c"T"))) : _unknown[51] "extern" "fast-on safe extern function" "local args" "local fn" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (371850 call . this[48167] c"T")
+    }
+    {
+      const tmp[47942] "const" "temp"
+      (47943 'move' tmp[47942](47940 'deref'(47939 '_wide_get_locale' this[48167])))
+      (47937 call atomic_fetch_xor(371856 call . this[48167] c"_v") value[47847](47936 call c_memory_order order[47857]))
+      (47946 'elided on block' 0 tmp[47942])
+    }
+  }
+  { scopeless type
+    void[4]
+  }
+  function AtomicT[48077](?).waitFor[47959](arg _mt[48173]:_MT[238], const arg this[48171]:AtomicT[48077](?), arg value[47956] :
+  (371863 call . this[48171] c"T"), param arg order[47966] :
+  memoryOrder[186978] =
+  seqCst[186968]) : _unknown[51] "atomic type" "inline" "method" "primary method" "no return value for void"
+  {
+    {
+      const tmp[48048] "const" "temp"
+      (48049 'move' tmp[48048](48046 'deref'(48045 '_wide_get_locale' this[48171])))
+      {
+        {
+          unknown tmp[47991] "temp"
+          (48033 'move' tmp[47991](48019 call _cond_test(48021 call !=(48026 call(48023 call . this[48171] c"read")(order = relaxed[186976])) value[47956])))
+          WhileDo[47996]
+          {
+            {
+              (47988 call chpl_task_yield)
+            }
+            label _continueLabel[47994]
+            (48014 'move' tmp[47991](48000 call _cond_test(48002 call !=(48007 call(48004 call . this[48171] c"read")(order = relaxed[186976])) value[47956])))
+            tmp[47991]
+          }
+          label _breakLabel[47995]
+        }
+        (48043 call chpl_atomic_thread_fence(48041 call c_memory_order order[47966]))
+      }
+      (48052 'elided on block' 0 tmp[48048])
+    }
+  }
+  { scopeless type
+    void[4]
+  }
+  function AtomicT[48077](?).writeThis[48064](arg _mt[48177]:_MT[238], const arg this[48175]:AtomicT[48077](?), arg x[48062]:_any[178](?)) : _unknown[51] throws "atomic type" "method" "primary method" "no doc" "no return value for void"
+  {
+    (48070 call <~> x[48062](48069 call(371873 call . this[48175] c"read")))
+  }
+  type AtomicT[48077](?) unknown T[45946] "no doc" "type variable" unknown _v[45953] "no doc"(45952 call externT T[45946])
+  function =[48186](ref arg a[48183] :
+  AtomicBool[45874], const  ref arg b[48189] :
+  AtomicBool[45874]) : _unknown[51] "assignop" "inline" "no return value for void"
+  {
+    (48203 call(48193 call . a[48183] c"write")(48201 call(48197 call . b[48189] c"read")))
+  }
+  function =[48214](ref arg a[48211] :
+  AtomicBool[45874], arg b[48216]:_any[178](?)) : _unknown[51] "assignop" "inline" "no return value for void"
+  {
+    (48239 call compilerError "Cannot directly assign atomic variables")
+  }
+  function =[48250](ref arg a[48247] :
+  AtomicT[48077](?), const  ref arg b[48253] :
+  AtomicT[48077](?)) : _unknown[51] "assignop" "inline" "no return value for void"
+  {
+    (48267 call(48257 call . a[48247] c"write")(48265 call(48261 call . b[48253] c"read")))
+  }
+  function =[48278](ref arg a[48275] :
+  AtomicT[48077](?), arg b[48280]:_any[178](?)) : _unknown[51] "assignop" "inline" "no return value for void"
+  {
+    (48285 call compilerError "Cannot directly assign atomic variables")
+  }
+  function +[48296](arg a[48293] :
+  AtomicT[48077](?), arg b[48298]:_any[178](?)) : _unknown[51] "inline"
+  {
+    (48319 call compilerError "Cannot directly add atomic variables")
+    (48323 return a[48293])
+  }
+  function -[48333](arg a[48330] :
+  AtomicT[48077](?), arg b[48335]:_any[178](?)) : _unknown[51] "inline"
+  {
+    (48356 call compilerError "Cannot directly subtract atomic variables")
+    (48360 return a[48330])
+  }
+  function *[48370](arg a[48367] :
+  AtomicT[48077](?), arg b[48372]:_any[178](?)) : _unknown[51] "inline"
+  {
+    (48393 call compilerError "Cannot directly multiply atomic variables")
+    (48397 return a[48367])
+  }
+  function /[48407](arg a[48404] :
+  AtomicT[48077](?), arg b[48409]:_any[178](?)) : _unknown[51] "inline"
+  {
+    (48430 call compilerError "Cannot directly divide atomic variables")
+    (48434 return a[48404])
+  }
+  function %[48444](arg a[48441] :
+  AtomicT[48077](?), arg b[48446]:_any[178](?)) : _unknown[51] "inline"
+  {
+    (48451 call compilerError "Cannot directly divide atomic variables")
+    (48455 return a[48441])
+  }
+  (355092 'used modules list'(43963 'use' ChapelBase[307])(43967 'use' MemConsistency[186614]))
+}

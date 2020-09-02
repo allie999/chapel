@@ -1,0 +1,280 @@
+AST dump for Random after pass scopeResolve.
+Module use list: ChapelStandard RandomSupport NPBRandom PCGRandom Set Search Sort 
+
+{ type RNG[304604] def PCG[304599]:RNG[304604] 1 def NPB[304602]:RNG[304604] 2 unknown defaultRNG[304613] "param" PCG[304599](304616 'end of statement') unknown RandomStream[304629] "type variable"(304626 IfExpr (304622 call == defaultRNG[304613] PCG[304599]) then
+  { scopeless PCGRandomStream[406930](?)
+  } else
+  { scopeless NPBRandomStream[406934](?)
+  } ) function isSupportedNumericType[304636](arg t[304634]:_any[178](?)) param : _unknown[51] "private"
+  {(304648 return(304646 call ||(304641 call isNumericType t[304634])(304645 call isBoolType t[304634])))
+  } function fillRandom[304661](arg arr[304658] :(304655 call chpl__buildArrayRuntimeType nil[44]), arg seed[304673] :(304666 call int(64)[13] 64) =(304670 call . SeedGenerator[307461] c"oddCurrentTime"), param arg algorithm[304678] = defaultRNG[304613]) : _unknown[51] "no return value for void"
+  { unknown randNums[304702](304701 call createRandomStream(seed = seed[304673])(eltType =(304693 call . arr[304658] c"eltType"))(parSafe = 0)(algorithm = algorithm[304678]))(304705 'end of statement')(304715 call(304710 call . randNums[304702] c"fillRandom") arr[304658])
+  }
+  {(304687 call isSupportedNumericType(304683 call . arr[304658] c"eltType"))
+  } function fillRandom[304728](arg arr[304725] :(304722 call chpl__buildArrayRuntimeType nil[44]), arg seed[304738] :(304733 call int(64)[13] 64) =(304735 call . SeedGenerator[307461] c"oddCurrentTime"), param arg algorithm[304743] = defaultRNG[304613]) : _unknown[51] "no doc" "no return value for void"
+  {(304765 call compilerError "Random.fillRandom is only defined for numeric arrays")
+  } function shuffle[304778](arg arr[304775] :(304772 call chpl__buildArrayRuntimeType nil[44]), arg seed[304788] :(304783 call int(64)[13] 64) =(304785 call . SeedGenerator[307461] c"oddCurrentTime"), param arg algorithm[304796] = PCG[304599]) : _unknown[51] "no return value for void"
+  { unknown randNums[304816](304815 call createRandomStream(seed = seed[304788])(eltType =(304807 call .(304804 call . arr[304775] c"_dom") c"idxType"))(parSafe = 0)(algorithm = algorithm[304796]))(304819 'end of statement')(304827 call(304822 call . randNums[304816] c"shuffle") arr[304775])
+  } function permutation[304839](arg arr[304836] :(304833 call chpl__buildArrayRuntimeType nil[44]), arg seed[304849] :(304844 call int(64)[13] 64) =(304846 call . SeedGenerator[307461] c"oddCurrentTime"), param arg algorithm[304857] = PCG[304599]) : _unknown[51] "no return value for void"
+  { unknown randNums[304874](304873 call createRandomStream(seed = seed[304849])(eltType =(304865 call . arr[304836] c"eltType"))(parSafe = 0)(algorithm = algorithm[304857]))(304877 'end of statement')(304887 call(304882 call . randNums[304874] c"permutation") arr[304836])
+  } function makeRandomStream[304895](arg eltType[304893]:_any[178](?), arg seed[304905] :(304900 call int(64)[13] 64) =(304902 call . SeedGenerator[307461] c"oddCurrentTime"), param arg parSafe[304911] : bool[10] = 1, param arg algorithm[304916] = defaultRNG[304613]) : _unknown[51] "no doc"
+  {(304957 call compilerWarning(304954 call + "makeRandomStream is deprecated - " "please use createRandomStream instead"))(304967 return(304966 call createRandomStream eltType[304893] seed[304905] parSafe[304911] algorithm[304916]))
+  } function createRandomStream[304975](arg eltType[304973]:_any[178](?), arg seed[304985] :(304980 call int(64)[13] 64) =(304982 call . SeedGenerator[307461] c"oddCurrentTime"), param arg parSafe[304991] : bool[10] = 1, param arg algorithm[304996] = defaultRNG[304613]) : _unknown[51]
+  {
+    if(305070 call _cond_test(305004 call == algorithm[304996] PCG[304599]))
+    {(305018 return(305008 'new'(_chpl_manager = _owned[30](?))(305017 call PCGRandomStream[406930](?)(seed = seed[304985])(parSafe = parSafe[304991])(eltType = eltType[304973]))))
+    }
+    {
+      if(305064 call _cond_test(305027 call == algorithm[304996] NPB[304602]))
+      {(305041 return(305031 'new'(_chpl_manager = _owned[30](?))(305040 call NPBRandomStream[406934](?)(seed = seed[304985])(parSafe = parSafe[304991])(eltType = eltType[304973]))))
+      }
+      {(305062 call compilerError "Unknown random number generator")
+      }
+    }
+  } function _choice[305083](arg stream[305081]:_any[178](?), arg X[305086] : _domain[125914](?), arg size[305091] : unknown sizeType[305089], arg replace[305095] : bool[10], arg prob[305100] : unknown probType[305098]) : _unknown[51] throws "no doc"
+  {
+    if(305132 call _cond_test(305108 call !=(305104 call . X[305086] c"rank") 1))
+    {(305129 call compilerError "choice() argument x must be 1 dimensional")
+    }
+    if(305170 call _cond_test(305142 call <(305138 call . X[305086] c"size") 1))
+    {(305167 'throw'(305146 'new'(_chpl_manager = _owned[30](?))(305166 call IllegalArgumentError[388835](?) "choice() x.size must be greater than 0")))
+    }
+    if(305330 call _cond_test(305178 call !(305177 call isNothingType probType[305098])))
+    {
+      if(305207 call _cond_test(305184 call !(305183 call isArrayType probType[305098])))
+      {(305205 call compilerError "choice() prob must be an array")
+      }
+      if(305252 call _cond_test(305229 call !(305227 call ||(305219 call isIntegralType(305215 call . prob[305100] c"eltType"))(305226 call isRealType(305222 call . prob[305100] c"eltType")))))
+      {(305250 call compilerError "choice() prob.eltType must be real or integral")
+      }
+      if(305286 call _cond_test(305262 call !=(305258 call . prob[305100] c"rank") 1))
+      {(305283 call compilerError "choice() prob array must be 1 dimensional")
+      }
+      if(305326 call _cond_test(305298 call !=(305291 call . prob[305100] c"size")(305295 call . X[305086] c"size")))
+      {(305323 'throw'(305302 'new'(_chpl_manager = _owned[30](?))(305322 call IllegalArgumentError[388835](?) "choice() x.size must be equal to prob.size")))
+      }
+    }
+    if(305524 call _cond_test(305338 call !(305337 call isNothingType sizeType[305089])))
+    {
+      if(305518 call _cond_test(305343 call isIntegralType sizeType[305089]))
+      {
+        if(305373 call _cond_test(305346 call <= size[305091] 0))
+        {(305371 'throw'(305350 'new'(_chpl_manager = _owned[30](?))(305370 call IllegalArgumentError[388835](?) "choice() size must be greater than 0")))
+        }
+        if(305416 call _cond_test(305389 call &&(305380 call ! replace[305095])(305387 call > size[305091](305384 call . X[305086] c"size"))))
+        {(305414 'throw'(305393 'new'(_chpl_manager = _owned[30](?))(305413 call IllegalArgumentError[388835](?) "choice() size must be smaller than x.size when replace=false")))
+        }
+      }
+      {
+        if(305514 call _cond_test(305424 call isDomainType sizeType[305089]))
+        {
+          if(305457 call _cond_test(305430 call <=(305426 call . size[305091] c"size") 0))
+          {(305455 'throw'(305434 'new'(_chpl_manager = _owned[30](?))(305454 call IllegalArgumentError[388835](?) "choice() size domain can not be empty")))
+          }
+          if(305487 call _cond_test(305476 call &&(305464 call ! replace[305095])(305474 call >(305467 call . size[305091] c"size")(305471 call . X[305086] c"size"))))
+          {(305485 'throw'(305480 'new'(_chpl_manager = _owned[30](?))(305484 call IllegalArgumentError[388835](?) "choice() size must be smaller than x.size when replace=false")))
+          }
+        }
+        {(305511 call compilerError "choice() size must be integral or domain")
+        }
+      }
+    }
+    if(305553 call _cond_test(305531 call isNothingType probType[305098]))
+    {(305539 return(305538 call _choiceUniform stream[305081] X[305086] size[305091] replace[305095]))
+    }
+    {(305550 return(305549 call _choiceProbabilities stream[305081] X[305086] size[305091] replace[305095] prob[305100]))
+    }
+  } function _choiceUniform[305563](arg stream[305561]:_any[178](?), arg X[305566] : _domain[125914](?), arg size[305571] : unknown sizeType[305569], arg replace[305575] : bool[10]) : _unknown[51] throws "no doc"
+  { const low[305582] "const"(305579 call . X[305566] c"alignedLow") const stride[305592] "const"(305591 call abs(305587 call . X[305566] c"stride"))(305595 'end of statement')
+    if(306053 call _cond_test(305600 call isNothingType sizeType[305569]))
+    { unknown randVal[305617](305616 call(305602 call . stream[305561] c"getNext")(resultType = int(64)[13]) 0(305614 call -(305610 call . X[305566] c"size") 1))(305620 'end of statement') unknown randIdx[305635](305634 call(305629 call .(305628 call(305623 call . X[305566] c"dim") 0) c"orderToIndex") randVal[305617])(305638 'end of statement')(305640 return randIdx[305635])
+    }
+    { unknown m[305643] 1(305646 'end of statement')
+      if(305660 call _cond_test(305651 call isDomainType sizeType[305569]))
+      {(305657 call = m[305643](305654 call . size[305571] c"size"))
+      } unknown numElements[305704](305701 IfExpr (305668 call isDomainType sizeType[305569]) then
+      { scopeless m[305643]
+      } else
+      { scopeless(305698 IfExpr (305673 call isIntegralType sizeType[305569]) then
+        { scopeless(305676 call _cast int(64)[13] size[305571])
+        } else
+        { scopeless(305697 call compilerError "choice() size type must be integral or tuple of ranges")
+        } )
+      } )(305707 'end of statement') unknown samples[305721](305719 call chpl__buildArrayRuntimeType(305717 call chpl__ensureDomainExpr(305713 call chpl_build_bounded_range 0(305711 call - numElements[305704] 1))) int(64)[13])(305724 'end of statement')
+      if(306020 call _cond_test replace[305575])
+      {
+        { unknown _indexOfInterest[305771] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[305772] "expr temp" "temp"(305781 'move' _iterator[305772](305779 call _getIterator samples[305721]))
+          Defer
+          {
+            {(305797 call _freeIterator _iterator[305772])
+            }
+          }
+          { scopeless type(305786 'move' _indexOfInterest[305771](305783 call iteratorIndex _iterator[305772]))
+          }
+          ForLoop[305773]
+          { unknown sample[305790] "index var" "insert auto destroy"(305792 'move' sample[305790] _indexOfInterest[305771])
+            { unknown randVal[305744](305743 call(305729 call . stream[305561] c"getNext")(resultType = int(64)[13]) 0(305741 call -(305737 call . X[305566] c"size") 1))(305747 'end of statement') unknown randIdx[305762](305761 call(305756 call .(305755 call(305750 call . X[305566] c"dim") 0) c"orderToIndex") randVal[305744])(305765 'end of statement')(305768 call = sample[305790] randIdx[305762])
+            } label _continueLabel[305776] _indexOfInterest[305771] _iterator[305772]
+          } label _breakLabel[305777]
+        }
+      }
+      {
+        if(306015 call _cond_test(305813 call < numElements[305704](305812 call log2(305808 call . X[305566] c"size"))))
+        { unknown indices[305819](305818 call set[333167](?) int(64)[13])(305822 'end of statement') unknown i[305826] 0 int(64)[13](305829 'end of statement')
+          { unknown tmp[305907] "temp"(305931 'move' tmp[305907](305926 call _cond_test(305928 call < i[305826] numElements[305704])))
+            WhileDo[305912]
+            {
+              { unknown randVal[305850](305849 call(305835 call . stream[305561] c"getNext")(resultType = int(64)[13]) 0(305847 call -(305843 call . X[305566] c"size") 1))(305853 'end of statement')
+                if(305903 call _cond_test(305862 call !(305861 call(305856 call . indices[305819] c"contains") randVal[305850])))
+                { unknown randIdx[305877](305876 call(305871 call .(305870 call(305865 call . X[305566] c"dim") 0) c"orderToIndex") randVal[305850])(305880 'end of statement')(305887 call =(305885 call samples[305721] i[305826]) randIdx[305877])(305896 call(305891 call . indices[305819] c"add") randVal[305850])(305900 call += i[305826] 1)
+                }
+              } label _continueLabel[305910](305921 'move' tmp[305907](305916 call _cond_test(305918 call < i[305826] numElements[305704]))) tmp[305907]
+            } label _breakLabel[305911]
+          }
+        }
+        { unknown indices[305942] X[305566](305939 call chpl__buildArrayRuntimeType(305937 call chpl__ensureDomainExpr X[305566]) int(64)[13])(305945 'end of statement')(305950 call shuffle indices[305942])
+          { unknown _indexOfInterest[305981] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[305982] "expr temp" "temp"(305991 'move' _iterator[305982](305989 call _getIterator(305954 call . samples[305721] c"_dom")))
+            Defer
+            {
+              {(306008 call _freeIterator _iterator[305982])
+              }
+            }
+            { scopeless type(305997 'move' _indexOfInterest[305981](305994 call iteratorIndex _iterator[305982]))
+            }
+            ForLoop[305983]
+            { unknown i[306001] "index var" "insert auto destroy"(306003 'move' i[306001] _indexOfInterest[305981])
+              {(305977 call =(305960 call samples[305721] i[306001])(305976 call indices[305942](305974 call(305969 call .(305968 call(305963 call . X[305566] c"dim") 0) c"orderToIndex") i[306001])))
+              } label _continueLabel[305986] _indexOfInterest[305981] _iterator[305982]
+            } label _breakLabel[305987]
+          }
+        }
+      }
+      if(306048 call _cond_test(306027 call isIntegralType sizeType[305569]))
+      {(306029 return samples[305721])
+      }
+      {
+        if(306044 call _cond_test(306035 call isDomainType sizeType[305569]))
+        {(306041 return(306040 call reshape samples[305721] size[305571]))
+        }
+      }
+    }
+  } function _choiceProbabilities[306063](arg stream[306061]:_any[178](?), arg X[306066] : _domain[125914](?), arg size[306071] : unknown sizeType[306069], arg replace[306074]:_any[178](?), arg prob[306078] : unknown probType[306076]) : _unknown[51] throws "no doc"
+  {
+    if(306108 call _cond_test(306096 call !=(306089 call . prob[306078] c"size")(306093 call . X[306066] c"size")))
+    {(306105 'throw'(306100 'new'(_chpl_manager = _owned[30](?))(306104 call IllegalArgumentError[388835](?) "choice() x.size must be equal to prob.size")))
+    }
+    if(306144 call _cond_test(306117 call ==(306113 call . prob[306078] c"size") 0))
+    {(306142 'throw'(306121 'new'(_chpl_manager = _owned[30](?))(306141 call IllegalArgumentError[388835](?) "choice() prob array cannot be empty")))
+    } const low[306153] "const"(306150 call . X[306066] c"alignedLow") const stride[306163] "const"(306162 call abs(306158 call . X[306066] c"stride"))(306166 'end of statement') unknown P[306183] "ref var"(306182 call(306168 call . prob[306078] c"reindex")(306179 call chpl_build_bounded_range 0(306177 call -(306173 call . X[306066] c"size") 1)))(306186 'end of statement') function chpl__scan5[306189](arg chpl_toScan[306191]:_any[178](?)) : _unknown[51] "compiler nested function" "fn returns iterator"
+    { unknown chpl_eltType[306193] "maybe type" "temp"
+      { scopeless type(306197 'move' chpl_eltType[306193](306199 'typeof'(306201 call chpl__initCopy(306203 call iteratorIndex(306205 call _getIterator chpl_toScan[306191])))))
+      } const tmp[306194] "const" "temp"(306214 'move' tmp[306194](306213 'new'(306212 call SumReduceScanOp[376429](?)(eltType = chpl_eltType[306193])(_chpl_manager = unmanaged[220](?)))))(306216 return(306218 call chpl__scanIterator tmp[306194] chpl_toScan[306191]))
+    } unknown cumulativeArr[306226](306224 call _cast real(64)[16](306222 call chpl__scan5 P[306183]))(306229 'end of statement')
+    if(306266 call _cond_test(306239 call !(306238 call isSorted module=[255] Sort[267885] cumulativeArr[306226])))
+    {(306264 'throw'(306243 'new'(_chpl_manager = _owned[30](?))(306263 call IllegalArgumentError[388835](?) "choice() prob array cannot contain negative values")))
+    }
+    if(306309 call _cond_test(306282 call <=(306280 call cumulativeArr[306226](306276 call .(306273 call . P[306183] c"_dom") c"last")) 0))
+    {(306307 'throw'(306286 'new'(_chpl_manager = _owned[30](?))(306306 call IllegalArgumentError[388835](?) "choice() prob array requires a value greater than 0")))
+    } unknown total[306324](306323 call cumulativeArr[306226](306319 call .(306316 call . P[306183] c"_dom") c"last"))(306327 'end of statement')(306330 call /= cumulativeArr[306226] total[306324])
+    if(306881 call _cond_test(306336 call isNothingType sizeType[306069]))
+    { unknown randNum[306345](306344 call(306338 call . stream[306061] c"getNext")(resultType = real(64)[16]))(306348 'end of statement') unknown tmp[306365] "temp"(306364 call binarySearch module=[255] Search[291162] cumulativeArr[306226] randNum[306345])(306372 call _check_tuple_var_decl tmp[306365] 2) unknown found[306350](306366 call tmp[306365] 0) unknown idx[306352](306369 call tmp[306365] 1)(306377 'end of statement')(306391 return(306390 call(306385 call .(306384 call(306379 call . X[306066] c"dim") 0) c"orderToIndex") idx[306352]))(365088 'referenced modules list' Search[291162])
+    }
+    { unknown m[306394] 1(306397 'end of statement')
+      if(306411 call _cond_test(306402 call isDomainType sizeType[306069]))
+      {(306408 call = m[306394](306405 call . size[306071] c"size"))
+      } unknown numElements[306439](306436 IfExpr (306419 call isDomainType sizeType[306069]) then
+      { scopeless m[306394]
+      } else
+      { scopeless(306433 IfExpr (306424 call isIntegralType sizeType[306069]) then
+        { scopeless(306427 call _cast int(64)[13] size[306071])
+        } else
+        { scopeless(306432 call compilerError "choice() size type must be integral or tuple of ranges")
+        } )
+      } )(306442 'end of statement') unknown samples[306456](306454 call chpl__buildArrayRuntimeType(306452 call chpl__ensureDomainExpr(306448 call chpl_build_bounded_range 0(306446 call - numElements[306439] 1))) int(64)[13])(306459 'end of statement')
+      if(306848 call _cond_test replace[306074])
+      {
+        { unknown _indexOfInterest[306519] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[306520] "expr temp" "temp"(306529 'move' _iterator[306520](306527 call _getIterator samples[306456]))
+          Defer
+          {
+            {(306545 call _freeIterator _iterator[306520])
+            }
+          }
+          { scopeless type(306534 'move' _indexOfInterest[306519](306531 call iteratorIndex _iterator[306520]))
+          }
+          ForLoop[306521]
+          { unknown sample[306538] "index var" "insert auto destroy"(306540 'move' sample[306538] _indexOfInterest[306519])
+            { unknown randNum[306471](306470 call(306464 call . stream[306061] c"getNext")(resultType = real(64)[16]))(306474 'end of statement') unknown tmp[306489] "temp"(306488 call binarySearch module=[255] Search[291162] cumulativeArr[306226] randNum[306471])(306496 call _check_tuple_var_decl tmp[306489] 2) unknown found[306476](306490 call tmp[306489] 0) unknown idx[306478](306493 call tmp[306489] 1)(306501 'end of statement')(306516 call = sample[306538](306515 call(306510 call .(306509 call(306504 call . X[306066] c"dim") 0) c"orderToIndex") idx[306478]))(365097 'referenced modules list' Search[291162])
+            } label _continueLabel[306524] _indexOfInterest[306519] _iterator[306520]
+          } label _breakLabel[306525]
+        }
+      }
+      { unknown indicesChosen[306558](306556 call chpl__buildDomainRuntimeType defaultDist[94058] int(64)[13])(306561 'end of statement') unknown i[306564] 0(306567 'end of statement')
+        { unknown tmp[306809] "temp"(306845 'move' tmp[306809](306834 call _cond_test(306836 call <(306838 call . indicesChosen[306558] c"size")(306842 call . samples[306456] c"size"))))
+          WhileDo[306814]
+          {
+            {
+              if(306648 call _cond_test(306583 call >(306579 call . indicesChosen[306558] c"size") 0))
+              { function chpl__scan6[306588](arg chpl_toScan[306590]:_any[178](?)) : _unknown[51] "compiler nested function" "fn returns iterator"
+                { unknown chpl_eltType[306592] "maybe type" "temp"
+                  { scopeless type(306596 'move' chpl_eltType[306592](306598 'typeof'(306600 call chpl__initCopy(306602 call iteratorIndex(306604 call _getIterator chpl_toScan[306590])))))
+                  } const tmp[306593] "const" "temp"(306613 'move' tmp[306593](306612 'new'(306611 call SumReduceScanOp[376429](?)(eltType = chpl_eltType[306592])(_chpl_manager = unmanaged[220](?)))))(306615 return(306617 call chpl__scanIterator tmp[306593] chpl_toScan[306590]))
+                }(306625 call = cumulativeArr[306226](306623 call _cast real(64)[16](306621 call chpl__scan6 P[306183])))(306640 call = total[306324](306639 call cumulativeArr[306226](306635 call .(306632 call . P[306183] c"_dom") c"last")))(306645 call /= cumulativeArr[306226] total[306324])
+              } unknown remainingSamples[306663](306661 call -(306654 call . samples[306456] c"size")(306658 call . indicesChosen[306558] c"size"))(306666 'end of statement')
+              { unknown _indexOfInterest[306775] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[306776] "expr temp" "temp"(306785 'move' _iterator[306776](306783 call _getIterator(306693 call(306671 call . stream[306061] c"iterate")(306688 call chpl__buildDomainExpr(306685 call chpl_build_bounded_range 1(306683 call -(306676 call . samples[306456] c"size")(306680 call . indicesChosen[306558] c"size"))))(resultType = real(64)[16]))))
+                Defer
+                {
+                  {(306802 call _freeIterator _iterator[306776])
+                  }
+                }
+                { scopeless type(306791 'move' _indexOfInterest[306775](306788 call iteratorIndex _iterator[306776]))
+                }
+                ForLoop[306777]
+                { unknown randNum[306795] "index var" "insert auto destroy"(306797 'move' randNum[306795] _indexOfInterest[306775])
+                  { unknown tmp[306707] "temp"(306706 call binarySearch module=[255] Search[291162] cumulativeArr[306226] randNum[306795])(306714 call _check_tuple_var_decl tmp[306707] 2) unknown found[306694](306708 call tmp[306707] 0) unknown indexChosen[306696](306711 call tmp[306707] 1)(306719 'end of statement')
+                    if(306763 call _cond_test(306728 call !(306727 call(306722 call . indicesChosen[306558] c"contains") indexChosen[306696])))
+                    {(306732 call += indicesChosen[306558] indexChosen[306696])(306753 call =(306739 call samples[306456] i[306564])(306752 call(306747 call .(306746 call(306741 call . X[306066] c"dim") 0) c"orderToIndex") indexChosen[306696]))
+                      {
+                      }(306760 call += i[306564] 1)
+                    }(306772 call =(306770 call P[306183] indexChosen[306696]) 0)(365111 'referenced modules list' Search[291162])
+                  } label _continueLabel[306780] _indexOfInterest[306775] _iterator[306776]
+                } label _breakLabel[306781]
+              }
+            } label _continueLabel[306812](306829 'move' tmp[306809](306818 call _cond_test(306820 call <(306822 call . indicesChosen[306558] c"size")(306826 call . samples[306456] c"size")))) tmp[306809]
+          } label _breakLabel[306813]
+        }
+      }
+      if(306876 call _cond_test(306855 call isIntegralType sizeType[306069]))
+      {(306857 return samples[306456])
+      }
+      {
+        if(306872 call _cond_test(306863 call isDomainType sizeType[306069]))
+        {(306869 return(306868 call reshape samples[306456] size[306071]))
+        }
+      }
+    }(355580 'used modules list'(306082 'import' Search[291162])(306086 'import' Sort[267885]))(365079 'referenced modules list' Sort[267885])
+  } function RandomStreamInterface[307322](?).getNext[306911](arg _mt[307326]:_MT[238], arg this[307324]:RandomStreamInterface[307322](?)) : _unknown[51] "method" "primary method"
+  {(306933 call compilerError "RandomStreamInterface.getNext called") unknown x[306937](407093 call . this[307324] c"eltType")(306940 'end of statement')(306942 return x[306937])
+  }
+  { scopeless type(407088 call . this[307324] c"eltType")
+  } function RandomStreamInterface[307322](?).skipToNth[306953](arg _mt[307330]:_MT[238], arg this[307328]:RandomStreamInterface[307322](?), arg n[306950] : integral[199](?)) : _unknown[51] throws "method" "primary method" "no return value for void"
+  {(306974 call compilerError "RandomStreamInterface.skipToNth called")
+  } function RandomStreamInterface[307322](?).getNth[306985](arg _mt[307334]:_MT[238], arg this[307332]:RandomStreamInterface[307322](?), arg n[306982] : integral[199](?)) : _unknown[51] throws "method" "primary method" "no return value for void"
+  {(307007 call compilerError "RandomStreamInterface.getNth called")
+  }
+  { scopeless type(407101 call . this[307332] c"eltType")
+  } function RandomStreamInterface[307322](?).fillRandom[307022](arg _mt[307338]:_MT[238], arg this[307336]:RandomStreamInterface[307322](?), arg arr[307019] :(307016 call chpl__buildArrayRuntimeType nil[44](407106 call . this[307336] c"eltType"))) : _unknown[51] "method" "primary method" "no return value for void"
+  {(307043 call compilerError "RandomStreamInterface.fillRandom called")
+  } function RandomStreamInterface[307322](?).fillRandom[307056](arg _mt[307342]:_MT[238], arg this[307340]:RandomStreamInterface[307322](?), arg arr[307053] :(307050 call chpl__buildArrayRuntimeType nil[44])) : _unknown[51] "method" "primary method" "no doc" "no return value for void"
+  {(307061 call compilerError "RandomStreamInterface.fillRandom called")
+  } function RandomStreamInterface[307322](?).choice[307074](arg _mt[307346]:_MT[238], arg this[307344]:RandomStreamInterface[307322](?), arg x[307071] :(307068 call chpl__buildArrayRuntimeType nil[44]), arg size[307079] : unknown sizeType[307076] = none[57], arg replace[307084] = 1, arg prob[307090] : unknown probType[307087] = none[57]) : _unknown[51] throws "method" "primary method" "no return value for void"
+  {(307113 call compilerError "RandomStreamInterface.choice called")
+  } function RandomStreamInterface[307322](?).choice[307128](arg _mt[307350]:_MT[238], arg this[307348]:RandomStreamInterface[307322](?), arg x[307125] :(307124 call range[64316](?)(stridable = ?[260])), arg size[307133] : unknown sizeType[307130] = none[57], arg replace[307138] = 1, arg prob[307144] : unknown probType[307141] = none[57]) : _unknown[51] throws "method" "primary method" "no return value for void"
+  {(307151 call compilerError "RandomStreamInterface.choice called")
+  } function RandomStreamInterface[307322](?).choice[307162](arg _mt[307354]:_MT[238], arg this[307352]:RandomStreamInterface[307322](?), arg x[307159] : _domain[125914](?), arg size[307167] : unknown sizeType[307164] = none[57], arg replace[307172] = 1, arg prob[307178] : unknown probType[307175] = none[57]) : _unknown[51] throws "method" "primary method" "no return value for void"
+  {(307185 call compilerError "RandomStreamInterface.choice called")
+  } function RandomStreamInterface[307322](?).iterate[307196](arg _mt[307358]:_MT[238], arg this[307356]:RandomStreamInterface[307322](?), arg D[307193] : _domain[125914](?), arg resultType[307199]:_any[178](?) =(407114 call . this[307356] c"eltType")) : _unknown[51] "method" "primary method" "no return value for void"
+  {(307221 call compilerError "RandomStreamInterface.iterate called")
+  } function RandomStreamInterface[307322](?).writeThis[307230](arg _mt[307362]:_MT[238], arg this[307360]:RandomStreamInterface[307322](?), arg f[307228]:_any[178](?)) : _unknown[51] throws "method" "primary method" "no doc" "no return value for void"
+  {(307250 call <~> f[307228] "RandomStreamInterface(eltType=")(307259 call <~> f[307228](307257 call _cast string[26](407121 call . this[307360] c"eltType")))(307280 call <~> f[307228] ", parSafe=")(307285 call <~> f[307228](407128 call . this[307360] c"parSafe"))(307306 call <~> f[307228] ", seed=")(307311 call <~> f[307228](407135 call . this[307360] c"seed"))(307316 call <~> f[307228] ")")
+  } type RandomStreamInterface[307322](?) val super[355831]:object[22] "super class" unknown eltType[306892] "type variable"(306891 call real(64)[16] 64) unknown parSafe[306897] "param" 1 bool[10] const seed[306905] "const"(306904 call int(64)[13] 64)(355574 'used modules list'(353119 'use' ChapelStandard[20264])(304580 'use' RandomSupport[307365])(304584 'use' NPBRandom[314312])(304587 'use' PCGRandom[307475])(304595 'import' Set[331308].{set}))
+}

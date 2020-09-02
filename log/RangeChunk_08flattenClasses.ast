@@ -1,0 +1,405 @@
+AST dump for RangeChunk after pass flattenClasses.
+Module use list: ChapelStandard 
+
+{
+  type RemElems[266383] def Thru[266377]:RemElems[266383] def Pack[266379]:RemElems[266383] def Mod[266381]:RemElems[266383]
+  function chunks[266406](arg r[266403] :
+  (266402 call range[64316](?) unknown RT[266396] bounded[64205] unknown S[266400]), arg numChunks[266409] :
+  integral[199](?), arg remPol[266414] :
+  RemElems[266383] =
+  Thru[266377]) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[266478] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[266479] "expr temp" "temp"
+      (266488 'move' _iterator[266479](266486 call _getIterator(266434 call chunksOrder r[266403] numChunks[266409] remPol[266414])))
+      Defer
+      {
+        {
+          (266519 call _freeIterator _iterator[266479])
+        }
+      }
+      { scopeless type
+        (266494 'move' _indexOfInterest[266478](266491 call iteratorIndex _iterator[266479]))
+      }
+      ForLoop[266480]
+      {
+        (266499 call _check_tuple_var_decl _indexOfInterest[266478] 2)
+        unknown startOrder[266505] "index var" "insert auto destroy"
+        (266507 'move' startOrder[266505](266503 call _indexOfInterest[266478] 0))
+        unknown endOrder[266512] "index var" "insert auto destroy"
+        (266514 'move' endOrder[266512](266510 call _indexOfInterest[266478] 1))
+        {
+          const start[266442] "const"(266441 call(266436 call . r[266403] c"orderToIndex") startOrder[266505])
+          (266445 'end of statement')
+          const end[266454] "const"(266453 call(266448 call . r[266403] c"orderToIndex") endOrder[266512])
+          (266457 'end of statement')
+          (266476 yield(266473 IfExpr  S[266400] then
+          { scopeless
+            (266467 call chpl_by(266461 call chpl_build_bounded_range start[266442] end[266454])(266464 call . r[266403] c"stride"))
+          } else
+          { scopeless
+            (266471 call chpl_build_bounded_range start[266442] end[266454])
+          } ))
+        }
+        label _continueLabel[266483]
+        _indexOfInterest[266478]
+        _iterator[266479]
+      }
+      label _breakLabel[266484]
+    }
+  }
+  { scopeless type
+    (266423 call range[64316](?) RT[266396] bounded[64205] S[266400])
+  }
+  function chunk[266543](arg r[266540] :
+  (266539 call range[64316](?) unknown RT[266533] bounded[64205] unknown S[266537]), arg numChunks[266546] :
+  integral[199](?), arg idx[266550] :
+  integral[199](?), arg remPol[266555] :
+  RemElems[266383] =
+  Thru[266377]) : _unknown[51]
+  {
+    const tmp[266577] "const" "temp"(266576 call chunkOrder r[266540] numChunks[266546] idx[266550] remPol[266555])
+    (266584 call _check_tuple_var_decl tmp[266577] 2)
+    const startOrder[266565] "const"(266578 call tmp[266577] 0)
+    const endOrder[266567] "const"(266581 call tmp[266577] 1)
+    (266589 'end of statement')
+    const start[266598] "const"(266597 call(266592 call . r[266540] c"orderToIndex") startOrder[266565])
+    (266601 'end of statement')
+    const end[266609] "const"(266608 call(266603 call . r[266540] c"orderToIndex") endOrder[266567])
+    (266612 'end of statement')
+    (266631 return(266628 IfExpr  S[266537] then
+    { scopeless
+      (266622 call chpl_by(266616 call chpl_build_bounded_range start[266598] end[266609])(266619 call . r[266540] c"stride"))
+    } else
+    { scopeless
+      (266626 call chpl_build_bounded_range start[266598] end[266609])
+    } ))
+  }
+  { scopeless type
+    (266564 call range[64316](?) RT[266533] bounded[64205] S[266537])
+  }
+  function blockCyclicChunks[266653](arg r[266650] :
+  (266649 call range[64316](?) unknown t[266639](boundedType = bounded[64205]) unknown strided[266647]), arg blockSize[266656] :
+  integral[199](?), arg tid[266660] :
+  integral[199](?), arg nTasks[266664] :
+  integral[199](?)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    if(266711 call _cond_test(266669 call >= tid[266660] nTasks[266664]))
+    {
+      (266709 call halt(266706 call + "Parameter tid must be < nTasks " "because blocks are indexed from 0..nTasks-1"))
+    }
+    if(266742 call _cond_test(266719 call <= blockSize[266656] 0))
+    {
+      (266740 call halt "blockSize must a positive number")
+    }
+    if(266772 call _cond_test(266749 call <= nTasks[266664] 0))
+    {
+      (266770 call halt "nTasks must be a positive number")
+    }
+    unknown rangeStride[266781](266778 call . r[266650] c"stride")
+    (266784 'end of statement')
+    unknown blockStride[266789](266787 call * blockSize[266656] rangeStride[266781])
+    (266792 'end of statement')
+    unknown low[266797](266794 call . r[266650] c"low")
+    (266800 'end of statement')
+    unknown high[266805](266802 call . r[266650] c"high")
+    (266808 'end of statement')
+    unknown firstBlockStart[266830](266828 call +(266821 IfExpr (266811 call > rangeStride[266781] 0) then
+    { scopeless
+      (266814 call . r[266650] c"low")
+    } else
+    { scopeless
+      (266818 call . r[266650] c"high")
+    } )(266826 call * blockStride[266789] tid[266660]))
+    (266833 'end of statement')
+    if(266852 call _cond_test(266848 call ||(266839 call > firstBlockStart[266830](266836 call . r[266650] c"high"))(266846 call < firstBlockStart[266830](266843 call . r[266650] c"low"))))
+    {
+      (266850 return _void[55])
+    }
+    unknown strideToNextBlock[266861](266859 call * blockStride[266789] nTasks[266664])
+    (266864 'end of statement')
+    if(267021 call _cond_test(266867 call > rangeStride[266781] 0))
+    {
+      {
+        unknown _indexOfInterest[266902] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[266903] "expr temp" "temp"
+        (266912 'move' _iterator[266903](266910 call _getIterator(266921 call chpl_direct_range_iter firstBlockStart[266830] high[266805] strideToNextBlock[266861])))
+        Defer
+        {
+          {
+            (266937 call _freeIterator _iterator[266903])
+          }
+        }
+        { scopeless type
+          (266926 'move' _indexOfInterest[266902](266923 call iteratorIndex _iterator[266903]))
+        }
+        ForLoop[266904]
+        {
+          unknown blockStart[266930] "index var" "insert auto destroy"
+          (266932 'move' blockStart[266930] _indexOfInterest[266902])
+          {
+            unknown blockEnd[266888](266887 call min high[266805](266885 call -(266882 call + blockStart[266930] blockStride[266789]) 1))
+            (266891 'end of statement')
+            (266900 yield(266898 call chpl_by(266895 call chpl_build_bounded_range blockStart[266930] blockEnd[266888]) rangeStride[266781]))
+          }
+          label _continueLabel[266907]
+          _indexOfInterest[266902]
+          _iterator[266903]
+        }
+        label _breakLabel[266908]
+      }
+    }
+    {
+      {
+        unknown _indexOfInterest[266978] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[266979] "expr temp" "temp"
+        (266988 'move' _iterator[266979](266986 call _getIterator(266997 call chpl_direct_range_iter low[266797] firstBlockStart[266830] strideToNextBlock[266861])))
+        Defer
+        {
+          {
+            (267013 call _freeIterator _iterator[266979])
+          }
+        }
+        { scopeless type
+          (267002 'move' _indexOfInterest[266978](266999 call iteratorIndex _iterator[266979]))
+        }
+        ForLoop[266980]
+        {
+          unknown blockEnd[267006] "index var" "insert auto destroy"
+          (267008 'move' blockEnd[267006] _indexOfInterest[266978])
+          {
+            unknown blockStart[266964](266963 call max low[266797](266961 call +(266958 call + blockEnd[267006] blockStride[266789]) 1))
+            (266967 'end of statement')
+            (266976 yield(266974 call chpl_by(266971 call chpl_build_bounded_range blockStart[266964] blockEnd[267006]) rangeStride[266781]))
+          }
+          label _continueLabel[266983]
+          _indexOfInterest[266978]
+          _iterator[266979]
+        }
+        label _breakLabel[266984]
+      }
+    }
+  }
+  function chunksOrder[267039](arg r[267036] :
+  (267035 call range[64316](?) unknown RT[267030] bounded[64205] ?[260]), arg numChunks[267042] :
+  integral[199](?), arg remPol[267047] :
+  RemElems[266383] =
+  Thru[266377]) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    if(267070 call _cond_test(267066 call ||(267060 call ==(267056 call . r[267036] c"size") 0)(267064 call <= numChunks[267042] 0)))
+    {
+      (267068 return _void[55])
+    }
+    const nElems[267080] "const"(267077 call . r[267036] c"size")
+    (267083 'end of statement')
+    unknown nChunks[267092](267090 call _cast RT[267030](267088 call min numChunks[267042] nElems[267080]))
+    (267095 'end of statement')
+    unknown chunkSize[267096] RT[267030]
+    unknown rem[267100](267104 'typeof' chunkSize[267096])
+    (267105 'end of statement')
+    {
+      unknown tmp[267172] "expr temp" "maybe param" "maybe type" "temp"
+      (267174 'move' tmp[267172] remPol[267047])
+      if(267179 call _cond_test(267176 call == tmp[267172] Pack[266379]))
+      {
+        (267115 call = chunkSize[267096](267113 call / nElems[267080] nChunks[267092]))
+        if(267141 call _cond_test(267124 call !=(267121 call * chunkSize[267096] nChunks[267092]) nElems[267080]))
+        {
+          (267128 call += chunkSize[267096] 1)
+          (267138 call = nChunks[267092](267137 call divceil nElems[267080] chunkSize[267096]))
+        }
+      }
+      {
+        if(267185 call _cond_test(267182 call == tmp[267172] Mod[266381]))
+        {
+          (267154 call = chunkSize[267096](267152 call / nElems[267080] nChunks[267092]))
+          (267166 call = rem[267100](267164 call - nElems[267080](267162 call * chunkSize[267096] nChunks[267092])))
+        }
+      }
+    }
+    {
+      unknown _indexOfInterest[267308] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[267309] "expr temp" "temp"
+      (267318 'move' _iterator[267309](267316 call _getIterator(267325 call chpl_direct_counted_range_iter 0 nChunks[267092])))
+      Defer
+      {
+        {
+          (267341 call _freeIterator _iterator[267309])
+        }
+      }
+      { scopeless type
+        (267330 'move' _indexOfInterest[267308](267327 call iteratorIndex _iterator[267309]))
+      }
+      ForLoop[267310]
+      {
+        unknown i[267334] "index var" "insert auto destroy"
+        (267336 'move' i[267334] _indexOfInterest[267308])
+        {
+          unknown chunk[267201](267199 call * 2 RT[267030])
+          (267204 'end of statement')
+          {
+            unknown tmp[267280] "expr temp" "maybe param" "maybe type" "temp"
+            (267282 'move' tmp[267280] remPol[267047])
+            if(267287 call _cond_test(267284 call == tmp[267280] Thru[266377]))
+            {
+              (267217 call = chunk[267201](267216 call chunkOrderThru nElems[267080] nChunks[267092] i[267334]))
+            }
+            {
+              if(267293 call _cond_test(267290 call == tmp[267280] Pack[266379]))
+              {
+                (267232 call = chunk[267201](267231 call chunkOrderPack chunkSize[267096] nElems[267080] i[267334]))
+              }
+              {
+                if(267300 call _cond_test(267297 call == tmp[267280] Mod[266381]))
+                {
+                  (267249 call = chunk[267201](267248 call chunkOrderMod chunkSize[267096] rem[267100] nElems[267080] nChunks[267092] i[267334]))
+                }
+                {
+                  (267274 call halt "RangeChunk: unknown RemElems in chunksOrder")
+                }
+              }
+            }
+          }
+          (267306 yield chunk[267201])
+        }
+        label _continueLabel[267313]
+        _indexOfInterest[267308]
+        _iterator[267309]
+      }
+      label _breakLabel[267314]
+    }
+  }
+  { scopeless type
+    (267053 call * 2 RT[267030])
+  }
+  function chunkOrder[267363](arg r[267360] :
+  (267359 call range[64316](?) unknown RT[267354] bounded[64205] ?[260]), arg numChunks[267366] :
+  integral[199](?), arg idx[267370] :
+  integral[199](?), arg remPol[267375] :
+  RemElems[266383] =
+  Thru[266377]) : _unknown[51]
+  {
+    if(267421 call _cond_test(267406 call ||(267400 call ||(267394 call ||(267388 call ==(267384 call . r[267360] c"size") 0)(267392 call <= numChunks[267366] 0))(267398 call < idx[267370] 0))(267404 call >= idx[267370] numChunks[267366])))
+    {
+      (267419 return(267417 call _build_tuple(267410 call _cast RT[267354] 1)(267414 call _cast RT[267354] 0)))
+    }
+    const nElems[267431] "const"(267428 call . r[267360] c"size")
+    (267434 'end of statement')
+    const nChunks[267443] "const"(267441 call _cast RT[267354](267439 call min numChunks[267366] nElems[267431]))
+    (267446 'end of statement')
+    const i[267451] "const"(267449 call _cast RT[267354] idx[267370])
+    (267454 'end of statement')
+    {
+      unknown tmp[267567] "expr temp" "maybe param" "maybe type" "temp"
+      (267569 'move' tmp[267567] remPol[267375])
+      if(267574 call _cond_test(267571 call == tmp[267567] Thru[266377]))
+      {
+        (267465 return(267464 call chunkOrderThru nElems[267431] nChunks[267443] i[267451]))
+      }
+      {
+        if(267580 call _cond_test(267577 call == tmp[267567] Pack[266379]))
+        {
+          unknown chunkSize[267476](267474 call / nElems[267431] nChunks[267443])
+          (267479 'end of statement')
+          if(267493 call _cond_test(267486 call !=(267483 call * chunkSize[267476] nChunks[267443]) nElems[267431]))
+          {
+            (267490 call += chunkSize[267476] 1)
+          }
+          (267504 return(267503 call chunkOrderPack chunkSize[267476] nElems[267431] i[267451]))
+        }
+        {
+          if(267587 call _cond_test(267584 call == tmp[267567] Mod[266381]))
+          {
+            const chunkSize[267514] "const"(267512 call / nElems[267431] nChunks[267443])
+            (267517 'end of statement')
+            const rem[267526] "const"(267524 call - nElems[267431](267522 call * chunkSize[267514] nChunks[267443]))
+            (267529 'end of statement')
+            (267538 return(267537 call chunkOrderMod chunkSize[267514] rem[267526] nElems[267431] nChunks[267443] i[267451]))
+          }
+          {
+            (267561 call halt "RangeChunk: unknown RemElems in chunkOrder")
+          }
+        }
+      }
+    }
+  }
+  { scopeless type
+    (267381 call * 2 RT[267354])
+  }
+  function chunkOrderThru[267602](arg nElems[267599] :
+  unknown I[267597], arg nChunks[267605] :
+  I[267597], arg i[267609] :
+  I[267597]) : _unknown[51] "no doc" "private"
+  {
+    const m[267621] "const"(267619 call * nElems[267599] i[267609])
+    (267624 'end of statement')
+    const start[267642] "const"(267639 IfExpr (267628 call == i[267609] 0) then
+    { scopeless
+      (267632 call _cast I[267597] 0)
+    } else
+    { scopeless
+      (267638 call divceil m[267621] nChunks[267605])
+    } )
+    (267645 'end of statement')
+    const end[267671] "const"(267668 IfExpr (267651 call == i[267609](267649 call - nChunks[267605] 1)) then
+    { scopeless
+      (267655 call - nElems[267599] 1)
+    } else
+    { scopeless
+      (267666 call -(267664 call divceil(267660 call + m[267621] nElems[267599]) nChunks[267605]) 1)
+    } )
+    (267674 'end of statement')
+    (267680 return(267678 call _build_tuple start[267642] end[267671]))
+  }
+  { scopeless type
+    (267615 call _build_tuple I[267597] I[267597])
+  }
+  function chunkOrderPack[267692](arg chunkSize[267689] :
+  unknown I[267687], arg nElems[267695] :
+  I[267687], arg i[267699] :
+  I[267687]) : _unknown[51] "no doc" "private"
+  {
+    const start[267711] "const"(267709 call * chunkSize[267689] i[267699])
+    (267714 'end of statement')
+    if(267733 call _cond_test(267718 call >= start[267711] nElems[267695]))
+    {
+      (267731 return(267729 call _build_tuple(267722 call _cast I[267687] 1)(267726 call _cast I[267687] 0)))
+    }
+    unknown end[267745](267743 call -(267740 call + start[267711] chunkSize[267689]) 1)
+    (267748 'end of statement')
+    if(267761 call _cond_test(267751 call >= end[267745] nElems[267695]))
+    {
+      (267758 call = end[267745](267756 call - nElems[267695] 1))
+    }
+    (267771 return(267769 call _build_tuple start[267711] end[267745]))
+  }
+  { scopeless type
+    (267705 call _build_tuple I[267687] I[267687])
+  }
+  function chunkOrderMod[267783](arg chunkSize[267780] :
+  unknown I[267778], arg rem[267786] :
+  I[267778], arg nElems[267790] :
+  I[267778], arg nChunks[267794] :
+  I[267778], arg i[267798] :
+  I[267778]) : _unknown[51] "no doc" "private"
+  {
+    unknown start[267806] I[267778]
+    unknown end[267810](267814 'typeof' start[267806])
+    (267815 'end of statement')
+    if(267867 call _cond_test(267819 call < i[267798] rem[267786]))
+    {
+      (267829 call = start[267806](267827 call * i[267798](267825 call + chunkSize[267780] 1)))
+      (267838 call = end[267810](267836 call + start[267806] chunkSize[267780]))
+    }
+    {
+      (267852 call = start[267806](267850 call - nElems[267790](267848 call *(267845 call - nChunks[267794] i[267798]) chunkSize[267780])))
+      (267864 call = end[267810](267862 call -(267859 call + start[267806] chunkSize[267780]) 1))
+    }
+    (267876 return(267874 call _build_tuple start[267806] end[267810]))
+  }
+  { scopeless type
+    (267804 call _build_tuple I[267778] I[267778])
+  }
+  (355381 'used modules list'(353073 'use' ChapelStandard[20264])(266388 'use' RemElems[266383])(266391 'use' BoundedRangeType[64213]))
+}

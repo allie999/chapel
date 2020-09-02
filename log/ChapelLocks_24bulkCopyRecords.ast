@@ -1,0 +1,116 @@
+AST dump for ChapelLocks after pass bulkCopyRecords.
+Module use list: Atomics ChapelBase MemConsistency 
+
+{
+  function chpl__init_ChapelLocks[416105]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (524076 return _void[55])
+  }
+  function _ref(chpl_LocalSpinlock)[939001].lock[187289](ref arg this[187400]:_ref(chpl_LocalSpinlock)[939001]) : void[4] "inline" "method" "primary method" "resolved" "no return value for void"
+  {
+    {
+      const-val tmp[187368]:chpl_localeID_t[209306] "dead after last mention" "const" "temp"
+      const-val call_tmp[690545]:chpl_localeID_t[209306] "dead after last mention" "expr temp" "maybe param" "temp"
+      (690548 'move' call_tmp[690545](187365 '_wide_get_locale' this[187400]))
+      (187369 'move' tmp[187368] call_tmp[690545])
+      {
+        val tmp[187314]:bool[10] "dead after last mention" "temp"
+        const-val tmp[429583]:bool[10] "dead after last mention" "maybe param" "temp"
+        ref call_tmp[690552]:_ref(AtomicBool)[939112] "dead after last mention" "maybe param" "temp"
+        (690555 'move' call_tmp[690552](361937 call l[820334] this[187400]))
+        (429594 'move' tmp[429583](187352 call read[1227598] call_tmp[690552]))
+        val tmp[572141]:bool[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+        const-val tmp[572142]:bool[10] "dead after last mention" "maybe param" "temp"
+        const-val call_tmp[690564]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (690567 'move' call_tmp[690564] tmp[429583])
+        (572147 'move' tmp[572142] call_tmp[690564])
+        if tmp[572142]
+        {
+          (572152 'move' tmp[572141] 1)
+        }
+        {
+          const-val tmp[572154]:bool[10] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+          ref call_tmp[690571]:_ref(AtomicBool)[939112] "dead after last mention" "maybe param" "temp"
+          (690574 'move' call_tmp[690571](361942 call l[820334] this[187400]))
+          const-val call_tmp[690578]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+          (690581 'move' call_tmp[690578](187357 call testAndSet[1228465] call_tmp[690571]))
+          (572156 'move' tmp[572154] call_tmp[690578])
+          (572161 'move' tmp[572141] tmp[572154])
+        }
+        (187362 'move' tmp[187314] tmp[572141])
+        WhileDo[187319] hazard
+        {
+          (187312 call chpl_task_yield[209654])
+          label _continueLabel[187317]
+          const-val tmp[429562]:bool[10] "dead after last mention" "maybe param" "temp"
+          ref call_tmp[690585]:_ref(AtomicBool)[939112] "dead after last mention" "maybe param" "temp"
+          (690588 'move' call_tmp[690585](361926 call l[820334] this[187400]))
+          (429573 'move' tmp[429562](187330 call read[1227598] call_tmp[690585]))
+          val tmp[572168]:bool[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+          const-val tmp[572169]:bool[10] "dead after last mention" "maybe param" "temp"
+          const-val call_tmp[690597]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+          (690600 'move' call_tmp[690597] tmp[429562])
+          (572174 'move' tmp[572169] call_tmp[690597])
+          if tmp[572169]
+          {
+            (572179 'move' tmp[572168] 1)
+          }
+          {
+            const-val tmp[572181]:bool[10] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+            ref call_tmp[690604]:_ref(AtomicBool)[939112] "dead after last mention" "maybe param" "temp"
+            (690607 'move' call_tmp[690604](361931 call l[820334] this[187400]))
+            const-val call_tmp[690611]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+            (690614 'move' call_tmp[690611](187335 call testAndSet[1228465] call_tmp[690604]))
+            (572183 'move' tmp[572181] call_tmp[690611])
+            (572188 'move' tmp[572168] tmp[572181])
+          }
+          (187340 'move' tmp[187314] tmp[572168])
+          tmp[187314]
+        }
+        label _breakLabel[187318]
+      }
+    }
+    (524072 return _void[55])
+  }
+  function _ref(chpl_LocalSpinlock)[939001].unlock[187381](ref arg this[187404]:_ref(chpl_LocalSpinlock)[939001]) : void[4] "inline" "method" "primary method" "resolved" "no return value for void"
+  {
+    ref call_tmp[690618]:_ref(AtomicBool)[939112] "dead after last mention" "maybe param" "temp"
+    (690621 'move' call_tmp[690618](361948 call l[820334] this[187404]))
+    (187392 call clear[1229306] call_tmp[690618])
+    (524074 return _void[55])
+  }
+  function _ref(chpl_LocalSpinlock)[939001].l[820334](ref arg this[820338]:_ref(chpl_LocalSpinlock)[939001]) ref : _ref(AtomicBool)[939112] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this" "resolved" "fn synchronization free"
+  {
+    ref ret[820348]:_ref(AtomicBool)[939112] "dead after last mention" "RVV" "temp"
+    ref call_tmp[820355]:_ref(AtomicBool)[939112] "dead after last mention" "maybe param" "temp"
+    (820358 'move' call_tmp[820355](820342 '.' this[820338] l[187283]))
+    (820353 'move' ret[820348] call_tmp[820355])
+    (820350 return ret[820348])
+  }
+  function _ref(chpl_LocalSpinlock)[939001].init[820360](ref arg this[820363]:_ref(chpl_LocalSpinlock)[939001], const  ref arg l[820366]:AtomicBool[45874]) : void[4] "compiler generated" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    val _formal_tmp_l[943084]:AtomicBool[45874] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (943087 'move' _formal_tmp_l[943084] l[820366])
+    (820382 '.=' this[820363] l[187283] _formal_tmp_l[943084])
+    (820386 return _void[55])
+  }
+  function init_default_l[942757](ref arg _retArg[1784448]:_ref(AtomicBool)[939112]) : void[4] "compiler generated" "default actual function" "fn returns via _retArg" "inline" "invisible fn" "last resort" "lineno ok" "maybe param" "maybe type" "method" "primary method" "resolved" "was compiler generated"
+  {
+    const-val ret[942759]:AtomicBool[45874] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val l[942764]:AtomicBool[45874] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    val _formal_type[942766]:AtomicBool[45874] "dead after last mention" "temp" "type variable"
+    (942781 call init[44785] l[942764])
+    (942777 'move' ret[942759] l[942764])
+    (1784450 '=' _retArg[1784448] ret[942759])
+    (1784452 return _void[55])
+  }
+  function _ref(chpl_LocalSpinlock)[939001].deinit[820433](const  ref arg this[820437]:_ref(chpl_LocalSpinlock)[939001]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method" "resolved"
+  {
+    label _enddeinit[1767546]
+    ref _field_destructor_tmp_[1767544]:_ref(AtomicBool)[939112] "temp"
+    (1767551 'move' _field_destructor_tmp_[1767544](1767548 '.' this[820437] l[187283]))
+    (1767553 call deinit[44860] _field_destructor_tmp_[1767544])
+    (820445 return _void[55])
+  }
+  type chpl_LocalSpinlock[187398] val l[187283]:AtomicBool[45874]
+}

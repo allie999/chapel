@@ -1,0 +1,2280 @@
+AST dump for SparseBlockDist after pass readExternC.
+Module use list: 
+
+{
+  (353137 'use' ChapelStandard)
+  (341886 'use' DSIUtil)
+  (341889 'use' ChapelUtil)
+  (341892 'use' BlockDist)
+  (341895 'use' RangeChunk)
+  (341898 'use' HaltWrappers)
+  (341901 'use' LayoutCS)
+  { scopeless
+    unknown debugSparseBlockDist[341904] "config" "param" 0
+    (341907 'end of statement')
+  }
+  { scopeless
+    unknown debugSparseBlockDistBulkTransfer[341909] "config" "param" 0
+    (341912 'end of statement')
+  }
+  type TargetLocaleComparator[342029](?) unknown rank[341914] "param" unknown idxType[341918] "type variable" unknown sparseLayoutType[341921] "type variable" unknown dist[341931](341930 'to unmanaged class from unknown'(341929 call Block rank idxType sparseLayoutType)) function TargetLocaleComparator[342029](?).key[341945](arg _mt[342033]:_MT[238], arg this[342031]:TargetLocaleComparator[342029](?), arg a[341942] :
+  (341940 call chpl__buildIndexType rank idxType)) : _unknown[51] "method" "primary method"
+  {
+    if(342021 call _cond_test(341949 call == rank 2))
+    {
+      if(342000 call _cond_test(341958 call == sparseLayoutType(341957 'to unmanaged class from unknown'(341956 call CS(compressRows = 0)))))
+      {
+        { scopeless
+          (341978 return(341976 call _build_tuple(341966 call(341961 call . dist c"targetLocsIdx") a)(341970 call a 1)(341975 call a 0)))
+        }
+      }
+      {
+        { scopeless
+          (341998 return(341996 call _build_tuple(341986 call(341981 call . dist c"targetLocsIdx") a)(341990 call a 0)(341995 call a 1)))
+        }
+      }
+    }
+    {
+      (342018 return(342016 call _build_tuple(342013 call(342008 call . dist c"targetLocsIdx") a) a))
+    }
+  }
+  type SparseBlockDom[344881](?) unknown sparseLayoutType[342039] "type variable" unknown stridable[342044] "param" 0 bool[10] const dist[342055] "const"(342054 'to unmanaged class from unknown'(342053 call Block rank idxType sparseLayoutType)) unknown whole[342069](342067 call chpl__buildDomainRuntimeType defaultDist(rank = rank)(idxType = idxType)(stridable = stridable)) unknown locDoms[342091](342089 call chpl__buildArrayRuntimeType(342087 call chpl__ensureDomainExpr(342074 call . dist c"targetLocDom"))(342086 'to unmanaged class from unknown'(342085 'to nilable class from type'(342084 call LocSparseBlockDom rank idxType stridable sparseLayoutType)))) unknown myLocDom[342104](342103 'to unmanaged class from unknown'(342102 'to nilable class from type'(342101 call LocSparseBlockDom rank idxType stridable sparseLayoutType))) function SparseBlockDom[344881](?).setup[342110](arg _mt[344885]:_MT[238], arg this[344883]:SparseBlockDom[344881](?)) : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      unknown thisid[342117](342116 '_wide_get_node' this)
+      (342120 'end of statement')
+    }
+    if(342442 call _cond_test(342133 call ==(342131 call locDoms(342127 call .(342124 call . dist c"targetLocDom") c"low")) nil[44]))
+    {
+      {
+        unknown tmpIter[342205] "expr temp" "maybe ref" "no copy" "temp"
+        (342208 'move' tmpIter[342205](342137 call . dist c"targetLocDom"))
+        unknown isRngDomArr[342400] "maybe param" "temp"
+        (342415 'move' isRngDomArr[342400](342413 call ||(342402 call isBoundedRange tmpIter[342205])(342411 call ||(342405 call isDomain tmpIter[342205])(342408 call isArray tmpIter[342205]))))
+        if isRngDomArr[342400]
+        {
+          const _coforallCount[342267] "const" "end count" "temp"
+          (342336 'move' _coforallCount[342267](342333 call _endCountAlloc 1))
+          unknown numTasks[342268] "temp"
+          (342320 'move' numTasks[342268](342316 call . tmpIter[342205] c"size"))
+          (342311 call _upEndCount _coforallCount[342267] 1 numTasks[342268])
+          (342308 call chpl_resetTaskSpawn numTasks[342268])
+          unknown _indexOfInterest[342275] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[342276] "expr temp" "temp"
+          (342285 'move' _iterator[342276](342283 call _getIterator tmpIter[342205]))
+          Defer
+          {
+            {
+              (342301 call _freeIterator _iterator[342276])
+            }
+          }
+          { scopeless type
+            (342290 'move' _indexOfInterest[342275](342287 call iteratorIndex _iterator[342276]))
+          }
+          ForLoop[342277]
+          {
+            unknown localeIdx[342294] "coforall index var" "index var" "insert auto destroy"
+            (342296 'move' localeIdx[342294] _indexOfInterest[342275])
+            {
+              {
+                const tmp[342214] "const" "temp"
+                (342216 'move' tmp[342214](342218 'deref'(342219 '_wide_get_locale'(342224 call(342221 call . dist c"targetLocales") localeIdx))))
+                {
+                  (342228 call =(342230 call locDoms localeIdx)(342232 'new'(_chpl_manager = unmanaged[220](?))(342236 call LocSparseBlockDom rank idxType stridable sparseLayoutType(342245 call(342242 call . dist c"getChunk") whole localeIdx))))
+                  if(342249 call _cond_test(342251 call == thisid(342254 call . here c"id")))
+                  {
+                    { scopeless
+                      (342260 call = myLocDom(342263 call locDoms localeIdx))
+                    }
+                  }
+                }
+                (342211 'elided on block' 0 tmp[342214])
+              }
+              (342270 call _downEndCount _coforallCount[342267] nil[44])
+              (342269 'coforall loop')
+            }
+            label _continueLabel[342280]
+            _indexOfInterest[342275]
+            _iterator[342276]
+          }
+          label _breakLabel[342281]
+          Defer
+          {
+            {
+              (342323 call _endCountFree _coforallCount[342267])
+            }
+          }
+          (342328 call _waitEndCount _coforallCount[342267] 1 numTasks[342268])
+        }
+        {
+          const _coforallCount[342340] "const" "end count" "temp"
+          (342397 'move' _coforallCount[342340](342394 call _endCountAlloc 1))
+          unknown _indexOfInterest[342348] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[342349] "expr temp" "temp"
+          (342358 'move' _iterator[342349](342356 call _getIterator tmpIter[342205]))
+          Defer
+          {
+            {
+              (342374 call _freeIterator _iterator[342349])
+            }
+          }
+          { scopeless type
+            (342363 'move' _indexOfInterest[342348](342360 call iteratorIndex _iterator[342349]))
+          }
+          ForLoop[342350]
+          {
+            unknown localeIdx[342367] "coforall index var" "index var" "insert auto destroy"
+            (342369 'move' localeIdx[342367] _indexOfInterest[342348])
+            (342381 call _upEndCount _coforallCount[342340] 1)
+            {
+              {
+                const tmp[342196] "const" "temp"
+                (342197 'move' tmp[342196](342194 'deref'(342193 '_wide_get_locale'(342146 call(342141 call . dist c"targetLocales") localeIdx))))
+                {
+                  (342169 call =(342150 call locDoms localeIdx)(342153 'new'(_chpl_manager = unmanaged[220](?))(342168 call LocSparseBlockDom rank idxType stridable sparseLayoutType(342167 call(342161 call . dist c"getChunk") whole localeIdx))))
+                  if(342188 call _cond_test(342178 call == thisid(342175 call . here c"id")))
+                  {
+                    { scopeless
+                      (342185 call = myLocDom(342184 call locDoms localeIdx))
+                    }
+                  }
+                }
+                (342200 'elided on block' 0 tmp[342196])
+              }
+              (342343 call _downEndCount _coforallCount[342340] nil[44])
+              (342342 'coforall loop')
+            }
+            label _continueLabel[342353]
+            _indexOfInterest[342348]
+            _iterator[342349]
+          }
+          label _breakLabel[342354]
+          Defer
+          {
+            {
+              (342385 call _endCountFree _coforallCount[342340])
+            }
+          }
+          (342390 call _waitEndCount _coforallCount[342340] 1)
+        }
+      }
+    }
+    {
+      (342439 call halt "Don't know how to reallocate yet")
+    }
+  } function SparseBlockDom[344881](?).dsiDestroyDom[342450](arg _mt[344889]:_MT[238], arg this[344887]:SparseBlockDom[344881](?)) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    {
+      unknown tmpIter[342481] "expr temp" "maybe ref" "no copy" "temp"
+      (342484 'move' tmpIter[342481](342454 call . dist c"targetLocDom"))
+      unknown isRngDomArr[342639] "maybe param" "temp"
+      (342654 'move' isRngDomArr[342639](342652 call ||(342641 call isBoundedRange tmpIter[342481])(342650 call ||(342644 call isDomain tmpIter[342481])(342647 call isArray tmpIter[342481]))))
+      if isRngDomArr[342639]
+      {
+        const _coforallCount[342506] "const" "end count" "temp"
+        (342575 'move' _coforallCount[342506](342572 call _endCountAlloc 1))
+        unknown numTasks[342507] "temp"
+        (342559 'move' numTasks[342507](342555 call . tmpIter[342481] c"size"))
+        (342550 call _upEndCount _coforallCount[342506] 1 numTasks[342507])
+        (342547 call chpl_resetTaskSpawn numTasks[342507])
+        unknown _indexOfInterest[342514] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[342515] "expr temp" "temp"
+        (342524 'move' _iterator[342515](342522 call _getIterator tmpIter[342481]))
+        Defer
+        {
+          {
+            (342540 call _freeIterator _iterator[342515])
+          }
+        }
+        { scopeless type
+          (342529 'move' _indexOfInterest[342514](342526 call iteratorIndex _iterator[342515]))
+        }
+        ForLoop[342516]
+        {
+          unknown localeIdx[342533] "coforall index var" "index var" "insert auto destroy"
+          (342535 'move' localeIdx[342533] _indexOfInterest[342514])
+          {
+            {
+              const tmp[342490] "const" "temp"
+              (342492 'move' tmp[342490](342494 'deref'(342495 '_wide_get_locale'(342497 call locDoms localeIdx))))
+              { scopeless
+                (342501 call chpl__delete(342503 call locDoms localeIdx))
+              }
+              (342487 'elided on block' 0 tmp[342490])
+            }
+            (342509 call _downEndCount _coforallCount[342506] nil[44])
+            (342508 'coforall loop')
+          }
+          label _continueLabel[342519]
+          _indexOfInterest[342514]
+          _iterator[342515]
+        }
+        label _breakLabel[342520]
+        Defer
+        {
+          {
+            (342562 call _endCountFree _coforallCount[342506])
+          }
+        }
+        (342567 call _waitEndCount _coforallCount[342506] 1 numTasks[342507])
+      }
+      {
+        const _coforallCount[342579] "const" "end count" "temp"
+        (342636 'move' _coforallCount[342579](342633 call _endCountAlloc 1))
+        unknown _indexOfInterest[342587] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[342588] "expr temp" "temp"
+        (342597 'move' _iterator[342588](342595 call _getIterator tmpIter[342481]))
+        Defer
+        {
+          {
+            (342613 call _freeIterator _iterator[342588])
+          }
+        }
+        { scopeless type
+          (342602 'move' _indexOfInterest[342587](342599 call iteratorIndex _iterator[342588]))
+        }
+        ForLoop[342589]
+        {
+          unknown localeIdx[342606] "coforall index var" "index var" "insert auto destroy"
+          (342608 'move' localeIdx[342606] _indexOfInterest[342587])
+          (342620 call _upEndCount _coforallCount[342579] 1)
+          {
+            {
+              const tmp[342472] "const" "temp"
+              (342473 'move' tmp[342472](342470 'deref'(342469 '_wide_get_locale'(342460 call locDoms localeIdx))))
+              { scopeless
+                (342466 call chpl__delete(342464 call locDoms localeIdx))
+              }
+              (342476 'elided on block' 0 tmp[342472])
+            }
+            (342582 call _downEndCount _coforallCount[342579] nil[44])
+            (342581 'coforall loop')
+          }
+          label _continueLabel[342592]
+          _indexOfInterest[342587]
+          _iterator[342588]
+        }
+        label _breakLabel[342593]
+        Defer
+        {
+          {
+            (342624 call _endCountFree _coforallCount[342579])
+          }
+        }
+        (342629 call _waitEndCount _coforallCount[342579] 1)
+      }
+    }
+  } function SparseBlockDom[344881](?).getNNZ[342663](arg _mt[344893]:_MT[238], arg this[344891]:SparseBlockDom[344881](?)) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    (342686 return(342684 'reduce' SumReduceScanOp(342680 [  ld  in  locDoms ]
+    {
+      (342677 call .(342674 call .(342670 call postfix! ld) c"mySparseBlock") c"size")
+    } ) 0))
+  } function SparseBlockDom[344881](?).dsiAdd[342700](arg _mt[344897]:_MT[238], arg this[344895]:SparseBlockDom[344881](?), arg ind[342697] :
+  (342695 call * rank idxType)) : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      unknown _retval[342703] 0
+      (342706 'end of statement')
+    }
+    {
+      const tmp[342741] "const" "temp"
+      (342742 'move' tmp[342741](342739 'deref'(342738 '_wide_get_locale'(342714 call(342709 call . dist c"dsiIndexToLocale") ind))))
+      {
+        (342734 call = _retval(342733 call(342728 call .(342726 call postfix!(342725 call locDoms(342723 call(342718 call . dist c"targetLocsIdx") ind))) c"dsiAdd") ind))
+      }
+      (342745 'elided on block' 0 tmp[342741])
+    }
+    (342750 return _retval)
+  } function SparseBlockDom[344881](?).dsiAdd[342760](arg _mt[344901]:_MT[238], arg this[344899]:SparseBlockDom[344881](?), arg ind[342757] :
+  idxType) : _unknown[51] "method" "primary method"
+  {
+    (342775 return(342774 call dsiAdd(342771 call _build_tuple ind)))
+  }
+  where {
+    (342767 call ==(342763 call . this c"rank") 1)
+  } function SparseBlockDom[344881](?).dsiFirst[342783](arg _mt[344905]:_MT[238], arg this[344903]:SparseBlockDom[344881](?)) : _unknown[51] "method" "primary method" "no parens"
+  {
+    (342804 return(342802 'reduce' MinReduceScanOp(342798 [  l  in  locDoms ]
+    {
+      (342795 call .(342792 call .(342790 call postfix! l) c"mySparseBlock") c"first")
+    } ) 0))
+  } function SparseBlockDom[344881](?).dsiLast[342811](arg _mt[344909]:_MT[238], arg this[344907]:SparseBlockDom[344881](?)) : _unknown[51] "method" "primary method" "no parens"
+  {
+    (342832 return(342830 'reduce' MaxReduceScanOp(342826 [  l  in  locDoms ]
+    {
+      (342823 call .(342820 call .(342818 call postfix! l) c"mySparseBlock") c"last")
+    } ) 0))
+  } function SparseBlockDom[344881](?).bulkAdd_help[342852](arg _mt[344913]:_MT[238], arg this[344911]:SparseBlockDom[344881](?), arg inds[342849] :
+  (342847 call chpl__buildArrayRuntimeType unknown indsDom[342839](342845 call chpl__buildIndexType rank idxType)), arg dataSorted[342855] =
+  0, arg isUnique[342859] =
+  0, arg addOn[342863] =
+  nilLocale) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    (342867 'use' Sort)
+    (342871 'use' Search)
+    if(342952 call _cond_test(342875 call != addOn nilLocale))
+    {
+      { scopeless
+        unknown retval[342878] 0
+        (342881 'end of statement')
+      }
+      {
+        const tmp[342941] "const" "temp"
+        (342942 'move' tmp[342941](342939 'deref'(342938 '_wide_get_locale' addOn)))
+        {
+          if(342933 call _cond_test(342889 call ==(342886 call chpl_localeID_to_locale(342885 '_wide_get_locale' inds)) here))
+          {
+            (342898 call = retval(342897 call bulkAddHere_help inds dataSorted isUnique))
+          }
+          {
+            { scopeless
+              unknown _local_inds[342913](342911 call chpl__buildArrayRuntimeType(342909 call chpl__ensureDomainExpr indsDom)(342907 call chpl__buildIndexType rank idxType))
+              (342916 'end of statement')
+            }
+            (342920 call = _local_inds inds)
+            (342930 call = retval(342929 call bulkAddHere_help _local_inds dataSorted isUnique))
+          }
+        }
+        (342945 'elided on block' 0 tmp[342941])
+      }
+      (342950 return retval)
+    }
+    { scopeless
+      unknown comp[342968](342956 'new'(342967 call TargetLocaleComparator(rank = rank)(idxType = idxType)(sparseLayoutType = sparseLayoutType)(dist = dist)))
+      (342971 'end of statement')
+    }
+    if(342982 call _cond_test(342973 call ! dataSorted))
+    {
+      { scopeless
+        (342980 call sort inds(comparator = comp))
+      }
+    }
+    { scopeless
+      unknown localeRanges[342997](342995 call chpl__buildArrayRuntimeType(342993 call chpl__ensureDomainExpr(342988 call . dist c"targetLocDom")) range)
+      (343000 'end of statement')
+    }
+    {
+      const tmp[343208] "const" "temp"
+      (343209 'move' tmp[343208](343206 'deref'(343205 '_wide_get_locale' inds)))
+      {
+        {
+          unknown _indexOfInterest[343170] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[343171] "expr temp" "temp"
+          (343180 'move' _iterator[343171](343178 call _getIterator(343004 call . dist c"targetLocDom")))
+          Defer
+          {
+            {
+              (343197 call _freeIterator _iterator[343171])
+            }
+          }
+          { scopeless type
+            (343186 'move' _indexOfInterest[343170](343183 call iteratorIndex _iterator[343171]))
+          }
+          ForLoop[343172]
+          {
+            unknown l[343190] "index var" "insert auto destroy"
+            (343192 'move' l[343190] _indexOfInterest[343170])
+            {
+              { scopeless
+                const blockval[343019] "const"(343016 call .(343013 call .(343011 call postfix!(343010 call locDoms l)) c"mySparseBlock") c"_value")
+                (343022 'end of statement')
+              }
+              { scopeless
+                const _first[343031] "const"(343028 call .(343025 call . blockval c"parentDom") c"first")
+                (343034 'end of statement')
+              }
+              { scopeless
+                const _last[343042] "const"(343039 call .(343036 call . blockval c"parentDom") c"last")
+                (343045 'end of statement')
+              }
+              { scopeless
+                unknown tmp[343057] "temp"(343056 call binarySearch inds _first comp)
+                (343064 call _check_tuple_var_decl tmp[343057] 2)
+                unknown foundFirst[343046](343058 call tmp[343057] 0)
+                unknown locFirst[343048](343061 call tmp[343057] 1)
+                (343069 'end of statement')
+              }
+              { scopeless
+                unknown tmp[343081] "temp"(343080 call binarySearch inds _last comp)
+                (343088 call _check_tuple_var_decl tmp[343081] 2)
+                unknown foundLast[343070](343082 call tmp[343081] 0)
+                unknown locLast[343072](343085 call tmp[343081] 1)
+                (343093 'end of statement')
+              }
+              if(343102 call _cond_test(343095 call ! foundLast))
+              {
+                { scopeless
+                  (343099 call -= locLast 1)
+                }
+              }
+              if(343128 call _cond_test(343115 call ==(343111 call .(343108 call . dist c"targetLocDom") c"first") l))
+              {
+                { scopeless
+                  (343125 call = locFirst(343122 call .(343119 call . inds c"_dom") c"first"))
+                }
+              }
+              if(343154 call _cond_test(343141 call ==(343137 call .(343134 call . dist c"targetLocDom") c"last") l))
+              {
+                { scopeless
+                  (343151 call = locLast(343148 call .(343145 call . inds c"_dom") c"last"))
+                }
+              }
+              (343167 call =(343162 call localeRanges l)(343165 call chpl_build_bounded_range locFirst locLast))
+            }
+            label _continueLabel[343175]
+            _indexOfInterest[343170]
+            _iterator[343171]
+          }
+          label _breakLabel[343176]
+        }
+      }
+      (343212 'elided on block' 0 tmp[343208])
+    }
+    { scopeless
+      unknown _totalAdded[343219](343217 call chpl__atomicType int[13])
+      (343222 'end of statement')
+    }
+    {
+      unknown tmpIter[343286] "expr temp" "maybe ref" "no copy" "temp"
+      (343289 'move' tmpIter[343286](343225 call . dist c"targetLocDom"))
+      unknown isRngDomArr[343473] "maybe param" "temp"
+      (343488 'move' isRngDomArr[343473](343486 call ||(343475 call isBoundedRange tmpIter[343286])(343484 call ||(343478 call isDomain tmpIter[343286])(343481 call isArray tmpIter[343286]))))
+      if isRngDomArr[343473]
+      {
+        const _coforallCount[343340] "const" "end count" "temp"
+        (343409 'move' _coforallCount[343340](343406 call _endCountAlloc 1))
+        unknown numTasks[343341] "temp"
+        (343393 'move' numTasks[343341](343389 call . tmpIter[343286] c"size"))
+        (343384 call _upEndCount _coforallCount[343340] 1 numTasks[343341])
+        (343381 call chpl_resetTaskSpawn numTasks[343341])
+        unknown _indexOfInterest[343348] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[343349] "expr temp" "temp"
+        (343358 'move' _iterator[343349](343356 call _getIterator tmpIter[343286]))
+        Defer
+        {
+          {
+            (343374 call _freeIterator _iterator[343349])
+          }
+        }
+        { scopeless type
+          (343363 'move' _indexOfInterest[343348](343360 call iteratorIndex _iterator[343349]))
+        }
+        ForLoop[343350]
+        {
+          unknown l[343367] "coforall index var" "index var" "insert auto destroy"
+          (343369 'move' l[343367] _indexOfInterest[343348])
+          {
+            {
+              const tmp[343295] "const" "temp"
+              (343297 'move' tmp[343295](343299 'deref'(343300 '_wide_get_locale'(343305 call(343302 call . dist c"targetLocales") l))))
+              {
+                { scopeless
+                  const _retval[343309] "const"(343321 call(343311 call .(343313 call .(343315 call postfix!(343317 call locDoms l)) c"mySparseBlock") c"bulkAdd")(343323 call inds(343325 call localeRanges l))(dataSorted = 1)(isUnique = 0))
+                  (343332 'end of statement')
+                }
+                (343337 call(343334 call . _totalAdded c"add") _retval)
+              }
+              (343292 'elided on block' 0 tmp[343295])
+            }
+            (343343 call _downEndCount _coforallCount[343340] nil[44])
+            (343342 'coforall loop')
+          }
+          label _continueLabel[343353]
+          _indexOfInterest[343348]
+          _iterator[343349]
+        }
+        label _breakLabel[343354]
+        Defer
+        {
+          {
+            (343396 call _endCountFree _coforallCount[343340])
+          }
+        }
+        (343401 call _waitEndCount _coforallCount[343340] 1 numTasks[343341])
+      }
+      {
+        const _coforallCount[343413] "const" "end count" "temp"
+        (343470 'move' _coforallCount[343413](343467 call _endCountAlloc 1))
+        unknown _indexOfInterest[343421] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[343422] "expr temp" "temp"
+        (343431 'move' _iterator[343422](343429 call _getIterator tmpIter[343286]))
+        Defer
+        {
+          {
+            (343447 call _freeIterator _iterator[343422])
+          }
+        }
+        { scopeless type
+          (343436 'move' _indexOfInterest[343421](343433 call iteratorIndex _iterator[343422]))
+        }
+        ForLoop[343423]
+        {
+          unknown l[343440] "coforall index var" "index var" "insert auto destroy"
+          (343442 'move' l[343440] _indexOfInterest[343421])
+          (343454 call _upEndCount _coforallCount[343413] 1)
+          {
+            {
+              const tmp[343278] "const" "temp"
+              (343279 'move' tmp[343278](343276 'deref'(343275 '_wide_get_locale'(343234 call(343229 call . dist c"targetLocales") l))))
+              {
+                { scopeless
+                  const _retval[343262] "const"(343261 call(343246 call .(343241 call .(343239 call postfix!(343238 call locDoms l)) c"mySparseBlock") c"bulkAdd")(343255 call inds(343253 call localeRanges l))(dataSorted = 1)(isUnique = 0))
+                  (343265 'end of statement')
+                }
+                (343273 call(343268 call . _totalAdded c"add") _retval)
+              }
+              (343282 'elided on block' 0 tmp[343278])
+            }
+            (343416 call _downEndCount _coforallCount[343413] nil[44])
+            (343415 'coforall loop')
+          }
+          label _continueLabel[343426]
+          _indexOfInterest[343421]
+          _iterator[343422]
+        }
+        label _breakLabel[343427]
+        Defer
+        {
+          {
+            (343458 call _endCountFree _coforallCount[343413])
+          }
+        }
+        (343463 call _waitEndCount _coforallCount[343413] 1)
+      }
+    }
+    { scopeless
+      const _retval[343498] "const"(343497 call(343493 call . _totalAdded c"read"))
+      (343501 'end of statement')
+    }
+    (343503 return _retval)
+  } function SparseBlockDom[344881](?).bulkAddHere_help[343520](arg _mt[344917]:_MT[238], arg this[344915]:SparseBlockDom[344881](?), arg inds[343517] :
+  (343514 call chpl__buildArrayRuntimeType nil[44](343512 call chpl__buildIndexType rank idxType)), arg dataSorted[343523] =
+  0, arg isUnique[343527] =
+  0) : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      const _retval[343546] "const"(343545 call(343536 call .(343533 call .(343531 call postfix! myLocDom) c"mySparseBlock") c"bulkAdd") inds(dataSorted = 1)(isUnique = 0))
+      (343549 'end of statement')
+    }
+    (343552 return _retval)
+  } function SparseBlockDom[344881](?).dsiSerialWrite[343560](arg _mt[344921]:_MT[238], arg this[344919]:SparseBlockDom[344881](?), arg f[343558]:_any[178](?)) : _unknown[51] "method" "primary method"
+  {
+    if(343661 call _cond_test(343564 call == rank 1))
+    {
+      (343568 call <~> f "{")
+      {
+        unknown _indexOfInterest[343601] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[343602] "expr temp" "temp"
+        (343611 'move' _iterator[343602](343609 call _getIterator locDoms))
+        Defer
+        {
+          {
+            (343627 call _freeIterator _iterator[343602])
+          }
+        }
+        { scopeless type
+          (343616 'move' _indexOfInterest[343601](343613 call iteratorIndex _iterator[343602]))
+        }
+        ForLoop[343603]
+        {
+          unknown locdom[343620] "index var" "insert auto destroy"
+          (343622 'move' locdom[343620] _indexOfInterest[343601])
+          {
+            if(343596 call _cond_test(343577 call .(343575 call postfix! locdom) c"dsiNumIndices"))
+            {
+              (343582 call <~> f " ")
+              (343594 call(343589 call .(343587 call postfix! locdom) c"dsiSerialWrite") f)
+            }
+          }
+          label _continueLabel[343606]
+          _indexOfInterest[343601]
+          _iterator[343602]
+        }
+        label _breakLabel[343607]
+      }
+      (343636 call <~> f "}")
+    }
+    {
+      (343658 call compilerError "Can't write out multidimensional sparse distributed domains yet")
+    }
+  } function SparseBlockDom[344881](?).dsiBuildArray[343672](arg _mt[344925]:_MT[238], arg this[344923]:SparseBlockDom[344881](?), arg eltType[343670]:_any[178](?), param arg initElts[343675] :
+  bool[10]) : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      unknown arr[343699](343680 'new'(_chpl_manager = unmanaged[220](?))(343698 call SparseBlockArr(eltType = eltType)(rank = rank)(idxType = idxType)(stridable = stridable)(sparseLayoutType = sparseLayoutType)(dom =(343696 call _to_unmanaged this))))
+      (343702 'end of statement')
+    }
+    (343710 call(343705 call . arr c"setup") initElts)
+    (343713 return arr)
+  } function SparseBlockDom[344881](?).getLocDom[343721](arg _mt[344929]:_MT[238], arg this[344927]:SparseBlockDom[344881](?), arg localeIdx[343719]:_any[178](?)) : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      (343729 return(343727 call postfix!(343726 call locDoms localeIdx)))
+    }
+  } function SparseBlockDom[344881](?).these[343736](arg _mt[344933]:_MT[238], arg this[344931]:SparseBlockDom[344881](?)) : _unknown[51] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[343789] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[343790] "expr temp" "temp"
+      (343799 'move' _iterator[343790](343797 call _getIterator locDoms))
+      Defer
+      {
+        {
+          (343815 call _freeIterator _iterator[343790])
+        }
+      }
+      { scopeless type
+        (343804 'move' _indexOfInterest[343789](343801 call iteratorIndex _iterator[343790]))
+      }
+      ForLoop[343791]
+      {
+        unknown locDom[343808] "index var" "insert auto destroy"
+        (343810 'move' locDom[343808] _indexOfInterest[343789])
+        {
+          unknown _indexOfInterest[343755] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[343756] "expr temp" "temp"
+          (343765 'move' _iterator[343756](343763 call _getIterator(343751 call(343747 call .(343744 call .(343742 call postfix! locDom) c"mySparseBlock") c"these"))))
+          Defer
+          {
+            {
+              (343782 call _freeIterator _iterator[343756])
+            }
+          }
+          { scopeless type
+            (343771 'move' _indexOfInterest[343755](343768 call iteratorIndex _iterator[343756]))
+          }
+          ForLoop[343757]
+          {
+            unknown x[343775] "index var" "insert auto destroy"
+            (343777 'move' x[343775] _indexOfInterest[343755])
+            { scopeless
+              (343753 yield x)
+            }
+            label _continueLabel[343760]
+            _indexOfInterest[343755]
+            _iterator[343756]
+          }
+          label _breakLabel[343761]
+        }
+        label _continueLabel[343794]
+        _indexOfInterest[343789]
+        _iterator[343790]
+      }
+      label _breakLabel[343795]
+    }
+  } function SparseBlockDom[344881](?).these[343831](arg _mt[344937]:_MT[238], arg this[344935]:SparseBlockDom[344881](?), param arg tag[343828] :
+  iterKind) : _unknown[51] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown tmpIter[343922] "expr temp" "maybe ref" "no copy" "temp"
+      (343925 'move' tmpIter[343922](343851 call _build_tuple locDoms(343848 call . dist c"targetLocDom")))
+      unknown isRngDomArr[344150] "maybe param" "temp"
+      (344165 'move' isRngDomArr[344150](344163 call ||(344152 call isBoundedRange tmpIter[343922])(344161 call ||(344155 call isDomain tmpIter[343922])(344158 call isArray tmpIter[343922]))))
+      if isRngDomArr[344150]
+      {
+        const _coforallCount[343989] "const" "end count" "temp"
+        (344072 'move' _coforallCount[343989](344069 call _endCountAlloc 1))
+        unknown numTasks[343990] "temp"
+        (344056 'move' numTasks[343990](344052 call . tmpIter[343922] c"size"))
+        (344047 call _upEndCount _coforallCount[343989] 1 numTasks[343990])
+        (344044 call chpl_resetTaskSpawn numTasks[343990])
+        unknown _indexOfInterest[343997] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[343998] "expr temp" "temp"
+        (344007 'move' _iterator[343998](344005 call _getIteratorZip tmpIter[343922]))
+        Defer
+        {
+          {
+            (344037 call _freeIterator _iterator[343998])
+          }
+        }
+        { scopeless type
+          (344012 'move' _indexOfInterest[343997](344009 call iteratorIndex _iterator[343998]))
+        }
+        ForLoop[343999]
+        {
+          (344017 call _check_tuple_var_decl _indexOfInterest[343997] 2)
+          unknown locDom[344023] "coforall index var" "index var" "insert auto destroy"
+          (344025 'move' locDom[344023](344021 call _indexOfInterest[343997] 0))
+          unknown localeIndex[344030] "coforall index var" "index var" "insert auto destroy"
+          (344032 'move' localeIndex[344030](344028 call _indexOfInterest[343997] 1))
+          {
+            {
+              const tmp[343931] "const" "temp"
+              (343933 'move' tmp[343931](343935 'deref'(343936 '_wide_get_locale' locDom)))
+              {
+                {
+                  unknown _indexOfInterest[343940] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                  unknown _iterator[343942] "expr temp" "temp"
+                  (343944 'move' _iterator[343942](343947 call _getIterator(343957 call(343949 call .(343951 call .(343953 call postfix! locDom) c"mySparseBlock") c"these") tag)))
+                  Defer
+                  {
+                    {
+                      (343961 call _freeIterator _iterator[343942])
+                    }
+                  }
+                  { scopeless type
+                    (343965 'move' _indexOfInterest[343940](343968 call iteratorIndex _iterator[343942]))
+                  }
+                  ForLoop[343970]
+                  {
+                    unknown followThis[343973] "index var" "insert auto destroy"
+                    (343975 'move' followThis[343973] _indexOfInterest[343940])
+                    {
+                      (343979 yield(343981 call _build_tuple followThis localeIndex))
+                    }
+                    label _continueLabel[343984]
+                    _indexOfInterest[343940]
+                    _iterator[343942]
+                  }
+                  label _breakLabel[343986]
+                }
+              }
+              (343928 'elided on block' 0 tmp[343931])
+            }
+            (343992 call _downEndCount _coforallCount[343989] nil[44])
+            (343991 'coforall loop')
+          }
+          label _continueLabel[344002]
+          _indexOfInterest[343997]
+          _iterator[343998]
+        }
+        label _breakLabel[344003]
+        Defer
+        {
+          {
+            (344059 call _endCountFree _coforallCount[343989])
+          }
+        }
+        (344064 call _waitEndCount _coforallCount[343989] 1 numTasks[343990])
+      }
+      {
+        const _coforallCount[344076] "const" "end count" "temp"
+        (344147 'move' _coforallCount[344076](344144 call _endCountAlloc 1))
+        unknown _indexOfInterest[344084] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[344085] "expr temp" "temp"
+        (344094 'move' _iterator[344085](344092 call _getIteratorZip tmpIter[343922]))
+        Defer
+        {
+          {
+            (344124 call _freeIterator _iterator[344085])
+          }
+        }
+        { scopeless type
+          (344099 'move' _indexOfInterest[344084](344096 call iteratorIndex _iterator[344085]))
+        }
+        ForLoop[344086]
+        {
+          (344104 call _check_tuple_var_decl _indexOfInterest[344084] 2)
+          unknown locDom[344110] "coforall index var" "index var" "insert auto destroy"
+          (344112 'move' locDom[344110](344108 call _indexOfInterest[344084] 0))
+          unknown localeIndex[344117] "coforall index var" "index var" "insert auto destroy"
+          (344119 'move' localeIndex[344117](344115 call _indexOfInterest[344084] 1))
+          (344131 call _upEndCount _coforallCount[344076] 1)
+          {
+            {
+              const tmp[343912] "const" "temp"
+              (343913 'move' tmp[343912](343910 'deref'(343909 '_wide_get_locale' locDom)))
+              {
+                {
+                  unknown _indexOfInterest[343874] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                  unknown _iterator[343875] "expr temp" "temp"
+                  (343884 'move' _iterator[343875](343882 call _getIterator(343865 call(343860 call .(343857 call .(343855 call postfix! locDom) c"mySparseBlock") c"these") tag)))
+                  Defer
+                  {
+                    {
+                      (343901 call _freeIterator _iterator[343875])
+                    }
+                  }
+                  { scopeless type
+                    (343890 'move' _indexOfInterest[343874](343887 call iteratorIndex _iterator[343875]))
+                  }
+                  ForLoop[343876]
+                  {
+                    unknown followThis[343894] "index var" "insert auto destroy"
+                    (343896 'move' followThis[343894] _indexOfInterest[343874])
+                    {
+                      (343871 yield(343869 call _build_tuple followThis localeIndex))
+                    }
+                    label _continueLabel[343879]
+                    _indexOfInterest[343874]
+                    _iterator[343875]
+                  }
+                  label _breakLabel[343880]
+                }
+              }
+              (343916 'elided on block' 0 tmp[343912])
+            }
+            (344079 call _downEndCount _coforallCount[344076] nil[44])
+            (344078 'coforall loop')
+          }
+          label _continueLabel[344089]
+          _indexOfInterest[344084]
+          _iterator[344085]
+        }
+        label _breakLabel[344090]
+        Defer
+        {
+          {
+            (344135 call _endCountFree _coforallCount[344076])
+          }
+        }
+        (344140 call _waitEndCount _coforallCount[344076] 1)
+      }
+    }
+  }
+  where {
+    (343838 call == tag(343835 call . iterKind c"leader"))
+  } function SparseBlockDom[344881](?).these[344179](arg _mt[344941]:_MT[238], arg this[344939]:SparseBlockDom[344881](?), param arg tag[344176] :
+  iterKind, arg followThis[344181]:_any[178](?)) : _unknown[51] "iterator fn" "method" "primary method"
+  {
+    { scopeless
+      unknown tmp[344196] "temp" followThis
+      (344203 call _check_tuple_var_decl tmp[344196] 2)
+      unknown locFollowThis[344190](344197 call tmp[344196] 0)
+      unknown localeIndex[344192](344200 call tmp[344196] 1)
+      (344208 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[344225] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[344226] "expr temp" "temp"
+      (344235 'move' _iterator[344226](344233 call _getIterator(344221 call(344215 call .(344214 call locFollowThis 0) c"these") tag locFollowThis)))
+      Defer
+      {
+        {
+          (344252 call _freeIterator _iterator[344226])
+        }
+      }
+      { scopeless type
+        (344241 'move' _indexOfInterest[344225](344238 call iteratorIndex _iterator[344226]))
+      }
+      ForLoop[344227]
+      {
+        unknown i[344245] "index var" "insert auto destroy"
+        (344247 'move' i[344245] _indexOfInterest[344225])
+        { scopeless
+          (344223 yield i)
+        }
+        label _continueLabel[344230]
+        _indexOfInterest[344225]
+        _iterator[344226]
+      }
+      label _breakLabel[344231]
+    }
+  }
+  where {
+    (344188 call == tag(344185 call . iterKind c"follower"))
+  } function SparseBlockDom[344881](?).these[344268](arg _mt[344945]:_MT[238], arg this[344943]:SparseBlockDom[344881](?), param arg tag[344265] :
+  iterKind) : _unknown[51] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown tmpIter[344332] "expr temp" "maybe ref" "no copy" "temp"
+      (344335 'move' tmpIter[344332] locDoms)
+      unknown isRngDomArr[344495] "maybe param" "temp"
+      (344510 'move' isRngDomArr[344495](344508 call ||(344497 call isBoundedRange tmpIter[344332])(344506 call ||(344500 call isDomain tmpIter[344332])(344503 call isArray tmpIter[344332]))))
+      if isRngDomArr[344495]
+      {
+        const _coforallCount[344362] "const" "end count" "temp"
+        (344431 'move' _coforallCount[344362](344428 call _endCountAlloc 1))
+        unknown numTasks[344363] "temp"
+        (344415 'move' numTasks[344363](344411 call . tmpIter[344332] c"size"))
+        (344406 call _upEndCount _coforallCount[344362] 1 numTasks[344363])
+        (344403 call chpl_resetTaskSpawn numTasks[344363])
+        unknown _indexOfInterest[344370] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[344371] "expr temp" "temp"
+        (344380 'move' _iterator[344371](344378 call _getIterator tmpIter[344332]))
+        Defer
+        {
+          {
+            (344396 call _freeIterator _iterator[344371])
+          }
+        }
+        { scopeless type
+          (344385 'move' _indexOfInterest[344370](344382 call iteratorIndex _iterator[344371]))
+        }
+        ForLoop[344372]
+        {
+          unknown locDom[344389] "coforall index var" "index var" "insert auto destroy"
+          (344391 'move' locDom[344389] _indexOfInterest[344370])
+          {
+            {
+              const tmp[344341] "const" "temp"
+              (344343 'move' tmp[344341](344345 'deref'(344346 '_wide_get_locale' locDom)))
+              {
+                Forall {
+                  induction variables:
+                    
+                    unknown i[344353] "index var" "insert auto destroy"
+                  iterated expressions:
+                    (344356 call .(344358 call postfix! locDom) c"mySparseBlock")
+                  shadow variables:
+                  other variables
+                    forall body
+                  {
+                    (344350 yield i)
+                  }
+                }
+              }
+              (344338 'elided on block' 0 tmp[344341])
+            }
+            (344365 call _downEndCount _coforallCount[344362] nil[44])
+            (344364 'coforall loop')
+          }
+          label _continueLabel[344375]
+          _indexOfInterest[344370]
+          _iterator[344371]
+        }
+        label _breakLabel[344376]
+        Defer
+        {
+          {
+            (344418 call _endCountFree _coforallCount[344362])
+          }
+        }
+        (344423 call _waitEndCount _coforallCount[344362] 1 numTasks[344363])
+      }
+      {
+        const _coforallCount[344435] "const" "end count" "temp"
+        (344492 'move' _coforallCount[344435](344489 call _endCountAlloc 1))
+        unknown _indexOfInterest[344443] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[344444] "expr temp" "temp"
+        (344453 'move' _iterator[344444](344451 call _getIterator tmpIter[344332]))
+        Defer
+        {
+          {
+            (344469 call _freeIterator _iterator[344444])
+          }
+        }
+        { scopeless type
+          (344458 'move' _indexOfInterest[344443](344455 call iteratorIndex _iterator[344444]))
+        }
+        ForLoop[344445]
+        {
+          unknown locDom[344462] "coforall index var" "index var" "insert auto destroy"
+          (344464 'move' locDom[344462] _indexOfInterest[344443])
+          (344476 call _upEndCount _coforallCount[344435] 1)
+          {
+            {
+              const tmp[344323] "const" "temp"
+              (344324 'move' tmp[344323](344321 'deref'(344320 '_wide_get_locale' locDom)))
+              {
+                Forall {
+                  induction variables:
+                    
+                    unknown i[344316] "index var" "insert auto destroy"
+                  iterated expressions:
+                    (344308 call .(344306 call postfix! locDom) c"mySparseBlock")
+                  shadow variables:
+                  other variables
+                    forall body
+                  {
+                    (344312 yield i)
+                  }
+                }
+              }
+              (344327 'elided on block' 0 tmp[344323])
+            }
+            (344438 call _downEndCount _coforallCount[344435] nil[44])
+            (344437 'coforall loop')
+          }
+          label _continueLabel[344448]
+          _indexOfInterest[344443]
+          _iterator[344444]
+        }
+        label _breakLabel[344449]
+        Defer
+        {
+          {
+            (344480 call _endCountFree _coforallCount[344435])
+          }
+        }
+        (344485 call _waitEndCount _coforallCount[344435] 1)
+      }
+    }
+  }
+  where {
+    (344299 call &&(344275 call == tag(344272 call . iterKind c"standalone"))(344298 'method call resolves'(344293 call .(344290 call .(344288 call postfix!(344287 call locDoms(344285 call createTuple rank int[13] 0))) c"mySparseBlock") c"_value") "these" tag))
+  } function SparseBlockDom[344881](?).dsiMember[344522](arg _mt[344949]:_MT[238], arg this[344947]:SparseBlockDom[344881](?), arg ind[344520]:_any[178](?)) : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      unknown _retval[344527] 0 bool[10]
+      (344530 'end of statement')
+    }
+    {
+      const tmp[344565] "const" "temp"
+      (344566 'move' tmp[344565](344563 'deref'(344562 '_wide_get_locale'(344538 call(344533 call . dist c"dsiIndexToLocale") ind))))
+      {
+        (344558 call = _retval(344557 call(344552 call .(344550 call postfix!(344549 call locDoms(344547 call(344542 call . dist c"targetLocsIdx") ind))) c"dsiMember") ind))
+      }
+      (344569 'elided on block' 0 tmp[344565])
+    }
+    (344574 return _retval)
+  }
+  { scopeless type
+    bool[10]
+  } function SparseBlockDom[344881](?).dsiClear[344581](arg _mt[344953]:_MT[238], arg this[344951]:SparseBlockDom[344881](?)) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    {
+      unknown tmpIter[344606] "expr temp" "maybe ref" "no copy" "temp"
+      (344609 'move' tmpIter[344606] locDoms)
+      unknown isRngDomArr[344764] "maybe param" "temp"
+      (344779 'move' isRngDomArr[344764](344777 call ||(344766 call isBoundedRange tmpIter[344606])(344775 call ||(344769 call isDomain tmpIter[344606])(344772 call isArray tmpIter[344606]))))
+      if isRngDomArr[344764]
+      {
+        const _coforallCount[344631] "const" "end count" "temp"
+        (344700 'move' _coforallCount[344631](344697 call _endCountAlloc 1))
+        unknown numTasks[344632] "temp"
+        (344684 'move' numTasks[344632](344680 call . tmpIter[344606] c"size"))
+        (344675 call _upEndCount _coforallCount[344631] 1 numTasks[344632])
+        (344672 call chpl_resetTaskSpawn numTasks[344632])
+        unknown _indexOfInterest[344639] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[344640] "expr temp" "temp"
+        (344649 'move' _iterator[344640](344647 call _getIterator tmpIter[344606]))
+        Defer
+        {
+          {
+            (344665 call _freeIterator _iterator[344640])
+          }
+        }
+        { scopeless type
+          (344654 'move' _indexOfInterest[344639](344651 call iteratorIndex _iterator[344640]))
+        }
+        ForLoop[344641]
+        {
+          unknown locDom[344658] "coforall index var" "index var" "insert auto destroy"
+          (344660 'move' locDom[344658] _indexOfInterest[344639])
+          {
+            {
+              const tmp[344615] "const" "temp"
+              (344617 'move' tmp[344615](344619 'deref'(344620 '_wide_get_locale' locDom)))
+              { scopeless
+                (344629 call(344624 call .(344626 call postfix! locDom) c"dsiClear"))
+              }
+              (344612 'elided on block' 0 tmp[344615])
+            }
+            (344634 call _downEndCount _coforallCount[344631] nil[44])
+            (344633 'coforall loop')
+          }
+          label _continueLabel[344644]
+          _indexOfInterest[344639]
+          _iterator[344640]
+        }
+        label _breakLabel[344645]
+        Defer
+        {
+          {
+            (344687 call _endCountFree _coforallCount[344631])
+          }
+        }
+        (344692 call _waitEndCount _coforallCount[344631] 1 numTasks[344632])
+      }
+      {
+        const _coforallCount[344704] "const" "end count" "temp"
+        (344761 'move' _coforallCount[344704](344758 call _endCountAlloc 1))
+        unknown _indexOfInterest[344712] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[344713] "expr temp" "temp"
+        (344722 'move' _iterator[344713](344720 call _getIterator tmpIter[344606]))
+        Defer
+        {
+          {
+            (344738 call _freeIterator _iterator[344713])
+          }
+        }
+        { scopeless type
+          (344727 'move' _indexOfInterest[344712](344724 call iteratorIndex _iterator[344713]))
+        }
+        ForLoop[344714]
+        {
+          unknown locDom[344731] "coforall index var" "index var" "insert auto destroy"
+          (344733 'move' locDom[344731] _indexOfInterest[344712])
+          (344745 call _upEndCount _coforallCount[344704] 1)
+          {
+            {
+              const tmp[344598] "const" "temp"
+              (344599 'move' tmp[344598](344596 'deref'(344595 '_wide_get_locale' locDom)))
+              { scopeless
+                (344593 call(344589 call .(344587 call postfix! locDom) c"dsiClear"))
+              }
+              (344602 'elided on block' 0 tmp[344598])
+            }
+            (344707 call _downEndCount _coforallCount[344704] nil[44])
+            (344706 'coforall loop')
+          }
+          label _continueLabel[344717]
+          _indexOfInterest[344712]
+          _iterator[344713]
+        }
+        label _breakLabel[344718]
+        Defer
+        {
+          {
+            (344749 call _endCountFree _coforallCount[344704])
+          }
+        }
+        (344754 call _waitEndCount _coforallCount[344704] 1)
+      }
+    }
+  } function SparseBlockDom[344881](?).dsiMyDist[344788](arg _mt[344957]:_MT[238], arg this[344955]:SparseBlockDom[344881](?)) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    { scopeless
+      (344791 return dist)
+    }
+  } function SparseBlockDom[344881](?).dsiAssignDomain[344802](arg _mt[344961]:_MT[238], arg this[344959]:SparseBlockDom[344881](?), arg rhs[344799] :
+  _domain, arg lhsPrivate[344805] :
+  bool[10]) : _unknown[51] "method" "primary method"
+  {
+    if(344832 call _cond_test(344809 call ! lhsPrivate))
+    {
+      { scopeless
+        (344830 call halt "SparseBlock domain assignment not yet supported")
+      }
+    }
+    {
+      unknown _indexOfInterest[344845] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[344846] "expr temp" "temp"
+      (344855 'move' _iterator[344846](344853 call _getIterator rhs))
+      Defer
+      {
+        {
+          (344871 call _freeIterator _iterator[344846])
+        }
+      }
+      { scopeless type
+        (344860 'move' _indexOfInterest[344845](344857 call iteratorIndex _iterator[344846]))
+      }
+      ForLoop[344847]
+      {
+        unknown i[344864] "index var" "insert auto destroy"
+        (344866 'move' i[344864] _indexOfInterest[344845])
+        { scopeless
+          (344843 call dsiAdd i)
+        }
+        label _continueLabel[344850]
+        _indexOfInterest[344845]
+        _iterator[344846]
+      }
+      label _breakLabel[344851]
+    }
+  } BaseSparseDomImpl
+  function getDefaultSparseDist[344968](arg sparseLayoutType[344966]:_any[178](?)) : _unknown[51] "private"
+  {
+    if(344993 call _cond_test(344977 call isSubtype(344974 call _to_nonnil sparseLayoutType) DefaultDist))
+    {
+      (344979 return defaultDist)
+    }
+    {
+      (344990 return(344982 'new'(344989 call dmap(344984 'new'(344987 call sparseLayoutType)))))
+    }
+  }
+  type LocSparseBlockDom[345150](?) unknown rank[345002] "param" int[13] unknown idxType[345006] "type variable" unknown stridable[345010] "param" bool[10] unknown sparseLayoutType[345014] "type variable" unknown parentDom[345024](345022 call chpl__buildDomainRuntimeType defaultDist rank idxType stridable) unknown sparseDist[345032](345031 call getDefaultSparseDist sparseLayoutType) unknown mySparseBlock[345050](345048 call chpl__distributed sparseDist(345045 call chpl__buildSparseDomainRuntimeType(345042 call . parentDom c"defaultSparseDist") parentDom)) function LocSparseBlockDom[345150](?).dsiAdd[345063](arg _mt[345154]:_MT[238], arg this[345152]:LocSparseBlockDom[345150](?), arg ind[345060] :
+  (345058 call * rank idxType)) : _unknown[51] "method" "primary method"
+  {
+    (345072 return(345071 call(345066 call . mySparseBlock c"add") ind))
+  } function LocSparseBlockDom[345150](?).dsiMember[345086](arg _mt[345158]:_MT[238], arg this[345156]:LocSparseBlockDom[345150](?), arg ind[345083] :
+  (345081 call * rank idxType)) : _unknown[51] "method" "primary method"
+  {
+    (345095 return(345094 call(345089 call . mySparseBlock c"contains") ind))
+  } function LocSparseBlockDom[345150](?).dsiClear[345102](arg _mt[345162]:_MT[238], arg this[345160]:LocSparseBlockDom[345150](?)) : _unknown[51] "method" "primary method"
+  {
+    (345109 call(345105 call . mySparseBlock c"clear"))
+  } function LocSparseBlockDom[345150](?).dsiSerialWrite[345118](arg _mt[345166]:_MT[238], arg this[345164]:LocSparseBlockDom[345150](?), arg w[345116]:_any[178](?)) : _unknown[51] "method" "primary method"
+  {
+    (345131 call(345124 call .(345121 call . mySparseBlock c"_value") c"dsiSerialWrite") w(printBrackets = 0))
+  } function LocSparseBlockDom[345150](?).dsiNumIndices[345138](arg _mt[345170]:_MT[238], arg this[345168]:LocSparseBlockDom[345150](?)) : _unknown[51] "method" "primary method" "no parens"
+  {
+    (345144 return(345141 call . mySparseBlock c"size"))
+  }
+  type SparseBlockArr[347222](?) unknown stridable[345177] "param" bool[10] unknown sparseLayoutType[345183] "type variable"(345182 'to unmanaged class from unknown' DefaultDist) unknown locArrDom[345192](345190 call chpl__buildDomainRuntimeType defaultDist rank idxType) unknown locArr[345212](345210 call chpl__buildArrayRuntimeType(345208 call chpl__ensureDomainExpr locArrDom)(345207 'to unmanaged class from unknown'(345206 'to nilable class from type'(345205 call LocSparseBlockArr eltType rank idxType stridable sparseLayoutType)))) unknown myLocArr[345226](345225 'to unmanaged class from unknown'(345224 'to nilable class from type'(345223 call LocSparseBlockArr eltType rank idxType stridable sparseLayoutType))) function SparseBlockArr[347222](?).init[345234](arg _mt[347226]:_MT[238], arg this[347224]:SparseBlockArr[347222](?), arg eltType[345232]:_any[178](?), param arg rank[345236]:_any[178](?), arg idxType[345238]:_any[178](?), param arg stridable[345240]:_any[178](?), arg sparseLayoutType[345242]:_any[178](?), arg dom[345244]:_any[178](?)) : _unknown[51] "method" "primary method"
+  {
+    (345259 call(345247 call . super c"init")(eltType = eltType)(rank = rank)(idxType = idxType)(dom = dom))
+    (345267 call =(345263 call . this c"stridable") stridable)
+    (345275 call =(345271 call . this c"sparseLayoutType") sparseLayoutType)
+    (345291 call =(345281 call . this c"locArrDom")(345288 call .(345285 call . dom c"dist") c"targetLocDom"))
+  } function SparseBlockArr[347222](?).setup[345300](arg _mt[347230]:_MT[238], arg this[347228]:SparseBlockArr[347222](?), param arg initElts[345298]:_any[178](?)) : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      unknown thisid[345307](345306 '_wide_get_node' this)
+      (345310 'end of statement')
+    }
+    {
+      unknown tmpIter[345395] "expr temp" "maybe ref" "no copy" "temp"
+      (345398 'move' tmpIter[345395](345317 call .(345314 call . dom c"dist") c"targetLocDom"))
+      unknown isRngDomArr[345600] "maybe param" "temp"
+      (345615 'move' isRngDomArr[345600](345613 call ||(345602 call isBoundedRange tmpIter[345395])(345611 call ||(345605 call isDomain tmpIter[345395])(345608 call isArray tmpIter[345395]))))
+      if isRngDomArr[345600]
+      {
+        const _coforallCount[345467] "const" "end count" "temp"
+        (345536 'move' _coforallCount[345467](345533 call _endCountAlloc 1))
+        unknown numTasks[345468] "temp"
+        (345520 'move' numTasks[345468](345516 call . tmpIter[345395] c"size"))
+        (345511 call _upEndCount _coforallCount[345467] 1 numTasks[345468])
+        (345508 call chpl_resetTaskSpawn numTasks[345468])
+        unknown _indexOfInterest[345475] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[345476] "expr temp" "temp"
+        (345485 'move' _iterator[345476](345483 call _getIterator tmpIter[345395]))
+        Defer
+        {
+          {
+            (345501 call _freeIterator _iterator[345476])
+          }
+        }
+        { scopeless type
+          (345490 'move' _indexOfInterest[345475](345487 call iteratorIndex _iterator[345476]))
+        }
+        ForLoop[345477]
+        {
+          unknown localeIdx[345494] "coforall index var" "index var" "insert auto destroy"
+          (345496 'move' localeIdx[345494] _indexOfInterest[345475])
+          {
+            {
+              const tmp[345404] "const" "temp"
+              (345406 'move' tmp[345404](345408 'deref'(345409 '_wide_get_locale'(345417 call(345411 call .(345413 call . dom c"dist") c"targetLocales") localeIdx))))
+              {
+                { scopeless
+                  const locDom[345421] "const"(345426 call(345423 call . dom c"getLocDom") localeIdx)
+                  (345429 'end of statement')
+                }
+                (345431 call =(345433 call locArr localeIdx)(345435 'new'(_chpl_manager = unmanaged[220](?))(345439 call LocSparseBlockArr eltType rank idxType stridable sparseLayoutType locDom(initElts = initElts))))
+                if(345449 call _cond_test(345451 call == thisid(345454 call . here c"id")))
+                {
+                  { scopeless
+                    (345460 call = myLocArr(345463 call locArr localeIdx))
+                  }
+                }
+              }
+              (345401 'elided on block' 0 tmp[345404])
+            }
+            (345470 call _downEndCount _coforallCount[345467] nil[44])
+            (345469 'coforall loop')
+          }
+          label _continueLabel[345480]
+          _indexOfInterest[345475]
+          _iterator[345476]
+        }
+        label _breakLabel[345481]
+        Defer
+        {
+          {
+            (345523 call _endCountFree _coforallCount[345467])
+          }
+        }
+        (345528 call _waitEndCount _coforallCount[345467] 1 numTasks[345468])
+      }
+      {
+        const _coforallCount[345540] "const" "end count" "temp"
+        (345597 'move' _coforallCount[345540](345594 call _endCountAlloc 1))
+        unknown _indexOfInterest[345548] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[345549] "expr temp" "temp"
+        (345558 'move' _iterator[345549](345556 call _getIterator tmpIter[345395]))
+        Defer
+        {
+          {
+            (345574 call _freeIterator _iterator[345549])
+          }
+        }
+        { scopeless type
+          (345563 'move' _indexOfInterest[345548](345560 call iteratorIndex _iterator[345549]))
+        }
+        ForLoop[345550]
+        {
+          unknown localeIdx[345567] "coforall index var" "index var" "insert auto destroy"
+          (345569 'move' localeIdx[345567] _indexOfInterest[345548])
+          (345581 call _upEndCount _coforallCount[345540] 1)
+          {
+            {
+              const tmp[345386] "const" "temp"
+              (345387 'move' tmp[345386](345384 'deref'(345383 '_wide_get_locale'(345329 call(345324 call .(345321 call . dom c"dist") c"targetLocales") localeIdx))))
+              {
+                { scopeless
+                  const locDom[345337] "const"(345336 call(345331 call . dom c"getLocDom") localeIdx)
+                  (345340 'end of statement')
+                }
+                (345360 call =(345345 call locArr localeIdx)(345348 'new'(_chpl_manager = unmanaged[220](?))(345359 call LocSparseBlockArr eltType rank idxType stridable sparseLayoutType locDom(initElts = initElts))))
+                if(345378 call _cond_test(345368 call == thisid(345365 call . here c"id")))
+                {
+                  { scopeless
+                    (345375 call = myLocArr(345374 call locArr localeIdx))
+                  }
+                }
+              }
+              (345390 'elided on block' 0 tmp[345386])
+            }
+            (345543 call _downEndCount _coforallCount[345540] nil[44])
+            (345542 'coforall loop')
+          }
+          label _continueLabel[345553]
+          _indexOfInterest[345548]
+          _iterator[345549]
+        }
+        label _breakLabel[345554]
+        Defer
+        {
+          {
+            (345585 call _endCountFree _coforallCount[345540])
+          }
+        }
+        (345590 call _waitEndCount _coforallCount[345540] 1)
+      }
+    }
+  } function SparseBlockArr[347222](?).dsiElementInitializationComplete[345623](arg _mt[347234]:_MT[238], arg this[347232]:SparseBlockArr[347222](?)) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    {
+      unknown tmpIter[345665] "expr temp" "maybe ref" "no copy" "temp"
+      (345668 'move' tmpIter[345665](345630 call .(345627 call . dom c"dist") c"targetLocDom"))
+      unknown isRngDomArr[345830] "maybe param" "temp"
+      (345845 'move' isRngDomArr[345830](345843 call ||(345832 call isBoundedRange tmpIter[345665])(345841 call ||(345835 call isDomain tmpIter[345665])(345838 call isArray tmpIter[345665]))))
+      if isRngDomArr[345830]
+      {
+        const _coforallCount[345697] "const" "end count" "temp"
+        (345766 'move' _coforallCount[345697](345763 call _endCountAlloc 1))
+        unknown numTasks[345698] "temp"
+        (345750 'move' numTasks[345698](345746 call . tmpIter[345665] c"size"))
+        (345741 call _upEndCount _coforallCount[345697] 1 numTasks[345698])
+        (345738 call chpl_resetTaskSpawn numTasks[345698])
+        unknown _indexOfInterest[345705] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[345706] "expr temp" "temp"
+        (345715 'move' _iterator[345706](345713 call _getIterator tmpIter[345665]))
+        Defer
+        {
+          {
+            (345731 call _freeIterator _iterator[345706])
+          }
+        }
+        { scopeless type
+          (345720 'move' _indexOfInterest[345705](345717 call iteratorIndex _iterator[345706]))
+        }
+        ForLoop[345707]
+        {
+          unknown localeIdx[345724] "coforall index var" "index var" "insert auto destroy"
+          (345726 'move' localeIdx[345724] _indexOfInterest[345705])
+          {
+            {
+              const tmp[345674] "const" "temp"
+              (345676 'move' tmp[345674](345678 'deref'(345679 '_wide_get_locale'(345681 call locArr localeIdx))))
+              {
+                (345695 call(345685 call .(345687 call .(345689 call postfix!(345691 call locArr localeIdx)) c"myElems") c"dsiElementInitializationComplete"))
+              }
+              (345671 'elided on block' 0 tmp[345674])
+            }
+            (345700 call _downEndCount _coforallCount[345697] nil[44])
+            (345699 'coforall loop')
+          }
+          label _continueLabel[345710]
+          _indexOfInterest[345705]
+          _iterator[345706]
+        }
+        label _breakLabel[345711]
+        Defer
+        {
+          {
+            (345753 call _endCountFree _coforallCount[345697])
+          }
+        }
+        (345758 call _waitEndCount _coforallCount[345697] 1 numTasks[345698])
+      }
+      {
+        const _coforallCount[345770] "const" "end count" "temp"
+        (345827 'move' _coforallCount[345770](345824 call _endCountAlloc 1))
+        unknown _indexOfInterest[345778] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[345779] "expr temp" "temp"
+        (345788 'move' _iterator[345779](345786 call _getIterator tmpIter[345665]))
+        Defer
+        {
+          {
+            (345804 call _freeIterator _iterator[345779])
+          }
+        }
+        { scopeless type
+          (345793 'move' _indexOfInterest[345778](345790 call iteratorIndex _iterator[345779]))
+        }
+        ForLoop[345780]
+        {
+          unknown localeIdx[345797] "coforall index var" "index var" "insert auto destroy"
+          (345799 'move' localeIdx[345797] _indexOfInterest[345778])
+          (345811 call _upEndCount _coforallCount[345770] 1)
+          {
+            {
+              const tmp[345656] "const" "temp"
+              (345657 'move' tmp[345656](345654 'deref'(345653 '_wide_get_locale'(345636 call locArr localeIdx))))
+              {
+                (345650 call(345646 call .(345643 call .(345641 call postfix!(345640 call locArr localeIdx)) c"myElems") c"dsiElementInitializationComplete"))
+              }
+              (345660 'elided on block' 0 tmp[345656])
+            }
+            (345773 call _downEndCount _coforallCount[345770] nil[44])
+            (345772 'coforall loop')
+          }
+          label _continueLabel[345783]
+          _indexOfInterest[345778]
+          _iterator[345779]
+        }
+        label _breakLabel[345784]
+        Defer
+        {
+          {
+            (345815 call _endCountFree _coforallCount[345770])
+          }
+        }
+        (345820 call _waitEndCount _coforallCount[345770] 1)
+      }
+    }
+  } function SparseBlockArr[347222](?).dsiElementDeinitializationComplete[345854](arg _mt[347238]:_MT[238], arg this[347236]:SparseBlockArr[347222](?)) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    {
+      unknown tmpIter[345896] "expr temp" "maybe ref" "no copy" "temp"
+      (345899 'move' tmpIter[345896](345861 call .(345858 call . dom c"dist") c"targetLocDom"))
+      unknown isRngDomArr[346061] "maybe param" "temp"
+      (346076 'move' isRngDomArr[346061](346074 call ||(346063 call isBoundedRange tmpIter[345896])(346072 call ||(346066 call isDomain tmpIter[345896])(346069 call isArray tmpIter[345896]))))
+      if isRngDomArr[346061]
+      {
+        const _coforallCount[345928] "const" "end count" "temp"
+        (345997 'move' _coforallCount[345928](345994 call _endCountAlloc 1))
+        unknown numTasks[345929] "temp"
+        (345981 'move' numTasks[345929](345977 call . tmpIter[345896] c"size"))
+        (345972 call _upEndCount _coforallCount[345928] 1 numTasks[345929])
+        (345969 call chpl_resetTaskSpawn numTasks[345929])
+        unknown _indexOfInterest[345936] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[345937] "expr temp" "temp"
+        (345946 'move' _iterator[345937](345944 call _getIterator tmpIter[345896]))
+        Defer
+        {
+          {
+            (345962 call _freeIterator _iterator[345937])
+          }
+        }
+        { scopeless type
+          (345951 'move' _indexOfInterest[345936](345948 call iteratorIndex _iterator[345937]))
+        }
+        ForLoop[345938]
+        {
+          unknown localeIdx[345955] "coforall index var" "index var" "insert auto destroy"
+          (345957 'move' localeIdx[345955] _indexOfInterest[345936])
+          {
+            {
+              const tmp[345905] "const" "temp"
+              (345907 'move' tmp[345905](345909 'deref'(345910 '_wide_get_locale'(345912 call locArr localeIdx))))
+              {
+                (345926 call(345916 call .(345918 call .(345920 call postfix!(345922 call locArr localeIdx)) c"myElems") c"dsiElementDeinitializationComplete"))
+              }
+              (345902 'elided on block' 0 tmp[345905])
+            }
+            (345931 call _downEndCount _coforallCount[345928] nil[44])
+            (345930 'coforall loop')
+          }
+          label _continueLabel[345941]
+          _indexOfInterest[345936]
+          _iterator[345937]
+        }
+        label _breakLabel[345942]
+        Defer
+        {
+          {
+            (345984 call _endCountFree _coforallCount[345928])
+          }
+        }
+        (345989 call _waitEndCount _coforallCount[345928] 1 numTasks[345929])
+      }
+      {
+        const _coforallCount[346001] "const" "end count" "temp"
+        (346058 'move' _coforallCount[346001](346055 call _endCountAlloc 1))
+        unknown _indexOfInterest[346009] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[346010] "expr temp" "temp"
+        (346019 'move' _iterator[346010](346017 call _getIterator tmpIter[345896]))
+        Defer
+        {
+          {
+            (346035 call _freeIterator _iterator[346010])
+          }
+        }
+        { scopeless type
+          (346024 'move' _indexOfInterest[346009](346021 call iteratorIndex _iterator[346010]))
+        }
+        ForLoop[346011]
+        {
+          unknown localeIdx[346028] "coforall index var" "index var" "insert auto destroy"
+          (346030 'move' localeIdx[346028] _indexOfInterest[346009])
+          (346042 call _upEndCount _coforallCount[346001] 1)
+          {
+            {
+              const tmp[345887] "const" "temp"
+              (345888 'move' tmp[345887](345885 'deref'(345884 '_wide_get_locale'(345867 call locArr localeIdx))))
+              {
+                (345881 call(345877 call .(345874 call .(345872 call postfix!(345871 call locArr localeIdx)) c"myElems") c"dsiElementDeinitializationComplete"))
+              }
+              (345891 'elided on block' 0 tmp[345887])
+            }
+            (346004 call _downEndCount _coforallCount[346001] nil[44])
+            (346003 'coforall loop')
+          }
+          label _continueLabel[346014]
+          _indexOfInterest[346009]
+          _iterator[346010]
+        }
+        label _breakLabel[346015]
+        Defer
+        {
+          {
+            (346046 call _endCountFree _coforallCount[346001])
+          }
+        }
+        (346051 call _waitEndCount _coforallCount[346001] 1)
+      }
+    }
+  } function SparseBlockArr[347222](?).dsiDestroyArr[346089](arg _mt[347242]:_MT[238], arg this[347240]:SparseBlockArr[347222](?), arg deinitElts[346086] :
+  bool[10]) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    {
+      unknown tmpIter[346157] "expr temp" "maybe ref" "no copy" "temp"
+      (346160 'move' tmpIter[346157](346096 call .(346093 call . dom c"dist") c"targetLocDom"))
+      unknown isRngDomArr[346344] "maybe param" "temp"
+      (346359 'move' isRngDomArr[346344](346357 call ||(346346 call isBoundedRange tmpIter[346157])(346355 call ||(346349 call isDomain tmpIter[346157])(346352 call isArray tmpIter[346157]))))
+      if isRngDomArr[346344]
+      {
+        const _coforallCount[346211] "const" "end count" "temp"
+        (346280 'move' _coforallCount[346211](346277 call _endCountAlloc 1))
+        unknown numTasks[346212] "temp"
+        (346264 'move' numTasks[346212](346260 call . tmpIter[346157] c"size"))
+        (346255 call _upEndCount _coforallCount[346211] 1 numTasks[346212])
+        (346252 call chpl_resetTaskSpawn numTasks[346212])
+        unknown _indexOfInterest[346219] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[346220] "expr temp" "temp"
+        (346229 'move' _iterator[346220](346227 call _getIterator tmpIter[346157]))
+        Defer
+        {
+          {
+            (346245 call _freeIterator _iterator[346220])
+          }
+        }
+        { scopeless type
+          (346234 'move' _indexOfInterest[346219](346231 call iteratorIndex _iterator[346220]))
+        }
+        ForLoop[346221]
+        {
+          unknown localeIdx[346238] "coforall index var" "index var" "insert auto destroy"
+          (346240 'move' localeIdx[346238] _indexOfInterest[346219])
+          {
+            {
+              const tmp[346166] "const" "temp"
+              (346168 'move' tmp[346166](346170 'deref'(346171 '_wide_get_locale'(346173 call locArr localeIdx))))
+              {
+                { scopeless
+                  unknown arr[346177](346179 call locArr localeIdx)
+                  (346182 'end of statement')
+                }
+                if(346184 call _cond_test deinitElts)
+                {
+                  { scopeless
+                    (346189 call _deinitElements(346191 call .(346193 call postfix! arr) c"myElems"))
+                  }
+                }
+                (346206 call(346198 call .(346200 call .(346202 call postfix! arr) c"myElems") c"dsiElementDeinitializationComplete"))
+                (346208 call chpl__delete arr)
+              }
+              (346163 'elided on block' 0 tmp[346166])
+            }
+            (346214 call _downEndCount _coforallCount[346211] nil[44])
+            (346213 'coforall loop')
+          }
+          label _continueLabel[346224]
+          _indexOfInterest[346219]
+          _iterator[346220]
+        }
+        label _breakLabel[346225]
+        Defer
+        {
+          {
+            (346267 call _endCountFree _coforallCount[346211])
+          }
+        }
+        (346272 call _waitEndCount _coforallCount[346211] 1 numTasks[346212])
+      }
+      {
+        const _coforallCount[346284] "const" "end count" "temp"
+        (346341 'move' _coforallCount[346284](346338 call _endCountAlloc 1))
+        unknown _indexOfInterest[346292] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[346293] "expr temp" "temp"
+        (346302 'move' _iterator[346293](346300 call _getIterator tmpIter[346157]))
+        Defer
+        {
+          {
+            (346318 call _freeIterator _iterator[346293])
+          }
+        }
+        { scopeless type
+          (346307 'move' _indexOfInterest[346292](346304 call iteratorIndex _iterator[346293]))
+        }
+        ForLoop[346294]
+        {
+          unknown localeIdx[346311] "coforall index var" "index var" "insert auto destroy"
+          (346313 'move' localeIdx[346311] _indexOfInterest[346292])
+          (346325 call _upEndCount _coforallCount[346284] 1)
+          {
+            {
+              const tmp[346148] "const" "temp"
+              (346149 'move' tmp[346148](346146 'deref'(346145 '_wide_get_locale'(346102 call locArr localeIdx))))
+              {
+                { scopeless
+                  unknown arr[346107](346106 call locArr localeIdx)
+                  (346110 'end of statement')
+                }
+                if(346123 call _cond_test deinitElts)
+                {
+                  { scopeless
+                    (346121 call _deinitElements(346117 call .(346115 call postfix! arr) c"myElems"))
+                  }
+                }
+                (346138 call(346134 call .(346131 call .(346129 call postfix! arr) c"myElems") c"dsiElementDeinitializationComplete"))
+                (346142 call chpl__delete arr)
+              }
+              (346152 'elided on block' 0 tmp[346148])
+            }
+            (346287 call _downEndCount _coforallCount[346284] nil[44])
+            (346286 'coforall loop')
+          }
+          label _continueLabel[346297]
+          _indexOfInterest[346292]
+          _iterator[346293]
+        }
+        label _breakLabel[346298]
+        Defer
+        {
+          {
+            (346329 call _endCountFree _coforallCount[346284])
+          }
+        }
+        (346334 call _waitEndCount _coforallCount[346284] 1)
+      }
+    }
+  } function SparseBlockArr[347222](?).these[346368](arg _mt[347246]:_MT[238], arg this[347244]:SparseBlockArr[347222](?)) ref : _unknown[51] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[346451] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[346452] "expr temp" "temp"
+      (346461 'move' _iterator[346452](346459 call _getIterator(346375 call .(346372 call . dom c"dist") c"targetLocDom")))
+      Defer
+      {
+        {
+          (346478 call _freeIterator _iterator[346452])
+        }
+      }
+      { scopeless type
+        (346467 'move' _indexOfInterest[346451](346464 call iteratorIndex _iterator[346452]))
+      }
+      ForLoop[346453]
+      {
+        unknown locI[346471] "index var" "insert auto destroy"
+        (346473 'move' locI[346471] _indexOfInterest[346451])
+        {
+          { scopeless
+            unknown locDom[346387](346385 call postfix!(346384 call(346379 call . dom c"locDoms") locI))
+            (346390 'end of statement')
+          }
+          { scopeless
+            unknown locArrI[346398](346396 call postfix!(346395 call locArr locI))
+            (346401 'end of statement')
+          }
+          {
+            unknown _indexOfInterest[346417] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[346418] "expr temp" "temp"
+            (346427 'move' _iterator[346418](346425 call _getIterator(346404 call . locDom c"mySparseBlock")))
+            Defer
+            {
+              {
+                (346444 call _freeIterator _iterator[346418])
+              }
+            }
+            { scopeless type
+              (346433 'move' _indexOfInterest[346417](346430 call iteratorIndex _iterator[346418]))
+            }
+            ForLoop[346419]
+            {
+              unknown x[346437] "index var" "insert auto destroy"
+              (346439 'move' x[346437] _indexOfInterest[346417])
+              {
+                (346414 yield(346413 call(346408 call . locArrI c"myElems") x))
+              }
+              label _continueLabel[346422]
+              _indexOfInterest[346417]
+              _iterator[346418]
+            }
+            label _breakLabel[346423]
+          }
+        }
+        label _continueLabel[346456]
+        _indexOfInterest[346451]
+        _iterator[346452]
+      }
+      label _breakLabel[346457]
+    }
+  } function SparseBlockArr[347222](?).these[346494](arg _mt[347250]:_MT[238], arg this[347248]:SparseBlockArr[347222](?), param arg tag[346491] :
+  iterKind) : _unknown[51] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[346514] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[346515] "expr temp" "temp"
+      (346524 'move' _iterator[346515](346522 call _getIterator(346510 call(346505 call . dom c"these") tag)))
+      Defer
+      {
+        {
+          (346541 call _freeIterator _iterator[346515])
+        }
+      }
+      { scopeless type
+        (346530 'move' _indexOfInterest[346514](346527 call iteratorIndex _iterator[346515]))
+      }
+      ForLoop[346516]
+      {
+        unknown followThis[346534] "index var" "insert auto destroy"
+        (346536 'move' followThis[346534] _indexOfInterest[346514])
+        { scopeless
+          (346512 yield followThis)
+        }
+        label _continueLabel[346519]
+        _indexOfInterest[346514]
+        _iterator[346515]
+      }
+      label _breakLabel[346520]
+    }
+  }
+  where {
+    (346501 call == tag(346498 call . iterKind c"leader"))
+  } function SparseBlockArr[347222](?).these[346558](arg _mt[347254]:_MT[238], arg this[347252]:SparseBlockArr[347222](?), param arg tag[346555] :
+  iterKind, arg followThis[346560]:_any[178](?)) ref : _unknown[51] "iterator fn" "method" "primary method"
+  {
+    { scopeless
+      unknown tmp[346575] "temp" followThis
+      (346582 call _check_tuple_var_decl tmp[346575] 2)
+      unknown locFollowThis[346569](346576 call tmp[346575] 0)
+      unknown localeIndex[346571](346579 call tmp[346575] 1)
+      (346587 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[346616] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[346617] "expr temp" "temp"
+      (346626 'move' _iterator[346617](346624 call _getIterator(346600 call(346594 call .(346593 call locFollowThis 0) c"these") tag locFollowThis)))
+      Defer
+      {
+        {
+          (346643 call _freeIterator _iterator[346617])
+        }
+      }
+      { scopeless type
+        (346632 'move' _indexOfInterest[346616](346629 call iteratorIndex _iterator[346617]))
+      }
+      ForLoop[346618]
+      {
+        unknown i[346636] "index var" "insert auto destroy"
+        (346638 'move' i[346636] _indexOfInterest[346616])
+        {
+          (346613 yield(346612 call(346607 call .(346605 call postfix!(346604 call locArr localeIndex)) c"dsiAccess") i))
+        }
+        label _continueLabel[346621]
+        _indexOfInterest[346616]
+        _iterator[346617]
+      }
+      label _breakLabel[346622]
+    }
+  }
+  where {
+    (346567 call == tag(346564 call . iterKind c"follower"))
+  } function SparseBlockArr[347222](?).these[346659](arg _mt[347258]:_MT[238], arg this[347256]:SparseBlockArr[347222](?), param arg tag[346656] :
+  iterKind) ref : _unknown[51] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown tmpIter[346720] "expr temp" "maybe ref" "no copy" "temp"
+      (346723 'move' tmpIter[346720] locArr)
+      unknown isRngDomArr[346883] "maybe param" "temp"
+      (346898 'move' isRngDomArr[346883](346896 call ||(346885 call isBoundedRange tmpIter[346720])(346894 call ||(346888 call isDomain tmpIter[346720])(346891 call isArray tmpIter[346720]))))
+      if isRngDomArr[346883]
+      {
+        const _coforallCount[346750] "const" "end count" "temp"
+        (346819 'move' _coforallCount[346750](346816 call _endCountAlloc 1))
+        unknown numTasks[346751] "temp"
+        (346803 'move' numTasks[346751](346799 call . tmpIter[346720] c"size"))
+        (346794 call _upEndCount _coforallCount[346750] 1 numTasks[346751])
+        (346791 call chpl_resetTaskSpawn numTasks[346751])
+        unknown _indexOfInterest[346758] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[346759] "expr temp" "temp"
+        (346768 'move' _iterator[346759](346766 call _getIterator tmpIter[346720]))
+        Defer
+        {
+          {
+            (346784 call _freeIterator _iterator[346759])
+          }
+        }
+        { scopeless type
+          (346773 'move' _indexOfInterest[346758](346770 call iteratorIndex _iterator[346759]))
+        }
+        ForLoop[346760]
+        {
+          unknown locA[346777] "coforall index var" "index var" "insert auto destroy"
+          (346779 'move' locA[346777] _indexOfInterest[346758])
+          {
+            {
+              const tmp[346729] "const" "temp"
+              (346731 'move' tmp[346729](346733 'deref'(346734 '_wide_get_locale' locA)))
+              {
+                Forall {
+                  induction variables:
+                    
+                    unknown i[346741] "index var" "insert auto destroy"
+                  iterated expressions:
+                    (346744 call .(346746 call postfix! locA) c"myElems")
+                  shadow variables:
+                  other variables
+                    forall body
+                  {
+                    (346738 yield i)
+                  }
+                }
+              }
+              (346726 'elided on block' 0 tmp[346729])
+            }
+            (346753 call _downEndCount _coforallCount[346750] nil[44])
+            (346752 'coforall loop')
+          }
+          label _continueLabel[346763]
+          _indexOfInterest[346758]
+          _iterator[346759]
+        }
+        label _breakLabel[346764]
+        Defer
+        {
+          {
+            (346806 call _endCountFree _coforallCount[346750])
+          }
+        }
+        (346811 call _waitEndCount _coforallCount[346750] 1 numTasks[346751])
+      }
+      {
+        const _coforallCount[346823] "const" "end count" "temp"
+        (346880 'move' _coforallCount[346823](346877 call _endCountAlloc 1))
+        unknown _indexOfInterest[346831] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[346832] "expr temp" "temp"
+        (346841 'move' _iterator[346832](346839 call _getIterator tmpIter[346720]))
+        Defer
+        {
+          {
+            (346857 call _freeIterator _iterator[346832])
+          }
+        }
+        { scopeless type
+          (346846 'move' _indexOfInterest[346831](346843 call iteratorIndex _iterator[346832]))
+        }
+        ForLoop[346833]
+        {
+          unknown locA[346850] "coforall index var" "index var" "insert auto destroy"
+          (346852 'move' locA[346850] _indexOfInterest[346831])
+          (346864 call _upEndCount _coforallCount[346823] 1)
+          {
+            {
+              const tmp[346712] "const" "temp"
+              (346713 'move' tmp[346712](346710 'deref'(346709 '_wide_get_locale' locA)))
+              {
+                Forall {
+                  induction variables:
+                    
+                    unknown i[346705] "index var" "insert auto destroy"
+                  iterated expressions:
+                    (346697 call .(346695 call postfix! locA) c"myElems")
+                  shadow variables:
+                  other variables
+                    forall body
+                  {
+                    (346701 yield i)
+                  }
+                }
+              }
+              (346716 'elided on block' 0 tmp[346712])
+            }
+            (346826 call _downEndCount _coforallCount[346823] nil[44])
+            (346825 'coforall loop')
+          }
+          label _continueLabel[346836]
+          _indexOfInterest[346831]
+          _iterator[346832]
+        }
+        label _breakLabel[346837]
+        Defer
+        {
+          {
+            (346868 call _endCountFree _coforallCount[346823])
+          }
+        }
+        (346873 call _waitEndCount _coforallCount[346823] 1)
+      }
+    }
+  }
+  where {
+    (346688 call &&(346666 call == tag(346663 call . iterKind c"standalone"))(346687 'method call resolves'(346682 call .(346679 call .(346677 call postfix!(346676 call locArr(346672 call . locArrDom c"low"))) c"myElems") c"_value") "these" tag))
+  } function SparseBlockArr[347222](?).dsiAccess[346915](arg _mt[347262]:_MT[238], arg this[347260]:SparseBlockArr[347222](?), arg i[346912] :
+  (346910 call * rank idxType)) ref : _unknown[51] "method" "primary method"
+  {
+    {
+      if(346950 call _cond_test(346936 call &&(346919 call != myLocArr nil[44])(346935 call(346930 call .(346927 call .(346924 call .(346922 call postfix! myLocArr) c"locDom") c"parentDom") c"contains") i)))
+      {
+        (346947 return(346946 call(346941 call .(346939 call postfix! myLocArr) c"dsiAccess") i))
+      }
+    }
+    (346978 return(346977 call(346972 call .(346970 call postfix!(346969 call locArr(346967 call(346962 call .(346959 call . dom c"dist") c"targetLocsIdx") i))) c"dsiAccess") i))
+  } function SparseBlockArr[347222](?).dsiAccess[346991](arg _mt[347266]:_MT[238], arg this[347264]:SparseBlockArr[347222](?), arg i[346988] :
+  (346986 call * rank idxType)) : _unknown[51] "method" "primary method"
+  {
+    {
+      if(347030 call _cond_test(347016 call &&(346999 call != myLocArr nil[44])(347015 call(347010 call .(347007 call .(347004 call .(347002 call postfix! myLocArr) c"locDom") c"parentDom") c"contains") i)))
+      {
+        (347027 return(347026 call(347021 call .(347019 call postfix! myLocArr) c"dsiAccess") i))
+      }
+    }
+    (347058 return(347057 call(347052 call .(347050 call postfix!(347049 call locArr(347047 call(347042 call .(347039 call . dom c"dist") c"targetLocsIdx") i))) c"dsiAccess") i))
+  }
+  where {
+    (346996 call shouldReturnRvalueByValue eltType)
+  } function SparseBlockArr[347222](?).dsiAccess[347072](arg _mt[347270]:_MT[238], arg this[347268]:SparseBlockArr[347222](?), arg i[347069] :
+  (347067 call * rank idxType)) const ref : _unknown[51] "method" "primary method"
+  {
+    {
+      if(347111 call _cond_test(347097 call &&(347080 call != myLocArr nil[44])(347096 call(347091 call .(347088 call .(347085 call .(347083 call postfix! myLocArr) c"locDom") c"parentDom") c"contains") i)))
+      {
+        (347108 return(347107 call(347102 call .(347100 call postfix! myLocArr) c"dsiAccess") i))
+      }
+    }
+    (347139 return(347138 call(347133 call .(347131 call postfix!(347130 call locArr(347128 call(347123 call .(347120 call . dom c"dist") c"targetLocsIdx") i))) c"dsiAccess") i))
+  }
+  where {
+    (347077 call shouldReturnRvalueByConstRef eltType)
+  } function SparseBlockArr[347222](?).dsiAccess[347152](arg _mt[347274]:_MT[238], arg this[347272]:SparseBlockArr[347222](?), arg i[347148] ... :
+  idxType) ref : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      (347158 return(347157 call dsiAccess i))
+    }
+  } function SparseBlockArr[347222](?).dsiAccess[347171](arg _mt[347278]:_MT[238], arg this[347276]:SparseBlockArr[347222](?), arg i[347167] ... :
+  idxType) : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      (347181 return(347180 call dsiAccess i))
+    }
+  }
+  where {
+    (347176 call shouldReturnRvalueByValue eltType)
+  } function SparseBlockArr[347222](?).dsiAccess[347195](arg _mt[347282]:_MT[238], arg this[347280]:SparseBlockArr[347222](?), arg i[347191] ... :
+  idxType) const ref : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      (347205 return(347204 call dsiAccess i))
+    }
+  }
+  where {
+    (347200 call shouldReturnRvalueByConstRef eltType)
+  } function SparseBlockArr[347222](?).dsiGetBaseDom[347213](arg _mt[347286]:_MT[238], arg this[347284]:SparseBlockArr[347222](?)) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    { scopeless
+      (347216 return dom)
+    }
+  } BaseSparseArr
+  type LocSparseBlockArr[347531](?) unknown eltType[347290] "type variable" unknown rank[347294] "param" int[13] unknown idxType[347298] "type variable" unknown stridable[347302] "param" bool[10] unknown sparseLayoutType[347306] "type variable" const locDom[347317] "const"(347316 'to unmanaged class from unknown'(347315 call LocSparseBlockDom rank idxType stridable sparseLayoutType)) unknown myElems[347331] "local field" "unsafe"(347329 call chpl__buildArrayRuntimeType(347327 call chpl__ensureDomainExpr(347322 call . locDom c"mySparseBlock")) eltType) function LocSparseBlockArr[347531](?).init[347339](arg _mt[347535]:_MT[238], arg this[347533]:LocSparseBlockArr[347531](?), arg eltType[347337]:_any[178](?), param arg rank[347342] :
+  int[13], arg idxType[347345]:_any[178](?), param arg stridable[347348] :
+  bool[10], arg sparseLayoutType[347351]:_any[178](?), const arg locDom[347361] :
+  (347360 'to unmanaged class from unknown'(347359 call LocSparseBlockDom rank idxType stridable sparseLayoutType)), param arg initElts[347365] :
+  bool[10]) : _unknown[51] "method" "primary method"
+  {
+    (347373 call =(347369 call . this c"eltType") eltType)
+    (347382 call =(347378 call . this c"rank") rank)
+    (347390 call =(347386 call . this c"idxType") idxType)
+    (347398 call =(347394 call . this c"stridable") stridable)
+    (347406 call =(347402 call . this c"sparseLayoutType") sparseLayoutType)
+    (347414 call =(347410 call . this c"locDom") locDom)
+    (347433 call =(347418 call . this c"myElems")(347432 call(347425 call .(347422 call . locDom c"mySparseBlock") c"buildArray") eltType(initElts = initElts)))
+  } function LocSparseBlockArr[347531](?).deinit[347440](arg _mt[347539]:_MT[238], arg this[347537]:LocSparseBlockArr[347531](?)) : _unknown[51] "destructor" "method" "primary method"
+  {
+  } function LocSparseBlockArr[347531](?).dsiAccess[347449](arg _mt[347543]:_MT[238], arg this[347541]:LocSparseBlockArr[347531](?), arg i[347447]:_any[178](?)) ref : _unknown[51] "method" "primary method"
+  {
+    (347455 return(347454 call myElems i))
+  } function LocSparseBlockArr[347531](?).dsiAccess[347464](arg _mt[347547]:_MT[238], arg this[347545]:LocSparseBlockArr[347531](?), arg i[347462]:_any[178](?)) : _unknown[51] "method" "primary method"
+  {
+    (347474 return(347473 call myElems i))
+  }
+  where {
+    (347469 call shouldReturnRvalueByValue eltType)
+  } function LocSparseBlockArr[347531](?).dsiAccess[347484](arg _mt[347551]:_MT[238], arg this[347549]:LocSparseBlockArr[347531](?), arg i[347482]:_any[178](?)) const ref : _unknown[51] "method" "primary method"
+  {
+    (347494 return(347493 call myElems i))
+  }
+  where {
+    (347489 call shouldReturnRvalueByConstRef eltType)
+  } function LocSparseBlockArr[347531](?).writeThis[347504](arg _mt[347555]:_MT[238], arg this[347553]:LocSparseBlockArr[347531](?), arg f[347502]:_any[178](?)) : _unknown[51] throws "method" "primary method" "method overrides"
+  {
+    (347525 call halt "LocSparseBlockArr.writeThis() is not implemented / should not be needed")
+  }
+  function _unknown[51].dsiSerialWrite[347563](arg _mt[347568]:_MT[238], arg this[347565] :
+  SparseBlockArr, arg f[347561]:_any[178](?)) : _unknown[51] "method"
+  {
+    if(347672 call _cond_test(347572 call == rank 1))
+    {
+      (347576 call <~> f "[")
+      {
+        unknown _indexOfInterest[347612] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[347613] "expr temp" "temp"
+        (347622 'move' _iterator[347613](347620 call _getIterator locArr))
+        Defer
+        {
+          {
+            (347638 call _freeIterator _iterator[347613])
+          }
+        }
+        { scopeless type
+          (347627 'move' _indexOfInterest[347612](347624 call iteratorIndex _iterator[347613]))
+        }
+        ForLoop[347614]
+        {
+          unknown locarr[347631] "index var" "insert auto destroy"
+          (347633 'move' locarr[347631] _indexOfInterest[347612])
+          {
+            if(347607 call _cond_test(347588 call .(347585 call .(347583 call postfix! locarr) c"locDom") c"dsiNumIndices"))
+            {
+              (347593 call <~> f " ")
+              (347605 call(347600 call .(347598 call postfix! locarr) c"dsiSerialWrite") f)
+            }
+          }
+          label _continueLabel[347617]
+          _indexOfInterest[347612]
+          _iterator[347613]
+        }
+        label _breakLabel[347618]
+      }
+      (347647 call <~> f "]")
+    }
+    {
+      (347669 call compilerError "Can't write out multidimensional sparse distributed arrays yet")
+    }
+  }
+  function _unknown[51].dsiSerialWrite[347684](arg _mt[347689]:_MT[238], arg this[347686] :
+  LocSparseBlockArr, arg f[347682]:_any[178](?)) : _unknown[51] "method"
+  {
+    (347700 call(347695 call .(347692 call . myElems c"_value") c"dsiSerialWrite") f)
+  }
+  function _unknown[51].dsiSupportsPrivatization[347708](arg _mt[347713]:_MT[238], arg this[347710] :
+  SparseBlockDom) param : _unknown[51] "method" "method overrides"
+  {
+    { scopeless
+      (347716 return 1)
+    }
+  }
+  function _unknown[51].dsiGetPrivatizeData[347724](arg _mt[347729]:_MT[238], arg this[347726] :
+  SparseBlockDom) : _unknown[51] "method"
+  {
+    { scopeless
+      (347744 return(347742 call _build_tuple(347732 call . dist c"pid")(347740 call(347736 call . whole c"dims"))))
+    }
+  }
+  function _unknown[51].dsiPrivatize[347754](arg _mt[347759]:_MT[238], arg this[347756] :
+  SparseBlockDom, arg privatizeData[347752]:_any[178](?)) : _unknown[51] "method"
+  {
+    { scopeless
+      unknown privdist[347770](347769 call chpl_getPrivatizedCopy(347763 'typeof' dist)(347768 call privatizeData 0))
+      (347773 'end of statement')
+    }
+    { scopeless
+      unknown c[347798](347777 'new'(_chpl_manager = unmanaged[220](?))(347797 call SparseBlockDom(rank = rank)(idxType = idxType)(sparseLayoutType = sparseLayoutType)(stridable =(347787 call . parentDom c"stridable"))(dist = privdist)(whole = whole)(parentDom = parentDom)))
+      (347801 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[347863] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[347864] "expr temp" "temp"
+      (347873 'move' _iterator[347864](347871 call _getIterator(347807 call .(347804 call . c c"dist") c"targetLocDom")))
+      Defer
+      {
+        {
+          (347890 call _freeIterator _iterator[347864])
+        }
+      }
+      { scopeless type
+        (347879 'move' _indexOfInterest[347863](347876 call iteratorIndex _iterator[347864]))
+      }
+      ForLoop[347865]
+      {
+        unknown i[347883] "index var" "insert auto destroy"
+        (347885 'move' i[347883] _indexOfInterest[347863])
+        {
+          (347821 call =(347816 call(347811 call . c c"locDoms") i)(347820 call locDoms i))
+          if(347858 call _cond_test(347840 call ==(347835 '_wide_get_node'(347831 call(347826 call . c c"locDoms") i))(347837 call . here c"id")))
+          {
+            { scopeless
+              (347855 call =(347845 call . c c"myLocDom")(347854 call(347849 call . c c"locDoms") i))
+            }
+          }
+        }
+        label _continueLabel[347868]
+        _indexOfInterest[347863]
+        _iterator[347864]
+      }
+      label _breakLabel[347869]
+    }
+    (347909 call =(347898 call . c c"whole")(347907 call chpl__buildDomainExpr(347905 'expand_tuple'(347904 call privatizeData 1))))
+    (347913 return c)
+  }
+  function _unknown[51].dsiGetReprivatizeData[347920](arg _mt[347925]:_MT[238], arg this[347922] :
+  SparseBlockDom) : _unknown[51] "method"
+  {
+    { scopeless
+      (347933 return(347932 call(347928 call . whole c"dims")))
+    }
+  }
+  function _unknown[51].dsiReprivatize[347943](arg _mt[347950]:_MT[238], arg this[347947] :
+  SparseBlockDom, arg other[347941]:_any[178](?), arg reprivatizeData[347945]:_any[178](?)) : _unknown[51] "method"
+  {
+    {
+      unknown _indexOfInterest[347971] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[347972] "expr temp" "temp"
+      (347981 'move' _iterator[347972](347979 call _getIterator(347954 call . dist c"targetLocDom")))
+      Defer
+      {
+        {
+          (347998 call _freeIterator _iterator[347972])
+        }
+      }
+      { scopeless type
+        (347987 'move' _indexOfInterest[347971](347984 call iteratorIndex _iterator[347972]))
+      }
+      ForLoop[347973]
+      {
+        unknown i[347991] "index var" "insert auto destroy"
+        (347993 'move' i[347991] _indexOfInterest[347971])
+        { scopeless
+          (347968 call =(347960 call locDoms i)(347967 call(347962 call . other c"locDoms") i))
+        }
+        label _continueLabel[347976]
+        _indexOfInterest[347971]
+        _iterator[347972]
+      }
+      label _breakLabel[347977]
+    }
+    (348012 call = whole(348010 call chpl__buildDomainExpr(348008 'expand_tuple' reprivatizeData)))
+  }
+  function _unknown[51].dsiSupportsPrivatization[348020](arg _mt[348025]:_MT[238], arg this[348022] :
+  SparseBlockArr) param : _unknown[51] "method" "method overrides"
+  {
+    { scopeless
+      (348028 return 1)
+    }
+  }
+  function _unknown[51].dsiGetPrivatizeData[348036](arg _mt[348041]:_MT[238], arg this[348038] :
+  SparseBlockArr) : _unknown[51] "method"
+  {
+    { scopeless
+      (348047 return(348044 call . dom c"pid"))
+    }
+  }
+  function _unknown[51].dsiPrivatize[348057](arg _mt[348062]:_MT[238], arg this[348059] :
+  SparseBlockArr, arg privatizeData[348055]:_any[178](?)) : _unknown[51] "method"
+  {
+    { scopeless
+      unknown privdom[348070](348069 call chpl_getPrivatizedCopy(348066 'typeof' dom) privatizeData)
+      (348073 'end of statement')
+    }
+    { scopeless
+      unknown c[348093](348077 'new'(_chpl_manager = unmanaged[220](?))(348092 call SparseBlockArr(sparseLayoutType = sparseLayoutType)(eltType = eltType)(rank = rank)(idxType = idxType)(stridable = stridable)(dom = privdom)))
+      (348096 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[348161] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[348162] "expr temp" "temp"
+      (348171 'move' _iterator[348162](348169 call _getIterator(348105 call .(348102 call .(348099 call . c c"dom") c"dist") c"targetLocDom")))
+      Defer
+      {
+        {
+          (348188 call _freeIterator _iterator[348162])
+        }
+      }
+      { scopeless type
+        (348177 'move' _indexOfInterest[348161](348174 call iteratorIndex _iterator[348162]))
+      }
+      ForLoop[348163]
+      {
+        unknown localeIdx[348181] "index var" "insert auto destroy"
+        (348183 'move' localeIdx[348181] _indexOfInterest[348161])
+        {
+          (348119 call =(348114 call(348109 call . c c"locArr") localeIdx)(348118 call locArr localeIdx))
+          if(348156 call _cond_test(348140 call ==(348135 '_wide_get_node'(348130 call postfix!(348129 call(348124 call . c c"locArr") localeIdx)))(348137 call . here c"id")))
+          {
+            { scopeless
+              (348153 call =(348143 call . c c"myLocArr")(348152 call(348147 call . c c"locArr") localeIdx))
+            }
+          }
+        }
+        label _continueLabel[348166]
+        _indexOfInterest[348161]
+        _iterator[348162]
+      }
+      label _breakLabel[348167]
+    }
+    (348196 return c)
+  }
+  function _unknown[51].numRemoteElems[348205](arg _mt[348212]:_MT[238], arg this[348209] :
+  SparseBlockDom, arg rlo[348203]:_any[178](?), arg rid[348207]:_any[178](?)) : _unknown[51] "method"
+  {
+    { scopeless
+      unknown blo[348214](348218 call . dist c"idxType")
+      unknown bhi[348221](348225 'typeof' blo)
+      (348226 'end of statement')
+    }
+    if(348354 call _cond_test(348248 call == rid(348246 call -(348242 call .(348241 call(348233 call .(348230 call . dist c"targetLocDom") c"dim")(348238 call - rank 1)) c"size") 1)))
+    {
+      { scopeless
+        (348264 call = bhi(348261 call .(348260 call(348252 call . whole c"dim")(348257 call - rank 1)) c"high"))
+      }
+    }
+    {
+      { scopeless
+        (348351 call = bhi(348349 call -(348346 call +(348281 call .(348280 call(348272 call .(348269 call . dist c"boundingBox") c"dim")(348277 call - rank 1)) c"low")(348345 call intCeilXDivByY(348326 call *(348320 call +(348317 call -(348298 call .(348297 call(348289 call .(348286 call . dist c"boundingBox") c"dim")(348294 call - rank 1)) c"high")(348314 call .(348313 call(348305 call .(348302 call . dist c"boundingBox") c"dim")(348310 call - rank 1)) c"low")) 1)(348324 call + rid 1))(348342 call .(348341 call(348333 call .(348330 call . dist c"targetLocDom") c"dim")(348338 call - rank 1)) c"size"))) 1))
+      }
+    }
+    (348367 return(348365 call +(348362 call - bhi rlo) 1))
+  }
+  function _unknown[51].dsiHasSingleLocalSubdomain[348374](arg _mt[348379]:_MT[238], arg this[348376] :
+  SparseBlockDom) param : _unknown[51] "method"
+  {
+    { scopeless
+      (348382 return 1)
+    }
+  }
+  function _unknown[51].dsiHasSingleLocalSubdomain[348390](arg _mt[348395]:_MT[238], arg this[348392] :
+  SparseBlockArr) param : _unknown[51] "method"
+  {
+    { scopeless
+      (348398 return 1)
+    }
+  }
+  function _unknown[51].dsiLocalSubdomain[348410](arg _mt[348415]:_MT[238], arg this[348412] :
+  SparseBlockDom, arg loc[348407] :
+  locale[28]) : _unknown[51] "method"
+  {
+    if(348459 call _cond_test(348419 call != loc here))
+    {
+      { scopeless
+        (348457 call unimplementedFeatureHalt "the Sparse Block distribution" "remote subdomain queries")
+      }
+    }
+    { scopeless
+      const tmp[348480] "const" "temp"(348479 call(348474 call .(348471 call . dist c"targetLocales") c"find") here)
+      (348487 call _check_tuple_var_decl tmp[348480] 2)
+      const found[348465] "const"(348481 call tmp[348480] 0)
+      const targetIdx[348467] "const"(348484 call tmp[348480] 1)
+      (348492 'end of statement')
+    }
+    (348502 return(348499 call .(348497 call postfix!(348496 call locDoms targetIdx)) c"mySparseBlock"))
+  }
+  function _unknown[51].dsiLocalSubdomain[348513](arg _mt[348518]:_MT[238], arg this[348515] :
+  SparseBlockArr, arg loc[348510] :
+  locale[28]) : _unknown[51] "method"
+  {
+    if(348530 call _cond_test(348522 call != loc here))
+    {
+      { scopeless
+        (348528 call unimplementedFeatureHalt "the Sparse Block distribution" "remote subdomain queries")
+      }
+    }
+    (348545 return(348542 call .(348539 call .(348537 call postfix! myLocArr) c"locDom") c"mySparseBlock"))
+  }
+}

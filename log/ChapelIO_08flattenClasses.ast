@@ -1,0 +1,1019 @@
+AST dump for ChapelIO after pass flattenClasses.
+Module use list: ChapelBase ChapelLocale SysBasic SysError IO 
+
+{
+  function _isNilObject[151510](arg val[151508]:_any[178](?)) : _unknown[51] "no doc"
+  {
+    function helper[151519](arg o[151516] :
+    object[22]) : _unknown[51]
+    {
+      (151525 return(151523 call == o[151516] nil[44]))
+    }
+    function helper[151535](arg o[151533]:_any[178](?)) : _unknown[51]
+    {
+      (151538 return 0)
+    }
+    (151547 return(151546 call helper val[151508]))
+  }
+  function isIoField[151558](arg x[151556]:_any[178](?), param arg i[151560]:_any[178](?)) param : _unknown[51] "private"
+  {
+    if(151615 call _cond_test(151605 call ||(151594 call ||(151585 call isType(151583 'field by num' x[151556] i[151560]))(151593 call isParam(151591 'field by num' x[151556] i[151560])))(151603 call ==(151601 'typeof'(151600 'field by num' x[151556] i[151560])) nothing[7])))
+    {
+      (151608 return 0)
+    }
+    {
+      (151612 return 1)
+    }
+  }
+  function ioFieldNameEqLiteral[151626](arg ch[151624]:_any[178](?), arg t[151628]:_any[178](?), param arg i[151630]:_any[178](?)) : _unknown[51] "private"
+  {
+    unknown st[151639](151638 call(151633 call . ch[151624] c"styleElement") QIO_STYLE_ELEMENT_AGGREGATE[19667])
+    (151642 'end of statement')
+    if(151745 call _cond_test(151646 call == st[151639] QIO_AGGREGATE_FORMAT_JSON[19717]))
+    {
+      (151711 return(151648 'new'(151710 call ioLiteral[238670](151707 call +(151688 call + "\""(151687 'field num to name' t[151628] i[151630])) "\":"))))
+    }
+    {
+      (151742 return(151714 'new'(151741 call ioLiteral[238670](151738 call +(151720 'field num to name' t[151628] i[151630]) " = "))))
+    }
+  }
+  function ioFieldNameLiteral[151755](arg ch[151753]:_any[178](?), arg t[151757]:_any[178](?), param arg i[151759]:_any[178](?)) : _unknown[51] "private"
+  {
+    unknown st[151768](151767 call(151762 call . ch[151753] c"styleElement") QIO_STYLE_ELEMENT_AGGREGATE[19667])
+    (151771 'end of statement')
+    if(151807 call _cond_test(151775 call == st[151768] QIO_AGGREGATE_FORMAT_JSON[19717]))
+    {
+      (151792 return(151777 'new'(151791 call ioLiteral[238670](151788 call +(151785 call + "\""(151784 'field num to name' t[151757] i[151759])) "\""))))
+    }
+    {
+      (151804 return(151795 'new'(151803 call ioLiteral[238670](151801 'field num to name' t[151757] i[151759]))))
+    }
+  }
+  function writeThisFieldsDefaultImpl[151817](arg writer[151815]:_any[178](?), arg x[151821] :
+  unknown t[151819], inout arg first[151825] :
+  bool[10]) : _unknown[51] throws "no doc" "no return value for void"
+  {
+    unknown num_fields[151848] "param"(151847 'num fields' t[151819])
+    (151851 'end of statement')
+    unknown isBinary[151859](151858 call(151854 call . writer[151815] c"binary"))
+    (151862 'end of statement')
+    if(151893 call _cond_test(151866 call isClassType t[151819]))
+    {
+      if(151888 call _cond_test(151873 call !=(151870 call _to_borrowed t[151819]) object[22]))
+      {
+        (151885 call writeThisFieldsDefaultImpl writer[151815](151881 call . x[151821] c"super") first[151825])
+      }
+    }
+    if(152147 call _cond_test(151901 call !(151900 call isUnionType t[151819])))
+    {
+      {
+        unknown i[151989] 0
+        unknown tmp[151990] "maybe param" "temp"
+        (152002 'move' tmp[151990](152000 call chpl_compute_low_param_loop_bound 1 num_fields[151848]))
+        unknown tmp[151991] "maybe param" "temp"
+        (152009 'move' tmp[151991](152007 call chpl_compute_high_param_loop_bound 1 num_fields[151848]))
+        unknown tmp[151992] "maybe param" "temp"
+        (152012 'move' tmp[151992] 1)
+        ParamForLoop[152014]
+        { i[151989] tmp[151990] tmp[151991] tmp[151992]
+          {
+            if(151984 call _cond_test(151911 call isIoField x[151821] i[151989]))
+            {
+              if(151962 call _cond_test(151913 call ! isBinary[151859]))
+              {
+                unknown comma[151920](151915 'new'(151919 call ioLiteral[238670] ", "))
+                (151923 'end of statement')
+                if(151938 call _cond_test(151926 call ! first[151825]))
+                {
+                  (151936 call(151931 call . writer[151815] c"readwrite") comma[151920])
+                }
+                unknown eq[151950](151949 call ioFieldNameEqLiteral writer[151815] t[151819] i[151989]) ioLiteral[238670]
+                (151953 'end of statement')
+                (151960 call(151955 call . writer[151815] c"readwrite") eq[151950])
+              }
+              (151977 call(151968 call . writer[151815] c"readwrite")(151975 'field by num' x[151821] i[151989]))
+              (151981 call = first[151825] 0)
+            }
+          }
+        }
+        label _unused_continueLabel[151994]
+        label _breakLabel[151993]
+      }
+    }
+    {
+      unknown id[152044](152043 'get_union_id' x[151821])
+      (152047 'end of statement')
+      {
+        unknown i[152113] 0
+        unknown tmp[152114] "maybe param" "temp"
+        (152126 'move' tmp[152114](152124 call chpl_compute_low_param_loop_bound 1 num_fields[151848]))
+        unknown tmp[152115] "maybe param" "temp"
+        (152133 'move' tmp[152115](152131 call chpl_compute_high_param_loop_bound 1 num_fields[151848]))
+        unknown tmp[152116] "maybe param" "temp"
+        (152136 'move' tmp[152116] 1)
+        ParamForLoop[152138]
+        { i[152113] tmp[152114] tmp[152115] tmp[152116]
+          {
+            if(152108 call _cond_test(152062 call &&(152057 call isIoField x[151821] i[152113])(152060 call == i[152113] id[152044])))
+            {
+              if(152091 call _cond_test isBinary[151859])
+              {
+                (152068 call write id[152044])
+              }
+              {
+                unknown eq[152078](152077 call ioFieldNameEqLiteral writer[151815] t[151819] i[152113]) ioLiteral[238670]
+                (152081 'end of statement')
+                (152089 call(152084 call . writer[151815] c"readwrite") eq[152078])
+              }
+              (152106 call(152097 call . writer[151815] c"readwrite")(152104 'field by num' x[151821] i[152113]))
+            }
+          }
+        }
+        label _unused_continueLabel[152118]
+        label _breakLabel[152117]
+      }
+    }
+  }
+  function writeThisDefaultImpl[152157](arg writer[152155]:_any[178](?), arg x[152161] :
+  unknown t[152159]) : _unknown[51] throws "no doc" "no return value for void"
+  {
+    if(152288 call _cond_test(152170 call !(152169 call(152165 call . writer[152155] c"binary"))))
+    {
+      unknown st[152179](152178 call(152173 call . writer[152155] c"styleElement") QIO_STYLE_ELEMENT_AGGREGATE[19667])
+      (152182 'end of statement')
+      unknown start[152185] ioLiteral[238670]
+      (152188 'end of statement')
+      if(152275 call _cond_test(152191 call == st[152179] QIO_AGGREGATE_FORMAT_JSON[19717]))
+      {
+        (152199 call = start[152185](152194 'new'(152198 call ioLiteral[238670] "{")))
+      }
+      {
+        if(152271 call _cond_test(152205 call == st[152179] QIO_AGGREGATE_FORMAT_CHPL[19712]))
+        {
+          (152238 call = start[152185](152208 'new'(152237 call ioLiteral[238670](152234 call +(152231 call + "new "(152229 call _cast string[26] t[152159])) "("))))
+        }
+        {
+          if(152266 call _cond_test(152245 call isClassType t[152159]))
+          {
+            (152252 call = start[152185](152247 'new'(152251 call ioLiteral[238670] "{")))
+          }
+          {
+            (152262 call = start[152185](152257 'new'(152261 call ioLiteral[238670] "(")))
+          }
+        }
+      }
+      (152286 call(152281 call . writer[152155] c"readwrite") start[152185])
+    }
+    unknown first[152294] 1
+    (152297 'end of statement')
+    (152303 call writeThisFieldsDefaultImpl writer[152155] x[152161] first[152294])
+    if(152404 call _cond_test(152311 call !(152310 call(152306 call . writer[152155] c"binary"))))
+    {
+      unknown st[152320](152319 call(152314 call . writer[152155] c"styleElement") QIO_STYLE_ELEMENT_AGGREGATE[19667])
+      (152323 'end of statement')
+      unknown end[152326] ioLiteral[238670]
+      (152329 'end of statement')
+      if(152391 call _cond_test(152332 call == st[152320] QIO_AGGREGATE_FORMAT_JSON[19717]))
+      {
+        (152340 call = end[152326](152335 'new'(152339 call ioLiteral[238670] "}")))
+      }
+      {
+        if(152387 call _cond_test(152346 call == st[152320] QIO_AGGREGATE_FORMAT_CHPL[19712]))
+        {
+          (152354 call = end[152326](152349 'new'(152353 call ioLiteral[238670] ")")))
+        }
+        {
+          if(152382 call _cond_test(152361 call isClassType t[152159]))
+          {
+            (152368 call = end[152326](152363 'new'(152367 call ioLiteral[238670] "}")))
+          }
+          {
+            (152378 call = end[152326](152373 'new'(152377 call ioLiteral[238670] ")")))
+          }
+        }
+      }
+      (152402 call(152397 call . writer[152155] c"readwrite") end[152326])
+    }
+  }
+  function skipFieldsAtEnd[152414](arg reader[152412]:_any[178](?), inout arg needsComma[152417] :
+  bool[10]) : _unknown[51] throws "private" "no return value for void"
+  {
+    const qioFmt[152427] "const"(152426 call(152421 call . reader[152412] c"styleElement") QIO_STYLE_ELEMENT_AGGREGATE[19667])
+    (152430 'end of statement')
+    const isJson[152436] "const"(152434 call == qioFmt[152427] QIO_AGGREGATE_FORMAT_JSON[19717])
+    (152439 'end of statement')
+    const qioSkipUnknown[152441] "const" QIO_STYLE_ELEMENT_SKIP_UNKNOWN_FIELDS[19687]
+    (152444 'end of statement')
+    const isSkipUnknown[152455] "const"(152453 call !=(152451 call(152446 call . reader[152412] c"styleElement") qioSkipUnknown[152441]) 0)
+    (152458 'end of statement')
+    if(152469 call _cond_test(152465 call ||(152460 call ! isSkipUnknown[152455])(152463 call ! isJson[152436])))
+    {
+      (152467 return _void[55])
+    }
+    {
+      unknown tmp[152539] "temp"
+      (152557 'move' tmp[152539](152555 call _cond_test 1))
+      WhileDo[152544]
+      {
+        {
+          if(152512 call _cond_test needsComma[152417])
+          {
+            unknown comma[152482](152476 'new'(152481 call ioLiteral[238670] "," 1))
+            (152485 'end of statement')
+            Try
+            {
+              {
+                (152493 call(152488 call . reader[152412] c"readwrite") comma[152482])
+                (152498 call = needsComma[152417] 0)
+              }
+            }
+            Catch err : BadFormatError
+            {
+              unknown tmp[354393] "temp"(354397 'dynamic_cast' unmanaged BadFormatError?[415664](354396 'current error'))
+              if(354400 '!=' tmp[354393] nil[44])
+              {
+                unknown err[354406](354411 'new'(354409 call _owned[30](?)(354407 'to non nilable class' tmp[354393])))
+                {
+                  break _breakLabel[152543] _breakLabel[152543]
+                }
+              }
+              {
+              }
+            }
+          }
+          unknown err[152519](386252 call ENOERR[223571]) syserr[223501]
+          (152522 'end of statement')
+          Try
+          {
+            {
+              (152530 call(152526 call . reader[152412] c"skipField"))
+            }
+          }
+          (152536 call = needsComma[152417] 1)
+        }
+        label _continueLabel[152542]
+        (152550 'move' tmp[152539](152548 call _cond_test 1))
+        tmp[152539]
+      }
+      label _breakLabel[152543]
+    }
+  }
+  function readThisFieldsDefaultImpl[152566](arg reader[152564]:_any[178](?), arg t[152568]:_any[178](?), ref arg x[152570]:_any[178](?), inout arg needsComma[152573] :
+  bool[10]) : _unknown[51] throws "no doc" "no return value for void"
+  {
+    unknown numFields[152586] "param"(152585 'num fields' t[152568])
+    (152589 'end of statement')
+    unknown isBinary[152597](152596 call(152592 call . reader[152564] c"binary"))
+    (152600 'end of statement')
+    if(152650 call _cond_test(152613 call &&(152604 call isClassType t[152568])(152611 call !=(152608 call _to_borrowed t[152568]) object[22])))
+    {
+      unknown superType[152620] "type variable"(152619 'typeof'(152616 call . x[152570] c"super"))
+      unknown castTmp[152626] x[152570] superType[152620]
+      (152629 'end of statement')
+      Try
+      {
+        {
+          (152636 call readThisFieldsDefaultImpl reader[152564] superType[152620] castTmp[152626] needsComma[152573])
+        }
+      }
+      Catch err : Error
+      {
+        unknown tmp[354414] "temp"(354417 'current error')
+        unknown err[354420](354425 'new'(354423 call _owned[30](?)(354421 'to non nilable class' tmp[354414])))
+        {
+          (152644 'throw' err[354420])
+        }
+      }
+    }
+    if(153329 call _cond_test isBinary[152597])
+    {
+      {
+        unknown i[152683] 0
+        unknown tmp[152684] "maybe param" "temp"
+        (152696 'move' tmp[152684](152694 call chpl_compute_low_param_loop_bound 1 numFields[152586]))
+        unknown tmp[152685] "maybe param" "temp"
+        (152703 'move' tmp[152685](152701 call chpl_compute_high_param_loop_bound 1 numFields[152586]))
+        unknown tmp[152686] "maybe param" "temp"
+        (152706 'move' tmp[152686] 1)
+        ParamForLoop[152708]
+        { i[152683] tmp[152684] tmp[152685] tmp[152686]
+          if(152678 call _cond_test(152663 call isIoField x[152570] i[152683]))
+          {
+            Try
+            {
+              {
+                (152674 call(152665 call . reader[152564] c"readwrite")(152672 'field by num' x[152570] i[152683]))
+              }
+            }
+          }
+        }
+        label _unused_continueLabel[152688]
+        label _breakLabel[152687]
+      }
+    }
+    {
+      if(153325 call _cond_test(152720 call > numFields[152586] 0))
+      {
+        unknown readField[152726](152724 call * numFields[152586] bool[10])
+        (152729 'end of statement')
+        unknown numToRead[152732] 0
+        (152735 'end of statement')
+        unknown numRead[152737] 0
+        (152740 'end of statement')
+        {
+          unknown i[152760] 0
+          unknown tmp[152761] "maybe param" "temp"
+          (152773 'move' tmp[152761](152771 call chpl_compute_low_param_loop_bound 1 numFields[152586]))
+          unknown tmp[152762] "maybe param" "temp"
+          (152780 'move' tmp[152762](152778 call chpl_compute_high_param_loop_bound 1 numFields[152586]))
+          unknown tmp[152763] "maybe param" "temp"
+          (152783 'move' tmp[152763] 1)
+          ParamForLoop[152785]
+          { i[152760] tmp[152761] tmp[152762] tmp[152763]
+            if(152755 call _cond_test(152749 call isIoField x[152570] i[152760]))
+            {
+              (152752 call += numToRead[152732] 1)
+            }
+          }
+          label _unused_continueLabel[152765]
+          label _breakLabel[152764]
+        }
+        {
+          unknown tmp[153151] "temp"
+          (153175 'move' tmp[153151](153170 call _cond_test(153172 call < numRead[152737] numToRead[152732])))
+          WhileDo[153156]
+          {
+            {
+              if(152834 call _cond_test needsComma[152573])
+              {
+                Try
+                {
+                  {
+                    unknown comma[152805](152799 'new'(152804 call ioLiteral[238670] "," 1))
+                    (152808 'end of statement')
+                    (152816 call(152811 call . reader[152564] c"readwrite") comma[152805])
+                    (152820 call = needsComma[152573] 0)
+                  }
+                }
+                Catch err : BadFormatError
+                {
+                  unknown tmp[354428] "temp"(354432 'dynamic_cast' unmanaged BadFormatError?[415664](354431 'current error'))
+                  if(354435 '!=' tmp[354428] nil[44])
+                  {
+                    unknown err[354441](354446 'new'(354444 call _owned[30](?)(354442 'to non nilable class' tmp[354428])))
+                    {
+                      break _breakLabel[153155] _breakLabel[153155]
+                    }
+                  }
+                  {
+                  }
+                }
+              }
+              unknown st[152847](152846 call(152841 call . reader[152564] c"styleElement") QIO_STYLE_ELEMENT_AGGREGATE[19667])
+              (152850 'end of statement')
+              const qioSkipUnknown[152852] "const" QIO_STYLE_ELEMENT_SKIP_UNKNOWN_FIELDS[19687]
+              (152855 'end of statement')
+              unknown isSkipUnknown[152866](152864 call !=(152862 call(152857 call . reader[152564] c"styleElement") qioSkipUnknown[152852]) 0)
+              (152869 'end of statement')
+              unknown hasReadFieldName[152871] 0
+              (152874 'end of statement')
+              {
+                unknown i[153052] 0
+                unknown tmp[153053] "maybe param" "temp"
+                (153065 'move' tmp[153053](153063 call chpl_compute_low_param_loop_bound 1 numFields[152586]))
+                unknown tmp[153054] "maybe param" "temp"
+                (153072 'move' tmp[153054](153070 call chpl_compute_high_param_loop_bound 1 numFields[152586]))
+                unknown tmp[153055] "maybe param" "temp"
+                (153075 'move' tmp[153055] 1)
+                ParamForLoop[153077]
+                { i[153052] tmp[153053] tmp[153054] tmp[153055]
+                  {
+                    if(152901 call _cond_test(152896 call ||(152887 call ||(152884 call !(152883 call isIoField x[152570] i[153052])) hasReadFieldName[152871])(152895 call readField[152726](152892 call - i[153052] 1))))
+                    {
+                      continue _unused_continueLabel[153057] _unused_continueLabel[153057]
+                    }
+                    unknown fieldName[152913](152912 call ioFieldNameLiteral reader[152564] t[152568] i[153052])
+                    (152916 'end of statement')
+                    Try
+                    {
+                      {
+                        (152923 call(152918 call . reader[152564] c"readwrite") fieldName[152913])
+                      }
+                    }
+                    Catch err : SystemError
+                    {
+                      unknown tmp[354449] "temp"(354453 'dynamic_cast' unmanaged SystemError?[415670](354452 'current error'))
+                      if(354456 '!=' tmp[354449] nil[44])
+                      {
+                        unknown err[354462](354467 'new'(354465 call _owned[30](?)(354463 'to non nilable class' tmp[354449])))
+                        {
+                          if(152951 call _cond_test(152946 call ||(152937 call ==(152933 call . err[354462] c"err")(386301 call EFORMAT[224187]))(152944 call ==(152940 call . err[354462] c"err")(386303 call EEOF[224141]))))
+                          {
+                            continue _unused_continueLabel[153057] _unused_continueLabel[153057]
+                          }
+                          (152958 'throw' err[354462])
+                        }
+                      }
+                      {
+                      }
+                    }
+                    (152965 call = hasReadFieldName[152871] 1)
+                    (152970 call = needsComma[152573] 1)
+                    unknown equalSign[153008](153005 IfExpr (152975 call == st[152847] QIO_AGGREGATE_FORMAT_JSON[19717]) then
+                    { scopeless
+                      (152977 'new'(152998 call ioLiteral[238670] ":" 1))
+                    } else
+                    { scopeless
+                      (152999 'new'(153004 call ioLiteral[238670] "=" 1))
+                    } )
+                    (153011 'end of statement')
+                    Try
+                    {
+                      {
+                        (153018 call(153013 call . reader[152564] c"readwrite") equalSign[153008])
+                      }
+                    }
+                    Try
+                    {
+                      {
+                        (153032 call(153023 call . reader[152564] c"readwrite")(153030 'field by num' x[152570] i[153052]))
+                      }
+                    }
+                    (153044 call =(153042 call readField[152726](153039 call - i[153052] 1)) 1)
+                    (153049 call += numRead[152737] 1)
+                  }
+                }
+                label _unused_continueLabel[153057]
+                label _breakLabel[153056]
+              }
+              const isJson[153090] "const"(153088 call == st[152847] QIO_AGGREGATE_FORMAT_JSON[19717])
+              (153093 'end of statement')
+              if(153146 call _cond_test(153095 call ! hasReadFieldName[152871]))
+              {
+                if(153142 call _cond_test(153099 call && isSkipUnknown[152866] isJson[153090]))
+                {
+                  Try
+                  {
+                    {
+                      (153106 call(153102 call . reader[152564] c"skipField"))
+                    }
+                  }
+                  (153113 call = needsComma[152573] 1)
+                }
+                {
+                  (153139 'throw'(153118 'new'(_chpl_manager = _owned[30](?))(153138 call BadFormatError[381699](?) "Failed to read field, could not skip")))
+                }
+              }
+            }
+            label _continueLabel[153154]
+            (153165 'move' tmp[153151](153160 call _cond_test(153162 call < numRead[152737] numToRead[152732])))
+            tmp[153151]
+          }
+          label _breakLabel[153155]
+        }
+        if(153321 call _cond_test(153180 call == numRead[152737] numToRead[152732]))
+        {
+        }
+        {
+          unknown tag[153224] "param"(153221 IfExpr (153186 call isClassType t[152568]) then
+          { scopeless
+            "class"
+          } else
+          { scopeless
+            "record"
+          } )
+          (153227 'end of statement')
+          const msg[153308] "const"(153306 call +(153300 call +(153297 call +(153294 call +(153275 call +(153269 call +(153250 call + "Read only "(153248 call _cast string[26] numRead[152737])) " out of ")(153273 call _cast string[26] numToRead[152732])) " fields of ") tag[153224]) " ")(153304 call _cast string[26] t[152568]))
+          (153311 'end of statement')
+          (153319 'throw'(153314 'new'(_chpl_manager = _owned[30](?))(153318 call BadFormatError[381699](?) msg[153308])))
+        }
+      }
+    }
+  }
+  where {
+    (152580 call !(152579 call isUnionType t[152568]))
+  }
+  function readThisFieldsDefaultImpl[153341](arg reader[153339]:_any[178](?), arg t[153343]:_any[178](?), ref arg x[153345]:_any[178](?), inout arg needsComma[153348] :
+  bool[10]) : _unknown[51] throws "no doc" "no return value for void"
+  {
+    unknown numFields[153359] "param"(153358 'num fields' t[153343])
+    (153362 'end of statement')
+    unknown isBinary[153370](153369 call(153365 call . reader[153339] c"binary"))
+    (153373 'end of statement')
+    unknown superclassError[153376](386342 call ENOERR[223571]) syserr[223501]
+    (153379 'end of statement')
+    if(153675 call _cond_test isBinary[153370])
+    {
+      unknown id[153385](153384 'get_union_id' x[153345])
+      (153388 'end of statement')
+      Try
+      {
+        {
+          (153396 call(153391 call . reader[153339] c"readwrite") id[153385])
+        }
+      }
+      {
+        unknown i[153434] 0
+        unknown tmp[153435] "maybe param" "temp"
+        (153447 'move' tmp[153435](153445 call chpl_compute_low_param_loop_bound 1 numFields[153359]))
+        unknown tmp[153436] "maybe param" "temp"
+        (153454 'move' tmp[153436](153452 call chpl_compute_high_param_loop_bound 1 numFields[153359]))
+        unknown tmp[153437] "maybe param" "temp"
+        (153457 'move' tmp[153437] 1)
+        ParamForLoop[153459]
+        { i[153434] tmp[153435] tmp[153436] tmp[153437]
+          if(153429 call _cond_test(153413 call &&(153408 call isIoField x[153345] i[153434])(153411 call == i[153434] id[153385])))
+          {
+            Try
+            {
+              {
+                (153425 call(153416 call . reader[153339] c"readwrite")(153423 'field by num' x[153345] i[153434]))
+              }
+            }
+          }
+        }
+        label _unused_continueLabel[153439]
+        label _breakLabel[153438]
+      }
+    }
+    {
+      unknown hasFoundAtLeastOneField[153469] 0
+      (153472 'end of statement')
+      {
+        unknown i[153608] 0
+        unknown tmp[153609] "maybe param" "temp"
+        (153621 'move' tmp[153609](153619 call chpl_compute_low_param_loop_bound 1 numFields[153359]))
+        unknown tmp[153610] "maybe param" "temp"
+        (153628 'move' tmp[153610](153626 call chpl_compute_high_param_loop_bound 1 numFields[153359]))
+        unknown tmp[153611] "maybe param" "temp"
+        (153631 'move' tmp[153611] 1)
+        ParamForLoop[153633]
+        { i[153608] tmp[153609] tmp[153610] tmp[153611]
+          {
+            if(153488 call _cond_test(153483 call !(153482 call isIoField x[153345] i[153608])))
+            {
+              continue _unused_continueLabel[153613] _unused_continueLabel[153613]
+            }
+            unknown st[153501](153500 call(153495 call . reader[153339] c"styleElement") QIO_STYLE_ELEMENT_AGGREGATE[19667])
+            (153504 'end of statement')
+            unknown fieldName[153511](153510 call ioFieldNameLiteral reader[153339] t[153343] i[153608])
+            (153514 'end of statement')
+            Try
+            {
+              {
+                (153521 call(153516 call . reader[153339] c"readwrite") fieldName[153511])
+              }
+            }
+            Catch err : SystemError
+            {
+              unknown tmp[354470] "temp"(354474 'dynamic_cast' unmanaged SystemError?[415670](354473 'current error'))
+              if(354477 '!=' tmp[354470] nil[44])
+              {
+                unknown err[354483](354488 'new'(354486 call _owned[30](?)(354484 'to non nilable class' tmp[354470])))
+                {
+                  if(153547 call _cond_test(153542 call ||(153533 call ==(153529 call . err[354483] c"err")(386364 call EFORMAT[224187]))(153540 call ==(153536 call . err[354483] c"err")(386366 call EEOF[224141]))))
+                  {
+                    continue _unused_continueLabel[153613] _unused_continueLabel[153613]
+                  }
+                  (153554 'throw' err[354483])
+                }
+              }
+              {
+              }
+            }
+            (153561 call = hasFoundAtLeastOneField[153469] 1)
+            unknown eq[153583](153580 IfExpr (153566 call == st[153501] QIO_AGGREGATE_FORMAT_JSON[19717]) then
+            { scopeless
+              (153568 'new'(153573 call ioLiteral[238670] ":" 1))
+            } else
+            { scopeless
+              (153574 'new'(153579 call ioLiteral[238670] "=" 1))
+            } )
+            (153586 'end of statement')
+            Try
+            {
+              {
+                (153590 call readIt eq[153583])
+              }
+            }
+            Try
+            {
+              {
+                (153604 call(153595 call . reader[153339] c"readwrite")(153602 'field by num' x[153345] i[153608]))
+              }
+            }
+          }
+        }
+        label _unused_continueLabel[153613]
+        label _breakLabel[153612]
+      }
+      if(153670 call _cond_test(153643 call ! hasFoundAtLeastOneField[153469]))
+      {
+        (153668 'throw'(153647 'new'(_chpl_manager = _owned[30](?))(153667 call BadFormatError[381699](?) "Failed to find any union fields")))
+      }
+    }
+  }
+  where {
+    (153354 call isUnionType t[153343])
+  }
+  function readThisDefaultImpl[153686](arg reader[153684]:_any[178](?), arg x[153690] :
+  unknown t[153688]) : _unknown[51] throws "no doc" "no return value for void"
+  {
+    const st[153704] "const"(153703 call(153698 call . reader[153684] c"styleElement") QIO_STYLE_ELEMENT_AGGREGATE[19667])
+    (153707 'end of statement')
+    if(153758 call _cond_test(153715 call !(153714 call(153710 call . reader[153684] c"binary"))))
+    {
+      unknown start[153743](153740 IfExpr (153719 call == st[153704] QIO_AGGREGATE_FORMAT_CHPL[19712]) then
+      { scopeless
+        (153721 'new'(153734 call ioLiteral[238670](153731 call +(153728 call + "new "(153726 call _cast string[26] t[153688])) "(")))
+      } else
+      { scopeless
+        (153735 'new'(153739 call ioLiteral[238670] "{"))
+      } )
+      (153746 'end of statement')
+      Try
+      {
+        {
+          (153754 call(153749 call . reader[153684] c"readwrite") start[153743])
+        }
+      }
+    }
+    unknown needsComma[153763] 0
+    (153766 'end of statement')
+    unknown obj[153768] x[153690]
+    (153771 'end of statement')
+    Try
+    {
+      {
+        (153778 call readThisFieldsDefaultImpl reader[153684] t[153688] obj[153768] needsComma[153763])
+      }
+    }
+    Try
+    {
+      {
+        (153786 call skipFieldsAtEnd reader[153684] needsComma[153763])
+      }
+    }
+    if(153830 call _cond_test(153796 call !(153795 call(153791 call . reader[153684] c"binary"))))
+    {
+      unknown end[153815](153812 IfExpr (153800 call == st[153704] QIO_AGGREGATE_FORMAT_CHPL[19712]) then
+      { scopeless
+        (153802 'new'(153806 call ioLiteral[238670] ")"))
+      } else
+      { scopeless
+        (153807 'new'(153811 call ioLiteral[238670] "}"))
+      } )
+      (153818 'end of statement')
+      Try
+      {
+        {
+          (153826 call(153821 call . reader[153684] c"readwrite") end[153815])
+        }
+      }
+    }
+  }
+  where {
+    (153696 call isClassType t[153688])
+  }
+  function readThisDefaultImpl[153841](arg reader[153839]:_any[178](?), ref arg x[153845] :
+  unknown t[153843]) : _unknown[51] throws "no doc" "no return value for void"
+  {
+    const st[153861] "const"(153860 call(153855 call . reader[153839] c"styleElement") QIO_STYLE_ELEMENT_AGGREGATE[19667])
+    (153864 'end of statement')
+    if(153960 call _cond_test(153872 call !(153871 call(153867 call . reader[153839] c"binary"))))
+    {
+      unknown start[153875] ioLiteral[238670]
+      (153878 'end of statement')
+      {
+        unknown tmp[153932] "expr temp" "maybe param" "maybe type" "temp"
+        (153934 'move' tmp[153932] st[153861])
+        if(153939 call _cond_test(153936 call == tmp[153932] QIO_AGGREGATE_FORMAT_CHPL[19712]))
+        {
+          (153899 call = start[153875](153885 'new'(153898 call ioLiteral[238670](153895 call +(153892 call + "new "(153890 call _cast string[26] t[153843])) "("))))
+        }
+        {
+          if(153945 call _cond_test(153942 call == tmp[153932] QIO_AGGREGATE_FORMAT_JSON[19717]))
+          {
+            (153913 call = start[153875](153908 'new'(153912 call ioLiteral[238670] "{")))
+          }
+          {
+            (153925 call = start[153875](153920 'new'(153924 call ioLiteral[238670] "(")))
+          }
+        }
+      }
+      Try
+      {
+        {
+          (153956 call(153951 call . reader[153839] c"readwrite") start[153875])
+        }
+      }
+    }
+    unknown needsComma[153965] 0
+    (153968 'end of statement')
+    Try
+    {
+      {
+        (153975 call readThisFieldsDefaultImpl reader[153839] t[153843] x[153845] needsComma[153965])
+      }
+    }
+    Try
+    {
+      {
+        (153983 call skipFieldsAtEnd reader[153839] needsComma[153965])
+      }
+    }
+    if(154028 call _cond_test(153993 call !(153992 call(153988 call . reader[153839] c"binary"))))
+    {
+      unknown end[154013](154010 IfExpr (153998 call == st[153861] QIO_AGGREGATE_FORMAT_JSON[19717]) then
+      { scopeless
+        (154000 'new'(154004 call ioLiteral[238670] "}"))
+      } else
+      { scopeless
+        (154005 'new'(154009 call ioLiteral[238670] ")"))
+      } ) ioLiteral[238670]
+      (154016 'end of statement')
+      Try
+      {
+        {
+          (154024 call(154019 call . reader[153839] c"readwrite") end[154013])
+        }
+      }
+    }
+  }
+  where {
+    (153852 call !(153851 call isClassType t[153843]))
+  }
+  function halt[154037]() : _unknown[51] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (154060 'chpl_error' c"halt reached")
+  }
+  function halt[154071](arg s[154068] :
+  string[26]) : _unknown[51] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    (154086 call halt(154084 call(154080 call .(154079 call(154075 call . s[154068] c"localize")) c"c_str")))
+  }
+  function halt[154098](arg args[154095]:_any[178](?) ...) : _unknown[51] "always propagate line file info" "function terminates program" "no return value for void"
+  {
+    unknown tmpstring[154124](154122 call + "halt reached - "(154121 call stringify(154119 'expand_tuple' args[154095])))
+    (154127 'end of statement')
+    (154137 'chpl_error'(154136 call(154132 call . tmpstring[154124] c"c_str")))
+  }
+  function warning[154147](arg s[154144] :
+  string[26]) : _unknown[51] "always propagate line file info" "no return value for void"
+  {
+    (154162 'chpl_warning'(154161 call(154157 call .(154156 call(154152 call . s[154144] c"localize")) c"c_str")))
+  }
+  function warning[154174](arg args[154171]:_any[178](?) ...) : _unknown[51] "always propagate line file info" "no return value for void"
+  {
+    unknown tmpstring[154181](154180 call stringify(154178 'expand_tuple' args[154171]))
+    (154184 'end of statement')
+    (154189 call warning tmpstring[154181])
+  }
+  function locale[28].writeThis[154198](arg _mt[154203]:_MT[238], arg this[154200]:locale[28] :
+  locale[28], arg f[154196]:_any[178](?)) : _unknown[51] throws "method" "no doc" "no return value for void"
+  {
+    (154210 call <~> f[154196](154207 call . this[154200] c"_instance"))
+  }
+  function _ddata[11695](?).writeThis[154221](arg _mt[154226]:_MT[238], arg this[154223]:_ddata[11695](?) :
+  _ddata[11695](?), arg f[154219]:_any[178](?)) : _unknown[51] throws "method" "no doc" "no return value for void"
+  {
+    (154247 call compilerWarning "printing _ddata class")
+    (154268 call <~> f[154219] "<_ddata class cannot be printed>")
+  }
+  function chpl_taskID_t[163].writeThis[154278](arg _mt[154283]:_MT[238], arg this[154280]:chpl_taskID_t[163] :
+  chpl_taskID_t[163], arg f[154276]:_any[178](?)) : _unknown[51] throws "method" "no doc" "no return value for void"
+  {
+    unknown tmp[154296](154294 call _cast(154293 call uint(64)[115] 64) this[154280])(154288 call uint(64)[115] 64)
+    (154299 'end of statement')
+    (154303 call <~> f[154276] tmp[154296])
+  }
+  function chpl_taskID_t[163].readThis[154313](arg _mt[154318]:_MT[238], arg this[154315]:chpl_taskID_t[163] :
+  chpl_taskID_t[163], arg f[154311]:_any[178](?)) : _unknown[51] throws "method" "no doc" "no return value for void"
+  {
+    unknown tmp[154324](154323 call uint(64)[115] 64)
+    (154327 'end of statement')
+    (154331 call <~> f[154311] tmp[154324])
+    (154339 call = this[154315](154337 call _cast chpl_taskID_t[163] tmp[154324]))
+  }
+  function nothing[7].writeThis[154349](arg _mt[154354]:_MT[238], arg this[154351]:nothing[7] :
+  nothing[7], arg f[154347]:_any[178](?)) : _unknown[51] "method" "no doc" "no return value for void"
+  {
+  }
+  function _tuple[56199](?).readWriteThis[154364](arg _mt[154369]:_MT[238], arg this[154366]:_tuple[56199](?) :
+  _tuple[56199](?), arg f[154362]:_any[178](?)) : _unknown[51] throws "method" "no doc" "no return value for void"
+  {
+    unknown st[154378](154377 call(154372 call . f[154362] c"styleElement") QIO_STYLE_ELEMENT_TUPLE[19672])
+    (154381 'end of statement')
+    unknown start[154384] ioLiteral[238670]
+    (154387 'end of statement')
+    unknown comma[154389] ioLiteral[238670]
+    (154392 'end of statement')
+    unknown end[154394] ioLiteral[238670]
+    (154397 'end of statement')
+    unknown binary[154404](154403 call(154399 call . f[154362] c"binary"))
+    (154407 'end of statement')
+    if(154536 call _cond_test(154410 call == st[154378] QIO_TUPLE_FORMAT_SPACE[19727]))
+    {
+      (154434 call = start[154384](154413 'new'(154433 call ioLiteral[238670] "")))
+      (154444 call = comma[154389](154439 'new'(154443 call ioLiteral[238670] " ")))
+      (154469 call = end[154394](154448 'new'(154468 call ioLiteral[238670] "")))
+    }
+    {
+      if(154532 call _cond_test(154474 call == st[154378] QIO_TUPLE_FORMAT_JSON[19732]))
+      {
+        (154482 call = start[154384](154477 'new'(154481 call ioLiteral[238670] "[")))
+        (154492 call = comma[154389](154487 'new'(154491 call ioLiteral[238670] ", ")))
+        (154501 call = end[154394](154496 'new'(154500 call ioLiteral[238670] "]")))
+      }
+      {
+        (154510 call = start[154384](154505 'new'(154509 call ioLiteral[238670] "(")))
+        (154520 call = comma[154389](154515 'new'(154519 call ioLiteral[238670] ", ")))
+        (154529 call = end[154394](154524 'new'(154528 call ioLiteral[238670] ")")))
+      }
+    }
+    if(154550 call _cond_test(154542 call ! binary[154404]))
+    {
+      (154546 call <~> f[154362] start[154384])
+    }
+    if(154633 call _cond_test(154556 call !=(386470 call . this[154366] c"size") 0))
+    {
+      (154563 call <~> f[154362](154562 call this[154366] 0))
+      {
+        unknown i[154596] 0
+        unknown tmp[154597] "maybe param" "temp"
+        (154609 'move' tmp[154597](154607 call chpl_compute_low_param_loop_bound 1(154570 call -(386477 call . this[154366] c"size") 1)))
+        unknown tmp[154598] "maybe param" "temp"
+        (154619 'move' tmp[154598](154617 call chpl_compute_high_param_loop_bound 1(154614 call -(386488 call . this[154366] c"size") 1)))
+        unknown tmp[154599] "maybe param" "temp"
+        (154622 'move' tmp[154599] 1)
+        ParamForLoop[154624]
+        { i[154596] tmp[154597] tmp[154598] tmp[154599]
+          {
+            if(154583 call _cond_test(154575 call ! binary[154404]))
+            {
+              (154579 call <~> f[154362] comma[154389])
+            }
+            (154593 call <~> f[154362](154592 call this[154366] i[154596]))
+          }
+        }
+        label _unused_continueLabel[154601]
+        label _breakLabel[154600]
+      }
+    }
+    if(154646 call _cond_test(154638 call ! binary[154404]))
+    {
+      (154642 call <~> f[154362] end[154394])
+    }
+  }
+  function range[64316](?).writeThis[154657](arg _mt[154662]:_MT[238], arg this[154659]:range[64316](?) :
+  range[64316](?), arg f[154655]:_any[178](?)) : _unknown[51] throws "method" "no doc" "no return value for void"
+  {
+    unknown alignCheckRange[154665] this[154659]
+    (154668 'end of statement')
+    if(154682 call _cond_test(154671 call . f[154655] c"writing"))
+    {
+      (154679 call(154675 call . alignCheckRange[154665] c"normalizeAlignment"))
+    }
+    if(154694 call _cond_test(154688 call(386496 call . this[154659] c"hasLowBound")))
+    {
+      (154691 call <~> f[154655](386501 call . this[154659] c"low"))
+    }
+    (154705 call <~> f[154655](154700 'new'(154704 call ioLiteral[238670] "..")))
+    if(154716 call _cond_test(154710 call(386507 call . this[154659] c"hasHighBound")))
+    {
+      (154713 call <~> f[154655](386512 call . this[154659] c"high"))
+    }
+    if(154737 call _cond_test(154723 call !=(386516 call . this[154659] c"stride") 1))
+    {
+      (154734 call <~>(154731 call <~> f[154655](154726 'new'(154730 call ioLiteral[238670] " by ")))(386522 call . this[154659] c"stride"))
+    }
+    if(154775 call _cond_test(154751 call &&(154748 call !(154747 call(154743 call . alignCheckRange[154665] c"isNaturallyAligned")))(386526 call . this[154659] c"aligned")))
+    {
+      (154772 call <~>(154759 call <~> f[154655](154754 'new'(154758 call ioLiteral[238670] " align ")))(154771 call(386532 call . this[154659] c"chpl_intToIdx")(154769 call chpl__mod(154766 call chpl__idxToInt(386536 call . this[154659] c"alignment"))(386540 call . this[154659] c"stride"))))
+    }
+  }
+  function range[64316](?).readThis[154787](arg _mt[154792]:_MT[238], ref arg this[154789]:range[64316](?) :
+  range[64316](?), arg f[154785]:_any[178](?)) : _unknown[51] throws "method" "no doc" "no return value for void"
+  {
+    if(154802 call _cond_test(154796 call(386544 call . this[154789] c"hasLowBound")))
+    {
+      (154799 call <~> f[154785](386550 call . this[154789] c"_low"))
+    }
+    (154814 call <~> f[154785](154809 'new'(154813 call ioLiteral[238670] "..")))
+    if(154825 call _cond_test(154819 call(386556 call . this[154789] c"hasHighBound")))
+    {
+      (154822 call <~> f[154785](386562 call . this[154789] c"_high"))
+    }
+    if(154846 call _cond_test(154832 call !=(386566 call . this[154789] c"stride") 1))
+    {
+      (154843 call <~>(154840 call <~> f[154785](154835 'new'(154839 call ioLiteral[238670] " by ")))(386572 call . this[154789] c"stride"))
+    }
+    Try
+    {
+      {
+        (154857 call <~> f[154785](154852 'new'(154856 call ioLiteral[238670] " align ")))
+        if(154904 call _cond_test(386579 call . this[154789] c"stridable"))
+        {
+          unknown a[154863](386583 call . this[154789] c"intIdxType")
+          (154866 'end of statement')
+          (154870 call <~> f[154785] a[154863])
+          (154875 call =(386590 call . this[154789] c"_alignment") a[154863])
+        }
+        {
+          (154901 'throw'(154880 'new'(_chpl_manager = _owned[30](?))(154900 call BadFormatError[381699](?) "Range is not stridable, cannot store alignment")))
+        }
+      }
+    }
+    Catch err : BadFormatError
+    {
+      unknown tmp[354491] "temp"(354495 'dynamic_cast' unmanaged BadFormatError?[415664](354494 'current error'))
+      if(354498 '!=' tmp[354491] nil[44])
+      {
+        unknown err[354504](354509 'new'(354507 call _owned[30](?)(354505 'to non nilable class' tmp[354491])))
+        {
+        }
+      }
+      {
+      }
+    }
+  }
+  function LocaleModel[89196].writeThis[154923](arg _mt[154928]:_MT[238], arg this[154925]:LocaleModel[89196] :
+  LocaleModel[89196], arg f[154921]:_any[178](?)) : _unknown[51] throws "method" "no doc" "method overrides" "no return value for void"
+  {
+    (154957 call <~>(154952 call <~> f[154921](154931 'new'(154951 call ioLiteral[238670] "LOCALE")))(154956 call(386599 call . this[154925] c"chpl_id")))
+  }
+  function Error[167942].writeThis[154968](arg _mt[154973]:_MT[238], arg this[154970]:Error[167942] :
+  Error[167942], arg f[154966]:_any[178](?)) : _unknown[51] throws "method" "no doc" "method overrides" "no return value for void"
+  {
+    unknown description[154979](154978 call chpl_describe_error this[154970])
+    (154982 'end of statement')
+    (154986 call <~> f[154966] description[154979])
+  }
+  function write[154998](const arg args[154995]:_any[178](?) ...) : _unknown[51] "no return value for void"
+  {
+    Try!
+    {
+      {
+        (155007 call(155001 call . stdout[250152] c"write")(155005 'expand_tuple' args[154995]))
+      }
+    }
+  }
+  function writeln[155021](const arg args[155018]:_any[178](?) ...) : _unknown[51] "no return value for void"
+  {
+    Try!
+    {
+      {
+        (155030 call(155024 call . stdout[250152] c"writeln")(155028 'expand_tuple' args[155018]))
+      }
+    }
+  }
+  function writeln[155039]() : _unknown[51] "no doc" "no return value for void"
+  {
+    Try!
+    {
+      {
+        (155046 call(155042 call . stdout[250152] c"writeln"))
+      }
+    }
+  }
+  function writef[155060](arg fmt[155057] :
+  unknown t[155055], const arg args[155064]:_any[178](?) ...) : _unknown[51]
+  {
+    Try!
+    {
+      {
+        (155087 return(155086 call(155079 call . stdout[250152] c"writef") fmt[155057](155085 'expand_tuple' args[155064])))
+      }
+    }
+  }
+  where {
+    (155076 call ||(155071 call isStringType t[155055])(155075 call isBytesType t[155055]))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function writef[155105](arg fmt[155102] :
+  unknown t[155100]) : _unknown[51] "no doc"
+  {
+    Try!
+    {
+      {
+        (155125 return(155124 call(155119 call . stdout[250152] c"writef") fmt[155102]))
+      }
+    }
+  }
+  where {
+    (155116 call ||(155111 call isStringType t[155100])(155115 call isBytesType t[155100]))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function _cast[155140](arg t[155138]:_any[178](?), arg x[155142]:_any[178](?)) : _unknown[51] "last resort" "no doc"
+  {
+    (155161 return(155160 call stringify x[155142]))
+  }
+  where {
+    (155155 call &&(155146 call == t[155138] string[26])(155153 call !(155152 call isPrimitiveType(155150 'typeof' x[155142]))))
+  }
+  (355190 'used modules list'(151494 'use' ChapelBase[307])(151498 'use' ChapelLocale[89848])(151501 'use' SysBasic[223433])(151504 'use' SysError[264148])(151552 'use' IO[230808]))
+}

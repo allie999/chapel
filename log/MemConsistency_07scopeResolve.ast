@@ -1,0 +1,180 @@
+AST dump for MemConsistency after pass scopeResolve.
+Module use list: HaltWrappers 
+
+{
+  type memory_order[186619]
+  function _defaultOf[186628](arg t[186625] :
+  memory_order[186619]) : _unknown[51] "inline" "last resort" "no doc"
+  {
+    function _defaultOfMemoryOrder[186632]() : _unknown[51] "extern" "local args" "no fn body" "no doc" "no return value for void"
+    {
+    }
+    { scopeless type
+      memory_order[186619]
+    }
+    (186642 return(186641 call _defaultOfMemoryOrder))
+  }
+  function ==[186652](arg a[186649] :
+  memory_order[186619], arg b[186655] :
+  memory_order[186619]) : _unknown[51]
+  {
+    (186664 return(186663 '==' a[186649] b[186655]))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function !=[186676](arg a[186673] :
+  memory_order[186619], arg b[186679] :
+  memory_order[186619]) : _unknown[51]
+  {
+    (186688 return(186687 '!=' a[186673] b[186679]))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function =[186700](ref arg lhs[186697] :
+  memory_order[186619], arg rhs[186703] :
+  memory_order[186619]) : _unknown[51] "assignop" "no return value for void"
+  {
+    (186710 '=' lhs[186697] rhs[186703])
+  }
+  function memory_order[186619].writeThis[186720](arg _mt[186725]:_MT[238], arg this[186722]:memory_order[186619] :
+  memory_order[186619], arg ch[186718]:_any[178](?)) : _unknown[51] throws "method" "no return value for void"
+  {
+    if(186928 call _cond_test(186729 call == this[186722] memory_order_relaxed[186938]))
+    {
+      (186749 call <~> ch[186718] "memory_order_relaxed")
+    }
+    {
+      if(186922 call _cond_test(186754 call == this[186722] memory_order_consume[186943]))
+      {
+        (186774 call <~> ch[186718] "memory_order_consume")
+      }
+      {
+        if(186916 call _cond_test(186779 call == this[186722] memory_order_acquire[186948]))
+        {
+          (186799 call <~> ch[186718] "memory_order_acquire")
+        }
+        {
+          if(186910 call _cond_test(186804 call == this[186722] memory_order_release[186953]))
+          {
+            (186824 call <~> ch[186718] "memory_order_release")
+          }
+          {
+            if(186904 call _cond_test(186829 call == this[186722] memory_order_acq_rel[186958]))
+            {
+              (186849 call <~> ch[186718] "memory_order_acq_rel")
+            }
+            {
+              if(186898 call _cond_test(186854 call == this[186722] memory_order_seq_cst[186963]))
+              {
+                (186874 call <~> ch[186718] "memory_order_seq_cst")
+              }
+              {
+                (186895 call <~> ch[186718] "memory_order_unknown")
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  const memory_order_relaxed[186938] "const" "extern" memory_order[186619]
+  (186941 'end of statement')
+  const memory_order_consume[186943] "const" "extern" memory_order[186619]
+  (186946 'end of statement')
+  const memory_order_acquire[186948] "const" "extern" memory_order[186619]
+  (186951 'end of statement')
+  const memory_order_release[186953] "const" "extern" memory_order[186619]
+  (186956 'end of statement')
+  const memory_order_acq_rel[186958] "const" "extern" memory_order[186619]
+  (186961 'end of statement')
+  const memory_order_seq_cst[186963] "const" "extern" memory_order[186619]
+  (186966 'end of statement')
+  type memoryOrder[186978] def seqCst[186968]:memoryOrder[186978] def acqRel[186970]:memoryOrder[186978] def release[186972]:memoryOrder[186978] def acquire[186974]:memoryOrder[186978] def relaxed[186976]:memoryOrder[186978]
+  function readableOrder[186987](param arg order[186984] :
+  memoryOrder[186978]) param : _unknown[51]
+  {
+    if(187018 call _cond_test(187005 call ||(186994 call == order[186984] release[186972])(187003 call == order[186984] acqRel[186970])))
+    {
+      (187011 return acquire[186974])
+    }
+    {
+      (187015 return order[186984])
+    }
+  }
+  function c_memory_order[187031](param arg order[187028] :
+  memoryOrder[186978]) : _unknown[51] "inline"
+  {
+    {
+      unknown tmp[187124] "expr temp" "maybe param" "maybe type" "temp"
+      (187126 'move' tmp[187124] order[187028])
+      if(187131 call _cond_test(187128 call == tmp[187124] relaxed[186976]))
+      {
+        (187045 return memory_order_relaxed[186938])
+      }
+      {
+        if(187137 call _cond_test(187134 call == tmp[187124] acquire[186974]))
+        {
+          (187056 return memory_order_acquire[186948])
+        }
+        {
+          if(187144 call _cond_test(187141 call == tmp[187124] release[186972]))
+          {
+            (187067 return memory_order_release[186953])
+          }
+          {
+            if(187151 call _cond_test(187148 call == tmp[187124] acqRel[186970]))
+            {
+              (187078 return memory_order_acq_rel[186958])
+            }
+            {
+              if(187158 call _cond_test(187155 call == tmp[187124] seqCst[186968]))
+              {
+                (187089 return memory_order_seq_cst[186963])
+              }
+              {
+                (187118 call exhaustiveSelectHalt module=[255] HaltWrappers[209915] "Invalid memoryOrder")
+                (361919 'referenced modules list' HaltWrappers[209915])
+              }
+            }
+          }
+        }
+      }
+    }
+    (355277 'used modules list'(187034 'import' HaltWrappers[209915]))
+  }
+  function chpl_rmem_consist_release[187167]() : void[4] "extern" "insert line file info" "local args" "no fn body" "no doc" "compiler added remote fence" "no return value for void"
+  {
+  }
+  function chpl_rmem_consist_acquire[187173]() : void[4] "extern" "insert line file info" "local args" "no fn body" "no doc" "compiler added remote fence" "no return value for void"
+  {
+  }
+  function chpl_rmem_consist_maybe_release[187183](arg order[187180] :
+  memory_order[186619]) : void[4] "extern" "insert line file info" "local args" "no fn body" "no doc" "compiler added remote fence" "no return value for void"
+  {
+  }
+  function chpl_rmem_consist_maybe_release[187193](param arg order[187190] :
+  memoryOrder[186978]) : _unknown[51] "compiler added remote fence" "no return value for void"
+  {
+    (187201 call chpl_rmem_consist_maybe_release(187199 call c_memory_order order[187190]))
+  }
+  function chpl_rmem_consist_maybe_acquire[187212](arg order[187209] :
+  memory_order[186619]) : void[4] "extern" "insert line file info" "local args" "no fn body" "no doc" "compiler added remote fence" "no return value for void"
+  {
+  }
+  function chpl_rmem_consist_maybe_acquire[187222](param arg order[187219] :
+  memoryOrder[186978]) : _unknown[51] "compiler added remote fence" "no return value for void"
+  {
+    (187230 call chpl_rmem_consist_maybe_acquire(187228 call c_memory_order order[187219]))
+  }
+  function chpl_rmem_consist_fence[187241](arg order[187238] :
+  memory_order[186619]) : void[4] "extern" "insert line file info" "local args" "no fn body" "no doc" "no return value for void"
+  {
+  }
+  function chpl_rmem_consist_fence[187251](param arg order[187248] :
+  memoryOrder[186978]) : _unknown[51] "no return value for void"
+  {
+    (187259 call chpl_rmem_consist_fence(187257 call c_memory_order order[187248]))
+  }
+}

@@ -1,0 +1,227 @@
+AST dump for MemConsistency after pass readExternC.
+Module use list: 
+
+{
+  type memory_order[186619]
+  function _defaultOf[186628](arg t[186625] :
+  memory_order) : _unknown[51] "inline" "last resort" "no doc"
+  {
+    function _defaultOfMemoryOrder[186632]() : _unknown[51] "extern" "local args" "no fn body" "no doc"
+    {
+    }
+    { scopeless type
+      memory_order
+    }
+    (186642 return(186641 call _defaultOfMemoryOrder))
+  }
+  function ==[186652](arg a[186649] :
+  memory_order, arg b[186655] :
+  memory_order) : _unknown[51]
+  {
+    (186664 return(186663 '==' a b))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function !=[186676](arg a[186673] :
+  memory_order, arg b[186679] :
+  memory_order) : _unknown[51]
+  {
+    (186688 return(186687 '!=' a b))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function =[186700](ref arg lhs[186697] :
+  memory_order, arg rhs[186703] :
+  memory_order) : _unknown[51] "assignop"
+  {
+    (186710 '=' lhs rhs)
+  }
+  function _unknown[51].writeThis[186720](arg _mt[186725]:_MT[238], arg this[186722] :
+  memory_order, arg ch[186718]:_any[178](?)) : _unknown[51] throws "method"
+  {
+    if(186928 call _cond_test(186729 call == this memory_order_relaxed))
+    {
+      { scopeless
+        (186749 call <~> ch "memory_order_relaxed")
+      }
+    }
+    {
+      { scopeless
+        if(186922 call _cond_test(186754 call == this memory_order_consume))
+        {
+          { scopeless
+            (186774 call <~> ch "memory_order_consume")
+          }
+        }
+        {
+          { scopeless
+            if(186916 call _cond_test(186779 call == this memory_order_acquire))
+            {
+              { scopeless
+                (186799 call <~> ch "memory_order_acquire")
+              }
+            }
+            {
+              { scopeless
+                if(186910 call _cond_test(186804 call == this memory_order_release))
+                {
+                  { scopeless
+                    (186824 call <~> ch "memory_order_release")
+                  }
+                }
+                {
+                  { scopeless
+                    if(186904 call _cond_test(186829 call == this memory_order_acq_rel))
+                    {
+                      { scopeless
+                        (186849 call <~> ch "memory_order_acq_rel")
+                      }
+                    }
+                    {
+                      { scopeless
+                        if(186898 call _cond_test(186854 call == this memory_order_seq_cst))
+                        {
+                          { scopeless
+                            (186874 call <~> ch "memory_order_seq_cst")
+                          }
+                        }
+                        {
+                          { scopeless
+                            (186895 call <~> ch "memory_order_unknown")
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  { scopeless
+    const memory_order_relaxed[186938] "const" "extern" memory_order
+    (186941 'end of statement')
+  }
+  { scopeless
+    const memory_order_consume[186943] "const" "extern" memory_order
+    (186946 'end of statement')
+  }
+  { scopeless
+    const memory_order_acquire[186948] "const" "extern" memory_order
+    (186951 'end of statement')
+  }
+  { scopeless
+    const memory_order_release[186953] "const" "extern" memory_order
+    (186956 'end of statement')
+  }
+  { scopeless
+    const memory_order_acq_rel[186958] "const" "extern" memory_order
+    (186961 'end of statement')
+  }
+  { scopeless
+    const memory_order_seq_cst[186963] "const" "extern" memory_order
+    (186966 'end of statement')
+  }
+  type memoryOrder[186978] def seqCst[186968]:memoryOrder[186978] def acqRel[186970]:memoryOrder[186978] def release[186972]:memoryOrder[186978] def acquire[186974]:memoryOrder[186978] def relaxed[186976]:memoryOrder[186978]
+  function readableOrder[186987](param arg order[186984] :
+  memoryOrder) param : _unknown[51]
+  {
+    if(187018 call _cond_test(187005 call ||(186994 call == order(186991 call . memoryOrder c"release"))(187003 call == order(187000 call . memoryOrder c"acqRel"))))
+    {
+      (187011 return(187008 call . memoryOrder c"acquire"))
+    }
+    {
+      (187015 return order)
+    }
+  }
+  function c_memory_order[187031](param arg order[187028] :
+  memoryOrder) : _unknown[51] "inline"
+  {
+    (187034 'import' HaltWrappers)
+    {
+      unknown tmp[187124] "expr temp" "maybe param" "maybe type" "temp"
+      (187126 'move' tmp[187124] order)
+      if(187131 call _cond_test(187128 call == tmp[187124](187040 call . memoryOrder c"relaxed")))
+      {
+        { scopeless
+          (187045 return memory_order_relaxed)
+        }
+      }
+      {
+        if(187137 call _cond_test(187134 call == tmp[187124](187051 call . memoryOrder c"acquire")))
+        {
+          { scopeless
+            (187056 return memory_order_acquire)
+          }
+        }
+        {
+          if(187144 call _cond_test(187141 call == tmp[187124](187062 call . memoryOrder c"release")))
+          {
+            { scopeless
+              (187067 return memory_order_release)
+            }
+          }
+          {
+            if(187151 call _cond_test(187148 call == tmp[187124](187073 call . memoryOrder c"acqRel")))
+            {
+              { scopeless
+                (187078 return memory_order_acq_rel)
+              }
+            }
+            {
+              if(187158 call _cond_test(187155 call == tmp[187124](187084 call . memoryOrder c"seqCst")))
+              {
+                { scopeless
+                  (187089 return memory_order_seq_cst)
+                }
+              }
+              {
+                { scopeless
+                  (187118 call(187097 call . HaltWrappers c"exhaustiveSelectHalt") "Invalid memoryOrder")
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  function chpl_rmem_consist_release[187167]() : void[4] "extern" "insert line file info" "local args" "no fn body" "no doc" "compiler added remote fence"
+  {
+  }
+  function chpl_rmem_consist_acquire[187173]() : void[4] "extern" "insert line file info" "local args" "no fn body" "no doc" "compiler added remote fence"
+  {
+  }
+  function chpl_rmem_consist_maybe_release[187183](arg order[187180] :
+  memory_order) : void[4] "extern" "insert line file info" "local args" "no fn body" "no doc" "compiler added remote fence"
+  {
+  }
+  function chpl_rmem_consist_maybe_release[187193](param arg order[187190] :
+  memoryOrder) : _unknown[51] "compiler added remote fence"
+  {
+    (187201 call chpl_rmem_consist_maybe_release(187199 call c_memory_order order))
+  }
+  function chpl_rmem_consist_maybe_acquire[187212](arg order[187209] :
+  memory_order) : void[4] "extern" "insert line file info" "local args" "no fn body" "no doc" "compiler added remote fence"
+  {
+  }
+  function chpl_rmem_consist_maybe_acquire[187222](param arg order[187219] :
+  memoryOrder) : _unknown[51] "compiler added remote fence"
+  {
+    (187230 call chpl_rmem_consist_maybe_acquire(187228 call c_memory_order order))
+  }
+  function chpl_rmem_consist_fence[187241](arg order[187238] :
+  memory_order) : void[4] "extern" "insert line file info" "local args" "no fn body" "no doc"
+  {
+  }
+  function chpl_rmem_consist_fence[187251](param arg order[187248] :
+  memoryOrder) : _unknown[51]
+  {
+    (187259 call chpl_rmem_consist_fence(187257 call c_memory_order order))
+  }
+}

@@ -1,0 +1,179 @@
+AST dump for InsertionSort after pass cleanup.
+Module use list: 
+
+{
+  (353081 'use' ChapelStandard)
+  (270011 'use' Sort)
+  function insertionSort[270026](arg Data[270023] :
+  (270021 call chpl__buildArrayRuntimeType unknown Dom[270016] unknown eltType[270019]), arg comparator[270031] :
+  unknown rec[270028] =
+  defaultComparator, arg lo[270040] :
+  int[13] =
+  (270037 call . Dom c"alignedLow"), arg hi[270049] :
+  int[13] =
+  (270046 call . Dom c"alignedHigh")) : _unknown[51] "no return value for void"
+  {
+    (270057 call chpl_check_comparator comparator eltType)
+    if(270089 call _cond_test(270065 call !=(270061 call . Dom c"rank") 1))
+    {
+      (270086 call compilerError "insertionSort() requires 1-D array")
+    }
+    const low[270094] "const" lo
+    const high[270098] "const" hi
+    const stride[270108] "const"(270107 call abs(270103 call . Dom c"stride"))
+    (270111 'end of statement')
+    {
+      unknown _indexOfInterest[270265] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[270266] "expr temp" "temp"
+      (270275 'move' _iterator[270266](270273 call _getIterator(270284 call chpl_direct_range_iter low high stride)))
+      Defer
+      {
+        {
+          (270300 call _freeIterator _iterator[270266])
+        }
+      }
+      { scopeless type
+        (270289 'move' _indexOfInterest[270265](270286 call iteratorIndex _iterator[270266]))
+      }
+      ForLoop[270267]
+      {
+        unknown i[270293] "index var" "insert auto destroy"
+        (270295 'move' i[270293] _indexOfInterest[270265])
+        {
+          unknown ithVal[270124](270123 call Data i)
+          (270127 'end of statement')
+          unknown inserted[270130] 0
+          (270133 'end of statement')
+          {
+            unknown _indexOfInterest[270199] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[270200] "expr temp" "temp"
+            (270209 'move' _iterator[270200](270207 call _getIterator(270226 call chpl_direct_range_iter low(270223 call - i stride)(270219 call - stride))))
+            Defer
+            {
+              {
+                (270242 call _freeIterator _iterator[270200])
+              }
+            }
+            { scopeless type
+              (270231 'move' _indexOfInterest[270199](270228 call iteratorIndex _iterator[270200]))
+            }
+            ForLoop[270201]
+            {
+              unknown j[270235] "index var" "insert auto destroy"
+              (270237 'move' j[270235] _indexOfInterest[270199])
+              {
+                if(270194 call _cond_test(270157 call <(270155 call chpl_compare ithVal(270153 call Data j) comparator) 0))
+                {
+                  (270170 call =(270165 call Data(270162 call + j stride))(270169 call Data j))
+                }
+                {
+                  (270182 call =(270180 call Data(270177 call + j stride)) ithVal)
+                  (270188 call = inserted 1)
+                  break nil[44]
+                }
+              }
+              label _continueLabel[270204]
+              _indexOfInterest[270199]
+              _iterator[270200]
+            }
+            label _breakLabel[270205]
+          }
+          if(270261 call _cond_test(270250 call ! inserted))
+          {
+            (270257 call =(270255 call Data low) ithVal)
+          }
+        }
+        label _continueLabel[270270]
+        _indexOfInterest[270265]
+        _iterator[270266]
+      }
+      label _breakLabel[270271]
+    }
+  }
+  function insertionSortMoveElts[270321](arg Data[270318] :
+  (270316 call chpl__buildArrayRuntimeType unknown Dom[270311] unknown eltType[270314]), arg comparator[270326] :
+  unknown rec[270323] =
+  defaultComparator, arg lo[270335] :
+  int[13] =
+  (270332 call . Dom c"alignedLow"), arg hi[270344] :
+  int[13] =
+  (270341 call . Dom c"alignedHigh")) : _unknown[51] "no return value for void"
+  {
+    (270352 call chpl_check_comparator comparator eltType)
+    if(270368 call _cond_test(270360 call !=(270356 call . Dom c"rank") 1))
+    {
+      (270365 call compilerError "insertionSort() requires 1-D array")
+    }
+    const low[270373] "const" lo
+    const high[270377] "const" hi
+    const stride[270387] "const"(270386 call abs(270382 call . Dom c"stride"))
+    (270390 'end of statement')
+    {
+      unknown _indexOfInterest[270566] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[270567] "expr temp" "temp"
+      (270576 'move' _iterator[270567](270574 call _getIterator(270585 call chpl_direct_range_iter low high stride)))
+      Defer
+      {
+        {
+          (270601 call _freeIterator _iterator[270567])
+        }
+      }
+      { scopeless type
+        (270590 'move' _indexOfInterest[270566](270587 call iteratorIndex _iterator[270567]))
+      }
+      ForLoop[270568]
+      {
+        unknown i[270594] "index var" "insert auto destroy"
+        (270596 'move' i[270594] _indexOfInterest[270566])
+        {
+          unknown ithVal[270411] "no auto destroy"(270410 call(270402 call . ShallowCopy c"shallowCopyInit")(270408 call Data i))
+          (270414 'end of statement')
+          unknown inserted[270417] 0
+          (270420 'end of statement')
+          {
+            unknown _indexOfInterest[270496] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[270497] "expr temp" "temp"
+            (270506 'move' _iterator[270497](270504 call _getIterator(270523 call chpl_direct_range_iter low(270520 call - i stride)(270516 call - stride))))
+            Defer
+            {
+              {
+                (270539 call _freeIterator _iterator[270497])
+              }
+            }
+            { scopeless type
+              (270528 'move' _indexOfInterest[270496](270525 call iteratorIndex _iterator[270497]))
+            }
+            ForLoop[270498]
+            {
+              unknown j[270532] "index var" "insert auto destroy"
+              (270534 'move' j[270532] _indexOfInterest[270496])
+              {
+                if(270491 call _cond_test(270444 call <(270442 call chpl_compare ithVal(270440 call Data j) comparator) 0))
+                {
+                  (270464 call(270449 call . ShallowCopy c"shallowCopy")(270458 call Data(270455 call + j stride))(270463 call Data j))
+                }
+                {
+                  (270480 call(270468 call . ShallowCopy c"shallowCopy")(270477 call Data(270474 call + j stride)) ithVal)
+                  (270485 call = inserted 1)
+                  break nil[44]
+                }
+              }
+              label _continueLabel[270501]
+              _indexOfInterest[270496]
+              _iterator[270497]
+            }
+            label _breakLabel[270502]
+          }
+          if(270562 call _cond_test(270547 call ! inserted))
+          {
+            (270559 call(270550 call . ShallowCopy c"shallowCopy")(270556 call Data low) ithVal)
+          }
+        }
+        label _continueLabel[270571]
+        _indexOfInterest[270566]
+        _iterator[270567]
+      }
+      label _breakLabel[270572]
+    }
+  }
+}

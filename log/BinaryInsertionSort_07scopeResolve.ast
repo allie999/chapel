@@ -1,0 +1,68 @@
+AST dump for BinaryInsertionSort after pass scopeResolve.
+Module use list: ChapelStandard Sort 
+
+{ function binaryInsertionSort[270629](arg Data[270626] :(270624 call chpl__buildArrayRuntimeType unknown Dom[270619] unknown eltType[270622]), arg comparator[270634] : unknown rec[270631] = defaultComparator[267894]) : _unknown[51] "no return value for void"
+  {(270642 call chpl_check_comparator comparator[270634] eltType[270622])
+    if(270674 call _cond_test(270650 call !=(270646 call . Dom[270619] c"rank") 1))
+    {(270671 call compilerError "binaryInsertionSort() requires 1-D array")
+    } const low[270682] "const"(270679 call . Dom[270619] c"alignedLow") const high[270689] "const"(270686 call . Dom[270619] c"alignedHigh") const stride[270699] "const"(270698 call abs(270694 call . Dom[270619] c"stride"))(270702 'end of statement')
+    { unknown _indexOfInterest[270856] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[270857] "expr temp" "temp"(270866 'move' _iterator[270857](270864 call _getIterator(270875 call chpl_direct_range_iter low[270682] high[270689] stride[270699])))
+      Defer
+      {
+        {(270891 call _freeIterator _iterator[270857])
+        }
+      }
+      { scopeless type(270880 'move' _indexOfInterest[270856](270877 call iteratorIndex _iterator[270857]))
+      }
+      ForLoop[270858]
+      { unknown i[270884] "index var" "insert auto destroy"(270886 'move' i[270884] _indexOfInterest[270856])
+        { unknown valToInsert[270715](270714 call Data[270626] i[270884]) unknown lo[270719] low[270682] unknown hi[270726](270724 call - i[270884] stride[270699])(270729 'end of statement') unknown tmp[270744] "temp"(270743 call _binarySearchForLastOccurrence Data[270626] valToInsert[270715] comparator[270634] lo[270719] hi[270726])(270751 call _check_tuple_var_decl tmp[270744] 2) unknown found[270731](270745 call tmp[270744] 0) unknown loc[270733](270748 call tmp[270744] 1)(270756 'end of statement')(270767 call = loc[270733](270764 IfExpr  found[270731] then
+          { scopeless(270761 call + loc[270733] stride[270699])
+          } else
+          { scopeless loc[270733]
+          } ))
+          { unknown _indexOfInterest[270798] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[270799] "expr temp" "temp"(270808 'move' _iterator[270799](270806 call _getIterator(270825 call chpl_direct_range_iter loc[270733](270822 call - i[270884] stride[270699])(270818 call - stride[270699]))))
+            Defer
+            {
+              {(270841 call _freeIterator _iterator[270799])
+              }
+            }
+            { scopeless type(270830 'move' _indexOfInterest[270798](270827 call iteratorIndex _iterator[270799]))
+            }
+            ForLoop[270800]
+            { unknown j[270834] "index var" "insert auto destroy"(270836 'move' j[270834] _indexOfInterest[270798])
+              {(270794 call =(270789 call Data[270626](270786 call + j[270834] stride[270699]))(270793 call Data[270626] j[270834]))
+              } label _continueLabel[270803] _indexOfInterest[270798] _iterator[270799]
+            } label _breakLabel[270804]
+          }(270853 call =(270851 call Data[270626] loc[270733]) valToInsert[270715])
+        } label _continueLabel[270861] _indexOfInterest[270856] _iterator[270857]
+      } label _breakLabel[270862]
+    }
+  } function _binarySearchForLastOccurrence[270910](arg Data[270907] :(270905 call chpl__buildArrayRuntimeType unknown Dom[270902]), arg val[270912]:_any[178](?), arg comparator[270917] : unknown rec[270914] = defaultComparator[267894], in arg lo[270925] =(270922 call . Dom[270902] c"alignedLow"), in arg hi[270932] =(270929 call . Dom[270902] c"alignedHigh")) : _unknown[51] "private"
+  { const stride[270950] "const"(270947 IfExpr (270936 call . Dom[270902] c"stridable") then
+    { scopeless(270945 call abs(270941 call . Dom[270902] c"stride"))
+    } else
+    { scopeless 1
+    } )(270953 'end of statement') unknown loc[270958](270956 call - 1)(270961 'end of statement')
+    { unknown tmp[271056] "temp"(271080 'move' tmp[271056](271075 call _cond_test(271077 call <= lo[270925] hi[270932])))
+      WhileDo[271061]
+      {
+        { const size[270973] "const"(270971 call /(270968 call - hi[270932] lo[270925]) stride[270950]) const mid[270986] "const"(270984 call + lo[270925](270982 call *(270979 call / size[270973] 2) stride[270950]))(270989 'end of statement')
+          if(271051 call _cond_test(271001 call ==(270999 call chpl_compare val[270912](270997 call Data[270907] mid[270986]) comparator[270917]) 0))
+          {(271005 call = loc[270958] mid[270986])(271014 call = lo[270925](271012 call + loc[270958] stride[270950]))
+          }
+          {
+            if(271045 call _cond_test(271027 call >(271025 call chpl_compare val[270912](271023 call Data[270907] mid[270986]) comparator[270917]) 0))
+            {(271034 call = lo[270925](271032 call + mid[270986] stride[270950]))
+            }
+            {(271042 call = hi[270932](271040 call - mid[270986] stride[270950]))
+            }
+          }
+        } label _continueLabel[271059](271070 'move' tmp[271056](271065 call _cond_test(271067 call <= lo[270925] hi[270932]))) tmp[271056]
+      } label _breakLabel[271060]
+    }
+    if(271096 call _cond_test(271087 call == loc[270958](271085 call - 1)))
+    {(271094 return(271092 call _build_tuple 0 lo[270925]))
+    }(271106 return(271104 call _build_tuple 1 loc[270958]))
+  }(355398 'used modules list'(353083 'use' ChapelStandard[20264])(270614 'use' Sort[267885]))
+}

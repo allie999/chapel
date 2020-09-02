@@ -1,0 +1,1215 @@
+AST dump for DSIUtil after pass readExternC.
+Module use list: 
+
+{
+  (353065 'use' ChapelStandard)
+  function getDataParTasksPerLocale[225873]() : _unknown[51] "inline"
+  {
+    (225876 return dataParTasksPerLocale)
+  }
+  function getDataParIgnoreRunningTasks[225883]() : _unknown[51] "inline"
+  {
+    (225886 return dataParIgnoreRunningTasks)
+  }
+  function getDataParMinGranularity[225893]() : _unknown[51] "inline"
+  {
+    (225896 return dataParMinGranularity)
+  }
+  function createTuple[225905](param arg rank[225903]:_any[178](?), arg t[225907]:_any[178](?), arg val[225909]:_any[178](?)) : _unknown[51]
+  {
+    { scopeless
+      unknown tup[225915](225913 call * rank t)
+      (225918 'end of statement')
+    }
+    {
+      unknown i[225935] 0
+      unknown tmp[225936] "maybe param" "temp"
+      (225948 'move' tmp[225936](225946 call chpl_compute_low_param_loop_bound 0(225923 call - rank 1)))
+      unknown tmp[225937] "maybe param" "temp"
+      (225958 'move' tmp[225937](225956 call chpl_compute_high_param_loop_bound 0(225953 call - rank 1)))
+      unknown tmp[225938] "maybe param" "temp"
+      (225961 'move' tmp[225938] 1)
+      ParamForLoop[225963]
+      { i[225935] tmp[225936] tmp[225937] tmp[225938]
+        { scopeless
+          (225932 call =(225930 call tup i) val)
+        }
+      }
+      label _unused_continueLabel[225940]
+      label _breakLabel[225939]
+    }
+    (225973 return tup)
+  }
+  function _computeChunkStuff[225981](arg maxTasks[225979]:_any[178](?), arg ignoreRunning[225983]:_any[178](?), arg minSize[225985]:_any[178](?), arg ranges[225987]:_any[178](?), param arg adjustToOneDim[225990] =
+  1) : _unknown[51]
+  {
+    { scopeless
+      unknown rank[226002] "param"(225999 call . ranges c"size")
+      (226005 'end of statement')
+    }
+    unknown EC[226008] "type variable" uint[115]
+    { scopeless
+      unknown numElems[226015](226013 call _cast EC 1)
+      (226018 'end of statement')
+    }
+    {
+      unknown i[226041] 0
+      unknown tmp[226042] "maybe param" "temp"
+      (226054 'move' tmp[226042](226052 call chpl_compute_low_param_loop_bound 0(226022 call - rank 1)))
+      unknown tmp[226043] "maybe param" "temp"
+      (226064 'move' tmp[226043](226062 call chpl_compute_high_param_loop_bound 0(226059 call - rank 1)))
+      unknown tmp[226044] "maybe param" "temp"
+      (226067 'move' tmp[226044] 1)
+      ParamForLoop[226069]
+      { i[226041] tmp[226042] tmp[226043] tmp[226044]
+        {
+          (226037 call *= numElems(226035 call _cast EC(226031 call .(226030 call ranges i) c"size")))
+        }
+      }
+      label _unused_continueLabel[226046]
+      label _breakLabel[226045]
+    }
+    { scopeless
+      unknown numChunks[226085](226084 call _computeNumChunks maxTasks ignoreRunning minSize numElems)
+      (226088 'end of statement')
+    }
+    if(226102 call _cond_test(226091 call == numChunks 0))
+    {
+      { scopeless
+        (226100 return(226098 call _build_tuple 0(226095 call - 1)))
+      }
+    }
+    (226113 call assert(226110 call > numChunks 0))
+    { scopeless
+      unknown parDim[226118](226116 call - 1)
+      (226121 'end of statement')
+    }
+    { scopeless
+      unknown maxDim[226125](226123 call - 1)
+      (226128 'end of statement')
+    }
+    { scopeless
+      unknown maxElems[226133](226132 call min EC)
+      (226136 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[226199] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[226200] "expr temp" "temp"
+      (226209 'move' _iterator[226200](226207 call _getIterator(226217 call chpl_direct_range_iter 0(226214 call - rank 1) 1)))
+      Defer
+      {
+        {
+          (226233 call _freeIterator _iterator[226200])
+        }
+      }
+      { scopeless type
+        (226222 'move' _indexOfInterest[226199](226219 call iteratorIndex _iterator[226200]))
+      }
+      ForLoop[226201]
+      {
+        unknown i[226226] "index var" "insert auto destroy"
+        (226228 'move' i[226226] _indexOfInterest[226199])
+        {
+          { scopeless
+            const curElems[226155] "const"(226153 call _cast EC(226149 call .(226148 call ranges i) c"size"))
+            (226158 'end of statement')
+          }
+          if(226176 call _cond_test(226165 call >= curElems(226163 call _cast EC numChunks)))
+          {
+            (226169 call = parDim i)
+            break nil[44]
+          }
+          if(226195 call _cond_test(226182 call > curElems maxElems))
+          {
+            (226186 call = maxElems curElems)
+            (226192 call = maxDim i)
+          }
+        }
+        label _continueLabel[226204]
+        _indexOfInterest[226199]
+        _iterator[226200]
+      }
+      label _breakLabel[226205]
+    }
+    if(226275 call _cond_test(226244 call == parDim(226242 call - 1)))
+    {
+      (226248 call = parDim maxDim)
+      if(226270 call _cond_test(226260 call && adjustToOneDim(226258 call < maxElems(226256 call _cast EC numChunks))))
+      {
+        { scopeless
+          (226267 call = numChunks(226265 call _cast int[13] maxElems))
+        }
+      }
+    }
+    (226284 return(226282 call _build_tuple numChunks parDim))
+  }
+  { scopeless type
+    (225996 call _build_tuple int[13] int[13])
+  }
+  function _computeNumChunks[226293](arg maxTasks[226291]:_any[178](?), arg ignoreRunning[226295]:_any[178](?), arg minSize[226297]:_any[178](?), arg numElems[226299]:_any[178](?)) : _unknown[51]
+  {
+    if(226309 call _cond_test(226304 call <= numElems 0))
+    {
+      { scopeless
+        (226307 return 0)
+      }
+    }
+    unknown EC[226316] "type variable" uint[115]
+    { scopeless
+      const unumElems[226323] "const"(226321 call _cast EC numElems)
+      (226326 'end of statement')
+    }
+    { scopeless
+      unknown numChunks[226331](226329 call _cast int[13] maxTasks)
+      (226334 'end of statement')
+    }
+    if(226371 call _cond_test(226336 call ! ignoreRunning))
+    {
+      { scopeless
+        const otherTasks[226347] "const"(226345 call -(226343 call(226339 call . here c"runningTasks")) 1)
+        (226350 'end of statement')
+      }
+      (226368 call = numChunks(226365 IfExpr (226355 call < otherTasks maxTasks) then
+      { scopeless
+        (226362 call _cast int[13](226359 call - maxTasks otherTasks))
+      } else
+      { scopeless
+        1
+      } ))
+    }
+    if(226452 call _cond_test(226377 call > minSize 0))
+    {
+      unknown tmp[226401] "temp"
+      (226449 'move' tmp[226401](226432 call _cond_test(226434 call &&(226436 call < unumElems(226439 call _cast EC(226442 call * minSize numChunks)))(226446 call > numChunks 1))))
+      WhileDo[226406]
+      {
+        {
+          (226397 call -= numChunks 1)
+        }
+        label _continueLabel[226404]
+        (226427 'move' tmp[226401](226410 call _cond_test(226412 call &&(226414 call < unumElems(226417 call _cast EC(226420 call * minSize numChunks)))(226424 call > numChunks 1))))
+        tmp[226401]
+      }
+      label _breakLabel[226405]
+    }
+    if(226471 call _cond_test(226461 call >(226458 call _cast EC numChunks) unumElems))
+    {
+      { scopeless
+        (226468 call = numChunks(226466 call _cast int[13] unumElems))
+      }
+    }
+    (226477 return numChunks)
+  }
+  { scopeless type
+    int[13]
+  }
+  function _computeNumChunks[226486](arg numElems[226484]:_any[178](?)) : _unknown[51]
+  {
+    { scopeless
+      unknown numTasks[226501](226498 IfExpr (226491 call == dataParTasksPerLocale 0) then
+      { scopeless
+        (226494 call . here c"maxTaskPar")
+      } else
+      { scopeless
+        dataParTasksPerLocale
+      } )
+      (226504 'end of statement')
+    }
+    { scopeless
+      unknown ignoreRunning[226507] dataParIgnoreRunningTasks
+      (226510 'end of statement')
+    }
+    { scopeless
+      unknown minIndicesPerTask[226512] dataParMinGranularity
+      (226515 'end of statement')
+    }
+    { scopeless
+      unknown numChunks[226523](226522 call _computeNumChunks numTasks ignoreRunning minIndicesPerTask numElems)
+      (226526 'end of statement')
+    }
+    (226528 return numChunks)
+  }
+  { scopeless type
+    int[13]
+  }
+  function _computeChunkStartEnd[226537](arg nElems[226535]:_any[178](?), arg nChunks[226539]:_any[178](?), arg myCnk[226541]:_any[178](?)) : _unknown[51]
+  {
+    unknown IT[226558] "type variable"(226555 IfExpr (226551 call ==(226549 'typeof' nElems) uint[115]) then
+    { scopeless
+      uint[115]
+    } else
+    { scopeless
+      int[13]
+    } )
+    { scopeless
+      const tmp[226584] "const" "temp"(226582 call _build_tuple(226571 call _cast IT nElems)(226575 call _cast IT nChunks)(226580 call _cast IT myCnk))
+      (226594 call _check_tuple_var_decl tmp[226584] 3)
+      const numElems[226562] "const"(226585 call tmp[226584] 0)
+      const numChunks[226564] "const"(226588 call tmp[226584] 1)
+      const myChunk[226566] "const"(226591 call tmp[226584] 2)
+      (226599 'end of statement')
+    }
+    unknown RT[226602] "type variable"(226601 'typeof' nElems)
+    { scopeless
+      unknown div[226609](226607 call / numElems numChunks)
+      (226612 'end of statement')
+    }
+    { scopeless
+      unknown rem[226617](226615 call % numElems numChunks)
+      (226620 'end of statement')
+    }
+    (226633 call assert(226630 call &&(226624 call <= 1 myChunk)(226628 call <= myChunk numChunks)))
+    if(226704 call _cond_test(226637 call <= myChunk rem))
+    {
+      { scopeless
+        unknown endIx[226646](226644 call * myChunk(226642 call + div 1))
+        (226649 'end of statement')
+      }
+      (226665 return(226663 call _build_tuple(226656 call _cast RT(226653 call - endIx div))(226660 call _cast RT endIx)))
+    }
+    {
+      { scopeless
+        unknown startIx1[226680](226678 call - numElems(226676 call *(226673 call +(226670 call - numChunks myChunk) 1) div))
+        (226683 'end of statement')
+      }
+      (226702 return(226700 call _build_tuple(226690 call _cast RT(226687 call + startIx1 1))(226697 call _cast RT(226694 call + startIx1 div))))
+    }
+  }
+  { scopeless type
+    (226546 call * 2(226545 'typeof' nElems))
+  }
+  function intCeilXDivByY[226715](arg x[226713]:_any[178](?), arg y[226717]:_any[178](?)) : _unknown[51]
+  {
+    { scopeless
+      (226729 return(226727 call + 1(226725 call /(226722 call - x 1) y)))
+    }
+  }
+  function _computeBlock[226738](arg numelems[226736]:_any[178](?), arg numblocks[226740]:_any[178](?), arg blocknum[226742]:_any[178](?), arg wayhi[226744]:_any[178](?), arg waylo[226751] =
+  (226749 call _cast(226748 'typeof' wayhi) 0), arg lo[226759] =
+  (226757 call _cast(226756 'typeof' wayhi) 0)) : _unknown[51]
+  {
+    if(226781 call _cond_test(226764 call == numelems 0))
+    {
+      { scopeless
+        (226779 return(226777 call _build_tuple(226769 call _cast(226768 'typeof' lo) 1)(226774 call _cast(226773 'typeof' lo) 0)))
+      }
+    }
+    { scopeless
+      const blo[226819] "const"(226816 IfExpr (226789 call == blocknum 0) then
+      { scopeless
+        waylo
+      } else
+      { scopeless
+        (226814 call + lo(226812 call _cast(226811 'typeof' lo)(226809 call intCeilXDivByY(226802 call *(226796 call _cast uint[115] numelems)(226800 call _cast uint[115] blocknum))(226807 call _cast uint[115] numblocks))))
+      } )
+      (226822 'end of statement')
+    }
+    { scopeless
+      const bhi[226864] "const"(226861 IfExpr (226828 call == blocknum(226826 call - numblocks 1)) then
+      { scopeless
+        wayhi
+      } else
+      { scopeless
+        (226859 call -(226856 call + lo(226854 call _cast(226853 'typeof' lo)(226851 call intCeilXDivByY(226844 call *(226835 call _cast uint[115] numelems)(226842 call _cast uint[115](226839 call + blocknum 1)))(226849 call _cast uint[115] numblocks)))) 1)
+      } )
+      (226867 'end of statement')
+    }
+    (226873 return(226871 call _build_tuple blo bhi))
+  }
+  function _factor[226883](param arg rank[226880] :
+  int[13], arg value[226885]:_any[178](?)) : _unknown[51]
+  {
+    { scopeless
+      unknown factors[226891](226889 call * rank int[13])
+      (226894 'end of statement')
+    }
+    {
+      unknown i[226911] 0
+      unknown tmp[226912] "maybe param" "temp"
+      (226924 'move' tmp[226912](226922 call chpl_compute_low_param_loop_bound 0(226899 call - rank 1)))
+      unknown tmp[226913] "maybe param" "temp"
+      (226934 'move' tmp[226913](226932 call chpl_compute_high_param_loop_bound 0(226929 call - rank 1)))
+      unknown tmp[226914] "maybe param" "temp"
+      (226937 'move' tmp[226914] 1)
+      ParamForLoop[226939]
+      { i[226911] tmp[226912] tmp[226913] tmp[226914]
+        { scopeless
+          (226908 call =(226906 call factors i) 1)
+        }
+      }
+      label _unused_continueLabel[226916]
+      label _breakLabel[226915]
+    }
+    if(227145 call _cond_test(226950 call >= value 1))
+    {
+      { scopeless
+        unknown iv[226953] value
+        (226956 'end of statement')
+      }
+      { scopeless
+        unknown factor[226959] 1
+        (226962 'end of statement')
+      }
+      {
+        unknown tmp[227118] "temp"
+        (227142 'move' tmp[227118](227137 call _cond_test(227139 call > iv 1)))
+        WhileDo[227123]
+        {
+          {
+            {
+              unknown _indexOfInterest[227079] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[227080] "expr temp" "temp"
+              (227089 'move' _iterator[227080](227087 call _getIterator(227094 call chpl_direct_range_iter 2 iv 1)))
+              Defer
+              {
+                {
+                  (227110 call _freeIterator _iterator[227080])
+                }
+              }
+              { scopeless type
+                (227099 'move' _indexOfInterest[227079](227096 call iteratorIndex _iterator[227080]))
+              }
+              ForLoop[227081]
+              {
+                unknown i[227103] "index var" "insert auto destroy"
+                (227105 'move' i[227103] _indexOfInterest[227079])
+                {
+                  if(227074 call _cond_test(226977 call ==(226974 call % iv i) 0))
+                  {
+                    { scopeless
+                      unknown j[226980] 0
+                      (226983 'end of statement')
+                    }
+                    {
+                      unknown _indexOfInterest[227014] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                      unknown _iterator[227015] "expr temp" "temp"
+                      (227024 'move' _iterator[227015](227022 call _getIterator(227032 call chpl_direct_range_iter 1(227029 call - rank 1) 1)))
+                      Defer
+                      {
+                        {
+                          (227048 call _freeIterator _iterator[227015])
+                        }
+                      }
+                      { scopeless type
+                        (227037 'move' _indexOfInterest[227014](227034 call iteratorIndex _iterator[227015]))
+                      }
+                      ForLoop[227016]
+                      {
+                        unknown i[227041] "index var" "insert auto destroy"
+                        (227043 'move' i[227041] _indexOfInterest[227014])
+                        {
+                          if(227008 call _cond_test(227001 call <(226996 call factors i)(227000 call factors j)))
+                          {
+                            { scopeless
+                              (227005 call = j i)
+                            }
+                          }
+                        }
+                        label _continueLabel[227019]
+                        _indexOfInterest[227014]
+                        _iterator[227015]
+                      }
+                      label _breakLabel[227020]
+                    }
+                    (227060 call *=(227058 call factors j) i)
+                    (227068 call = iv(227066 call / iv i))
+                    break nil[44]
+                  }
+                }
+                label _continueLabel[227084]
+                _indexOfInterest[227079]
+                _iterator[227080]
+              }
+              label _breakLabel[227085]
+            }
+          }
+          label _continueLabel[227121]
+          (227132 'move' tmp[227118](227127 call _cond_test(227129 call > iv 1)))
+          tmp[227118]
+        }
+        label _breakLabel[227122]
+      }
+    }
+    {
+      unknown _indexOfInterest[227238] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[227239] "expr temp" "temp"
+      (227248 'move' _iterator[227239](227246 call _getIterator(227256 call chpl_direct_range_iter 0(227253 call - rank 1) 1)))
+      Defer
+      {
+        {
+          (227272 call _freeIterator _iterator[227239])
+        }
+      }
+      { scopeless type
+        (227261 'move' _indexOfInterest[227238](227258 call iteratorIndex _iterator[227239]))
+      }
+      ForLoop[227240]
+      {
+        unknown i[227265] "index var" "insert auto destroy"
+        (227267 'move' i[227265] _indexOfInterest[227238])
+        {
+          unknown _indexOfInterest[227194] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[227195] "expr temp" "temp"
+          (227204 'move' _iterator[227195](227202 call _getIterator(227215 call chpl_direct_range_iter(227208 call + i 1)(227212 call - rank 1) 1)))
+          Defer
+          {
+            {
+              (227231 call _freeIterator _iterator[227195])
+            }
+          }
+          { scopeless type
+            (227220 'move' _indexOfInterest[227194](227217 call iteratorIndex _iterator[227195]))
+          }
+          ForLoop[227196]
+          {
+            unknown j[227224] "index var" "insert auto destroy"
+            (227226 'move' j[227224] _indexOfInterest[227194])
+            { scopeless
+              if(227189 call _cond_test(227176 call <(227171 call factors i)(227175 call factors j)))
+              {
+                { scopeless
+                  (227186 call <=>(227181 call factors i)(227185 call factors j))
+                }
+              }
+            }
+            label _continueLabel[227199]
+            _indexOfInterest[227194]
+            _iterator[227195]
+          }
+          label _breakLabel[227200]
+        }
+        label _continueLabel[227243]
+        _indexOfInterest[227238]
+        _iterator[227239]
+      }
+      label _breakLabel[227244]
+    }
+    (227280 return factors)
+  }
+  function computeZeroBasedDomain[227290](arg dom[227287] :
+  _domain) : _unknown[51]
+  {
+    { scopeless
+      (227305 return(227303 call chpl__buildDomainExpr(227301 'expand_tuple'(227300 call computeZeroBasedRanges(227298 call(227294 call . dom c"dims"))))))
+    }
+  }
+  function computeZeroBasedRanges[227316](arg ranges[227313] :
+  _tuple) : _unknown[51]
+  {
+    function helper[227322](arg idxType[227320]:_any[178](?), arg first[227324]:_any[178](?), arg rest[227327]:_any[178](?) ...) : _unknown[51]
+    {
+      if(227402 call _cond_test(227335 call >(227331 call . rest c"size") 1))
+      {
+        { scopeless
+          (227362 return(227360 call _build_tuple(227350 call #(227341 call chpl_build_low_bounded_range(227339 call _cast idxType 0))(227348 call _cast idxType(227344 call . first c"size")))(227358 'expand_tuple'(227357 call helper idxType(227356 'expand_tuple' rest)))))
+        }
+      }
+      {
+        { scopeless
+          (227400 return(227398 call _build_tuple(227377 call #(227368 call chpl_build_low_bounded_range(227366 call _cast idxType 0))(227375 call _cast idxType(227371 call . first c"size")))(227395 call #(227383 call chpl_build_low_bounded_range(227381 call _cast idxType 0))(227393 call _cast idxType(227389 call .(227388 call rest 0) c"size")))))
+        }
+      }
+    }
+    unknown idxType[227419] "type variable"(227416 call .(227415 call ranges 0) c"idxType")
+    if(227459 call _cond_test(227427 call >(227423 call . ranges c"size") 1))
+    {
+      { scopeless
+        (227435 return(227434 call helper idxType(227433 'expand_tuple' ranges)))
+      }
+    }
+    {
+      { scopeless
+        (227457 return(227455 call _build_tuple(227453 call #(227441 call chpl_build_low_bounded_range(227439 call _cast idxType 0))(227451 call _cast idxType(227447 call .(227446 call ranges 0) c"size")))))
+      }
+    }
+  }
+  function densify[227473](arg sub[227470] :
+  _domain, arg whole[227476] :
+  _domain, arg userErrors[227480] =
+  1) : _unknown[51]
+  {
+    unknown argtypes[227502] "type variable"(227501 'typeof'(227499 call _build_tuple sub whole))
+    (227519 call _densiCheck(227515 call ==(227508 call . sub c"rank")(227512 call . whole c"rank")) argtypes)
+    (227532 call _densiIdxCheck(227523 call . sub c"idxType")(227528 call . whole c"idxType") argtypes)
+    (227554 return(227552 call chpl__buildDomainExpr(227550 'expand_tuple'(227549 call densify(227540 call(227536 call . sub c"dims"))(227547 call(227543 call . whole c"dims")) userErrors))))
+  }
+  { scopeless type
+    (227494 call chpl__buildDomainRuntimeType defaultDist(227484 call . whole c"rank")(227489 call . whole c"idxType") 1)
+  }
+  function densify[227563](arg subs[227561]:_any[178](?), arg wholes[227565]:_any[178](?), arg userErrors[227568] =
+  1) : _unknown[51]
+  {
+    unknown argtypes[227587] "type variable"(227586 'typeof'(227584 call _build_tuple subs wholes))
+    (227604 call _densiCheck(227600 call ==(227593 call . wholes c"size")(227597 call . subs c"size")) argtypes)
+    (227616 call _densiCheck(227613 call isRange(227611 call subs 0)) argtypes)
+    (227628 call _densiCheck(227625 call isRange(227623 call wholes 0)) argtypes)
+    (227636 call _densiEnsureBounded(227634 call subs 0))
+    (227655 call _densiIdxCheck(227643 call .(227642 call subs 0) c"idxType")(227651 call .(227650 call wholes 0) c"idxType") argtypes)
+    { scopeless
+      unknown rank[227661] "param"(227658 call . wholes c"size")
+      (227664 'end of statement')
+    }
+    unknown IT[227672] "type variable"(227669 call .(227668 call wholes 0) c"idxType")
+    { scopeless
+      unknown result[227687](227685 call * rank(227684 call range IT(227680 call . BoundedRangeType c"bounded") 1))
+      (227690 'end of statement')
+    }
+    {
+      unknown d[227782] 0
+      unknown tmp[227783] "maybe param" "temp"
+      (227795 'move' tmp[227783](227793 call chpl_compute_low_param_loop_bound 0(227694 call - rank 1)))
+      unknown tmp[227784] "maybe param" "temp"
+      (227805 'move' tmp[227784](227803 call chpl_compute_high_param_loop_bound 0(227800 call - rank 1)))
+      unknown tmp[227785] "maybe param" "temp"
+      (227808 'move' tmp[227785] 1)
+      ParamForLoop[227810]
+      { d[227782] tmp[227783] tmp[227784] tmp[227785]
+        {
+          (227708 call _densiCheck(227705 call isRange(227703 call subs d)) argtypes)
+          (227721 call _densiCheck(227718 call isRange(227716 call wholes d)) argtypes)
+          (227734 call _densiIdxCheck(227728 call .(227727 call wholes d) c"idxType") IT argtypes)
+          (227742 call _densiEnsureBounded(227740 call subs d))
+          (227761 call _densiIdxCheck(227749 call .(227748 call subs d) c"idxType")(227757 call .(227756 call wholes d) c"idxType") argtypes)
+          (227779 call =(227766 call result d)(227778 call densify(227771 call subs d)(227776 call wholes d) userErrors))
+        }
+      }
+      label _unused_continueLabel[227787]
+      label _breakLabel[227786]
+    }
+    (227820 return result)
+  }
+  where {
+    (227579 call &&(227574 call isTuple subs)(227578 call isTuple wholes))
+  }
+  function densify[227837](arg s[227834] :
+  (227833 call range ?[260](boundedType = unknown B[227830])), arg w[227847] :
+  (227846 call range unknown IT[227840] ?[260](stridable = 1)), arg userErrors[227851] =
+  1) : _unknown[51]
+  {
+    (227863 call _densiEnsureBounded s)
+    (227879 call _densiIdxCheck(227868 call . s c"idxType") IT(227878 'typeof'(227876 call _build_tuple s w)))
+    function ensure[227885](arg cond[227883]:_any[178](?), arg args[227888]:_any[178](?) ...) : _unknown[51]
+    {
+      if(227914 call _cond_test userErrors)
+      {
+        if(227901 call _cond_test(227893 call ! cond))
+        {
+          { scopeless
+            (227899 call halt(227897 'expand_tuple' args))
+          }
+        }
+      }
+      {
+        { scopeless
+          (227912 call assert cond(227911 'expand_tuple' args))
+        }
+      }
+    }
+    if(228238 call _cond_test(227927 call ==(227923 call . s c"size") 0))
+    {
+      (227939 return(227937 call chpl_build_bounded_range(227931 call _cast IT 1)(227935 call _cast IT 0)))
+    }
+    {
+      (228004 call ensure(227948 call >(227944 call . w c"size") 0) "densify(s=" s ", w=" w "): w is empty while s is not")
+      { scopeless
+        unknown low[228018](228017 call(228009 call . w c"indexOrder")(228013 call . s c"first")) IT
+        (228021 'end of statement')
+      }
+      (228049 call ensure(228025 call >= low 0) "densify(s=" s ", w=" w "): s.first is not in w")
+      if(228234 call _cond_test(228056 call ==(228052 call . s c"size") 1))
+      {
+        (228062 return(228060 call chpl_build_bounded_range low low))
+      }
+      {
+        { scopeless
+          unknown high[228076](228075 call(228067 call . w c"indexOrder")(228071 call . s c"last")) IT
+          (228079 'end of statement')
+        }
+        (228108 call ensure(228084 call >= high 0) "densify(s=" s ", w=" w "): s.last is not in w")
+        (228146 call ensure(228122 call ==(228119 call %(228112 call . s c"stride")(228116 call . w c"stride")) 0) "densify(s=" s ", w=" w "): s.stride is not a multiple of w.stride")
+        { scopeless
+          const stride[228158] "const"(228156 call /(228149 call . s c"stride")(228153 call . w c"stride"))
+          (228161 'end of statement')
+        }
+        if(228171 call _cond_test(228164 call < stride 0))
+        {
+          { scopeless
+            (228168 call <=> low high)
+          }
+        }
+        (228223 call assert(228179 call <= low high) "densify(s=" s ", w=" w "): got low (" low ") larger than high (" high ")")
+        (228232 return(228230 call chpl_by(228227 call chpl_build_bounded_range low high) stride))
+      }
+    }
+  }
+  { scopeless type
+    (227859 call range IT B 1)
+  }
+  function densify[228260](arg sArg[228257] :
+  (228256 call range ?[260](boundedType = unknown B[228250])(stridable = unknown S[228253])), arg w[228270] :
+  (228269 call range unknown IT[228263] ?[260](stridable = 0)), arg userErrors[228274] =
+  1) : _unknown[51]
+  {
+    (228286 call _densiEnsureBounded sArg)
+    (228302 call _densiIdxCheck(228291 call . sArg c"idxType") IT(228301 'typeof'(228299 call _build_tuple sArg w)))
+    { scopeless
+      const s[228313] "const"(228311 call _cast(228310 call range IT B S) sArg)
+      (228316 'end of statement')
+    }
+    function ensure[228321](arg cond[228319]:_any[178](?)) : _unknown[51]
+    {
+      if(228342 call _cond_test userErrors)
+      {
+        if(228331 call _cond_test(228325 call ! cond))
+        {
+          { scopeless
+            (228329 call halt)
+          }
+        }
+      }
+      {
+        { scopeless
+          (228340 call assert cond)
+        }
+      }
+    }
+    (228381 call ensure(228378 call ||(228356 call(228352 call . s c"isEmpty"))(228376 call <=(228358 call . w c"low")(228373 IfExpr (228364 call isIntType IT) then
+    { scopeless
+      (228366 call . s c"alignedLow")
+    } else
+    { scopeless
+      (228370 call . s c"low")
+    } ))))
+    (228413 call ensure(228410 call ||(228398 call ||(228389 call(228385 call . s c"isEmpty"))(228396 call !(228395 call(228391 call . w c"hasHighBound"))))(228408 call <=(228401 call . s c"alignedHigh")(228405 call . w c"high"))))
+    if(228439 call _cond_test(228425 call &&(228418 call isUintType IT)(228424 call(228420 call . s c"isEmpty"))))
+    {
+      { scopeless
+        (228437 return(228435 call chpl_build_bounded_range(228429 call _cast IT 1)(228433 call _cast IT 0)))
+      }
+    }
+    (228459 return(228457 call _cast(228456 call range IT B S)(228449 call - s(228446 call . w c"low"))))
+  }
+  { scopeless type
+    (228282 call range IT B S)
+  }
+  function _densiEnsureBounded[228468](arg arg[228466]:_any[178](?)) : _unknown[51]
+  {
+    if(228498 call _cond_test(228474 call !(228473 call isBoundedRange arg)))
+    {
+      { scopeless
+        (228496 call compilerError "densify() currently requires that sub-ranges be bounded" 2)
+      }
+    }
+  }
+  function _densiIdxCheck[228510](arg subIdxType[228508]:_any[178](?), arg wholeIdxType[228512]:_any[178](?), arg argtypes[228514]:_any[178](?)) : _unknown[51]
+  {
+    (228526 call _densiCheck(228521 call chpl__legalIntCoerce subIdxType wholeIdxType) argtypes(errlevel = 3))
+  }
+  function _densiCheck[228535](param arg cond[228533]:_any[178](?), arg argtypes[228537]:_any[178](?), param arg errlevel[228540] =
+  2) : _unknown[51]
+  {
+    if(228574 call _cond_test(228544 call ! cond))
+    {
+      { scopeless
+        (228572 call compilerError "densify() is defined only on matching domains, ranges, and quasi-homogeneous tuples of ranges (except stridability and range b(228569 call _cast string[26] argtypes) errlevel)
+      }
+    }
+  }
+  function unDensify[228588](arg dense[228585] :
+  _domain, arg whole[228591] :
+  _domain, arg userErrors[228595] =
+  1) : _unknown[51]
+  {
+    unknown argtypes[228617] "type variable"(228616 'typeof'(228614 call _build_tuple dense whole))
+    (228634 call _undensCheck(228630 call ==(228623 call . dense c"rank")(228627 call . whole c"rank")) argtypes)
+    (228656 return(228654 call chpl__buildDomainExpr(228652 'expand_tuple'(228651 call unDensify(228642 call(228638 call . dense c"dims"))(228649 call(228645 call . whole c"dims")) userErrors))))
+  }
+  { scopeless type
+    (228609 call chpl__buildDomainRuntimeType defaultDist(228599 call . whole c"rank")(228604 call . whole c"idxType") 1)
+  }
+  function unDensify[228665](arg denses[228663]:_any[178](?), arg wholes[228667]:_any[178](?), arg userErrors[228670] =
+  1) : _unknown[51]
+  {
+    unknown argtypes[228689] "type variable"(228688 'typeof'(228686 call _build_tuple denses wholes))
+    (228706 call _undensCheck(228702 call ==(228695 call . wholes c"size")(228699 call . denses c"size")) argtypes)
+    (228718 call _undensCheck(228715 call isRange(228713 call denses 0)) argtypes)
+    (228730 call _undensCheck(228727 call isRange(228725 call wholes 0)) argtypes)
+    (228738 call _undensEnsureBounded(228736 call denses 0))
+    { scopeless
+      unknown rank[228744] "param"(228741 call . wholes c"size")
+      (228747 'end of statement')
+    }
+    unknown IT[228755] "type variable"(228752 call .(228751 call wholes 0) c"idxType")
+    { scopeless
+      unknown result[228770](228768 call * rank(228767 call range IT(228763 call . BoundedRangeType c"bounded") 1))
+      (228773 'end of statement')
+    }
+    {
+      unknown d[228848] 0
+      unknown tmp[228849] "maybe param" "temp"
+      (228861 'move' tmp[228849](228859 call chpl_compute_low_param_loop_bound 0(228777 call - rank 1)))
+      unknown tmp[228850] "maybe param" "temp"
+      (228871 'move' tmp[228850](228869 call chpl_compute_high_param_loop_bound 0(228866 call - rank 1)))
+      unknown tmp[228851] "maybe param" "temp"
+      (228874 'move' tmp[228851] 1)
+      ParamForLoop[228876]
+      { d[228848] tmp[228849] tmp[228850] tmp[228851]
+        {
+          (228791 call _undensCheck(228788 call isRange(228786 call denses d)) argtypes)
+          (228804 call _undensCheck(228801 call isRange(228799 call wholes d)) argtypes)
+          (228820 call _undensCheck(228817 call chpl__legalIntCoerce(228812 call .(228811 call wholes d) c"idxType") IT) argtypes)
+          (228828 call _undensEnsureBounded(228826 call denses d))
+          (228845 call =(228833 call result d)(228844 call unDensify(228838 call denses d)(228843 call wholes d)))
+        }
+      }
+      label _unused_continueLabel[228853]
+      label _breakLabel[228852]
+    }
+    (228886 return result)
+  }
+  where {
+    (228681 call &&(228676 call isTuple denses)(228680 call isTuple wholes))
+  }
+  function unDensify[228903](arg dense[228900] :
+  (228899 call range ?[260](boundedType = unknown B[228896])), arg whole[228913] :
+  (228912 call range unknown IT[228906] ?[260](stridable = 1))) : _unknown[51]
+  {
+    (228925 call _undensEnsureBounded dense)
+    if(228959 call _cond_test(228936 call ==(228929 call . whole c"boundedType")(228933 call . BoundedRangeType c"boundedNone")))
+    {
+      { scopeless
+        (228957 call compilerError "unDensify(): the 'whole' argument must have at least one bound")
+      }
+    }
+    if(228983 call _cond_test(228969 call ==(228965 call . dense c"size") 0))
+    {
+      { scopeless
+        (228981 return(228979 call chpl_build_bounded_range(228973 call _cast IT 1)(228977 call _cast IT 0)))
+      }
+    }
+    if(229017 call _cond_test(228994 call !(228993 call(228989 call . whole c"hasFirst"))))
+    {
+      { scopeless
+        (229015 call halt "unDensify() is invoked with the 'whole' range that has no first index")
+      }
+    }
+    { scopeless
+      unknown low[229033](229032 call(229024 call . whole c"orderToIndex")(229028 call . dense c"first")) IT
+      (229036 'end of statement')
+    }
+    { scopeless
+      const stride[229047] "const"(229045 call *(229038 call . whole c"stride")(229042 call . dense c"stride"))
+      (229050 'end of statement')
+    }
+    { scopeless
+      unknown high[229064](229063 call chpl__addRangeStrides low stride(229061 call -(229057 call . dense c"size") 1)) IT
+      (229067 'end of statement')
+    }
+    (229083 call assert(229080 call == high(229079 call(229071 call . whole c"orderToIndex")(229075 call . dense c"last"))))
+    if(229094 call _cond_test(229087 call < stride 0))
+    {
+      { scopeless
+        (229091 call <=> low high)
+      }
+    }
+    (229146 call assert(229102 call <= low high) "unDensify(dense=" dense ", whole=" whole "): got low (" low ") larger than high (" high ")")
+    (229155 return(229153 call chpl_by(229150 call chpl_build_bounded_range low high) stride))
+  }
+  { scopeless type
+    (228921 call range IT B 1)
+  }
+  function unDensify[229175](arg dense[229172] :
+  (229171 call range ?[260](boundedType = unknown B[229165])(stridable = unknown S[229168])), arg whole[229185] :
+  (229184 call range unknown IT[229178] ?[260](stridable = 0))) : _unknown[51]
+  {
+    if(229223 call _cond_test(229200 call !(229199 call(229195 call . whole c"hasLowBound"))))
+    {
+      { scopeless
+        (229221 call compilerError "unDensify(): the 'whole' argument, when not stridable, must have a low bound")
+      }
+    }
+    (229244 return(229242 call _cast(229241 call range IT B S)(229234 call + dense(229231 call . whole c"low"))))
+  }
+  { scopeless type
+    (229193 call range IT B S)
+  }
+  function _undensEnsureBounded[229253](arg arg[229251]:_any[178](?)) : _unknown[51]
+  {
+    if(229283 call _cond_test(229259 call !(229258 call isBoundedRange arg)))
+    {
+      { scopeless
+        (229281 call compilerError "unDensify() currently requires that the densified ranges be bounded" 2)
+      }
+    }
+  }
+  function _undensCheck[229295](param arg cond[229293]:_any[178](?), arg argtypes[229297]:_any[178](?), param arg errlevel[229300] =
+  2) : _unknown[51]
+  {
+    if(229334 call _cond_test(229304 call ! cond))
+    {
+      { scopeless
+        (229332 call compilerError "unDensify() is defined only on matching domains, ranges, and quasi-homogeneous tuples of ranges, but is invoked on "(229329 call _cast string[26] argtypes) errlevel)
+      }
+    }
+  }
+  function setupTargetLocalesArray[229346](ref arg targetLocDom[229344]:_any[178](?), arg targetLocArr[229348]:_any[178](?), arg specifiedLocArr[229350]:_any[178](?)) : _unknown[51]
+  {
+    { scopeless
+      unknown rank[229356] "param"(229353 call . targetLocDom c"rank")
+      (229359 'end of statement')
+    }
+    if(229598 call _cond_test(229372 call &&(229363 call != rank 1)(229370 call ==(229366 call . specifiedLocArr c"rank") 1)))
+    {
+      { scopeless
+        const factors[229382] "const"(229381 call _factor rank(229378 call . specifiedLocArr c"size"))
+        (229385 'end of statement')
+      }
+      { scopeless
+        unknown ranges[229391](229389 call * rank range)
+        (229394 'end of statement')
+      }
+      {
+        unknown i[229418] 0
+        unknown tmp[229419] "maybe param" "temp"
+        (229431 'move' tmp[229419](229429 call chpl_compute_low_param_loop_bound 0(229398 call - rank 1)))
+        unknown tmp[229420] "maybe param" "temp"
+        (229441 'move' tmp[229420](229439 call chpl_compute_high_param_loop_bound 0(229436 call - rank 1)))
+        unknown tmp[229421] "maybe param" "temp"
+        (229444 'move' tmp[229421] 1)
+        ParamForLoop[229446]
+        { i[229418] tmp[229419] tmp[229420] tmp[229421]
+          { scopeless
+            (229415 call =(229405 call ranges i)(229413 call #(229407 call chpl_build_low_bounded_range 0)(229412 call factors i)))
+          }
+        }
+        label _unused_continueLabel[229423]
+        label _breakLabel[229422]
+      }
+      (229461 call = targetLocDom(229459 call chpl__buildDomainExpr(229457 'expand_tuple' ranges)))
+      (229470 call = targetLocArr(229469 call reshape specifiedLocArr targetLocDom))
+    }
+    {
+      if(229501 call _cond_test(229478 call !=(229474 call . specifiedLocArr c"rank") rank))
+      {
+        { scopeless
+          (229499 call compilerError "specified target array of locales must equal 1 or distribution rank")
+        }
+      }
+      { scopeless
+        unknown ranges[229511](229509 call * rank range)
+        (229514 'end of statement')
+      }
+      {
+        unknown i[229547] 0
+        unknown tmp[229548] "maybe param" "temp"
+        (229560 'move' tmp[229548](229558 call chpl_compute_low_param_loop_bound 0(229518 call - rank 1)))
+        unknown tmp[229549] "maybe param" "temp"
+        (229570 'move' tmp[229549](229568 call chpl_compute_high_param_loop_bound 0(229565 call - rank 1)))
+        unknown tmp[229550] "maybe param" "temp"
+        (229573 'move' tmp[229550] 1)
+        ParamForLoop[229575]
+        { i[229547] tmp[229548] tmp[229549] tmp[229550]
+          { scopeless
+            (229544 call =(229525 call ranges i)(229542 call #(229527 call chpl_build_low_bounded_range 0)(229539 call .(229538 call(229533 call .(229530 call . specifiedLocArr c"_dom") c"dim") i) c"size")))
+          }
+        }
+        label _unused_continueLabel[229552]
+        label _breakLabel[229551]
+      }
+      (229590 call = targetLocDom(229588 call chpl__buildDomainExpr(229586 'expand_tuple' ranges)))
+      (229595 call = targetLocArr specifiedLocArr)
+    }
+  }
+  function setupTargetLocRanges[229608](param arg rank[229606]:_any[178](?), arg specifiedLocArr[229610]:_any[178](?)) : _unknown[51]
+  {
+    { scopeless
+      unknown ranges[229616](229614 call * rank range)
+      (229619 'end of statement')
+    }
+    if(229794 call _cond_test(229632 call &&(229623 call != rank 1)(229630 call ==(229626 call . specifiedLocArr c"rank") 1)))
+    {
+      { scopeless
+        const factors[229642] "const"(229641 call _factor rank(229638 call . specifiedLocArr c"size"))
+        (229645 'end of statement')
+      }
+      {
+        unknown i[229670] 0
+        unknown tmp[229671] "maybe param" "temp"
+        (229683 'move' tmp[229671](229681 call chpl_compute_low_param_loop_bound 0(229650 call - rank 1)))
+        unknown tmp[229672] "maybe param" "temp"
+        (229693 'move' tmp[229672](229691 call chpl_compute_high_param_loop_bound 0(229688 call - rank 1)))
+        unknown tmp[229673] "maybe param" "temp"
+        (229696 'move' tmp[229673] 1)
+        ParamForLoop[229698]
+        { i[229670] tmp[229671] tmp[229672] tmp[229673]
+          { scopeless
+            (229667 call =(229657 call ranges i)(229665 call #(229659 call chpl_build_low_bounded_range 0)(229664 call factors i)))
+          }
+        }
+        label _unused_continueLabel[229675]
+        label _breakLabel[229674]
+      }
+    }
+    {
+      if(229719 call _cond_test(229712 call !=(229708 call . specifiedLocArr c"rank") rank))
+      {
+        { scopeless
+          (229717 call compilerError "specified target array of locales must equal 1 or distribution rank")
+        }
+      }
+      {
+        unknown i[229757] 0
+        unknown tmp[229758] "maybe param" "temp"
+        (229770 'move' tmp[229758](229768 call chpl_compute_low_param_loop_bound 0(229728 call - rank 1)))
+        unknown tmp[229759] "maybe param" "temp"
+        (229780 'move' tmp[229759](229778 call chpl_compute_high_param_loop_bound 0(229775 call - rank 1)))
+        unknown tmp[229760] "maybe param" "temp"
+        (229783 'move' tmp[229760] 1)
+        ParamForLoop[229785]
+        { i[229757] tmp[229758] tmp[229759] tmp[229760]
+          { scopeless
+            (229754 call =(229735 call ranges i)(229752 call #(229737 call chpl_build_low_bounded_range 0)(229749 call .(229748 call(229743 call .(229740 call . specifiedLocArr c"_dom") c"dim") i) c"size")))
+          }
+        }
+        label _unused_continueLabel[229762]
+        label _breakLabel[229761]
+      }
+    }
+    (229799 return ranges)
+  }
+  function createWholeDomainForInds[229807](param arg rank[229805]:_any[178](?), arg idxType[229809]:_any[178](?), param arg stridable[229811]:_any[178](?), arg inds[229813]:_any[178](?)) : _unknown[51]
+  {
+    if(229846 call _cond_test(229818 call isDomain inds))
+    {
+      (229820 return inds)
+    }
+    {
+      { scopeless
+        unknown result[229830](229828 call chpl__buildDomainRuntimeType defaultDist rank idxType stridable)
+        (229833 'end of statement')
+      }
+      (229841 call(229836 call . result c"setIndices") inds)
+      (229844 return result)
+    }
+  }
+  function bulkCommComputeActiveDims[229857](arg LeftDims[229855]:_any[178](?), arg RightDims[229859]:_any[178](?)) : _unknown[51]
+  {
+    { scopeless
+      unknown LeftRank[229865] "param"(229862 call . LeftDims c"size")
+      (229868 'end of statement')
+    }
+    { scopeless
+      unknown RightRank[229874] "param"(229871 call . RightDims c"size")
+      (229877 'end of statement')
+    }
+    { scopeless
+      unknown minRank[229883] "param"(229882 call min LeftRank RightRank)
+      (229886 'end of statement')
+    }
+    { scopeless
+      unknown inferredRank[229888] 0
+      (229891 'end of statement')
+    }
+    { scopeless
+      unknown LeftActives[229892](229897 call * minRank int[13])
+      unknown RightActives[229899](229903 'typeof' LeftActives)
+      (229904 'end of statement')
+    }
+    { scopeless
+      unknown li[229906] 0
+      unknown ri[229910] 0
+      (229913 'end of statement')
+    }
+    function advance[229916]() : _unknown[51]
+    {
+      {
+        unknown tmp[229951] "temp"
+        (230017 'move' tmp[229951](229991 call _cond_test(229993 call &&(229995 call ==(229997 call .(229999 call LeftDims li) c"size") 1)(230004 call !=(230006 call .(230008 call LeftDims li) c"size")(230012 call .(230014 call RightDims ri) c"size")))))
+        WhileDo[229956]
+        {
+          { scopeless
+            (229948 call += li 1)
+          }
+          label _continueLabel[229954]
+          (229986 'move' tmp[229951](229960 call _cond_test(229962 call &&(229964 call ==(229966 call .(229968 call LeftDims li) c"size") 1)(229973 call !=(229975 call .(229977 call LeftDims li) c"size")(229981 call .(229983 call RightDims ri) c"size")))))
+          tmp[229951]
+        }
+        label _breakLabel[229955]
+      }
+      {
+        unknown tmp[230054] "temp"
+        (230120 'move' tmp[230054](230094 call _cond_test(230096 call &&(230098 call ==(230100 call .(230102 call RightDims ri) c"size") 1)(230107 call !=(230109 call .(230111 call RightDims ri) c"size")(230115 call .(230117 call LeftDims li) c"size")))))
+        WhileDo[230059]
+        {
+          { scopeless
+            (230051 call += ri 1)
+          }
+          label _continueLabel[230057]
+          (230089 'move' tmp[230054](230063 call _cond_test(230065 call &&(230067 call ==(230069 call .(230071 call RightDims ri) c"size") 1)(230076 call !=(230078 call .(230080 call RightDims ri) c"size")(230084 call .(230086 call LeftDims li) c"size")))))
+          tmp[230054]
+        }
+        label _breakLabel[230058]
+      }
+      (230141 call assert(230138 call ==(230128 call .(230127 call LeftDims li) c"size")(230135 call .(230134 call RightDims ri) c"size")))
+    }
+    {
+      unknown tmp[230191] "temp"
+      DoWhile[230212]
+      {
+        {
+          (230147 call advance)
+          (230155 call =(230153 call LeftActives inferredRank) li)
+          (230163 call =(230161 call RightActives inferredRank) ri)
+          (230168 call += inferredRank 1)
+          (230173 call += li 1)
+          (230178 call += ri 1)
+          label _continueLabel[230194]
+          (230210 'move' tmp[230191](230199 call _cond_test(230201 call &&(230203 call < li LeftRank)(230207 call < ri RightRank))))
+        }
+        tmp[230191]
+      }
+      label _breakLabel[230195]
+    }
+    (230222 return(230220 call _build_tuple LeftActives RightActives inferredRank))
+  }
+  function bulkCommTranslateDomain[230232](arg srcSlice[230229] :
+  _domain, arg srcDom[230235] :
+  _domain, arg targetDom[230239] :
+  _domain) : _unknown[51]
+  {
+    if(230273 call _cond_test(230250 call !=(230243 call . srcSlice c"rank")(230247 call . srcDom c"rank")))
+    {
+      { scopeless
+        (230271 call compilerError "bulkCommTranslateDomain: source slice and source domain must have identical rank")
+      }
+    }
+    { scopeless
+      const tmp[230301] "const" "temp"(230300 call bulkCommComputeActiveDims(230292 call(230288 call . srcDom c"dims"))(230299 call(230295 call . targetDom c"dims")))
+      (230311 call _check_tuple_var_decl tmp[230301] 3)
+      const SrcActives[230279] "const"(230302 call tmp[230301] 0)
+      const TargetActives[230281] "const"(230305 call tmp[230301] 1)
+      const inferredRank[230283] "const"(230308 call tmp[230301] 2)
+      (230316 'end of statement')
+    }
+    { scopeless
+      unknown needsStridable[230327] "param"(230325 call ||(230318 call . targetDom c"stridable")(230322 call . srcSlice c"stridable"))
+      (230330 'end of statement')
+    }
+    { scopeless
+      unknown rngs[230352](230351 call(230347 call . targetDom c"dims"))(230344 call *(230332 call . targetDom c"rank")(230343 call range(230337 call . targetDom c"idxType")(stridable = needsStridable)))
+      (230355 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[230420] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[230421] "expr temp" "temp"
+      (230430 'move' _iterator[230421](230428 call _getIterator(230438 call chpl_direct_range_iter 0(230435 call - inferredRank 1) 1)))
+      Defer
+      {
+        {
+          (230454 call _freeIterator _iterator[230421])
+        }
+      }
+      { scopeless type
+        (230443 'move' _indexOfInterest[230420](230440 call iteratorIndex _iterator[230421]))
+      }
+      ForLoop[230422]
+      {
+        unknown i[230447] "index var" "insert auto destroy"
+        (230449 'move' i[230447] _indexOfInterest[230420])
+        {
+          { scopeless
+            const SD[230368] "const"(230367 call SrcActives i)
+            (230371 'end of statement')
+          }
+          { scopeless
+            const TD[230377] "const"(230376 call TargetActives i)
+            (230380 'end of statement')
+          }
+          { scopeless
+            const dense[230398] "const"(230397 call densify(230388 call(230383 call . srcSlice c"dim") SD)(230396 call(230391 call . srcDom c"dim") SD))
+            (230401 'end of statement')
+          }
+          (230417 call =(230405 call rngs TD)(230416 call unDensify dense(230415 call(230410 call . targetDom c"dim") TD)))
+        }
+        label _continueLabel[230425]
+        _indexOfInterest[230420]
+        _iterator[230421]
+      }
+      label _breakLabel[230426]
+    }
+    (230466 return(230464 call chpl__buildDomainExpr(230462 'expand_tuple' rngs)))
+  }
+  function bulkCommConvertCoordinate[230474](arg ind[230472]:_any[178](?), arg bView[230477] :
+  _domain, arg aView[230481] :
+  _domain) : _unknown[51]
+  {
+    if(230547 call _cond_test(230492 call !=(230485 call . bView c"rank")(230489 call . aView c"rank")))
+    {
+      (230544 call compilerError "Invalid arguments passed to bulkCommConvertCoordinate - domain ranks must match: bView.rank = "(230518 call _cast string[26](230514 call . bView c"rank")) ", aView.rank = "(230542 call _cast string[26](230538 call . aView c"rank")))
+    }
+    { scopeless
+      unknown rank[230556] "param"(230553 call . aView c"rank")
+      (230559 'end of statement')
+    }
+    { scopeless
+      const b[230564] "const"(230563 call chpl__tuplify ind)
+      (230567 'end of statement')
+    }
+    if(230658 call _cond_test(230573 call !=(230569 call . b c"size") rank))
+    {
+      { scopeless
+        unknown plural[230603] "param"(230600 IfExpr (230580 call ==(230576 call . b c"size") 1) then
+        { scopeless
+          " element"
+        } else
+        { scopeless
+          " elements"
+        } )
+        (230606 'end of statement')
+      }
+      (230656 call compilerError "Invalid arguments passed to bulkCommConvertCoordinate - expecting index with "(230629 call _cast string[26] rank) " elements, got "(230653 call _cast string[26](230649 call . b c"size")) plural)
+    }
+    unknown idxType[230666] "type variable"(230663 call . aView c"idxType")
+    { scopeless
+      const AD[230675] "const"(230674 call(230670 call . aView c"dims"))
+      (230678 'end of statement')
+    }
+    { scopeless
+      const BD[230685] "const"(230684 call(230680 call . bView c"dims"))
+      (230688 'end of statement')
+    }
+    { scopeless
+      unknown result[230693](230691 call * rank idxType)
+      (230696 'end of statement')
+    }
+    {
+      unknown i[230763] 0
+      unknown tmp[230764] "maybe param" "temp"
+      (230776 'move' tmp[230764](230774 call chpl_compute_low_param_loop_bound 0(230700 call - rank 1)))
+      unknown tmp[230765] "maybe param" "temp"
+      (230786 'move' tmp[230765](230784 call chpl_compute_high_param_loop_bound 0(230781 call - rank 1)))
+      unknown tmp[230766] "maybe param" "temp"
+      (230789 'move' tmp[230766] 1)
+      ParamForLoop[230791]
+      { i[230763] tmp[230764] tmp[230765] tmp[230766]
+        {
+          { scopeless
+            const ar[230708] "const"(230707 call AD i)
+            const br[230715] "const"(230714 call BD i)
+            (230718 'end of statement')
+          }
+          if(230735 call _cond_test boundsChecking)
+          {
+            { scopeless
+              (230733 call assert(230731 call(230723 call . br c"contains")(230729 call b i)))
+            }
+          }
+          (230760 call =(230743 call result i)(230759 call(230745 call . ar c"orderToIndex")(230757 call(230749 call . br c"indexOrder")(230755 call b i))))
+        }
+      }
+      label _unused_continueLabel[230768]
+      label _breakLabel[230767]
+    }
+    (230801 return result)
+  }
+}

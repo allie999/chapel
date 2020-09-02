@@ -1,0 +1,35 @@
+AST dump for ChapelLocks after pass parse.
+Module use list: 
+
+{
+  { scopeless
+    (187271 'use' Atomics)
+    (187273 'use' ChapelBase)
+  }
+  (187276 'use' MemConsistency)
+  type chpl_LocalSpinlock[187398] unknown l[187283](187282 call chpl__processorAtomicType bool[10]) function chpl_LocalSpinlock[187398].lock[187289](arg _mt[187402]:_MT[238], arg this[187400]:chpl_LocalSpinlock[187398]) : _unknown[51] "inline" "method" "primary method"
+  {
+    {
+      const tmp[187368] "const" "temp"
+      (187369 'move' tmp[187368](187366 'deref'(187365 '_wide_get_locale' this)))
+      {
+        unknown tmp[187314] "temp"
+        (187362 'move' tmp[187314](187345 call _cond_test(187347 call ||(187352 call(187349 call . l c"read"))(187357 call(187354 call . l c"testAndSet")(187359 call . memoryOrder c"acquire")))))
+        WhileDo[187319]
+        {
+          { scopeless
+            (187312 call chpl_task_yield)
+          }
+          label _continueLabel[187317]
+          (187340 'move' tmp[187314](187323 call _cond_test(187325 call ||(187330 call(187327 call . l c"read"))(187335 call(187332 call . l c"testAndSet")(187337 call . memoryOrder c"acquire")))))
+          tmp[187314]
+        }
+        label _breakLabel[187318]
+      }
+      (187372 'elided on block' 0 tmp[187368])
+    }
+  } function chpl_LocalSpinlock[187398].unlock[187381](arg _mt[187406]:_MT[238], arg this[187404]:chpl_LocalSpinlock[187398]) : _unknown[51] "inline" "method" "primary method"
+  {
+    (187392 call(187384 call . l c"clear")(187388 call . memoryOrder c"release"))
+  }
+}

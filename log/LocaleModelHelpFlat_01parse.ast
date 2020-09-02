@@ -1,0 +1,110 @@
+AST dump for LocaleModelHelpFlat after pass parse.
+Module use list: 
+
+{
+  { scopeless
+    unknown localeModelHasSublocales[187415] "param" 0
+    (187418 'end of statement')
+  }
+  (187421 'use' LocaleModelHelpSetup)
+  (187424 'use' LocaleModelHelpRuntime)
+  (187427 'use' SysCTypes)
+  function chpl_doDirectExecuteOn[187435](in arg loc[187432] :
+  chpl_localeID_t) : _unknown[51] "export" "local args"
+  {
+    { scopeless
+      const node[187442] "const"(187441 call chpl_nodeFromLocaleID loc)
+      (187445 'end of statement')
+    }
+    (187451 return(187449 call == node chpl_nodeID))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function chpl_executeOn[187462](in arg loc[187459] :
+  chpl_localeID_t, arg fn[187465] :
+  int[13], arg args[187469] :
+  chpl_comm_on_bundle_p, arg args_size[187473] :
+  size_t) : _unknown[51] "export" "insert line file info" "local args"
+  {
+    { scopeless
+      const node[187480] "const"(187479 call chpl_nodeFromLocaleID loc)
+      (187483 'end of statement')
+    }
+    if(187525 call _cond_test(187487 call == node chpl_nodeID))
+    {
+      (187493 call chpl_ftable_call fn args)
+    }
+    {
+      { scopeless
+        unknown tls[187499](187498 call chpl_task_getInfoChapel)
+        (187502 'end of statement')
+      }
+      (187511 call chpl_task_data_setup(187508 call chpl_comm_on_bundle_task_bundle args) tls)
+      (187523 call chpl_comm_execute_on node(187519 call chpl_sublocFromLocaleID loc) fn args args_size)
+    }
+  }
+  function chpl_executeOnFast[187537](in arg loc[187534] :
+  chpl_localeID_t, arg fn[187540] :
+  int[13], arg args[187544] :
+  chpl_comm_on_bundle_p, arg args_size[187548] :
+  size_t) : _unknown[51] "export" "insert line file info" "local args"
+  {
+    { scopeless
+      const node[187555] "const"(187554 call chpl_nodeFromLocaleID loc)
+      (187558 'end of statement')
+    }
+    if(187600 call _cond_test(187562 call == node chpl_nodeID))
+    {
+      (187568 call chpl_ftable_call fn args)
+    }
+    {
+      { scopeless
+        unknown tls[187574](187573 call chpl_task_getInfoChapel)
+        (187577 'end of statement')
+      }
+      (187586 call chpl_task_data_setup(187583 call chpl_comm_on_bundle_task_bundle args) tls)
+      (187598 call chpl_comm_execute_on_fast node(187594 call chpl_sublocFromLocaleID loc) fn args args_size)
+    }
+  }
+  function chpl_executeOnNB[187612](in arg loc[187609] :
+  chpl_localeID_t, arg fn[187615] :
+  int[13], arg args[187619] :
+  chpl_comm_on_bundle_p, arg args_size[187623] :
+  size_t) : _unknown[51] "export" "insert line file info" "local args"
+  {
+    { scopeless
+      const node[187630] "const"(187629 call chpl_nodeFromLocaleID loc)
+      (187633 'end of statement')
+    }
+    { scopeless
+      unknown tls[187638](187637 call chpl_task_getInfoChapel)
+      (187641 'end of statement')
+    }
+    { scopeless
+      unknown isSerial[187646](187645 call chpl_task_data_getSerial tls)
+      (187649 'end of statement')
+    }
+    if(187720 call _cond_test(187652 call == node chpl_nodeID))
+    {
+      if(187680 call _cond_test isSerial)
+      {
+        (187659 call chpl_ftable_call fn args)
+      }
+      {
+        (187669 call chpl_task_data_setup(187666 call chpl_comm_on_bundle_task_bundle args) tls)
+        (187678 call chpl_comm_taskCallFTable fn args args_size c_sublocid_any)
+      }
+    }
+    {
+      (187692 call chpl_task_data_setup(187689 call chpl_comm_on_bundle_task_bundle args) tls)
+      if(187716 call _cond_test isSerial)
+      {
+        (187703 call chpl_comm_execute_on node c_sublocid_any fn args args_size)
+      }
+      {
+        (187713 call chpl_comm_execute_on_nb node c_sublocid_any fn args args_size)
+      }
+    }
+  }
+}

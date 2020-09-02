@@ -1,0 +1,93 @@
+AST dump for CString after pass parallel.
+Module use list: ChapelStandard SysCTypes 
+
+{
+  function chpl__init_CString[415970]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (501866 return _void[55])
+  }
+  function chpl__initCopy[21695](const in arg x[21692]:c_string[19]) : c_string[19] "init copy fn" "inline" "resolved" "fn synchronization free"
+  {
+    val ret[501599]:c_string[19] "dead after last mention" "RVV" "temp"
+    (960238 'move' ret[501599] x[21692])
+    (501601 return ret[501599])
+  }
+  function chpl__autoCopy[21711](const in arg x[21708]:c_string[19]) : c_string[19] "auto copy fn" "inline" "resolved"
+  {
+    val ret[501609]:c_string[19] "dead after last mention" "RVV" "temp"
+    (954398 'move' ret[501609] x[21708])
+    (501611 return ret[501609])
+  }
+  function !=[21768](const in arg s0[21765]:c_string[19], const in arg s1[21771]:c_string[19]) : bool[10] "inline" "resolved"
+  {
+    val ret[501628]:bool[10] "dead after last mention" "RVV" "temp"
+    const-val call_tmp[595232]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (595235 'move' call_tmp[595232](21778 'string_compare' s0[21765] s1[21771]))
+    const-val call_tmp[595237]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (595240 'move' call_tmp[595237](21780 call !=[436070] call_tmp[595232] 0))
+    (501633 'move' ret[501628] call_tmp[595237])
+    (501630 return ret[501628])
+  }
+  function =[21893](ref arg a[21890]:_ref(c_string)[935190], const in arg b[21896]:c_string[19]) : void[4] "assignop" "inline" "resolved" "no return value for void"
+  {
+    (21903 '=' a[21890] b[21896])
+    (501671 return _void[55])
+  }
+  function =[21914](ref arg a[21911]:_ref(c_string)[935190], const in arg b[21917]:nil[42]) : void[4] "assignop" "inline" "resolved" "no return value for void"
+  {
+    const-val call_tmp[595282]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    (595285 'move' call_tmp[595282](368901 call c_nil[204963]))
+    const-val call_tmp[595287]:c_string[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (595290 'move' call_tmp[595287](21923 call _cast[22009] call_tmp[595282]))
+    (21925 call =[21893] a[21911] call_tmp[595287])
+    (501673 return _void[55])
+  }
+  function _cast[22009](const in arg x[22012]:c_void_ptr[149]) : c_string[19] "inline" "resolved"
+  {
+    val _formal_type_tmp_[1759565]:c_string[19] "temp"
+    val ret[501697]:c_string[19] "dead after last mention" "RVV" "temp"
+    const-val call_tmp[595309]:c_string[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (595312 'move' call_tmp[595309](22019 'cast' c_string[19] x[22012]))
+    (501702 'move' ret[501697] call_tmp[595309])
+    (501699 return ret[501697])
+  }
+  function _cast[952688](const in arg x[952692]:c_ptr(uint(8))[935386]) : c_string[19] "inline" "instantiated generic" "invisible fn" "resolved" "fn synchronization free"
+  {
+    val _formal_type_tmp_[1759625]:c_string[19] "temp"
+    val ret[952865]:c_string[19] "dead after last mention" "RVV" "temp"
+    const-val call_tmp[960219]:c_string[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (960221 'move' call_tmp[960219](960223 'cast' c_string[19] x[952692]))
+    (960226 'move' ret[952865] call_tmp[960219])
+    (960230 return ret[952865])
+  }
+  function c_string[19].size[22358](const in arg this[22360]:c_string[19]) : int(64)[13] "inline" "method" "no parens" "resolved" "fn synchronization free"
+  {
+    val ret[501779]:int(64)[13] "dead after last mention" "RVV" "temp"
+    const-val call_tmp[595531]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (595534 'move' call_tmp[595531](22384 'string_length_bytes' this[22360]))
+    (501784 'move' ret[501779] call_tmp[595531])
+    (501781 return ret[501779])
+  }
+  function chpl_free_c_string[22706](ref arg cs[22703]:_ref(c_string)[935190]) : void[4] "inline" "resolved" "no return value for void"
+  {
+    const-val call_tmp[595621]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    (595624 'move' call_tmp[595621](368975 call c_nil[204963]))
+    const-val call_tmp[595626]:c_string[19] "dead after last mention" "expr temp" "maybe param" "temp"
+    (595629 'move' call_tmp[595626](22722 call _cast[22009] call_tmp[595621]))
+    const-val call_tmp[595631]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val coerce_tmp[1016899]:c_string[19] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1016903 'move' coerce_tmp[1016899](1016901 'deref' cs[22703]))
+    (595634 'move' call_tmp[595631](22724 call !=[21768] coerce_tmp[1016899] call_tmp[595626]))
+    const-val call_tmp[595636]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (595639 'move' call_tmp[595636] call_tmp[595631])
+    if call_tmp[595636]
+    {
+      (22729 call chpl_rt_free_c_string[22714] cs[22703])
+    }
+    (501860 return _void[55])
+  }
+  function chpl_rt_free_c_string[22714](ref arg cs[22711]:_ref(c_string)[935190]) : void[4] "extern" "insert line file info" "local args" "no fn body" "resolved" "fn synchronization free" "no return value for void"
+  {
+    (501858 return _void[55])
+  }
+}

@@ -1,0 +1,529 @@
+AST dump for StringCasts after pass flattenClasses.
+Module use list: ChapelStandard SysCTypes NVStringFactory 
+
+{
+  function _cast[184444](arg t[184441] :
+  string[26], arg x[184447] :
+  bool[10]) : _unknown[51] "inline"
+  {
+    if(184473 call _cond_test x[184447])
+    {
+      (184452 return "true")
+    }
+    {
+      (184470 return "false")
+    }
+  }
+  function _cast[184486](arg t[184483] :
+  chpl_anybool[181](?), arg x[184489] :
+  string[26]) : _unknown[51] throws
+  {
+    unknown str[184498](184497 call(184493 call . x[184489] c"strip"))
+    (184501 'end of statement')
+    if(184576 call _cond_test(184508 call(184504 call . str[184498] c"isEmpty")))
+    {
+      (184532 'throw'(184511 'new'(_chpl_manager = _owned[30](?))(184531 call IllegalArgumentError[388835](?) "bad cast from empty string to bool")))
+    }
+    {
+      if(184571 call _cond_test(184537 call == str[184498] "true"))
+      {
+        (184540 return 1)
+      }
+      {
+        if(184567 call _cond_test(184545 call == str[184498] "false"))
+        {
+          (184548 return 0)
+        }
+        {
+          (184564 'throw'(184553 'new'(_chpl_manager = _owned[30](?))(184563 call IllegalArgumentError[388835](?)(184560 call +(184557 call + "bad cast from string '" x[184489]) "' to bool"))))
+        }
+      }
+    }
+    (184582 return 0)
+  }
+  function _cast[184592](arg t[184589] :
+  string[26], arg x[184595] :
+  integral[199](?)) : _unknown[51]
+  {
+    function integral_to_c_string[184607](arg x[184604] :
+    (184603 call int(64)[13] 64), arg size[184613] :
+    (184612 call uint(64)[115] 32), arg isSigned[184617] :
+    bool[10], ref arg err[184621] :
+    bool[10]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      c_string[19]
+    }
+    function strlen[184635](const arg str[184632] :
+    c_string[19]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      size_t[20654]
+    }
+    unknown isErr[184642] bool[10]
+    (184645 'end of statement')
+    unknown csc[184667](184666 call integral_to_c_string(184652 call _cast(184651 call int(64)[13] 64) x[184595])(184659 call numBytes(184657 'typeof' x[184595]))(184664 call isIntType(184662 'typeof' x[184595])) isErr[184642])
+    (184670 'end of statement')
+    if(184686 call _cond_test isErr[184642])
+    {
+      Try!
+      {
+        {
+          (184679 'throw'(184674 'new'(_chpl_manager = _owned[30](?))(184678 call IllegalArgumentError[388835](?) "Unexpected case in integral_to_c_string")))
+        }
+      }
+    }
+    const len[184700] "const"(184699 call(184694 call .(184693 call strlen csc[184667]) c"safeCast") int(64)[13])
+    (184703 'end of statement')
+    (184727 return(184726 call chpl_createStringWithOwnedBufferNV(x =(184713 call _cast(184712 call c_ptr[205057](?)(184710 call uint(64)[115] 8)) csc[184667]))(length = len[184700])(size =(184721 call + len[184700] 1))(numCodepoints = len[184700])))
+  }
+  function _cast[184737](arg t[184734] :
+  integral[199](?), arg x[184740] :
+  string[26]) : _unknown[51] throws "inline"
+  {
+    function c_string_to_int8_t[184749](arg x[184746] :
+    c_string[19], ref arg err[184752] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (184758 call int(64)[13] 8)
+    }
+    function c_string_to_int16_t[184769](arg x[184766] :
+    c_string[19], ref arg err[184772] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (184778 call int(64)[13] 16)
+    }
+    function c_string_to_int32_t[184788](arg x[184785] :
+    c_string[19], ref arg err[184791] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (184797 call int(64)[13] 32)
+    }
+    function c_string_to_int64_t[184807](arg x[184804] :
+    c_string[19], ref arg err[184810] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (184816 call int(64)[13] 64)
+    }
+    function c_string_to_uint8_t[184826](arg x[184823] :
+    c_string[19], ref arg err[184829] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (184835 call uint(64)[115] 8)
+    }
+    function c_string_to_uint16_t[184845](arg x[184842] :
+    c_string[19], ref arg err[184848] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (184854 call uint(64)[115] 16)
+    }
+    function c_string_to_uint32_t[184864](arg x[184861] :
+    c_string[19], ref arg err[184867] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (184873 call uint(64)[115] 32)
+    }
+    function c_string_to_uint64_t[184883](arg x[184880] :
+    c_string[19], ref arg err[184886] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (184892 call uint(64)[115] 64)
+    }
+    unknown retVal[184897] t[184734]
+    (184900 'end of statement')
+    unknown isErr[184902] bool[10]
+    (184905 'end of statement')
+    unknown localX[184912](184911 call(184907 call . x[184740] c"localize"))
+    (184915 'end of statement')
+    const hasUnderscores[184928] "const"(184926 call !=(184922 call(184917 call . localX[184912] c"find") "_")(184924 call - 1))
+    (184931 'end of statement')
+    if(185089 call _cond_test hasUnderscores[184928])
+    {
+      (184940 call = localX[184912](184939 call(184935 call . localX[184912] c"strip")))
+      unknown numElements[184945] int(64)[13]
+      (184948 'end of statement')
+      {
+        unknown _indexOfInterest[184973] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[184974] "expr temp" "temp"
+        (184983 'move' _iterator[184974](184981 call _getIterator(184954 call(184950 call . localX[184912] c"split"))))
+        Defer
+        {
+          {
+            (185001 call _freeIterator _iterator[184974])
+          }
+        }
+        { scopeless type
+          (184989 'move' _indexOfInterest[184973](184986 call iteratorIndex _iterator[184974]))
+        }
+        ForLoop[184975]
+        {
+          unknown chpl__elidedIdx[184994] "index var" "insert auto destroy"
+          (184996 'move' chpl__elidedIdx[184994] _indexOfInterest[184973])
+          {
+            (184957 call += numElements[184945] 1)
+            if(184968 call _cond_test(184963 call > numElements[184945] 1))
+            {
+              break _breakLabel[184979] _breakLabel[184979]
+            }
+          }
+          label _continueLabel[184978]
+          _indexOfInterest[184973]
+          _iterator[184974]
+        }
+        label _breakLabel[184979]
+      }
+      if(185033 call _cond_test(185010 call > numElements[184945] 1))
+      {
+        (185031 'throw'(185014 'new'(_chpl_manager = _owned[30](?))(185030 call IllegalArgumentError[388835](?)(185027 call +(185021 call +(185018 call + "bad cast from string '" x[184740]) "' to ")(185025 call _cast string[26] t[184734])))))
+      }
+      if(185084 call _cond_test(185043 call >=(185039 call . localX[184912] c"size") 2))
+      {
+        (185081 call = localX[184912](185079 call +(185049 call localX[184912] 0)(185078 call(185056 call .(185055 call localX[184912](185052 call chpl_build_low_bounded_range 1)) c"replace") "_" "")))
+      }
+    }
+    if(185130 call _cond_test(185098 call(185094 call . localX[184912] c"isEmpty")))
+    {
+      (185128 'throw'(185101 'new'(_chpl_manager = _owned[30](?))(185127 call IllegalArgumentError[388835](?)(185124 call + "bad cast from empty string to "(185122 call _cast string[26] t[184734])))))
+    }
+    if(185423 call _cond_test(185138 call isIntType t[184734]))
+    {
+      {
+        unknown tmp[185256] "expr temp" "maybe param" "maybe type" "temp"
+        (185258 'move' tmp[185256](185142 call numBits t[184734]))
+        if(185263 call _cond_test(185260 call == tmp[185256] 8))
+        {
+          (185157 call = retVal[184897](185156 call c_string_to_int8_t(185153 call(185149 call . localX[184912] c"c_str")) isErr[184902]))
+        }
+        {
+          if(185269 call _cond_test(185266 call == tmp[185256] 16))
+          {
+            (185176 call = retVal[184897](185175 call c_string_to_int16_t(185172 call(185168 call . localX[184912] c"c_str")) isErr[184902]))
+          }
+          {
+            if(185276 call _cond_test(185273 call == tmp[185256] 32))
+            {
+              (185195 call = retVal[184897](185194 call c_string_to_int32_t(185191 call(185187 call . localX[184912] c"c_str")) isErr[184902]))
+            }
+            {
+              if(185283 call _cond_test(185280 call == tmp[185256] 64))
+              {
+                (185214 call = retVal[184897](185213 call c_string_to_int64_t(185210 call(185206 call . localX[184912] c"c_str")) isErr[184902]))
+              }
+              {
+                (185250 call compilerError "Unsupported bit width "(185226 call numBits t[184734])(185248 call + " in cast from string to "(185246 call _cast string[26] t[184734])))
+              }
+            }
+          }
+        }
+      }
+    }
+    {
+      {
+        unknown tmp[185390] "expr temp" "maybe param" "maybe type" "temp"
+        (185392 'move' tmp[185390](185292 call numBits t[184734]))
+        if(185397 call _cond_test(185394 call == tmp[185390] 8))
+        {
+          (185307 call = retVal[184897](185306 call c_string_to_uint8_t(185303 call(185299 call . localX[184912] c"c_str")) isErr[184902]))
+        }
+        {
+          if(185403 call _cond_test(185400 call == tmp[185390] 16))
+          {
+            (185326 call = retVal[184897](185325 call c_string_to_uint16_t(185322 call(185318 call . localX[184912] c"c_str")) isErr[184902]))
+          }
+          {
+            if(185410 call _cond_test(185407 call == tmp[185390] 32))
+            {
+              (185345 call = retVal[184897](185344 call c_string_to_uint32_t(185341 call(185337 call . localX[184912] c"c_str")) isErr[184902]))
+            }
+            {
+              if(185417 call _cond_test(185414 call == tmp[185390] 64))
+              {
+                (185364 call = retVal[184897](185363 call c_string_to_uint64_t(185360 call(185356 call . localX[184912] c"c_str")) isErr[184902]))
+              }
+              {
+                (185384 call compilerError "Unsupported bit width "(185376 call numBits t[184734])(185382 call + " in cast from string to "(185380 call _cast string[26] t[184734])))
+              }
+            }
+          }
+        }
+      }
+    }
+    if(185449 call _cond_test isErr[184902])
+    {
+      (185447 'throw'(185430 'new'(_chpl_manager = _owned[30](?))(185446 call IllegalArgumentError[388835](?)(185443 call +(185437 call +(185434 call + "bad cast from string '" x[184740]) "' to ")(185441 call _cast string[26] t[184734])))))
+    }
+    (185455 return retVal[184897])
+  }
+  function _real_cast_helper[185468](arg x[185465] :
+  (185464 call real(64)[16] 64), param arg isImag[185471] :
+  bool[10]) : _unknown[51] "inline"
+  {
+    function real_to_c_string[185484](arg x[185481] :
+    (185480 call real(64)[16] 64), arg isImag[185487] :
+    bool[10]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      c_string[19]
+    }
+    function strlen[185501](const arg str[185498] :
+    c_string[19]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      size_t[20654]
+    }
+    unknown csc[185518](185517 call real_to_c_string(185513 call _cast(185512 call real(64)[16] 64) x[185465]) isImag[185471])
+    (185521 'end of statement')
+    const len[185532] "const"(185531 call(185526 call .(185525 call strlen csc[185518]) c"safeCast") int(64)[13])
+    (185535 'end of statement')
+    (185559 return(185558 call chpl_createStringWithOwnedBufferNV(x =(185545 call _cast(185544 call c_ptr[205057](?)(185542 call uint(64)[115] 8)) csc[185518]))(length = len[185532])(size =(185553 call + len[185532] 1))(numCodepoints = len[185532])))
+  }
+  { scopeless type
+    string[26]
+  }
+  function _cast[185570](arg t[185567] :
+  string[26], arg x[185573] :
+  chpl_anyreal[193](?)) : _unknown[51]
+  {
+    (185587 return(185586 call _real_cast_helper(185582 call _cast(185581 call real(64)[16] 64) x[185573]) 0))
+  }
+  function _cast[185598](arg t[185595] :
+  string[26], arg x[185601] :
+  chpl_anyimag[190](?)) : _unknown[51]
+  {
+    unknown r[185612](185611 'cast'(185609 call real(64)[16] 64) x[185601])
+    (185615 'end of statement')
+    (185622 return(185621 call _real_cast_helper r[185612] 1))
+  }
+  function _cleanupStringForRealCast[185630](arg t[185628]:_any[178](?), ref arg s[185633] :
+  string[26]) : _unknown[51] throws "inline" "no return value for void"
+  {
+    unknown len[185640](185637 call . s[185633] c"size")
+    (185643 'end of statement')
+    if(185666 call _cond_test(185650 call(185646 call . s[185633] c"isEmpty")))
+    {
+      (185664 'throw'(185653 'new'(_chpl_manager = _owned[30](?))(185663 call IllegalArgumentError[388835](?)(185660 call + "bad cast from empty string to "(185658 call _cast string[26] t[185628])))))
+    }
+    if(185781 call _cond_test(185692 call &&(185673 call >= len[185640] 2)(185690 call !=(185686 call(185681 call .(185680 call s[185633](185677 call chpl_build_low_bounded_range 1)) c"find") "_")(185688 call - 1))))
+    {
+      if(185776 call _cond_test(185705 call &&(185696 call > len[185640] 2)(185703 call ==(185701 call s[185633] 0) "_")))
+      {
+        (185743 call = s[185633](185741 call +(185711 call s[185633] 0)(185740 call(185718 call .(185717 call s[185633](185714 call chpl_build_low_bounded_range 1)) c"replace") "_" "")))
+      }
+      {
+        (185772 call = s[185633](185771 call(185749 call . s[185633] c"replace") "_" ""))
+      }
+    }
+  }
+  function _cast[185793](arg t[185790] :
+  chpl_anyreal[193](?), arg x[185796] :
+  string[26]) : _unknown[51] throws "inline"
+  {
+    function c_string_to_real32[185805](arg x[185802] :
+    c_string[19], ref arg err[185808] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (185814 call real(64)[16] 32)
+    }
+    function c_string_to_real64[185825](arg x[185822] :
+    c_string[19], ref arg err[185828] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (185834 call real(64)[16] 64)
+    }
+    unknown retVal[185839] t[185790]
+    (185842 'end of statement')
+    unknown isErr[185844] bool[10]
+    (185847 'end of statement')
+    unknown localX[185854](185853 call(185849 call . x[185796] c"localize"))
+    (185857 'end of statement')
+    (185862 call _cleanupStringForRealCast t[185790] localX[185854])
+    {
+      unknown tmp[185937] "expr temp" "maybe param" "maybe type" "temp"
+      (185939 'move' tmp[185937](185867 call numBits t[185790]))
+      if(185944 call _cond_test(185941 call == tmp[185937] 32))
+      {
+        (185882 call = retVal[185839](185881 call c_string_to_real32(185878 call(185874 call . localX[185854] c"c_str")) isErr[185844]))
+      }
+      {
+        if(185950 call _cond_test(185947 call == tmp[185937] 64))
+        {
+          (185901 call = retVal[185839](185900 call c_string_to_real64(185897 call(185893 call . localX[185854] c"c_str")) isErr[185844]))
+        }
+        {
+          (185931 call compilerError "Unsupported bit width "(185913 call numBits t[185790]) " in cast to string")
+        }
+      }
+    }
+    if(185983 call _cond_test isErr[185844])
+    {
+      (185981 'throw'(185958 'new'(_chpl_manager = _owned[30](?))(185980 call IllegalArgumentError[388835](?)(185977 call +(185974 call +(185965 call +(185962 call + "bad cast from string '" x[185796]) "' to real(")(185972 call _cast string[26](185970 call numBits t[185790]))) ")"))))
+    }
+    (185989 return retVal[185839])
+  }
+  function _cast[185999](arg t[185996] :
+  chpl_anyimag[190](?), arg x[186002] :
+  string[26]) : _unknown[51] throws "inline"
+  {
+    function c_string_to_imag32[186011](arg x[186008] :
+    c_string[19], ref arg err[186014] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (186020 call imag(64)[130] 32)
+    }
+    function c_string_to_imag64[186031](arg x[186028] :
+    c_string[19], ref arg err[186034] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (186040 call imag(64)[130] 64)
+    }
+    unknown retVal[186045] t[185996]
+    (186048 'end of statement')
+    unknown isErr[186050] bool[10]
+    (186053 'end of statement')
+    unknown localX[186060](186059 call(186055 call . x[186002] c"localize"))
+    (186063 'end of statement')
+    (186068 call _cleanupStringForRealCast t[185996] localX[186060])
+    {
+      unknown tmp[186127] "expr temp" "maybe param" "maybe type" "temp"
+      (186129 'move' tmp[186127](186073 call numBits t[185996]))
+      if(186134 call _cond_test(186131 call == tmp[186127] 32))
+      {
+        (186088 call = retVal[186045](186087 call c_string_to_imag32(186084 call(186080 call . localX[186060] c"c_str")) isErr[186050]))
+      }
+      {
+        if(186140 call _cond_test(186137 call == tmp[186127] 64))
+        {
+          (186107 call = retVal[186045](186106 call c_string_to_imag64(186103 call(186099 call . localX[186060] c"c_str")) isErr[186050]))
+        }
+        {
+          (186121 call compilerError "Unsupported bit width "(186119 call numBits t[185996]) " in cast to string")
+        }
+      }
+    }
+    if(186173 call _cond_test isErr[186050])
+    {
+      (186171 'throw'(186148 'new'(_chpl_manager = _owned[30](?))(186170 call IllegalArgumentError[388835](?)(186167 call +(186164 call +(186155 call +(186152 call + "bad cast from string '" x[186002]) "' to imag(")(186162 call _cast string[26](186160 call numBits t[185996]))) ")"))))
+    }
+    (186179 return retVal[186045])
+  }
+  function _cast[186189](arg t[186186] :
+  string[26], arg x[186192] :
+  chpl_anycomplex[184](?)) : _unknown[51]
+  {
+    if(186228 call _cond_test(186209 call ||(186201 call isnan(186197 call . x[186192] c"re"))(186208 call isnan(186204 call . x[186192] c"im"))))
+    {
+      (186226 return "nan")
+    }
+    unknown re[186241](186239 call _cast string[26](186235 call . x[186192] c"re"))
+    (186244 'end of statement')
+    unknown im[186246] string[26]
+    (186249 'end of statement')
+    unknown op[186251] string[26]
+    (186254 'end of statement')
+    if(186330 call _cond_test(186260 call <(186256 call . x[186192] c"im") 0))
+    {
+      (186272 call = im[186246](186270 call _cast string[26](186267 call -(186264 call . x[186192] c"im"))))
+      (186278 call = op[186251] " - ")
+    }
+    {
+      if(186326 call _cond_test(186296 call &&(186288 call ==(186282 call . x[186192] c"im")(186286 call - 0.0))(186294 call !=(186291 call - 0.0) 0.0)))
+      {
+        (186300 call = im[186246] "0.0")
+        (186306 call = op[186251] " - ")
+      }
+      {
+        (186317 call = im[186246](186315 call _cast string[26](186311 call . x[186192] c"im")))
+        (186323 call = op[186251] " + ")
+      }
+    }
+    const ts0[186339] "const"(186337 call + re[186241] op[186251])
+    (186342 'end of statement')
+    const ts1[186347] "const"(186345 call + ts0[186339] im[186246])
+    (186350 'end of statement')
+    const ret[186369] "const"(186367 call + ts1[186347] "i")
+    (186372 'end of statement')
+    (186374 return ret[186369])
+  }
+  function _cast[186384](arg t[186381] :
+  chpl_anycomplex[184](?), arg x[186387] :
+  string[26]) : _unknown[51] throws "inline"
+  {
+    function c_string_to_complex64[186396](arg x[186393] :
+    c_string[19], ref arg err[186399] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (186405 call complex(128)[140] 64)
+    }
+    function c_string_to_complex128[186416](arg x[186413] :
+    c_string[19], ref arg err[186419] :
+    bool[10]) : _unknown[51] "extern" "insert line file info" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+    }
+    { scopeless type
+      (186425 call complex(128)[140] 128)
+    }
+    unknown retVal[186430] t[186381]
+    (186433 'end of statement')
+    unknown isErr[186435] bool[10]
+    (186438 'end of statement')
+    const localX[186445] "const"(186444 call(186440 call . x[186387] c"localize"))
+    (186448 'end of statement')
+    if(186492 call _cond_test(186454 call(186450 call . localX[186445] c"isEmpty")))
+    {
+      (186490 'throw'(186457 'new'(_chpl_manager = _owned[30](?))(186489 call IllegalArgumentError[388835](?)(186486 call +(186483 call + "bad cast from empty string to complex("(186481 call _cast string[26](186479 call numBits t[186381]))) ")"))))
+    }
+    {
+      unknown tmp[186554] "expr temp" "maybe param" "maybe type" "temp"
+      (186556 'move' tmp[186554](186500 call numBits t[186381]))
+      if(186561 call _cond_test(186558 call == tmp[186554] 64))
+      {
+        (186515 call = retVal[186430](186514 call c_string_to_complex64(186511 call(186507 call . localX[186445] c"c_str")) isErr[186435]))
+      }
+      {
+        if(186567 call _cond_test(186564 call == tmp[186554] 128))
+        {
+          (186534 call = retVal[186430](186533 call c_string_to_complex128(186530 call(186526 call . localX[186445] c"c_str")) isErr[186435]))
+        }
+        {
+          (186548 call compilerError "Unsupported bit width "(186546 call numBits t[186381]) " in cast to string")
+        }
+      }
+    }
+    if(186600 call _cond_test isErr[186435])
+    {
+      (186598 'throw'(186575 'new'(_chpl_manager = _owned[30](?))(186597 call IllegalArgumentError[388835](?)(186594 call +(186591 call +(186582 call +(186579 call + "bad cast from string '" x[186387]) "' to complex(")(186589 call _cast string[26](186587 call numBits t[186381]))) ")"))))
+    }
+    (186606 return retVal[186430])
+  }
+  (355273 'used modules list'(184426 'use' ChapelStandard[20264])(184430 'use' SysCTypes[20940])(184436 'use' NVStringFactory[30564]))
+}

@@ -1,0 +1,255 @@
+AST dump for Reflection after pass scopeResolve.
+Module use list: ChapelStandard 
+
+{
+  function checkQueryT[224804](arg t[224802]:_any[178](?)) type : _unknown[51] "private"
+  {
+    if(224862 call _cond_test(224809 call isClassType t[224802]))
+    {
+      (224815 return(224813 call _cast _borrowedNonNilable[214](?) t[224802]))
+    }
+    {
+      if(224856 call _cond_test(224825 call ||(224820 call isRecordType t[224802])(224824 call isUnionType t[224802])))
+      {
+        (224828 return t[224802])
+      }
+      {
+        (224854 call compilerError(224833 call _cast string[26] t[224802]) " is not a class, record, or union type" 2)
+      }
+    }
+  }
+  function numFields[224876](arg t[224874]:_any[178](?)) param : _unknown[51]
+  {
+    (224886 return(224885 'num fields'(224884 call checkQueryT t[224874])))
+  }
+  { scopeless type
+    int(64)[13]
+  }
+  function getFieldName[224896](arg t[224894]:_any[178](?), param arg i[224899] :
+  int(64)[13]) param : _unknown[51]
+  {
+    (224914 return(224913 'field num to name'(224908 call checkQueryT t[224894])(224911 call + i[224899] 1)))
+  }
+  { scopeless type
+    string[26]
+  }
+  function getField[224927](const  ref arg x[224924] :
+  unknown t[224922], param arg i[224930] :
+  int(64)[13]) param : _unknown[51]
+  {
+    (224967 return(224966 'field by num' x[224924](224964 call + i[224930] 1)))
+  }
+  where {
+    (224957 call &&(224944 call &&(224935 call >= i[224930] 0)(224942 call < i[224930](224941 call numFields t[224922])))(224956 call isParam(224954 'field by num' x[224924](224952 call + i[224930] 1))))
+  }
+  function getField[224980](const  ref arg x[224977] :
+  unknown t[224975], param arg i[224983] :
+  int(64)[13]) type : _unknown[51]
+  {
+    (225020 return(225019 'field by num' x[224977](225017 call + i[224983] 1)))
+  }
+  where {
+    (225010 call &&(224997 call &&(224988 call >= i[224983] 0)(224995 call < i[224983](224994 call numFields t[224975])))(225009 call isType(225007 'field by num' x[224977](225005 call + i[224983] 1))))
+  }
+  function getField[225033](const  ref arg x[225030] :
+  unknown t[225028], param arg i[225036] :
+  int(64)[13]) const ref : _unknown[51] "inline" "unsafe"
+  {
+    (225047 return(225046 'field by num' x[225030](225044 call + i[225036] 1)))
+  }
+  function getField[225059](const  ref arg x[225056] :
+  unknown t[225054], param arg s[225062] :
+  string[26]) param : _unknown[51]
+  {
+    (225098 return(225097 call getField x[225056](225096 call getFieldIndex t[225054] s[225062])))
+  }
+  where {
+    (225087 call &&(225073 call !=(225069 call getFieldIndex t[225054] s[225062])(225071 call - 1))(225086 call isParam(225084 call getField x[225056](225083 call getFieldIndex t[225054] s[225062]))))
+  }
+  function getField[225111](const  ref arg x[225108] :
+  unknown t[225106], param arg s[225114] :
+  string[26]) type : _unknown[51]
+  {
+    (225150 return(225149 call getField x[225108](225148 call getFieldIndex t[225106] s[225114])))
+  }
+  where {
+    (225139 call &&(225125 call !=(225121 call getFieldIndex t[225106] s[225114])(225123 call - 1))(225138 call isType(225136 call getField x[225108](225135 call getFieldIndex t[225106] s[225114]))))
+  }
+  function getField[225163](const  ref arg x[225160] :
+  unknown t[225158], param arg s[225166] :
+  string[26]) const ref : _unknown[51] "inline" "unsafe"
+  {
+    unknown i[225190] "param"(225189 'field name to num' t[225158] s[225166])
+    (225193 'end of statement')
+    if(225242 call _cond_test(225197 call == i[225190] 0))
+    {
+      (225240 call compilerError "field " s[225166] " not found in "(225238 call _cast string[26] t[225158]))
+    }
+    (225252 return(225251 'field by num' x[225160] i[225190]))
+  }
+  function isImplementedWithRecords[225260](arg t[225258]:_any[178](?)) param : _unknown[51] "no doc"
+  {
+    (225272 return(225270 call ||(225265 call isRangeType t[225258])(225269 call isStringType t[225258])))
+  }
+  function numImplementationFields[225281](arg t[225279]:_any[178](?)) param : _unknown[51] "no doc"
+  {
+    (225292 return(225291 'num fields' t[225279]))
+  }
+  where {
+    (225287 call isImplementedWithRecords t[225279])
+  }
+  { scopeless type
+    int(64)[13]
+  }
+  function getImplementationField[225306](const  ref arg x[225303] :
+  unknown t[225301], param arg i[225309] :
+  int(64)[13]) type : _unknown[51] "no doc"
+  {
+    (225331 return(225330 'field by num' x[225303] i[225309]))
+  }
+  where {
+    (225324 call &&(225315 call isImplementedWithRecords t[225301])(225323 call isType(225321 'field by num' x[225303] i[225309])))
+  }
+  function getImplementationField[225344](const  ref arg x[225341] :
+  unknown t[225339], param arg i[225347] :
+  int(64)[13]) param : _unknown[51] "no doc"
+  {
+    (225369 return(225368 'field by num' x[225341] i[225347]))
+  }
+  where {
+    (225362 call &&(225353 call isImplementedWithRecords t[225339])(225361 call isParam(225359 'field by num' x[225341] i[225347])))
+  }
+  function getImplementationField[225382](const  ref arg x[225379] :
+  unknown t[225377], param arg i[225385] :
+  int(64)[13]) const ref : _unknown[51] "no doc" "unsafe"
+  {
+    if(225436 call _cond_test(225392 call !(225391 call isImplementedWithRecords t[225377])))
+    {
+      (225434 call compilerError "an argument of the type "(225415 call _cast string[26] t[225377]) " is not valid for getImplementationField()")
+    }
+    (225447 return(225446 'field by num' x[225379] i[225385]))
+  }
+  function getFieldRef[225458](ref arg x[225455] :
+  unknown t[225453], param arg i[225461] :
+  int(64)[13]) ref : _unknown[51] "inline" "unsafe"
+  {
+    (225472 return(225471 'field by num' x[225455](225469 call + i[225461] 1)))
+  }
+  function getFieldRef[225484](ref arg x[225481] :
+  unknown t[225479], param arg s[225487] :
+  string[26]) ref : _unknown[51] "unsafe"
+  {
+    unknown i[225495] "param"(225494 'field name to num' t[225479] s[225487])
+    (225498 'end of statement')
+    if(225515 call _cond_test(225502 call == i[225495] 0))
+    {
+      (225513 call compilerError "field " s[225487] " not found in "(225511 call _cast string[26] t[225479]))
+    }
+    (225525 return(225524 'field by num' x[225481] i[225495]))
+  }
+  function getFieldIndex[225533](arg t[225531]:_any[178](?), param arg s[225536] :
+  string[26]) param : _unknown[51]
+  {
+    (225551 return(225549 call -(225547 'field name to num'(225545 call checkQueryT t[225531]) s[225536]) 1))
+  }
+  { scopeless type
+    int(64)[13]
+  }
+  function hasField[225561](arg t[225559]:_any[178](?), param arg s[225564] :
+  string[26]) param : _unknown[51]
+  {
+    (225576 return(225574 call >=(225572 call getFieldIndex t[225559] s[225564]) 0))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function isFieldBound[225586](arg t[225584]:_any[178](?), param arg i[225589] :
+  int(64)[13]) param : _unknown[51]
+  {
+    (225624 return(225623 'is bound'(225614 call checkQueryT t[225584])(225622 call getFieldName(225619 call checkQueryT t[225584]) i[225589])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function isFieldBound[225634](arg t[225632]:_any[178](?), param arg s[225637] :
+  string[26]) param : _unknown[51]
+  {
+    (225649 return(225648 'is bound'(225646 call checkQueryT t[225632]) s[225637]))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function canResolve[225661](param arg fname[225658] :
+  string[26]) param : _unknown[51]
+  {
+    (225684 return(225683 'call and fn resolves' fname[225658]))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function canResolve[225696](param arg fname[225693] :
+  string[26], arg args[225699]:_any[178](?) ...) param : _unknown[51]
+  {
+    (225709 return(225708 'call and fn resolves' fname[225693](225707 'expand_tuple' args[225699])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function canResolveMethod[225719](arg obj[225717]:_any[178](?), param arg fname[225722] :
+  string[26]) param : _unknown[51]
+  {
+    (225747 return(225746 'method call and fn resolves' obj[225717] fname[225722]))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function canResolveMethod[225757](arg obj[225755]:_any[178](?), param arg fname[225760] :
+  string[26], arg args[225764]:_any[178](?) ...) param : _unknown[51]
+  {
+    (225775 return(225774 'method call and fn resolves' obj[225755] fname[225760](225773 'expand_tuple' args[225764])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function canResolveTypeMethod[225785](arg t[225783]:_any[178](?), param arg fname[225788] :
+  string[26]) param : _unknown[51]
+  {
+    (225797 return(225796 'method call and fn resolves' t[225783] fname[225788]))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function canResolveTypeMethod[225807](arg t[225805]:_any[178](?), param arg fname[225810] :
+  string[26], arg args[225814]:_any[178](?) ...) param : _unknown[51]
+  {
+    (225825 return(225824 'method call and fn resolves' t[225805] fname[225810](225823 'expand_tuple' args[225814])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function getLineNumber[225833]() param : _unknown[51] "get line number" "no return value for void"
+  {
+  }
+  { scopeless type
+    int(64)[13]
+  }
+  function getFileName[225842]() param : _unknown[51] "get file name" "no return value for void"
+  {
+  }
+  { scopeless type
+    string[26]
+  }
+  function getRoutineName[225851]() param : _unknown[51] "get function name" "no return value for void"
+  {
+  }
+  { scopeless type
+    string[26]
+  }
+  function getModuleName[225860]() param : _unknown[51] "get module name" "no return value for void"
+  {
+  }
+  { scopeless type
+    string[26]
+  }
+  (355356 'used modules list'(353063 'use' ChapelStandard[20264]))
+}

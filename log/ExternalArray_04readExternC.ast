@@ -1,0 +1,284 @@
+AST dump for ExternalArray after pass readExternC.
+Module use list: 
+
+{
+  (188567 'use' ChapelStandard)
+  type chpl_opaque_array[188587] unknown _pid[188572] int[13] unknown _instance[188577] c_void_ptr unknown _unowned[188582] bool[10]
+  type chpl_external_array[188607] unknown elts[188592] c_void_ptr unknown num_elts[188597] uint[115] unknown freer[188602] c_void_ptr
+  function chpl_make_external_array[188616](arg elt_size[188613] :
+  uint[115], arg num_elts[188619] :
+  uint[115]) : _unknown[51] "extern" "local args" "no fn body"
+  {
+  }
+  { scopeless type
+    chpl_external_array
+  }
+  function chpl_make_external_array_ptr[188632](arg elts[188629] :
+  c_void_ptr, arg num_elts[188635] :
+  uint[115]) : _unknown[51] "extern" "local args" "no fn body"
+  {
+  }
+  { scopeless type
+    chpl_external_array
+  }
+  function chpl_make_external_array_ptr_free[188648](arg elts[188645] :
+  c_void_ptr, arg num_elts[188651] :
+  uint[115]) : _unknown[51] "extern" "local args" "no fn body"
+  {
+  }
+  { scopeless type
+    chpl_external_array
+  }
+  function chpl_free_external_array[188664](in arg x[188661] :
+  chpl_external_array) : void[4] "extern" "local args" "no fn body"
+  {
+  }
+  function chpl_call_free_func[188674](arg func[188671] :
+  c_void_ptr, arg elts[188677] :
+  c_void_ptr) : void[4] "extern" "local args" "no fn body"
+  {
+  }
+  function makeArrayFromPtr[188688](arg value[188685] :
+  c_ptr, arg num_elts[188691] :
+  uint[115]) : _unknown[51] "no copy return"
+  {
+    { scopeless
+      unknown data[188702](188701 call chpl_make_external_array_ptr(188697 call _cast c_void_ptr value) num_elts)
+      (188705 'end of statement')
+    }
+    (188715 return(188714 call makeArrayFromExternArray data(188711 call . value c"eltType")))
+  }
+  function makeArrayFromExternArray[188725](arg value[188722] :
+  chpl_external_array, arg eltType[188727]:_any[178](?)) : _unknown[51] "no copy return"
+  {
+    { scopeless
+      unknown dom[188755](188754 call(188730 call . defaultDist c"dsiNewRectangularDom")(rank = 1)(idxType = int[13])(stridable = 0)(inds =(188751 call _build_tuple(188749 call #(188741 call chpl_build_low_bounded_range 0)(188746 call . value c"num_elts")))))
+      (188758 'end of statement')
+    }
+    (188765 call =(188761 call . dom c"_free_when_no_arrs") 1)
+    { scopeless
+      unknown arr[188814](188770 'new'(_chpl_manager = unmanaged[220](?))(188813 call DefaultRectangularArr(eltType = eltType)(rank = 1)(idxType =(188778 call . dom c"idxType"))(stridable =(188783 call . dom c"stridable"))(dom = dom)(data =(188799 call _cast(188798 call _ddata eltType)(188792 call . value c"elts")))(externFreeFunc =(188805 call . value c"freer"))(externArr = 1)(_borrowed = 1)))
+      (188817 'end of statement')
+    }
+    (188826 call(188819 call . dom c"add_arr") arr(locking = 0))
+    (188832 return(188831 call _newArray arr))
+  }
+  function makeArrayFromOpaque[188842](arg value[188839] :
+  chpl_opaque_array, arg arrType[188844]:_any[178](?)) : _unknown[51] "no copy return"
+  {
+    { scopeless
+      unknown asArrType[188854](188852 call _cast(188851 'to nilable class from type' arrType)(188847 call . value c"_instance"))
+      (188857 'end of statement')
+    }
+    if(188884 call _cond_test(188861 call == asArrType nil[44]))
+    {
+      { scopeless
+        (188882 call halt "nil array passed to makeArrayFromOpaque")
+      }
+    }
+    { scopeless
+      unknown asNonNilArrType[188894](188893 'try!-expr'(188891 call _cast arrType asArrType))
+      (188897 'end of statement')
+    }
+    { scopeless
+      unknown ret[188902](188901 call _newArray asNonNilArrType)
+      (188905 'end of statement')
+    }
+    (188914 call =(188907 call . ret c"_pid")(188911 call . value c"_pid"))
+    (188922 call =(188918 call . ret c"_unowned") 1)
+    (188926 return ret)
+  }
+  function convertStringOrBytes[188938](ref arg arr[188935] :
+  (188932 call chpl__buildArrayRuntimeType nil[44])) : _unknown[51]
+  {
+    { scopeless
+      unknown wrapper[188967](188965 call chpl__buildArrayRuntimeType(188963 call chpl__ensureDomainExpr(188958 call . arr c"_dom")) chpl_byte_buffer)
+      (188970 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[189007] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[189008] "expr temp" "temp"
+      (189017 'move' _iterator[189008](189015 call _getIterator(189027 call chpl_direct_counted_range_iter 0(189023 call . arr c"size"))))
+      Defer
+      {
+        {
+          (189043 call _freeIterator _iterator[189008])
+        }
+      }
+      { scopeless type
+        (189032 'move' _indexOfInterest[189007](189029 call iteratorIndex _iterator[189008]))
+      }
+      ForLoop[189009]
+      {
+        unknown i[189036] "index var" "insert auto destroy"
+        (189038 'move' i[189036] _indexOfInterest[189007])
+        {
+          { scopeless
+            unknown item[188986] "ref var"(188985 call arr i)
+            (188989 'end of statement')
+          }
+          { scopeless
+            unknown val[188995](188994 call chpl__exportRetStringOrBytes item)
+            (188998 'end of statement')
+          }
+          (189004 call =(189002 call wrapper i) val)
+        }
+        label _continueLabel[189012]
+        _indexOfInterest[189007]
+        _iterator[189008]
+      }
+      label _breakLabel[189013]
+    }
+    { scopeless
+      unknown ext[189067](189066 call chpl_make_external_array_ptr_free(189057 call c_ptrTo(189055 call wrapper 0))(189064 call _cast uint[115](189060 call . wrapper c"size")))
+      (189070 'end of statement')
+    }
+    (189072 return ext)
+  }
+  where {
+    (188955 call ||(188946 call ==(188942 call . arr c"eltType") string[26])(188953 call ==(188949 call . arr c"eltType") bytes[24]))
+  }
+  { scopeless type
+    chpl_external_array
+  }
+  function convertToExternalArray[189086](in arg arr[189083] :
+  (189080 call chpl__buildArrayRuntimeType nil[44])) : _unknown[51]
+  {
+    if(189139 call _cond_test(189103 call !(189102 call isExternArrEltType(189098 call . arr c"eltType"))))
+    {
+      (189106 'use' HaltWrappers)
+      (189137 call safeCastCheckHalt(189134 call + "Cannot build an external array that stores "(189132 call _cast string[26](189128 call . arr c"eltType"))))
+    }
+    if(189197 call _cond_test(189154 call !(189153 call isIntegralType(189149 call .(189146 call . arr c"_dom") c"idxType"))))
+    {
+      (189194 call compilerError(189191 call + "cannot return an array with indices that are not " "integrals"))
+    }
+    if(189230 call _cond_test(189205 call .(189202 call . arr c"_dom") c"stridable"))
+    {
+      (189227 call compilerError "cannot return a strided array")
+    }
+    if(189266 call _cond_test(189242 call !=(189238 call .(189235 call . arr c"_dom") c"rank") 1))
+    {
+      (189263 call compilerError "cannot return an array with rank != 1")
+    }
+    if(189302 call _cond_test(189278 call !=(189274 call .(189271 call . arr c"_dom") c"low") 0))
+    {
+      (189299 call halt "cannot return an array when the lower bounds is not 0")
+    }
+    if(189328 call _cond_test(189320 call ||(189311 call ==(189307 call . arr c"eltType") string[26])(189318 call ==(189314 call . arr c"eltType") bytes[24])))
+    {
+      { scopeless
+        (189326 return(189325 call convertStringOrBytes arr))
+      }
+    }
+    { scopeless
+      unknown externalArr[189350](189349 call chpl_make_external_array_ptr_free(189340 call c_ptrTo(189338 call arr 0))(189347 call _cast uint[115](189343 call . arr c"size")))
+      (189353 'end of statement')
+    }
+    (189359 call =(189355 call . arr c"externArr") 1)
+    (189367 call =(189363 call . arr c"_borrowed") 1)
+    (189371 return externalArr)
+  }
+  where {
+    (189094 call ==(189092 call getExternalArrayType arr) chpl_external_array)
+  }
+  { scopeless type
+    chpl_external_array
+  }
+  function convertToExternalArray[189385](arg arr[189382] :
+  (189379 call chpl__buildArrayRuntimeType nil[44])) : _unknown[51]
+  {
+    { scopeless
+      unknown ret[189396] chpl_opaque_array
+      (189399 'end of statement')
+    }
+    (189409 call =(189402 call . ret c"_pid")(189406 call . arr c"_pid"))
+    (189423 call =(189413 call . ret c"_instance")(189421 call _cast c_void_ptr(189417 call . arr c"_value")))
+    (189434 call =(189427 call . ret c"_unowned")(189431 call . arr c"_unowned"))
+    if(189452 call _cond_test(189441 call !(189438 call . arr c"_unowned")))
+    {
+      (189448 call =(189444 call . arr c"_unowned") 1)
+    }
+    (189457 return ret)
+  }
+  where {
+    (189393 call ==(189391 call getExternalArrayType arr) chpl_opaque_array)
+  }
+  { scopeless type
+    chpl_opaque_array
+  }
+  function isExternArrEltType[189467](arg t[189465]:_any[178](?)) param : _unknown[51] "private"
+  {
+    if(189522 call _cond_test(189472 call isPrimitive t))
+    {
+      (189474 return 1)
+    }
+    {
+      { scopeless
+        if(189517 call _cond_test(189479 call == t c_string))
+        {
+          (189482 return 1)
+        }
+        {
+          { scopeless
+            if(189513 call _cond_test(189504 'is extern type' t))
+            {
+              (189506 return 1)
+            }
+            {
+              (189510 return 0)
+            }
+          }
+        }
+      }
+    }
+  }
+  function getExternalArrayType[189534](arg arg[189532]:_any[178](?)) type : _unknown[51]
+  {
+    if(189587 call _cond_test(189541 call !(189540 call isArrayType(189538 'typeof' arg))))
+    {
+      (189562 call compilerError "must call with an array")
+    }
+    {
+      if(189582 call _cond_test(189573 call(189569 call .(189566 call . arg c"_value") c"isDefaultRectangular")))
+      {
+        (189575 return chpl_external_array)
+      }
+      {
+        (189579 return chpl_opaque_array)
+      }
+    }
+  }
+  function getExternalArrayType[189598](arg arg[189596]:_any[178](?)) type : _unknown[51]
+  {
+    if(189646 call _cond_test(189604 call !(189603 call isArrayType arg)))
+    {
+      (189609 call compilerError "must call with an array")
+    }
+    {
+      unknown _instanceType[189617] "type variable"(189616 'static field type' arg "_instance")
+      unknown borrowedAlt[189625] "type variable"(189624 call _to_borrowed _instanceType)
+      if(189642 call _cond_test(189633 call(189629 call . borrowedAlt c"isDefaultRectangular")))
+      {
+        (189635 return chpl_external_array)
+      }
+      {
+        (189639 return chpl_opaque_array)
+      }
+    }
+  }
+  function cleanupOpaqueArray[189659](const  ref arg arr[189656] :
+  chpl_opaque_array) : _unknown[51] "export" "local args"
+  {
+    { scopeless
+      unknown cleanup[189670](189668 call _cast(189667 'to unmanaged class from unknown'(189666 'to nilable class from type' BaseArr))(189662 call . arr c"_instance"))
+      (189673 'end of statement')
+    }
+    if(189687 call _cond_test cleanup)
+    {
+      { scopeless
+        (189685 call _do_destroy_arr(189678 call . arr c"_unowned")(189683 call postfix! cleanup))
+      }
+    }
+  }
+}

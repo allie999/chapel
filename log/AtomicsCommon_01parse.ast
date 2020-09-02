@@ -1,0 +1,50 @@
+AST dump for AtomicsCommon after pass parse.
+Module use list: 
+
+{
+  (51941 'use' ChapelStandard)
+  type atomic_refcnt[52099] unknown _cnt[51949](51948 call chpl__processorAtomicType int[13]) function atomic_refcnt[52099].inc[51959](arg _mt[52103]:_MT[238], arg this[52101]:atomic_refcnt[52099], arg cnt[51956] =
+  1) : _unknown[51] "inline" "method" "primary method"
+  {
+    if(51983 call _cond_test CHPL_CACHE_REMOTE)
+    {
+      { scopeless
+        (51973 call(51963 call . _cnt c"add") cnt(order =(51969 call . memoryOrder c"relaxed")))
+      }
+    }
+    {
+      { scopeless
+        (51981 call(51976 call . _cnt c"add") cnt)
+      }
+    }
+  } function atomic_refcnt[52099].dec[51994](arg _mt[52107]:_MT[238], arg this[52105]:atomic_refcnt[52099]) : _unknown[51] "inline" "method" "primary method"
+  {
+    { scopeless
+      unknown got[52004](52003 call int[13] 64)
+      (52007 'end of statement')
+    }
+    if(52071 call _cond_test CHPL_CACHE_REMOTE)
+    {
+      (52023 call = got(52022 call(52012 call . _cnt c"fetchSub") 1(order =(52018 call . memoryOrder c"release"))))
+      if(52043 call _cond_test(52029 call == got 1))
+      {
+        (52037 call atomicFence(52033 call . memoryOrder c"acquire"))
+        (52041 return 0)
+      }
+      (52051 return(52049 call - got 1))
+    }
+    {
+      (52061 call = got(52060 call(52055 call . _cnt c"fetchSub") 1))
+      (52069 return(52067 call - got 1))
+    }
+  }
+  { scopeless type
+    (51999 call int[13] 64)
+  } function atomic_refcnt[52099].read[52080](arg _mt[52111]:_MT[238], arg this[52109]:atomic_refcnt[52099]) : _unknown[51] "inline" "method" "primary method"
+  {
+    (52092 return(52091 call(52087 call . _cnt c"read")))
+  }
+  { scopeless type
+    (52085 call int[13] 64)
+  }
+}

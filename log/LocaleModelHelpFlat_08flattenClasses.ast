@@ -1,0 +1,90 @@
+AST dump for LocaleModelHelpFlat after pass flattenClasses.
+Module use list: LocaleModelHelpSetup LocaleModelHelpRuntime SysCTypes 
+
+{
+  unknown localeModelHasSublocales[187415] "param" 0
+  (187418 'end of statement')
+  function chpl_doDirectExecuteOn[187435](in arg loc[187432] :
+  chpl_localeID_t[209306]) : _unknown[51] "export" "local args"
+  {
+    const node[187442] "const"(187441 call chpl_nodeFromLocaleID loc[187432])
+    (187445 'end of statement')
+    (187451 return(187449 call == node[187442] chpl_nodeID[208164]))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function chpl_executeOn[187462](in arg loc[187459] :
+  chpl_localeID_t[209306], arg fn[187465] :
+  int(64)[13], arg args[187469] :
+  chpl_comm_on_bundle_p[209329], arg args_size[187473] :
+  size_t[20654]) : _unknown[51] "export" "insert line file info" "local args" "no return value for void"
+  {
+    const node[187480] "const"(187479 call chpl_nodeFromLocaleID loc[187459])
+    (187483 'end of statement')
+    if(187525 call _cond_test(187487 call == node[187480] chpl_nodeID[208164]))
+    {
+      (187493 call chpl_ftable_call fn[187465] args[187469])
+    }
+    {
+      unknown tls[187499](187498 call chpl_task_getInfoChapel)
+      (187502 'end of statement')
+      (187511 call chpl_task_data_setup(187508 call chpl_comm_on_bundle_task_bundle args[187469]) tls[187499])
+      (187523 call chpl_comm_execute_on node[187480](187519 call chpl_sublocFromLocaleID loc[187459]) fn[187465] args[187469] args_size[187473])
+    }
+  }
+  function chpl_executeOnFast[187537](in arg loc[187534] :
+  chpl_localeID_t[209306], arg fn[187540] :
+  int(64)[13], arg args[187544] :
+  chpl_comm_on_bundle_p[209329], arg args_size[187548] :
+  size_t[20654]) : _unknown[51] "export" "insert line file info" "local args" "no return value for void"
+  {
+    const node[187555] "const"(187554 call chpl_nodeFromLocaleID loc[187534])
+    (187558 'end of statement')
+    if(187600 call _cond_test(187562 call == node[187555] chpl_nodeID[208164]))
+    {
+      (187568 call chpl_ftable_call fn[187540] args[187544])
+    }
+    {
+      unknown tls[187574](187573 call chpl_task_getInfoChapel)
+      (187577 'end of statement')
+      (187586 call chpl_task_data_setup(187583 call chpl_comm_on_bundle_task_bundle args[187544]) tls[187574])
+      (187598 call chpl_comm_execute_on_fast node[187555](187594 call chpl_sublocFromLocaleID loc[187534]) fn[187540] args[187544] args_size[187548])
+    }
+  }
+  function chpl_executeOnNB[187612](in arg loc[187609] :
+  chpl_localeID_t[209306], arg fn[187615] :
+  int(64)[13], arg args[187619] :
+  chpl_comm_on_bundle_p[209329], arg args_size[187623] :
+  size_t[20654]) : _unknown[51] "export" "insert line file info" "local args" "no return value for void"
+  {
+    const node[187630] "const"(187629 call chpl_nodeFromLocaleID loc[187609])
+    (187633 'end of statement')
+    unknown tls[187638](187637 call chpl_task_getInfoChapel)
+    (187641 'end of statement')
+    unknown isSerial[187646](187645 call chpl_task_data_getSerial tls[187638])
+    (187649 'end of statement')
+    if(187720 call _cond_test(187652 call == node[187630] chpl_nodeID[208164]))
+    {
+      if(187680 call _cond_test isSerial[187646])
+      {
+        (187659 call chpl_ftable_call fn[187615] args[187619])
+      }
+      {
+        (187669 call chpl_task_data_setup(187666 call chpl_comm_on_bundle_task_bundle args[187619]) tls[187638])
+        (187678 call chpl_comm_taskCallFTable fn[187615] args[187619] args_size[187623] c_sublocid_any[89879])
+      }
+    }
+    {
+      (187692 call chpl_task_data_setup(187689 call chpl_comm_on_bundle_task_bundle args[187619]) tls[187638])
+      if(187716 call _cond_test isSerial[187646])
+      {
+        (187703 call chpl_comm_execute_on node[187630] c_sublocid_any[89879] fn[187615] args[187619] args_size[187623])
+      }
+      {
+        (187713 call chpl_comm_execute_on_nb node[187630] c_sublocid_any[89879] fn[187615] args[187619] args_size[187623])
+      }
+    }
+  }
+  (355283 'used modules list'(187421 'use' LocaleModelHelpSetup[208138])(187424 'use' LocaleModelHelpRuntime[209297])(187427 'use' SysCTypes[20940]))
+}

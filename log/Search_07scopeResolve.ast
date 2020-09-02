@@ -1,0 +1,239 @@
+AST dump for Search after pass scopeResolve.
+Module use list: ChapelStandard Sort 
+
+{
+  function search[291184](arg Data[291181] :
+  (291179 call chpl__buildArrayRuntimeType unknown Dom[291176]), arg val[291186]:_any[178](?), arg comparator[291191] :
+  unknown rec[291188] =
+  defaultComparator[267894], arg lo[291199] =
+  (291196 call . Dom[291176] c"alignedLow"), arg hi[291206] =
+  (291203 call . Dom[291176] c"alignedHigh"), arg sorted[291210] =
+  0) : _unknown[51]
+  {
+    if(291234 call _cond_test sorted[291210])
+    {
+      (291222 return(291221 call binarySearch Data[291181] val[291186] comparator[291191] lo[291199] hi[291206]))
+    }
+    {
+      (291232 return(291231 call linearSearch Data[291181] val[291186] comparator[291191] lo[291199] hi[291206]))
+    }
+  }
+  function search[291253](arg Data[291250] :
+  (291248 call chpl__buildArrayRuntimeType unknown Dom[291245]), arg val[291255]:_any[178](?), arg comparator[291260] :
+  unknown rec[291257] =
+  defaultComparator[267894], arg lo[291268] =
+  (291265 call . Dom[291245] c"alignedLow"), arg hi[291275] =
+  (291272 call . Dom[291245] c"alignedHigh"), arg sorted[291279] =
+  0) : _unknown[51] "no doc" "no return value for void"
+  {
+    (291308 call compilerError "search() requires 1-D array")
+  }
+  where {
+    (291287 call !=(291283 call . Dom[291245] c"rank") 1)
+  }
+  function linearSearch[291324](arg Data[291321] :
+  (291319 call chpl__buildArrayRuntimeType unknown Dom[291316]), arg val[291326]:_any[178](?), arg comparator[291331] :
+  unknown rec[291328] =
+  defaultComparator[267894], arg lo[291339] =
+  (291336 call . Dom[291316] c"alignedLow"), arg hi[291346] =
+  (291343 call . Dom[291316] c"alignedHigh")) : _unknown[51]
+  {
+    (291356 call chpl_check_comparator comparator[291331](291353 call . Data[291321] c"eltType"))
+    const stride[291374] "const"(291371 IfExpr (291360 call . Dom[291316] c"stridable") then
+    { scopeless
+      (291369 call abs(291365 call . Dom[291316] c"stride"))
+    } else
+    { scopeless
+      1
+    } )
+    (291377 'end of statement')
+    if(291529 call _cond_test(291379 call . Dom[291316] c"stridable"))
+    {
+      {
+        unknown _indexOfInterest[291416] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[291417] "expr temp" "temp"
+        (291426 'move' _iterator[291417](291424 call _getIterator(291435 call chpl_direct_range_iter lo[291339] hi[291346] stride[291374])))
+        Defer
+        {
+          {
+            (291451 call _freeIterator _iterator[291417])
+          }
+        }
+        { scopeless type
+          (291440 'move' _indexOfInterest[291416](291437 call iteratorIndex _iterator[291417]))
+        }
+        ForLoop[291418]
+        {
+          unknown i[291444] "index var" "insert auto destroy"
+          (291446 'move' i[291444] _indexOfInterest[291416])
+          {
+            if(291410 call _cond_test(291401 call ==(291399 call chpl_compare(291394 call Data[291321] i[291444]) val[291326](comparator = comparator[291331])) 0))
+            {
+              (291408 return(291406 call _build_tuple 1 i[291444]))
+            }
+          }
+          label _continueLabel[291421]
+          _indexOfInterest[291416]
+          _iterator[291417]
+        }
+        label _breakLabel[291422]
+      }
+    }
+    {
+      {
+        unknown _indexOfInterest[291490] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[291491] "expr temp" "temp"
+        (291500 'move' _iterator[291491](291498 call _getIterator(291505 call chpl_direct_range_iter lo[291339] hi[291346] 1)))
+        Defer
+        {
+          {
+            (291521 call _freeIterator _iterator[291491])
+          }
+        }
+        { scopeless type
+          (291510 'move' _indexOfInterest[291490](291507 call iteratorIndex _iterator[291491]))
+        }
+        ForLoop[291492]
+        {
+          unknown i[291514] "index var" "insert auto destroy"
+          (291516 'move' i[291514] _indexOfInterest[291490])
+          {
+            if(291484 call _cond_test(291475 call ==(291473 call chpl_compare(291468 call Data[291321] i[291514]) val[291326](comparator = comparator[291331])) 0))
+            {
+              (291482 return(291480 call _build_tuple 1 i[291514]))
+            }
+          }
+          label _continueLabel[291495]
+          _indexOfInterest[291490]
+          _iterator[291491]
+        }
+        label _breakLabel[291496]
+      }
+    }
+    (291541 return(291539 call _build_tuple 0(291536 call + hi[291346] stride[291374])))
+  }
+  function linearSearch[291555](arg Data[291552] :
+  (291550 call chpl__buildArrayRuntimeType unknown Dom[291547]), arg val[291557]:_any[178](?), arg comparator[291562] :
+  unknown rec[291559] =
+  defaultComparator[267894], arg lo[291570] =
+  (291567 call . Dom[291547] c"alignedLow"), arg hi[291577] =
+  (291574 call . Dom[291547] c"alignedHigh")) : _unknown[51] "no doc" "no return value for void"
+  {
+    (291606 call compilerError "linearSearch() requires 1-D array")
+  }
+  where {
+    (291585 call !=(291581 call . Dom[291547] c"rank") 1)
+  }
+  function binarySearch[291622](arg Data[291619] :
+  (291617 call chpl__buildArrayRuntimeType unknown Dom[291614]), arg val[291624]:_any[178](?), arg comparator[291629] :
+  unknown rec[291626] =
+  defaultComparator[267894], in arg lo[291637] =
+  (291634 call . Dom[291614] c"alignedLow"), in arg hi[291644] =
+  (291641 call . Dom[291614] c"alignedHigh")) : _unknown[51]
+  {
+    (291654 call chpl_check_comparator comparator[291629](291651 call . Data[291619] c"eltType"))
+    const stride[291672] "const"(291669 IfExpr (291658 call . Dom[291614] c"stridable") then
+    { scopeless
+      (291667 call abs(291663 call . Dom[291614] c"stride"))
+    } else
+    { scopeless
+      1
+    } )
+    (291675 'end of statement')
+    {
+      unknown tmp[291797] "temp"
+      (291821 'move' tmp[291797](291816 call _cond_test(291818 call <= lo[291637] hi[291644])))
+      WhileDo[291802]
+      {
+        {
+          const size[291687] "const"(291685 call /(291682 call - hi[291644] lo[291637]) stride[291672])
+          const mid[291731] "const"(291728 IfExpr (291692 call == hi[291644] lo[291637]) then
+          { scopeless
+            hi[291644]
+          } else
+          { scopeless(291725 IfExpr (291697 call % size[291687] 2) then
+            { scopeless
+              (291710 call + lo[291637](291708 call *(291705 call /(291702 call - size[291687] 1) 2) stride[291672]))
+            } else
+            { scopeless
+              (291723 call + lo[291637](291721 call *(291718 call -(291715 call / size[291687] 2) 1) stride[291672]))
+            } )
+          } )
+          (291734 'end of statement')
+          if(291791 call _cond_test(291747 call ==(291745 call chpl_compare(291740 call Data[291619] mid[291731]) val[291624](comparator = comparator[291629])) 0))
+          {
+            (291754 return(291752 call _build_tuple 1 mid[291731]))
+          }
+          {
+            if(291785 call _cond_test(291767 call >(291765 call chpl_compare val[291624](291762 call Data[291619] mid[291731])(comparator = comparator[291629])) 0))
+            {
+              (291774 call = lo[291637](291772 call + mid[291731] stride[291672]))
+            }
+            {
+              (291782 call = hi[291644](291780 call - mid[291731] stride[291672]))
+            }
+          }
+        }
+        label _continueLabel[291800]
+        (291811 'move' tmp[291797](291806 call _cond_test(291808 call <= lo[291637] hi[291644])))
+        tmp[291797]
+      }
+      label _breakLabel[291801]
+    }
+    (291829 return(291827 call _build_tuple 0 lo[291637]))
+  }
+  function binarySearch[291843](arg Data[291840] :
+  (291838 call chpl__buildArrayRuntimeType unknown Dom[291835]), arg val[291845]:_any[178](?), arg comparator[291850] :
+  unknown rec[291847] =
+  defaultComparator[267894], in arg lo[291858] =
+  (291855 call . Dom[291835] c"alignedLow"), in arg hi[291865] =
+  (291862 call . Dom[291835] c"alignedHigh")) : _unknown[51] "no doc"
+  {
+    (291881 call chpl_check_comparator comparator[291850](291878 call . Data[291840] c"eltType"))
+    {
+      unknown tmp[291964] "temp"
+      (291988 'move' tmp[291964](291983 call _cond_test(291985 call <= lo[291858] hi[291865])))
+      WhileDo[291969]
+      {
+        {
+          const mid[291898] "const"(291896 call +(291893 call /(291890 call - hi[291865] lo[291858]) 2) lo[291858])
+          (291901 'end of statement')
+          if(291958 call _cond_test(291914 call ==(291912 call chpl_compare(291907 call Data[291840] mid[291898]) val[291845](comparator = comparator[291850])) 0))
+          {
+            (291921 return(291919 call _build_tuple 1 mid[291898]))
+          }
+          {
+            if(291952 call _cond_test(291934 call >(291932 call chpl_compare val[291845](291929 call Data[291840] mid[291898])(comparator = comparator[291850])) 0))
+            {
+              (291941 call = lo[291858](291939 call + mid[291898] 1))
+            }
+            {
+              (291949 call = hi[291865](291947 call - mid[291898] 1))
+            }
+          }
+        }
+        label _continueLabel[291967]
+        (291978 'move' tmp[291964](291973 call _cond_test(291975 call <= lo[291858] hi[291865])))
+        tmp[291964]
+      }
+      label _breakLabel[291968]
+    }
+    (291996 return(291994 call _build_tuple 0 lo[291858]))
+  }
+  where {
+    (291872 call !(291869 call . Dom[291835] c"stridable"))
+  }
+  function binarySearch[292011](arg Data[292008] :
+  (292006 call chpl__buildArrayRuntimeType unknown Dom[292003]), arg val[292013]:_any[178](?), arg comparator[292018] :
+  unknown rec[292015] =
+  defaultComparator[267894], in arg lo[292026] =
+  (292023 call . Dom[292003] c"alignedLow"), in arg hi[292033] =
+  (292030 call . Dom[292003] c"alignedHigh")) : _unknown[51] "no doc" "no return value for void"
+  {
+    (292062 call compilerError "binarySearch() requires 1-D array")
+  }
+  where {
+    (292041 call !=(292037 call . Dom[292003] c"rank") 1)
+  }
+  (355460 'used modules list'(353111 'use' ChapelStandard[20264])(291168 'use' Sort[267885] 'only' defaultComparator, DefaultComparator, reverseComparator, ReverseComparator)(291172 'use' Sort[267885]))
+}

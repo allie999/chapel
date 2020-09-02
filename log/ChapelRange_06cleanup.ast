@@ -1,0 +1,4398 @@
+AST dump for ChapelRange after pass cleanup.
+Module use list: 
+
+{
+  (64184 'use' ChapelBase)
+  (64186 'use' SysBasic)
+  (64187 'use' HaltWrappers)
+  (64191 'use' Math)
+  (64193 'use' DSIUtil)
+  unknown debugChapelRange[64195] "config" "no doc" "param" 0
+  (64198 'end of statement')
+  unknown useOptimizedRangeIterators[64200] "config" "no doc" "param" 1
+  (64203 'end of statement')
+  type BoundedRangeType[64213] def bounded[64205]:BoundedRangeType[64213] def boundedLow[64207]:BoundedRangeType[64213] def boundedHigh[64209]:BoundedRangeType[64213] def boundedNone[64211]:BoundedRangeType[64213]
+  {
+  }
+  function range[64316](?).strType[64294](arg _mt[64320]:_MT[238], arg this[64318]:range[64316](?)) type : _unknown[51] "method" "primary method" "no parens"
+  {
+    (64300 return(64299 call chpl__rangeStrideType idxType))
+  }
+  function range[64316](?).chpl__promotionType[64307](arg _mt[64324]:_MT[238], arg this[64322]:range[64316](?)) type : _unknown[51] "method" "primary method"
+  {
+    (64310 return idxType)
+  }
+  type range[64316](?) unknown idxType[64220] "type variable" int[13] unknown boundedType[64230] "param"(64227 call . BoundedRangeType c"bounded") BoundedRangeType unknown stridable[64236] "param" 0 bool[10] unknown _low[64244](64243 call chpl__idxTypeToIntIdxType idxType) unknown _high[64252](64251 call chpl__idxTypeToIntIdxType idxType) unknown _stride[64265](64262 IfExpr  stridable then
+  { scopeless
+    (64260 call chpl__rangeStrideType idxType)
+  } else
+  { scopeless
+    nothing[7]
+  } ) unknown _alignment[64278](64275 IfExpr  stridable then
+  { scopeless
+    (64273 call chpl__idxTypeToIntIdxType idxType)
+  } else
+  { scopeless
+    nothing[7]
+  } ) unknown _aligned[64288](64285 IfExpr  stridable then
+  { scopeless
+    bool[10]
+  } else
+  { scopeless
+    nothing[7]
+  } )
+  function _unknown[51].intIdxType[64330](arg _mt[64335]:_MT[238], arg this[64332] :
+  range) type : _unknown[51] "method" "no parens"
+  {
+    (64341 return(64340 call chpl__idxTypeToIntIdxType idxType))
+  }
+  function _unknown[51].init[64353](arg _mt[64418]:_MT[238], arg this[64415] :
+  range, arg idxType[64350]:_any[178](?) =
+  int[13], param arg boundedType[64360] :
+  BoundedRangeType =
+  (64357 call . BoundedRangeType c"bounded"), param arg stridable[64366] :
+  bool[10] =
+  0, arg _low[64376] :
+  idxType =
+  (64375 call chpl__intToIdx idxType 1), arg _high[64386] :
+  idxType =
+  (64385 call chpl__intToIdx idxType 0), arg _stride[64395] :
+  (64393 call chpl__rangeStrideType idxType) =
+  1, arg _alignment[64405] :
+  idxType =
+  (64404 call chpl__intToIdx idxType 0), arg _aligned[64411] :
+  bool[10] =
+  0) : _unknown[51] "method" "no doc" "no return value for void"
+  {
+    (64425 call =(64421 call . this c"idxType") idxType)
+    (64436 call =(64432 call . this c"boundedType") boundedType)
+    (64444 call =(64440 call . this c"stridable") stridable)
+    (64457 call =(64450 call . this c"_low")(64456 call chpl__idxToInt _low))
+    (64470 call =(64463 call . this c"_high")(64469 call chpl__idxToInt _high))
+    (64478 call(64474 call . this c"complete"))
+    if(64515 call _cond_test stridable)
+    {
+      (64488 call =(64484 call . this c"_stride") _stride)
+      (64502 call =(64495 call . this c"_alignment")(64501 call chpl__idxToInt _alignment))
+      (64512 call =(64508 call . this c"_aligned") _aligned)
+    }
+    if(64533 call _cond_test(64523 call &&(64520 call ! stridable) boundsChecking))
+    {
+      (64531 call assert(64528 call == _stride 1))
+    }
+  }
+  function _isAnyNothing[64546](arg args[64543]:_any[178](?) ...) param : _unknown[51] "private"
+  {
+    {
+      unknown i[64576] 0
+      unknown tmp[64577] "maybe param" "temp"
+      (64589 'move' tmp[64577](64587 call chpl_compute_low_param_loop_bound 0(64555 call -(64551 call . args c"size") 1)))
+      unknown tmp[64578] "maybe param" "temp"
+      (64602 'move' tmp[64578](64600 call chpl_compute_high_param_loop_bound 0(64594 call -(64596 call . args c"size") 1)))
+      unknown tmp[64579] "maybe param" "temp"
+      (64605 'move' tmp[64579] 1)
+      ParamForLoop[64607]
+      { i[64576] tmp[64577] tmp[64578] tmp[64579]
+        {
+          if(64570 call _cond_test(64566 call isNothingType(64564 'typeof'(64563 call args i))))
+          {
+            (64568 return 1)
+          }
+        }
+      }
+      label _unused_continueLabel[64581]
+      label _breakLabel[64580]
+    }
+    (64618 return 0)
+  }
+  { scopeless type
+    bool[10]
+  }
+  function _unknown[51].init[64630](arg _mt[64676]:_MT[238], arg this[64673] :
+  range, arg idxType[64627]:_any[178](?) =
+  int[13], param arg boundedType[64637] :
+  BoundedRangeType =
+  (64634 call . BoundedRangeType c"bounded"), param arg stridable[64643] :
+  bool[10] =
+  0, arg _low[64653] :
+  idxType =
+  (64652 call chpl__intToIdx idxType 1), arg _high[64663] :
+  idxType =
+  (64662 call chpl__intToIdx idxType 0), arg _stride[64667]:_any[178](?), arg _alignment[64669]:_any[178](?), arg _aligned[64671]:_any[178](?)) : _unknown[51] "method" "no doc" "no return value for void"
+  {
+    (64689 call =(64685 call . this c"idxType") idxType)
+    (64698 call =(64694 call . this c"boundedType") boundedType)
+    (64706 call =(64702 call . this c"stridable") stridable)
+    (64717 call =(64710 call . this c"_low")(64716 call chpl__idxToInt _low))
+    (64728 call =(64721 call . this c"_high")(64727 call chpl__idxToInt _high))
+    (64736 call(64732 call . this c"complete"))
+    if(64760 call _cond_test stridable)
+    {
+      (64758 call compilerError "non-stridable range initializer called with stridable=true")
+    }
+  }
+  where {
+    (64683 call _isAnyNothing _stride _alignment _aligned)
+  }
+  function _unknown[51].init=[64783](arg _mt[64788]:_MT[238], arg this[64785] :
+  range, arg other[64780] :
+  (64779 call range unknown i[64772] unknown b[64775] unknown s[64777])) : _unknown[51] "method" "no doc" "no return value for void"
+  {
+    unknown idxType[64807] "type variable"(64804 IfExpr (64796 call ==(64792 call .(64791 'typeof' this) c"idxType") ?[260]) then
+    { scopeless
+      i
+    } else
+    { scopeless
+      (64801 call .(64800 'typeof' this) c"idxType")
+    } )
+    unknown boundedType[64828] "param"(64825 IfExpr (64817 call ==(64813 call .(64812 'typeof' this) c"boundedType") ?[260]) then
+    { scopeless
+      b
+    } else
+    { scopeless
+      (64822 call .(64821 'typeof' this) c"boundedType")
+    } )
+    (64831 'end of statement')
+    unknown stridable[64849] "param"(64846 IfExpr (64838 call ==(64834 call .(64833 'typeof' this) c"stridable") ?[260]) then
+    { scopeless
+      s
+    } else
+    { scopeless
+      (64843 call .(64842 'typeof' this) c"stridable")
+    } )
+    (64852 'end of statement')
+    if(64917 call _cond_test(64855 call != boundedType b))
+    {
+      (64914 call compilerError(64911 call +(64908 call +(64902 call +(64883 call + "range(boundedType="(64881 call _cast string[26](64877 call .(64876 'typeof' this) c"boundedType"))) ") cannot be initialized from range(boundedType=")(64906 call _cast string[26] b)) ")"))
+    }
+    if(64948 call _cond_test(64925 call &&(64922 call ! stridable) s))
+    {
+      (64946 call compilerError "cannot initialize a non-stridable range from a stridable range")
+    }
+    const str[64971] "const"(64968 IfExpr (64955 call && stridable s) then
+    { scopeless
+      (64958 call . other c"stride")
+    } else
+    { scopeless
+      (64966 call _cast(64965 call chpl__rangeStrideType idxType) 1)
+    } )
+    (64974 'end of statement')
+    (65019 call(64976 call . this c"init") idxType boundedType stridable(64990 call chpl__intToIdx idxType(64987 call . other c"_low"))(64998 call chpl__intToIdx idxType(64995 call . other c"_high")) str(65012 call chpl__intToIdx idxType(65011 call chpl__idxToInt(65007 call . other c"alignment")))(65016 call . other c"aligned"))
+  }
+  function _unknown[51].displayRepresentation[65048](arg _mt[65053]:_MT[238], arg this[65050] :
+  range, arg msg[65044] :
+  string[26] =
+  "") : _unknown[51] "method" "no doc" "no return value for void"
+  {
+    (65149 call chpl_debug_writeln msg "("(65078 call _cast string[26] idxType) "," boundedType "," stridable " : " low "," high "," stride ","(65145 IfExpr  aligned then
+    { scopeless
+      (65126 call _cast string[26] alignment)
+    } else
+    { scopeless
+      "\?"
+    } ) ")")
+  }
+  { scopeless type
+    void[4]
+  }
+  function chpl_build_bounded_range[65165](arg low[65162] :
+  (65161 call int[13] unknown w[65158]), arg high[65171] :
+  (65170 call int[13] w)) : _unknown[51]
+  {
+    (65186 return(65174 'new'(65185 call range(65179 call int[13] w)(_low = low)(_high = high))))
+  }
+  function chpl_build_bounded_range[65201](arg low[65198] :
+  (65197 call uint[115] unknown w[65194]), arg high[65207] :
+  (65206 call uint[115] w)) : _unknown[51]
+  {
+    (65222 return(65210 'new'(65221 call range(65215 call uint[115] w)(_low = low)(_high = high))))
+  }
+  function chpl_build_bounded_range[65233](arg low[65230] :
+  enum[187](?), arg high[65236] :
+  enum[187](?)) : _unknown[51]
+  {
+    if(65266 call _cond_test(65243 call !=(65240 'typeof' low)(65242 'typeof' high)))
+    {
+      (65264 call compilerError "ranges of enums must use a single enum type")
+    }
+    (65282 return(65272 'new'(65281 call range(65275 'typeof' low)(_low = low)(_high = high))))
+  }
+  function chpl_build_bounded_range[65292](arg low[65289] :
+  bool[10], arg high[65295] :
+  bool[10]) : _unknown[51]
+  {
+    (65307 return(65298 'new'(65306 call range bool[10](_low = low)(_high = high))))
+  }
+  function chpl_build_bounded_range[65316](arg low[65314]:_any[178](?), arg high[65318]:_any[178](?)) : _unknown[51] "no return value for void"
+  {
+    (65339 call compilerError "Bounds of 'low..high' must be integers of compatible types.")
+  }
+  function chpl_build_low_bounded_range[65350](arg low[65347] :
+  integral) : _unknown[51]
+  {
+    (65364 return(65352 'new'(65363 call range(65355 'typeof' low)(65358 call . BoundedRangeType c"boundedLow")(_low = low))))
+  }
+  function chpl_build_low_bounded_range[65375](arg low[65372] :
+  enum[187](?)) : _unknown[51]
+  {
+    (65389 return(65377 'new'(65388 call range(65380 'typeof' low)(65383 call . BoundedRangeType c"boundedLow")(_low = low))))
+  }
+  function chpl_build_low_bounded_range[65400](arg low[65397] :
+  bool[10]) : _unknown[51]
+  {
+    (65414 return(65402 'new'(65413 call range(65405 'typeof' low)(65408 call . BoundedRangeType c"boundedLow")(_low = low))))
+  }
+  function chpl_build_low_bounded_range[65423](arg low[65421]:_any[178](?)) : _unknown[51] "no return value for void"
+  {
+    (65444 call compilerError "Bound of 'low..' must be an integer")
+  }
+  function chpl_build_high_bounded_range[65455](arg high[65452] :
+  integral) : _unknown[51]
+  {
+    (65469 return(65457 'new'(65468 call range(65460 'typeof' high)(65463 call . BoundedRangeType c"boundedHigh")(_high = high))))
+  }
+  function chpl_build_high_bounded_range[65480](arg high[65477] :
+  enum[187](?)) : _unknown[51]
+  {
+    (65494 return(65482 'new'(65493 call range(65485 'typeof' high)(65488 call . BoundedRangeType c"boundedHigh")(_high = high))))
+  }
+  function chpl_build_high_bounded_range[65505](arg high[65502] :
+  bool[10]) : _unknown[51]
+  {
+    (65519 return(65507 'new'(65518 call range(65510 'typeof' high)(65513 call . BoundedRangeType c"boundedHigh")(_high = high))))
+  }
+  function chpl_build_high_bounded_range[65528](arg high[65526]:_any[178](?)) : _unknown[51] "no return value for void"
+  {
+    (65549 call compilerError "Bound of '..high' must be an integer.")
+  }
+  function chpl_build_unbounded_range[65556]() : _unknown[51]
+  {
+    (65569 return(65558 'new'(65568 call range int[13](65565 call . BoundedRangeType c"boundedNone"))))
+  }
+  function chpl_compute_low_param_loop_bound[65584](param arg low[65581] :
+  (65580 call int[13] unknown w[65577]), param arg high[65590] :
+  (65589 call int[13] w)) param : _unknown[51]
+  {
+    (65594 return low)
+  }
+  function chpl_compute_high_param_loop_bound[65609](param arg low[65606] :
+  (65605 call int[13] unknown w[65602]), param arg high[65615] :
+  (65614 call int[13] w)) param : _unknown[51]
+  {
+    (65619 return high)
+  }
+  function chpl_compute_low_param_loop_bound[65634](param arg low[65631] :
+  (65630 call uint[115] unknown w[65627]), param arg high[65640] :
+  (65639 call uint[115] w)) param : _unknown[51]
+  {
+    (65644 return low)
+  }
+  function chpl_compute_high_param_loop_bound[65659](param arg low[65656] :
+  (65655 call uint[115] unknown w[65652]), param arg high[65665] :
+  (65664 call uint[115] w)) param : _unknown[51]
+  {
+    (65669 return high)
+  }
+  function chpl_compute_low_param_loop_bound[65680](param arg low[65677] :
+  bool[10], param arg high[65683] :
+  bool[10]) param : _unknown[51]
+  {
+    (65687 return low)
+  }
+  function chpl_compute_high_param_loop_bound[65698](param arg low[65695] :
+  bool[10], param arg high[65701] :
+  bool[10]) param : _unknown[51]
+  {
+    (65705 return high)
+  }
+  function chpl_compute_low_param_loop_bound[65714](param arg low[65712]:_any[178](?), param arg high[65716]:_any[178](?)) param : _unknown[51] "last resort" "no return value for void"
+  {
+    (65739 call compilerError "Range bounds must be integers of compatible types in param for-loops")
+  }
+  function chpl_compute_low_param_loop_bound[65748](arg low[65746]:_any[178](?), arg high[65750]:_any[178](?)) : _unknown[51] "last resort" "no return value for void"
+  {
+    (65771 call compilerError "param for-loops must be defined over a bounded param range")
+  }
+  function chpl_compute_count_param_loop[65782](param arg count[65779] :
+  integral) param : _unknown[51]
+  {
+    (65785 return count)
+  }
+  function chpl_compute_count_param_loop[65794](arg count[65792]:_any[178](?)) : _unknown[51] "last resort" "no return value for void"
+  {
+    (65817 call compilerError "in a param for-loop, the count operator requires a param integral value")
+  }
+  function chpl_low_bound_count_for_param_loop[65828](param arg high[65825] :
+  integral, param arg count[65831] :
+  integral) param : _unknown[51]
+  {
+    if(65885 call _cond_test(65836 call > count 0))
+    {
+      (65857 call compilerError "count operators with positive count require the range to have a low bound")
+    }
+    {
+      if(65881 call _cond_test(65862 call == count 0))
+      {
+        (65868 return(65866 call + high 1))
+      }
+      {
+        (65878 return(65876 call +(65873 call + high count) 1))
+      }
+    }
+  }
+  function chpl_low_bound_count_for_param_loop[65897](arg high[65895]:_any[178](?), arg count[65899]:_any[178](?)) : _unknown[51] "last resort" "no return value for void"
+  {
+    (65904 call compilerError "Range bounds must be integers of compatible types in param for-loops")
+  }
+  function chpl_high_bound_count_for_param_loop[65915](param arg low[65912] :
+  integral, param arg count[65918] :
+  integral) param : _unknown[51]
+  {
+    if(65974 call _cond_test(65923 call < count 0))
+    {
+      (65946 call compilerError "count operators with negative count require the range to have a high bound")
+    }
+    {
+      if(65970 call _cond_test(65951 call == count 0))
+      {
+        (65957 return(65955 call - low 1))
+      }
+      {
+        (65967 return(65965 call -(65962 call + low count) 1))
+      }
+    }
+  }
+  function chpl_high_bound_count_for_param_loop[65986](arg low[65984]:_any[178](?), arg count[65988]:_any[178](?)) : _unknown[51] "last resort" "no return value for void"
+  {
+    (65993 call compilerError "Range bounds must be integers of compatible types in param for-loops")
+  }
+  function chpl_bounded_count_for_param_loop_low[66004](param arg low[66001] :
+  integral, param arg high[66007] :
+  integral, param arg count[66011] :
+  integral) param : _unknown[51]
+  {
+    unknown abs_count[66025] "param"(66022 IfExpr (66016 call < count 0) then
+    { scopeless
+      (66019 call - count)
+    } else
+    { scopeless
+      count
+    } )
+    (66028 'end of statement')
+    unknown size[66037] "param"(66035 call +(66032 call - high low) 1)
+    (66040 'end of statement')
+    if(66130 call _cond_test(66043 call < size abs_count))
+    {
+      (66089 call compilerError "Count of "(66066 call _cast string[26] abs_count) " is too small for range of size "(66087 call _cast string[26] size))
+    }
+    {
+      if(66125 call _cond_test(66094 call == count 0))
+      {
+        (66100 return(66098 call + high 1))
+      }
+      {
+        if(66121 call _cond_test(66105 call < count 0))
+        {
+          (66114 return(66112 call +(66109 call + high count) 1))
+        }
+        {
+          (66118 return low)
+        }
+      }
+    }
+  }
+  function chpl_bounded_count_for_param_loop_low[66141](arg low[66139]:_any[178](?), arg high[66143]:_any[178](?), arg count[66145]:_any[178](?)) : _unknown[51] "last resort" "no return value for void"
+  {
+    (66168 call compilerError "Range bounds and counts must be integers of compatible types in param for-loops")
+  }
+  function chpl_bounded_count_for_param_loop_high[66179](param arg low[66176] :
+  integral, param arg high[66182] :
+  integral, param arg count[66186] :
+  integral) param : _unknown[51]
+  {
+    if(66222 call _cond_test(66191 call == count 0))
+    {
+      (66197 return(66195 call - low 1))
+    }
+    {
+      if(66218 call _cond_test(66202 call < count 0))
+      {
+        (66205 return high)
+      }
+      {
+        (66215 return(66213 call -(66210 call + low count) 1))
+      }
+    }
+  }
+  function chpl_bounded_count_for_param_loop_high[66234](arg low[66232]:_any[178](?), arg high[66236]:_any[178](?), arg count[66238]:_any[178](?)) : _unknown[51] "last resort" "no return value for void"
+  {
+    (66243 call compilerError "Range bounds and counts must be integers of compatible types in param for-loops")
+  }
+  function isRangeType[66252](arg t[66250]:_any[178](?)) param : _unknown[51]
+  {
+    function isRangeHelp[66263](arg t[66260] :
+    (66259 call range ?[260])) param : _unknown[51]
+    {
+      (66266 return 1)
+    }
+    function isRangeHelp[66276](arg t[66274]:_any[178](?)) param : _unknown[51]
+    {
+      (66279 return 0)
+    }
+    (66288 return(66287 call isRangeHelp t))
+  }
+  function isRangeValue[66301](arg r[66298] :
+  (66297 call range ?[260])) param : _unknown[51] "no doc"
+  {
+    (66304 return 1)
+  }
+  function isRangeValue[66313](arg r[66311]:_any[178](?)) param : _unknown[51] "no doc"
+  {
+    (66316 return 0)
+  }
+  function isBoundedRange[66325](arg r[66323]:_any[178](?)) param : _unknown[51] "no doc"
+  {
+    (66328 return 0)
+  }
+  function isBoundedRange[66342](arg r[66339] :
+  (66338 call range ?[260])) param : _unknown[51]
+  {
+    (66351 return(66350 call isBoundedRange(66346 call . r c"boundedType")))
+  }
+  function isBoundedRange[66362](param arg B[66359] :
+  BoundedRangeType) param : _unknown[51] "no doc"
+  {
+    (66371 return(66369 call == B(66366 call . BoundedRangeType c"bounded")))
+  }
+  function _unknown[51].isBounded[66379](arg _mt[66384]:_MT[238], arg this[66381] :
+  range) param : _unknown[51] "method"
+  {
+    (66393 return(66391 call == boundedType(66388 call . BoundedRangeType c"bounded")))
+  }
+  function _unknown[51].hasLowBound[66401](arg _mt[66406]:_MT[238], arg this[66403] :
+  range) param : _unknown[51] "method"
+  {
+    (66424 return(66422 call ||(66413 call == boundedType(66410 call . BoundedRangeType c"bounded"))(66420 call == boundedType(66417 call . BoundedRangeType c"boundedLow"))))
+  }
+  function _unknown[51].hasHighBound[66432](arg _mt[66437]:_MT[238], arg this[66434] :
+  range) param : _unknown[51] "method"
+  {
+    (66455 return(66453 call ||(66444 call == boundedType(66441 call . BoundedRangeType c"bounded"))(66451 call == boundedType(66448 call . BoundedRangeType c"boundedHigh"))))
+  }
+  function _unknown[51].stride[66463](arg _mt[66468]:_MT[238], arg this[66465] :
+  range) : _unknown[51] "inline" "method" "no parens"
+  {
+    (66472 return _stride)
+  }
+  where {
+    stridable
+  }
+  function _unknown[51].stride[66481](arg _mt[66486]:_MT[238], arg this[66483] :
+  range) param : _unknown[51] "method" "no doc" "no parens"
+  {
+    (66495 return(66493 call _cast strType 1))
+  }
+  where {
+    (66489 call ! stridable)
+  }
+  function _unknown[51].alignment[66504](arg _mt[66509]:_MT[238], arg this[66506] :
+  range) : _unknown[51] "inline" "method" "no parens"
+  {
+    (66516 return(66515 call chpl_intToIdx _alignment))
+  }
+  where {
+    stridable
+  }
+  function _unknown[51].alignment[66525](arg _mt[66530]:_MT[238], arg this[66527] :
+  range) : _unknown[51] "method" "no doc" "no parens"
+  {
+    (66541 return low)
+  }
+  where {
+    (66538 call &&(66533 call ! stridable)(66537 call hasLowBound))
+  }
+  function _unknown[51].alignment[66550](arg _mt[66555]:_MT[238], arg this[66552] :
+  range) : _unknown[51] "method" "no doc" "no parens"
+  {
+    (66561 return(66560 call chpl_intToIdx 0))
+  }
+  function _unknown[51].aligned[66569](arg _mt[66574]:_MT[238], arg this[66571] :
+  range) : _unknown[51] "inline" "method" "no parens"
+  {
+    (66578 return _aligned)
+  }
+  where {
+    stridable
+  }
+  function _unknown[51].aligned[66587](arg _mt[66592]:_MT[238], arg this[66589] :
+  range) param : _unknown[51] "method" "no doc" "no parens"
+  {
+    (66616 return 1)
+  }
+  where {
+    (66613 call &&(66595 call ! stridable)(66611 call ||(66602 call == boundedType(66599 call . BoundedRangeType c"bounded"))(66609 call == boundedType(66606 call . BoundedRangeType c"boundedLow"))))
+  }
+  function _unknown[51].aligned[66625](arg _mt[66630]:_MT[238], arg this[66627] :
+  range) param : _unknown[51] "method" "no doc" "no parens"
+  {
+    (66633 return 0)
+  }
+  function _unknown[51].first[66641](arg _mt[66646]:_MT[238], arg this[66643] :
+  range) : _unknown[51] "inline" "method" "no parens"
+  {
+    (66657 return(66656 call chpl_intToIdx(66652 call . this c"firstAsInt")))
+  }
+  function _unknown[51].firstAsInt[66665](arg _mt[66670]:_MT[238], arg this[66667] :
+  range) : _unknown[51] "inline" "method" "no doc" "no parens"
+  {
+    if(66699 call _cond_test(66673 call ! stridable))
+    {
+      (66676 return _low)
+    }
+    {
+      (66697 return(66694 IfExpr (66680 call > _stride 0) then
+      { scopeless
+        (66685 call . this c"alignedLowAsInt")
+      } else
+      { scopeless
+        (66691 call . this c"alignedHighAsInt")
+      } ))
+    }
+  }
+  function _unknown[51].last[66711](arg _mt[66716]:_MT[238], arg this[66713] :
+  range) : _unknown[51] "inline" "method" "no parens"
+  {
+    (66727 return(66726 call chpl_intToIdx(66722 call . this c"lastAsInt")))
+  }
+  function _unknown[51].lastAsInt[66735](arg _mt[66740]:_MT[238], arg this[66737] :
+  range) : _unknown[51] "inline" "method" "no doc" "no parens"
+  {
+    if(66765 call _cond_test(66743 call ! stridable))
+    {
+      (66746 return _high)
+    }
+    {
+      (66763 return(66760 IfExpr (66750 call > stride 0) then
+      { scopeless
+        (66753 call . this c"alignedHighAsInt")
+      } else
+      { scopeless
+        (66757 call . this c"alignedLowAsInt")
+      } ))
+    }
+  }
+  function _unknown[51].low[66777](arg _mt[66782]:_MT[238], arg this[66779] :
+  range) : _unknown[51] "inline" "method" "no parens"
+  {
+    (66788 return(66787 call chpl_intToIdx _low))
+  }
+  function _unknown[51].high[66796](arg _mt[66801]:_MT[238], arg this[66798] :
+  range) : _unknown[51] "inline" "method" "no parens"
+  {
+    (66807 return(66806 call chpl_intToIdx _high))
+  }
+  function _unknown[51].alignedLow[66815](arg _mt[66820]:_MT[238], arg this[66817] :
+  range) : _unknown[51] "inline" "method" "no parens"
+  {
+    (66830 return(66829 call chpl_intToIdx(66825 call . this c"alignedLowAsInt")))
+  }
+  { scopeless type
+    idxType
+  }
+  function _unknown[51].alignedLowAsInt[66839](arg _mt[66844]:_MT[238], arg this[66841] :
+  range) : _unknown[51] "inline" "method" "no doc" "no parens"
+  {
+    if(66863 call _cond_test(66847 call ! stridable))
+    {
+      (66850 return _low)
+    }
+    {
+      (66861 return(66859 call + _low(66858 call chpl__diffMod _alignment _low stride)))
+    }
+  }
+  function _unknown[51].alignedHigh[66875](arg _mt[66880]:_MT[238], arg this[66877] :
+  range) : _unknown[51] "inline" "method" "no parens"
+  {
+    (66890 return(66889 call chpl_intToIdx(66885 call . this c"alignedHighAsInt")))
+  }
+  { scopeless type
+    idxType
+  }
+  function _unknown[51].alignedHighAsInt[66899](arg _mt[66904]:_MT[238], arg this[66901] :
+  range) : _unknown[51] "inline" "method" "no doc" "no parens"
+  {
+    if(66923 call _cond_test(66907 call ! stridable))
+    {
+      (66910 return _high)
+    }
+    {
+      (66921 return(66919 call - _high(66918 call chpl__diffMod _high _alignment stride)))
+    }
+  }
+  function _unknown[51].isEmpty[66935](arg _mt[66940]:_MT[238], arg this[66937] :
+  range) : _unknown[51] "inline" "method"
+  {
+    if(66990 call _cond_test(66946 call && boundsChecking(66945 call isAmbiguous)))
+    {
+      (66970 call(66949 call . HaltWrappers c"boundsCheckHalt") "isEmpty() is invoked on an ambiguously-aligned range")
+    }
+    {
+      (66988 return(66986 call &&(66975 call isBoundedRange this)(66984 call >(66977 call . this c"alignedLow")(66981 call . this c"alignedHigh"))))
+    }
+  }
+  function _unknown[51].length[67002](arg _mt[67007]:_MT[238], arg this[67004] :
+  range) : _unknown[51] "inline" "method" "no parens"
+  {
+    (67048 call compilerWarning(67045 call + "'range.length' is deprecated - " "please use 'range.size' instead"))
+    (67055 return(67052 call . this c"size"))
+  }
+  { scopeless type
+    intIdxType
+  }
+  function _unknown[51].size[67063](arg _mt[67068]:_MT[238], arg this[67065] :
+  range) : _unknown[51] "method" "no parens"
+  {
+    if(67098 call _cond_test(67075 call !(67074 call isBoundedRange this)))
+    {
+      (67096 call compilerError "'size' is not defined on unbounded ranges")
+    }
+    const ah[67108] "const"(67105 call . this c"alignedHighAsInt")
+    const al[67115] "const"(67112 call . this c"alignedLowAsInt")
+    (67118 'end of statement')
+    if(67129 call _cond_test(67121 call > al ah))
+    {
+      (67127 return(67125 call _cast intIdxType 0))
+    }
+    const s[67144] "const"(67142 call _cast intIdxType(67140 call abs(67136 call . this c"stride")))
+    (67147 'end of statement')
+    (67161 return(67159 call +(67153 call /(67150 call - ah al) s)(67157 call _cast intIdxType 1)))
+  }
+  { scopeless type
+    intIdxType
+  }
+  function _unknown[51].hasFirst[67169](arg _mt[67174]:_MT[238], arg this[67171] :
+  range) param : _unknown[51] "method"
+  {
+    (67189 return(67188 call hasLowBound))
+  }
+  where {
+    (67184 call &&(67177 call ! stridable)(67182 call !(67181 call hasHighBound)))
+  }
+  function _unknown[51].hasFirst[67198](arg _mt[67203]:_MT[238], arg this[67200] :
+  range) : _unknown[51] "inline" "method" "no doc"
+  {
+    (67230 return(67227 IfExpr (67211 call ||(67207 call isAmbiguous)(67210 call isEmpty)) then
+    { scopeless
+      0
+    } else
+    { scopeless(67224 IfExpr (67216 call > stride 0) then
+      { scopeless
+        (67220 call hasLowBound)
+      } else
+      { scopeless
+        (67223 call hasHighBound)
+      } )
+    } ))
+  }
+  function _unknown[51].hasLast[67238](arg _mt[67243]:_MT[238], arg this[67240] :
+  range) param : _unknown[51] "method"
+  {
+    (67258 return(67257 call hasHighBound))
+  }
+  where {
+    (67253 call &&(67246 call ! stridable)(67251 call !(67250 call hasLowBound)))
+  }
+  function _unknown[51].hasLast[67267](arg _mt[67272]:_MT[238], arg this[67269] :
+  range) : _unknown[51] "inline" "method" "no doc"
+  {
+    (67299 return(67296 IfExpr (67280 call ||(67276 call isAmbiguous)(67279 call isEmpty)) then
+    { scopeless
+      0
+    } else
+    { scopeless(67293 IfExpr (67285 call > stride 0) then
+      { scopeless
+        (67289 call hasHighBound)
+      } else
+      { scopeless
+        (67292 call hasLowBound)
+      } )
+    } ))
+  }
+  function _unknown[51].isNaturallyAligned[67307](arg _mt[67312]:_MT[238], arg this[67309] :
+  range) : _unknown[51] "method"
+  {
+    if(67340 call _cond_test(67329 call > stride 0))
+    {
+      (67338 return(67336 call ==(67332 call . this c"alignedLowAsInt") _low))
+    }
+    if(67359 call _cond_test(67348 call < stride 0))
+    {
+      (67357 return(67355 call ==(67351 call . this c"alignedHighAsInt") _high))
+    }
+    (67365 return 0)
+  }
+  where {
+    (67325 call && stridable(67323 call ==(67316 call . this c"boundedType")(67320 call . BoundedRangeType c"bounded")))
+  }
+  function _unknown[51].isNaturallyAligned[67373](arg _mt[67378]:_MT[238], arg this[67375] :
+  range) param : _unknown[51] "inline" "method" "no doc"
+  {
+    (67396 return 1)
+  }
+  where {
+    (67393 call &&(67381 call ! stridable)(67391 call ==(67384 call . this c"boundedType")(67388 call . BoundedRangeType c"bounded")))
+  }
+  function _unknown[51].isNaturallyAligned[67405](arg _mt[67410]:_MT[238], arg this[67407] :
+  range) : _unknown[51] "inline" "method" "no doc"
+  {
+    (67434 return(67432 call ==(67428 call . this c"alignedLowAsInt") _low))
+  }
+  where {
+    (67425 call &&(67413 call ! stridable)(67423 call ==(67416 call . this c"boundedType")(67420 call . BoundedRangeType c"boundedLow")))
+  }
+  function _unknown[51].isNaturallyAligned[67443](arg _mt[67448]:_MT[238], arg this[67445] :
+  range) : _unknown[51] "inline" "method" "no doc"
+  {
+    (67476 return(67474 call &&(67465 call > stride 0)(67472 call ==(67468 call . this c"alignedLowAsInt") _low)))
+  }
+  where {
+    (67461 call && stridable(67459 call ==(67452 call . this c"boundedType")(67456 call . BoundedRangeType c"boundedLow")))
+  }
+  function _unknown[51].isNaturallyAligned[67485](arg _mt[67490]:_MT[238], arg this[67487] :
+  range) param : _unknown[51] "inline" "method" "no doc"
+  {
+    (67520 return 0)
+  }
+  where {
+    (67517 call ||(67500 call ==(67493 call . this c"boundedType")(67497 call . BoundedRangeType c"boundedNone"))(67515 call &&(67503 call ! stridable)(67513 call ==(67506 call . this c"boundedType")(67510 call . BoundedRangeType c"boundedHigh"))))
+  }
+  function _unknown[51].isNaturallyAligned[67529](arg _mt[67534]:_MT[238], arg this[67531] :
+  range) : _unknown[51] "inline" "method" "no doc"
+  {
+    (67562 return(67560 call &&(67551 call < stride 0)(67558 call ==(67554 call . this c"alignedHighAsInt") _high)))
+  }
+  where {
+    (67547 call && stridable(67545 call ==(67538 call . this c"boundedType")(67542 call . BoundedRangeType c"boundedHigh")))
+  }
+  function _unknown[51].isAmbiguous[67571](arg _mt[67576]:_MT[238], arg this[67573] :
+  range) param : _unknown[51] "method"
+  {
+    (67582 return 0)
+  }
+  where {
+    (67579 call ! stridable)
+  }
+  function _unknown[51].isAmbiguous[67591](arg _mt[67596]:_MT[238], arg this[67593] :
+  range) : _unknown[51] "method" "no doc"
+  {
+    (67616 return(67614 call &&(67600 call ! aligned)(67612 call ||(67604 call > stride 1)(67610 call < stride(67608 call - 1)))))
+  }
+  where {
+    stridable
+  }
+  function _unknown[51].contains[67629](arg _mt[67634]:_MT[238], arg this[67631] :
+  range, arg ind[67626] :
+  idxType) : _unknown[51] "inline" "method"
+  {
+    if(67647 call _cond_test(67643 call(67639 call . this c"isAmbiguous")))
+    {
+      (67645 return 0)
+    }
+    const i[67657] "const"(67656 call chpl__idxToInt ind)
+    (67660 'end of statement')
+    if(67677 call _cond_test(67663 call hasHighBound))
+    {
+      if(67671 call _cond_test(67666 call > i _high))
+      {
+        (67669 return 0)
+      }
+    }
+    if(67697 call _cond_test(67683 call hasLowBound))
+    {
+      if(67691 call _cond_test(67686 call < i _low))
+      {
+        (67689 return 0)
+      }
+    }
+    if(67731 call _cond_test stridable)
+    {
+      unknown s[67709](67707 call _cast intIdxType(67705 call abs _stride))
+      (67712 'end of statement')
+      if(67726 call _cond_test(67721 call !=(67719 call chpl__diffMod i _alignment s) 0))
+      {
+        (67724 return 0)
+      }
+    }
+    (67736 return 1)
+  }
+  function _unknown[51].contains[67750](arg _mt[67755]:_MT[238], arg this[67752] :
+  range, arg other[67747] :
+  (67746 call range ?[260])) : _unknown[51] "inline" "method"
+  {
+    if(67774 call _cond_test(67769 call ||(67762 call(67758 call . this c"isAmbiguous"))(67768 call(67764 call . other c"isAmbiguous"))))
+    {
+      (67772 return 0)
+    }
+    if(67842 call _cond_test stridable)
+    {
+      if(67816 call _cond_test(67807 call ||(67792 call &&(67783 call > stride 0)(67790 call <(67786 call . other c"stride") 0))(67805 call &&(67796 call < stride 0)(67803 call >(67799 call . other c"stride") 0))))
+      {
+        (67814 return(67813 call _containsHelp this other))
+      }
+    }
+    {
+      if(67836 call _cond_test(67827 call <(67823 call . other c"stride") 0))
+      {
+        (67834 return(67833 call _containsHelp this other))
+      }
+    }
+    (67853 return(67851 call == other(67850 call this other)))
+  }
+  function _unknown[51].member[67864](arg _mt[67869]:_MT[238], arg this[67866] :
+  range, arg ind[67861] :
+  idxType) : _unknown[51] "inline" "method"
+  {
+    (67909 call compilerWarning(67906 call + "range.member is deprecated - " "please use range.contains instead"))
+    (67921 return(67920 call(67915 call . this c"contains") ind))
+  }
+  function _unknown[51].member[67935](arg _mt[67940]:_MT[238], arg this[67937] :
+  range, arg other[67932] :
+  (67931 call range ?[260])) : _unknown[51] "inline" "method"
+  {
+    (67948 call compilerWarning(67945 call + "range.member is deprecated - " "please use range.contains instead"))
+    (67958 return(67957 call(67952 call . this c"contains") other))
+  }
+  function _containsHelp[67971](in arg arg1[67968] :
+  (67967 call range ?[260]), in arg arg2[67977] :
+  (67976 call range ?[260])) : _unknown[51] "inline" "private"
+  {
+    if(68010 call _cond_test(67981 call . arg2 c"stridable"))
+    {
+      (67994 call =(67985 call . arg2 c"_stride")(67992 call -(67989 call . arg2 c"_stride")))
+    }
+    {
+      (68007 call =(67998 call . arg1 c"_stride")(68005 call -(68002 call . arg1 c"_stride")))
+    }
+    (68024 return(68022 call == arg2(68021 call arg1 arg2)))
+  }
+  function ==[68037](arg r1[68034] :
+  (68033 call range ?[260]), arg r2[68043] :
+  (68042 call range ?[260])) param : _unknown[51]
+  {
+    (68057 return 0)
+  }
+  where {
+    (68054 call !=(68047 call . r1 c"boundedType")(68051 call . r2 c"boundedType"))
+  }
+  function ==[68072](arg r1[68069] :
+  (68068 call range ?[260]), arg r2[68078] :
+  (68077 call range ?[260])) : _unknown[51]
+  {
+    if(68109 call _cond_test(68104 call !=(68097 call(68093 call . r1 c"isAmbiguous"))(68103 call(68099 call . r2 c"isAmbiguous"))))
+    {
+      (68107 return 0)
+    }
+    if(68128 call _cond_test(68120 call(68116 call . r1 c"isAmbiguous")))
+    {
+      (68126 return(68125 call ident r1 r2))
+    }
+    if(68310 call _cond_test(68136 call isBoundedRange r1))
+    {
+      const len[68141] "const"(68138 call . r1 c"size")
+      const l2[68148] "const"(68145 call . r2 c"size")
+      (68151 'end of statement')
+      if(68160 call _cond_test(68155 call != len l2))
+      {
+        (68158 return 0)
+      }
+      if(68172 call _cond_test(68167 call == len 0))
+      {
+        (68170 return 1)
+      }
+      if(68192 call _cond_test(68187 call !=(68180 call . r1 c"first")(68184 call . r2 c"first")))
+      {
+        (68190 return 0)
+      }
+      if(68204 call _cond_test(68199 call == len 1))
+      {
+        (68202 return 1)
+      }
+      if(68222 call _cond_test(68217 call !=(68210 call . r1 c"stride")(68214 call . r2 c"stride")))
+      {
+        (68220 return 0)
+      }
+      (68228 return 1)
+    }
+    {
+      if(68243 call _cond_test(68238 call !=(68231 call . r1 c"stride")(68235 call . r2 c"stride")))
+      {
+        (68241 return 0)
+      }
+      if(68273 call _cond_test(68254 call(68250 call . r1 c"hasLowBound")))
+      {
+        if(68268 call _cond_test(68263 call !=(68256 call . r1 c"alignedLow")(68260 call . r2 c"alignedLow")))
+        {
+          (68266 return 0)
+        }
+      }
+      if(68302 call _cond_test(68283 call(68279 call . r1 c"hasHighBound")))
+      {
+        if(68297 call _cond_test(68292 call !=(68285 call . r1 c"alignedHigh")(68289 call . r2 c"alignedHigh")))
+        {
+          (68295 return 0)
+        }
+      }
+      (68308 return 1)
+    }
+  }
+  where {
+    (68090 call ==(68083 call . r1 c"boundedType")(68087 call . r2 c"boundedType"))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function !=[68327](arg r1[68324] :
+  (68323 call range ?[260]), arg r2[68333] :
+  (68332 call range ?[260])) : _unknown[51]
+  {
+    (68342 return(68340 call !(68338 call == r1 r2)))
+  }
+  function ident[68356](arg r1[68353] :
+  (68352 call range ?[260]), arg r2[68362] :
+  (68361 call range ?[260])) : _unknown[51]
+  {
+    if(68412 call _cond_test(68407 call !=(68400 call . r1 c"_low")(68404 call . r2 c"_low")))
+    {
+      (68410 return 0)
+    }
+    if(68431 call _cond_test(68426 call !=(68419 call . r1 c"_high")(68423 call . r2 c"_high")))
+    {
+      (68429 return 0)
+    }
+    if(68508 call _cond_test(68437 call . r1 c"stridable"))
+    {
+      if(68503 call _cond_test(68441 call . r2 c"stridable"))
+      {
+        if(68457 call _cond_test(68452 call !=(68445 call . r1 c"_stride")(68449 call . r2 c"_stride")))
+        {
+          (68455 return 0)
+        }
+        if(68476 call _cond_test(68471 call !=(68464 call . r1 c"_alignment")(68468 call . r2 c"_alignment")))
+        {
+          (68474 return 0)
+        }
+        if(68494 call _cond_test(68489 call !=(68482 call . r1 c"_aligned")(68486 call . r2 c"_aligned")))
+        {
+          (68492 return 0)
+        }
+      }
+      {
+        (68500 return 0)
+      }
+    }
+    (68513 return 1)
+  }
+  where {
+    (68397 call &&(68385 call &&(68373 call ==(68366 call . r1 c"idxType")(68370 call . r2 c"idxType"))(68383 call ==(68376 call . r1 c"boundedType")(68380 call . r2 c"boundedType")))(68395 call ==(68388 call . r1 c"stridable")(68392 call . r2 c"stridable")))
+  }
+  function ident[68527](arg r1[68524] :
+  (68523 call range ?[260]), arg r2[68533] :
+  (68532 call range ?[260])) param : _unknown[51] "no doc"
+  {
+    (68537 return 0)
+  }
+  function _unknown[51].safeCast[68552](arg _mt[68557]:_MT[238], arg this[68554] :
+  range, arg t[68549] :
+  (68548 call range ?[260])) : _unknown[51] "method" "no doc"
+  {
+    unknown tmp[68560] t
+    (68563 'end of statement')
+    if(68628 call _cond_test(68573 call !=(68566 call . tmp c"boundedType")(68570 call . this c"boundedType")))
+    {
+      (68625 call compilerError "cannot cast range from "(68599 call _cast string[26](68595 call . this c"boundedType")) " to "(68623 call _cast string[26](68619 call . tmp c"boundedType")))
+    }
+    if(68722 call _cond_test(68633 call . tmp c"stridable"))
+    {
+      (68644 call =(68637 call . tmp c"_stride")(68641 call . this c"stride"))
+      (68670 call =(68649 call . tmp c"_alignment")(68669 call(68659 call .(68658 call chpl__idxToInt(68654 call . this c"alignment")) c"safeCast")(68665 call . tmp c"intIdxType")))
+      (68681 call =(68674 call . tmp c"_aligned")(68678 call . this c"aligned"))
+    }
+    {
+      if(68718 call _cond_test(68689 call !=(68685 call . this c"stride") 1))
+      {
+        (68715 call(68694 call . HaltWrappers c"safeCastCheckHalt") "illegal safeCast from non-unit stride range to unstridable range")
+      }
+    }
+    (68744 call =(68728 call . tmp c"_low")(68743 call(68735 call .(68732 call . this c"_low") c"safeCast")(68739 call . tmp c"intIdxType")))
+    (68764 call =(68748 call . tmp c"_high")(68763 call(68755 call .(68752 call . this c"_high") c"safeCast")(68759 call . tmp c"intIdxType")))
+    (68768 return tmp)
+  }
+  function _cast[68781](arg t[68778] :
+  (68777 call range ?[260]), arg r[68787] :
+  (68786 call range ?[260])) : _unknown[51] "no doc"
+  {
+    unknown tmp[68791] t
+    (68794 'end of statement')
+    if(68827 call _cond_test(68804 call !=(68797 call . tmp c"boundedType")(68801 call . r c"boundedType")))
+    {
+      (68824 call compilerError "cannot cast range from "(68814 call _cast string[26](68810 call . r c"boundedType")) " to "(68822 call _cast string[26](68818 call . tmp c"boundedType")))
+    }
+    if(68875 call _cond_test(68832 call . tmp c"stridable"))
+    {
+      (68843 call =(68836 call . tmp c"_stride")(68840 call . r c"_stride"))
+      (68861 call =(68848 call . tmp c"_alignment")(68859 call _cast(68856 call . tmp c"intIdxType")(68852 call . r c"_alignment")))
+      (68872 call =(68865 call . tmp c"_aligned")(68869 call . r c"_aligned"))
+    }
+    (68893 call =(68880 call . tmp c"_low")(68891 call _cast(68888 call . tmp c"intIdxType")(68884 call . r c"low")))
+    (68910 call =(68897 call . tmp c"_high")(68908 call _cast(68905 call . tmp c"intIdxType")(68901 call . r c"high")))
+    (68914 return tmp)
+  }
+  function _unknown[51].boundsCheck[68933](arg _mt[68938]:_MT[238], arg this[68935] :
+  range, arg other[68930] :
+  (68929 call range unknown e[68922] unknown b[68925] unknown s[68927])) : _unknown[51] "inline" "method"
+  {
+    if(68964 call _cond_test(68959 call ||(68952 call(68948 call . this c"isAmbiguous"))(68958 call(68954 call . other c"isAmbiguous"))))
+    {
+      (68962 return 0)
+    }
+    (68971 return 1)
+  }
+  where {
+    (68945 call == b(68942 call . BoundedRangeType c"boundedNone"))
+  }
+  function _unknown[51].boundsCheck[68991](arg _mt[68996]:_MT[238], arg this[68993] :
+  range, arg other[68988] :
+  (68987 call range unknown e[68980] unknown b[68983] unknown s[68985])) : _unknown[51] "inline" "method" "no doc"
+  {
+    if(69015 call _cond_test(69010 call ||(69003 call(68999 call . this c"isAmbiguous"))(69009 call(69005 call . other c"isAmbiguous"))))
+    {
+      (69013 return 0)
+    }
+    unknown boundedOther[69074](69021 'new'(69073 call range idxType(69026 call . BoundedRangeType c"bounded")(69034 call || s(69031 call . this c"stridable"))(69047 IfExpr (69041 call(69037 call . other c"hasLowBound")) then
+    { scopeless
+      (69043 call . other c"low")
+    } else
+    { scopeless
+      low
+    } )(69061 IfExpr (69055 call(69051 call . other c"hasHighBound")) then
+    { scopeless
+      (69057 call . other c"high")
+    } else
+    { scopeless
+      high
+    } )(69065 call . other c"stride")(69069 call . other c"alignment") 1))
+    (69077 'end of statement')
+    (69091 return(69089 call ||(69083 call ==(69079 call . boundedOther c"size") 0)(69088 call contains boundedOther)))
+  }
+  function _unknown[51].boundsCheck[69102](arg _mt[69107]:_MT[238], arg this[69104] :
+  range, arg other[69099] :
+  idxType) : _unknown[51] "inline" "method"
+  {
+    (69113 return(69112 call contains other))
+  }
+  function _unknown[51].alignLow[69121](arg _mt[69126]:_MT[238], ref arg this[69123] :
+  range) : _unknown[51] "method" "no doc"
+  {
+    if(69163 call _cond_test(69135 call && boundsChecking(69134 call(69130 call . this c"isAmbiguous"))))
+    {
+      (69161 call(69138 call . HaltWrappers c"boundsCheckHalt") "alignLow -- Cannot be applied to a range with ambiguous alignment.")
+    }
+    if(69178 call _cond_test stridable)
+    {
+      (69175 call = _low(69172 call . this c"alignedLowAsInt"))
+    }
+    (69184 return this)
+  }
+  function _unknown[51].alignHigh[69191](arg _mt[69196]:_MT[238], ref arg this[69193] :
+  range) : _unknown[51] "method" "no doc"
+  {
+    if(69231 call _cond_test(69205 call && boundsChecking(69204 call(69200 call . this c"isAmbiguous"))))
+    {
+      (69229 call(69208 call . HaltWrappers c"boundsCheckHalt") "alignHigh -- Cannot be applied to a range with ambiguous alignment.")
+    }
+    if(69246 call _cond_test stridable)
+    {
+      (69243 call = _high(69240 call . this c"alignedHighAsInt"))
+    }
+    (69252 return this)
+  }
+  function _unknown[51].indexOrder[69263](arg _mt[69268]:_MT[238], arg this[69265] :
+  range, arg ind[69260] :
+  idxType) : _unknown[51] "method"
+  {
+    if(69303 call _cond_test(69277 call && boundsChecking(69276 call(69272 call . this c"isAmbiguous"))))
+    {
+      (69301 call(69280 call . HaltWrappers c"boundsCheckHalt") "indexOrder -- Undefined on a range with ambiguous alignment.")
+    }
+    if(69323 call _cond_test(69313 call !(69312 call contains ind)))
+    {
+      (69321 return(69319 call _cast intIdxType(69316 call - 1)))
+    }
+    if(69393 call _cond_test(69329 call ! stridable))
+    {
+      if(69346 call _cond_test(69336 call(69332 call . this c"hasLowBound")))
+      {
+        (69344 return(69342 call -(69340 call chpl__idxToInt ind) _low))
+      }
+    }
+    {
+      if(69387 call _cond_test(69359 call(69355 call . this c"hasFirst")))
+      {
+        (69385 return(69383 call _cast intIdxType(69380 call /(69377 call -(69365 call _cast strType(69363 call chpl__idxToInt ind))(69375 call _cast strType(69373 call chpl__idxToInt(69369 call . this c"first")))) _stride)))
+      }
+    }
+    (69403 return(69401 call _cast intIdxType(69398 call - 1)))
+  }
+  function _unknown[51].orderToIndex[69414](arg _mt[69419]:_MT[238], arg this[69416] :
+  range, arg ord[69411] :
+  integral) : _unknown[51] "method"
+  {
+    if(69605 call _cond_test boundsChecking)
+    {
+      if(69452 call _cond_test(69426 call !(69425 call hasFirst)))
+      {
+        (69450 call(69429 call . HaltWrappers c"boundsCheckHalt") "invoking orderToIndex on a range that has no first index")
+      }
+      if(69485 call _cond_test(69460 call isAmbiguous))
+      {
+        (69483 call(69462 call . HaltWrappers c"boundsCheckHalt") "invoking orderToIndex on a range that is ambiguously aligned")
+      }
+      if(69524 call _cond_test(69492 call < ord 0))
+      {
+        (69522 call(69495 call . HaltWrappers c"boundsCheckHalt")(69519 call + "invoking orderToIndex on a negative integer: "(69517 call _cast string[26] ord)))
+      }
+      if(69600 call _cond_test(69540 call &&(69532 call isBoundedRange this)(69538 call >= ord(69535 call . this c"size"))))
+      {
+        (69598 call(69543 call . HaltWrappers c"boundsCheckHalt")(69595 call +(69586 call +(69567 call + "invoking orderToIndex on an integer "(69565 call _cast string[26] ord)) " that is larger than the range's number of indices ")(69593 call _cast string[26](69589 call . this c"size"))))
+      }
+    }
+    (69625 return(69624 call chpl_intToIdx(69622 call chpl__addRangeStrides(69613 call . this c"firstAsInt")(69618 call . this c"stride") ord)))
+  }
+  { scopeless type
+    idxType
+  }
+  function _unknown[51].translate[69637](arg _mt[69642]:_MT[238], arg this[69639] :
+  range, arg offset[69634] :
+  integral) : _unknown[51] "inline" "method"
+  {
+    (69648 return(69646 call + this offset))
+  }
+  function _unknown[51].translate[69658](arg _mt[69663]:_MT[238], arg this[69660] :
+  range, arg i[69656]:_any[178](?)) : _unknown[51] "inline" "method" "no doc" "no return value for void"
+  {
+    (69684 call compilerError "offsets must be of integral type")
+  }
+  function _unknown[51]._effAlmt[69692](arg _mt[69697]:_MT[238], arg this[69694] :
+  range) : _unknown[51] "inline" "method" "no doc"
+  {
+    (69701 return alignment)
+  }
+  where {
+    stridable
+  }
+  function _unknown[51]._effAlmt[69710](arg _mt[69715]:_MT[238], arg this[69712] :
+  range) : _unknown[51] "method" "no doc"
+  {
+    (69724 return(69723 call chpl_intToIdx 0))
+  }
+  where {
+    (69718 call ! stridable)
+  }
+  function _unknown[51].interior[69737](arg _mt[69742]:_MT[238], arg this[69739] :
+  range, arg offset[69734] :
+  integral) : _unknown[51] "method" "no doc" "no return value for void"
+  {
+    (69770 call compilerError "interior is not supported on unbounded ranges")
+  }
+  where {
+    (69749 call != boundedType(69746 call . BoundedRangeType c"bounded"))
+  }
+  function _unknown[51].interior[69783](arg _mt[69788]:_MT[238], arg this[69785] :
+  range, arg offset[69780] :
+  integral) : _unknown[51] "method"
+  {
+    const i[69797] "const"(69796 call(69791 call . offset c"safeCast") intIdxType)
+    (69800 'end of statement')
+    if(69831 call _cond_test(69804 call < i 0))
+    {
+      (69829 return(69806 'new'(69828 call range idxType boundedType stridable low(69822 call chpl_intToIdx(69819 call -(69816 call - _low 1) i)) stride(69826 call _effAlmt) aligned)))
+    }
+    if(69865 call _cond_test(69838 call > i 0))
+    {
+      (69863 return(69840 'new'(69862 call range idxType boundedType stridable(69855 call chpl_intToIdx(69852 call -(69849 call + _high 1) i)) high stride(69860 call _effAlmt) aligned)))
+    }
+    (69884 return(69870 'new'(69883 call range idxType boundedType stridable low high stride(69881 call _effAlmt) aligned)))
+  }
+  function _unknown[51].exterior[69895](arg _mt[69900]:_MT[238], arg this[69897] :
+  range, arg offset[69892] :
+  integral) : _unknown[51] "method" "no doc" "no return value for void"
+  {
+    (69928 call compilerError "exterior is not supported on unbounded ranges")
+  }
+  where {
+    (69907 call != boundedType(69904 call . BoundedRangeType c"bounded"))
+  }
+  function _unknown[51].exterior[69941](arg _mt[69946]:_MT[238], arg this[69943] :
+  range, arg offset[69938] :
+  integral) : _unknown[51] "method"
+  {
+    const i[69955] "const"(69954 call(69949 call . offset c"safeCast") intIdxType)
+    (69958 'end of statement')
+    if(69992 call _cond_test(69962 call < i 0))
+    {
+      (69990 return(69964 'new'(69989 call range idxType boundedType stridable(69976 call chpl_intToIdx(69973 call + _low i))(69983 call chpl_intToIdx(69980 call - _low 1)) stride(69987 call _effAlmt) aligned)))
+    }
+    if(70029 call _cond_test(69999 call > i 0))
+    {
+      (70027 return(70001 'new'(70026 call range idxType boundedType stridable(70013 call chpl_intToIdx(70010 call + _high 1))(70020 call chpl_intToIdx(70017 call + _high i)) stride(70024 call _effAlmt) aligned)))
+    }
+    (70048 return(70034 'new'(70047 call range idxType boundedType stridable low high stride(70045 call _effAlmt) aligned)))
+  }
+  function _unknown[51].expand[70059](arg _mt[70064]:_MT[238], arg this[70061] :
+  range, arg offset[70056] :
+  integral) : _unknown[51] "method" "no doc" "no return value for void"
+  {
+    (70092 call compilerError "expand() is not supported on unbounded ranges")
+  }
+  where {
+    (70071 call != boundedType(70068 call . BoundedRangeType c"bounded"))
+  }
+  function _unknown[51].expand[70105](arg _mt[70110]:_MT[238], arg this[70107] :
+  range, arg offset[70102] :
+  integral) : _unknown[51] "method"
+  {
+    const i[70119] "const"(70118 call(70113 call . offset c"safeCast") intIdxType)
+    (70122 'end of statement')
+    (70148 return(70124 'new'(70147 call range idxType boundedType stridable(70136 call chpl_intToIdx(70133 call - _low i))(70143 call chpl_intToIdx(70140 call + _high i)) stride alignment _aligned)))
+  }
+  function =[70163](ref arg r1[70160] :
+  (70159 call range(stridable = unknown s1[70155])), arg r2[70171] :
+  (70170 call range(stridable = unknown s2[70166]))) : _unknown[51] "assignop" "inline" "no return value for void"
+  {
+    if(70207 call _cond_test(70182 call !=(70175 call . r1 c"boundedType")(70179 call . r2 c"boundedType")))
+    {
+      (70205 call compilerError "type mismatch in assignment of ranges with different boundedType parameters")
+    }
+    if(70275 call _cond_test(70217 call &&(70214 call ! s1) s2))
+    {
+      (70238 call compilerError "type mismatch in assignment of ranges with different stridable parameters")
+    }
+    {
+      if(70269 call _cond_test(70242 call && s1 s2))
+      {
+        (70252 call =(70245 call . r1 c"_stride")(70249 call . r2 c"stride"))
+      }
+      {
+        if(70264 call _cond_test s1)
+        {
+          (70261 call =(70257 call . r1 c"_stride") 1)
+        }
+      }
+    }
+    (70289 call =(70282 call . r1 c"_low")(70286 call . r2 c"_low"))
+    (70300 call =(70293 call . r1 c"_high")(70297 call . r2 c"_high"))
+    if(70330 call _cond_test s1)
+    {
+      (70315 call =(70305 call . r1 c"_alignment")(70314 call chpl__idxToInt(70310 call . r2 c"alignment")))
+      (70327 call =(70320 call . r1 c"_aligned")(70324 call . r2 c"aligned"))
+    }
+  }
+  function +[70350](arg r[70347] :
+  (70346 call range unknown e[70339] unknown b[70342] unknown s[70344]), arg offset[70353] :
+  integral) : _unknown[51] "inline"
+  {
+    const i[70363] "const"(70361 call _cast(70358 call . r c"intIdxType") offset)
+    (70366 'end of statement')
+    unknown strType[70372] "type variable"(70371 call chpl__rangeStrideType e)
+    (70437 return(70375 'new'(70436 call range e b s(70395 call(70384 call . r c"chpl_intToIdx")(70392 call +(70388 call . r c"_low") i))(70408 call(70397 call . r c"chpl_intToIdx")(70405 call +(70401 call . r c"_high") i))(70414 call _cast strType(70410 call . r c"stride"))(70431 call(70417 call . r c"chpl_intToIdx")(70428 call +(70426 call chpl__idxToInt(70422 call . r c"alignment")) i))(70433 call . r c"aligned"))))
+  }
+  function +[70447](arg i[70444] :
+  integral, arg r[70458] :
+  (70457 call range unknown e[70450] unknown b[70453] unknown s[70455])) : _unknown[51] "inline"
+  {
+    (70465 return(70463 call + r i))
+  }
+  function -[70484](arg r[70481] :
+  (70480 call range unknown e[70473] unknown b[70476] unknown s[70478]), arg i[70487] :
+  integral) : _unknown[51] "inline"
+  {
+    unknown strType[70494] "type variable"(70493 call chpl__rangeStrideType e)
+    (70558 return(70498 'new'(70557 call range e b s(70516 call(70505 call . r c"chpl_intToIdx")(70513 call -(70509 call . r c"_low") i))(70529 call(70518 call . r c"chpl_intToIdx")(70526 call -(70522 call . r c"_high") i))(70535 call _cast strType(70531 call . r c"stride"))(70552 call(70538 call . r c"chpl_intToIdx")(70549 call -(70547 call chpl__idxToInt(70543 call . r c"alignment")) i))(70554 call . r c"aligned"))))
+  }
+  function chpl_check_step_integral[70566](arg step[70564]:_any[178](?)) : _unknown[51] "inline" "no return value for void"
+  {
+    if(70601 call _cond_test(70573 call !(70572 call isIntegral(70570 'typeof' step))))
+    {
+      (70599 call compilerError "can't apply 'by' using step of a non-integral type "(70597 call _cast string[26](70595 'typeof' step)))
+    }
+  }
+  function chpl_need_to_check_step[70613](arg step[70611]:_any[178](?), arg strType[70615]:_any[178](?)) param : _unknown[51]
+  {
+    (70623 call compilerAssert(70621 call isInt strType))
+    (70644 return(70642 call &&(70629 call !=(70627 'typeof' step) strType)(70640 call >=(70635 call numBits(70633 'typeof' step))(70639 call numBits strType))))
+  }
+  function chpl_range_check_stride[70652](arg step[70650]:_any[178](?), arg idxType[70654]:_any[178](?)) : _unknown[51] "inline" "no return value for void"
+  {
+    (70659 call chpl_check_step_integral step)
+    unknown strType[70666] "type variable"(70665 call chpl__rangeStrideType idxType)
+    if(70727 call _cond_test(70678 call >(70673 call numBits(70671 'typeof' step))(70677 call numBits strType)))
+    {
+      (70725 call compilerError "can't apply 'by' to a range with idxType "(70701 call _cast string[26] idxType) " using a step of type "(70723 call _cast string[26](70721 'typeof' step)))
+    }
+    if(70822 call _cond_test boundsChecking)
+    {
+      if(70761 call _cond_test(70735 call == step 0))
+      {
+        (70759 call(70738 call . HaltWrappers c"boundsCheckHalt") "the step argument of the 'by' operator is zero")
+      }
+      if(70817 call _cond_test(70783 call &&(70771 call chpl_need_to_check_step step strType)(70781 call > step(70779 call _cast(70778 'typeof' step)(70776 call max strType)))))
+      {
+        (70815 call(70786 call . HaltWrappers c"boundsCheckHalt")(70812 call + "the step argument of the 'by' operator is too large and cannot be represented within the range's stride type "(70810 call _cast string[26] strType)))
+      }
+    }
+  }
+  function chpl_range_check_stride[70832](param arg step[70830]:_any[178](?), arg idxType[70834]:_any[178](?)) : _unknown[51] "inline" "no return value for void"
+  {
+    (70839 call chpl_check_step_integral step)
+    unknown strType[70846] "type variable"(70845 call chpl__rangeStrideType idxType)
+    if(70858 call _cond_test(70851 call == step 0))
+    {
+      (70856 call compilerError "the step argument of the 'by' operator is zero")
+    }
+    if(70892 call _cond_test(70879 call &&(70867 call chpl_need_to_check_step step strType)(70877 call > step(70875 call _cast(70874 'typeof' step)(70872 call max strType)))))
+    {
+      (70890 call compilerError(70887 call + "the step argument of the 'by' operator is too large and cannot be represented within the range's stride type "(70885 call _cast string[26] strType)))
+    }
+  }
+  function chpl_by_help[70913](arg r[70910] :
+  (70909 call range unknown i[70902] unknown b[70905] unknown s[70907]), arg step[70915]:_any[178](?)) : _unknown[51]
+  {
+    const lw[70922] "const"(70919 call . r c"low") i
+    const hh[70930] "const"(70927 call . r c"high") i
+    const st[70952] "const"(70950 call *(70940 call . r c"stride")(70948 call _cast(70945 call . r c"strType") step))(70936 call . r c"strType")
+    (70955 'end of statement')
+    const tmp[71077] "const" "temp"(71074 IfExpr (70972 call(70968 call . r c"isAmbiguous")) then
+    { scopeless(70996 IfExpr (70974 call . r c"stridable") then
+      { scopeless
+        (70983 call _build_tuple 0(70979 call . r c"alignment"))
+      } else
+      { scopeless
+        (70994 call _build_tuple 0(70992 call(70987 call . r c"chpl_intToIdx") 0))
+      } )
+    } else
+    { scopeless(71071 IfExpr (71009 call &&(71004 call(71000 call . r c"hasLowBound"))(71007 call > st 0)) then
+      { scopeless
+        (71017 call _build_tuple 1(71013 call . r c"alignedLow"))
+      } else
+      { scopeless(71068 IfExpr (71029 call &&(71024 call(71020 call . r c"hasHighBound"))(71027 call < st 0)) then
+        { scopeless
+          (71037 call _build_tuple 1(71033 call . r c"alignedHigh"))
+        } else
+        { scopeless(71065 IfExpr (71040 call . r c"stridable") then
+          { scopeless
+            (71052 call _build_tuple(71044 call . r c"aligned")(71048 call . r c"alignment"))
+          } else
+          { scopeless
+            (71063 call _build_tuple 0(71061 call(71056 call . r c"chpl_intToIdx") 0))
+          } )
+        } )
+      } )
+    } )(70965 call _build_tuple bool[10] i)
+    (71084 call _check_tuple_var_decl tmp[71077] 2)
+    const ald[70957] "const"(71078 call tmp[71077] 0)
+    const alt[70959] "const"(71081 call tmp[71077] 1)
+    (71089 'end of statement')
+    (71102 return(71090 'new'(71101 call range i b 1 lw hh st alt ald)))
+  }
+  function chpl_by[71110](arg r[71108]:_any[178](?), arg step[71112]:_any[178](?)) : _unknown[51] "inline" "no doc"
+  {
+    if(71141 call _cond_test(71118 call !(71117 call isRange r)))
+    {
+      (71139 call compilerError "the first argument of the 'by' operator is not a range")
+    }
+    (71154 call chpl_range_check_stride step(71151 call . r c"idxType"))
+    (71161 return(71160 call chpl_by_help r step))
+  }
+  function chpl_by[71174](arg r[71171] :
+  (71170 call range ?[260]), param arg step[71176]:_any[178](?)) : _unknown[51] "inline" "no doc"
+  {
+    (71185 call chpl_range_check_stride step(71182 call . r c"idxType"))
+    (71199 return(71198 call chpl_by_help r(71196 call _cast(71193 call . r c"strType") step)))
+  }
+  function chpl_align[71217](arg r[71214] :
+  (71213 call range unknown i[71206] unknown b[71209] unknown s[71211]), arg algn[71220] :
+  i) : _unknown[51] "inline" "no doc"
+  {
+    (71256 return(71223 'new'(71255 call range i b 1(71238 call(71230 call . r c"chpl_intToIdx")(71234 call . r c"_low"))(71248 call(71240 call . r c"chpl_intToIdx")(71244 call . r c"_high"))(71250 call . r c"stride") algn 1)))
+  }
+  function chpl_align[71275](arg r[71272] :
+  (71271 call range unknown i[71264] unknown b[71267] unknown s[71269]), arg algn[71277]:_any[178](?)) : _unknown[51] "inline" "no doc"
+  {
+    (71324 call compilerError "can't align a range with idxType "(71300 call _cast string[26] i) " using a value of type "(71322 call _cast string[26](71320 'typeof' algn)))
+    (71328 return r)
+  }
+  function _unknown[51].offset[71339](arg _mt[71344]:_MT[238], arg this[71341] :
+  range, in arg offset[71336] :
+  integral) : _unknown[51] "method"
+  {
+    unknown offs[71353](71352 call(71347 call . offset c"safeCast") intIdxType)
+    (71356 'end of statement')
+    if(71388 call _cond_test(71359 call ! stridable))
+    {
+      (71380 call compilerWarning "invoking 'offset' on an unstrided range has no effect.")
+      (71385 call = offs 0)
+    }
+    if(71424 call _cond_test(71398 call && boundsChecking(71396 call !(71395 call hasFirst))))
+    {
+      (71422 call(71401 call . HaltWrappers c"boundsCheckHalt") "invoking 'offset' on a range without the first index")
+    }
+    (71450 return(71429 'new'(71449 call range idxType boundedType stridable low high stride(71447 call chpl_intToIdx(71444 call +(71440 call . this c"firstAsInt") offs)) 1)))
+  }
+  function _unknown[51].this[71464](arg _mt[71469]:_MT[238], const arg this[71466] :
+  range, arg other[71461] :
+  (71460 call range ?[260])) : _unknown[51] "method" "no doc"
+  {
+    unknown ambig[71472] 0
+    (71475 'end of statement')
+    if(71580 call _cond_test(71489 call ||(71482 call(71478 call . this c"isAmbiguous"))(71488 call(71484 call . other c"isAmbiguous"))))
+    {
+      unknown st1[71498](71497 call abs(71493 call . this c"stride"))
+      (71501 'end of statement')
+      unknown st2[71510](71509 call abs(71505 call . other c"stride"))
+      (71513 'end of statement')
+      unknown tmp[71524] "temp"(71523 call chpl__extendedEuclid st1 st2)
+      (71531 call _check_tuple_var_decl tmp[71524] 2)
+      unknown g[71514](71525 call tmp[71524] 0)
+      unknown x[71516](71528 call tmp[71524] 1)
+      (71536 'end of statement')
+      if(71570 call _cond_test(71542 call && boundsChecking(71540 call > g 1)))
+      {
+        (71568 call(71545 call . HaltWrappers c"boundsCheckHalt") "Cannot slice ranges with ambiguous alignments unless their strides are relatively prime.")
+      }
+      (71577 call = ambig 1)
+    }
+    function computeBoundedType[71588](arg r1[71586]:_any[178](?), arg r2[71590]:_any[178](?)) param : _unknown[51]
+    {
+      unknown low[71606] "param"(71604 call ||(71597 call(71593 call . r1 c"hasLowBound"))(71603 call(71599 call . r2 c"hasLowBound")))
+      (71609 'end of statement')
+      unknown high[71625] "param"(71623 call ||(71616 call(71612 call . r1 c"hasHighBound"))(71622 call(71618 call . r2 c"hasHighBound")))
+      (71628 'end of statement')
+      if(71671 call _cond_test(71631 call && low high))
+      {
+        (71637 return(71634 call . BoundedRangeType c"bounded"))
+      }
+      {
+        if(71665 call _cond_test low)
+        {
+          (71644 return(71641 call . BoundedRangeType c"boundedLow"))
+        }
+        {
+          if(71659 call _cond_test high)
+          {
+            (71651 return(71648 call . BoundedRangeType c"boundedHigh"))
+          }
+          {
+            (71657 return(71654 call . BoundedRangeType c"boundedNone"))
+          }
+        }
+      }
+    }
+    unknown lo1[71693](71690 IfExpr (71681 call hasLowBound) then
+    { scopeless
+      (71683 call . this c"_low")
+    } else
+    { scopeless
+      (71687 call . other c"_low")
+    } )
+    (71696 'end of statement')
+    unknown hi1[71711](71708 IfExpr (71699 call hasHighBound) then
+    { scopeless
+      (71701 call . this c"_high")
+    } else
+    { scopeless
+      (71705 call . other c"_high")
+    } )
+    (71714 'end of statement')
+    unknown st1[71722](71721 call abs(71717 call . this c"stride"))
+    (71725 'end of statement')
+    unknown lo2[71743](71740 IfExpr (71731 call(71727 call . other c"hasLowBound")) then
+    { scopeless
+      (71733 call . other c"_low")
+    } else
+    { scopeless
+      (71737 call . this c"_low")
+    } )
+    (71746 'end of statement')
+    unknown hi2[71764](71761 IfExpr (71752 call(71748 call . other c"hasHighBound")) then
+    { scopeless
+      (71754 call . other c"_high")
+    } else
+    { scopeless
+      (71758 call . this c"_high")
+    } )
+    (71767 'end of statement')
+    unknown st2[71775](71774 call abs(71770 call . other c"stride"))
+    (71778 'end of statement')
+    if(71798 call _cond_test(71782 call isUintType intIdxType))
+    {
+      if(71792 call _cond_test(71785 call < lo1 0))
+      {
+        (71789 call = lo1 0)
+      }
+    }
+    unknown newStride[71807](71804 call . this c"stride") strType
+    (71810 'end of statement')
+    unknown lcm[71819](71818 call abs(71814 call . this c"stride")) strType
+    (71822 'end of statement')
+    unknown tmp[71840] "temp"(71838 call _build_tuple lcm(71835 call _cast strType 0))(71830 call * 2 strType)
+    (71847 call _check_tuple_var_decl tmp[71840] 2)
+    unknown g[71823](71841 call tmp[71840] 0)
+    unknown x[71825](71844 call tmp[71840] 1)
+    (71852 'end of statement')
+    if(71955 call _cond_test(71875 call &&(71861 call !=(71854 call . this c"stride")(71858 call . other c"stride"))(71873 call !=(71864 call . this c"stride")(71871 call -(71868 call . other c"stride")))))
+    {
+      const tmp[71887] "const" "temp"(71886 call chpl__extendedEuclid st1 st2)
+      (71894 call _check_tuple_var_decl tmp[71887] 2)
+      const tg[71877] "const"(71888 call tmp[71887] 0)
+      const tx[71879] "const"(71891 call tmp[71887] 1)
+      (71899 'end of statement')
+      (71923 call =(71904 call _build_tuple g x)(71921 call _build_tuple(71912 call(71907 call . tg c"safeCast") strType)(71919 call(71914 call . tx c"safeCast") strType)))
+      (71934 call = lcm(71932 call *(71929 call / st1 g) st2))
+      (71952 call = newStride(71949 IfExpr (71943 call >(71939 call . this c"stride") 0) then
+      { scopeless
+        lcm
+      } else
+      { scopeless
+        (71947 call - lcm)
+      } ))
+    }
+    unknown emptyIntersection[71960] bool[10]
+    (71963 'end of statement')
+    function min[71970](arg x[71967] :
+    int[13], arg y[71973] :
+    uint[115]) : _unknown[51]
+    {
+      if(71987 call _cond_test(71981 call > y(71980 call max int[13])))
+      {
+        (71984 return x)
+      }
+      (72000 return(71999 call min x(71997 call _cast int[13] y)))
+    }
+    function min[72010](arg x[72007] :
+    uint[115], arg y[72013] :
+    int[13]) : _unknown[51]
+    {
+      if(72029 call _cond_test(72018 call < y 0))
+      {
+        (72022 call = emptyIntersection 1)
+        (72027 return x)
+      }
+      (72042 return(72041 call min x(72039 call _cast uint[115] y)))
+    }
+    function max[72052](arg x[72049] :
+    int[13], arg y[72055] :
+    uint[115]) : _unknown[51]
+    {
+      if(72074 call _cond_test(72063 call > y(72062 call max int[13])))
+      {
+        (72067 call = emptyIntersection 1)
+        (72072 return x)
+      }
+      (72087 return(72086 call max x(72084 call _cast int[13] y)))
+    }
+    function max[72097](arg x[72094] :
+    uint[115], arg y[72100] :
+    int[13]) : _unknown[51]
+    {
+      if(72111 call _cond_test(72105 call < y 0))
+      {
+        (72108 return x)
+      }
+      (72124 return(72123 call max x(72121 call _cast uint[115] y)))
+    }
+    (72130 call = emptyIntersection 0)
+    unknown newlo[72141](72139 call _cast intIdxType(72137 call max lo1 lo2))
+    (72144 'end of statement')
+    unknown newhi[72153](72151 call _cast intIdxType(72149 call min hi1 hi2))
+    (72156 'end of statement')
+    if(72169 call _cond_test emptyIntersection)
+    {
+      (72160 call = newlo 1)
+      (72166 call = newhi 0)
+    }
+    unknown result[72221](72173 'new'(72220 call range idxType(72181 call computeBoundedType this other)(72190 call |(72183 call . this c"stridable")(72187 call . other c"stridable"))(72195 call chpl_intToIdx newlo)(72199 call chpl_intToIdx newhi) newStride(72204 call chpl_intToIdx 0)(72218 call &&(72206 call ! ambig)(72216 call ||(72209 call . this c"aligned")(72213 call . other c"aligned")))))
+    (72224 'end of statement')
+    if(72430 call _cond_test(72226 call . result c"stridable"))
+    {
+      unknown al1[72245](72243 call _cast int[13](72240 call %(72235 call chpl__idxToInt(72231 call . this c"alignment"))(72238 call _cast intIdxType st1)))
+      (72248 'end of statement')
+      unknown al2[72269](72267 call _cast int[13](72264 call %(72256 call chpl__idxToInt(72252 call . other c"alignment"))(72262 call _cast(72259 call . other c"intIdxType") st2)))
+      (72272 'end of statement')
+      if(72426 call _cond_test(72281 call !=(72278 call %(72275 call - al2 al1) g) 0))
+      {
+        if(72318 call _cond_test(72290 call && boundsChecking(72288 call !(72287 call isBoundedRange result))))
+        {
+          (72316 call(72293 call . HaltWrappers c"boundsCheckHalt") "could not represent range slice - it needs to be empty, but the slice type is not bounded")
+        }
+        (72332 call =(72325 call . result c"_low")(72330 call _cast intIdxType 1))
+        (72343 call =(72336 call . result c"_high")(72341 call _cast intIdxType 0))
+        (72368 call =(72347 call . result c"_alignment")(72365 IfExpr (72355 call >(72351 call . this c"stride") 0) then
+        { scopeless
+          (72359 call _cast intIdxType 1)
+        } else
+        { scopeless
+          (72363 call _cast intIdxType 0)
+        } ))
+      }
+      {
+        unknown offset[72378](72376 call *(72373 call - al2 al1) x)
+        (72381 'end of statement')
+        if(72392 call _cond_test(72385 call < offset 0))
+        {
+          (72389 call += offset lcm)
+        }
+        (72423 call =(72398 call . result c"_alignment")(72421 call +(72403 call _cast intIdxType al1)(72419 call /(72413 call *(72407 call _cast intIdxType offset)(72411 call _cast intIdxType st1))(72417 call _cast intIdxType g))))
+      }
+    }
+    (72435 return result)
+  }
+  function chpl_count_help[72448](arg r[72445] :
+  (72444 call range ?[260]), arg i[72450]:_any[178](?)) : _unknown[51] "no return value for void"
+  {
+    (72483 call compilerError "count operator is not defined for unbounded ranges")
+  }
+  where {
+    (72460 call ==(72453 call . r c"boundedType")(72457 call . BoundedRangeType c"boundedNone"))
+  }
+  function chpl_count_help[72493](arg r[72491]:_any[178](?), arg count[72496] :
+  integral) : _unknown[51]
+  {
+    if(72531 call _cond_test(72506 call && boundsChecking(72505 call(72501 call . r c"isAmbiguous"))))
+    {
+      (72529 call boundsCheckHalt "count -- Cannot count off elements from a range which is ambiguously aligned.")
+    }
+    unknown resultType[72541] "type variable"(72538 call . r c"intIdxType")
+    unknown strType[72548] "type variable"(72547 call chpl__rangeStrideType resultType)
+    function absSameType[72555](arg str[72553]:_any[178](?)) : _unknown[51]
+    {
+      if(72586 call _cond_test(72562 call <(72558 call . r c"stride") 0))
+      {
+        (72573 return(72571 call _cast resultType(72568 call -(72565 call . r c"stride"))))
+      }
+      {
+        (72583 return(72581 call _cast resultType(72577 call . r c"stride")))
+      }
+    }
+    if(72795 call _cond_test(72595 call == count 0))
+    {
+      if(72789 call _cond_test(72602 call(72598 call . r c"hasLowBound")))
+      {
+        (72677 return(72603 'new'(72676 call range(idxType =(72606 call . r c"idxType"))(boundedType =(72612 call . BoundedRangeType c"bounded"))(stridable =(72617 call . r c"stridable"))(_low =(72631 call chpl__intToIdx(72623 call . r c"idxType")(72628 call . r c"_low")))(_high =(72652 call chpl__intToIdx(72635 call . r c"idxType")(72650 call -(72640 call . r c"_low")(72649 call absSameType(72645 call . r c"stride")))))(_stride =(72655 call . r c"stride"))(_alignment =(72669 call chpl__intToIdx(72661 call . r c"idxType")(72666 call . r c"_alignment")))(_aligned =(72672 call . r c"aligned")))))
+      }
+      {
+        if(72785 call _cond_test(72685 call(72681 call . r c"hasHighBound")))
+        {
+          (72760 return(72686 'new'(72759 call range(idxType =(72689 call . r c"idxType"))(boundedType =(72695 call . BoundedRangeType c"bounded"))(stridable =(72700 call . r c"stridable"))(_low =(72723 call chpl__intToIdx(72706 call . r c"idxType")(72721 call +(72711 call . r c"_high")(72720 call absSameType(72716 call . r c"stride")))))(_high =(72735 call chpl__intToIdx(72727 call . r c"idxType")(72732 call . r c"_high")))(_stride =(72738 call . r c"stride"))(_alignment =(72752 call chpl__intToIdx(72744 call . r c"idxType")(72749 call . r c"_alignment")))(_aligned =(72755 call . r c"aligned")))))
+        }
+        {
+          (72782 call halt "Internal error: Unexpected case in chpl_count_help")
+        }
+      }
+    }
+    if(72837 call _cond_test(72814 call &&(72808 call && boundsChecking(72806 call !(72805 call(72801 call . r c"hasFirst"))))(72812 call > count 0)))
+    {
+      (72835 call boundsCheckHalt "With a positive count, the range must have a first index.")
+    }
+    if(72882 call _cond_test(72859 call &&(72853 call && boundsChecking(72851 call !(72850 call(72846 call . r c"hasLast"))))(72857 call < count 0)))
+    {
+      (72880 call boundsCheckHalt "With a negative count, the range must have a last index.")
+    }
+    if(72981 call _cond_test(72929 call &&(72898 call && boundsChecking(72896 call ==(72889 call . r c"boundedType")(72893 call . BoundedRangeType c"bounded")))(72927 call >(72915 call _cast(72914 call uint[115] 64)(72910 call abs(72907 call _cast(72906 call chpl__maxIntTypeSameSign(72904 'typeof' count)) count)))(72925 call _cast(72924 call uint[115] 64)(72918 call . r c"size")))))
+    {
+      (72978 call boundsCheckHalt(72975 call +(72956 call + "bounded range is too small to access "(72954 call _cast string[26](72952 call abs count))) " elements"))
+    }
+    function chpl__computeTypeForCountMath[72989](arg t1[72987]:_any[178](?), arg t2[72991]:_any[178](?)) type : _unknown[51]
+    {
+      if(73049 call _cond_test(72995 call == t1 t2))
+      {
+        (73001 return(73000 call chpl__idxTypeToIntIdxType t1))
+      }
+      {
+        if(73045 call _cond_test(73018 call ||(73009 call ==(73007 call numBits t1) 64)(73016 call ==(73014 call numBits t2) 64)))
+        {
+          (73024 return(73023 call int[13] 64))
+        }
+        {
+          unknown x1[73028] t1
+          (73031 'end of statement')
+          unknown x2[73034] t2
+          (73037 'end of statement')
+          (73043 return(73042 'typeof'(73040 call + x1 x2)))
+        }
+      }
+    }
+    unknown computeType[73063] "type variable"(73062 call chpl__computeTypeForCountMath resultType(73061 'typeof' count))
+    unknown signedComputeType[73070] "type variable"(73069 call chpl__signedType computeType)
+    unknown diff[73086](73084 call *(73075 call _cast signedComputeType count)(73082 call _cast signedComputeType(73078 call . r c"stride")))
+    (73089 'end of statement')
+    unknown lo[73120](73117 IfExpr (73093 call > diff 0) then
+    { scopeless
+      (73096 call . r c"_low")
+    } else
+    { scopeless
+      (73116 call chpl__add(73105 call _cast computeType(73101 call . r c"_high"))(73113 call _cast computeType(73110 call + diff 1)) resultType)
+    } ) resultType
+    (73123 'end of statement')
+    unknown hi[73154](73151 IfExpr (73127 call < diff 0) then
+    { scopeless
+      (73130 call . r c"_high")
+    } else
+    { scopeless
+      (73150 call chpl__add(73139 call _cast computeType(73135 call . r c"_low"))(73147 call -(73144 call _cast computeType diff) 1) resultType)
+    } ) resultType
+    (73157 'end of statement')
+    if(73219 call _cond_test(73159 call . r c"stridable"))
+    {
+      if(73185 call _cond_test(73175 call &&(73167 call(73163 call . r c"hasLowBound"))(73173 call < lo(73170 call . r c"_low"))))
+      {
+        (73182 call = lo(73179 call . r c"_low"))
+      }
+      if(73214 call _cond_test(73204 call &&(73196 call(73192 call . r c"hasHighBound"))(73202 call > hi(73199 call . r c"_high"))))
+      {
+        (73211 call = hi(73208 call . r c"_high"))
+      }
+    }
+    (73300 return(73223 'new'(73299 call range(idxType =(73226 call . r c"idxType"))(boundedType =(73232 call . BoundedRangeType c"bounded"))(stridable =(73237 call . r c"stridable"))(_low =(73247 call(73242 call . r c"chpl_intToIdx") lo))(_high =(73255 call(73250 call . r c"chpl_intToIdx") hi))(_stride =(73269 IfExpr (73258 call . r c"stridable") then
+    { scopeless
+      (73266 call _cast strType(73262 call . r c"stride"))
+    } else
+    { scopeless
+      none[57]
+    } ))(_alignment =(73282 IfExpr (73274 call . r c"stridable") then
+    { scopeless
+      (73278 call . r c"alignment")
+    } else
+    { scopeless
+      none[57]
+    } ))(_aligned =(73295 IfExpr (73287 call . r c"stridable") then
+    { scopeless
+      (73291 call . r c"aligned")
+    } else
+    { scopeless
+      none[57]
+    } )))))
+  }
+  function #[73314](arg r[73311] :
+  (73310 call range unknown i[73307]), arg count[73320] :
+  (73319 call chpl__rangeStrideType i)) : _unknown[51]
+  {
+    (73328 return(73327 call chpl_count_help r count))
+  }
+  function #[73343](arg r[73340] :
+  (73339 call range unknown i[73336]), arg count[73349] :
+  (73348 call chpl__rangeUnsignedType i)) : _unknown[51]
+  {
+    (73357 return(73356 call chpl_count_help r count))
+  }
+  function #[73372](arg r[73369] :
+  (73368 call range unknown i[73365]), arg count[73374]:_any[178](?)) : _unknown[51]
+  {
+    (73421 call compilerError "can't apply '#' to a range with idxType "(73397 call _cast string[26] i) " using a count of type "(73419 call _cast string[26](73417 'typeof' count)))
+    (73425 return r)
+  }
+  function chpl_checkIfRangeIterWillOverflow[73433](arg idxType[73431]:_any[178](?), arg low[73435]:_any[178](?), arg high[73437]:_any[178](?), arg stride[73439]:_any[178](?), arg first[73442] =
+  low, arg last[73446] =
+  high, arg shouldHalt[73450] =
+  1) : _unknown[51]
+  {
+    if(73461 call _cond_test(73455 call > low high))
+    {
+      (73458 return 0)
+    }
+    unknown willOverFlow[73467] 0
+    (73470 'end of statement')
+    if(73654 call _cond_test(73474 call isIntType idxType))
+    {
+      if(73541 call _cond_test(73483 call &&(73477 call > last 0)(73481 call > stride 0)))
+      {
+        if(73501 call _cond_test(73493 call > stride(73491 call -(73489 call max idxType) last)))
+        {
+          (73497 call = willOverFlow 1)
+        }
+      }
+      {
+        if(73537 call _cond_test(73514 call &&(73508 call < last 0)(73512 call < stride 0)))
+        {
+          if(73532 call _cond_test(73524 call < stride(73522 call -(73520 call min idxType) last)))
+          {
+            (73528 call = willOverFlow 1)
+          }
+        }
+      }
+    }
+    {
+      if(73650 call _cond_test(73550 call isUintType idxType))
+      {
+        if(73605 call _cond_test(73553 call > stride 0))
+        {
+          if(73571 call _cond_test(73563 call <(73560 call + last(73558 call _cast idxType stride)) last))
+          {
+            (73567 call = willOverFlow 1)
+          }
+        }
+        {
+          if(73601 call _cond_test(73578 call < stride 0))
+          {
+            if(73596 call _cond_test(73588 call >(73585 call + last(73583 call _cast idxType stride)) last))
+            {
+              (73592 call = willOverFlow 1)
+            }
+          }
+        }
+      }
+      {
+        (73647 call compilerError "Iterator overflow checking is only supported " "for integral types")
+      }
+    }
+    if(73688 call _cond_test(73661 call && willOverFlow shouldHalt))
+    {
+      (73685 call(73664 call . HaltWrappers c"boundsCheckHalt") "Iteration over a bounded range may be incorrect due to overflow.")
+    }
+    (73693 return willOverFlow)
+  }
+  function _unknown[51].checkIfIterWillOverflow[73704](arg _mt[73709]:_MT[238], arg this[73706] :
+  range, arg shouldHalt[73701] =
+  1) : _unknown[51] "method" "no doc"
+  {
+    (73739 return(73738 call chpl_checkIfRangeIterWillOverflow(73713 call . this c"intIdxType")(73718 call . this c"_low")(73722 call . this c"_high")(73726 call . this c"stride")(73730 call . this c"firstAsInt")(73734 call . this c"lastAsInt") shouldHalt))
+  }
+  function chpl_direct_range_iter[73754](arg low[73751] :
+  (73750 call int[13] unknown w[73747]), arg high[73760] :
+  (73759 call int[13] w), arg stride[73767] :
+  (73766 call int[13] w)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    const r[73777] "const"(73775 call chpl_by(73772 call chpl_build_bounded_range low high) stride)
+    (73780 'end of statement')
+    {
+      unknown _indexOfInterest[73787] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[73788] "expr temp" "temp"
+      (73797 'move' _iterator[73788](73795 call _getIterator r))
+      Defer
+      {
+        {
+          (73813 call _freeIterator _iterator[73788])
+        }
+      }
+      { scopeless type
+        (73802 'move' _indexOfInterest[73787](73799 call iteratorIndex _iterator[73788]))
+      }
+      ForLoop[73789]
+      {
+        unknown i[73806] "index var" "insert auto destroy"
+        (73808 'move' i[73806] _indexOfInterest[73787])
+        (73785 yield i)
+        label _continueLabel[73792]
+        _indexOfInterest[73787]
+        _iterator[73788]
+      }
+      label _breakLabel[73793]
+    }
+  }
+  function chpl_direct_range_iter[73832](arg low[73829] :
+  (73828 call uint[115] unknown w[73825]), arg high[73838] :
+  (73837 call uint[115] w), arg stride[73845] :
+  (73844 call int[13] w)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    const r[73855] "const"(73853 call chpl_by(73850 call chpl_build_bounded_range low high) stride)
+    (73858 'end of statement')
+    {
+      unknown _indexOfInterest[73865] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[73866] "expr temp" "temp"
+      (73875 'move' _iterator[73866](73873 call _getIterator r))
+      Defer
+      {
+        {
+          (73891 call _freeIterator _iterator[73866])
+        }
+      }
+      { scopeless type
+        (73880 'move' _indexOfInterest[73865](73877 call iteratorIndex _iterator[73866]))
+      }
+      ForLoop[73867]
+      {
+        unknown i[73884] "index var" "insert auto destroy"
+        (73886 'move' i[73884] _indexOfInterest[73865])
+        (73863 yield i)
+        label _continueLabel[73870]
+        _indexOfInterest[73865]
+        _iterator[73866]
+      }
+      label _breakLabel[73871]
+    }
+  }
+  function chpl_direct_range_iter[73906](arg low[73903] :
+  enum[187](?), arg high[73909] :
+  enum[187](?), arg stride[73913] :
+  integral) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    const r[73923] "const"(73921 call chpl_by(73918 call chpl_build_bounded_range low high) stride)
+    (73926 'end of statement')
+    {
+      unknown _indexOfInterest[73933] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[73934] "expr temp" "temp"
+      (73943 'move' _iterator[73934](73941 call _getIterator r))
+      Defer
+      {
+        {
+          (73959 call _freeIterator _iterator[73934])
+        }
+      }
+      { scopeless type
+        (73948 'move' _indexOfInterest[73933](73945 call iteratorIndex _iterator[73934]))
+      }
+      ForLoop[73935]
+      {
+        unknown i[73952] "index var" "insert auto destroy"
+        (73954 'move' i[73952] _indexOfInterest[73933])
+        (73931 yield i)
+        label _continueLabel[73938]
+        _indexOfInterest[73933]
+        _iterator[73934]
+      }
+      label _breakLabel[73939]
+    }
+  }
+  function chpl_direct_range_iter[73974](arg low[73971] :
+  bool[10], arg high[73977] :
+  bool[10], arg stride[73981] :
+  integral) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    const r[73991] "const"(73989 call chpl_by(73986 call chpl_build_bounded_range low high) stride)
+    (73994 'end of statement')
+    {
+      unknown _indexOfInterest[74001] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[74002] "expr temp" "temp"
+      (74011 'move' _iterator[74002](74009 call _getIterator r))
+      Defer
+      {
+        {
+          (74027 call _freeIterator _iterator[74002])
+        }
+      }
+      { scopeless type
+        (74016 'move' _indexOfInterest[74001](74013 call iteratorIndex _iterator[74002]))
+      }
+      ForLoop[74003]
+      {
+        unknown i[74020] "index var" "insert auto destroy"
+        (74022 'move' i[74020] _indexOfInterest[74001])
+        (73999 yield i)
+        label _continueLabel[74006]
+        _indexOfInterest[74001]
+        _iterator[74002]
+      }
+      label _breakLabel[74007]
+    }
+  }
+  function chpl_direct_range_iter[74046](arg low[74043] :
+  (74042 call int[13] unknown w[74039]), arg high[74052] :
+  (74051 call int[13] w), param arg stride[74059] :
+  (74058 call int[13] w)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[74072] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[74073] "expr temp" "temp"
+      (74082 'move' _iterator[74073](74080 call _getIterator(74068 call chpl_direct_param_stride_range_iter low high stride)))
+      Defer
+      {
+        {
+          (74099 call _freeIterator _iterator[74073])
+        }
+      }
+      { scopeless type
+        (74088 'move' _indexOfInterest[74072](74085 call iteratorIndex _iterator[74073]))
+      }
+      ForLoop[74074]
+      {
+        unknown i[74092] "index var" "insert auto destroy"
+        (74094 'move' i[74092] _indexOfInterest[74072])
+        (74070 yield i)
+        label _continueLabel[74077]
+        _indexOfInterest[74072]
+        _iterator[74073]
+      }
+      label _breakLabel[74078]
+    }
+  }
+  function chpl_direct_range_iter[74119](arg low[74116] :
+  (74115 call uint[115] unknown w[74112]), arg high[74125] :
+  (74124 call uint[115] w), param arg stride[74132] :
+  (74131 call int[13] w)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[74145] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[74146] "expr temp" "temp"
+      (74155 'move' _iterator[74146](74153 call _getIterator(74141 call chpl_direct_param_stride_range_iter low high stride)))
+      Defer
+      {
+        {
+          (74172 call _freeIterator _iterator[74146])
+        }
+      }
+      { scopeless type
+        (74161 'move' _indexOfInterest[74145](74158 call iteratorIndex _iterator[74146]))
+      }
+      ForLoop[74147]
+      {
+        unknown i[74165] "index var" "insert auto destroy"
+        (74167 'move' i[74165] _indexOfInterest[74145])
+        (74143 yield i)
+        label _continueLabel[74150]
+        _indexOfInterest[74145]
+        _iterator[74146]
+      }
+      label _breakLabel[74151]
+    }
+  }
+  function chpl_direct_range_iter[74188](arg low[74185] :
+  enum[187](?), arg high[74191] :
+  enum[187](?), param arg stride[74195] :
+  integral) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    if(74299 call _cond_test(74200 call == stride 1))
+    {
+      const r[74206] "const"(74204 call chpl_build_bounded_range low high)
+      (74209 'end of statement')
+      {
+        unknown _indexOfInterest[74216] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[74217] "expr temp" "temp"
+        (74226 'move' _iterator[74217](74224 call _getIterator r))
+        Defer
+        {
+          {
+            (74242 call _freeIterator _iterator[74217])
+          }
+        }
+        { scopeless type
+          (74231 'move' _indexOfInterest[74216](74228 call iteratorIndex _iterator[74217]))
+        }
+        ForLoop[74218]
+        {
+          unknown i[74235] "index var" "insert auto destroy"
+          (74237 'move' i[74235] _indexOfInterest[74216])
+          (74214 yield i)
+          label _continueLabel[74221]
+          _indexOfInterest[74216]
+          _iterator[74217]
+        }
+        label _breakLabel[74222]
+      }
+    }
+    {
+      const r[74256] "const"(74254 call chpl_by(74251 call chpl_build_bounded_range low high) stride)
+      (74259 'end of statement')
+      {
+        unknown _indexOfInterest[74266] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[74267] "expr temp" "temp"
+        (74276 'move' _iterator[74267](74274 call _getIterator r))
+        Defer
+        {
+          {
+            (74292 call _freeIterator _iterator[74267])
+          }
+        }
+        { scopeless type
+          (74281 'move' _indexOfInterest[74266](74278 call iteratorIndex _iterator[74267]))
+        }
+        ForLoop[74268]
+        {
+          unknown i[74285] "index var" "insert auto destroy"
+          (74287 'move' i[74285] _indexOfInterest[74266])
+          (74264 yield i)
+          label _continueLabel[74271]
+          _indexOfInterest[74266]
+          _iterator[74267]
+        }
+        label _breakLabel[74272]
+      }
+    }
+  }
+  function chpl_direct_range_iter[74312](arg low[74309] :
+  bool[10], arg high[74315] :
+  bool[10], param arg stride[74319] :
+  integral) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    if(74423 call _cond_test(74324 call == stride 1))
+    {
+      const r[74330] "const"(74328 call chpl_build_bounded_range low high)
+      (74333 'end of statement')
+      {
+        unknown _indexOfInterest[74340] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[74341] "expr temp" "temp"
+        (74350 'move' _iterator[74341](74348 call _getIterator r))
+        Defer
+        {
+          {
+            (74366 call _freeIterator _iterator[74341])
+          }
+        }
+        { scopeless type
+          (74355 'move' _indexOfInterest[74340](74352 call iteratorIndex _iterator[74341]))
+        }
+        ForLoop[74342]
+        {
+          unknown i[74359] "index var" "insert auto destroy"
+          (74361 'move' i[74359] _indexOfInterest[74340])
+          (74338 yield i)
+          label _continueLabel[74345]
+          _indexOfInterest[74340]
+          _iterator[74341]
+        }
+        label _breakLabel[74346]
+      }
+    }
+    {
+      const r[74380] "const"(74378 call chpl_by(74375 call chpl_build_bounded_range low high) stride)
+      (74383 'end of statement')
+      {
+        unknown _indexOfInterest[74390] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[74391] "expr temp" "temp"
+        (74400 'move' _iterator[74391](74398 call _getIterator r))
+        Defer
+        {
+          {
+            (74416 call _freeIterator _iterator[74391])
+          }
+        }
+        { scopeless type
+          (74405 'move' _indexOfInterest[74390](74402 call iteratorIndex _iterator[74391]))
+        }
+        ForLoop[74392]
+        {
+          unknown i[74409] "index var" "insert auto destroy"
+          (74411 'move' i[74409] _indexOfInterest[74390])
+          (74388 yield i)
+          label _continueLabel[74395]
+          _indexOfInterest[74390]
+          _iterator[74391]
+        }
+        label _breakLabel[74396]
+      }
+    }
+  }
+  function chpl_direct_range_iter[74440](arg low[74437] :
+  (74436 call int[13] unknown w[74433]), arg high[74446] :
+  (74445 call int[13] w), arg stride[74453] :
+  (74452 call uint[115] w)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[74466] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[74467] "expr temp" "temp"
+      (74476 'move' _iterator[74467](74474 call _getIterator(74462 call chpl_direct_pos_stride_range_iter low high stride)))
+      Defer
+      {
+        {
+          (74493 call _freeIterator _iterator[74467])
+        }
+      }
+      { scopeless type
+        (74482 'move' _indexOfInterest[74466](74479 call iteratorIndex _iterator[74467]))
+      }
+      ForLoop[74468]
+      {
+        unknown i[74486] "index var" "insert auto destroy"
+        (74488 'move' i[74486] _indexOfInterest[74466])
+        (74464 yield i)
+        label _continueLabel[74471]
+        _indexOfInterest[74466]
+        _iterator[74467]
+      }
+      label _breakLabel[74472]
+    }
+  }
+  function chpl_direct_range_iter[74513](arg low[74510] :
+  (74509 call uint[115] unknown w[74506]), arg high[74519] :
+  (74518 call uint[115] w), arg stride[74526] :
+  (74525 call uint[115] w)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[74539] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[74540] "expr temp" "temp"
+      (74549 'move' _iterator[74540](74547 call _getIterator(74535 call chpl_direct_pos_stride_range_iter low high stride)))
+      Defer
+      {
+        {
+          (74566 call _freeIterator _iterator[74540])
+        }
+      }
+      { scopeless type
+        (74555 'move' _indexOfInterest[74539](74552 call iteratorIndex _iterator[74540]))
+      }
+      ForLoop[74541]
+      {
+        unknown i[74559] "index var" "insert auto destroy"
+        (74561 'move' i[74559] _indexOfInterest[74539])
+        (74537 yield i)
+        label _continueLabel[74544]
+        _indexOfInterest[74539]
+        _iterator[74540]
+      }
+      label _breakLabel[74545]
+    }
+  }
+  function chpl_direct_range_iter[74586](arg low[74583] :
+  (74582 call int[13] unknown w[74579]), arg high[74592] :
+  (74591 call int[13] w), arg stride[74595]:_any[178](?)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    (74613 call compilerError "can't apply 'by' to a range with idxType "(74605 call _cast string[26](74603 call int[13] w)) " using a step of type "(74611 call _cast string[26](74609 'typeof' stride)))
+  }
+  function chpl_direct_range_iter[74628](arg low[74625] :
+  (74624 call uint[115] unknown w[74621]), arg high[74634] :
+  (74633 call uint[115] w), arg stride[74637]:_any[178](?)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    (74655 call compilerError "can't apply 'by' to a range with idxType "(74647 call _cast string[26](74645 call uint[115] w)) " using a step of type "(74653 call _cast string[26](74651 'typeof' stride)))
+  }
+  function chpl_direct_range_iter[74664](arg low[74662]:_any[178](?), arg high[74666]:_any[178](?), arg stride[74668]:_any[178](?)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    (74673 call compilerError "Bounds of 'low..high' must be integers of compatible types.")
+  }
+  function chpl_direct_counted_range_iter[74688](arg low[74685] :
+  (74684 call int[13] unknown w[74681]), arg count[74694] :
+  (74693 call int[13] w)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[74706] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[74707] "expr temp" "temp"
+      (74716 'move' _iterator[74707](74714 call _getIterator(74702 call chpl_direct_counted_range_iter_helper low count)))
+      Defer
+      {
+        {
+          (74733 call _freeIterator _iterator[74707])
+        }
+      }
+      { scopeless type
+        (74722 'move' _indexOfInterest[74706](74719 call iteratorIndex _iterator[74707]))
+      }
+      ForLoop[74708]
+      {
+        unknown i[74726] "index var" "insert auto destroy"
+        (74728 'move' i[74726] _indexOfInterest[74706])
+        (74704 yield i)
+        label _continueLabel[74711]
+        _indexOfInterest[74706]
+        _iterator[74707]
+      }
+      label _breakLabel[74712]
+    }
+  }
+  function chpl_direct_counted_range_iter[74753](arg low[74750] :
+  (74749 call int[13] unknown w[74746]), arg count[74759] :
+  (74758 call uint[115] w)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[74771] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[74772] "expr temp" "temp"
+      (74781 'move' _iterator[74772](74779 call _getIterator(74767 call chpl_direct_counted_range_iter_helper low count)))
+      Defer
+      {
+        {
+          (74798 call _freeIterator _iterator[74772])
+        }
+      }
+      { scopeless type
+        (74787 'move' _indexOfInterest[74771](74784 call iteratorIndex _iterator[74772]))
+      }
+      ForLoop[74773]
+      {
+        unknown i[74791] "index var" "insert auto destroy"
+        (74793 'move' i[74791] _indexOfInterest[74771])
+        (74769 yield i)
+        label _continueLabel[74776]
+        _indexOfInterest[74771]
+        _iterator[74772]
+      }
+      label _breakLabel[74777]
+    }
+  }
+  function chpl_direct_counted_range_iter[74818](arg low[74815] :
+  (74814 call uint[115] unknown w[74811]), arg count[74824] :
+  (74823 call int[13] w)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[74836] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[74837] "expr temp" "temp"
+      (74846 'move' _iterator[74837](74844 call _getIterator(74832 call chpl_direct_counted_range_iter_helper low count)))
+      Defer
+      {
+        {
+          (74863 call _freeIterator _iterator[74837])
+        }
+      }
+      { scopeless type
+        (74852 'move' _indexOfInterest[74836](74849 call iteratorIndex _iterator[74837]))
+      }
+      ForLoop[74838]
+      {
+        unknown i[74856] "index var" "insert auto destroy"
+        (74858 'move' i[74856] _indexOfInterest[74836])
+        (74834 yield i)
+        label _continueLabel[74841]
+        _indexOfInterest[74836]
+        _iterator[74837]
+      }
+      label _breakLabel[74842]
+    }
+  }
+  function chpl_direct_counted_range_iter[74883](arg low[74880] :
+  (74879 call uint[115] unknown w[74876]), arg count[74889] :
+  (74888 call uint[115] w)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    {
+      unknown _indexOfInterest[74901] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[74902] "expr temp" "temp"
+      (74911 'move' _iterator[74902](74909 call _getIterator(74897 call chpl_direct_counted_range_iter_helper low count)))
+      Defer
+      {
+        {
+          (74928 call _freeIterator _iterator[74902])
+        }
+      }
+      { scopeless type
+        (74917 'move' _indexOfInterest[74901](74914 call iteratorIndex _iterator[74902]))
+      }
+      ForLoop[74903]
+      {
+        unknown i[74921] "index var" "insert auto destroy"
+        (74923 'move' i[74921] _indexOfInterest[74901])
+        (74899 yield i)
+        label _continueLabel[74906]
+        _indexOfInterest[74901]
+        _iterator[74902]
+      }
+      label _breakLabel[74907]
+    }
+  }
+  function chpl_direct_counted_range_iter[74944](arg low[74941] :
+  enum[187](?), arg count[74951] :
+  (74950 call int[13] unknown w[74947])) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    const r[74957] "const"(74955 call chpl_build_low_bounded_range low)
+    (74960 'end of statement')
+    {
+      unknown _indexOfInterest[74970] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[74971] "expr temp" "temp"
+      (74980 'move' _iterator[74971](74978 call _getIterator(74965 call # r count)))
+      Defer
+      {
+        {
+          (74998 call _freeIterator _iterator[74971])
+        }
+      }
+      { scopeless type
+        (74987 'move' _indexOfInterest[74970](74984 call iteratorIndex _iterator[74971]))
+      }
+      ForLoop[74972]
+      {
+        unknown i[74991] "index var" "insert auto destroy"
+        (74993 'move' i[74991] _indexOfInterest[74970])
+        (74968 yield i)
+        label _continueLabel[74975]
+        _indexOfInterest[74970]
+        _iterator[74971]
+      }
+      label _breakLabel[74976]
+    }
+  }
+  function chpl_direct_counted_range_iter[75013](arg low[75010] :
+  enum[187](?), arg count[75020] :
+  (75019 call uint[115] unknown w[75016])) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    const r[75026] "const"(75024 call chpl_build_low_bounded_range low)
+    (75029 'end of statement')
+    {
+      unknown _indexOfInterest[75039] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[75040] "expr temp" "temp"
+      (75049 'move' _iterator[75040](75047 call _getIterator(75034 call # r count)))
+      Defer
+      {
+        {
+          (75067 call _freeIterator _iterator[75040])
+        }
+      }
+      { scopeless type
+        (75056 'move' _indexOfInterest[75039](75053 call iteratorIndex _iterator[75040]))
+      }
+      ForLoop[75041]
+      {
+        unknown i[75060] "index var" "insert auto destroy"
+        (75062 'move' i[75060] _indexOfInterest[75039])
+        (75037 yield i)
+        label _continueLabel[75044]
+        _indexOfInterest[75039]
+        _iterator[75040]
+      }
+      label _breakLabel[75045]
+    }
+  }
+  function chpl_direct_counted_range_iter[75082](arg low[75079] :
+  bool[10], arg count[75089] :
+  (75088 call int[13] unknown w[75085])) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    const r[75095] "const"(75093 call chpl_build_low_bounded_range low)
+    (75098 'end of statement')
+    {
+      unknown _indexOfInterest[75108] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[75109] "expr temp" "temp"
+      (75118 'move' _iterator[75109](75116 call _getIterator(75103 call # r count)))
+      Defer
+      {
+        {
+          (75136 call _freeIterator _iterator[75109])
+        }
+      }
+      { scopeless type
+        (75125 'move' _indexOfInterest[75108](75122 call iteratorIndex _iterator[75109]))
+      }
+      ForLoop[75110]
+      {
+        unknown i[75129] "index var" "insert auto destroy"
+        (75131 'move' i[75129] _indexOfInterest[75108])
+        (75106 yield i)
+        label _continueLabel[75113]
+        _indexOfInterest[75108]
+        _iterator[75109]
+      }
+      label _breakLabel[75114]
+    }
+  }
+  function chpl_direct_counted_range_iter[75151](arg low[75148] :
+  bool[10], arg count[75158] :
+  (75157 call uint[115] unknown w[75154])) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    const r[75164] "const"(75162 call chpl_build_low_bounded_range low)
+    (75167 'end of statement')
+    {
+      unknown _indexOfInterest[75177] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[75178] "expr temp" "temp"
+      (75187 'move' _iterator[75178](75185 call _getIterator(75172 call # r count)))
+      Defer
+      {
+        {
+          (75205 call _freeIterator _iterator[75178])
+        }
+      }
+      { scopeless type
+        (75194 'move' _indexOfInterest[75177](75191 call iteratorIndex _iterator[75178]))
+      }
+      ForLoop[75179]
+      {
+        unknown i[75198] "index var" "insert auto destroy"
+        (75200 'move' i[75198] _indexOfInterest[75177])
+        (75175 yield i)
+        label _continueLabel[75182]
+        _indexOfInterest[75177]
+        _iterator[75178]
+      }
+      label _breakLabel[75183]
+    }
+  }
+  function chpl_direct_counted_range_iter[75220](arg low[75217] :
+  integral, arg count[75222]:_any[178](?)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    (75238 call compilerError "can't apply '#' to a range with idxType "(75230 call _cast string[26](75228 'typeof' low)) " using a count of type "(75236 call _cast string[26](75234 'typeof' count)))
+  }
+  function chpl_direct_counted_range_iter[75247](arg low[75245]:_any[178](?), arg count[75249]:_any[178](?)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    (75254 call compilerError "Bound of 'low..' must be an integer")
+  }
+  function chpl_direct_counted_range_iter_helper[75263](arg low[75261]:_any[178](?), arg count[75265]:_any[178](?)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    if(75289 call _cond_test(75279 call &&(75273 call && boundsChecking(75272 call isIntType(75270 'typeof' count)))(75277 call < count 0)))
+    {
+      (75287 call(75282 call . HaltWrappers c"boundsCheckHalt") "With a negative count, the range must have a last index.")
+    }
+    const tmp[75337] "const" "temp"(75334 IfExpr (75302 call == count 0) then
+    { scopeless
+      (75317 call _build_tuple low(75314 call _cast(75313 'typeof' low)(75310 call -(75307 call _cast uint[115] low) 1)))
+    } else
+    { scopeless
+      (75332 call _build_tuple low(75329 call + low(75327 call -(75324 call _cast(75323 'typeof' low) count) 1)))
+    } )
+    (75344 call _check_tuple_var_decl tmp[75337] 2)
+    const start[75295] "const"(75338 call tmp[75337] 0)
+    const end[75297] "const"(75341 call tmp[75337] 1)
+    (75349 'end of statement')
+    {
+      unknown _indexOfInterest[75360] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[75361] "expr temp" "temp"
+      (75370 'move' _iterator[75361](75368 call _getIterator(75356 call chpl_direct_param_stride_range_iter start end 1)))
+      Defer
+      {
+        {
+          (75387 call _freeIterator _iterator[75361])
+        }
+      }
+      { scopeless type
+        (75376 'move' _indexOfInterest[75360](75373 call iteratorIndex _iterator[75361]))
+      }
+      ForLoop[75362]
+      {
+        unknown i[75380] "index var" "insert auto destroy"
+        (75382 'move' i[75380] _indexOfInterest[75360])
+        (75358 yield i)
+        label _continueLabel[75365]
+        _indexOfInterest[75360]
+        _iterator[75361]
+      }
+      label _breakLabel[75366]
+    }
+  }
+  function chpl_direct_pos_stride_range_iter[75403](arg low[75400] :
+  unknown t[75398], arg high[75405]:_any[178](?), arg stride[75407]:_any[178](?)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    if(75551 call _cond_test useOptimizedRangeIterators)
+    {
+      (75414 call chpl_range_check_stride stride t)
+      if(75426 call _cond_test boundsChecking)
+      {
+        (75424 call chpl_checkIfRangeIterWillOverflow t low high stride)
+      }
+      unknown i[75432] t
+      (75435 'end of statement')
+      CForLoop[75478]
+      {
+        {
+          (75474 yield i)
+        }
+        label _continueLabel[75494]
+        {
+          (75479 '=' i low)
+        }
+        {
+          (75482 '<=' i high)
+        }
+        {
+          (75485 '+=' i(75488 call _cast t stride))
+        }
+      }
+      label _breakLabel[75495]
+    }
+    {
+      {
+        unknown _indexOfInterest[75516] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[75517] "expr temp" "temp"
+        (75526 'move' _iterator[75517](75524 call _getIterator(75512 call(75508 call .(75504 call chpl_by(75501 call chpl_build_bounded_range low high) stride) c"generalIterator"))))
+        Defer
+        {
+          {
+            (75543 call _freeIterator _iterator[75517])
+          }
+        }
+        { scopeless type
+          (75532 'move' _indexOfInterest[75516](75529 call iteratorIndex _iterator[75517]))
+        }
+        ForLoop[75518]
+        {
+          unknown i[75536] "index var" "insert auto destroy"
+          (75538 'move' i[75536] _indexOfInterest[75516])
+          (75514 yield i)
+          label _continueLabel[75521]
+          _indexOfInterest[75516]
+          _iterator[75517]
+        }
+        label _breakLabel[75522]
+      }
+    }
+  }
+  function chpl_direct_param_stride_range_iter[75565](arg low[75562] :
+  unknown t[75560], arg high[75567]:_any[178](?), param arg stride[75569]:_any[178](?)) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    if(75776 call _cond_test useOptimizedRangeIterators)
+    {
+      (75576 call chpl_range_check_stride stride t)
+      unknown i[75580] t
+      (75583 'end of statement')
+      if(75720 call _cond_test(75586 call > stride 0))
+      {
+        if(75597 call _cond_test boundsChecking)
+        {
+          (75595 call chpl_checkIfRangeIterWillOverflow t low high stride)
+        }
+        CForLoop[75629]
+        {
+          {
+            (75625 yield i)
+          }
+          label _continueLabel[75645]
+          {
+            (75630 '=' i low)
+          }
+          {
+            (75633 '<=' i high)
+          }
+          {
+            (75636 '+=' i(75639 call _cast t stride))
+          }
+        }
+        label _breakLabel[75646]
+      }
+      {
+        if(75716 call _cond_test(75651 call < stride 0))
+        {
+          if(75664 call _cond_test boundsChecking)
+          {
+            (75662 call chpl_checkIfRangeIterWillOverflow t low high stride high low)
+          }
+          CForLoop[75696]
+          {
+            {
+              (75692 yield i)
+            }
+            label _continueLabel[75712]
+            {
+              (75697 '=' i high)
+            }
+            {
+              (75700 '>=' i low)
+            }
+            {
+              (75703 '+=' i(75706 call _cast t stride))
+            }
+          }
+          label _breakLabel[75713]
+        }
+      }
+    }
+    {
+      {
+        unknown _indexOfInterest[75741] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[75742] "expr temp" "temp"
+        (75751 'move' _iterator[75742](75749 call _getIterator(75737 call(75733 call .(75731 call chpl_by(75728 call chpl_build_bounded_range low high) stride) c"generalIterator"))))
+        Defer
+        {
+          {
+            (75768 call _freeIterator _iterator[75742])
+          }
+        }
+        { scopeless type
+          (75757 'move' _indexOfInterest[75741](75754 call iteratorIndex _iterator[75742]))
+        }
+        ForLoop[75743]
+        {
+          unknown i[75761] "index var" "insert auto destroy"
+          (75763 'move' i[75761] _indexOfInterest[75741])
+          (75739 yield i)
+          label _continueLabel[75746]
+          _indexOfInterest[75741]
+          _iterator[75742]
+        }
+        label _breakLabel[75747]
+      }
+    }
+  }
+  function _unknown[51].these[75786](arg _mt[75791]:_MT[238], arg this[75788] :
+  range) : _unknown[51] "iterator fn" "method" "no doc" "no return value for void"
+  {
+    if(75828 call _cond_test(75805 call == boundedType(75802 call . BoundedRangeType c"boundedNone")))
+    {
+      (75826 call compilerError "iteration over a range with no bounds")
+    }
+    if(75908 call _cond_test boundsChecking)
+    {
+      if(75867 call _cond_test(75841 call !(75840 call(75836 call . this c"hasFirst"))))
+      {
+        (75865 call(75844 call . HaltWrappers c"boundsCheckHalt") "iteration over range that has no first index")
+      }
+      if(75903 call _cond_test(75878 call(75874 call . this c"isAmbiguous")))
+      {
+        (75901 call(75880 call . HaltWrappers c"boundsCheckHalt") "these -- Attempt to iterate over a range with ambiguous alignment.")
+      }
+    }
+    unknown i[75913] intIdxType
+    (75916 'end of statement')
+    const start[75924] "const"(75923 call chpl__idxToInt(75919 call . this c"first"))
+    (75927 'end of statement')
+    CForLoop[75953]
+    {
+      {
+        (75949 yield(75948 call chpl_intToIdx i))
+      }
+      label _continueLabel[75967]
+      {
+        (75954 '=' i start)
+      }
+      {
+        1
+      }
+      {
+        (75958 '+=' i(75961 call _cast intIdxType stride))
+      }
+    }
+    label _breakLabel[75968]
+  }
+  where {
+    (75798 call != boundedType(75795 call . BoundedRangeType c"bounded"))
+  }
+  function _unknown[51].these[75977](arg _mt[75982]:_MT[238], arg this[75979] :
+  range) : _unknown[51] "iterator fn" "method" "no doc" "no return value for void"
+  {
+    if(76164 call _cond_test useOptimizedRangeIterators)
+    {
+      if(76023 call _cond_test boundsChecking)
+      {
+        (76001 call checkIfIterWillOverflow)
+        if(76018 call _cond_test(76009 call(76005 call . this c"isAmbiguous")))
+        {
+          (76016 call(76011 call . HaltWrappers c"boundsCheckHalt") "these -- Attempt to iterate over a range with ambiguous alignment.")
+        }
+      }
+      unknown i[76029] intIdxType
+      (76032 'end of statement')
+      const start[76037] "const"(76034 call . this c"firstAsInt")
+      (76040 'end of statement')
+      const end[76066] "const"(76063 IfExpr (76050 call >(76043 call . this c"low")(76047 call . this c"high")) then
+      { scopeless
+        start
+      } else
+      { scopeless
+        (76061 call +(76054 call . this c"lastAsInt")(76059 call _cast intIdxType stride))
+      } ) intIdxType
+      (76069 'end of statement')
+      CForLoop[76099]
+      {
+        {
+          (76095 yield(76094 call chpl_intToIdx i))
+        }
+        label _continueLabel[76115]
+        {
+          (76100 '=' i start)
+        }
+        {
+          (76103 '!=' i end)
+        }
+        {
+          (76106 '+=' i(76109 call _cast intIdxType stride))
+        }
+      }
+      label _breakLabel[76116]
+    }
+    {
+      {
+        unknown _indexOfInterest[76129] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[76130] "expr temp" "temp"
+        (76139 'move' _iterator[76130](76137 call _getIterator(76125 call(76121 call . this c"generalIterator"))))
+        Defer
+        {
+          {
+            (76156 call _freeIterator _iterator[76130])
+          }
+        }
+        { scopeless type
+          (76145 'move' _indexOfInterest[76129](76142 call iteratorIndex _iterator[76130]))
+        }
+        ForLoop[76131]
+        {
+          unknown i[76149] "index var" "insert auto destroy"
+          (76151 'move' i[76149] _indexOfInterest[76129])
+          (76127 yield i)
+          label _continueLabel[76134]
+          _indexOfInterest[76129]
+          _iterator[76130]
+        }
+        label _breakLabel[76135]
+      }
+    }
+  }
+  where {
+    (75995 call &&(75989 call == boundedType(75986 call . BoundedRangeType c"bounded"))(75993 call == stridable 1))
+  }
+  function _unknown[51].these[76175](arg _mt[76180]:_MT[238], arg this[76177] :
+  range) : _unknown[51] "iterator fn" "method" "no doc" "no return value for void"
+  {
+    if(76322 call _cond_test useOptimizedRangeIterators)
+    {
+      if(76201 call _cond_test boundsChecking)
+      {
+        (76199 call checkIfIterWillOverflow)
+      }
+      unknown i[76208] intIdxType
+      (76211 'end of statement')
+      const start[76216] "const"(76213 call . this c"_low")
+      (76219 'end of statement')
+      const end[76224] "const"(76221 call . this c"_high")
+      (76227 'end of statement')
+      CForLoop[76257]
+      {
+        {
+          (76253 yield(76252 call chpl_intToIdx i))
+        }
+        label _continueLabel[76273]
+        {
+          (76258 '=' i start)
+        }
+        {
+          (76261 '<=' i end)
+        }
+        {
+          (76264 '+=' i(76267 call _cast intIdxType stride))
+        }
+      }
+      label _breakLabel[76274]
+    }
+    {
+      {
+        unknown _indexOfInterest[76287] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[76288] "expr temp" "temp"
+        (76297 'move' _iterator[76288](76295 call _getIterator(76283 call(76279 call . this c"generalIterator"))))
+        Defer
+        {
+          {
+            (76314 call _freeIterator _iterator[76288])
+          }
+        }
+        { scopeless type
+          (76303 'move' _indexOfInterest[76287](76300 call iteratorIndex _iterator[76288]))
+        }
+        ForLoop[76289]
+        {
+          unknown i[76307] "index var" "insert auto destroy"
+          (76309 'move' i[76307] _indexOfInterest[76287])
+          (76285 yield i)
+          label _continueLabel[76292]
+          _indexOfInterest[76287]
+          _iterator[76288]
+        }
+        label _breakLabel[76293]
+      }
+    }
+  }
+  where {
+    (76193 call &&(76187 call == boundedType(76184 call . BoundedRangeType c"bounded"))(76191 call == stridable 0))
+  }
+  function _unknown[51].generalIterator[76333](arg _mt[76338]:_MT[238], arg this[76335] :
+  range) : _unknown[51] "iterator fn" "method" "no doc" "no return value for void"
+  {
+    if(76357 call _cond_test(76347 call && boundsChecking(76346 call(76342 call . this c"isAmbiguous"))))
+    {
+      (76355 call(76350 call . HaltWrappers c"boundsCheckHalt") "these -- Attempt to iterate over a range with ambiguous alignment.")
+    }
+    unknown i[76364] intIdxType
+    (76367 'end of statement')
+    const start[76372] "const"(76369 call . this c"first")
+    (76375 'end of statement')
+    const end[76396] "const"(76393 IfExpr (76384 call >(76377 call . this c"low")(76381 call . this c"high")) then
+    { scopeless
+      start
+    } else
+    { scopeless
+      (76390 call . this c"last")
+    } )
+    (76399 'end of statement')
+    CForLoop[76438]
+    {
+      {
+        (76422 yield i)
+        if(76432 call _cond_test(76427 call == i end))
+        {
+          break nil[44]
+        }
+      }
+      label _continueLabel[76454]
+      {
+        (76439 '=' i start)
+      }
+      {
+        (76442 '>=' high low)
+      }
+      {
+        (76445 '+=' i(76448 call _cast intIdxType stride))
+      }
+    }
+    label _breakLabel[76455]
+  }
+  function _unknown[51].these[76467](arg _mt[76472]:_MT[238], arg this[76469] :
+  range, param arg tag[76464] :
+  iterKind) : _unknown[51] "iterator fn" "method" "no doc" "no return value for void"
+  {
+    if(76514 call _cond_test(76490 call !(76489 call isBoundedRange this)))
+    {
+      (76511 call compilerError "parallel iteration is not supported over unbounded ranges")
+    }
+    if(76537 call _cond_test(76526 call && boundsChecking(76525 call(76521 call . this c"isAmbiguous"))))
+    {
+      (76534 call(76529 call . HaltWrappers c"boundsCheckHalt") "these -- Attempt to iterate over a range with ambiguous alignment.")
+    }
+    if(76564 call _cond_test debugChapelRange)
+    {
+      (76561 call chpl_debug_writeln "*** In range standalone iterator:")
+    }
+    const len[76572] "const"(76569 call . this c"size")
+    (76575 'end of statement')
+    const numChunks[76603] "const"(76600 IfExpr (76594 'task_get_serial') then
+    { scopeless
+      1
+    } else
+    { scopeless
+      (76599 call _computeNumChunks len)
+    } )
+    (76606 'end of statement')
+    if(76649 call _cond_test debugChapelRange)
+    {
+      (76646 call chpl_debug_writeln "*** RI: length=" len " numChunks=" numChunks)
+    }
+    if(77304 call _cond_test(76655 call <= numChunks 1))
+    {
+      {
+        unknown _indexOfInterest[76663] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[76664] "expr temp" "temp"
+        (76673 'move' _iterator[76664](76671 call _getIterator this))
+        Defer
+        {
+          {
+            (76689 call _freeIterator _iterator[76664])
+          }
+        }
+        { scopeless type
+          (76678 'move' _indexOfInterest[76663](76675 call iteratorIndex _iterator[76664]))
+        }
+        ForLoop[76665]
+        {
+          unknown i[76682] "index var" "insert auto destroy"
+          (76684 'move' i[76682] _indexOfInterest[76663])
+          {
+            (76660 yield i)
+          }
+          label _continueLabel[76668]
+          _indexOfInterest[76663]
+          _iterator[76664]
+        }
+        label _breakLabel[76669]
+      }
+    }
+    {
+      {
+        unknown tmpIter[76939] "expr temp" "maybe ref" "no copy" "temp"
+        (76942 'move' tmpIter[76939](76702 call #(76699 call chpl_build_low_bounded_range 0) numChunks))
+        unknown isRngDomArr[77284] "maybe param" "temp"
+        (77299 'move' isRngDomArr[77284](77297 call ||(77286 call isBoundedRange tmpIter[76939])(77295 call ||(77289 call isDomain tmpIter[76939])(77292 call isArray tmpIter[76939]))))
+        if isRngDomArr[77284]
+        {
+          const _coforallCount[77151] "const" "end count" "temp"
+          (77220 'move' _coforallCount[77151](77217 call _endCountAlloc 1))
+          unknown numTasks[77152] "temp"
+          (77204 'move' numTasks[77152](77200 call . tmpIter[76939] c"size"))
+          (77195 call _upEndCount _coforallCount[77151] 1 numTasks[77152])
+          (77192 call chpl_resetTaskSpawn numTasks[77152])
+          unknown _indexOfInterest[77159] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[77160] "expr temp" "temp"
+          (77169 'move' _iterator[77160](77167 call _getIterator tmpIter[76939]))
+          Defer
+          {
+            {
+              (77185 call _freeIterator _iterator[77160])
+            }
+          }
+          { scopeless type
+            (77174 'move' _indexOfInterest[77159](77171 call iteratorIndex _iterator[77160]))
+          }
+          ForLoop[77161]
+          {
+            unknown chunk[77178] "coforall index var" "index var" "insert auto destroy"
+            (77180 'move' chunk[77178] _indexOfInterest[77159])
+            {
+              {
+                if(76946 call _cond_test stridable)
+                {
+                  const tmp[76950] "const" "temp"(76952 call _computeBlock len numChunks chunk(76957 call - len 1))
+                  (76962 call _check_tuple_var_decl tmp[76950] 2)
+                  const lo[76965] "const"(76967 call tmp[76950] 0)
+                  const hi[76970] "const"(76972 call tmp[76950] 1)
+                  (76975 'end of statement')
+                  const mylen[76977] "const"(76979 call - hi(76982 call - lo 1))
+                  (76986 'end of statement')
+                  unknown low[76988](76990 call orderToIndex lo)
+                  (76993 'end of statement')
+                  unknown high[76995](76997 call chpl_intToIdx(76999 call +(77001 call _cast strType(77004 call chpl__idxToInt low))(77007 call * stride(77010 call _cast strType(77013 call - mylen 1)))))
+                  (77017 'end of statement')
+                  if(77019 call _cond_test(77021 call < stride 0))
+                  {
+                    (77027 call <=> low high)
+                  }
+                  {
+                    unknown _indexOfInterest[77032] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                    unknown _iterator[77034] "expr temp" "temp"
+                    (77036 'move' _iterator[77034](77039 call _getIterator(77041 call chpl_direct_range_iter low high stride)))
+                    Defer
+                    {
+                      {
+                        (77047 call _freeIterator _iterator[77034])
+                      }
+                    }
+                    { scopeless type
+                      (77051 'move' _indexOfInterest[77032](77054 call iteratorIndex _iterator[77034]))
+                    }
+                    ForLoop[77056]
+                    {
+                      unknown i[77059] "index var" "insert auto destroy"
+                      (77061 'move' i[77059] _indexOfInterest[77032])
+                      {
+                        (77065 yield i)
+                      }
+                      label _continueLabel[77067]
+                      _indexOfInterest[77032]
+                      _iterator[77034]
+                    }
+                    label _breakLabel[77069]
+                  }
+                }
+                {
+                  const tmp[77073] "const" "temp"(77075 call _computeBlock len numChunks chunk(77080 call . this c"_high")(77084 call . this c"_low")(77088 call . this c"_low"))
+                  (77093 call _check_tuple_var_decl tmp[77073] 2)
+                  const lo[77096] "const"(77098 call tmp[77073] 0)
+                  const hi[77101] "const"(77103 call tmp[77073] 1)
+                  (77106 'end of statement')
+                  {
+                    unknown _indexOfInterest[77108] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                    unknown _iterator[77110] "expr temp" "temp"
+                    (77112 'move' _iterator[77110](77115 call _getIterator(77117 call chpl_direct_range_iter lo hi 1)))
+                    Defer
+                    {
+                      {
+                        (77123 call _freeIterator _iterator[77110])
+                      }
+                    }
+                    { scopeless type
+                      (77127 'move' _indexOfInterest[77108](77130 call iteratorIndex _iterator[77110]))
+                    }
+                    ForLoop[77132]
+                    {
+                      unknown i[77135] "index var" "insert auto destroy"
+                      (77137 'move' i[77135] _indexOfInterest[77108])
+                      {
+                        (77141 yield(77143 call chpl_intToIdx i))
+                      }
+                      label _continueLabel[77145]
+                      _indexOfInterest[77108]
+                      _iterator[77110]
+                    }
+                    label _breakLabel[77147]
+                  }
+                }
+              }
+              (77154 call _downEndCount _coforallCount[77151] nil[44])
+              (77153 'coforall loop')
+            }
+            label _continueLabel[77164]
+            _indexOfInterest[77159]
+            _iterator[77160]
+          }
+          label _breakLabel[77165]
+          Defer
+          {
+            {
+              (77207 call _endCountFree _coforallCount[77151])
+            }
+          }
+          (77212 call _waitEndCount _coforallCount[77151] 1 numTasks[77152])
+        }
+        {
+          const _coforallCount[77224] "const" "end count" "temp"
+          (77281 'move' _coforallCount[77224](77278 call _endCountAlloc 1))
+          unknown _indexOfInterest[77232] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[77233] "expr temp" "temp"
+          (77242 'move' _iterator[77233](77240 call _getIterator tmpIter[76939]))
+          Defer
+          {
+            {
+              (77258 call _freeIterator _iterator[77233])
+            }
+          }
+          { scopeless type
+            (77247 'move' _indexOfInterest[77232](77244 call iteratorIndex _iterator[77233]))
+          }
+          ForLoop[77234]
+          {
+            unknown chunk[77251] "coforall index var" "index var" "insert auto destroy"
+            (77253 'move' chunk[77251] _indexOfInterest[77232])
+            (77265 call _upEndCount _coforallCount[77224] 1)
+            {
+              {
+                if(76934 call _cond_test stridable)
+                {
+                  const tmp[76720] "const" "temp"(76719 call _computeBlock len numChunks chunk(76717 call - len 1))
+                  (76727 call _check_tuple_var_decl tmp[76720] 2)
+                  const lo[76705] "const"(76721 call tmp[76720] 0)
+                  const hi[76707] "const"(76724 call tmp[76720] 1)
+                  (76732 'end of statement')
+                  const mylen[76741] "const"(76739 call - hi(76737 call - lo 1))
+                  (76744 'end of statement')
+                  unknown low[76749](76748 call orderToIndex lo)
+                  (76752 'end of statement')
+                  unknown high[76775](76774 call chpl_intToIdx(76771 call +(76759 call _cast strType(76757 call chpl__idxToInt low))(76769 call * stride(76767 call _cast strType(76764 call - mylen 1)))))
+                  (76778 'end of statement')
+                  if(76788 call _cond_test(76781 call < stride 0))
+                  {
+                    (76785 call <=> low high)
+                  }
+                  {
+                    unknown _indexOfInterest[76805] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                    unknown _iterator[76806] "expr temp" "temp"
+                    (76815 'move' _iterator[76806](76813 call _getIterator(76824 call chpl_direct_range_iter low high stride)))
+                    Defer
+                    {
+                      {
+                        (76840 call _freeIterator _iterator[76806])
+                      }
+                    }
+                    { scopeless type
+                      (76829 'move' _indexOfInterest[76805](76826 call iteratorIndex _iterator[76806]))
+                    }
+                    ForLoop[76807]
+                    {
+                      unknown i[76833] "index var" "insert auto destroy"
+                      (76835 'move' i[76833] _indexOfInterest[76805])
+                      {
+                        (76802 yield i)
+                      }
+                      label _continueLabel[76810]
+                      _indexOfInterest[76805]
+                      _iterator[76806]
+                    }
+                    label _breakLabel[76811]
+                  }
+                }
+                {
+                  const tmp[76870] "const" "temp"(76869 call _computeBlock len numChunks chunk(76858 call . this c"_high")(76862 call . this c"_low")(76866 call . this c"_low"))
+                  (76877 call _check_tuple_var_decl tmp[76870] 2)
+                  const lo[76847] "const"(76871 call tmp[76870] 0)
+                  const hi[76849] "const"(76874 call tmp[76870] 1)
+                  (76882 'end of statement')
+                  {
+                    unknown _indexOfInterest[76896] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                    unknown _iterator[76897] "expr temp" "temp"
+                    (76906 'move' _iterator[76897](76904 call _getIterator(76911 call chpl_direct_range_iter lo hi 1)))
+                    Defer
+                    {
+                      {
+                        (76927 call _freeIterator _iterator[76897])
+                      }
+                    }
+                    { scopeless type
+                      (76916 'move' _indexOfInterest[76896](76913 call iteratorIndex _iterator[76897]))
+                    }
+                    ForLoop[76898]
+                    {
+                      unknown i[76920] "index var" "insert auto destroy"
+                      (76922 'move' i[76920] _indexOfInterest[76896])
+                      {
+                        (76893 yield(76892 call chpl_intToIdx i))
+                      }
+                      label _continueLabel[76901]
+                      _indexOfInterest[76896]
+                      _iterator[76897]
+                    }
+                    label _breakLabel[76902]
+                  }
+                }
+              }
+              (77227 call _downEndCount _coforallCount[77224] nil[44])
+              (77226 'coforall loop')
+            }
+            label _continueLabel[77237]
+            _indexOfInterest[77232]
+            _iterator[77233]
+          }
+          label _breakLabel[77238]
+          Defer
+          {
+            {
+              (77269 call _endCountFree _coforallCount[77224])
+            }
+          }
+          (77274 call _waitEndCount _coforallCount[77224] 1)
+        }
+      }
+    }
+  }
+  where {
+    (76484 call &&(76479 call == tag(76476 call . iterKind c"standalone"))(76482 call ! localeModelHasSublocales))
+  }
+  function _unknown[51].these[77318](arg _mt[77323]:_MT[238], arg this[77320] :
+  range, param arg tag[77315] :
+  iterKind) : _unknown[51] "iterator fn" "method" "no doc" "no return value for void"
+  {
+    if(77343 call _cond_test(77336 call !(77335 call isBoundedRange this)))
+    {
+      (77341 call compilerError "parallel iteration is not supported over unbounded ranges")
+    }
+    if(77366 call _cond_test(77356 call && boundsChecking(77355 call(77351 call . this c"isAmbiguous"))))
+    {
+      (77364 call(77359 call . HaltWrappers c"boundsCheckHalt") "these -- Attempt to iterate over a range with ambiguous alignment.")
+    }
+    if(77393 call _cond_test debugChapelRange)
+    {
+      (77391 call chpl_debug_writeln "*** In range leader:")
+    }
+    const numSublocs[77406] "const"(77405 call(77401 call . here c"getChildCount"))
+    (77409 'end of statement')
+    if(79139 call _cond_test(77415 call && localeModelHasSublocales(77413 call != numSublocs 0)))
+    {
+      const len[77421] "const"(77418 call . this c"size")
+      (77424 'end of statement')
+      const tasksPerLocale[77427] "const" dataParTasksPerLocale
+      (77430 'end of statement')
+      const ignoreRunning[77432] "const" dataParIgnoreRunningTasks
+      (77435 'end of statement')
+      const minIndicesPerTask[77437] "const" dataParMinGranularity
+      (77440 'end of statement')
+      unknown dptpl[77453](77450 IfExpr (77443 call == tasksPerLocale 0) then
+      { scopeless
+        (77446 call . here c"maxTaskPar")
+      } else
+      { scopeless
+        tasksPerLocale
+      } )
+      (77456 'end of statement')
+      if(77495 call _cond_test(77458 call ! ignoreRunning))
+      {
+        const otherTasks[77471] "const"(77469 call -(77467 call(77463 call . here c"runningTasks")) 1)
+        (77474 'end of statement')
+        (77492 call = dptpl(77489 IfExpr (77479 call < otherTasks dptpl) then
+        { scopeless
+          (77486 call _cast int[13](77483 call - dptpl otherTasks))
+        } else
+        { scopeless
+          1
+        } ))
+      }
+      const numSublocTasks[77504] "const"(77503 call min numSublocs dptpl)
+      (77507 'end of statement')
+      const numChunks[77523] "const"(77520 IfExpr (77510 'task_get_serial') then
+      { scopeless
+        1
+      } else
+      { scopeless
+        (77519 call _computeNumChunks numSublocTasks(ignoreRunning = 1) minIndicesPerTask len)
+      } )
+      (77526 'end of statement')
+      if(77643 call _cond_test debugDataParNuma)
+      {
+        (77640 call chpl_debug_writeln "### numSublocs = " numSublocs "\n" "### numTasksPerSubloc = " numSublocTasks "\n" "### ignoreRunning = " ignoreRunning "\n" "### minIndicesPerTask = " minIndicesPerTask "\n" "### numChunks = " numChunks)
+      }
+      if(78752 call _cond_test(77649 call == numChunks 1))
+      {
+        (77660 yield(77658 call _build_tuple(77656 call chpl_build_bounded_range 0(77654 call - len 1))))
+      }
+      {
+        {
+          unknown tmpIter[78206] "expr temp" "maybe ref" "no copy" "temp"
+          (78209 'move' tmpIter[78206](77668 call #(77665 call chpl_build_low_bounded_range 0) numChunks))
+          unknown isRngDomArr[78732] "maybe param" "temp"
+          (78747 'move' isRngDomArr[78732](78745 call ||(78734 call isBoundedRange tmpIter[78206])(78743 call ||(78737 call isDomain tmpIter[78206])(78740 call isArray tmpIter[78206]))))
+          if isRngDomArr[78732]
+          {
+            const _coforallCount[78599] "const" "end count" "temp"
+            (78668 'move' _coforallCount[78599](78665 call _endCountAlloc 1))
+            unknown numTasks[78600] "temp"
+            (78652 'move' numTasks[78600](78648 call . tmpIter[78206] c"size"))
+            (78643 call _upEndCount _coforallCount[78599] 1 numTasks[78600])
+            (78640 call chpl_resetTaskSpawn numTasks[78600])
+            unknown _indexOfInterest[78607] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[78608] "expr temp" "temp"
+            (78617 'move' _iterator[78608](78615 call _getIterator tmpIter[78206]))
+            Defer
+            {
+              {
+                (78633 call _freeIterator _iterator[78608])
+              }
+            }
+            { scopeless type
+              (78622 'move' _indexOfInterest[78607](78619 call iteratorIndex _iterator[78608]))
+            }
+            ForLoop[78609]
+            {
+              unknown chunk[78626] "coforall index var" "index var" "insert auto destroy"
+              (78628 'move' chunk[78626] _indexOfInterest[78607])
+              {
+                {
+                  const tmp[78216] "const" "temp"
+                  (78218 'move' tmp[78216](78220 'deref'(78221 '_wide_get_locale'(78226 call(78223 call . here c"getChild") chunk))))
+                  {
+                    if(78230 call _cond_test debugDataParNuma)
+                    {
+                      if(78234 call _cond_test(78236 call != chunk(78239 call chpl_getSubloc)))
+                      {
+                        (78243 call chpl_debug_writeln "*** ERROR: ON WRONG SUBLOC (should be " chunk ", on "(78248 call chpl_getSubloc) ") ***")
+                      }
+                    }
+                    const tmp[78253] "const" "temp"(78255 call _computeBlock len numChunks chunk(78260 call - len 1))
+                    (78265 call _check_tuple_var_decl tmp[78253] 2)
+                    const lo[78268] "const"(78270 call tmp[78253] 0)
+                    const hi[78273] "const"(78275 call tmp[78253] 1)
+                    (78278 'end of statement')
+                    const locRange[78280] "const"(78282 call chpl_build_bounded_range lo hi)
+                    (78286 'end of statement')
+                    const locLen[78288] "const"(78290 call . locRange c"size")
+                    (78294 'end of statement')
+                    const numSublocTasks[78296] "const"(78317 IfExpr (78298 call < chunk(78301 call % dptpl numChunks)) then
+                    { scopeless
+                      (78306 call +(78308 call / dptpl numChunks) 1)
+                    } else
+                    { scopeless
+                      (78314 call / dptpl numChunks)
+                    } )
+                    (78319 'end of statement')
+                    const numTasks[78321] "const"(78323 call _computeNumChunks numSublocTasks(ignoreRunning = 1) minIndicesPerTask locLen)
+                    (78330 'end of statement')
+                    {
+                      unknown tmpIter[78332] "expr temp" "maybe ref" "no copy" "temp"
+                      (78334 'move' tmpIter[78332](78337 call #(78339 call chpl_build_low_bounded_range 0) numTasks))
+                      unknown isRngDomArr[78342] "maybe param" "temp"
+                      (78344 'move' isRngDomArr[78342](78347 call ||(78349 call isBoundedRange tmpIter[78332])(78352 call ||(78354 call isDomain tmpIter[78332])(78357 call isArray tmpIter[78332]))))
+                      if isRngDomArr[78342]
+                      {
+                        const _coforallCount[78361] "const" "end count" "temp"
+                        (78363 'move' _coforallCount[78361](78366 call _endCountAlloc 1))
+                        unknown numTasks[78368] "temp"
+                        (78370 'move' numTasks[78368](78373 call . tmpIter[78332] c"size"))
+                        (78377 call _upEndCount _coforallCount[78361] 1 numTasks[78368])
+                        (78382 call chpl_resetTaskSpawn numTasks[78368])
+                        unknown _indexOfInterest[78384] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+                        unknown _iterator[78386] "expr temp" "temp"
+                        (78388 'move' _iterator[78386](78391 call _getIterator tmpIter[78332]))
+                        Defer
+                        {
+                          {
+                            (78395 call _freeIterator _iterator[78386])
+                          }
+                        }
+                        { scopeless type
+                          (78399 'move' _indexOfInterest[78384](78402 call iteratorIndex _iterator[78386]))
+                        }
+                        ForLoop[78404]
+                        {
+                          unknown core[78407] "coforall index var" "index var" "insert auto destroy"
+                          (78409 'move' core[78407] _indexOfInterest[78384])
+                          {
+                            {
+                              const tmp[78416] "const" "temp"(78418 call _computeBlock locLen numTasks core hi lo lo)
+                              (78427 call _check_tuple_var_decl tmp[78416] 2)
+                              const low[78430] "const"(78432 call tmp[78416] 0)
+                              const high[78435] "const"(78437 call tmp[78416] 1)
+                              (78440 'end of statement')
+                              if(78442 call _cond_test debugDataParNuma)
+                              {
+                                (78446 call chpl_debug_writeln "### chunk = " chunk "  core = " core "  " "locRange = " locRange "  coreRange = "(78456 call chpl_build_bounded_range low high))
+                              }
+                              (78460 yield(78462 call _build_tuple(78464 call chpl_build_bounded_range low high)))
+                            }
+                            (78468 call _downEndCount _coforallCount[78361] nil[44])
+                            (78413 'coforall loop')
+                          }
+                          label _continueLabel[78471]
+                          _indexOfInterest[78384]
+                          _iterator[78386]
+                        }
+                        label _breakLabel[78473]
+                        Defer
+                        {
+                          {
+                            (78477 call _endCountFree _coforallCount[78361])
+                          }
+                        }
+                        (78481 call _waitEndCount _coforallCount[78361] 1 numTasks[78368])
+                      }
+                      {
+                        const _coforallCount[78486] "const" "end count" "temp"
+                        (78488 'move' _coforallCount[78486](78491 call _endCountAlloc 1))
+                        unknown _indexOfInterest[78493] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+                        unknown _iterator[78495] "expr temp" "temp"
+                        (78497 'move' _iterator[78495](78500 call _getIterator tmpIter[78332]))
+                        Defer
+                        {
+                          {
+                            (78504 call _freeIterator _iterator[78495])
+                          }
+                        }
+                        { scopeless type
+                          (78508 'move' _indexOfInterest[78493](78511 call iteratorIndex _iterator[78495]))
+                        }
+                        ForLoop[78513]
+                        {
+                          unknown core[78516] "coforall index var" "index var" "insert auto destroy"
+                          (78518 'move' core[78516] _indexOfInterest[78493])
+                          (78522 call _upEndCount _coforallCount[78486] 1)
+                          {
+                            {
+                              const tmp[78529] "const" "temp"(78531 call _computeBlock locLen numTasks core hi lo lo)
+                              (78540 call _check_tuple_var_decl tmp[78529] 2)
+                              const low[78543] "const"(78545 call tmp[78529] 0)
+                              const high[78548] "const"(78550 call tmp[78529] 1)
+                              (78553 'end of statement')
+                              if(78555 call _cond_test debugDataParNuma)
+                              {
+                                (78559 call chpl_debug_writeln "### chunk = " chunk "  core = " core "  " "locRange = " locRange "  coreRange = "(78569 call chpl_build_bounded_range low high))
+                              }
+                              (78573 yield(78575 call _build_tuple(78577 call chpl_build_bounded_range low high)))
+                            }
+                            (78581 call _downEndCount _coforallCount[78486] nil[44])
+                            (78526 'coforall loop')
+                          }
+                          label _continueLabel[78584]
+                          _indexOfInterest[78493]
+                          _iterator[78495]
+                        }
+                        label _breakLabel[78586]
+                        Defer
+                        {
+                          {
+                            (78590 call _endCountFree _coforallCount[78486])
+                          }
+                        }
+                        (78594 call _waitEndCount _coforallCount[78486] 1)
+                      }
+                    }
+                  }
+                  (78213 'elided on block' 0 tmp[78216])
+                }
+                (78602 call _downEndCount _coforallCount[78599] nil[44])
+                (78601 'coforall loop')
+              }
+              label _continueLabel[78612]
+              _indexOfInterest[78607]
+              _iterator[78608]
+            }
+            label _breakLabel[78613]
+            Defer
+            {
+              {
+                (78655 call _endCountFree _coforallCount[78599])
+              }
+            }
+            (78660 call _waitEndCount _coforallCount[78599] 1 numTasks[78600])
+          }
+          {
+            const _coforallCount[78672] "const" "end count" "temp"
+            (78729 'move' _coforallCount[78672](78726 call _endCountAlloc 1))
+            unknown _indexOfInterest[78680] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[78681] "expr temp" "temp"
+            (78690 'move' _iterator[78681](78688 call _getIterator tmpIter[78206]))
+            Defer
+            {
+              {
+                (78706 call _freeIterator _iterator[78681])
+              }
+            }
+            { scopeless type
+              (78695 'move' _indexOfInterest[78680](78692 call iteratorIndex _iterator[78681]))
+            }
+            ForLoop[78682]
+            {
+              unknown chunk[78699] "coforall index var" "index var" "insert auto destroy"
+              (78701 'move' chunk[78699] _indexOfInterest[78680])
+              (78713 call _upEndCount _coforallCount[78672] 1)
+              {
+                {
+                  const tmp[78196] "const" "temp"
+                  (78197 'move' tmp[78196](78194 'deref'(78193 '_wide_get_locale'(77678 call(77673 call . here c"getChild") chunk))))
+                  {
+                    if(77751 call _cond_test debugDataParNuma)
+                    {
+                      if(77745 call _cond_test(77684 call != chunk(77683 call chpl_getSubloc)))
+                      {
+                        (77743 call chpl_debug_writeln "*** ERROR: ON WRONG SUBLOC (should be " chunk ", on "(77725 call chpl_getSubloc) ") ***")
+                      }
+                    }
+                    const tmp[77771] "const" "temp"(77770 call _computeBlock len numChunks chunk(77768 call - len 1))
+                    (77778 call _check_tuple_var_decl tmp[77771] 2)
+                    const lo[77756] "const"(77772 call tmp[77771] 0)
+                    const hi[77758] "const"(77775 call tmp[77771] 1)
+                    (77783 'end of statement')
+                    const locRange[77788] "const"(77786 call chpl_build_bounded_range lo hi)
+                    (77791 'end of statement')
+                    const locLen[77796] "const"(77793 call . locRange c"size")
+                    (77799 'end of statement')
+                    const numSublocTasks[77821] "const"(77818 IfExpr (77805 call < chunk(77803 call % dptpl numChunks)) then
+                    { scopeless
+                      (77812 call +(77809 call / dptpl numChunks) 1)
+                    } else
+                    { scopeless
+                      (77816 call / dptpl numChunks)
+                    } )
+                    (77824 'end of statement')
+                    const numTasks[77833] "const"(77832 call _computeNumChunks numSublocTasks(ignoreRunning = 1) minIndicesPerTask locLen)
+                    (77836 'end of statement')
+                    {
+                      unknown tmpIter[77982] "expr temp" "maybe ref" "no copy" "temp"
+                      (77985 'move' tmpIter[77982](77842 call #(77839 call chpl_build_low_bounded_range 0) numTasks))
+                      unknown isRngDomArr[78174] "maybe param" "temp"
+                      (78189 'move' isRngDomArr[78174](78187 call ||(78176 call isBoundedRange tmpIter[77982])(78185 call ||(78179 call isDomain tmpIter[77982])(78182 call isArray tmpIter[77982]))))
+                      if isRngDomArr[78174]
+                      {
+                        const _coforallCount[78041] "const" "end count" "temp"
+                        (78110 'move' _coforallCount[78041](78107 call _endCountAlloc 1))
+                        unknown numTasks[78042] "temp"
+                        (78094 'move' numTasks[78042](78090 call . tmpIter[77982] c"size"))
+                        (78085 call _upEndCount _coforallCount[78041] 1 numTasks[78042])
+                        (78082 call chpl_resetTaskSpawn numTasks[78042])
+                        unknown _indexOfInterest[78049] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+                        unknown _iterator[78050] "expr temp" "temp"
+                        (78059 'move' _iterator[78050](78057 call _getIterator tmpIter[77982]))
+                        Defer
+                        {
+                          {
+                            (78075 call _freeIterator _iterator[78050])
+                          }
+                        }
+                        { scopeless type
+                          (78064 'move' _indexOfInterest[78049](78061 call iteratorIndex _iterator[78050]))
+                        }
+                        ForLoop[78051]
+                        {
+                          unknown core[78068] "coforall index var" "index var" "insert auto destroy"
+                          (78070 'move' core[78068] _indexOfInterest[78049])
+                          {
+                            {
+                              const tmp[77989] "const" "temp"(77991 call _computeBlock locLen numTasks core hi lo lo)
+                              (78000 call _check_tuple_var_decl tmp[77989] 2)
+                              const low[78003] "const"(78005 call tmp[77989] 0)
+                              const high[78008] "const"(78010 call tmp[77989] 1)
+                              (78013 'end of statement')
+                              if(78015 call _cond_test debugDataParNuma)
+                              {
+                                (78019 call chpl_debug_writeln "### chunk = " chunk "  core = " core "  " "locRange = " locRange "  coreRange = "(78029 call chpl_build_bounded_range low high))
+                              }
+                              (78033 yield(78035 call _build_tuple(78037 call chpl_build_bounded_range low high)))
+                            }
+                            (78044 call _downEndCount _coforallCount[78041] nil[44])
+                            (78043 'coforall loop')
+                          }
+                          label _continueLabel[78054]
+                          _indexOfInterest[78049]
+                          _iterator[78050]
+                        }
+                        label _breakLabel[78055]
+                        Defer
+                        {
+                          {
+                            (78097 call _endCountFree _coforallCount[78041])
+                          }
+                        }
+                        (78102 call _waitEndCount _coforallCount[78041] 1 numTasks[78042])
+                      }
+                      {
+                        const _coforallCount[78114] "const" "end count" "temp"
+                        (78171 'move' _coforallCount[78114](78168 call _endCountAlloc 1))
+                        unknown _indexOfInterest[78122] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+                        unknown _iterator[78123] "expr temp" "temp"
+                        (78132 'move' _iterator[78123](78130 call _getIterator tmpIter[77982]))
+                        Defer
+                        {
+                          {
+                            (78148 call _freeIterator _iterator[78123])
+                          }
+                        }
+                        { scopeless type
+                          (78137 'move' _indexOfInterest[78122](78134 call iteratorIndex _iterator[78123]))
+                        }
+                        ForLoop[78124]
+                        {
+                          unknown core[78141] "coforall index var" "index var" "insert auto destroy"
+                          (78143 'move' core[78141] _indexOfInterest[78122])
+                          (78155 call _upEndCount _coforallCount[78114] 1)
+                          {
+                            {
+                              const tmp[77858] "const" "temp"(77857 call _computeBlock locLen numTasks core hi lo lo)
+                              (77865 call _check_tuple_var_decl tmp[77858] 2)
+                              const low[77844] "const"(77859 call tmp[77858] 0)
+                              const high[77846] "const"(77862 call tmp[77858] 1)
+                              (77870 'end of statement')
+                              if(77970 call _cond_test debugDataParNuma)
+                              {
+                                (77967 call chpl_debug_writeln "### chunk = " chunk "  core = " core "  " "locRange = " locRange "  coreRange = "(77965 call chpl_build_bounded_range low high))
+                              }
+                              (77980 yield(77978 call _build_tuple(77976 call chpl_build_bounded_range low high)))
+                            }
+                            (78117 call _downEndCount _coforallCount[78114] nil[44])
+                            (78116 'coforall loop')
+                          }
+                          label _continueLabel[78127]
+                          _indexOfInterest[78122]
+                          _iterator[78123]
+                        }
+                        label _breakLabel[78128]
+                        Defer
+                        {
+                          {
+                            (78159 call _endCountFree _coforallCount[78114])
+                          }
+                        }
+                        (78164 call _waitEndCount _coforallCount[78114] 1)
+                      }
+                    }
+                  }
+                  (78200 'elided on block' 0 tmp[78196])
+                }
+                (78675 call _downEndCount _coforallCount[78672] nil[44])
+                (78674 'coforall loop')
+              }
+              label _continueLabel[78685]
+              _indexOfInterest[78680]
+              _iterator[78681]
+            }
+            label _breakLabel[78686]
+            Defer
+            {
+              {
+                (78717 call _endCountFree _coforallCount[78672])
+              }
+            }
+            (78722 call _waitEndCount _coforallCount[78672] 1)
+          }
+        }
+      }
+    }
+    {
+      unknown v[78760](78757 call . this c"size")
+      (78763 'end of statement')
+      const numChunks[78776] "const"(78773 IfExpr (78767 'task_get_serial') then
+      { scopeless
+        1
+      } else
+      { scopeless
+        (78772 call _computeNumChunks v)
+      } )
+      (78779 'end of statement')
+      if(78829 call _cond_test debugChapelRange)
+      {
+        (78787 call chpl_debug_writeln "*** RI: length=" v " numChunks=" numChunks)
+        (78827 call chpl_debug_writeln "*** RI: Using " numChunks " chunk(s)")
+      }
+      if(79134 call _cond_test(78835 call == numChunks 1))
+      {
+        (78846 yield(78844 call _build_tuple(78842 call chpl_build_bounded_range 0(78840 call - v 1))))
+      }
+      {
+        {
+          unknown tmpIter[78925] "expr temp" "maybe ref" "no copy" "temp"
+          (78928 'move' tmpIter[78925](78853 call #(78850 call chpl_build_low_bounded_range 0) numChunks))
+          unknown isRngDomArr[79114] "maybe param" "temp"
+          (79129 'move' isRngDomArr[79114](79127 call ||(79116 call isBoundedRange tmpIter[78925])(79125 call ||(79119 call isDomain tmpIter[78925])(79122 call isArray tmpIter[78925]))))
+          if isRngDomArr[79114]
+          {
+            const _coforallCount[78981] "const" "end count" "temp"
+            (79050 'move' _coforallCount[78981](79047 call _endCountAlloc 1))
+            unknown numTasks[78982] "temp"
+            (79034 'move' numTasks[78982](79030 call . tmpIter[78925] c"size"))
+            (79025 call _upEndCount _coforallCount[78981] 1 numTasks[78982])
+            (79022 call chpl_resetTaskSpawn numTasks[78982])
+            unknown _indexOfInterest[78989] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[78990] "expr temp" "temp"
+            (78999 'move' _iterator[78990](78997 call _getIterator tmpIter[78925]))
+            Defer
+            {
+              {
+                (79015 call _freeIterator _iterator[78990])
+              }
+            }
+            { scopeless type
+              (79004 'move' _indexOfInterest[78989](79001 call iteratorIndex _iterator[78990]))
+            }
+            ForLoop[78991]
+            {
+              unknown chunk[79008] "coforall index var" "index var" "insert auto destroy"
+              (79010 'move' chunk[79008] _indexOfInterest[78989])
+              {
+                {
+                  const tmp[78932] "const" "temp"(78934 call _computeBlock v numChunks chunk(78939 call - v 1))
+                  (78944 call _check_tuple_var_decl tmp[78932] 2)
+                  const lo[78947] "const"(78949 call tmp[78932] 0)
+                  const hi[78952] "const"(78954 call tmp[78932] 1)
+                  (78957 'end of statement')
+                  if(78959 call _cond_test debugChapelRange)
+                  {
+                    (78964 call chpl_debug_writeln "*** RI: tuple = "(78967 call _build_tuple(78969 call chpl_build_bounded_range lo hi)))
+                  }
+                  (78973 yield(78975 call _build_tuple(78977 call chpl_build_bounded_range lo hi)))
+                }
+                (78984 call _downEndCount _coforallCount[78981] nil[44])
+                (78983 'coforall loop')
+              }
+              label _continueLabel[78994]
+              _indexOfInterest[78989]
+              _iterator[78990]
+            }
+            label _breakLabel[78995]
+            Defer
+            {
+              {
+                (79037 call _endCountFree _coforallCount[78981])
+              }
+            }
+            (79042 call _waitEndCount _coforallCount[78981] 1 numTasks[78982])
+          }
+          {
+            const _coforallCount[79054] "const" "end count" "temp"
+            (79111 'move' _coforallCount[79054](79108 call _endCountAlloc 1))
+            unknown _indexOfInterest[79062] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[79063] "expr temp" "temp"
+            (79072 'move' _iterator[79063](79070 call _getIterator tmpIter[78925]))
+            Defer
+            {
+              {
+                (79088 call _freeIterator _iterator[79063])
+              }
+            }
+            { scopeless type
+              (79077 'move' _indexOfInterest[79062](79074 call iteratorIndex _iterator[79063]))
+            }
+            ForLoop[79064]
+            {
+              unknown chunk[79081] "coforall index var" "index var" "insert auto destroy"
+              (79083 'move' chunk[79081] _indexOfInterest[79062])
+              (79095 call _upEndCount _coforallCount[79054] 1)
+              {
+                {
+                  const tmp[78870] "const" "temp"(78869 call _computeBlock v numChunks chunk(78867 call - v 1))
+                  (78877 call _check_tuple_var_decl tmp[78870] 2)
+                  const lo[78855] "const"(78871 call tmp[78870] 0)
+                  const hi[78857] "const"(78874 call tmp[78870] 1)
+                  (78882 'end of statement')
+                  if(78912 call _cond_test debugChapelRange)
+                  {
+                    (78910 call chpl_debug_writeln "*** RI: tuple = "(78908 call _build_tuple(78906 call chpl_build_bounded_range lo hi)))
+                  }
+                  (78923 yield(78921 call _build_tuple(78919 call chpl_build_bounded_range lo hi)))
+                }
+                (79057 call _downEndCount _coforallCount[79054] nil[44])
+                (79056 'coforall loop')
+              }
+              label _continueLabel[79067]
+              _indexOfInterest[79062]
+              _iterator[79063]
+            }
+            label _breakLabel[79068]
+            Defer
+            {
+              {
+                (79099 call _endCountFree _coforallCount[79054])
+              }
+            }
+            (79104 call _waitEndCount _coforallCount[79054] 1)
+          }
+        }
+      }
+    }
+  }
+  where {
+    (77330 call == tag(77327 call . iterKind c"leader"))
+  }
+  function _unknown[51].these[79153](arg _mt[79160]:_MT[238], arg this[79157] :
+  range, param arg tag[79150] :
+  iterKind, arg followThis[79155]:_any[178](?)) : _unknown[51] "iterator fn" "method" "no doc" "no return value for void"
+  {
+    if(79186 call _cond_test(79176 call && boundsChecking(79175 call(79171 call . this c"isAmbiguous"))))
+    {
+      (79184 call(79179 call . HaltWrappers c"boundsCheckHalt") "these -- Attempt to iterate over a range with ambiguous alignment.")
+    }
+    if(79204 call _cond_test(79197 call == boundedType(79194 call . BoundedRangeType c"boundedNone")))
+    {
+      (79202 call compilerError "iteration over a range with no bounds")
+    }
+    if(79242 call _cond_test(79219 call &&(79210 call ! stridable)(79217 call == boundedType(79214 call . BoundedRangeType c"boundedHigh"))))
+    {
+      (79240 call compilerError "iteration over a range with no first index")
+    }
+    if(79275 call _cond_test(79252 call !=(79248 call . followThis c"size") 1))
+    {
+      (79273 call compilerError "iteration over a range with multi-dimensional iterator")
+    }
+    if(79303 call _cond_test debugChapelRange)
+    {
+      (79301 call chpl_debug_writeln "In range follower code: Following " followThis)
+    }
+    unknown myFollowThis[79312](79311 call followThis 0)
+    (79315 'end of statement')
+    if(79339 call _cond_test debugChapelRange)
+    {
+      (79337 call chpl_debug_writeln "Range = " myFollowThis)
+    }
+    if(79413 call _cond_test(79353 call && boundsChecking(79351 call !(79350 call(79346 call . this c"hasFirst")))))
+    {
+      if(79408 call _cond_test(79360 call(79356 call . this c"isEmpty")))
+      {
+        if(79393 call _cond_test(79367 call !(79366 call(79362 call . myFollowThis c"isEmpty"))))
+        {
+          (79391 call(79370 call . HaltWrappers c"boundsCheckHalt") "size mismatch in zippered iteration")
+        }
+      }
+      {
+        (79405 call(79400 call . HaltWrappers c"boundsCheckHalt") "iteration over a range with no first index")
+      }
+    }
+    if(79476 call _cond_test(79426 call && boundsChecking(79424 call !(79423 call(79419 call . myFollowThis c"hasFirst")))))
+    {
+      if(79470 call _cond_test(79444 call !(79442 call &&(79434 call !(79433 call(79429 call . myFollowThis c"isAmbiguous")))(79441 call(79437 call . myFollowThis c"isEmpty")))))
+      {
+        (79468 call(79447 call . HaltWrappers c"boundsCheckHalt") "zippered iteration over a range with no first index")
+      }
+    }
+    if(80148 call _cond_test(79498 call ||(79490 call &&(79483 call isBoundedRange myFollowThis)(79488 call !(79485 call . myFollowThis c"stridable")))(79497 call(79493 call . myFollowThis c"hasLast"))))
+    {
+      const flwlen[79504] "const"(79501 call . myFollowThis c"size")
+      (79507 'end of statement')
+      if(79587 call _cond_test(79516 call && boundsChecking(79515 call(79511 call . this c"hasLast"))))
+      {
+        if(79581 call _cond_test(79521 call isBoundedRange this))
+        {
+          if(79553 call _cond_test(79527 call <(79523 call . this c"size") flwlen))
+          {
+            (79551 call(79530 call . HaltWrappers c"boundsCheckHalt") "zippered iteration over a range with too few indices")
+          }
+        }
+        {
+          (79579 call assert 0 "hasFirst && hasLast do not imply isBoundedRange")
+        }
+      }
+      if(79937 call _cond_test(79599 call ||(79592 call . this c"stridable")(79596 call . myFollowThis c"stridable")))
+      {
+        unknown r[79620](79618 call chpl_by(79609 call chpl_build_bounded_range(79604 call chpl_intToIdx 1)(79608 call chpl_intToIdx 0))(79616 call _cast(79615 call chpl__rangeStrideType intIdxType) 1))
+        (79623 'end of statement')
+        if(79729 call _cond_test(79627 call != flwlen 0))
+        {
+          const stride[79639] "const"(79637 call *(79630 call . this c"stride")(79634 call . myFollowThis c"stride"))
+          (79642 'end of statement')
+          unknown low[79654](79653 call(79645 call . this c"orderToIndex")(79649 call . myFollowThis c"first"))
+          (79657 'end of statement')
+          unknown high[79680](79679 call chpl_intToIdx(79676 call +(79664 call _cast strType(79662 call chpl__idxToInt low))(79674 call * stride(79672 call _cast strType(79669 call - flwlen 1)))))
+          (79683 'end of statement')
+          (79699 call assert(79696 call == high(79695 call(79687 call . this c"orderToIndex")(79691 call . myFollowThis c"last"))))
+          if(79710 call _cond_test(79703 call < stride 0))
+          {
+            (79707 call <=> low high)
+          }
+          (79726 call = r(79724 call chpl_by(79718 call chpl_build_bounded_range low high)(79722 call _cast strType stride)))
+        }
+        if(79756 call _cond_test debugChapelRange)
+        {
+          (79754 call chpl_debug_writeln "Expanded range = " r)
+        }
+        {
+          unknown _indexOfInterest[79766] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[79767] "expr temp" "temp"
+          (79776 'move' _iterator[79767](79774 call _getIterator r))
+          Defer
+          {
+            {
+              (79792 call _freeIterator _iterator[79767])
+            }
+          }
+          { scopeless type
+            (79781 'move' _indexOfInterest[79766](79778 call iteratorIndex _iterator[79767]))
+          }
+          ForLoop[79768]
+          {
+            unknown i[79785] "index var" "insert auto destroy"
+            (79787 'move' i[79785] _indexOfInterest[79766])
+            (79764 yield i)
+            label _continueLabel[79771]
+            _indexOfInterest[79766]
+            _iterator[79767]
+          }
+          label _breakLabel[79772]
+        }
+      }
+      {
+        unknown r[79811](79809 call chpl_build_bounded_range(79803 call chpl__intToIdx idxType 1)(79808 call chpl__intToIdx idxType 0))
+        (79814 'end of statement')
+        if(79883 call _cond_test(79818 call != flwlen 0))
+        {
+          const low[79830] "const"(79829 call(79821 call . this c"orderToIndex")(79825 call . myFollowThis c"first"))
+          (79833 'end of statement')
+          const high[79854] "const"(79853 call chpl_intToIdx(79850 call +(79841 call _cast strType(79839 call chpl__idxToInt low))(79848 call _cast strType(79845 call - flwlen 1))))
+          (79857 'end of statement')
+          (79873 call assert(79870 call == high(79869 call(79861 call . this c"orderToIndex")(79865 call . myFollowThis c"last"))))
+          (79880 call = r(79878 call chpl_build_bounded_range low high))
+        }
+        if(79894 call _cond_test debugChapelRange)
+        {
+          (79892 call chpl_debug_writeln "Expanded range = " r)
+        }
+        {
+          unknown _indexOfInterest[79904] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[79905] "expr temp" "temp"
+          (79914 'move' _iterator[79905](79912 call _getIterator r))
+          Defer
+          {
+            {
+              (79930 call _freeIterator _iterator[79905])
+            }
+          }
+          { scopeless type
+            (79919 'move' _indexOfInterest[79904](79916 call iteratorIndex _iterator[79905]))
+          }
+          ForLoop[79906]
+          {
+            unknown i[79923] "index var" "insert auto destroy"
+            (79925 'move' i[79923] _indexOfInterest[79904])
+            (79902 yield i)
+            label _continueLabel[79909]
+            _indexOfInterest[79904]
+            _iterator[79905]
+          }
+          label _breakLabel[79910]
+        }
+      }
+    }
+    {
+      if(79978 call _cond_test(79948 call && boundsChecking(79947 call(79943 call . this c"hasLast"))))
+      {
+        (79976 call(79953 call . HaltWrappers c"zipLengthHalt") "zippered iteration where a bounded range follows an unbounded iterator")
+      }
+      const first[79994] "const"(79993 call(79985 call . this c"orderToIndex")(79989 call . myFollowThis c"first"))
+      (79997 'end of statement')
+      const stride[80008] "const"(80006 call *(79999 call . this c"stride")(80003 call . myFollowThis c"stride"))
+      (80011 'end of statement')
+      if(80144 call _cond_test(80014 call > stride 0))
+      {
+        const r[80025] "const"(80023 call chpl_by(80017 call chpl_build_low_bounded_range first)(80021 call _cast strType stride))
+        (80028 'end of statement')
+        if(80037 call _cond_test debugChapelRange)
+        {
+          (80035 call chpl_debug_writeln "Expanded range = " r)
+        }
+        {
+          unknown _indexOfInterest[80047] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[80048] "expr temp" "temp"
+          (80057 'move' _iterator[80048](80055 call _getIterator r))
+          Defer
+          {
+            {
+              (80073 call _freeIterator _iterator[80048])
+            }
+          }
+          { scopeless type
+            (80062 'move' _indexOfInterest[80047](80059 call iteratorIndex _iterator[80048]))
+          }
+          ForLoop[80049]
+          {
+            unknown i[80066] "index var" "insert auto destroy"
+            (80068 'move' i[80066] _indexOfInterest[80047])
+            (80045 yield i)
+            label _continueLabel[80052]
+            _indexOfInterest[80047]
+            _iterator[80048]
+          }
+          label _breakLabel[80053]
+        }
+      }
+      {
+        const r[80089] "const"(80087 call chpl_by(80081 call chpl_build_high_bounded_range first)(80085 call _cast strType stride))
+        (80092 'end of statement')
+        if(80101 call _cond_test debugChapelRange)
+        {
+          (80099 call chpl_debug_writeln "Expanded range = " r)
+        }
+        {
+          unknown _indexOfInterest[80111] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[80112] "expr temp" "temp"
+          (80121 'move' _iterator[80112](80119 call _getIterator r))
+          Defer
+          {
+            {
+              (80137 call _freeIterator _iterator[80112])
+            }
+          }
+          { scopeless type
+            (80126 'move' _indexOfInterest[80111](80123 call iteratorIndex _iterator[80112]))
+          }
+          ForLoop[80113]
+          {
+            unknown i[80130] "index var" "insert auto destroy"
+            (80132 'move' i[80130] _indexOfInterest[80111])
+            (80109 yield i)
+            label _continueLabel[80116]
+            _indexOfInterest[80111]
+            _iterator[80112]
+          }
+          label _breakLabel[80117]
+        }
+      }
+    }
+  }
+  where {
+    (79167 call == tag(79164 call . iterKind c"follower"))
+  }
+  function _cast[80161](arg t[80158] :
+  string[26], arg x[80167] :
+  (80166 call range ?[260])) : _unknown[51]
+  {
+    unknown ret[80171] string[26]
+    (80174 'end of statement')
+    if(80193 call _cond_test(80181 call(80177 call . x c"hasLowBound")))
+    {
+      (80190 call += ret(80188 call _cast string[26](80184 call . x c"low")))
+    }
+    (80216 call += ret "..")
+    if(80236 call _cond_test(80224 call(80220 call . x c"hasHighBound")))
+    {
+      (80233 call += ret(80231 call _cast string[26](80227 call . x c"high")))
+    }
+    if(80262 call _cond_test(80246 call !=(80242 call . x c"stride") 1))
+    {
+      (80259 call += ret(80257 call + " by "(80255 call _cast string[26](80251 call . x c"stride"))))
+    }
+    unknown alignCheckRange[80268] x
+    (80271 'end of statement')
+    (80279 call(80275 call . alignCheckRange c"normalizeAlignment"))
+    if(80331 call _cond_test(80289 call !(80288 call(80284 call . alignCheckRange c"isNaturallyAligned"))))
+    {
+      (80328 call += ret(80326 call + " align "(80324 call _cast string[26](80322 call chpl__mod(80316 call chpl__idxToInt(80312 call . x c"alignment"))(80319 call . x c"stride")))))
+    }
+    (80337 return ret)
+  }
+  function _unknown[51].normalizeAlignment[80344](arg _mt[80349]:_MT[238], ref arg this[80346] :
+  range) : _unknown[51] "method" "no doc" "no return value for void"
+  {
+    if(80407 call _cond_test(80355 call && stridable(80353 call ! aligned)))
+    {
+      (80403 call = _alignment(80400 IfExpr (80361 call isBoundedRange this) then
+      { scopeless(80368 IfExpr (80364 call > stride 0) then
+        { scopeless
+          _low
+        } else
+        { scopeless
+          _high
+        } )
+      } else
+      { scopeless(80397 IfExpr (80379 call ==(80372 call . this c"boundedType")(80376 call . BoundedRangeType c"boundedLow")) then
+        { scopeless
+          _low
+        } else
+        { scopeless(80394 IfExpr (80390 call ==(80383 call . this c"boundedType")(80387 call . BoundedRangeType c"boundedHigh")) then
+          { scopeless
+            _high
+          } else
+          { scopeless
+            0
+          } )
+        } )
+      } ))
+    }
+  }
+  function _unknown[51].chpl__unTranslate[80421](arg _mt[80426]:_MT[238], arg this[80423] :
+  range, arg i[80418] :
+  intIdxType) : _unknown[51] "inline" "method" "no doc"
+  {
+    (80432 return(80430 call - this i))
+  }
+  function _unknown[51].chpl__unTranslate[80442](arg _mt[80447]:_MT[238], arg this[80444] :
+  range, arg i[80440]:_any[178](?)) : _unknown[51] "inline" "method" "no doc"
+  {
+    if(80469 call _cond_test(80453 call isIntType(80451 'typeof' i)))
+    {
+      (80458 return(80456 call - this i))
+    }
+    {
+      (80467 return(80465 call + this(80464 call abs i)))
+    }
+  }
+  function chpl__hasAlignment[80487](arg r[80484] :
+  (80483 call range ?[260])) : _unknown[51]
+  {
+    if(80507 call _cond_test(80502 call &&(80494 call(80490 call . r c"hasLowBound"))(80500 call >=(80496 call . r c"stride") 2)))
+    {
+      (80505 return 1)
+    }
+    if(80533 call _cond_test(80528 call &&(80518 call(80514 call . r c"hasHighBound"))(80526 call <=(80520 call . r c"stride")(80524 call - 2))))
+    {
+      (80531 return 1)
+    }
+    (80539 return 0)
+  }
+  function chpl__mod[80549](arg dividend[80546] :
+  integral, arg modulus[80552] :
+  integral) : _unknown[51]
+  {
+    const m[80566] "const"(80565 call(80559 call .(80558 call abs modulus) c"safeCast")(80563 'typeof' dividend))
+    (80569 'end of statement')
+    unknown tmp[80575](80573 call % dividend m)
+    (80578 'end of statement')
+    if(80597 call _cond_test(80582 call isInt dividend))
+    {
+      if(80592 call _cond_test(80585 call < tmp 0))
+      {
+        (80589 call += tmp m)
+      }
+    }
+    (80603 return tmp)
+  }
+  function chpl__diffMod[80613](arg minuend[80610] :
+  integral, arg subtrahend[80616] :
+  integral, arg modulus[80620] :
+  integral) : _unknown[51]
+  {
+    const m[80642] "const"(80641 call(80635 call .(80634 call abs modulus) c"safeCast")(80639 'typeof' minuend))
+    (80645 'end of statement')
+    unknown minMod[80652](80651 call chpl__mod minuend m)
+    (80655 'end of statement')
+    unknown subMod[80661](80660 call chpl__mod subtrahend m)
+    (80664 'end of statement')
+    (80683 return(80680 IfExpr (80667 call < minMod subMod) then
+    { scopeless
+      (80674 call - m(80672 call - subMod minMod))
+    } else
+    { scopeless
+      (80678 call - minMod subMod)
+    } ))
+  }
+  where {
+    (80629 call ==(80626 'typeof' minuend)(80628 'typeof' subtrahend))
+  }
+  { scopeless type
+    (80624 'typeof' minuend)
+  }
+  function chpl__diffMod[80695](arg minuend[80692] :
+  integral, arg subtrahend[80698] :
+  integral, arg modulus[80702] :
+  integral) : _unknown[51] "no return value for void"
+  {
+    (80724 call compilerError "chpl__diffMod -- Operand types must match.")
+  }
+  function chpl__add[80736](arg a[80733] :
+  unknown t[80731], arg b[80739] :
+  t, arg resultType[80742]:_any[178](?)) : _unknown[51]
+  {
+    if(80771 call _cond_test(80748 call !(80747 call isIntegralType t)))
+    {
+      (80769 call compilerError "Values must be of integral type.")
+    }
+    if(80805 call _cond_test(80797 call &&(80785 call &&(80779 call > a 0)(80783 call > b 0))(80795 call > b(80793 call -(80791 call max t) a))))
+    {
+      (80803 return(80802 call max resultType))
+    }
+    if(80838 call _cond_test(80830 call &&(80818 call &&(80812 call < a 0)(80816 call < b 0))(80828 call < b(80826 call -(80824 call min t) a))))
+    {
+      (80836 return(80835 call min resultType))
+    }
+    if(80923 call _cond_test(80846 call isUintType resultType))
+    {
+      if(80917 call _cond_test(80909 call ||(80876 call &&(80855 call &&(80849 call < a 0)(80853 call > b 0))(80874 call ||(80862 call == a(80861 call min t))(80872 call >(80867 call abs a)(80871 call abs b))))(80907 call &&(80886 call &&(80880 call > a 0)(80884 call < b 0))(80905 call ||(80893 call == b(80892 call min t))(80903 call >(80898 call abs b)(80902 call abs a))))))
+      {
+        (80915 return(80913 call _cast resultType 0))
+      }
+    }
+    (80934 return(80932 call _cast resultType(80929 call + a b)))
+  }
+  function chpl__addRangeStrides[80942](arg start[80940]:_any[178](?), arg stride[80944]:_any[178](?), arg count[80946]:_any[178](?)) : _unknown[51]
+  {
+    function convert[80954](arg a[80952]:_any[178](?), arg b[80956]:_any[178](?)) param : _unknown[51]
+    {
+      (80996 return(80994 call ||(80974 call &&(80964 call ==(80959 'typeof' a)(80963 call int[13] 64))(80972 call ==(80967 'typeof' b)(80971 call uint[115] 64)))(80992 call &&(80982 call ==(80977 'typeof' a)(80981 call uint[115] 64))(80990 call ==(80985 'typeof' b)(80989 call int[13] 64)))))
+    }
+    function mul[81006](arg a[81004]:_any[178](?), arg b[81008]:_any[178](?)) : _unknown[51]
+    {
+      (81038 return(81035 IfExpr (81014 call convert a b) then
+      { scopeless
+        (81029 call *(81020 call _cast(81019 call int[13] 64) a)(81027 call _cast(81026 call int[13] 64) b))
+      } else
+      { scopeless
+        (81033 call * a b)
+      } ))
+    }
+    function add[81047](arg a[81045]:_any[178](?), arg b[81049]:_any[178](?)) : _unknown[51]
+    {
+      (81079 return(81076 IfExpr (81055 call convert a b) then
+      { scopeless
+        (81070 call +(81061 call _cast(81060 call int[13] 64) a)(81068 call _cast(81067 call int[13] 64) b))
+      } else
+      { scopeless
+        (81074 call + a b)
+      } ))
+    }
+    (81097 return(81095 call _cast(81094 'typeof' start)(81092 call add start(81091 call mul stride count))))
+  }
+  { scopeless type
+    (80949 'typeof' start)
+  }
+  function chpl__extendedEuclidHelper[81106](arg u[81104]:_any[178](?), arg v[81108]:_any[178](?)) : _unknown[51]
+  {
+    unknown zero[81113] 0(81111 'typeof' u)
+    (81116 'end of statement')
+    unknown one[81121] 1(81119 'typeof' u)
+    (81124 'end of statement')
+    unknown U[81131](81129 call _build_tuple one zero u)
+    (81134 'end of statement')
+    unknown V[81141](81139 call _build_tuple zero one v)
+    (81144 'end of statement')
+    {
+      unknown tmp[81193] "temp"
+      (81221 'move' tmp[81193](81214 call _cond_test(81216 call !=(81218 call V 2) 0)))
+      WhileDo[81198]
+      {
+        {
+          unknown oldU[81153] U
+          (81156 'end of statement')
+          unknown q[81168](81166 call /(81161 call U 2)(81165 call V 2))
+          (81171 'end of statement')
+          (81174 call = U V)
+          (81190 call = V(81188 call - oldU(81186 call * V(81184 call _build_tuple q q q))))
+        }
+        label _continueLabel[81196]
+        (81209 'move' tmp[81193](81202 call _cond_test(81204 call !=(81206 call V 2) 0)))
+        tmp[81193]
+      }
+      label _breakLabel[81197]
+    }
+    (81235 return(81233 call _build_tuple(81227 call U 2)(81231 call U 0)))
+  }
+  function chpl__extendedEuclid[81248](arg u[81245] :
+  (81244 call int[13] 32), arg v[81254] :
+  (81253 call int[13] 32)) : _unknown[51] "inline"
+  {
+    (81262 return(81261 call chpl__extendedEuclidHelper u v))
+  }
+  function chpl__extendedEuclid[81276](arg u[81273] :
+  (81272 call int[13] 64), arg v[81282] :
+  (81281 call int[13] 64)) : _unknown[51] "inline"
+  {
+    (81290 return(81289 call chpl__extendedEuclidHelper u v))
+  }
+  function chpl__rangeIdxTypeError[81299](arg idxType[81297]:_any[178](?)) : _unknown[51] "private" "no return value for void"
+  {
+    (81341 call compilerError "ranges don't support '"(81322 call _cast string[26] idxType) "' as their idxType")
+  }
+  function chpl__rangeStrideType[81350](arg idxType[81348]:_any[178](?)) type : _unknown[51] "private"
+  {
+    if(81387 call _cond_test(81355 call isIntegralType idxType))
+    {
+      (81360 return(81359 call chpl__signedType idxType))
+    }
+    {
+      if(81383 call _cond_test(81371 call ||(81366 call isEnumType idxType)(81370 call isBoolType idxType)))
+      {
+        (81374 return int[13])
+      }
+      {
+        (81380 call chpl__rangeIdxTypeError idxType)
+      }
+    }
+  }
+  function chpl__rangeUnsignedType[81399](arg idxType[81397]:_any[178](?)) type : _unknown[51] "private"
+  {
+    if(81436 call _cond_test(81404 call isIntegralType idxType))
+    {
+      (81409 return(81408 call chpl__unsignedType idxType))
+    }
+    {
+      if(81432 call _cond_test(81420 call ||(81415 call isEnumType idxType)(81419 call isBoolType idxType)))
+      {
+        (81423 return uint[115])
+      }
+      {
+        (81429 call chpl__rangeIdxTypeError idxType)
+      }
+    }
+  }
+  function chpl__idxTypeToIntIdxType[81448](arg idxType[81446]:_any[178](?)) type : _unknown[51] "no doc"
+  {
+    if(81507 call _cond_test(81453 call isBoolType idxType))
+    {
+      (81455 return int[13])
+    }
+    {
+      if(81503 call _cond_test(81461 call isEnumType idxType))
+      {
+        if(81490 call _cond_test(81467 call <(81463 call . idxType c"size") 2))
+        {
+          (81488 call compilerError "ranges are not currently supported for enums with fewer than two values")
+        }
+        (81497 return int[13])
+      }
+      {
+        (81500 return idxType)
+      }
+    }
+  }
+  function _unknown[51].chpl_intToIdx[81520](arg _mt[81525]:_MT[238], arg this[81522] :
+  range, arg i[81518]:_any[178](?)) : _unknown[51] "inline" "method" "no doc"
+  {
+    (81535 return(81534 call chpl__intToIdx(81529 call . this c"idxType") i))
+  }
+  function chpl__intToIdx[81546](arg idxType[81543] :
+  integral, arg i[81549] :
+  integral) : _unknown[51] "inline"
+  {
+    if(81566 call _cond_test(81555 call ==(81553 'typeof' i) idxType))
+    {
+      (81558 return i)
+    }
+    {
+      (81564 return(81562 call _cast idxType i))
+    }
+  }
+  function chpl__intToIdx[81581](arg idxType[81578] :
+  integral, param arg i[81584] :
+  integral) : _unknown[51] "inline"
+  {
+    if(81601 call _cond_test(81590 call ==(81588 'typeof' i) idxType))
+    {
+      (81593 return i)
+    }
+    {
+      (81599 return(81597 call _cast idxType i))
+    }
+  }
+  function chpl__intToIdx[81616](arg idxType[81613] :
+  enum[187](?), arg i[81619] :
+  integral) : _unknown[51] "inline"
+  {
+    (81627 return(81626 call chpl__orderToEnum i idxType))
+  }
+  function chpl__intToIdx[81636](arg idxType[81634]:_any[178](?), arg i[81639] :
+  integral) : _unknown[51] "inline"
+  {
+    (81650 return(81648 call _cast bool[10] i))
+  }
+  where {
+    (81645 call isBoolType idxType)
+  }
+  function chpl__intToIdx[81660](arg idxType[81658]:_any[178](?), param arg i[81663] :
+  integral) param : _unknown[51] "inline"
+  {
+    (81674 return(81672 call _cast bool[10] i))
+  }
+  where {
+    (81669 call isBoolType idxType)
+  }
+  function chpl__intToIdx[81684](arg idxType[81682]:_any[178](?), arg i[81687] :
+  nothing[7]) : _unknown[51] "inline"
+  {
+    (81691 return none[57])
+  }
+  function chpl__idxToInt[81702](arg i[81699] :
+  integral) : _unknown[51] "inline"
+  {
+    (81705 return i)
+  }
+  function chpl__idxToInt[81716](param arg i[81713] :
+  integral) param : _unknown[51] "inline"
+  {
+    (81719 return i)
+  }
+  function chpl__idxToInt[81730](arg i[81727] :
+  enum[187](?)) : _unknown[51] "inline"
+  {
+    (81736 return(81735 call chpl__enumToOrder i))
+  }
+  function chpl__idxToInt[81747](arg i[81744] :
+  bool[10]) : _unknown[51] "inline"
+  {
+    (81753 return(81751 call _cast int[13] i))
+  }
+  function chpl__idxToInt[81764](param arg i[81761] :
+  bool[10]) param : _unknown[51] "inline"
+  {
+    (81770 return(81768 call _cast int[13] i))
+  }
+}

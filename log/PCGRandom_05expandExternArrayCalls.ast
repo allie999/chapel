@@ -1,0 +1,1088 @@
+AST dump for PCGRandom after pass expandExternArrayCalls.
+Module use list: 
+
+{
+  (353123 'use' ChapelStandard)
+  (307482 'use'(307479 call . super c"RandomSupport"))
+  (307486 'use' Random)
+  (307489 'use' PCGRandomLib)
+  (307492 'use' ChapelLocks)
+  function numGenerators[307498](arg t[307496]:_any[178](?)) param : _unknown[51] "private"
+  {
+    if(307519 call _cond_test(307503 call isBoolType t))
+    {
+      { scopeless
+        (307505 return 1)
+      }
+    }
+    {
+      { scopeless
+        (307517 return(307515 call /(307512 call +(307510 call numBits t) 31) 32))
+      }
+    }
+  }
+  type PCGRandomStream[309052](?) unknown eltType[307529] "type variable" const seed[307536] "const"(307535 call int[13] 64) unknown parSafe[307542] "param" 1 bool[10] function PCGRandomStream[309052](?).init[307550](arg _mt[309056]:_MT[238], arg this[309054]:PCGRandomStream[309052](?), arg eltType[307548]:_any[178](?), arg seed[307562] :
+  (307555 call int[13] 64) =
+  (307559 call . SeedGenerator c"currentTime"), param arg parSafe[307568] :
+  bool[10] =
+  1) : _unknown[51] "method" "primary method"
+  {
+    (307577 call =(307573 call . this c"eltType") eltType)
+    (307588 call =(307584 call . this c"seed") seed)
+    (307596 call =(307592 call . this c"parSafe") parSafe)
+    (307604 call(307600 call . this c"complete"))
+    {
+      unknown i[307648] 0
+      unknown tmp[307649] "maybe param" "temp"
+      (307661 'move' tmp[307649](307659 call chpl_compute_low_param_loop_bound 0(307612 call -(307610 call numGenerators eltType) 1)))
+      unknown tmp[307650] "maybe param" "temp"
+      (307673 'move' tmp[307650](307671 call chpl_compute_high_param_loop_bound 0(307666 call -(307668 call numGenerators eltType) 1)))
+      unknown tmp[307651] "maybe param" "temp"
+      (307676 'move' tmp[307651] 1)
+      ParamForLoop[307678]
+      { i[307648] tmp[307649] tmp[307650] tmp[307651]
+        {
+          { scopeless
+            unknown inc[307623] "param"(307622 call pcg_getvalid_inc(307619 call + i 1))
+            (307626 'end of statement')
+          }
+          (307646 call(307634 call .(307631 call PCGRandomStreamPrivate_rngs i) c"srandom")(307642 call _cast(307641 call uint[115] 64) seed) inc)
+        }
+      }
+      label _unused_continueLabel[307653]
+      label _breakLabel[307652]
+    }
+    (307689 call = PCGRandomStreamPrivate_count 1)
+  } function PCGRandomStream[309052](?).PCGRandomStreamPrivate_getNext_noLock[307698](arg _mt[309060]:_MT[238], arg this[309058]:PCGRandomStream[309052](?), arg resultType[307696]:_any[178](?)) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (307702 call += PCGRandomStreamPrivate_count 1)
+    (307711 return(307710 call randlc resultType PCGRandomStreamPrivate_rngs))
+  } function PCGRandomStream[309052](?).PCGRandomStreamPrivate_getNext_noLock[307719](arg _mt[309064]:_MT[238], arg this[309062]:PCGRandomStream[309052](?), arg resultType[307717]:_any[178](?), arg min[307722] :
+  resultType, arg max[307726] :
+  resultType) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (307731 call += PCGRandomStreamPrivate_count 1)
+    (307747 return(307746 call randlc_bounded resultType PCGRandomStreamPrivate_rngs seed(307742 call - PCGRandomStreamPrivate_count 1) min max))
+  } function PCGRandomStream[309052](?).PCGRandomStreamPrivate_skipToNth_noLock[307757](arg _mt[309068]:_MT[238], arg this[309066]:PCGRandomStream[309052](?), in arg n[307754] :
+  integral) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (307764 call = PCGRandomStreamPrivate_count(307762 call + n 1))
+    (307778 call = PCGRandomStreamPrivate_rngs(307777 call randlc_skipto eltType seed(307775 call + n 1)))
+  } function PCGRandomStream[309052](?).getNext[307789](arg _mt[309072]:_MT[238], arg this[309070]:PCGRandomStream[309052](?), arg resultType[307786]:_any[178](?) =
+  eltType) : _unknown[51] "method" "primary method"
+  {
+    (307794 call _lock)
+    { scopeless
+      const result[307801] "const"(307800 call PCGRandomStreamPrivate_getNext_noLock resultType)
+      (307804 'end of statement')
+    }
+    (307807 call _unlock)
+    (307810 return result)
+  }
+  { scopeless type
+    resultType
+  } function PCGRandomStream[309052](?).getNext[307821](arg _mt[309076]:_MT[238], arg this[309074]:PCGRandomStream[309052](?), arg min[307818] :
+  eltType, arg max[307824] :
+  eltType) : _unknown[51] "method" "primary method"
+  {
+    (307829 'use' HaltWrappers)
+    (307834 call _lock)
+    if(307885 call _cond_test(307841 call && boundsChecking(307839 call > min max)))
+    {
+      { scopeless
+        (307883 call(307844 call . HaltWrappers c"boundsCheckHalt")(307880 call +(307877 call +(307871 call +(307868 call + "Cannot generate random numbers within empty range: ["(307866 call _cast string[26] min)) ", ")(307875 call _cast string[26] max)) "]"))
+      }
+    }
+    { scopeless
+      const result[307896] "const"(307895 call PCGRandomStreamPrivate_getNext_noLock eltType min max)
+      (307899 'end of statement')
+    }
+    (307902 call _unlock)
+    (307905 return result)
+  }
+  { scopeless type
+    eltType
+  } function PCGRandomStream[309052](?).getNext[307914](arg _mt[309080]:_MT[238], arg this[309078]:PCGRandomStream[309052](?), arg resultType[307912]:_any[178](?), arg min[307917] :
+  resultType, arg max[307921] :
+  resultType) : _unknown[51] "method" "primary method"
+  {
+    (307926 'use' HaltWrappers)
+    (307931 call _lock)
+    if(307966 call _cond_test(307938 call && boundsChecking(307936 call > min max)))
+    {
+      { scopeless
+        (307964 call(307941 call . HaltWrappers c"boundsCheckHalt")(307961 call +(307958 call +(307952 call +(307949 call + "Cannot generate random numbers within empty range: ["(307947 call _cast string[26] min)) ", ")(307956 call _cast string[26] max)) "]"))
+      }
+    }
+    { scopeless
+      const result[307977] "const"(307976 call PCGRandomStreamPrivate_getNext_noLock resultType min max)
+      (307980 'end of statement')
+    }
+    (307983 call _unlock)
+    (307986 return result)
+  }
+  { scopeless type
+    resultType
+  } function PCGRandomStream[309052](?).skipToNth[307997](arg _mt[309084]:_MT[238], arg this[309082]:PCGRandomStream[309052](?), arg n[307994] :
+  integral) : _unknown[51] throws "method" "primary method"
+  {
+    if(308034 call _cond_test(308001 call < n 0))
+    {
+      { scopeless
+        (308032 'throw'(308005 'new'(_chpl_manager = _owned[30](?))(308031 call IllegalArgumentError(308028 call + "PCGRandomStream.skipToNth(n) called with negative 'n' value "(308026 call _cast string[26] n)))))
+      }
+    }
+    (308042 call _lock)
+    (308047 call PCGRandomStreamPrivate_skipToNth_noLock n)
+    (308051 call _unlock)
+  } function PCGRandomStream[309052](?).getNth[308061](arg _mt[309088]:_MT[238], arg this[309086]:PCGRandomStream[309052](?), arg n[308058] :
+  integral) : _unknown[51] throws "method" "primary method"
+  {
+    if(308099 call _cond_test(308066 call < n 0))
+    {
+      { scopeless
+        (308097 'throw'(308070 'new'(_chpl_manager = _owned[30](?))(308096 call IllegalArgumentError(308093 call + "PCGRandomStream.getNth(n) called with negative 'n' value "(308091 call _cast string[26] n)))))
+      }
+    }
+    (308107 call _lock)
+    (308112 call PCGRandomStreamPrivate_skipToNth_noLock n)
+    { scopeless
+      const result[308118] "const"(308117 call PCGRandomStreamPrivate_getNext_noLock eltType)
+      (308121 'end of statement')
+    }
+    (308124 call _unlock)
+    (308127 return result)
+  }
+  { scopeless type
+    eltType
+  } function PCGRandomStream[309052](?).fillRandom[308141](arg _mt[309092]:_MT[238], arg this[309090]:PCGRandomStream[309052](?), arg arr[308138] :
+  (308135 call chpl__buildArrayRuntimeType nil[44] eltType)) : _unknown[51] "method" "primary method"
+  {
+    Forall {
+      induction variables:
+        
+        unknown x[308168] "index var" "insert auto destroy"
+        
+        unknown r[308170] "index var" "insert auto destroy"
+      iterated expressions:
+        arr
+        (308160 call iterate(308152 call . arr c"_dom")(308157 call . arr c"eltType"))
+      shadow variables:
+      other variables
+        forall body
+      {
+        (308164 call = x r)
+      }
+    }
+  } function PCGRandomStream[309052](?).choice[308186](arg _mt[309096]:_MT[238], arg this[309094]:PCGRandomStream[309052](?), arg x[308183] :
+  (308181 call chpl__buildArrayRuntimeType unknown dom[308178]), arg size[308191] :
+  unknown sizeType[308188] =
+  none[57], arg replace[308196] =
+  1, arg prob[308202] :
+  unknown probType[308199] =
+  none[57]) : _unknown[51] throws "method" "primary method"
+  {
+    { scopeless
+      unknown idx[308217](308216 call _choice this dom(size = size)(replace = replace)(prob = prob))
+      (308220 'end of statement')
+    }
+    (308226 return(308225 call x idx))
+  } function PCGRandomStream[309052](?).choice[308240](arg _mt[309100]:_MT[238], arg this[309098]:PCGRandomStream[309052](?), arg x[308237] :
+  (308236 call range(stridable = ?[260])), arg size[308245] :
+  unknown sizeType[308242] =
+  none[57], arg replace[308250] =
+  1, arg prob[308256] :
+  unknown probType[308253] =
+  none[57]) : _unknown[51] throws "method" "primary method"
+  {
+    { scopeless
+      unknown dom[308267](308265 call chpl__buildDomainRuntimeType defaultDist 1(stridable = 1))
+      (308270 'end of statement')
+    }
+    if(308324 call _cond_test(308276 call !(308275 call isBoundedRange x)))
+    {
+      (308301 'throw'(308280 'new'(_chpl_manager = _owned[30](?))(308300 call IllegalArgumentError "input range must be bounded")))
+      (308312 call = dom(308310 call chpl__buildDomainExpr(308307 call chpl_build_bounded_range 1 2)))
+    }
+    {
+      (308320 call = dom(308318 call chpl__buildDomainExpr x))
+    }
+    (308339 return(308338 call _choice this dom(size = size)(replace = replace)(prob = prob)))
+  } function PCGRandomStream[309052](?).choice[308349](arg _mt[309104]:_MT[238], arg this[309102]:PCGRandomStream[309052](?), arg x[308346] :
+  _domain, arg size[308354] :
+  unknown sizeType[308351] =
+  none[57], arg replace[308359] =
+  1, arg prob[308365] :
+  unknown probType[308362] =
+  none[57]) : _unknown[51] throws "method" "primary method"
+  {
+    (308380 return(308379 call _choice this x(size = size)(replace = replace)(prob = prob)))
+  } function PCGRandomStream[309052](?).shuffle[308397](arg _mt[309108]:_MT[238], arg this[309106]:PCGRandomStream[309052](?), arg arr[308394] :
+  (308392 call chpl__buildArrayRuntimeType unknown D[308387] unknown eltType[308390])) : _unknown[51] "method" "primary method"
+  {
+    if(308427 call _cond_test(308404 call !=(308400 call . D c"rank") 1))
+    {
+      { scopeless
+        (308425 call compilerError "Shuffle requires 1-D array")
+      }
+    }
+    { scopeless
+      const low[308437] "const"(308434 call . D c"alignedLow")
+      const stride[308447] "const"(308446 call abs(308442 call . D c"stride"))
+      (308450 'end of statement')
+    }
+    (308453 call _lock)
+    {
+      unknown _indexOfInterest[308532] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[308533] "expr temp" "temp"
+      (308542 'move' _iterator[308533](308540 call _getIterator(308468 call chpl_by(308463 call #(308457 call chpl_build_low_bounded_range 0)(308460 call . D c"size"))(308466 call - 1))))
+      Defer
+      {
+        {
+          (308570 call _freeIterator _iterator[308533])
+        }
+      }
+      { scopeless type
+        (308559 'move' _indexOfInterest[308532](308556 call iteratorIndex _iterator[308533]))
+      }
+      ForLoop[308534]
+      {
+        unknown i[308563] "index var" "insert auto destroy"
+        (308565 'move' i[308563] _indexOfInterest[308532])
+        {
+          { scopeless
+            unknown k[308482](308481 call randlc_bounded(308472 call . D c"idxType") PCGRandomStreamPrivate_rngs seed PCGRandomStreamPrivate_count 0 i)
+            (308485 'end of statement')
+          }
+          { scopeless
+            unknown j[308488] i
+            (308491 'end of statement')
+          }
+          if(308507 call _cond_test(308494 call > stride 1))
+          {
+            (308498 call *= k stride)
+            (308504 call *= j stride)
+          }
+          (308513 call += k low)
+          (308518 call += j low)
+          (308529 call <=>(308524 call arr k)(308528 call arr j))
+        }
+        label _continueLabel[308537]
+        _indexOfInterest[308532]
+        _iterator[308533]
+      }
+      label _breakLabel[308538]
+    }
+    (308582 call += PCGRandomStreamPrivate_count(308579 call . D c"size"))
+    (308587 call _unlock)
+  } function PCGRandomStream[309052](?).permutation[308600](arg _mt[309112]:_MT[238], arg this[309110]:PCGRandomStream[309052](?), arg arr[308597] :
+  (308594 call chpl__buildArrayRuntimeType nil[44] eltType)) : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      unknown low[308615](308612 call .(308611 call(308606 call .(308603 call . arr c"_dom") c"dim") 0) c"low")
+      (308618 'end of statement')
+    }
+    { scopeless
+      unknown high[308633](308630 call .(308629 call(308624 call .(308621 call . arr c"_dom") c"dim") 0) c"high")
+      (308636 'end of statement')
+    }
+    if(308668 call _cond_test(308645 call !=(308641 call .(308638 call . arr c"_dom") c"rank") 1))
+    {
+      { scopeless
+        (308666 call compilerError "Permutation requires 1-D array")
+      }
+    }
+    (308675 call _lock)
+    {
+      unknown _indexOfInterest[308721] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[308722] "expr temp" "temp"
+      (308731 'move' _iterator[308722](308729 call _getIterator(308736 call chpl_direct_range_iter low high 1)))
+      Defer
+      {
+        {
+          (308752 call _freeIterator _iterator[308722])
+        }
+      }
+      { scopeless type
+        (308741 'move' _indexOfInterest[308721](308738 call iteratorIndex _iterator[308722]))
+      }
+      ForLoop[308723]
+      {
+        unknown i[308745] "index var" "insert auto destroy"
+        (308747 'move' i[308745] _indexOfInterest[308721])
+        {
+          { scopeless
+            unknown j[308697](308696 call randlc_bounded(308687 call .(308684 call . arr c"_dom") c"idxType") PCGRandomStreamPrivate_rngs seed PCGRandomStreamPrivate_count low i)
+            (308700 'end of statement')
+          }
+          (308710 call =(308705 call arr i)(308709 call arr j))
+          (308718 call =(308716 call arr j) i)
+        }
+        label _continueLabel[308726]
+        _indexOfInterest[308721]
+        _iterator[308722]
+      }
+      label _breakLabel[308727]
+    }
+    (308764 call += PCGRandomStreamPrivate_count(308762 call - high low))
+    (308769 call _unlock)
+  } function PCGRandomStream[309052](?).fillRandom[308781](arg _mt[309116]:_MT[238], arg this[309114]:PCGRandomStream[309052](?), arg arr[308778] :
+  (308775 call chpl__buildArrayRuntimeType nil[44])) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (308827 call compilerError "PCGRandomStream(eltType="(308804 call _cast string[26] eltType) ") can only be used to fill arrays of "(308825 call _cast string[26] eltType))
+  } function PCGRandomStream[309052](?).iterate[308838](arg _mt[309120]:_MT[238], arg this[309118]:PCGRandomStream[309052](?), arg D[308835] :
+  _domain, arg resultType[308841]:_any[178](?) =
+  eltType) : _unknown[51] "method" "primary method" "fn returns iterator"
+  {
+    (308846 call _lock)
+    { scopeless
+      const start[308850] "const" PCGRandomStreamPrivate_count
+      (308853 'end of statement')
+    }
+    (308868 call += PCGRandomStreamPrivate_count(308867 call(308859 call .(308856 call . D c"size") c"safeCast")(308865 call int[13] 64)))
+    (308877 call PCGRandomStreamPrivate_skipToNth_noLock(308874 call - PCGRandomStreamPrivate_count 1))
+    (308881 call _unlock)
+    (308890 return(308889 call PCGRandomPrivate_iterate resultType D seed start))
+  } function PCGRandomStream[309052](?).iterate[308900](arg _mt[309124]:_MT[238], arg this[309122]:PCGRandomStream[309052](?), arg D[308897] :
+  _domain, arg resultType[308903]:_any[178](?) =
+  eltType, param arg tag[308906]:_any[178](?)) : _unknown[51] "method" "primary method" "no doc" "fn returns iterator"
+  {
+    { scopeless
+      const start[308916] "const" PCGRandomStreamPrivate_count
+      (308919 'end of statement')
+    }
+    (308929 return(308928 call PCGRandomPrivate_iterate resultType D seed start tag))
+  }
+  where {
+    (308913 call == tag(308910 call . iterKind c"leader"))
+  } function PCGRandomStream[309052](?).writeThis[308938](arg _mt[309128]:_MT[238], arg this[309126]:PCGRandomStream[309052](?), arg f[308936]:_any[178](?)) : _unknown[51] throws "method" "primary method" "no doc" "method overrides"
+  {
+    (308942 call <~> f "PCGRandomStream(eltType=")
+    (308951 call <~> f(308949 call _cast string[26] eltType))
+    (308956 call <~> f ", parSafe=")
+    (308961 call <~> f parSafe)
+    (308966 call <~> f ", seed=")
+    (308971 call <~> f seed)
+    (308976 call <~> f ")")
+  } unknown _l[308987] "no doc"(308984 IfExpr  parSafe then
+  { scopeless
+    chpl_LocalSpinlock
+  } else
+  { scopeless
+    nothing[7]
+  } ) function PCGRandomStream[309052](?)._lock[308993](arg _mt[309132]:_MT[238], arg this[309130]:PCGRandomStream[309052](?)) : _unknown[51] "inline" "method" "primary method" "no doc"
+  {
+    if(309003 call _cond_test parSafe)
+    {
+      { scopeless
+        (309001 call(308997 call . _l c"lock"))
+      }
+    }
+  } function PCGRandomStream[309052](?)._unlock[309013](arg _mt[309136]:_MT[238], arg this[309134]:PCGRandomStream[309052](?)) : _unknown[51] "inline" "method" "primary method" "no doc"
+  {
+    if(309023 call _cond_test parSafe)
+    {
+      { scopeless
+        (309021 call(309017 call . _l c"unlock"))
+      }
+    }
+  } unknown PCGRandomStreamPrivate_rngs[309038] "no doc"(309036 call *(309034 call numGenerators eltType) pcg_setseq_64_xsh_rr_32_rng) unknown PCGRandomStreamPrivate_count[309047] "no doc" 1(309045 call int[13] 64)
+  function randToReal64[309148](arg x[309145] :
+  (309144 call uint[115] 64)) : _unknown[51] "inline" "private"
+  {
+    (309167 return(309166 call ldexp(309160 call _cast(309159 call real[16] 64) x)(309164 call - 64)))
+  }
+  { scopeless type
+    (309153 call real[16] 64)
+  }
+  function randToReal64[309182](arg x[309179] :
+  (309178 call uint[115] 64), arg min[309188] :
+  (309187 call real[16] 64), arg max[309195] :
+  (309194 call real[16] 64)) : _unknown[51] "inline" "private"
+  {
+    { scopeless
+      unknown normalized[309206](309205 call randToReal64 x)
+      (309209 'end of statement')
+    }
+    (309221 return(309219 call +(309216 call *(309213 call - max min) normalized) min))
+  }
+  { scopeless type
+    (309201 call real[16] 64)
+  }
+  function randToReal32[309235](arg x[309232] :
+  (309231 call uint[115] 32)) : _unknown[51] "inline" "private"
+  {
+    (309250 return(309249 call ldexp(309243 call _cast(309242 call real[16] 32) x)(309247 call - 32)))
+  }
+  function randToReal32[309264](arg x[309261] :
+  (309260 call uint[115] 32), arg min[309270] :
+  (309269 call real[16] 32), arg max[309277] :
+  (309276 call real[16] 32)) : _unknown[51] "inline" "private"
+  {
+    { scopeless
+      unknown normalized[309288](309287 call randToReal32 x)
+      (309291 'end of statement')
+    }
+    (309303 return(309301 call +(309298 call *(309295 call - max min) normalized) min))
+  }
+  { scopeless type
+    (309283 call real[16] 32)
+  }
+  function rand32_1[309312](ref arg states[309310]:_any[178](?)) : _unknown[51] "inline" "private"
+  {
+    (309333 return(309332 call(309324 call .(309321 call states 0) c"random")(309330 call pcg_getvalid_inc 1)))
+  }
+  { scopeless type
+    (309317 call uint[115] 32)
+  }
+  function rand32_2[309343](ref arg states[309341]:_any[178](?)) : _unknown[51] "inline" "private"
+  {
+    (309362 return(309361 call(309353 call .(309352 call states 1) c"random")(309359 call pcg_getvalid_inc 2)))
+  }
+  { scopeless type
+    (309348 call uint[115] 32)
+  }
+  function boundedrand32_1[309372](ref arg states[309370]:_any[178](?), arg seed[309378] :
+  (309377 call int[13] 64), arg count[309385] :
+  (309384 call int[13] 64), arg bound[309392] :
+  (309391 call uint[115] 32)) : _unknown[51] "inline" "private"
+  {
+    if(309455 call _cond_test(309407 call == bound(309406 call max(309404 call uint[115] 32))))
+    {
+      { scopeless
+        (309413 return(309412 call rand32_1 states))
+      }
+    }
+    {
+      { scopeless
+        (309453 return(309452 call(309421 call .(309418 call states 0) c"bounded_random_vary_inc")(309427 call pcg_getvalid_inc 1)(309431 call + bound 1)(309438 call _cast(309437 call uint[115] 64) seed)(309448 call _cast(309447 call uint[115] 64)(309442 call - count 1)) 101 4))
+      }
+    }
+  }
+  { scopeless type
+    (309398 call uint[115] 32)
+  }
+  function boundedrand32_2[309469](ref arg states[309467]:_any[178](?), arg seed[309475] :
+  (309474 call int[13] 64), arg count[309482] :
+  (309481 call int[13] 64), arg bound[309489] :
+  (309488 call uint[115] 32)) : _unknown[51] "inline" "private"
+  {
+    if(309552 call _cond_test(309504 call == bound(309503 call max(309501 call uint[115] 32))))
+    {
+      { scopeless
+        (309510 return(309509 call rand32_2 states))
+      }
+    }
+    {
+      { scopeless
+        (309550 return(309549 call(309516 call .(309515 call states 1) c"bounded_random_vary_inc")(309522 call pcg_getvalid_inc 2)(309526 call + bound 1)(309533 call _cast(309532 call uint[115] 64) seed)(309543 call _cast(309542 call uint[115] 64)(309537 call - count 1)) 102 4))
+      }
+    }
+  }
+  { scopeless type
+    (309495 call uint[115] 32)
+  }
+  function rand64_1[309566](ref arg states[309564]:_any[178](?)) : _unknown[51] "inline" "private"
+  {
+    { scopeless
+      unknown ret[309577] 0(309575 call uint[115] 64)
+      (309580 'end of statement')
+    }
+    (309596 call |= ret(309595 call(309587 call .(309586 call states 0) c"random")(309593 call pcg_getvalid_inc 1)))
+    (309601 call <<= ret 32)
+    (309618 call |= ret(309617 call(309609 call .(309608 call states 1) c"random")(309615 call pcg_getvalid_inc 2)))
+    (309622 return ret)
+  }
+  { scopeless type
+    (309571 call uint[115] 64)
+  }
+  function rand64_2[309631](ref arg states[309629]:_any[178](?)) : _unknown[51] "inline" "private"
+  {
+    { scopeless
+      unknown ret[309642] 0(309640 call uint[115] 64)
+      (309645 'end of statement')
+    }
+    (309661 call |= ret(309660 call(309652 call .(309651 call states 2) c"random")(309658 call pcg_getvalid_inc 3)))
+    (309666 call <<= ret 32)
+    (309683 call |= ret(309682 call(309674 call .(309673 call states 3) c"random")(309680 call pcg_getvalid_inc 4)))
+    (309687 return ret)
+  }
+  { scopeless type
+    (309636 call uint[115] 64)
+  }
+  function boundedrand64_1[309696](ref arg states[309694]:_any[178](?), arg seed[309702] :
+  (309701 call int[13] 64), arg count[309709] :
+  (309708 call int[13] 64), arg bound[309713] :
+  uint[115]) : _unknown[51] "private"
+  {
+    if(309823 call _cond_test(309728 call > bound(309726 call _cast uint[115](309724 call max(309722 call uint[115] 32)))))
+    {
+      { scopeless
+        unknown toprand[309734](309732 call _cast uint[115] 0)
+        (309737 'end of statement')
+      }
+      { scopeless
+        unknown botrand[309743](309741 call _cast uint[115] 0)
+        (309746 'end of statement')
+      }
+      (309764 call = toprand(309763 call boundedrand32_1 states seed count(309761 call _cast(309760 call uint[115] 32)(309755 call >> bound 32))))
+      (309790 call = botrand(309789 call boundedrand32_2 states seed count(309787 call _cast(309786 call uint[115] 32)(309781 call & bound(309780 call max(309778 call uint[115] 32))))))
+      (309800 return(309798 call |(309795 call << toprand 32) botrand))
+    }
+    {
+      (309805 call rand32_1 states)
+      (309821 return(309820 call boundedrand32_2 states seed count(309818 call _cast(309817 call uint[115] 32) bound)))
+    }
+  }
+  { scopeless type
+    uint[115]
+  }
+  function checkSufficientBitsAndAdvanceOthers[309835](arg resultType[309833]:_any[178](?), ref arg states[309837]:_any[178](?)) : _unknown[51] "private"
+  {
+    { scopeless
+      unknown numGenForResultType[309843] "param"(309842 call numGenerators resultType)
+      (309846 'end of statement')
+    }
+    { scopeless
+      unknown numGen[309852] "param"(309849 call . states c"size")
+      (309855 'end of statement')
+    }
+    if(309962 call _cond_test(309858 call > numGenForResultType numGen))
+    {
+      { scopeless
+        (309960 call compilerError(309957 call +(309938 call +(309929 call +(309910 call +(309901 call +(309882 call + "PCGRandomStream cannot produce "(309880 call _cast string[26] resultType)) " (requiring ")(309908 call _cast string[26](309905 call * 32 numGenForResultType))) " bits) from a stream configured for ")(309936 call _cast string[26](309933 call * 32 numGen))) " bits of output"))
+      }
+    }
+    {
+      unknown _indexOfInterest[309996] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[309997] "expr temp" "temp"
+      (310006 'move' _iterator[309997](310004 call _getIterator(310014 call chpl_direct_range_iter(310010 call + numGenForResultType 1) numGen 1)))
+      Defer
+      {
+        {
+          (310030 call _freeIterator _iterator[309997])
+        }
+      }
+      { scopeless type
+        (310019 'move' _indexOfInterest[309996](310016 call iteratorIndex _iterator[309997]))
+      }
+      ForLoop[309998]
+      {
+        unknown i[310023] "index var" "insert auto destroy"
+        (310025 'move' i[310023] _indexOfInterest[309996])
+        {
+          (309993 call(309982 call .(309981 call states(309978 call - i 1)) c"random")(309991 call pcg_getvalid_inc(309988 call _cast uint[115] i)))
+        }
+        label _continueLabel[310001]
+        _indexOfInterest[309996]
+        _iterator[309997]
+      }
+      label _breakLabel[310002]
+    }
+  }
+  function randlc[310043](arg resultType[310041]:_any[178](?), ref arg states[310045]:_any[178](?)) : _unknown[51] "inline" "private"
+  {
+    (310051 call checkSufficientBitsAndAdvanceOthers resultType states)
+    if(310370 call _cond_test(310059 call == resultType(310058 call complex[140] 128)))
+    {
+      (310084 return(310082 call _cast(310081 call complex[140] 128)(310076 call _build_tuple(310067 call randToReal64(310065 call rand64_1 states))(310074 call randToReal64(310072 call rand64_2 states)))))
+    }
+    {
+      { scopeless
+        if(310365 call _cond_test(310092 call == resultType(310091 call complex[140] 64)))
+        {
+          (310117 return(310115 call _cast(310114 call complex[140] 64)(310109 call _build_tuple(310100 call randToReal32(310098 call rand32_1 states))(310107 call randToReal32(310105 call rand32_2 states)))))
+        }
+        {
+          { scopeless
+            if(310360 call _cond_test(310125 call == resultType(310124 call imag[130] 64)))
+            {
+              (310137 return(310136 call _r2i(310134 call randToReal64(310132 call rand64_1 states))))
+            }
+            {
+              { scopeless
+                if(310355 call _cond_test(310145 call == resultType(310144 call imag[130] 32)))
+                {
+                  (310157 return(310156 call _r2i(310154 call randToReal32(310152 call rand32_1 states))))
+                }
+                {
+                  { scopeless
+                    if(310350 call _cond_test(310165 call == resultType(310164 call real[16] 64)))
+                    {
+                      (310174 return(310173 call randToReal64(310171 call rand64_1 states)))
+                    }
+                    {
+                      { scopeless
+                        if(310345 call _cond_test(310182 call == resultType(310181 call real[16] 32)))
+                        {
+                          (310191 return(310190 call randToReal32(310188 call rand32_1 states)))
+                        }
+                        {
+                          { scopeless
+                            if(310340 call _cond_test(310208 call ||(310199 call == resultType(310198 call uint[115] 64))(310206 call == resultType(310205 call int[13] 64))))
+                            {
+                              (310217 return(310215 call _cast resultType(310213 call rand64_1 states)))
+                            }
+                            {
+                              { scopeless
+                                if(310335 call _cond_test(310234 call ||(310225 call == resultType(310224 call uint[115] 32))(310232 call == resultType(310231 call int[13] 32))))
+                                {
+                                  (310243 return(310241 call _cast resultType(310239 call rand32_1 states)))
+                                }
+                                {
+                                  { scopeless
+                                    if(310330 call _cond_test(310260 call ||(310251 call == resultType(310250 call uint[115] 16))(310258 call == resultType(310257 call int[13] 16))))
+                                    {
+                                      (310272 return(310270 call _cast resultType(310267 call >>(310265 call rand32_1 states) 16)))
+                                    }
+                                    {
+                                      { scopeless
+                                        if(310325 call _cond_test(310289 call ||(310280 call == resultType(310279 call uint[115] 8))(310287 call == resultType(310286 call int[13] 8))))
+                                        {
+                                          (310301 return(310299 call _cast resultType(310296 call >>(310294 call rand32_1 states) 24)))
+                                        }
+                                        {
+                                          { scopeless
+                                            if(310321 call _cond_test(310307 call isBoolType resultType))
+                                            {
+                                              (310318 return(310316 call !=(310313 call >>(310311 call rand32_1 states) 31) 0))
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  function randlc_bounded[310381](arg resultType[310379]:_any[178](?), ref arg states[310383]:_any[178](?), arg seed[310389] :
+  (310388 call int[13] 64), arg count[310396] :
+  (310395 call int[13] 64), arg min[310399]:_any[178](?), arg max[310401]:_any[178](?)) : _unknown[51] "inline" "private"
+  {
+    (310407 call checkSufficientBitsAndAdvanceOthers resultType states)
+    if(310868 call _cond_test(310415 call == resultType(310414 call complex[140] 128)))
+    {
+      (310456 return(310454 call _cast(310453 call complex[140] 128)(310448 call _build_tuple(310431 call randToReal64(310421 call rand64_1 states)(310424 call . min c"re")(310428 call . max c"re"))(310446 call randToReal64(310436 call rand64_2 states)(310439 call . min c"im")(310443 call . max c"im")))))
+    }
+    {
+      { scopeless
+        if(310863 call _cond_test(310464 call == resultType(310463 call complex[140] 64)))
+        {
+          (310505 return(310503 call _cast(310502 call complex[140] 64)(310497 call _build_tuple(310480 call randToReal32(310470 call rand32_1 states)(310473 call . min c"re")(310477 call . max c"re"))(310495 call randToReal32(310485 call rand32_2 states)(310488 call . min c"im")(310492 call . max c"im")))))
+        }
+        {
+          { scopeless
+            if(310858 call _cond_test(310513 call == resultType(310512 call imag[130] 64)))
+            {
+              (310533 return(310532 call _r2i(310530 call randToReal64(310520 call rand64_1 states)(310525 call _i2r min)(310529 call _i2r max))))
+            }
+            {
+              { scopeless
+                if(310853 call _cond_test(310541 call == resultType(310540 call imag[130] 32)))
+                {
+                  (310561 return(310560 call _r2i(310558 call randToReal32(310548 call rand32_1 states)(310553 call _i2r min)(310557 call _i2r max))))
+                }
+                {
+                  { scopeless
+                    if(310848 call _cond_test(310569 call == resultType(310568 call real[16] 64)))
+                    {
+                      (310580 return(310579 call randToReal64(310575 call rand64_1 states) min max))
+                    }
+                    {
+                      { scopeless
+                        if(310843 call _cond_test(310588 call == resultType(310587 call real[16] 32)))
+                        {
+                          (310599 return(310598 call randToReal32(310594 call rand32_1 states) min max))
+                        }
+                        {
+                          { scopeless
+                            if(310838 call _cond_test(310616 call ||(310607 call == resultType(310606 call uint[115] 64))(310614 call == resultType(310613 call int[13] 64))))
+                            {
+                              (310646 return(310644 call _cast resultType(310641 call +(310633 call boundedrand64_1 states seed count(310631 call _cast(310630 call uint[115] 64)(310625 call - max min)))(310639 call _cast(310638 call uint[115] 64) min))))
+                            }
+                            {
+                              { scopeless
+                                if(310833 call _cond_test(310663 call ||(310654 call == resultType(310653 call uint[115] 32))(310661 call == resultType(310660 call int[13] 32))))
+                                {
+                                  (310693 return(310691 call _cast resultType(310688 call +(310680 call boundedrand32_1 states seed count(310678 call _cast(310677 call uint[115] 32)(310672 call - max min)))(310686 call _cast(310685 call uint[115] 32) min))))
+                                }
+                                {
+                                  { scopeless
+                                    if(310828 call _cond_test(310710 call ||(310701 call == resultType(310700 call uint[115] 16))(310708 call == resultType(310707 call int[13] 16))))
+                                    {
+                                      (310740 return(310738 call _cast resultType(310735 call +(310727 call boundedrand32_1 states seed count(310725 call _cast(310724 call uint[115] 32)(310719 call - max min)))(310733 call _cast(310732 call uint[115] 32) min))))
+                                    }
+                                    {
+                                      { scopeless
+                                        if(310823 call _cond_test(310757 call ||(310748 call == resultType(310747 call uint[115] 8))(310755 call == resultType(310754 call int[13] 8))))
+                                        {
+                                          (310787 return(310785 call _cast resultType(310782 call +(310774 call boundedrand32_1 states seed count(310772 call _cast(310771 call uint[115] 32)(310766 call - max min)))(310780 call _cast(310779 call uint[115] 32) min))))
+                                        }
+                                        {
+                                          { scopeless
+                                            if(310819 call _cond_test(310793 call isBoolType resultType))
+                                            {
+                                              (310813 call compilerError "bounded rand with boolean type")
+                                              (310817 return 0)
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  function randlc_skipto[310879](arg resultType[310877]:_any[178](?), arg seed[310885] :
+  (310884 call int[13] 64), arg n[310889] :
+  integral) : _unknown[51] "private"
+  {
+    { scopeless
+      unknown states[310899](310897 call *(310895 call numGenerators resultType) pcg_setseq_64_xsh_rr_32_rng)
+      (310902 'end of statement')
+    }
+    {
+      unknown i[310965] 0
+      unknown tmp[310966] "maybe param" "temp"
+      (310978 'move' tmp[310966](310976 call chpl_compute_low_param_loop_bound 0(310910 call -(310906 call . states c"size") 1)))
+      unknown tmp[310967] "maybe param" "temp"
+      (310991 'move' tmp[310967](310989 call chpl_compute_high_param_loop_bound 0(310983 call -(310985 call . states c"size") 1)))
+      unknown tmp[310968] "maybe param" "temp"
+      (310994 'move' tmp[310968] 1)
+      ParamForLoop[310996]
+      { i[310965] tmp[310966] tmp[310967] tmp[310968]
+        {
+          { scopeless
+            unknown inc[310921] "param"(310920 call pcg_getvalid_inc(310917 call + i 1))
+            (310924 'end of statement')
+          }
+          (310942 call(310930 call .(310929 call states i) c"srandom")(310938 call _cast(310937 call uint[115] 64) seed) inc)
+          (310963 call(310948 call .(310947 call states i) c"advance") inc(310961 call _cast(310960 call uint[115] 64)(310955 call - n 1)))
+        }
+      }
+      label _unused_continueLabel[310970]
+      label _breakLabel[310969]
+    }
+    (311006 return states)
+  }
+  function outer[311014](arg ranges[311012]:_any[178](?), param arg dim[311018] :
+  int[13] =
+  0) : _unknown[51] "iterator fn" "private"
+  {
+    if(311186 call _cond_test(311030 call ==(311024 call + dim 2)(311027 call . ranges c"size")))
+    {
+      {
+        unknown _indexOfInterest[311042] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[311043] "expr temp" "temp"
+        (311052 'move' _iterator[311043](311050 call _getIterator(311036 call ranges dim)))
+        Defer
+        {
+          {
+            (311069 call _freeIterator _iterator[311043])
+          }
+        }
+        { scopeless type
+          (311058 'move' _indexOfInterest[311042](311055 call iteratorIndex _iterator[311043]))
+        }
+        ForLoop[311044]
+        {
+          unknown i[311062] "index var" "insert auto destroy"
+          (311064 'move' i[311062] _indexOfInterest[311042])
+          { scopeless
+            (311040 yield(311038 call _build_tuple i))
+          }
+          label _continueLabel[311047]
+          _indexOfInterest[311042]
+          _iterator[311043]
+        }
+        label _breakLabel[311048]
+      }
+    }
+    {
+      { scopeless
+        if(311182 call _cond_test(311085 call <(311079 call + dim 2)(311082 call . ranges c"size")))
+        {
+          {
+            unknown _indexOfInterest[311143] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[311144] "expr temp" "temp"
+            (311153 'move' _iterator[311144](311151 call _getIterator(311091 call ranges dim)))
+            Defer
+            {
+              {
+                (311170 call _freeIterator _iterator[311144])
+              }
+            }
+            { scopeless type
+              (311159 'move' _indexOfInterest[311143](311156 call iteratorIndex _iterator[311144]))
+            }
+            ForLoop[311145]
+            {
+              unknown i[311163] "index var" "insert auto destroy"
+              (311165 'move' i[311163] _indexOfInterest[311143])
+              {
+                unknown _indexOfInterest[311109] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                unknown _iterator[311110] "expr temp" "temp"
+                (311119 'move' _iterator[311110](311117 call _getIterator(311100 call outer ranges(311098 call + dim 1))))
+                Defer
+                {
+                  {
+                    (311136 call _freeIterator _iterator[311110])
+                  }
+                }
+                { scopeless type
+                  (311125 'move' _indexOfInterest[311109](311122 call iteratorIndex _iterator[311110]))
+                }
+                ForLoop[311111]
+                {
+                  unknown j[311129] "index var" "insert auto destroy"
+                  (311131 'move' j[311129] _indexOfInterest[311109])
+                  { scopeless
+                    (311107 yield(311105 call _build_tuple i(311103 'expand_tuple' j)))
+                  }
+                  label _continueLabel[311114]
+                  _indexOfInterest[311109]
+                  _iterator[311110]
+                }
+                label _breakLabel[311115]
+              }
+              label _continueLabel[311148]
+              _indexOfInterest[311143]
+              _iterator[311144]
+            }
+            label _breakLabel[311149]
+          }
+        }
+        {
+          (311179 yield 0)
+        }
+      }
+    }
+  }
+  function PCGRandomPrivate_iterate[311198](arg resultType[311196]:_any[178](?), arg D[311201] :
+  _domain, arg seed[311208] :
+  (311207 call int[13] 64), arg start[311215] :
+  (311214 call int[13] 64)) : _unknown[51] "iterator fn" "no doc"
+  {
+    { scopeless
+      unknown cursor[311224](311223 call randlc_skipto resultType seed start)
+      (311227 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[311238] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[311239] "expr temp" "temp"
+      (311248 'move' _iterator[311239](311246 call _getIterator D))
+      Defer
+      {
+        {
+          (311264 call _freeIterator _iterator[311239])
+        }
+      }
+      { scopeless type
+        (311253 'move' _indexOfInterest[311238](311250 call iteratorIndex _iterator[311239]))
+      }
+      ForLoop[311240]
+      {
+        unknown i[311257] "index var" "insert auto destroy"
+        (311259 'move' i[311257] _indexOfInterest[311238])
+        { scopeless
+          (311236 yield(311235 call randlc resultType cursor))
+        }
+        label _continueLabel[311243]
+        _indexOfInterest[311238]
+        _iterator[311239]
+      }
+      label _breakLabel[311244]
+    }
+  }
+  function PCGRandomPrivate_iterate[311277](arg resultType[311275]:_any[178](?), arg D[311280] :
+  _domain, arg seed[311287] :
+  (311286 call int[13] 64), arg start[311294] :
+  (311293 call int[13] 64), param arg tag[311298] :
+  iterKind) : _unknown[51] "iterator fn" "no doc"
+  {
+    {
+      unknown _indexOfInterest[311323] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[311324] "expr temp" "temp"
+      (311333 'move' _iterator[311324](311331 call _getIterator(311319 call(311310 call . D c"these")(tag =(311314 call . iterKind c"leader")))))
+      Defer
+      {
+        {
+          (311350 call _freeIterator _iterator[311324])
+        }
+      }
+      { scopeless type
+        (311339 'move' _indexOfInterest[311323](311336 call iteratorIndex _iterator[311324]))
+      }
+      ForLoop[311325]
+      {
+        unknown block[311343] "index var" "insert auto destroy"
+        (311345 'move' block[311343] _indexOfInterest[311323])
+        { scopeless
+          (311321 yield block)
+        }
+        label _continueLabel[311328]
+        _indexOfInterest[311323]
+        _iterator[311324]
+      }
+      label _breakLabel[311329]
+    }
+  }
+  where {
+    (311306 call == tag(311303 call . iterKind c"leader"))
+  }
+  function PCGRandomPrivate_iterate[311365](arg resultType[311363]:_any[178](?), arg D[311368] :
+  _domain, arg seed[311375] :
+  (311374 call int[13] 64), arg start[311382] :
+  (311381 call int[13] 64), param arg tag[311386] :
+  iterKind, arg followThis[311389]:_any[178](?)) : _unknown[51] "iterator fn" "no doc"
+  {
+    (311399 'use' DSIUtil)
+    { scopeless
+      unknown multiplier[311403] "param" 1
+      (311406 'end of statement')
+    }
+    { scopeless
+      const ZD[311411] "const"(311410 call computeZeroBasedDomain D)
+      (311414 'end of statement')
+    }
+    { scopeless
+      const innerRange[311425] "const"(311424 call followThis(311421 call -(311417 call . ZD c"rank") 1))
+      (311428 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[311659] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[311660] "expr temp" "temp"
+      (311669 'move' _iterator[311660](311667 call _getIterator(311433 call outer followThis)))
+      Defer
+      {
+        {
+          (311686 call _freeIterator _iterator[311660])
+        }
+      }
+      { scopeless type
+        (311675 'move' _indexOfInterest[311659](311672 call iteratorIndex _iterator[311660]))
+      }
+      ForLoop[311661]
+      {
+        unknown outer[311679] "index var" "insert auto destroy"
+        (311681 'move' outer[311679] _indexOfInterest[311659])
+        {
+          { scopeless
+            unknown myStart[311435] start
+            (311438 'end of statement')
+          }
+          if(311504 call _cond_test(311445 call >(311441 call . ZD c"rank") 1))
+          {
+            { scopeless
+              (311475 call += myStart(311473 call * multiplier(311472 call(311464 call .(311463 call(311450 call . ZD c"indexOrder")(311460 call _build_tuple(311454 'expand_tuple' outer)(311456 call . innerRange c"low"))) c"safeCast")(311470 call int[13] 64))))
+            }
+          }
+          {
+            { scopeless
+              (311501 call += myStart(311499 call * multiplier(311498 call(311490 call .(311489 call(311481 call . ZD c"indexOrder")(311485 call . innerRange c"low")) c"safeCast")(311496 call int[13] 64))))
+            }
+          }
+          if(311655 call _cond_test(311514 call !(311511 call . innerRange c"stridable")))
+          {
+            { scopeless
+              unknown cursor[311522](311521 call randlc_skipto resultType seed myStart)
+              (311525 'end of statement')
+            }
+            {
+              unknown _indexOfInterest[311536] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[311537] "expr temp" "temp"
+              (311546 'move' _iterator[311537](311544 call _getIterator innerRange))
+              Defer
+              {
+                {
+                  (311562 call _freeIterator _iterator[311537])
+                }
+              }
+              { scopeless type
+                (311551 'move' _indexOfInterest[311536](311548 call iteratorIndex _iterator[311537]))
+              }
+              ForLoop[311538]
+              {
+                unknown i[311555] "index var" "insert auto destroy"
+                (311557 'move' i[311555] _indexOfInterest[311536])
+                { scopeless
+                  (311534 yield(311533 call randlc resultType cursor))
+                }
+                label _continueLabel[311541]
+                _indexOfInterest[311536]
+                _iterator[311537]
+              }
+              label _breakLabel[311542]
+            }
+          }
+          {
+            (311583 call -= myStart(311582 call(311574 call .(311571 call . innerRange c"low") c"safeCast")(311580 call int[13] 64)))
+            {
+              unknown _indexOfInterest[311622] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[311623] "expr temp" "temp"
+              (311632 'move' _iterator[311623](311630 call _getIterator innerRange))
+              Defer
+              {
+                {
+                  (311648 call _freeIterator _iterator[311623])
+                }
+              }
+              { scopeless type
+                (311637 'move' _indexOfInterest[311622](311634 call iteratorIndex _iterator[311623]))
+              }
+              ForLoop[311624]
+              {
+                unknown i[311641] "index var" "insert auto destroy"
+                (311643 'move' i[311641] _indexOfInterest[311622])
+                {
+                  { scopeless
+                    unknown cursor[311610](311609 call randlc_skipto resultType seed(311607 call + myStart(311605 call *(311603 call(311595 call . i c"safeCast")(311601 call int[13] 64)) multiplier)))
+                    (311613 'end of statement')
+                  }
+                  (311620 yield(311619 call randlc resultType cursor))
+                }
+                label _continueLabel[311627]
+                _indexOfInterest[311622]
+                _iterator[311623]
+              }
+              label _breakLabel[311628]
+            }
+          }
+        }
+        label _continueLabel[311664]
+        _indexOfInterest[311659]
+        _iterator[311660]
+      }
+      label _breakLabel[311665]
+    }
+  }
+  where {
+    (311396 call == tag(311393 call . iterKind c"follower"))
+  }
+}

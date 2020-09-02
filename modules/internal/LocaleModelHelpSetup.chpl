@@ -204,7 +204,7 @@ module LocaleModelHelpSetup {
 
     chpl_task_setSubloc(1:chpl_sublocID_t);
 
-    dst.GPU = new unmanaged GPULocale(1:chpl_sublocID_t, dst);
+    // dst.GPU = new unmanaged GPULocale(1:chpl_sublocID_t, dst);
     chpl_task_setSubloc(origSubloc);
   }
 }

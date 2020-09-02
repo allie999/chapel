@@ -1,0 +1,175 @@
+AST dump for ShallowCopy after pass expandExternArrayCalls.
+Module use list: 
+
+{
+  (353097 'use' ChapelStandard)
+  (277300 'use' SysCTypes)
+  function ptrTo[277307](ref arg x[277305]:_any[178](?)) : _unknown[51] "inline" "private"
+  {
+    (277313 return(277312 call c_pointer_return x))
+  }
+  function shallowCopy[277322](ref arg dst[277320]:_any[178](?), ref arg src[277324]:_any[178](?)) : _unknown[51] "inline"
+  {
+    unknown st[277330] "type variable"(277329 'static typeof' dst)
+    if(277382 call _cond_test(277337 call isPODType st))
+    {
+      (277340 call = dst src)
+    }
+    {
+      { scopeless
+        unknown size[277348](277347 call c_sizeof st)
+        (277351 'end of statement')
+      }
+      (277364 call c_memcpy(277357 call ptrTo dst)(277362 call ptrTo src) size)
+      if(277378 call _cond_test boundsChecking)
+      {
+        (277375 call c_memset(277371 call ptrTo src) 0 size)
+      }
+    }
+  }
+  function shallowCopyInit[277392](ref arg src[277390]:_any[178](?)) : _unknown[51] "inline" "no copy return" "unsafe"
+  {
+    unknown st[277398] "type variable"(277397 'static typeof' src)
+    { scopeless
+      unknown dst[277403] "no auto destroy" "no init" st
+      (277406 'end of statement')
+    }
+    (277411 call shallowCopy dst src)
+    (277414 return dst)
+  }
+  function shallowSwap[277425](ref arg lhs[277422] :
+  unknown t[277420], ref arg rhs[277428] :
+  t) : _unknown[51] "inline" "unsafe"
+  {
+    unknown st[277435] "type variable"(277434 'static typeof' lhs)
+    { scopeless
+      unknown tmp[277440] "no auto destroy" "no init" st
+      (277443 'end of statement')
+    }
+    if(277512 call _cond_test(277447 call isPODType st))
+    {
+      (277450 call = tmp lhs)
+      (277456 call = lhs rhs)
+      (277461 call = rhs tmp)
+    }
+    {
+      { scopeless
+        unknown size[277468](277467 call c_sizeof st)
+        (277471 'end of statement')
+      }
+      (277484 call c_memcpy(277477 call ptrTo tmp)(277482 call ptrTo lhs) size)
+      (277497 call c_memcpy(277490 call ptrTo lhs)(277495 call ptrTo rhs) size)
+      (277510 call c_memcpy(277503 call ptrTo rhs)(277508 call ptrTo tmp) size)
+    }
+  }
+  function shallowCopy[277522](ref arg A[277520]:_any[178](?), arg dst[277524]:_any[178](?), arg src[277526]:_any[178](?), arg nElts[277528]:_any[178](?)) : _unknown[51] "inline"
+  {
+    (277531 'use' SysCTypes)
+    if(277582 call _cond_test boundsChecking)
+    {
+      (277541 call assert(277538 call > nElts 0))
+      (277561 call assert(277559 call(277549 call .(277546 call . A c"_dom") c"contains")(277556 call #(277553 call chpl_build_low_bounded_range dst) nElts)))
+      (277580 call assert(277578 call(277568 call .(277565 call . A c"_dom") c"contains")(277575 call #(277572 call chpl_build_low_bounded_range src) nElts)))
+    }
+    if(277760 call _cond_test(277594 call(277590 call .(277587 call . A c"_instance") c"isDefaultRectangular")))
+    {
+      unknown st[277603] "type variable"(277602 'static field type'(277598 call . A c"_value") "eltType")
+      { scopeless
+        unknown size[277617](277615 call *(277609 call _cast size_t nElts)(277614 call c_sizeof st))
+        (277620 'end of statement')
+      }
+      (277638 call c_memcpy(277628 call ptrTo(277626 call A dst))(277636 call ptrTo(277634 call A src)) size)
+    }
+    {
+      { scopeless
+        unknown ok[277663](277662 call chpl__bulkTransferArray A(277650 call chpl__buildDomainExpr(277647 call #(277644 call chpl_build_low_bounded_range dst) nElts)) A(277660 call chpl__buildDomainExpr(277657 call #(277654 call chpl_build_low_bounded_range src) nElts)))
+        (277666 'end of statement')
+      }
+      if(277756 call _cond_test(277669 call ! ok))
+      {
+        (277690 call halt "bulk transfer failed in sorting")
+        {
+          unknown _indexOfInterest[277722] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[277723] "expr temp" "temp"
+          (277732 'move' _iterator[277723](277730 call _getIterator(277702 call vectorizeOnly(277699 call #(277696 call chpl_build_low_bounded_range 0) nElts))))
+          Defer
+          {
+            {
+              (277749 call _freeIterator _iterator[277723])
+            }
+          }
+          { scopeless type
+            (277738 'move' _indexOfInterest[277722](277735 call iteratorIndex _iterator[277723]))
+          }
+          ForLoop[277724]
+          {
+            unknown i[277742] "index var" "insert auto destroy"
+            (277744 'move' i[277742] _indexOfInterest[277722])
+            {
+              (277719 '='(277711 call A(277708 call + dst i))(277718 call A(277715 call + src i)))
+            }
+            label _continueLabel[277727]
+            _indexOfInterest[277722]
+            _iterator[277723]
+          }
+          label _breakLabel[277728]
+        }
+      }
+    }
+  }
+  function shallowCopy[277770](ref arg DstA[277768]:_any[178](?), arg dst[277772]:_any[178](?), ref arg SrcA[277774]:_any[178](?), arg src[277776]:_any[178](?), arg nElts[277778]:_any[178](?)) : _unknown[51] "inline"
+  {
+    (277781 'use' SysCTypes)
+    if(277832 call _cond_test boundsChecking)
+    {
+      (277791 call assert(277788 call > nElts 0))
+      (277811 call assert(277809 call(277799 call .(277796 call . DstA c"_dom") c"contains")(277806 call #(277803 call chpl_build_low_bounded_range dst) nElts)))
+      (277830 call assert(277828 call(277818 call .(277815 call . SrcA c"_dom") c"contains")(277825 call #(277822 call chpl_build_low_bounded_range src) nElts)))
+    }
+    if(278005 call _cond_test(277854 call &&(277844 call(277840 call .(277837 call . DstA c"_instance") c"isDefaultRectangular"))(277853 call(277849 call .(277846 call . SrcA c"_instance") c"isDefaultRectangular"))))
+    {
+      unknown st[277864] "type variable"(277863 'static field type'(277859 call . DstA c"_value") "eltType")
+      { scopeless
+        unknown size[277878](277876 call *(277870 call _cast size_t nElts)(277875 call c_sizeof st))
+        (277881 'end of statement')
+      }
+      (277899 call c_memcpy(277889 call ptrTo(277887 call DstA dst))(277897 call ptrTo(277895 call SrcA src)) size)
+    }
+    {
+      { scopeless
+        unknown ok[277924](277923 call chpl__bulkTransferArray DstA(277911 call chpl__buildDomainExpr(277908 call #(277905 call chpl_build_low_bounded_range dst) nElts)) SrcA(277921 call chpl__buildDomainExpr(277918 call #(277915 call chpl_build_low_bounded_range src) nElts)))
+        (277927 'end of statement')
+      }
+      if(278001 call _cond_test(277930 call ! ok))
+      {
+        (277935 call halt "bulk transfer failed in sorting")
+        {
+          unknown _indexOfInterest[277967] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[277968] "expr temp" "temp"
+          (277977 'move' _iterator[277968](277975 call _getIterator(277947 call vectorizeOnly(277944 call #(277941 call chpl_build_low_bounded_range 0) nElts))))
+          Defer
+          {
+            {
+              (277994 call _freeIterator _iterator[277968])
+            }
+          }
+          { scopeless type
+            (277983 'move' _indexOfInterest[277967](277980 call iteratorIndex _iterator[277968]))
+          }
+          ForLoop[277969]
+          {
+            unknown i[277987] "index var" "insert auto destroy"
+            (277989 'move' i[277987] _indexOfInterest[277967])
+            {
+              (277964 '='(277956 call DstA(277953 call + dst i))(277963 call SrcA(277960 call + src i)))
+            }
+            label _continueLabel[277972]
+            _indexOfInterest[277967]
+            _iterator[277968]
+          }
+          label _breakLabel[277973]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,2207 @@
+AST dump for ChapelDistribution after pass scalarReplace.
+Module use list: ChapelArray ChapelRange ChapelLocks ChapelHashtable Sort 
+
+{
+  function chpl__init_ChapelDistribution[416042]() : void[4] "insert line file info" "module init" "resolved"
+  {
+    (520463 return _void[55])
+  }
+  function BaseDist[145934].deinit[145468](const in arg this[145936]:BaseDist[145934]) : void[4] "destructor" "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    label _enddeinit[1767150]
+    const-ref _field_destructor_tmp_[1767148]:chpl_LocalSpinlock[187398] "temp"
+    (1767155 'move' _field_destructor_tmp_[1767148](1767152 '.' this[145936] _domsLock[145451]))
+    ref _field_destructor_tmp_[2127034]:AtomicBool[45874] "temp"
+    (2127036 'move' _field_destructor_tmp_[2127034](2127038 '.' _field_destructor_tmp_[1767148] l[187283]))
+    (2127042 call deinit[44860] _field_destructor_tmp_[2127034])
+    const-ref _field_destructor_tmp_[1767160]:chpl__simpleSet(unmanaged BaseDom)[1205508] "temp"
+    (1767165 'move' _field_destructor_tmp_[1767160](1767162 '.' this[145936] _doms[145446]))
+    const-ref _field_destructor_tmp_[2233873]:chpl__hashtable(unmanaged BaseDom,nothing)[1205594] "temp"
+    (2233875 'move' _field_destructor_tmp_[2233873](2233877 '.' _field_destructor_tmp_[1767160] table[1205502]))
+    (2233881 call deinit[1487247] _field_destructor_tmp_[2233873])
+    val _parent_destructor_tmp_[1767170]:object[22] "temp"
+    (1767175 'move' _parent_destructor_tmp_[1767170](1767171 'cast' object[22] this[145936]))
+    (519739 return _void[55])
+  }
+  function BaseDist[145934].remove[145475](const in arg this[145940]:BaseDist[145934]) : BaseDist[145934] "dont disable remote value forwarding" "method" "primary method" "resolved"
+  {
+    val ret[519743]:BaseDist[145934] "dead after last mention" "RVV" "temp"
+    val free_dist[145481]:bool[10] "dead at end of block" "insert auto destroy"
+    (543581 'move' free_dist[145481] 0)
+    const-val call_tmp[667465]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val _virtual_method_tmp_[1755943]:int(32)[95] "temp"
+    (1755947 'move' _virtual_method_tmp_[1755943](1755945 'getcid' this[145940]))
+    (667468 'move' call_tmp[667465](145488 'virtual method call' dsiTrackDomains[145905] _virtual_method_tmp_[1755943] this[145940]))
+    const-val call_tmp[667470]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (667473 'move' call_tmp[667470] call_tmp[667465])
+    if call_tmp[667470]
+    {
+      const-val tmp[145544]:chpl_localeID_t[209306] "dead after last mention" "const" "temp"
+      const-val call_tmp[667475]:chpl_localeID_t[209306] "dead after last mention" "expr temp" "maybe param" "temp"
+      (667478 'move' call_tmp[667475](145541 '_wide_get_locale' this[145940]))
+      (145545 'move' tmp[145544] call_tmp[667475])
+      val dom_count[145493]:int(64)[13] "dead at end of block" "insert auto destroy"
+      (543583 'move' dom_count[145493] -1)
+      ref call_tmp[667487]:chpl_LocalSpinlock[187398] "dead after last mention" "maybe param" "temp"
+      ref call_tmp[2088473]:chpl_LocalSpinlock[187398] "dead after last mention" "maybe param" "temp"
+      (2088475 'move' call_tmp[2088473](2088477 '.' this[145940] _domsLock[145451]))
+      (667490 'move' call_tmp[667487] call_tmp[2088473])
+      val tmp[2089765]:bool[10] "dead after last mention" "temp"
+      ref call_tmp[2089767]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+      (2089769 'move' call_tmp[2089767](2089771 '.' call_tmp[667487] l[187283]))
+      ref call_tmp[2089774]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+      (2089776 'move' call_tmp[2089774](2089778 '.' call_tmp[2089767] _v[44717]))
+      val ret[2089781]:memory_order[186619] "dead after last mention" "RVV" "temp"
+      (2089783 'move' ret[2089781] memory_order_seq_cst[186963])
+      const-val call_tmp[2089786]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2089788 'move' call_tmp[2089786](2089791 call atomic_load[1227699] call_tmp[2089774] ret[2089781]))
+      val tmp[2089794]:bool[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+      if call_tmp[2089786]
+      {
+        (2089798 'move' tmp[2089794] 1)
+      }
+      {
+        ref call_tmp[2089802]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+        (2089804 'move' call_tmp[2089802](2089806 '.' call_tmp[667487] l[187283]))
+        ref call_tmp[2089809]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+        (2089811 'move' call_tmp[2089809](2089813 '.' call_tmp[2089802] _v[44717]))
+        val ret[2089816]:memory_order[186619] "dead after last mention" "RVV" "temp"
+        (2089818 'move' ret[2089816] memory_order_acquire[186948])
+        const-val call_tmp[2089821]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (2089823 'move' call_tmp[2089821](2089826 call atomic_exchange[1228522] call_tmp[2089809] 1 ret[2089816]))
+        (2089830 'move' tmp[2089794] call_tmp[2089821])
+      }
+      (2089834 'move' tmp[2089765] tmp[2089794])
+      WhileDo[2089837]
+      {
+        (2089840 call chpl_task_yield[209654])
+        ref call_tmp[2089841]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+        (2089843 'move' call_tmp[2089841](2089845 '.' call_tmp[667487] l[187283]))
+        ref call_tmp[2089848]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+        (2089850 'move' call_tmp[2089848](2089852 '.' call_tmp[2089841] _v[44717]))
+        val ret[2089855]:memory_order[186619] "dead after last mention" "RVV" "temp"
+        (2089857 'move' ret[2089855] memory_order_seq_cst[186963])
+        const-val call_tmp[2089860]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (2089862 'move' call_tmp[2089860](2089865 call atomic_load[1227699] call_tmp[2089848] ret[2089855]))
+        val tmp[2089868]:bool[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+        if call_tmp[2089860]
+        {
+          (2089872 'move' tmp[2089868] 1)
+        }
+        {
+          ref call_tmp[2089876]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+          (2089878 'move' call_tmp[2089876](2089880 '.' call_tmp[667487] l[187283]))
+          ref call_tmp[2089883]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+          (2089885 'move' call_tmp[2089883](2089887 '.' call_tmp[2089876] _v[44717]))
+          val ret[2089890]:memory_order[186619] "dead after last mention" "RVV" "temp"
+          (2089892 'move' ret[2089890] memory_order_acquire[186948])
+          const-val call_tmp[2089895]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+          (2089897 'move' call_tmp[2089895](2089900 call atomic_exchange[1228522] call_tmp[2089883] 1 ret[2089890]))
+          (2089904 'move' tmp[2089868] call_tmp[2089895])
+        }
+        (2089908 'move' tmp[2089765] tmp[2089868])
+        tmp[2089765]
+      }
+      ref call_tmp[667496]:bool[10] "dead after last mention" "maybe param" "temp"
+      ref call_tmp[2090096]:bool[10] "dead after last mention" "maybe param" "temp"
+      (2090098 'move' call_tmp[2090096](2090100 '.' this[145940] _free_when_no_doms[145456]))
+      (667499 'move' call_tmp[667496] call_tmp[2090096])
+      val inlineImm[2054665]:bool[10] "temp"
+      (2054668 'move' inlineImm[2054665] 1)
+      (2054671 '=' call_tmp[667496] inlineImm[2054665])
+      const-ref call_tmp[667503]:chpl__simpleSet(unmanaged BaseDom)[1205508] "dead after last mention" "maybe param" "temp"
+      ref call_tmp[2089935]:chpl__simpleSet(unmanaged BaseDom)[1205508] "dead after last mention" "maybe param" "temp"
+      (2089937 'move' call_tmp[2089935](2089939 '.' this[145940] _doms[145446]))
+      (667506 'move' call_tmp[667503] call_tmp[2089935])
+      const-val call_tmp[667510]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      val ret[2090065]:int(64)[13] "dead after last mention" "RVV" "temp"
+      ref call_tmp[2090067]:chpl__hashtable(unmanaged BaseDom,nothing)[1205594] "dead after last mention" "maybe param" "temp"
+      (2090069 'move' call_tmp[2090067](2090071 '.' call_tmp[667503] table[1205502]))
+      (2090074 'move' ret[2090065](2090076 '.v' call_tmp[2090067] tableNumFullSlots[1205566]))
+      (667513 'move' call_tmp[667510] ret[2090065])
+      ref i_a[2040196]:int(64)[13] "temp"
+      (2040200 'move' i_a[2040196](2040198 'set reference' dom_count[145493]))
+      (2040203 '=' i_a[2040196] call_tmp[667510])
+      ref call_tmp[667517]:chpl_LocalSpinlock[187398] "dead after last mention" "maybe param" "temp"
+      ref call_tmp[2088483]:chpl_LocalSpinlock[187398] "dead after last mention" "maybe param" "temp"
+      (2088485 'move' call_tmp[2088483](2088487 '.' this[145940] _domsLock[145451]))
+      (667520 'move' call_tmp[667517] call_tmp[2088483])
+      ref call_tmp[2091343]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+      (2091345 'move' call_tmp[2091343](2091347 '.' call_tmp[667517] l[187283]))
+      ref call_tmp[2091350]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+      (2091352 'move' call_tmp[2091350](2091354 '.' call_tmp[2091343] _v[44717]))
+      val ret[2091357]:memory_order[186619] "dead after last mention" "RVV" "temp"
+      (2091359 'move' ret[2091357] memory_order_release[186953])
+      (2091363 call atomic_store[1229835] call_tmp[2091350] 0 ret[2091357])
+      const-val call_tmp[667524]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      val inlineImm[2047825]:int(64)[13] "temp"
+      (2047828 'move' inlineImm[2047825] 0)
+      const-val call_tmp[2047831]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2047833 'move' call_tmp[2047831](2047835 '==' dom_count[145493] inlineImm[2047825]))
+      (667527 'move' call_tmp[667524] call_tmp[2047831])
+      const-val call_tmp[667529]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (667532 'move' call_tmp[667529] call_tmp[667524])
+      if call_tmp[667529]
+      {
+        ref i_a[2054676]:bool[10] "temp"
+        (2054680 'move' i_a[2054676](2054678 'set reference' free_dist[145481]))
+        val inlineImm[2054682]:bool[10] "temp"
+        (2054685 'move' inlineImm[2054682] 1)
+        (2054688 '=' i_a[2054676] inlineImm[2054682])
+      }
+    }
+    {
+      ref i_a[2054693]:bool[10] "temp"
+      (2054697 'move' i_a[2054693](2054695 'set reference' free_dist[145481]))
+      val inlineImm[2054699]:bool[10] "temp"
+      (2054702 'move' inlineImm[2054699] 1)
+      (2054705 '=' i_a[2054693] inlineImm[2054699])
+    }
+    const-val call_tmp[667534]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (667537 'move' call_tmp[667534] free_dist[145481])
+    if call_tmp[667534]
+    {
+      val call_tmp[667539]:BaseDist[145934] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+      val ret[2230477]:BaseDist[145934] "dead after last mention" "RVV" "temp"
+      (2230479 'move' ret[2230477] this[145940])
+      (667542 'move' call_tmp[667539] ret[2230477])
+      (519749 'move' ret[519743] call_tmp[667539])
+      gotoReturn _end_remove[519741] _end_remove[519741]
+    }
+    {
+      (519755 'move' ret[519743](1390167 'cast' BaseDist[145934] nil[44]))
+      gotoReturn _end_remove[519741] _end_remove[519741]
+    }
+    label _end_remove[519741]
+    (519745 return ret[519743])
+  }
+  function BaseDist[145934].dsiDestroyDist[145860](const in arg this[145972]:BaseDist[145934]) : void[4] "method" "primary method" "resolved" "no return value for void"
+  {
+    (519797 return _void[55])
+  }
+  function BaseDist[145934].dsiTrackDomains[145905](const in arg this[145984]:BaseDist[145934]) : bool[10] "method" "primary method" "resolved" "virtual"
+  {
+    val ret[519812]:bool[10] "dead after last mention" "RVV" "temp"
+    (519817 'move' ret[519812] 1)
+    (519814 return ret[519812])
+  }
+  type BaseDist[145934] val super[355709]:object[22] "super class" val _doms[145446]:chpl__simpleSet(unmanaged BaseDom)[1205508] val _domsLock[145451]:chpl_LocalSpinlock[187398] val _free_when_no_doms[145456]:bool[10] val pid[145462]:int(64)[13]
+  function BaseDom[146729].deinit[146037](const in arg this[146735]:BaseDom[146729]) : void[4] "destructor" "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    label _enddeinit[1767182]
+    const-ref _field_destructor_tmp_[1767180]:chpl_LocalSpinlock[187398] "temp"
+    (1767187 'move' _field_destructor_tmp_[1767180](1767184 '.' this[146735] _arrsLock[146013]))
+    ref _field_destructor_tmp_[2127049]:AtomicBool[45874] "temp"
+    (2127051 'move' _field_destructor_tmp_[2127049](2127053 '.' _field_destructor_tmp_[1767180] l[187283]))
+    (2127057 call deinit[44860] _field_destructor_tmp_[2127049])
+    const-ref _field_destructor_tmp_[1767192]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+    (1767197 'move' _field_destructor_tmp_[1767192](1767194 '.' this[146735] _arrs[146003]))
+    const-ref _field_destructor_tmp_[2233829]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    (2233831 'move' _field_destructor_tmp_[2233829](2233833 '.' _field_destructor_tmp_[1767192] table[1205202]))
+    (2233837 call deinit[1486034] _field_destructor_tmp_[2233829])
+    val _parent_destructor_tmp_[1767202]:object[22] "temp"
+    (1767207 'move' _parent_destructor_tmp_[1767202](1767203 'cast' object[22] this[146735]))
+    (519839 return _void[55])
+  }
+  function BaseDom[146729].dsiMyDist[146044](const in arg this[146739]:BaseDom[146729]) : BaseDist[145934] "method" "primary method" "resolved" "virtual"
+  {
+    val ret[519843]:BaseDist[145934] "dead after last mention" "RVV" "temp"
+    (146067 call halt[154071] "internal error: dsiMyDist is not implemented")
+    val ret[146072]:BaseDist[145934] "dead at end of block" "insert auto destroy" "unsafe"
+    (1385377 'move' ret[146072](1385375 'cast' BaseDist[145934] nil[44]))
+    (1385372 'move' ret[519843] ret[146072])
+    label _end_dsiMyDist[519841]
+    (519845 return ret[519843])
+  }
+  function BaseDom[146729].remove[146084](const in arg this[146743]:BaseDom[146729], ref arg _retArg[1783564]:(unmanaged BaseDom?,unmanaged BaseDist?)[1385283]) : void[4] "dont disable remote value forwarding" "fn returns via _retArg" "method" "primary method" "resolved"
+  {
+    const-val ret[519855]:(unmanaged BaseDom?,unmanaged BaseDist?)[1385283] "dead after last mention" "RVV" "temp"
+    val call_tmp[667671]:BaseDist[145934] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val _virtual_method_tmp_[1755950]:int(32)[95] "temp"
+    (1755954 'move' _virtual_method_tmp_[1755950](1755952 'getcid' this[146743]))
+    (667674 'move' call_tmp[667671](146098 'virtual method call' dsiMyDist[146044] _virtual_method_tmp_[1755950] this[146743]))
+    const-val call_tmp[667678]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    val coerce_tmp[1385379]:BaseDist[145934] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1385384 'move' coerce_tmp[1385379] call_tmp[667671])
+    const-val _virtual_method_tmp_[1755957]:int(32)[95] "temp"
+    (1755961 'move' _virtual_method_tmp_[1755957](1755959 'getcid' coerce_tmp[1385379]))
+    (667681 'move' call_tmp[667678](146105 'virtual method call' dsiTrackDomains[145905] _virtual_method_tmp_[1755957] coerce_tmp[1385379]))
+    const-val call_tmp[667685]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val _virtual_method_tmp_[1755964]:int(32)[95] "temp"
+    (1755968 'move' _virtual_method_tmp_[1755964](1755966 'getcid' this[146743]))
+    (667688 'move' call_tmp[667685](146108 'virtual method call' dsiLinksDistribution[146641] _virtual_method_tmp_[1755964] this[146743]))
+    const-val call_tmp[667690]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val call_tmp[2033073]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2033075 'move' call_tmp[2033073](2033077 '==' call_tmp[667678] call_tmp[667685]))
+    (667693 'move' call_tmp[667690] call_tmp[2033073])
+    (146112 call assert[210262] call_tmp[667690])
+    val ret_dom[146119]:BaseDom[146729] "dead at end of block" "insert auto destroy"
+    val init_coerce_tmp[1385390]:BaseDom[146729] "dead at end of block" "temp"
+    (1385393 'move' init_coerce_tmp[1385390](1389718 'cast' BaseDom[146729] nil[44]))
+    (543593 'move' ret_dom[146119] init_coerce_tmp[1385390])
+    val ret_dist[146127]:BaseDist[145934] "dead at end of block" "insert auto destroy"
+    val init_coerce_tmp[1385396]:BaseDist[145934] "dead at end of block" "temp"
+    (1385399 'move' init_coerce_tmp[1385396](1389722 'cast' BaseDist[145934] nil[44]))
+    (543595 'move' ret_dist[146127] init_coerce_tmp[1385396])
+    val call_tmp[667697]:BaseDist[145934] "dead at end of block" "maybe param" "temp"
+    const-val _virtual_method_tmp_[1755971]:int(32)[95] "temp"
+    (1755975 'move' _virtual_method_tmp_[1755971](1755973 'getcid' this[146743]))
+    (667700 'move' call_tmp[667697](146133 'virtual method call' dsiMyDist[146044] _virtual_method_tmp_[1755971] this[146743]))
+    val dist[146134]:BaseDist[145934] "dead at end of block" "insert auto destroy"
+    (543597 'move' dist[146134] call_tmp[667697])
+    val free_dom[146139]:bool[10] "dead at end of block" "insert auto destroy"
+    (543599 'move' free_dom[146139] 0)
+    val remove_dist[146144]:bool[10] "dead at end of block" "insert auto destroy"
+    (543601 'move' remove_dist[146144] 0)
+    const-val tmp[146230]:chpl_localeID_t[209306] "dead after last mention" "const" "temp"
+    const-val call_tmp[667702]:chpl_localeID_t[209306] "dead after last mention" "expr temp" "maybe param" "temp"
+    (667705 'move' call_tmp[667702](146227 '_wide_get_locale' this[146743]))
+    (146231 'move' tmp[146230] call_tmp[667702])
+    val arr_count[146150]:int(64)[13] "dead at end of block" "insert auto destroy"
+    (543603 'move' arr_count[146150] 0)
+    ref call_tmp[667709]:chpl_LocalSpinlock[187398] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[2128210]:chpl_LocalSpinlock[187398] "dead after last mention" "maybe param" "temp"
+    (2128212 'move' call_tmp[2128210](2128214 '.' this[146743] _arrsLock[146013]))
+    (667712 'move' call_tmp[667709] call_tmp[2128210])
+    val tmp[2089467]:bool[10] "dead after last mention" "temp"
+    ref call_tmp[2089469]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+    (2089471 'move' call_tmp[2089469](2089473 '.' call_tmp[667709] l[187283]))
+    ref call_tmp[2089476]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+    (2089478 'move' call_tmp[2089476](2089480 '.' call_tmp[2089469] _v[44717]))
+    val ret[2089483]:memory_order[186619] "dead after last mention" "RVV" "temp"
+    (2089485 'move' ret[2089483] memory_order_seq_cst[186963])
+    const-val call_tmp[2089488]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2089490 'move' call_tmp[2089488](2089493 call atomic_load[1227699] call_tmp[2089476] ret[2089483]))
+    val tmp[2089496]:bool[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if call_tmp[2089488]
+    {
+      (2089500 'move' tmp[2089496] 1)
+    }
+    {
+      ref call_tmp[2089504]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+      (2089506 'move' call_tmp[2089504](2089508 '.' call_tmp[667709] l[187283]))
+      ref call_tmp[2089511]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+      (2089513 'move' call_tmp[2089511](2089515 '.' call_tmp[2089504] _v[44717]))
+      val ret[2089518]:memory_order[186619] "dead after last mention" "RVV" "temp"
+      (2089520 'move' ret[2089518] memory_order_acquire[186948])
+      const-val call_tmp[2089523]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2089525 'move' call_tmp[2089523](2089528 call atomic_exchange[1228522] call_tmp[2089511] 1 ret[2089518]))
+      (2089532 'move' tmp[2089496] call_tmp[2089523])
+    }
+    (2089536 'move' tmp[2089467] tmp[2089496])
+    WhileDo[2089539]
+    {
+      (2089542 call chpl_task_yield[209654])
+      ref call_tmp[2089543]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+      (2089545 'move' call_tmp[2089543](2089547 '.' call_tmp[667709] l[187283]))
+      ref call_tmp[2089550]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+      (2089552 'move' call_tmp[2089550](2089554 '.' call_tmp[2089543] _v[44717]))
+      val ret[2089557]:memory_order[186619] "dead after last mention" "RVV" "temp"
+      (2089559 'move' ret[2089557] memory_order_seq_cst[186963])
+      const-val call_tmp[2089562]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2089564 'move' call_tmp[2089562](2089567 call atomic_load[1227699] call_tmp[2089550] ret[2089557]))
+      val tmp[2089570]:bool[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+      if call_tmp[2089562]
+      {
+        (2089574 'move' tmp[2089570] 1)
+      }
+      {
+        ref call_tmp[2089578]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+        (2089580 'move' call_tmp[2089578](2089582 '.' call_tmp[667709] l[187283]))
+        ref call_tmp[2089585]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+        (2089587 'move' call_tmp[2089585](2089589 '.' call_tmp[2089578] _v[44717]))
+        val ret[2089592]:memory_order[186619] "dead after last mention" "RVV" "temp"
+        (2089594 'move' ret[2089592] memory_order_acquire[186948])
+        const-val call_tmp[2089597]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (2089599 'move' call_tmp[2089597](2089602 call atomic_exchange[1228522] call_tmp[2089585] 1 ret[2089592]))
+        (2089606 'move' tmp[2089570] call_tmp[2089597])
+      }
+      (2089610 'move' tmp[2089467] tmp[2089570])
+      tmp[2089467]
+    }
+    const-ref call_tmp[667718]:chpl__simpleSet(unmanaged BaseArr)[1205208] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[2128132]:chpl__simpleSet(unmanaged BaseArr)[1205208] "dead after last mention" "maybe param" "temp"
+    (2128134 'move' call_tmp[2128132](2128136 '.' this[146743] _arrs[146003]))
+    (667721 'move' call_tmp[667718] call_tmp[2128132])
+    const-val call_tmp[667725]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    val ret[2229532]:int(64)[13] "dead after last mention" "RVV" "temp"
+    ref call_tmp[2229534]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "maybe param" "temp"
+    (2229536 'move' call_tmp[2229534](2229538 '.' call_tmp[667718] table[1205202]))
+    (2229541 'move' ret[2229532](2229543 '.v' call_tmp[2229534] tableNumFullSlots[1205266]))
+    (667728 'move' call_tmp[667725] ret[2229532])
+    ref i_a[2040120]:int(64)[13] "temp"
+    (2040124 'move' i_a[2040120](2040122 'set reference' arr_count[146150]))
+    (2040127 '=' i_a[2040120] call_tmp[667725])
+    const-ref call_tmp[667732]:int(64)[13] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[2128156]:int(64)[13] "dead after last mention" "maybe param" "temp"
+    (2128158 'move' call_tmp[2128156](2128160 '.' this[146743] _arrs_containing_dom[146008]))
+    (667735 'move' call_tmp[667732] call_tmp[2128156])
+    const-val coerce_tmp[1385430]:int(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1385434 'move' coerce_tmp[1385430](1385432 'deref' call_tmp[667732]))
+    ref i_lhs[2090394]:int(64)[13] "temp"
+    (2090398 'move' i_lhs[2090394](2090396 'set reference' arr_count[146150]))
+    (2090401 '+=' i_lhs[2090394] coerce_tmp[1385430])
+    ref call_tmp[667739]:bool[10] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[2128244]:bool[10] "dead after last mention" "maybe param" "temp"
+    (2128246 'move' call_tmp[2128244](2128248 '.' this[146743] _free_when_no_arrs[146018]))
+    (667742 'move' call_tmp[667739] call_tmp[2128244])
+    val inlineImm[2054602]:bool[10] "temp"
+    (2054605 'move' inlineImm[2054602] 1)
+    (2054608 '=' call_tmp[667739] inlineImm[2054602])
+    ref call_tmp[667746]:chpl_LocalSpinlock[187398] "dead after last mention" "maybe param" "temp"
+    ref call_tmp[2128220]:chpl_LocalSpinlock[187398] "dead after last mention" "maybe param" "temp"
+    (2128222 'move' call_tmp[2128220](2128224 '.' this[146743] _arrsLock[146013]))
+    (667749 'move' call_tmp[667746] call_tmp[2128220])
+    ref call_tmp[2091289]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+    (2091291 'move' call_tmp[2091289](2091293 '.' call_tmp[667746] l[187283]))
+    ref call_tmp[2091296]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+    (2091298 'move' call_tmp[2091296](2091300 '.' call_tmp[2091289] _v[44717]))
+    val ret[2091303]:memory_order[186619] "dead after last mention" "RVV" "temp"
+    (2091305 'move' ret[2091303] memory_order_release[186953])
+    (2091309 call atomic_store[1229835] call_tmp[2091296] 0 ret[2091303])
+    const-val call_tmp[667753]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    val inlineImm[2047780]:int(64)[13] "temp"
+    (2047783 'move' inlineImm[2047780] 0)
+    const-val call_tmp[2047786]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2047788 'move' call_tmp[2047786](2047790 '==' arr_count[146150] inlineImm[2047780]))
+    (667756 'move' call_tmp[667753] call_tmp[2047786])
+    const-val call_tmp[667758]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (667761 'move' call_tmp[667758] call_tmp[667753])
+    if call_tmp[667758]
+    {
+      ref i_a[2054613]:bool[10] "temp"
+      (2054617 'move' i_a[2054613](2054615 'set reference' free_dom[146139]))
+      val inlineImm[2054619]:bool[10] "temp"
+      (2054622 'move' inlineImm[2054619] 1)
+      (2054625 '=' i_a[2054613] inlineImm[2054619])
+      const-val call_tmp[667765]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      const-val _virtual_method_tmp_[1755978]:int(32)[95] "temp"
+      (1755982 'move' _virtual_method_tmp_[1755978](1755980 'getcid' this[146743]))
+      (667768 'move' call_tmp[667765](146201 'virtual method call' dsiLinksDistribution[146641] _virtual_method_tmp_[1755978] this[146743]))
+      const-val call_tmp[667770]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (667773 'move' call_tmp[667770] call_tmp[667765])
+      if call_tmp[667770]
+      {
+        val call_tmp[667777]:BaseDom[146729] "dead after last mention" "expr temp" "maybe param" "temp"
+        val ret[2229955]:BaseDom[146729] "dead after last mention" "RVV" "temp"
+        (2229957 'move' ret[2229955] this[146743])
+        (667780 'move' call_tmp[667777] ret[2229955])
+        const-val call_tmp[667782]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        val coerce_tmp[1385487]:BaseDist[145934] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1385492 'move' coerce_tmp[1385487] dist[146134])
+        val ret[2091392]:bool[10] "dead after last mention" "RVV" "temp"
+        val count[2091394]:int(64)[13] "dead at end of block" "insert auto destroy"
+        (2091396 'move' count[2091394] -1)
+        val cnt[2091399]:int(64)[13] "dead at end of block" "insert auto destroy"
+        (2091401 'move' cnt[2091399] -1)
+        ref call_tmp[2091404]:chpl_LocalSpinlock[187398] "dead after last mention" "maybe param" "temp"
+        (2091406 'move' call_tmp[2091404](2091408 '.' coerce_tmp[1385487] _domsLock[145451]))
+        val tmp[2091411]:bool[10] "dead after last mention" "temp"
+        ref call_tmp[2091413]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+        (2091415 'move' call_tmp[2091413](2091417 '.' call_tmp[2091404] l[187283]))
+        ref call_tmp[2091420]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+        (2091422 'move' call_tmp[2091420](2091424 '.' call_tmp[2091413] _v[44717]))
+        val ret[2091427]:memory_order[186619] "dead after last mention" "RVV" "temp"
+        (2091429 'move' ret[2091427] memory_order_seq_cst[186963])
+        const-val call_tmp[2091432]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (2091434 'move' call_tmp[2091432](2091437 call atomic_load[1227699] call_tmp[2091420] ret[2091427]))
+        val tmp[2091440]:bool[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+        if call_tmp[2091432]
+        {
+          (2091444 'move' tmp[2091440] 1)
+        }
+        {
+          ref call_tmp[2091448]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+          (2091450 'move' call_tmp[2091448](2091452 '.' call_tmp[2091404] l[187283]))
+          ref call_tmp[2091455]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+          (2091457 'move' call_tmp[2091455](2091459 '.' call_tmp[2091448] _v[44717]))
+          val ret[2091462]:memory_order[186619] "dead after last mention" "RVV" "temp"
+          (2091464 'move' ret[2091462] memory_order_acquire[186948])
+          const-val call_tmp[2091467]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+          (2091469 'move' call_tmp[2091467](2091472 call atomic_exchange[1228522] call_tmp[2091455] 1 ret[2091462]))
+          (2091476 'move' tmp[2091440] call_tmp[2091467])
+        }
+        (2091480 'move' tmp[2091411] tmp[2091440])
+        WhileDo[2091483]
+        {
+          (2091486 call chpl_task_yield[209654])
+          ref call_tmp[2091487]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+          (2091489 'move' call_tmp[2091487](2091491 '.' call_tmp[2091404] l[187283]))
+          ref call_tmp[2091494]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+          (2091496 'move' call_tmp[2091494](2091498 '.' call_tmp[2091487] _v[44717]))
+          val ret[2091501]:memory_order[186619] "dead after last mention" "RVV" "temp"
+          (2091503 'move' ret[2091501] memory_order_seq_cst[186963])
+          const-val call_tmp[2091506]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+          (2091508 'move' call_tmp[2091506](2091511 call atomic_load[1227699] call_tmp[2091494] ret[2091501]))
+          val tmp[2091514]:bool[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+          if call_tmp[2091506]
+          {
+            (2091518 'move' tmp[2091514] 1)
+          }
+          {
+            ref call_tmp[2091522]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+            (2091524 'move' call_tmp[2091522](2091526 '.' call_tmp[2091404] l[187283]))
+            ref call_tmp[2091529]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+            (2091531 'move' call_tmp[2091529](2091533 '.' call_tmp[2091522] _v[44717]))
+            val ret[2091536]:memory_order[186619] "dead after last mention" "RVV" "temp"
+            (2091538 'move' ret[2091536] memory_order_acquire[186948])
+            const-val call_tmp[2091541]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+            (2091543 'move' call_tmp[2091541](2091546 call atomic_exchange[1228522] call_tmp[2091529] 1 ret[2091536]))
+            (2091550 'move' tmp[2091514] call_tmp[2091541])
+          }
+          (2091554 'move' tmp[2091411] tmp[2091514])
+          tmp[2091411]
+        }
+        ref call_tmp[2091557]:chpl__simpleSet(unmanaged BaseDom)[1205508] "dead after last mention" "maybe param" "temp"
+        (2091559 'move' call_tmp[2091557](2091561 '.' coerce_tmp[1385487] _doms[145446]))
+        (2091565 call remove[1385502] call_tmp[2091557] call_tmp[667777])
+        ref call_tmp[2091568]:chpl__simpleSet(unmanaged BaseDom)[1205508] "dead after last mention" "maybe param" "temp"
+        (2091570 'move' call_tmp[2091568](2091572 '.' coerce_tmp[1385487] _doms[145446]))
+        val ret[2091575]:int(64)[13] "dead after last mention" "RVV" "temp"
+        ref call_tmp[2091577]:chpl__hashtable(unmanaged BaseDom,nothing)[1205594] "dead after last mention" "maybe param" "temp"
+        (2091579 'move' call_tmp[2091577](2091581 '.' call_tmp[2091568] table[1205502]))
+        (2091584 'move' ret[2091575](2091586 '.v' call_tmp[2091577] tableNumFullSlots[1205566]))
+        (2091589 '=' cnt[2091399] ret[2091575])
+        const-val coerce_tmp[2091592]:bool[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (2091594 'move' coerce_tmp[2091592](2091596 '.v' coerce_tmp[1385487] _free_when_no_doms[145456]))
+        const-val call_tmp[2091599]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (2091601 'move' call_tmp[2091599](2091603 '!' coerce_tmp[2091592]))
+        if call_tmp[2091599]
+        {
+          ref i_lhs[2091607]:int(64)[13] "temp"
+          (2091609 'move' i_lhs[2091607](2091611 'set reference' cnt[2091399]))
+          (2091613 '+=' i_lhs[2091607] 1)
+        }
+        ref call_tmp[2091617]:chpl_LocalSpinlock[187398] "dead after last mention" "maybe param" "temp"
+        (2091619 'move' call_tmp[2091617](2091621 '.' coerce_tmp[1385487] _domsLock[145451]))
+        ref call_tmp[2091624]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+        (2091626 'move' call_tmp[2091624](2091628 '.' call_tmp[2091617] l[187283]))
+        ref call_tmp[2091631]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+        (2091633 'move' call_tmp[2091631](2091635 '.' call_tmp[2091624] _v[44717]))
+        val ret[2091638]:memory_order[186619] "dead after last mention" "RVV" "temp"
+        (2091640 'move' ret[2091638] memory_order_release[186953])
+        (2091644 call atomic_store[1229835] call_tmp[2091631] 0 ret[2091638])
+        (2091648 '=' count[2091394] cnt[2091399])
+        const-val call_tmp[2091651]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (2091653 'move' call_tmp[2091651](2091655 '==' count[2091394] 0))
+        (2091658 'move' ret[2091392] call_tmp[2091651])
+        (667785 'move' call_tmp[667782] ret[2091392])
+        ref i_a[2054636]:bool[10] "temp"
+        (2054640 'move' i_a[2054636](2054638 'set reference' remove_dist[146144]))
+        (2054643 '=' i_a[2054636] call_tmp[667782])
+      }
+    }
+    const-val call_tmp[667787]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (667790 'move' call_tmp[667787] free_dom[146139])
+    if call_tmp[667787]
+    {
+      val call_tmp[667792]:BaseDom[146729] "dead after last mention" "expr temp" "maybe param" "temp"
+      val ret[2229965]:BaseDom[146729] "dead after last mention" "RVV" "temp"
+      (2229967 'move' ret[2229965] this[146743])
+      (667795 'move' call_tmp[667792] ret[2229965])
+      val coerce_tmp[1389541]:BaseDom[146729] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1389547 'move' coerce_tmp[1389541] call_tmp[667792])
+      ref i_a[2228852]:BaseDom[146729] "temp"
+      (2228856 'move' i_a[2228852](2228854 'set reference' ret_dom[146119]))
+      (2228859 '=' i_a[2228852] coerce_tmp[1389541])
+    }
+    const-val call_tmp[667797]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (667800 'move' call_tmp[667797] remove_dist[146144])
+    if call_tmp[667797]
+    {
+      val coerce_tmp[1389626]:BaseDist[145934] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1389632 'move' coerce_tmp[1389626] dist[146134])
+      ref i_a[2228888]:BaseDist[145934] "temp"
+      (2228892 'move' i_a[2228888](2228890 'set reference' ret_dist[146127]))
+      (2228895 '=' i_a[2228888] coerce_tmp[1389626])
+    }
+    const-val call_tmp[667802]:(unmanaged BaseDom?,unmanaged BaseDist?)[1385283] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    const-val ret_tmp[1790721]:(unmanaged BaseDom?,unmanaged BaseDist?)[1385283] "temp"
+    val this_x0[2245072]:BaseDom[146729]
+    val this_x1[2245074]:BaseDist[145934]
+    (2230463 'move' this_x0[2245072] ret_dom[146119])
+    (2230467 'move' this_x1[2245074] ret_dist[146127])
+    (2245080 '.=' ret_tmp[1790721] x0[1385279] this_x0[2245072])
+    (2245084 '.=' ret_tmp[1790721] x1[1385281] this_x1[2245074])
+    (1790724 'move' call_tmp[667802] ret_tmp[1790721])
+    val call_tmp[667807]:(unmanaged BaseDom?,unmanaged BaseDist?)[1385283] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    (1389727 'move' ret[519855] call_tmp[667802])
+    label _end_remove[519853]
+    (1783566 '=' _retArg[1783564] ret[519855])
+    (1783568 return _void[55])
+  }
+  function BaseDom[146729].dsiLinksDistribution[146641](const in arg this[146775]:BaseDom[146729]) : bool[10] "method" "primary method" "resolved" "virtual"
+  {
+    val ret[519924]:bool[10] "dead after last mention" "RVV" "temp"
+    (519929 'move' ret[519924] 1)
+    (519926 return ret[519924])
+  }
+  function BaseDom[146729].dsiDestroyDom[146651](const in arg this[146779]:BaseDom[146729]) : void[4] "method" "primary method" "resolved" "no return value for void"
+  {
+    (519931 return _void[55])
+  }
+  type BaseDom[146729] val super[355713]:object[22] "super class" val _arrs[146003]:chpl__simpleSet(unmanaged BaseArr)[1205208] val _arrs_containing_dom[146008]:int(64)[13] val _arrsLock[146013]:chpl_LocalSpinlock[187398] val _free_when_no_arrs[146018]:bool[10] val pid[146024]:int(64)[13]
+  function BaseRectangularDom(1,int(64),false)[1247514].deinit[1716743](const in arg this[1716747]:BaseRectangularDom(1,int(64),false)[1247514]) : void[4] "destructor" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    label _enddeinit[1768953]
+    val _parent_destructor_tmp_[1768948]:BaseDom[146729] "temp"
+    (1768955 'move' _parent_destructor_tmp_[1768948](1768949 'cast' BaseDom[146729] this[1716747]))
+    (1768957 call deinit[146037] _parent_destructor_tmp_[1768948])
+    (1716753 return _void[55])
+  }
+  function BaseRectangularDom(1,int(64),false)[1247514].init[1243945](const in arg this[1243949]:BaseRectangularDom(1,int(64),false)[1247514]) : void[4] "compiler generated" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    val _formal_type_tmp_[1759962]:int(64)[13] "temp"
+    val super_tmp[1243965]:BaseDom[146729] "dead after last mention" "temporary of super field" "temp"
+    (1243967 'move' super_tmp[1243965](1243969 '.v' this[1243949] super[1247504]))
+    val super_tmp[2091926]:object[22] "dead after last mention" "temporary of super field" "temp"
+    (2091928 'move' super_tmp[2091926](2091930 '.v' super_tmp[1243965] super[355713]))
+    (2091933 'setcid' super_tmp[2091926])
+    val call_tmp[2091935]:object[22] "dead at end of block" "maybe param" "temp"
+    (2091937 'move' call_tmp[2091935](2091939 'cast' object[22] super_tmp[1243965]))
+    (2091942 'setcid' call_tmp[2091935])
+    val tmp[2091944]:chpl__simpleSet(unmanaged BaseArr)[1205208] "dead after last mention" "temp"
+    const-val default_arg_table[2091946]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val ret_tmp[2091948]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    ref i__retArg[2091950]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    (2091952 'move' i__retArg[2091950](2091954 'set reference' ret_tmp[2091948]))
+    const-val ret[2091956]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val table[2091958]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val default_arg_rehashHelpers[2091960]:owned chpl__rehashHelpers?[1205433] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val ret_tmp[2091962]:owned chpl__rehashHelpers?[1205433] "temp"
+    ref i__retArg[2091964]:owned chpl__rehashHelpers?[1205433] "temp"
+    (2091966 'move' i__retArg[2091964](2091968 'set reference' ret_tmp[2091962]))
+    const-val ret[2091970]:owned chpl__rehashHelpers?[1205433] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val rehashHelpers[2091972]:owned chpl__rehashHelpers?[1205433] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    const-val tmp[2091974]:owned chpl__rehashHelpers?[1205433] "dead after last mention" "temp"
+    const-val ret_tmp[2091976]:owned chpl__rehashHelpers?[1205433] "temp"
+    ref i__retArg[2091978]:owned chpl__rehashHelpers?[1205433] "temp"
+    (2091980 'move' i__retArg[2091978](2091982 'set reference' ret_tmp[2091976]))
+    const-val ret[2091984]:owned chpl__rehashHelpers?[1205433] "dead after last mention" "RVV" "temp"
+    const-val tmp[2091986]:owned chpl__rehashHelpers?[1205433] "dead at end of block" "insert auto destroy"
+    (2091989 call init[1239690] tmp[2091986])
+    (2091991 'move' ret[2091984] tmp[2091986])
+    (2091994 '=' i__retArg[2091978] ret[2091984])
+    (2091997 'move' tmp[2091974] ret_tmp[2091976])
+    (2092000 'move' rehashHelpers[2091972] tmp[2091974])
+    (2092003 'move' ret[2091970] rehashHelpers[2091972])
+    (2092006 '=' i__retArg[2091964] ret[2091970])
+    (2092009 'move' default_arg_rehashHelpers[2091960] ret_tmp[2091962])
+    (2092013 call init[1244176] table[2091958] default_arg_rehashHelpers[2091960])
+    (2092016 'move' ret[2091956] table[2091958])
+    (2092019 '=' i__retArg[2091950] ret[2091956])
+    (2092022 'move' default_arg_table[2091946] ret_tmp[2091948])
+    (2092026 call init[1244083] tmp[2091944] default_arg_table[2091946])
+    (2092029 '.=' super_tmp[1243965] _arrs[146003] tmp[2091944])
+    (2092033 '.=' super_tmp[1243965] _arrs_containing_dom[146008] 0)
+    val tmp[2092037]:chpl_LocalSpinlock[187398] "dead after last mention" "temp"
+    const-val default_arg_l[2092039]:AtomicBool[45874] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    const-val ret[2092041]:AtomicBool[45874] "dead after last mention" "RVV" "maybe param" "temp"
+    const-val l[2092043]:AtomicBool[45874] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    (2092046 call init[44785] l[2092043])
+    (2092048 'move' ret[2092041] l[2092043])
+    (2092051 'move' default_arg_l[2092039] ret[2092041])
+    (2092055 call init[820360] tmp[2092037] default_arg_l[2092039])
+    (2092058 '.=' super_tmp[1243965] _arrsLock[146013] tmp[2092037])
+    (2092062 '.=' super_tmp[1243965] _free_when_no_arrs[146018] 0)
+    (2092066 '.=' super_tmp[1243965] pid[146024] -1)
+    (2092070 'setcid' super_tmp[1243965])
+    val tmp[1243978]:BaseDom[146729] "dead after last mention" "temp" "type variable"
+    val call_tmp[1243997]:BaseDom[146729] "dead at end of block" "maybe param" "temp"
+    (1243999 'move' call_tmp[1243997](1244001 'cast' BaseDom[146729] this[1243949]))
+    val chpl__thisAsParent[1244004]:BaseDom[146729] "dead at end of block" "insert auto destroy" "temp"
+    (1244006 'move' chpl__thisAsParent[1244004] call_tmp[1243997])
+    (1244010 'setcid' chpl__thisAsParent[1244004])
+    (1244042 'setcid' this[1243949])
+    (1244044 return _void[55])
+  }
+  type BaseRectangularDom(1,int(64),false)[1247514] val super[1247504]:BaseDom[146729] "super class"
+  function BaseArr[149545].deinit[148886](const in arg this[149563]:BaseArr[149545]) : void[4] "destructor" "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    label _enddeinit[1767217]
+    val _parent_destructor_tmp_[1767212]:object[22] "temp"
+    (1767219 'move' _parent_destructor_tmp_[1767212](1767213 'cast' object[22] this[149563]))
+    (520283 return _void[55])
+  }
+  function BaseArr[149545].dsiGetBaseDom[148905](const in arg this[149571]:BaseArr[149545]) : BaseDom[146729] "method" "primary method" "resolved" "virtual"
+  {
+    val ret[520296]:BaseDom[146729] "dead after last mention" "RVV" "temp"
+    (148928 call halt[154071] "internal error: dsiGetBaseDom is not implemented")
+    val ret[148933]:BaseDom[146729] "dead at end of block" "insert auto destroy" "unsafe"
+    (1382888 'move' ret[148933](1382886 'cast' BaseDom[146729] nil[44]))
+    (1382883 'move' ret[520296] ret[148933])
+    label _end_dsiGetBaseDom[520294]
+    (520298 return ret[520296])
+  }
+  function BaseArr[149545].remove[1382739](const in arg this[1382743]:BaseArr[149545], ref arg _retArg[1790627]:(BaseArr,unmanaged BaseDom?)[1384489]) : void[4] "dont disable remote value forwarding" "fn returns via _retArg" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  {
+    const-val ret[1382747]:(BaseArr,unmanaged BaseDom?)[1384489] "dead after last mention" "RVV" "temp"
+    val ret_arr[1382755]:BaseArr[149545] "dead at end of block" "insert auto destroy"
+    (1382757 'move' ret_arr[1382755] this[1382743])
+    val ret_dom[1382761]:BaseDom[146729] "dead at end of block" "insert auto destroy"
+    val init_coerce_tmp[1382873]:BaseDom[146729] "dead at end of block" "temp"
+    (1382876 'move' init_coerce_tmp[1382873](1384629 'cast' BaseDom[146729] nil[44]))
+    (1382763 'move' ret_dom[1382761] init_coerce_tmp[1382873])
+    val rm_dom[1382768]:bool[10] "dead at end of block" "insert auto destroy"
+    (1382770 'move' rm_dom[1382768] 0)
+    val call_tmp[1382774]:BaseDom[146729] "dead at end of block" "maybe param" "temp"
+    const-val _virtual_method_tmp_[1756083]:int(32)[95] "temp"
+    (1756087 'move' _virtual_method_tmp_[1756083](1756085 'getcid' this[1382743]))
+    (1382776 'move' call_tmp[1382774](1382782 'virtual method call' dsiGetBaseDom[148905] _virtual_method_tmp_[1756083] this[1382743]))
+    val dom[1382783]:BaseDom[146729] "dead at end of block" "insert auto destroy"
+    (1382785 'move' dom[1382783] call_tmp[1382774])
+    val call_tmp[1382789]:BaseArr[149545] "dead after last mention" "expr temp" "maybe param" "temp"
+    val ret[2229497]:BaseArr[149545] "dead after last mention" "RVV" "temp"
+    (2229499 'move' ret[2229497] this[1382743])
+    (1382791 'move' call_tmp[1382789] ret[2229497])
+    const-val call_tmp[1382796]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    val coerce_tmp[1383179]:BaseDom[146729] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1383184 'move' coerce_tmp[1383179] dom[1382783])
+    val ret[2229578]:bool[10] "dead after last mention" "RVV" "temp"
+    val count[2229580]:int(64)[13] "dead at end of block" "insert auto destroy"
+    (2229582 'move' count[2229580] -1)
+    val cnt[2229585]:int(64)[13] "dead at end of block" "insert auto destroy"
+    (2229587 'move' cnt[2229585] -1)
+    ref call_tmp[2229590]:chpl_LocalSpinlock[187398] "dead after last mention" "maybe param" "temp"
+    (2229592 'move' call_tmp[2229590](2229594 '.' coerce_tmp[1383179] _arrsLock[146013]))
+    val tmp[2229597]:bool[10] "dead after last mention" "temp"
+    ref call_tmp[2229599]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+    (2229601 'move' call_tmp[2229599](2229603 '.' call_tmp[2229590] l[187283]))
+    ref call_tmp[2229606]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+    (2229608 'move' call_tmp[2229606](2229610 '.' call_tmp[2229599] _v[44717]))
+    val ret[2229613]:memory_order[186619] "dead after last mention" "RVV" "temp"
+    (2229615 'move' ret[2229613] memory_order_seq_cst[186963])
+    const-val call_tmp[2229618]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2229620 'move' call_tmp[2229618](2229623 call atomic_load[1227699] call_tmp[2229606] ret[2229613]))
+    val tmp[2229626]:bool[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    if call_tmp[2229618]
+    {
+      (2229630 'move' tmp[2229626] 1)
+    }
+    {
+      ref call_tmp[2229634]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+      (2229636 'move' call_tmp[2229634](2229638 '.' call_tmp[2229590] l[187283]))
+      ref call_tmp[2229641]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+      (2229643 'move' call_tmp[2229641](2229645 '.' call_tmp[2229634] _v[44717]))
+      val ret[2229648]:memory_order[186619] "dead after last mention" "RVV" "temp"
+      (2229650 'move' ret[2229648] memory_order_acquire[186948])
+      const-val call_tmp[2229653]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2229655 'move' call_tmp[2229653](2229658 call atomic_exchange[1228522] call_tmp[2229641] 1 ret[2229648]))
+      (2229662 'move' tmp[2229626] call_tmp[2229653])
+    }
+    (2229666 'move' tmp[2229597] tmp[2229626])
+    WhileDo[2229669]
+    {
+      (2229672 call chpl_task_yield[209654])
+      ref call_tmp[2229673]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+      (2229675 'move' call_tmp[2229673](2229677 '.' call_tmp[2229590] l[187283]))
+      ref call_tmp[2229680]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+      (2229682 'move' call_tmp[2229680](2229684 '.' call_tmp[2229673] _v[44717]))
+      val ret[2229687]:memory_order[186619] "dead after last mention" "RVV" "temp"
+      (2229689 'move' ret[2229687] memory_order_seq_cst[186963])
+      const-val call_tmp[2229692]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2229694 'move' call_tmp[2229692](2229697 call atomic_load[1227699] call_tmp[2229680] ret[2229687]))
+      val tmp[2229700]:bool[10] "dead after last mention" "expr temp" "if-expr result" "insert auto destroy" "temp"
+      if call_tmp[2229692]
+      {
+        (2229704 'move' tmp[2229700] 1)
+      }
+      {
+        ref call_tmp[2229708]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+        (2229710 'move' call_tmp[2229708](2229712 '.' call_tmp[2229590] l[187283]))
+        ref call_tmp[2229715]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+        (2229717 'move' call_tmp[2229715](2229719 '.' call_tmp[2229708] _v[44717]))
+        val ret[2229722]:memory_order[186619] "dead after last mention" "RVV" "temp"
+        (2229724 'move' ret[2229722] memory_order_acquire[186948])
+        const-val call_tmp[2229727]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (2229729 'move' call_tmp[2229727](2229732 call atomic_exchange[1228522] call_tmp[2229715] 1 ret[2229722]))
+        (2229736 'move' tmp[2229700] call_tmp[2229727])
+      }
+      (2229740 'move' tmp[2229597] tmp[2229700])
+      tmp[2229597]
+    }
+    ref call_tmp[2229743]:chpl__simpleSet(unmanaged BaseArr)[1205208] "dead after last mention" "maybe param" "temp"
+    (2229745 'move' call_tmp[2229743](2229747 '.' coerce_tmp[1383179] _arrs[146003]))
+    (2229751 call remove[1383196] call_tmp[2229743] call_tmp[1382789])
+    ref call_tmp[2229754]:chpl__simpleSet(unmanaged BaseArr)[1205208] "dead after last mention" "maybe param" "temp"
+    (2229756 'move' call_tmp[2229754](2229758 '.' coerce_tmp[1383179] _arrs[146003]))
+    val ret[2229761]:int(64)[13] "dead after last mention" "RVV" "temp"
+    ref call_tmp[2229763]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "maybe param" "temp"
+    (2229765 'move' call_tmp[2229763](2229767 '.' call_tmp[2229754] table[1205202]))
+    (2229770 'move' ret[2229761](2229772 '.v' call_tmp[2229763] tableNumFullSlots[1205266]))
+    (2229775 '=' cnt[2229585] ret[2229761])
+    const-val coerce_tmp[2229778]:int(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (2229780 'move' coerce_tmp[2229778](2229782 '.v' coerce_tmp[1383179] _arrs_containing_dom[146008]))
+    ref i_lhs[2229785]:int(64)[13] "temp"
+    (2229787 'move' i_lhs[2229785](2229789 'set reference' cnt[2229585]))
+    (2229791 '+=' i_lhs[2229785] coerce_tmp[2229778])
+    const-val coerce_tmp[2229794]:bool[10] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (2229796 'move' coerce_tmp[2229794](2229798 '.v' coerce_tmp[1383179] _free_when_no_arrs[146018]))
+    const-val call_tmp[2229801]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2229803 'move' call_tmp[2229801](2229805 '!' coerce_tmp[2229794]))
+    if call_tmp[2229801]
+    {
+      ref i_lhs[2229809]:int(64)[13] "temp"
+      (2229811 'move' i_lhs[2229809](2229813 'set reference' cnt[2229585]))
+      (2229815 '+=' i_lhs[2229809] 1)
+    }
+    ref call_tmp[2229819]:chpl_LocalSpinlock[187398] "dead after last mention" "maybe param" "temp"
+    (2229821 'move' call_tmp[2229819](2229823 '.' coerce_tmp[1383179] _arrsLock[146013]))
+    ref call_tmp[2229826]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+    (2229828 'move' call_tmp[2229826](2229830 '.' call_tmp[2229819] l[187283]))
+    ref call_tmp[2229833]:atomic_bool[939147] "dead after last mention" "maybe param" "temp"
+    (2229835 'move' call_tmp[2229833](2229837 '.' call_tmp[2229826] _v[44717]))
+    val ret[2229840]:memory_order[186619] "dead after last mention" "RVV" "temp"
+    (2229842 'move' ret[2229840] memory_order_release[186953])
+    (2229846 call atomic_store[1229835] call_tmp[2229833] 0 ret[2229840])
+    (2229850 '=' count[2229580] cnt[2229585])
+    const-val call_tmp[2229853]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2229855 'move' call_tmp[2229853](2229857 '==' count[2229580] 0))
+    (2229860 'move' ret[2229578] call_tmp[2229853])
+    (1382798 'move' call_tmp[1382796] ret[2229578])
+    ref i_a[2054590]:bool[10] "temp"
+    (2054594 'move' i_a[2054590](2054592 'set reference' rm_dom[1382768]))
+    (2054597 '=' i_a[2054590] call_tmp[1382796])
+    const-val call_tmp[1382814]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1382816 'move' call_tmp[1382814] rm_dom[1382768])
+    if call_tmp[1382814]
+    {
+      val coerce_tmp[1384438]:BaseDom[146729] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1384444 'move' coerce_tmp[1384438] dom[1382783])
+      ref i_a[2228840]:BaseDom[146729] "temp"
+      (2228844 'move' i_a[2228840](2228842 'set reference' ret_dom[1382761]))
+      (2228847 '=' i_a[2228840] coerce_tmp[1384438])
+    }
+    const-val call_tmp[1382831]:(BaseArr,unmanaged BaseDom?)[1384489] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    const-val ret_tmp[1790645]:(BaseArr,unmanaged BaseDom?)[1384489] "temp"
+    val this_x0[2245151]:BaseArr[149545]
+    val this_x1[2245153]:BaseDom[146729]
+    (2229919 'move' this_x0[2245151] ret_arr[1382755])
+    (2229923 'move' this_x1[2245153] ret_dom[1382761])
+    (2245159 '.=' ret_tmp[1790645] x0[1384485] this_x0[2245151])
+    (2245163 '.=' ret_tmp[1790645] x1[1384487] this_x1[2245153])
+    (1790648 'move' call_tmp[1382831] ret_tmp[1790645])
+    (1382839 'move' ret[1382747] call_tmp[1382831])
+    label _end_remove[1382848]
+    (1790629 '=' _retArg[1790627] ret[1382747])
+    (1790631 return _void[55])
+  }
+  function BaseArr[149545].dsiDestroyArr[149076](const in arg this[149587]:BaseArr[149545], const in arg deinitElts[149073]:bool[10]) : void[4] "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    (149097 call halt[154071] "dsiDestroyArr must be defined")
+    (520321 return _void[55])
+  }
+  function BaseArr[149545].decEltCountsIfNeeded[149539](const in arg this[149667]:BaseArr[149545]) : void[4] "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    (520403 return _void[55])
+  }
+  type BaseArr[149545] val super[355721]:object[22] "super class" val pid[148834]:int(64)[13] val _decEltRefCounts[148840]:bool[10]
+  function BaseArrOverRectangularDom(1,int(64),false)[1252717].dsiReallocate[1293847](const in arg this[1293851]:BaseArrOverRectangularDom(1,int(64),false)[1252717], const  ref arg bounds[1293891]:1*range(int(64),bounded,false)[1241311]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    (1293910 call halt[154071] "reallocating not supported for this array type")
+    (1293912 return _void[55])
+  }
+  function BaseArrOverRectangularDom(1,int(64),false)[1252717].dsiPostReallocate[1293967](const in arg this[1293971]:BaseArrOverRectangularDom(1,int(64),false)[1252717]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "method overrides" "resolved" "virtual" "no return value for void"
+  {
+    (1293977 return _void[55])
+  }
+  function BaseArrOverRectangularDom(1,int(64),false)[1252717].deinit[1716804](const in arg this[1716808]:BaseArrOverRectangularDom(1,int(64),false)[1252717]) : void[4] "destructor" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    label _enddeinit[1768965]
+    val _parent_destructor_tmp_[1768960]:BaseArr[149545] "temp"
+    (1768967 'move' _parent_destructor_tmp_[1768960](1768961 'cast' BaseArr[149545] this[1716808]))
+    (1768969 call deinit[148886] _parent_destructor_tmp_[1768960])
+    (1716814 return _void[55])
+  }
+  function BaseArrOverRectangularDom(1,int(64),false)[1252717].init[1252507](const in arg this[1252511]:BaseArrOverRectangularDom(1,int(64),false)[1252717], const in arg pid[1252517]:int(64)[13], const in arg _decEltRefCounts[1252523]:bool[10]) : void[4] "compiler generated" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    val _formal_type_tmp_[1760007]:int(64)[13] "temp"
+    val super_tmp[1252539]:BaseArr[149545] "dead after last mention" "temporary of super field" "temp"
+    (1252541 'move' super_tmp[1252539](1252543 '.v' this[1252511] super[1252707]))
+    val super_tmp[2128308]:object[22] "dead after last mention" "temporary of super field" "temp"
+    (2128310 'move' super_tmp[2128308](2128312 '.v' super_tmp[1252539] super[355721]))
+    (2128315 'setcid' super_tmp[2128308])
+    val call_tmp[2128317]:object[22] "dead at end of block" "maybe param" "temp"
+    (2128319 'move' call_tmp[2128317](2128321 'cast' object[22] super_tmp[1252539]))
+    (2128324 'setcid' call_tmp[2128317])
+    (2128326 '.=' super_tmp[1252539] pid[148834] pid[1252517])
+    (2128330 '.=' super_tmp[1252539] _decEltRefCounts[148840] _decEltRefCounts[1252523])
+    (2128334 'setcid' super_tmp[1252539])
+    val tmp[1252554]:BaseArr[149545] "dead after last mention" "temp" "type variable"
+    val call_tmp[1252573]:BaseArr[149545] "dead at end of block" "maybe param" "temp"
+    (1252575 'move' call_tmp[1252573](1252577 'cast' BaseArr[149545] this[1252511]))
+    val chpl__thisAsParent[1252580]:BaseArr[149545] "dead at end of block" "insert auto destroy" "temp"
+    (1252582 'move' chpl__thisAsParent[1252580] call_tmp[1252573])
+    (1252586 'setcid' chpl__thisAsParent[1252580])
+    (1252618 'setcid' this[1252511])
+    (1252620 return _void[55])
+  }
+  type BaseArrOverRectangularDom(1,int(64),false)[1252717] val super[1252707]:BaseArr[149545] "super class"
+  function BaseRectangularArr(1,int(64),false,locale)[1252770].deinit[1716816](const in arg this[1716820]:BaseRectangularArr(1,int(64),false,locale)[1252770]) : void[4] "destructor" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    label _enddeinit[1768977]
+    val _parent_destructor_tmp_[1768972]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "temp"
+    (1768979 'move' _parent_destructor_tmp_[1768972](1768973 'cast' BaseArrOverRectangularDom(1,int(64),false)[1252717] this[1716820]))
+    (1768981 call deinit[1716804] _parent_destructor_tmp_[1768972])
+    (1716826 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,unmanaged localesSignal?)[1314336].deinit[1716840](const in arg this[1716844]:BaseRectangularArr(1,int(64),false,unmanaged localesSignal?)[1314336]) : void[4] "destructor" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    label _enddeinit[1769041]
+    val _parent_destructor_tmp_[1769036]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "temp"
+    (1769043 'move' _parent_destructor_tmp_[1769036](1769037 'cast' BaseArrOverRectangularDom(1,int(64),false)[1252717] this[1716844]))
+    (1769045 call deinit[1716804] _parent_destructor_tmp_[1769036])
+    (1716850 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,real(64))[1354242].deinit[1716864](const in arg this[1716868]:BaseRectangularArr(1,int(64),false,real(64))[1354242]) : void[4] "destructor" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    label _enddeinit[1769105]
+    val _parent_destructor_tmp_[1769100]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "temp"
+    (1769107 'move' _parent_destructor_tmp_[1769100](1769101 'cast' BaseArrOverRectangularDom(1,int(64),false)[1252717] this[1716868]))
+    (1769109 call deinit[1716804] _parent_destructor_tmp_[1769100])
+    (1716874 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,int(64))[1521335].deinit[1716888](const in arg this[1716892]:BaseRectangularArr(1,int(64),false,int(64))[1521335]) : void[4] "destructor" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    label _enddeinit[1769169]
+    val _parent_destructor_tmp_[1769164]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "temp"
+    (1769171 'move' _parent_destructor_tmp_[1769164](1769165 'cast' BaseArrOverRectangularDom(1,int(64),false)[1252717] this[1716892]))
+    (1769173 call deinit[1716804] _parent_destructor_tmp_[1769164])
+    (1716898 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,uint(64))[1539803].deinit[1716912](const in arg this[1716916]:BaseRectangularArr(1,int(64),false,uint(64))[1539803]) : void[4] "destructor" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "virtual" "no return value for void"
+  {
+    label _enddeinit[1769233]
+    val _parent_destructor_tmp_[1769228]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "temp"
+    (1769235 'move' _parent_destructor_tmp_[1769228](1769229 'cast' BaseArrOverRectangularDom(1,int(64),false)[1252717] this[1716916]))
+    (1769237 call deinit[1716804] _parent_destructor_tmp_[1769228])
+    (1716922 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,locale)[1252770].decEltCountsIfNeeded[1721791](const in arg this[1721795]:BaseRectangularArr(1,int(64),false,locale)[1252770]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "method overrides" "resolved" "virtual" "no return value for void"
+  {
+    const-ref call_tmp[1721801]:bool[10] "dead after last mention" "maybe param" "temp"
+    val coerce_tmp[1721840]:BaseArr[149545] "dead after last mention" "arg this" "coerce temp" "insert auto destroy" "temp"
+    (1721846 'move' coerce_tmp[1721840](1721842 'cast' BaseArr[149545] this[1721795]))
+    ref call_tmp[2128258]:bool[10] "dead after last mention" "maybe param" "temp"
+    (2128260 'move' call_tmp[2128258](2128262 '.' coerce_tmp[1721840] _decEltRefCounts[148840]))
+    (1721803 'move' call_tmp[1721801] call_tmp[2128258])
+    const-val call_tmp[1721809]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val tmp[1721849]:bool[10] "dead after last mention" "const" "temp"
+    (1721851 'move' tmp[1721849](1721853 'deref' call_tmp[1721801]))
+    (1721811 'move' call_tmp[1721809] tmp[1721849])
+    if call_tmp[1721809]
+    {
+      val call_tmp[1721818]:BaseRectangularArr(1,int(64),false,locale)[1252770] "dead after last mention" "expr temp" "maybe param" "temp"
+      val ret[2240373]:BaseRectangularArr(1,int(64),false,locale)[1252770] "dead after last mention" "RVV" "temp"
+      (2240375 'move' ret[2240373] this[1721795])
+      (1721820 'move' call_tmp[1721818] ret[2240373])
+      val call_tmp[1721825]:locale[28] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+      val coerce_tmp[1722252]:BaseArr[149545] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1722258 'move' coerce_tmp[1722252](1722254 'cast' BaseArr[149545] call_tmp[1721818]))
+      (1721834 call chpl_decRefCountsForDomainsInArrayEltTypes[1721918] coerce_tmp[1722252])
+    }
+    (1721838 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,unmanaged localesSignal?)[1314336].decEltCountsIfNeeded[1722265](const in arg this[1722269]:BaseRectangularArr(1,int(64),false,unmanaged localesSignal?)[1314336]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "method overrides" "resolved" "virtual" "no return value for void"
+  {
+    const-ref call_tmp[1722275]:bool[10] "dead after last mention" "maybe param" "temp"
+    val coerce_tmp[1722314]:BaseArr[149545] "dead after last mention" "arg this" "coerce temp" "insert auto destroy" "temp"
+    (1722320 'move' coerce_tmp[1722314](1722316 'cast' BaseArr[149545] this[1722269]))
+    ref call_tmp[2128268]:bool[10] "dead after last mention" "maybe param" "temp"
+    (2128270 'move' call_tmp[2128268](2128272 '.' coerce_tmp[1722314] _decEltRefCounts[148840]))
+    (1722277 'move' call_tmp[1722275] call_tmp[2128268])
+    const-val call_tmp[1722283]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val tmp[1722323]:bool[10] "dead after last mention" "const" "temp"
+    (1722325 'move' tmp[1722323](1722327 'deref' call_tmp[1722275]))
+    (1722285 'move' call_tmp[1722283] tmp[1722323])
+    if call_tmp[1722283]
+    {
+      val call_tmp[1722292]:BaseRectangularArr(1,int(64),false,unmanaged localesSignal?)[1314336] "dead after last mention" "expr temp" "maybe param" "temp"
+      val ret[2240383]:BaseRectangularArr(1,int(64),false,unmanaged localesSignal?)[1314336] "dead after last mention" "RVV" "temp"
+      (2240385 'move' ret[2240383] this[1722269])
+      (1722294 'move' call_tmp[1722292] ret[2240383])
+      val call_tmp[1722299]:localesSignal[92283] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+      val coerce_tmp[1722726]:BaseArr[149545] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1722732 'move' coerce_tmp[1722726](1722728 'cast' BaseArr[149545] call_tmp[1722292]))
+      (1722308 call chpl_decRefCountsForDomainsInArrayEltTypes[1722392] coerce_tmp[1722726])
+    }
+    (1722312 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,real(64))[1354242].decEltCountsIfNeeded[1722739](const in arg this[1722743]:BaseRectangularArr(1,int(64),false,real(64))[1354242]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "method overrides" "resolved" "virtual" "no return value for void"
+  {
+    const-ref call_tmp[1722749]:bool[10] "dead after last mention" "maybe param" "temp"
+    val coerce_tmp[1722788]:BaseArr[149545] "dead after last mention" "arg this" "coerce temp" "insert auto destroy" "temp"
+    (1722794 'move' coerce_tmp[1722788](1722790 'cast' BaseArr[149545] this[1722743]))
+    ref call_tmp[2128278]:bool[10] "dead after last mention" "maybe param" "temp"
+    (2128280 'move' call_tmp[2128278](2128282 '.' coerce_tmp[1722788] _decEltRefCounts[148840]))
+    (1722751 'move' call_tmp[1722749] call_tmp[2128278])
+    const-val call_tmp[1722757]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val tmp[1722797]:bool[10] "dead after last mention" "const" "temp"
+    (1722799 'move' tmp[1722797](1722801 'deref' call_tmp[1722749]))
+    (1722759 'move' call_tmp[1722757] tmp[1722797])
+    if call_tmp[1722757]
+    {
+      val call_tmp[1722766]:BaseRectangularArr(1,int(64),false,real(64))[1354242] "dead after last mention" "expr temp" "maybe param" "temp"
+      val ret[2240393]:BaseRectangularArr(1,int(64),false,real(64))[1354242] "dead after last mention" "RVV" "temp"
+      (2240395 'move' ret[2240393] this[1722743])
+      (1722768 'move' call_tmp[1722766] ret[2240393])
+      val call_tmp[1722773]:real(64)[16] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+      val coerce_tmp[1723200]:BaseArr[149545] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1723206 'move' coerce_tmp[1723200](1723202 'cast' BaseArr[149545] call_tmp[1722766]))
+      (1722782 call chpl_decRefCountsForDomainsInArrayEltTypes[1722866] coerce_tmp[1723200])
+    }
+    (1722786 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,int(64))[1521335].decEltCountsIfNeeded[1723213](const in arg this[1723217]:BaseRectangularArr(1,int(64),false,int(64))[1521335]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "method overrides" "resolved" "virtual" "no return value for void"
+  {
+    const-ref call_tmp[1723223]:bool[10] "dead after last mention" "maybe param" "temp"
+    val coerce_tmp[1723262]:BaseArr[149545] "dead after last mention" "arg this" "coerce temp" "insert auto destroy" "temp"
+    (1723268 'move' coerce_tmp[1723262](1723264 'cast' BaseArr[149545] this[1723217]))
+    ref call_tmp[2128288]:bool[10] "dead after last mention" "maybe param" "temp"
+    (2128290 'move' call_tmp[2128288](2128292 '.' coerce_tmp[1723262] _decEltRefCounts[148840]))
+    (1723225 'move' call_tmp[1723223] call_tmp[2128288])
+    const-val call_tmp[1723231]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val tmp[1723271]:bool[10] "dead after last mention" "const" "temp"
+    (1723273 'move' tmp[1723271](1723275 'deref' call_tmp[1723223]))
+    (1723233 'move' call_tmp[1723231] tmp[1723271])
+    if call_tmp[1723231]
+    {
+      val call_tmp[1723240]:BaseRectangularArr(1,int(64),false,int(64))[1521335] "dead after last mention" "expr temp" "maybe param" "temp"
+      val ret[2240403]:BaseRectangularArr(1,int(64),false,int(64))[1521335] "dead after last mention" "RVV" "temp"
+      (2240405 'move' ret[2240403] this[1723217])
+      (1723242 'move' call_tmp[1723240] ret[2240403])
+      val call_tmp[1723247]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+      val coerce_tmp[1723674]:BaseArr[149545] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1723680 'move' coerce_tmp[1723674](1723676 'cast' BaseArr[149545] call_tmp[1723240]))
+      (1723256 call chpl_decRefCountsForDomainsInArrayEltTypes[1723340] coerce_tmp[1723674])
+    }
+    (1723260 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,uint(64))[1539803].decEltCountsIfNeeded[1723687](const in arg this[1723691]:BaseRectangularArr(1,int(64),false,uint(64))[1539803]) : void[4] "instantiated generic" "invisible fn" "method" "primary method" "method overrides" "resolved" "virtual" "no return value for void"
+  {
+    const-ref call_tmp[1723697]:bool[10] "dead after last mention" "maybe param" "temp"
+    val coerce_tmp[1723736]:BaseArr[149545] "dead after last mention" "arg this" "coerce temp" "insert auto destroy" "temp"
+    (1723742 'move' coerce_tmp[1723736](1723738 'cast' BaseArr[149545] this[1723691]))
+    ref call_tmp[2128298]:bool[10] "dead after last mention" "maybe param" "temp"
+    (2128300 'move' call_tmp[2128298](2128302 '.' coerce_tmp[1723736] _decEltRefCounts[148840]))
+    (1723699 'move' call_tmp[1723697] call_tmp[2128298])
+    const-val call_tmp[1723705]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val tmp[1723745]:bool[10] "dead after last mention" "const" "temp"
+    (1723747 'move' tmp[1723745](1723749 'deref' call_tmp[1723697]))
+    (1723707 'move' call_tmp[1723705] tmp[1723745])
+    if call_tmp[1723705]
+    {
+      val call_tmp[1723714]:BaseRectangularArr(1,int(64),false,uint(64))[1539803] "dead after last mention" "expr temp" "maybe param" "temp"
+      val ret[2240413]:BaseRectangularArr(1,int(64),false,uint(64))[1539803] "dead after last mention" "RVV" "temp"
+      (2240415 'move' ret[2240413] this[1723691])
+      (1723716 'move' call_tmp[1723714] ret[2240413])
+      val call_tmp[1723721]:uint(64)[115] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+      val coerce_tmp[1724148]:BaseArr[149545] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (1724154 'move' coerce_tmp[1724148](1724150 'cast' BaseArr[149545] call_tmp[1723714]))
+      (1723730 call chpl_decRefCountsForDomainsInArrayEltTypes[1723814] coerce_tmp[1724148])
+    }
+    (1723734 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,locale)[1252770].init[1252321](const in arg this[1252325]:BaseRectangularArr(1,int(64),false,locale)[1252770], const in arg pid[1252331]:int(64)[13], const in arg _decEltRefCounts[1252337]:bool[10]) : void[4] "compiler generated" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    val _formal_type_tmp_[1760005]:locale[28] "temp"
+    val _formal_type_tmp_[1760003]:int(64)[13] "temp"
+    val super_tmp[1252357]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "temporary of super field" "temp"
+    (1252359 'move' super_tmp[1252357](1252361 '.v' this[1252325] super[1252766]))
+    (1252368 call init[1252507] super_tmp[1252357] pid[1252331] _decEltRefCounts[1252337])
+    val tmp[1252375]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "temp" "type variable"
+    val call_tmp[1252394]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "maybe param" "temp"
+    (1252396 'move' call_tmp[1252394](1252398 'cast' BaseArrOverRectangularDom(1,int(64),false)[1252717] this[1252325]))
+    val chpl__thisAsParent[1252401]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "insert auto destroy" "temp"
+    (1252403 'move' chpl__thisAsParent[1252401] call_tmp[1252394])
+    (1252407 'setcid' chpl__thisAsParent[1252401])
+    (1252414 'setcid' this[1252325])
+    (1252416 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,unmanaged localesSignal?)[1314336].init[1314140](const in arg this[1314144]:BaseRectangularArr(1,int(64),false,unmanaged localesSignal?)[1314336], const in arg pid[1314150]:int(64)[13], const in arg _decEltRefCounts[1314156]:bool[10]) : void[4] "compiler generated" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    val _formal_type_tmp_[1760066]:localesSignal[92283] "temp"
+    val _formal_type_tmp_[1760064]:int(64)[13] "temp"
+    val super_tmp[1314176]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "temporary of super field" "temp"
+    (1314178 'move' super_tmp[1314176](1314180 '.v' this[1314144] super[1314332]))
+    (1314187 call init[1252507] super_tmp[1314176] pid[1314150] _decEltRefCounts[1314156])
+    val tmp[1314194]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "temp" "type variable"
+    val call_tmp[1314213]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "maybe param" "temp"
+    (1314215 'move' call_tmp[1314213](1314217 'cast' BaseArrOverRectangularDom(1,int(64),false)[1252717] this[1314144]))
+    val chpl__thisAsParent[1314220]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "insert auto destroy" "temp"
+    (1314222 'move' chpl__thisAsParent[1314220] call_tmp[1314213])
+    (1314226 'setcid' chpl__thisAsParent[1314220])
+    (1314233 'setcid' this[1314144])
+    (1314235 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,real(64))[1354242].init[1354046](const in arg this[1354050]:BaseRectangularArr(1,int(64),false,real(64))[1354242], const in arg pid[1354056]:int(64)[13], const in arg _decEltRefCounts[1354062]:bool[10]) : void[4] "compiler generated" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    val _formal_type_tmp_[1760153]:real(64)[16] "temp"
+    val _formal_type_tmp_[1760151]:int(64)[13] "temp"
+    val super_tmp[1354082]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "temporary of super field" "temp"
+    (1354084 'move' super_tmp[1354082](1354086 '.v' this[1354050] super[1354238]))
+    (1354093 call init[1252507] super_tmp[1354082] pid[1354056] _decEltRefCounts[1354062])
+    val tmp[1354100]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "temp" "type variable"
+    val call_tmp[1354119]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "maybe param" "temp"
+    (1354121 'move' call_tmp[1354119](1354123 'cast' BaseArrOverRectangularDom(1,int(64),false)[1252717] this[1354050]))
+    val chpl__thisAsParent[1354126]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "insert auto destroy" "temp"
+    (1354128 'move' chpl__thisAsParent[1354126] call_tmp[1354119])
+    (1354132 'setcid' chpl__thisAsParent[1354126])
+    (1354139 'setcid' this[1354050])
+    (1354141 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,int(64))[1521335].init[1521139](const in arg this[1521143]:BaseRectangularArr(1,int(64),false,int(64))[1521335], const in arg pid[1521149]:int(64)[13], const in arg _decEltRefCounts[1521155]:bool[10]) : void[4] "compiler generated" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    val _formal_type_tmp_[1760229]:int(64)[13] "temp"
+    val _formal_type_tmp_[1760227]:int(64)[13] "temp"
+    val super_tmp[1521175]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "temporary of super field" "temp"
+    (1521177 'move' super_tmp[1521175](1521179 '.v' this[1521143] super[1521331]))
+    (1521186 call init[1252507] super_tmp[1521175] pid[1521149] _decEltRefCounts[1521155])
+    val tmp[1521193]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "temp" "type variable"
+    val call_tmp[1521212]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "maybe param" "temp"
+    (1521214 'move' call_tmp[1521212](1521216 'cast' BaseArrOverRectangularDom(1,int(64),false)[1252717] this[1521143]))
+    val chpl__thisAsParent[1521219]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "insert auto destroy" "temp"
+    (1521221 'move' chpl__thisAsParent[1521219] call_tmp[1521212])
+    (1521225 'setcid' chpl__thisAsParent[1521219])
+    (1521232 'setcid' this[1521143])
+    (1521234 return _void[55])
+  }
+  function BaseRectangularArr(1,int(64),false,uint(64))[1539803].init[1539607](const in arg this[1539611]:BaseRectangularArr(1,int(64),false,uint(64))[1539803], const in arg pid[1539617]:int(64)[13], const in arg _decEltRefCounts[1539623]:bool[10]) : void[4] "compiler generated" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  {
+    val _formal_type_tmp_[1760267]:uint(64)[115] "temp"
+    val _formal_type_tmp_[1760265]:int(64)[13] "temp"
+    val super_tmp[1539643]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "temporary of super field" "temp"
+    (1539645 'move' super_tmp[1539643](1539647 '.v' this[1539611] super[1539799]))
+    (1539654 call init[1252507] super_tmp[1539643] pid[1539617] _decEltRefCounts[1539623])
+    val tmp[1539661]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "temp" "type variable"
+    val call_tmp[1539680]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "maybe param" "temp"
+    (1539682 'move' call_tmp[1539680](1539684 'cast' BaseArrOverRectangularDom(1,int(64),false)[1252717] this[1539611]))
+    val chpl__thisAsParent[1539687]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "insert auto destroy" "temp"
+    (1539689 'move' chpl__thisAsParent[1539687] call_tmp[1539680])
+    (1539693 'setcid' chpl__thisAsParent[1539687])
+    (1539700 'setcid' this[1539611])
+    (1539702 return _void[55])
+  }
+  type BaseRectangularArr(1,int(64),false,locale)[1252770] val super[1252766]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "super class"
+  type BaseRectangularArr(1,int(64),false,unmanaged localesSignal?)[1314336] val super[1314332]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "super class"
+  type BaseRectangularArr(1,int(64),false,real(64))[1354242] val super[1354238]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "super class"
+  type BaseRectangularArr(1,int(64),false,int(64))[1521335] val super[1521331]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "super class"
+  type BaseRectangularArr(1,int(64),false,uint(64))[1539803] val super[1539799]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "super class"
+  function _delete_dist[150577](const in arg dist[150574]:BaseDist[145934], const in arg privatized[150580]:bool[10]) : void[4] "resolved" "no return value for void"
+  {
+    val coerce_tmp[1392784]:BaseDist[145934] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1392789 'move' coerce_tmp[1392784] dist[150574])
+    (150590 call dsiDestroyDist[145860] coerce_tmp[1392784])
+    val coerce_tmp[2230565]:object[22] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (2230567 'move' coerce_tmp[2230565](2230569 'cast' object[22] dist[150574]))
+    const-val call_tmp[2230572]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2230574 'move' call_tmp[2230572](2230576 'ptr_neq' coerce_tmp[2230565] nil[44]))
+    if call_tmp[2230572]
+    {
+      val _virtual_method_tmp_[2230581]:int(32)[95] "temp"
+      (2230583 'move' _virtual_method_tmp_[2230581](2230585 'getcid' dist[150574]))
+      (2230587 'virtual method call' deinit[145468] _virtual_method_tmp_[2230581] dist[150574])
+      const-val call_tmp[2230591]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2230593 'move' call_tmp[2230591](2230595 '_wide_get_addr' dist[150574]))
+      (2230598 call chpl_here_free[188093] call_tmp[2230591])
+    }
+    (520453 return _void[55])
+  }
+  function _delete_dom[1391610](const in arg dom[1391612]:BaseDom[146729], const in arg privatized[1391614]:bool[10]) : void[4] "instantiated generic" "invisible fn" "resolved" "no return value for void"
+  {
+    val coerce_tmp[1391709]:BaseDom[146729] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1391714 'move' coerce_tmp[1391709] dom[1391612])
+    (1391624 call dsiDestroyDom[146651] coerce_tmp[1391709])
+    val coerce_tmp[2230526]:object[22] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (2230528 'move' coerce_tmp[2230526](2230530 'cast' object[22] dom[1391612]))
+    const-val call_tmp[2230533]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2230535 'move' call_tmp[2230533](2230537 'ptr_neq' coerce_tmp[2230526] nil[44]))
+    if call_tmp[2230533]
+    {
+      val _virtual_method_tmp_[2230542]:int(32)[95] "temp"
+      (2230544 'move' _virtual_method_tmp_[2230542](2230546 'getcid' dom[1391612]))
+      (2230548 'virtual method call' deinit[146037] _virtual_method_tmp_[2230542] dom[1391612])
+      const-val call_tmp[2230552]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2230554 'move' call_tmp[2230552](2230556 '_wide_get_addr' dom[1391612]))
+      (2230559 call chpl_here_free[188093] call_tmp[2230552])
+    }
+    (1391706 return _void[55])
+  }
+  function _delete_dom[1493584](const in arg dom[1493586]:domain(1,int(64),false)[1247549], const in arg privatized[1493588]:bool[10]) : void[4] "instantiated generic" "invisible fn" "resolved" "no return value for void"
+  {
+    val coerce_tmp[1493683]:BaseDom[146729] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1493688 'move' coerce_tmp[1493683](1493685 'cast' BaseDom[146729] dom[1493586]))
+    (1493598 call dsiDestroyDom[146651] coerce_tmp[1493683])
+    val coerce_tmp[2234270]:object[22] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (2234272 'move' coerce_tmp[2234270](2234274 'cast' object[22] dom[1493586]))
+    const-val call_tmp[2234277]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2234279 'move' call_tmp[2234277](2234281 'ptr_neq' coerce_tmp[2234270] nil[44]))
+    if call_tmp[2234277]
+    {
+      val _parent_destructor_tmp_[2234286]:BaseRectangularDom(1,int(64),false)[1247514] "temp"
+      (2234288 'move' _parent_destructor_tmp_[2234286](2234290 'cast' BaseRectangularDom(1,int(64),false)[1247514] dom[1493586]))
+      (2234294 call deinit[1716743] _parent_destructor_tmp_[2234286])
+      const-val call_tmp[2234296]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2234298 'move' call_tmp[2234296](2234300 '_wide_get_addr' dom[1493586]))
+      (2234303 call chpl_here_free[188093] call_tmp[2234296])
+    }
+    (1493680 return _void[55])
+  }
+  function _delete_arr[1390414](const in arg arr[1390416]:BaseArr[149545], const in arg deinitElts[1390424]:bool[10]) : void[4] "instantiated generic" "invisible fn" "resolved" "no return value for void"
+  {
+    val coerce_tmp[1390527]:BaseArr[149545] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1390532 'move' coerce_tmp[1390527] arr[1390416])
+    val _virtual_method_tmp_[1756090]:int(32)[95] "temp"
+    (1756094 'move' _virtual_method_tmp_[1756090](1756092 'getcid' coerce_tmp[1390527]))
+    (1390434 'virtual method call' dsiDestroyArr[149076] _virtual_method_tmp_[1756090] coerce_tmp[1390527] deinitElts[1390424])
+    val coerce_tmp[1390536]:BaseArr[149545] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1390541 'move' coerce_tmp[1390536] arr[1390416])
+    val _virtual_method_tmp_[1756097]:int(32)[95] "temp"
+    (1756101 'move' _virtual_method_tmp_[1756097](1756099 'getcid' coerce_tmp[1390536]))
+    (1390442 'virtual method call' decEltCountsIfNeeded[149539] _virtual_method_tmp_[1756097] coerce_tmp[1390536])
+    val coerce_tmp[2230487]:object[22] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (2230489 'move' coerce_tmp[2230487](2230491 'cast' object[22] arr[1390416]))
+    const-val call_tmp[2230494]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2230496 'move' call_tmp[2230494](2230498 'ptr_neq' coerce_tmp[2230487] nil[44]))
+    if call_tmp[2230494]
+    {
+      val _virtual_method_tmp_[2230503]:int(32)[95] "temp"
+      (2230505 'move' _virtual_method_tmp_[2230503](2230507 'getcid' arr[1390416]))
+      (2230509 'virtual method call' deinit[148886] _virtual_method_tmp_[2230503] arr[1390416])
+      const-val call_tmp[2230513]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2230515 'move' call_tmp[2230513](2230517 '_wide_get_addr' arr[1390416]))
+      (2230520 call chpl_here_free[188093] call_tmp[2230513])
+    }
+    (1390524 return _void[55])
+  }
+  function chpl_assignDomainWithGetSetIndices[1284824](const in arg lhs[1284826]:domain(1,int(64),false)[1247549], const  ref arg rhs[1284828]:domain(1,int(64),false)[1249095]) : void[4] "instantiated generic" "invisible fn" "resolved" "no return value for void"
+  {
+    val arrType[1284890]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "insert auto destroy" "type variable"
+    val coerce_tmp[1285464]:BaseRectangularDom(1,int(64),false)[1247514] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1285470 'move' coerce_tmp[1285464](1285466 'cast' BaseRectangularDom(1,int(64),false)[1247514] lhs[1284826]))
+    val idxType[1284918]:int(64)[13] "dead at end of block" "insert auto destroy" "type variable"
+    val coerce_tmp[1285719]:BaseRectangularDom(1,int(64),false)[1247514] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1285725 'move' coerce_tmp[1285719](1285721 'cast' BaseRectangularDom(1,int(64),false)[1247514] lhs[1284826]))
+    val _indexOfInterest[1284945]:BaseArr[149545] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+    const-ref call_tmp[1284949]:chpl__simpleSet(unmanaged BaseArr)[1205208] "dead at end of block" "maybe param" "temp"
+    val coerce_tmp[1285731]:BaseDom[146729] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+    (1285737 'move' coerce_tmp[1285731](1285733 'cast' BaseDom[146729] lhs[1284826]))
+    ref call_tmp[2128092]:chpl__simpleSet(unmanaged BaseArr)[1205208] "dead after last mention" "maybe param" "temp"
+    (2128094 'move' call_tmp[2128092](2128096 '.' coerce_tmp[1285731] _arrs[146003]))
+    (1284951 'move' call_tmp[1284949] call_tmp[2128092])
+    const-ref call_tmp_F0_this[2245935]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+    const-ref _ir_F0_this[2245943]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+    (2208834 'move' _ir_F0_this[2245943] call_tmp[1284949])
+    (2245941 'move' call_tmp_F0_this[2245935] _ir_F0_this[2245943])
+    val _ic__super[2245277]:object[22] "temp"
+    val _ic__more[2245279]:int(64)[13] "temp"
+    const-ref _ic__F0_this[2245281]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+    val _ic__F1__iterator[2245283]:_ic_allSlots__ref_chpl__hashtable_BaseArr_nothing[1286001] "temp"
+    val _ic__F2__iterator[2245285]:_ic__allSlots[1218466] "temp"
+    val _ic__F3__iterator[2245287]:_ic_chpl_direct_counted_range_iter[1100747] "temp"
+    val _ic__F4__iterator[2245289]:_ic_chpl_direct_counted_range_iter_helper[1100497] "temp"
+    const _ic__F5_tmp[2245291]:2*int(64)[1037179] "temp"
+    val _ic__F6__iterator[2245293]:_ic_chpl_direct_param_stride_range_iter[1100243] "temp"
+    val _ic__F7_i[2245295]:int(64)[13] "temp"
+    val _ic__value[2245297]:BaseArr[149545] "temp"
+    const-val call_tmp[2208845]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2208847 'move' call_tmp[2208845](2208849 'sizeof_bundle' _ic_these__ref_chpl__simpleSet_BaseArr[1286575]))
+    const-val cast_tmp[2208851]:c_void_ptr[149] "dead after last mention" "temp"
+    (2208869 'move' _ic__more[2245279] 1)
+    const-ref tmp[2208873]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+    (2208875 'move' tmp[2208873] call_tmp_F0_this[2245935])
+    (2208880 'move' _ic__F0_this[2245281] tmp[2208873])
+    val ret[1862885]:_ir_these__ref_chpl__simpleSet_BaseArr[1286581] "dead after last mention" "RVV" "temp"
+    val _indexOfInterest[1862887]:int(64)[13] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+    const-ref call_tmp[1862891]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead at end of block" "maybe param" "temp"
+    const-ref this[1863202]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+    (1863207 'move' this[1863202] _ic__F0_this[2245281])
+    ref call_tmp[2202173]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "maybe param" "temp"
+    (2202175 'move' call_tmp[2202173](2202177 '.' this[1863202] table[1205202]))
+    (1862893 'move' call_tmp[1862891] call_tmp[2202173])
+    const-ref call_tmp_F0_this[2246747]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    const-ref ret_tmp_F0_this[2246755]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    const-ref _ir_F0_this[2246779]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    (2208952 'move' _ir_F0_this[2246779] call_tmp[1862891])
+    (2246761 'move' ret_tmp_F0_this[2246755] _ir_F0_this[2246779])
+    (2246753 'move' call_tmp_F0_this[2246747] ret_tmp_F0_this[2246755])
+    val _ic__super[2245536]:object[22] "temp"
+    val _ic__more[2245538]:int(64)[13] "temp"
+    const-ref _ic__F0_this[2245540]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    val _ic__F1__iterator[2245542]:_ic__allSlots[1218466] "temp"
+    val _ic__F2__iterator[2245544]:_ic_chpl_direct_counted_range_iter[1100747] "temp"
+    val _ic__F3__iterator[2245546]:_ic_chpl_direct_counted_range_iter_helper[1100497] "temp"
+    const _ic__F4_tmp[2245548]:2*int(64)[1037179] "temp"
+    val _ic__F5__iterator[2245550]:_ic_chpl_direct_param_stride_range_iter[1100243] "temp"
+    val _ic__F6_i[2245552]:int(64)[13] "temp"
+    const-val _ic__F7_low[2245554]:int(64)[13] "temp"
+    val _ic__value[2245556]:int(64)[13] "temp"
+    const-val call_tmp[2208990]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2208992 'move' call_tmp[2208990](2208994 'sizeof_bundle' _ic_allSlots__ref_chpl__hashtable_BaseArr_nothing[1286001]))
+    const-val cast_tmp[2208996]:c_void_ptr[149] "dead after last mention" "temp"
+    (2209014 'move' _ic__more[2245538] 1)
+    const-ref tmp[2209018]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    (2209020 'move' tmp[2209018] call_tmp_F0_this[2246747])
+    (2209025 'move' _ic__F0_this[2245540] tmp[2209018])
+    val ret[1919171]:_ir_allSlots__ref_chpl__hashtable_BaseArr_nothing[1286007] "dead after last mention" "RVV" "temp"
+    val _indexOfInterest[1919173]:int(64)[13] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+    const-ref call_tmp[1919177]:int(64)[13] "dead at end of block" "maybe param" "temp"
+    const-ref this[1919640]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    (1919645 'move' this[1919640] _ic__F0_this[2245540])
+    ref call_tmp[2198016]:int(64)[13] "dead after last mention" "maybe param" "temp"
+    (2198018 'move' call_tmp[2198016](2198020 '.' this[1919640] tableSize[1205275]))
+    (1919179 'move' call_tmp[1919177] call_tmp[2198016])
+    const-val call_tmp_F0_size[2262205]:int(64)[13] "temp"
+    const-val coerce_tmp[1919186]:int(64)[13] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+    (1919188 'move' coerce_tmp[1919186](1919190 'deref' call_tmp[1919177]))
+    const-val ret_tmp_F0_size[2262213]:int(64)[13] "temp"
+    const-val _ir_F0_size[2262253]:int(64)[13] "temp"
+    (2117655 'move' _ir_F0_size[2262253] coerce_tmp[1919186])
+    (2262219 'move' ret_tmp_F0_size[2262213] _ir_F0_size[2262253])
+    (2262211 'move' call_tmp_F0_size[2262205] ret_tmp_F0_size[2262213])
+    val _ic__super[2246464]:object[22] "temp"
+    val _ic__more[2246466]:int(64)[13] "temp"
+    const-val _ic__F0_size[2246468]:int(64)[13] "temp"
+    val _ic__F1__iterator[2246470]:_ic_chpl_direct_counted_range_iter[1100747] "temp"
+    val _ic__F2__iterator[2246472]:_ic_chpl_direct_counted_range_iter_helper[1100497] "temp"
+    const _ic__F3_tmp[2246474]:2*int(64)[1037179] "temp"
+    val _ic__F4__iterator[2246476]:_ic_chpl_direct_param_stride_range_iter[1100243] "temp"
+    val _ic__F5_i[2246478]:int(64)[13] "temp"
+    const-val _ic__F6_low[2246480]:int(64)[13] "temp"
+    val _ic__value[2246482]:int(64)[13] "temp"
+    const-val call_tmp[2192695]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2192697 'move' call_tmp[2192695](2192699 'sizeof_bundle' _ic__allSlots[1218466]))
+    const-val cast_tmp[2192701]:c_void_ptr[149] "dead after last mention" "temp"
+    (2192719 'move' _ic__more[2246466] 1)
+    const-val tmp[2192723]:int(64)[13] "temp"
+    (2192725 'move' tmp[2192723] call_tmp_F0_size[2262205])
+    (2192730 'move' _ic__F0_size[2246468] tmp[2192723])
+    val ret[1919207]:_ir__allSlots[1218472] "dead after last mention" "RVV" "temp"
+    val _indexOfInterest[1919209]:int(64)[13] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+    const-val call_tmp_F0_low[2261545]:int(64)[13] "temp"
+    const-val call_tmp_F1_count[2261547]:int(64)[13] "temp"
+    const-val ret_tmp_F0_low[2261561]:int(64)[13] "temp"
+    const-val ret_tmp_F1_count[2261563]:int(64)[13] "temp"
+    const-val size[1919217]:int(64)[13] "temp"
+    (1919219 'move' size[1919217] _ic__F0_size[2246468])
+    val inlineImm[2094474]:int(64)[13] "temp"
+    (2094477 'move' inlineImm[2094474] 0)
+    const-val _ir_F0_low[2261769]:int(64)[13] "temp"
+    const-val _ir_F1_count[2261771]:int(64)[13] "temp"
+    (2094488 'move' _ir_F0_low[2261769] inlineImm[2094474])
+    (2094492 'move' _ir_F1_count[2261771] size[1919217])
+    (2261569 'move' ret_tmp_F0_low[2261561] _ir_F0_low[2261769])
+    (2261574 'move' ret_tmp_F1_count[2261563] _ir_F1_count[2261771])
+    (2261553 'move' call_tmp_F0_low[2261545] ret_tmp_F0_low[2261561])
+    (2261558 'move' call_tmp_F1_count[2261547] ret_tmp_F1_count[2261563])
+    val _ic__super[2247291]:object[22] "temp"
+    val _ic__more[2247293]:int(64)[13] "temp"
+    const-val _ic__F0_low[2247295]:int(64)[13] "temp"
+    const-val _ic__F1_count[2247297]:int(64)[13] "temp"
+    val _ic__F2__iterator[2247299]:_ic_chpl_direct_counted_range_iter_helper[1100497] "temp"
+    const _ic__F3_tmp[2247301]:2*int(64)[1037179] "temp"
+    val _ic__F4__iterator[2247303]:_ic_chpl_direct_param_stride_range_iter[1100243] "temp"
+    val _ic__F5_i[2247305]:int(64)[13] "temp"
+    const-val _ic__F6_low[2247307]:int(64)[13] "temp"
+    val _ic__value[2247309]:int(64)[13] "temp"
+    const-val call_tmp[2096105]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2096107 'move' call_tmp[2096105](2096109 'sizeof_bundle' _ic_chpl_direct_counted_range_iter[1100747]))
+    const-val cast_tmp[2096111]:c_void_ptr[149] "dead after last mention" "temp"
+    (2096129 'move' _ic__more[2247293] 1)
+    const-val tmp[2096133]:int(64)[13] "temp"
+    (2096135 'move' tmp[2096133] call_tmp_F0_low[2261545])
+    (2096140 'move' _ic__F0_low[2247295] tmp[2096133])
+    const-val tmp[2096144]:int(64)[13] "temp"
+    (2096146 'move' tmp[2096144] call_tmp_F1_count[2261547])
+    (2096151 'move' _ic__F1_count[2247297] tmp[2096144])
+    val ret[1919238]:_ir_chpl_direct_counted_range_iter[1100753] "dead after last mention" "RVV" "temp"
+    val _indexOfInterest[1919240]:int(64)[13] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+    const-val call_tmp_F0_low[2263002]:int(64)[13] "temp"
+    const-val call_tmp_F1_count[2263004]:int(64)[13] "temp"
+    const-val ret_tmp_F0_low[2263018]:int(64)[13] "temp"
+    const-val ret_tmp_F1_count[2263020]:int(64)[13] "temp"
+    const-val low[1919248]:int(64)[13] "temp"
+    (1919250 'move' low[1919248] _ic__F0_low[2247295])
+    const-val count[1919255]:int(64)[13] "temp"
+    (1919257 'move' count[1919255] _ic__F1_count[2247297])
+    const-val _ir_F0_low[2263226]:int(64)[13] "temp"
+    const-val _ir_F1_count[2263228]:int(64)[13] "temp"
+    (2096883 'move' _ir_F0_low[2263226] low[1919248])
+    (2096887 'move' _ir_F1_count[2263228] count[1919255])
+    (2263026 'move' ret_tmp_F0_low[2263018] _ir_F0_low[2263226])
+    (2263031 'move' ret_tmp_F1_count[2263020] _ir_F1_count[2263228])
+    (2263010 'move' call_tmp_F0_low[2263002] ret_tmp_F0_low[2263018])
+    (2263015 'move' call_tmp_F1_count[2263004] ret_tmp_F1_count[2263020])
+    val _ic__super[2249732]:object[22] "temp"
+    val _ic__more[2249734]:int(64)[13] "temp"
+    const-val _ic__F0_low[2249736]:int(64)[13] "temp"
+    const-val _ic__F1_count[2249738]:int(64)[13] "temp"
+    const _ic__F2_tmp[2249740]:2*int(64)[1037179] "temp"
+    val _ic__F3__iterator[2249742]:_ic_chpl_direct_param_stride_range_iter[1100243] "temp"
+    val _ic__F4_i[2249744]:int(64)[13] "temp"
+    const-val _ic__F5_low[2249746]:int(64)[13] "temp"
+    val _ic__value[2249748]:int(64)[13] "temp"
+    const-val call_tmp[2098485]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2098487 'move' call_tmp[2098485](2098489 'sizeof_bundle' _ic_chpl_direct_counted_range_iter_helper[1100497]))
+    const-val cast_tmp[2098491]:c_void_ptr[149] "dead after last mention" "temp"
+    (2098509 'move' _ic__more[2249734] 1)
+    const-val tmp[2098513]:int(64)[13] "temp"
+    (2098515 'move' tmp[2098513] call_tmp_F0_low[2263002])
+    (2098520 'move' _ic__F0_low[2249736] tmp[2098513])
+    const-val tmp[2098524]:int(64)[13] "temp"
+    (2098526 'move' tmp[2098524] call_tmp_F1_count[2263004])
+    (2098531 'move' _ic__F1_count[2249738] tmp[2098524])
+    val ret[1936663]:_ir_chpl_direct_counted_range_iter_helper[1100503] "dead after last mention" "RVV" "temp"
+    val call_tmp[1936665]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    const-val tmp[1936667]:bool[10] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    const-val tmp[1936669]:bool[10] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+    const-val call_tmp[1936671]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val count[1937342]:int(64)[13] "temp"
+    (1937347 'move' count[1937342] _ic__F1_count[2249738])
+    const-val call_tmp[2036556]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2036558 'move' call_tmp[2036556](2036560 '<' count[1937342] 0))
+    (1936673 'move' call_tmp[1936671] call_tmp[2036556])
+    (1936678 'move' tmp[1936669] call_tmp[1936671])
+    (1936681 'move' tmp[1936667] call_tmp[1936671])
+    const-val call_tmp[1936684]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1936686 'move' call_tmp[1936684] call_tmp[1936671])
+    if call_tmp[1936671]
+    {
+      (1936692 call boundsCheckHalt[210084] "With a negative count, the range must have a last index.")
+    }
+    val tmp_x0[2259020]:int(64)[13] "temp"
+    val tmp_x1[2259022]:int(64)[13] "temp"
+    val tmp_x0[2259038]:int(64)[13] "temp"
+    val tmp_x1[2259040]:int(64)[13] "temp"
+    const-val tmp[1936699]:bool[10] "dead after last mention" "maybe param" "temp"
+    const-val call_tmp[1936701]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val count[1937349]:int(64)[13] "temp"
+    (1937354 'move' count[1937349] _ic__F1_count[2249738])
+    val inlineImm[2048680]:int(64)[13] "temp"
+    (2048683 'move' inlineImm[2048680] 0)
+    const-val call_tmp[2048686]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2048688 'move' call_tmp[2048686](2048690 '==' count[1937349] inlineImm[2048680]))
+    (1936703 'move' call_tmp[1936701] call_tmp[2048686])
+    (1936709 'move' tmp[1936699] call_tmp[1936701])
+    if call_tmp[1936701]
+    {
+      val tmp_x0[2259064]:int(64)[13] "temp"
+      val tmp_x1[2259066]:int(64)[13] "temp"
+      val call_tmp[1936716]:int(64)[13] "dead at end of block" "expr temp" "maybe param" "temp" "type variable"
+      const-val call_tmp[1936718]:uint(64)[115] "dead at end of block" "expr temp" "maybe param" "temp"
+      const-val low[1937356]:int(64)[13] "temp"
+      (1937361 'move' low[1937356] _ic__F0_low[2249736])
+      const-val call_tmp[2037416]:uint(64)[115] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2037418 'move' call_tmp[2037416](2037420 'cast' uint(64)[115] low[1937356]))
+      (1936720 'move' call_tmp[1936718] call_tmp[2037416])
+      const-val call_tmp[1936725]:uint(64)[115] "dead at end of block" "expr temp" "maybe param" "temp"
+      const-val coerce_tmp[1936727]:uint(64)[115] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+      (1936729 'move' coerce_tmp[1936727](1936731 'cast' uint(64)[115] 1))
+      const-val call_tmp[2098987]:uint(64)[115] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2098989 'move' call_tmp[2098987](2098991 '-' call_tmp[1936718] 1))
+      (1936734 'move' call_tmp[1936725] call_tmp[2098987])
+      const-val call_tmp[1936739]:int(64)[13] "dead at end of block" "expr temp" "maybe param" "temp"
+      const-val call_tmp[2099377]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2099379 'move' call_tmp[2099377](2099381 'cast' int(64)[13] call_tmp[1936725]))
+      (1936741 'move' call_tmp[1936739] call_tmp[2099377])
+      val ret_tmp_x0[2259080]:int(64)[13] "temp"
+      val ret_tmp_x1[2259082]:int(64)[13] "temp"
+      const-val low[1937363]:int(64)[13] "temp"
+      (1937368 'move' low[1937363] _ic__F0_low[2249736])
+      val this_x0[2259702]:int(64)[13]
+      val this_x1[2259704]:int(64)[13]
+      (2100885 'move' this_x0[2259702] low[1937363])
+      (2100889 'move' this_x1[2259704] call_tmp[1936739])
+      (2259088 'move' ret_tmp_x0[2259080] this_x0[2259702])
+      (2259093 'move' ret_tmp_x1[2259082] this_x1[2259704])
+      (2259072 'move' tmp_x0[2259064] ret_tmp_x0[2259080])
+      (2259077 'move' tmp_x1[2259066] ret_tmp_x1[2259082])
+      (2259046 'move' tmp_x0[2259038] tmp_x0[2259064])
+      (2259051 'move' tmp_x1[2259040] tmp_x1[2259066])
+    }
+    {
+      val tmp_x0[2259096]:int(64)[13] "temp"
+      val tmp_x1[2259098]:int(64)[13] "temp"
+      val call_tmp[1936762]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+      const-val call_tmp[1936764]:int(64)[13] "dead at end of block" "expr temp" "maybe param" "temp"
+      const-val count[1937370]:int(64)[13] "temp"
+      (1937375 'move' count[1937370] _ic__F1_count[2249738])
+      (1936766 'move' call_tmp[1936764] count[1937370])
+      const-val call_tmp[1936769]:int(64)[13] "dead at end of block" "expr temp" "maybe param" "temp"
+      const-val count[1937377]:int(64)[13] "temp"
+      (1937382 'move' count[1937377] _ic__F1_count[2249738])
+      const-val call_tmp[2064056]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2064058 'move' call_tmp[2064056](2064060 '-' count[1937377] 1))
+      (1936771 'move' call_tmp[1936769] call_tmp[2064056])
+      const-val call_tmp[1936776]:int(64)[13] "dead at end of block" "expr temp" "maybe param" "temp"
+      const-val low[1937384]:int(64)[13] "temp"
+      (1937389 'move' low[1937384] _ic__F0_low[2249736])
+      const-val call_tmp[2044300]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2044302 'move' call_tmp[2044300](2044304 '+' low[1937384] call_tmp[1936769]))
+      (1936778 'move' call_tmp[1936776] call_tmp[2044300])
+      val ret_tmp_x0[2259112]:int(64)[13] "temp"
+      val ret_tmp_x1[2259114]:int(64)[13] "temp"
+      const-val low[1937391]:int(64)[13] "temp"
+      (1937396 'move' low[1937391] _ic__F0_low[2249736])
+      val this_x0[2259710]:int(64)[13]
+      val this_x1[2259712]:int(64)[13]
+      (2100907 'move' this_x0[2259710] low[1937391])
+      (2100911 'move' this_x1[2259712] call_tmp[1936776])
+      (2259120 'move' ret_tmp_x0[2259112] this_x0[2259710])
+      (2259125 'move' ret_tmp_x1[2259114] this_x1[2259712])
+      (2259104 'move' tmp_x0[2259096] ret_tmp_x0[2259112])
+      (2259109 'move' tmp_x1[2259098] ret_tmp_x1[2259114])
+      (2259056 'move' tmp_x0[2259038] tmp_x0[2259096])
+      (2259061 'move' tmp_x1[2259040] tmp_x1[2259098])
+    }
+    (2259028 'move' tmp_x0[2259020] tmp_x0[2259038])
+    (2259033 'move' tmp_x1[2259022] tmp_x1[2259040])
+    (1936801 'noop')
+    1
+    const-ref call_tmp[1936803]:int(64)[13] "dead at end of block" "maybe param" "reference to a const" "temp"
+    (1936805 'move' call_tmp[1936803](2259035 'set reference' tmp_x0[2259020]))
+    const-val start[1936810]:int(64)[13] "dead at end of block" "const" "insert auto destroy"
+    const-val coerce_tmp[1936812]:int(64)[13] "dead at end of block" "coerce temp" "insert auto destroy" "maybe copy elided" "temp"
+    (1936814 'move' coerce_tmp[1936812](1936816 'deref' call_tmp[1936803]))
+    (1936818 '=' start[1936810] coerce_tmp[1936812])
+    (1936821 'noop')
+    const-ref call_tmp[1936822]:int(64)[13] "dead at end of block" "maybe param" "reference to a const" "temp"
+    (1936824 'move' call_tmp[1936822](2259037 'set reference' tmp_x1[2259022]))
+    const-val end[1936829]:int(64)[13] "dead at end of block" "const" "insert auto destroy"
+    const-val coerce_tmp[1936831]:int(64)[13] "dead at end of block" "coerce temp" "insert auto destroy" "maybe copy elided" "temp"
+    (1936833 'move' coerce_tmp[1936831](1936835 'deref' call_tmp[1936822]))
+    (1936837 '=' end[1936829] coerce_tmp[1936831])
+    (1936840 'noop')
+    val _indexOfInterest[1936841]:int(64)[13] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+    const-val call_tmp_F0_low[2264895]:int(64)[13] "temp"
+    const-val call_tmp_F1_high[2264897]:int(64)[13] "temp"
+    const-val ret_tmp_F0_low[2264911]:int(64)[13] "temp"
+    const-val ret_tmp_F1_high[2264913]:int(64)[13] "temp"
+    const-val _ir_F0_low[2265239]:int(64)[13] "temp"
+    const-val _ir_F1_high[2265241]:int(64)[13] "temp"
+    (2101941 'move' _ir_F0_low[2265239] coerce_tmp[1936812])
+    (2101945 'move' _ir_F1_high[2265241] coerce_tmp[1936831])
+    (2264919 'move' ret_tmp_F0_low[2264911] _ir_F0_low[2265239])
+    (2264924 'move' ret_tmp_F1_high[2264913] _ir_F1_high[2265241])
+    (2264903 'move' call_tmp_F0_low[2264895] ret_tmp_F0_low[2264911])
+    (2264908 'move' call_tmp_F1_high[2264897] ret_tmp_F1_high[2264913])
+    val _ic__super[2251806]:object[22] "temp"
+    val _ic__more[2251808]:int(64)[13] "temp"
+    const-val _ic__F0_low[2251810]:int(64)[13] "temp"
+    const-val _ic__F1_high[2251812]:int(64)[13] "temp"
+    val _ic__value[2251814]:int(64)[13] "temp"
+    const-val call_tmp[2104551]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2104553 'move' call_tmp[2104551](2104555 'sizeof_bundle' _ic_chpl_direct_param_stride_range_iter[1100243]))
+    const-val cast_tmp[2104557]:c_void_ptr[149] "dead after last mention" "temp"
+    (2104575 'move' _ic__more[2251808] 1)
+    const-val tmp[2104579]:int(64)[13] "temp"
+    (2104581 'move' tmp[2104579] call_tmp_F0_low[2264895])
+    (2104586 'move' _ic__F0_low[2251810] tmp[2104579])
+    const-val tmp[2104590]:int(64)[13] "temp"
+    (2104592 'move' tmp[2104590] call_tmp_F1_high[2264897])
+    (2104597 'move' _ic__F1_high[2251812] tmp[2104590])
+    val ret[1936863]:_ir_chpl_direct_param_stride_range_iter[1100249] "dead after last mention" "RVV" "temp"
+    val call_tmp[1936865]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val i[1936869]:int(64)[13] "dead at end of block" "insert auto destroy"
+    val call_tmp[1936871]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    (1936873 'move' i[1936869] 0)
+    val call_tmp[1936876]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    const-val default_arg_first[1936878]:int(64)[13] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+    const-val low[1936880]:int(64)[13] "temp"
+    (1936882 'move' low[1936880] _ic__F0_low[2251810])
+    (1936887 'move' default_arg_first[1936878] low[1936880])
+    const-val default_arg_last[1936892]:int(64)[13] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+    const-val high[1936894]:int(64)[13] "temp"
+    (1936896 'move' high[1936894] _ic__F1_high[2251812])
+    (1936901 'move' default_arg_last[1936892] high[1936894])
+    const-val _return_tmp_[1936906]:bool[10] "dead after last mention" "temp"
+    const-val low[1936908]:int(64)[13] "temp"
+    (1936910 'move' low[1936908] _ic__F0_low[2251810])
+    const-val high[1936915]:int(64)[13] "temp"
+    (1936917 'move' high[1936915] _ic__F1_high[2251812])
+    (1936922 'move' _return_tmp_[1936906](1936925 call chpl_checkIfRangeIterWillOverflow[1093055] low[1936908] high[1936915] 1 default_arg_first[1936878] default_arg_last[1936892] 1))
+    CForLoop[1936932] hazard
+    {
+      const-val yret[1936961]:int(64)[13] "dead after last mention" "YVV" "temp"
+      (1936963 'move' yret[1936961] i[1936869])
+      const-val _yieldedIndex[1936966]:int(64)[13] "temp"
+      (1936968 'move' _yieldedIndex[1936966] i[1936869])
+      const-val i[1936972]:int(64)[13] "const" "index var" "insert auto destroy"
+      (1936974 'move' i[1936972] _yieldedIndex[1936966])
+      const-val yret[1936977]:int(64)[13] "dead after last mention" "YVV" "temp"
+      (1936979 'move' yret[1936977] _yieldedIndex[1936966])
+      const-val _yieldedIndex[1937007]:int(64)[13] "temp"
+      (1937340 'move' _yieldedIndex[1937007] _yieldedIndex[1936966])
+      const-val i[1937009]:int(64)[13] "const" "index var" "insert auto destroy"
+      (1937011 'move' i[1937009] _yieldedIndex[1937007])
+      const-val yret[1937014]:int(64)[13] "dead after last mention" "YVV" "temp"
+      (1937016 'move' yret[1937014] _yieldedIndex[1937007])
+      const-val _yieldedIndex[1937019]:int(64)[13] "temp"
+      (1937021 'move' _yieldedIndex[1937019] _yieldedIndex[1937007])
+      const-val slot[1937025]:int(64)[13] "const" "index var" "insert auto destroy"
+      (1937027 'move' slot[1937025] _yieldedIndex[1937019])
+      const-val yret[1937030]:int(64)[13] "dead after last mention" "YVV" "temp"
+      (1937032 'move' yret[1937030] _yieldedIndex[1937019])
+      const-val _yieldedIndex[1937035]:int(64)[13] "temp"
+      (1937037 'move' _yieldedIndex[1937035] _yieldedIndex[1937019])
+      const-val slot[1937041]:int(64)[13] "const" "index var" "insert auto destroy"
+      (1937043 'move' slot[1937041] _yieldedIndex[1937035])
+      const-val yret[1937046]:int(64)[13] "dead after last mention" "YVV" "temp"
+      (1937048 'move' yret[1937046] _yieldedIndex[1937035])
+      const-val _yieldedIndex[1937051]:int(64)[13] "temp"
+      (1937053 'move' _yieldedIndex[1937051] _yieldedIndex[1937035])
+      const-val slot[1937057]:int(64)[13] "const" "index var" "insert auto destroy"
+      (1937059 'move' slot[1937057] _yieldedIndex[1937051])
+      const-ref call_tmp[1937062]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "maybe param" "temp"
+      const-ref this[1937064]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+      (1937066 'move' this[1937064] _ic__F0_this[2245281])
+      ref call_tmp[2202193]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "maybe param" "temp"
+      (2202195 'move' call_tmp[2202193](2202197 '.' this[1937064] table[1205202]))
+      (1937071 'move' call_tmp[1937062] call_tmp[2202193])
+      const-val call_tmp[1937076]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[2209123]:_ddata(chpl_TableEntry(unmanaged BaseArr,nothing))[1205360] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (2209125 'move' coerce_tmp[2209123](2209127 '.v' call_tmp[1937062] table[1205278]))
+      ref call_tmp[2209130]:chpl_TableEntry(unmanaged BaseArr,nothing)[1205337] "dead after last mention" "maybe param" "temp"
+      (2209132 'move' call_tmp[2209130](2209134 'array_get' coerce_tmp[2209123] _yieldedIndex[1937051]))
+      const-val coerce_tmp[2209137]:chpl__hash_status[200420] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (2209139 'move' coerce_tmp[2209137](2209141 '.v' call_tmp[2209130] status[1205329]))
+      const-val call_tmp[2209144]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2209146 'move' call_tmp[2209144](2209148 '==' coerce_tmp[2209137] full[200416]))
+      (1937078 'move' call_tmp[1937076] call_tmp[2209144])
+      const-val call_tmp[1937084]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (1937086 'move' call_tmp[1937084] call_tmp[1937076])
+      if call_tmp[1937076]
+      {
+        val yret[1937091]:BaseArr[149545] "dead after last mention" "YVV" "temp"
+        const-ref call_tmp[1937093]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "maybe param" "temp"
+        const-ref this[1937095]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+        (1937097 'move' this[1937095] _ic__F0_this[2245281])
+        ref call_tmp[2202203]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "maybe param" "temp"
+        (2202205 'move' call_tmp[2202203](2202207 '.' this[1937095] table[1205202]))
+        (1937102 'move' call_tmp[1937093] call_tmp[2202203])
+        ref call_tmp[1937107]:chpl_TableEntry(unmanaged BaseArr,nothing)[1205337] "dead after last mention" "maybe param" "temp"
+        const-ref _this_tmp_[1937109]:_ddata(chpl_TableEntry(unmanaged BaseArr,nothing))[1205360] "dead after last mention" "temp"
+        ref call_tmp[2197862]:_ddata(chpl_TableEntry(unmanaged BaseArr,nothing))[1205360] "dead after last mention" "maybe param" "temp"
+        (2197864 'move' call_tmp[2197862](2197866 '.' call_tmp[1937093] table[1205278]))
+        (1937111 'move' _this_tmp_[1937109] call_tmp[2197862])
+        val coerce_tmp[1937116]:_ddata(chpl_TableEntry(unmanaged BaseArr,nothing))[1205360] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1937118 'move' coerce_tmp[1937116](1937120 'deref' _this_tmp_[1937109]))
+        ref call_tmp[2198285]:chpl_TableEntry(unmanaged BaseArr,nothing)[1205337] "dead after last mention" "maybe param" "temp"
+        (2198287 'move' call_tmp[2198285](2198289 'array_get' coerce_tmp[1937116] slot[1937057]))
+        (1937122 'move' call_tmp[1937107] call_tmp[2198285])
+        const-ref call_tmp[1937128]:BaseArr[149545] "dead after last mention" "maybe param" "temp"
+        ref call_tmp[2203177]:BaseArr[149545] "dead after last mention" "maybe param" "temp"
+        (2203179 'move' call_tmp[2203177](2203181 '.' call_tmp[1937107] key[1205333]))
+        (1937130 'move' call_tmp[1937128] call_tmp[2203177])
+        val _yieldedIndex[1937135]:BaseArr[149545] "temp"
+        (1937137 'move' _yieldedIndex[1937135](1937139 'deref' call_tmp[1937128]))
+        const e[1937142]:BaseArr[149545] "const" "index var" "insert auto destroy"
+        (1937144 'move' e[1937142] _yieldedIndex[1937135])
+        const-val tmp[1937149]:chpl_localeID_t[209306] "dead after last mention" "const" "temp"
+        const-val call_tmp[1937151]:chpl_localeID_t[209306] "dead after last mention" "expr temp" "maybe param" "temp"
+        (1937153 'move' call_tmp[1937151](1937155 '_wide_get_locale' e[1937142]))
+        (1937157 'move' tmp[1937149] call_tmp[1937151])
+        val call_tmp[1937161]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "expr temp" "maybe param" "temp" "type variable"
+        val call_tmp[1937163]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "maybe param" "temp"
+        val coerce_tmp[1937165]:BaseArr[149545] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+        (1937167 'move' coerce_tmp[1937165] e[1937142])
+        val _formal_type_tmp_[2209229]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "temp"
+        val ret[2209231]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "RVV" "temp"
+        val coerce_tmp[2209233]:object[22] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (2209235 'move' coerce_tmp[2209233](2209237 'cast' object[22] coerce_tmp[1937165]))
+        const-val call_tmp[2209240]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (2209242 'move' call_tmp[2209240](2209244 'ptr_eq' coerce_tmp[2209233] nil[44]))
+        if call_tmp[2209240]
+        {
+          (2209249 'move' ret[2209231](2209251 'cast' BaseArrOverRectangularDom(1,int(64),false)[1252717] nil[44]))
+          gotoReturn _end__cast[2209267] _end__cast[2209267]
+        }
+        val call_tmp[2209257]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "maybe param" "temp"
+        (2209259 'move' call_tmp[2209257](2209261 'dynamic_cast' _formal_type_tmp_[2209229] coerce_tmp[1937165]))
+        (2209264 'move' ret[2209231] call_tmp[2209257])
+        label _end__cast[2209267]
+        (1937170 'move' call_tmp[1937163] ret[2209231])
+        val eCastQ[1937175]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "insert auto destroy"
+        (1937177 'move' eCastQ[1937175] call_tmp[1937163])
+        const-val call_tmp[1937182]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        val coerce_tmp[1937184]:object[22] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1937186 'move' coerce_tmp[1937184](1937188 'cast' object[22] eCastQ[1937175]))
+        const-val call_tmp[2033388]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (2033390 'move' call_tmp[2033388](2033392 'ptr_eq' coerce_tmp[1937184] nil[44]))
+        (1937191 'move' call_tmp[1937182] call_tmp[2033388])
+        const-val call_tmp[1937197]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (1937199 'move' call_tmp[1937197] call_tmp[1937182])
+        if call_tmp[1937197]
+        {
+          val call_tmp[1937204]:domain(1,int(64),false)[1247549] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+          (1937207 call halt[1287433] "internal error: " "borrowed domain(1,int(64),false)" " contains an bad array type " "unmanaged BaseArrOverRectangularDom(1,int(64),false)")
+        }
+        val call_tmp[1937213]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "maybe param" "temp"
+        val coerce_tmp[2209391]:object[22] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (2209393 'move' coerce_tmp[2209391](2209395 'cast' object[22] eCastQ[1937175]))
+        const-val call_tmp[2209398]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (2209400 'move' call_tmp[2209398](2209402 'ptr_eq' coerce_tmp[2209391] nil[44]))
+        if call_tmp[2209398]
+        {
+          (2209408 call nilCheckHalt[210068] "argument to ! is nil")
+        }
+        (1937215 'move' call_tmp[1937213] eCastQ[1937175])
+        val eCast[1937220]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "insert auto destroy"
+        (1937222 'move' eCast[1937220] call_tmp[1937213])
+        const-val call_tmp[1937227]:1*range(int(64),bounded,false)[1241311] "dead at end of block" "maybe param" "temp"
+        const-val ret_tmp[1937229]:1*range(int(64),bounded,false)[1241311] "temp"
+        (1937232 call getIndices[1293128] rhs[1284828] ret_tmp[1937229])
+        (1937235 'move' call_tmp[1937227] ret_tmp[1937229])
+        val inds_x0[2254244]:range(int(64),bounded,false)[1023946]
+        (2254250 'move' inds_x0[2254244](2254248 '.v' call_tmp[1937227] x0[1241309]))
+        val tmp[1937243]:1*range(int(64),bounded,false)[1241311] "dead at end of block" "insert auto destroy"
+        val call_tmp[1937245]:range(int(64),bounded,false)[1023946] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+        val call_tmp[1937247]:1*range(int(64),bounded,false)[1241311] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+        const-val ret_tmp[1937249]:1*range(int(64),bounded,false)[1241311] "temp"
+        val tup_x0[2254285]:range(int(64),bounded,false)[1023946] "temp"
+        val elt_x0[2198491]:range(int(64),bounded,false)[1023946] "dead at end of block" "no auto destroy" "temp"
+        (2198494 call init[1023169] elt_x0[2198491] 1 0 1 0 0)
+        (2198501 'move' tup_x0[2254285] elt_x0[2198491])
+        (2254290 '.=' ret_tmp[1937249] x0[1241309] tup_x0[2254285])
+        (1937254 'move' tmp[1937243] ret_tmp[1937249])
+        const-val i[1937258]:int(64)[13] "dead at end of block" "insert auto destroy"
+        (1937260 'move' i[1937258] 0)
+        const-ref call_tmp[1937265]:range(int(64),bounded,false)[1023946] "dead at end of block" "maybe param" "temp"
+        (1937267 'move' call_tmp[1937265](2254252 'set reference' inds_x0[2254244]))
+        const-val from[1937272]:range(int(64),bounded,false)[1023946] "dead at end of block" "insert auto destroy"
+        (1937274 'move' from[1937272](1937276 'deref' call_tmp[1937265]))
+        ref call_tmp[1937278]:range(int(64),bounded,false)[1023946] "dead after last mention" "maybe param" "temp"
+        (1937280 'move' call_tmp[1937278](1937282 '.' tmp[1937243] x0[1241309]))
+        val call_tmp[1937285]:range(int(64),bounded,false)[1023946] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+        const-val call_tmp[1937287]:range(int(64),bounded,false)[1023946] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+        const-val ret_tmp[1937289]:range(int(64),bounded,false)[1023946] "temp"
+        (1937292 call safeCast[1293372] from[1937272] ret_tmp[1937289])
+        (1937295 'move' call_tmp[1937287] ret_tmp[1937289])
+        (2199203 '=' call_tmp[1937278] call_tmp[1937287])
+        val coerce_tmp[1937314]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1937316 'move' coerce_tmp[1937314] eCast[1937220])
+        val _virtual_method_tmp_[1937319]:int(32)[95] "temp"
+        (1937321 'move' _virtual_method_tmp_[1937319](1937323 'getcid' coerce_tmp[1937314]))
+        (1937325 'virtual method call' dsiReallocate[1293847] _virtual_method_tmp_[1937319] coerce_tmp[1937314] tmp[1937243])
+      }
+      {
+        const-val low[1936934]:int(64)[13] "temp"
+        (1936936 'move' low[1936934] _ic__F0_low[2251810])
+        (1936941 '=' i[1936869] low[1936934])
+      }
+      {
+        const-val high[1936945]:int(64)[13] "temp"
+        (1936947 'move' high[1936945] _ic__F1_high[2251812])
+        (1936952 '<=' i[1936869] high[1936945])
+      }
+      {
+        val call_tmp[1936956]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+        (1936958 '+=' i[1936869] 1)
+      }
+    }
+    label _endchpl_direct_param_stride_range_iter[1936995]
+    const-val call_tmp[2106224]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    label _endchpl_direct_counted_range_iter_helper[1937003]
+    const-val call_tmp[2107247]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    label _endchpl_direct_counted_range_iter[1919339]
+    const-val call_tmp[2107679]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    label _end_allSlots[1919344]
+    const-val call_tmp[2192837]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    label _endallSlots[1919349]
+    const-val call_tmp[2209084]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    label _endthese[1862999]
+    const-val call_tmp[2209185]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val call_tmp[1285243]:1*range(int(64),bounded,false)[1241311] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    const-val ret_tmp[1789447]:1*range(int(64),bounded,false)[1241311] "temp"
+    (1285251 call getIndices[1293128] rhs[1284828] ret_tmp[1789447])
+    (1789450 'move' call_tmp[1285243] ret_tmp[1789447])
+    (1285256 call dsiSetIndices[1247923] lhs[1284826] call_tmp[1285243])
+    val _indexOfInterest[1285260]:BaseArr[149545] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+    const-ref call_tmp[1285264]:chpl__simpleSet(unmanaged BaseArr)[1205208] "dead at end of block" "maybe param" "temp"
+    val coerce_tmp[1293939]:BaseDom[146729] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+    (1293945 'move' coerce_tmp[1293939](1293941 'cast' BaseDom[146729] lhs[1284826]))
+    ref call_tmp[2128102]:chpl__simpleSet(unmanaged BaseArr)[1205208] "dead after last mention" "maybe param" "temp"
+    (2128104 'move' call_tmp[2128102](2128106 '.' coerce_tmp[1293939] _arrs[146003]))
+    (1285266 'move' call_tmp[1285264] call_tmp[2128102])
+    const-ref call_tmp_F0_this[2245947]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+    const-ref _ir_F0_this[2245955]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+    (2208891 'move' _ir_F0_this[2245955] call_tmp[1285264])
+    (2245953 'move' call_tmp_F0_this[2245947] _ir_F0_this[2245955])
+    val _ic__super[2245304]:object[22] "temp"
+    val _ic__more[2245306]:int(64)[13] "temp"
+    const-ref _ic__F0_this[2245308]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+    val _ic__F1__iterator[2245310]:_ic_allSlots__ref_chpl__hashtable_BaseArr_nothing[1286001] "temp"
+    val _ic__F2__iterator[2245312]:_ic__allSlots[1218466] "temp"
+    val _ic__F3__iterator[2245314]:_ic_chpl_direct_counted_range_iter[1100747] "temp"
+    val _ic__F4__iterator[2245316]:_ic_chpl_direct_counted_range_iter_helper[1100497] "temp"
+    const _ic__F5_tmp[2245318]:2*int(64)[1037179] "temp"
+    val _ic__F6__iterator[2245320]:_ic_chpl_direct_param_stride_range_iter[1100243] "temp"
+    val _ic__F7_i[2245322]:int(64)[13] "temp"
+    val _ic__value[2245324]:BaseArr[149545] "temp"
+    const-val call_tmp[2208902]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2208904 'move' call_tmp[2208902](2208906 'sizeof_bundle' _ic_these__ref_chpl__simpleSet_BaseArr[1286575]))
+    const-val cast_tmp[2208908]:c_void_ptr[149] "dead after last mention" "temp"
+    (2208926 'move' _ic__more[2245306] 1)
+    const-ref tmp[2208930]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+    (2208932 'move' tmp[2208930] call_tmp_F0_this[2245947])
+    (2208937 'move' _ic__F0_this[2245308] tmp[2208930])
+    val ret[1863224]:_ir_these__ref_chpl__simpleSet_BaseArr[1286581] "dead after last mention" "RVV" "temp"
+    val _indexOfInterest[1863226]:int(64)[13] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+    const-ref call_tmp[1863230]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead at end of block" "maybe param" "temp"
+    const-ref this[1863415]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+    (1863420 'move' this[1863415] _ic__F0_this[2245308])
+    ref call_tmp[2202183]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "maybe param" "temp"
+    (2202185 'move' call_tmp[2202183](2202187 '.' this[1863415] table[1205202]))
+    (1863232 'move' call_tmp[1863230] call_tmp[2202183])
+    const-ref call_tmp_F0_this[2246763]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    const-ref ret_tmp_F0_this[2246771]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    const-ref _ir_F0_this[2246783]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    (2208970 'move' _ir_F0_this[2246783] call_tmp[1863230])
+    (2246777 'move' ret_tmp_F0_this[2246771] _ir_F0_this[2246783])
+    (2246769 'move' call_tmp_F0_this[2246763] ret_tmp_F0_this[2246771])
+    val _ic__super[2245561]:object[22] "temp"
+    val _ic__more[2245563]:int(64)[13] "temp"
+    const-ref _ic__F0_this[2245565]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    val _ic__F1__iterator[2245567]:_ic__allSlots[1218466] "temp"
+    val _ic__F2__iterator[2245569]:_ic_chpl_direct_counted_range_iter[1100747] "temp"
+    val _ic__F3__iterator[2245571]:_ic_chpl_direct_counted_range_iter_helper[1100497] "temp"
+    const _ic__F4_tmp[2245573]:2*int(64)[1037179] "temp"
+    val _ic__F5__iterator[2245575]:_ic_chpl_direct_param_stride_range_iter[1100243] "temp"
+    val _ic__F6_i[2245577]:int(64)[13] "temp"
+    const-val _ic__F7_low[2245579]:int(64)[13] "temp"
+    val _ic__value[2245581]:int(64)[13] "temp"
+    const-val call_tmp[2209042]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2209044 'move' call_tmp[2209042](2209046 'sizeof_bundle' _ic_allSlots__ref_chpl__hashtable_BaseArr_nothing[1286001]))
+    const-val cast_tmp[2209048]:c_void_ptr[149] "dead after last mention" "temp"
+    (2209066 'move' _ic__more[2245563] 1)
+    const-ref tmp[2209070]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    (2209072 'move' tmp[2209070] call_tmp_F0_this[2246763])
+    (2209077 'move' _ic__F0_this[2245565] tmp[2209070])
+    val ret[1919648]:_ir_allSlots__ref_chpl__hashtable_BaseArr_nothing[1286007] "dead after last mention" "RVV" "temp"
+    val _indexOfInterest[1919650]:int(64)[13] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+    const-ref call_tmp[1919654]:int(64)[13] "dead at end of block" "maybe param" "temp"
+    const-ref this[1919991]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "temp"
+    (1919996 'move' this[1919991] _ic__F0_this[2245565])
+    ref call_tmp[2198026]:int(64)[13] "dead after last mention" "maybe param" "temp"
+    (2198028 'move' call_tmp[2198026](2198030 '.' this[1919991] tableSize[1205275]))
+    (1919656 'move' call_tmp[1919654] call_tmp[2198026])
+    const-val call_tmp_F0_size[2262221]:int(64)[13] "temp"
+    const-val coerce_tmp[1919663]:int(64)[13] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+    (1919665 'move' coerce_tmp[1919663](1919667 'deref' call_tmp[1919654]))
+    const-val ret_tmp_F0_size[2262229]:int(64)[13] "temp"
+    const-val _ir_F0_size[2262257]:int(64)[13] "temp"
+    (2117673 'move' _ir_F0_size[2262257] coerce_tmp[1919663])
+    (2262235 'move' ret_tmp_F0_size[2262229] _ir_F0_size[2262257])
+    (2262227 'move' call_tmp_F0_size[2262221] ret_tmp_F0_size[2262229])
+    val _ic__super[2246487]:object[22] "temp"
+    val _ic__more[2246489]:int(64)[13] "temp"
+    const-val _ic__F0_size[2246491]:int(64)[13] "temp"
+    val _ic__F1__iterator[2246493]:_ic_chpl_direct_counted_range_iter[1100747] "temp"
+    val _ic__F2__iterator[2246495]:_ic_chpl_direct_counted_range_iter_helper[1100497] "temp"
+    const _ic__F3_tmp[2246497]:2*int(64)[1037179] "temp"
+    val _ic__F4__iterator[2246499]:_ic_chpl_direct_param_stride_range_iter[1100243] "temp"
+    val _ic__F5_i[2246501]:int(64)[13] "temp"
+    const-val _ic__F6_low[2246503]:int(64)[13] "temp"
+    val _ic__value[2246505]:int(64)[13] "temp"
+    const-val call_tmp[2192747]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2192749 'move' call_tmp[2192747](2192751 'sizeof_bundle' _ic__allSlots[1218466]))
+    const-val cast_tmp[2192753]:c_void_ptr[149] "dead after last mention" "temp"
+    (2192771 'move' _ic__more[2246489] 1)
+    const-val tmp[2192775]:int(64)[13] "temp"
+    (2192777 'move' tmp[2192775] call_tmp_F0_size[2262221])
+    (2192782 'move' _ic__F0_size[2246491] tmp[2192775])
+    val ret[1919684]:_ir__allSlots[1218472] "dead after last mention" "RVV" "temp"
+    val _indexOfInterest[1919686]:int(64)[13] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+    const-val call_tmp_F0_low[2261577]:int(64)[13] "temp"
+    const-val call_tmp_F1_count[2261579]:int(64)[13] "temp"
+    const-val ret_tmp_F0_low[2261593]:int(64)[13] "temp"
+    const-val ret_tmp_F1_count[2261595]:int(64)[13] "temp"
+    const-val size[1919694]:int(64)[13] "temp"
+    (1919696 'move' size[1919694] _ic__F0_size[2246491])
+    val inlineImm[2094501]:int(64)[13] "temp"
+    (2094504 'move' inlineImm[2094501] 0)
+    const-val _ir_F0_low[2261777]:int(64)[13] "temp"
+    const-val _ir_F1_count[2261779]:int(64)[13] "temp"
+    (2094515 'move' _ir_F0_low[2261777] inlineImm[2094501])
+    (2094519 'move' _ir_F1_count[2261779] size[1919694])
+    (2261601 'move' ret_tmp_F0_low[2261593] _ir_F0_low[2261777])
+    (2261606 'move' ret_tmp_F1_count[2261595] _ir_F1_count[2261779])
+    (2261585 'move' call_tmp_F0_low[2261577] ret_tmp_F0_low[2261593])
+    (2261590 'move' call_tmp_F1_count[2261579] ret_tmp_F1_count[2261595])
+    val _ic__super[2247316]:object[22] "temp"
+    val _ic__more[2247318]:int(64)[13] "temp"
+    const-val _ic__F0_low[2247320]:int(64)[13] "temp"
+    const-val _ic__F1_count[2247322]:int(64)[13] "temp"
+    val _ic__F2__iterator[2247324]:_ic_chpl_direct_counted_range_iter_helper[1100497] "temp"
+    const _ic__F3_tmp[2247326]:2*int(64)[1037179] "temp"
+    val _ic__F4__iterator[2247328]:_ic_chpl_direct_param_stride_range_iter[1100243] "temp"
+    val _ic__F5_i[2247330]:int(64)[13] "temp"
+    const-val _ic__F6_low[2247332]:int(64)[13] "temp"
+    val _ic__value[2247334]:int(64)[13] "temp"
+    const-val call_tmp[2096168]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2096170 'move' call_tmp[2096168](2096172 'sizeof_bundle' _ic_chpl_direct_counted_range_iter[1100747]))
+    const-val cast_tmp[2096174]:c_void_ptr[149] "dead after last mention" "temp"
+    (2096192 'move' _ic__more[2247318] 1)
+    const-val tmp[2096196]:int(64)[13] "temp"
+    (2096198 'move' tmp[2096196] call_tmp_F0_low[2261577])
+    (2096203 'move' _ic__F0_low[2247320] tmp[2096196])
+    const-val tmp[2096207]:int(64)[13] "temp"
+    (2096209 'move' tmp[2096207] call_tmp_F1_count[2261579])
+    (2096214 'move' _ic__F1_count[2247322] tmp[2096207])
+    val ret[1919715]:_ir_chpl_direct_counted_range_iter[1100753] "dead after last mention" "RVV" "temp"
+    val _indexOfInterest[1919717]:int(64)[13] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+    const-val call_tmp_F0_low[2263034]:int(64)[13] "temp"
+    const-val call_tmp_F1_count[2263036]:int(64)[13] "temp"
+    const-val ret_tmp_F0_low[2263050]:int(64)[13] "temp"
+    const-val ret_tmp_F1_count[2263052]:int(64)[13] "temp"
+    const-val low[1919725]:int(64)[13] "temp"
+    (1919727 'move' low[1919725] _ic__F0_low[2247320])
+    const-val count[1919732]:int(64)[13] "temp"
+    (1919734 'move' count[1919732] _ic__F1_count[2247322])
+    const-val _ir_F0_low[2263234]:int(64)[13] "temp"
+    const-val _ir_F1_count[2263236]:int(64)[13] "temp"
+    (2096905 'move' _ir_F0_low[2263234] low[1919725])
+    (2096909 'move' _ir_F1_count[2263236] count[1919732])
+    (2263058 'move' ret_tmp_F0_low[2263050] _ir_F0_low[2263234])
+    (2263063 'move' ret_tmp_F1_count[2263052] _ir_F1_count[2263236])
+    (2263042 'move' call_tmp_F0_low[2263034] ret_tmp_F0_low[2263050])
+    (2263047 'move' call_tmp_F1_count[2263036] ret_tmp_F1_count[2263052])
+    val _ic__super[2249761]:object[22] "temp"
+    val _ic__more[2249763]:int(64)[13] "temp"
+    const-val _ic__F0_low[2249765]:int(64)[13] "temp"
+    const-val _ic__F1_count[2249767]:int(64)[13] "temp"
+    const _ic__F2_tmp[2249769]:2*int(64)[1037179] "temp"
+    val _ic__F3__iterator[2249771]:_ic_chpl_direct_param_stride_range_iter[1100243] "temp"
+    val _ic__F4_i[2249773]:int(64)[13] "temp"
+    const-val _ic__F5_low[2249775]:int(64)[13] "temp"
+    val _ic__value[2249777]:int(64)[13] "temp"
+    const-val call_tmp[2098548]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2098550 'move' call_tmp[2098548](2098552 'sizeof_bundle' _ic_chpl_direct_counted_range_iter_helper[1100497]))
+    const-val cast_tmp[2098554]:c_void_ptr[149] "dead after last mention" "temp"
+    (2098572 'move' _ic__more[2249763] 1)
+    const-val tmp[2098576]:int(64)[13] "temp"
+    (2098578 'move' tmp[2098576] call_tmp_F0_low[2263034])
+    (2098583 'move' _ic__F0_low[2249765] tmp[2098576])
+    const-val tmp[2098587]:int(64)[13] "temp"
+    (2098589 'move' tmp[2098587] call_tmp_F1_count[2263036])
+    (2098594 'move' _ic__F1_count[2249767] tmp[2098587])
+    val ret[1937399]:_ir_chpl_direct_counted_range_iter_helper[1100503] "dead after last mention" "RVV" "temp"
+    val call_tmp[1937401]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    const-val tmp[1937403]:bool[10] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
+    const-val tmp[1937405]:bool[10] "dead after last mention" "expr temp" "maybe param" "no auto destroy" "temp"
+    const-val call_tmp[1937407]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val count[1937952]:int(64)[13] "temp"
+    (1937957 'move' count[1937952] _ic__F1_count[2249767])
+    const-val call_tmp[2036566]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2036568 'move' call_tmp[2036566](2036570 '<' count[1937952] 0))
+    (1937409 'move' call_tmp[1937407] call_tmp[2036566])
+    (1937414 'move' tmp[1937405] call_tmp[1937407])
+    (1937417 'move' tmp[1937403] call_tmp[1937407])
+    const-val call_tmp[1937420]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1937422 'move' call_tmp[1937420] call_tmp[1937407])
+    if call_tmp[1937407]
+    {
+      (1937428 call boundsCheckHalt[210084] "With a negative count, the range must have a last index.")
+    }
+    val tmp_x0[2259128]:int(64)[13] "temp"
+    val tmp_x1[2259130]:int(64)[13] "temp"
+    val tmp_x0[2259146]:int(64)[13] "temp"
+    val tmp_x1[2259148]:int(64)[13] "temp"
+    const-val tmp[1937435]:bool[10] "dead after last mention" "maybe param" "temp"
+    const-val call_tmp[1937437]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    const-val count[1937959]:int(64)[13] "temp"
+    (1937964 'move' count[1937959] _ic__F1_count[2249767])
+    val inlineImm[2048695]:int(64)[13] "temp"
+    (2048698 'move' inlineImm[2048695] 0)
+    const-val call_tmp[2048701]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2048703 'move' call_tmp[2048701](2048705 '==' count[1937959] inlineImm[2048695]))
+    (1937439 'move' call_tmp[1937437] call_tmp[2048701])
+    (1937445 'move' tmp[1937435] call_tmp[1937437])
+    if call_tmp[1937437]
+    {
+      val tmp_x0[2259172]:int(64)[13] "temp"
+      val tmp_x1[2259174]:int(64)[13] "temp"
+      val call_tmp[1937452]:int(64)[13] "dead at end of block" "expr temp" "maybe param" "temp" "type variable"
+      const-val call_tmp[1937454]:uint(64)[115] "dead at end of block" "expr temp" "maybe param" "temp"
+      const-val low[1937966]:int(64)[13] "temp"
+      (1937971 'move' low[1937966] _ic__F0_low[2249765])
+      const-val call_tmp[2037426]:uint(64)[115] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2037428 'move' call_tmp[2037426](2037430 'cast' uint(64)[115] low[1937966]))
+      (1937456 'move' call_tmp[1937454] call_tmp[2037426])
+      const-val call_tmp[1937461]:uint(64)[115] "dead at end of block" "expr temp" "maybe param" "temp"
+      const-val coerce_tmp[1937463]:uint(64)[115] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+      (1937465 'move' coerce_tmp[1937463](1937467 'cast' uint(64)[115] 1))
+      const-val call_tmp[2098997]:uint(64)[115] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2098999 'move' call_tmp[2098997](2099001 '-' call_tmp[1937454] 1))
+      (1937470 'move' call_tmp[1937461] call_tmp[2098997])
+      const-val call_tmp[1937475]:int(64)[13] "dead at end of block" "expr temp" "maybe param" "temp"
+      const-val call_tmp[2099387]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2099389 'move' call_tmp[2099387](2099391 'cast' int(64)[13] call_tmp[1937461]))
+      (1937477 'move' call_tmp[1937475] call_tmp[2099387])
+      val ret_tmp_x0[2259188]:int(64)[13] "temp"
+      val ret_tmp_x1[2259190]:int(64)[13] "temp"
+      const-val low[1937973]:int(64)[13] "temp"
+      (1937978 'move' low[1937973] _ic__F0_low[2249765])
+      val this_x0[2259718]:int(64)[13]
+      val this_x1[2259720]:int(64)[13]
+      (2100929 'move' this_x0[2259718] low[1937973])
+      (2100933 'move' this_x1[2259720] call_tmp[1937475])
+      (2259196 'move' ret_tmp_x0[2259188] this_x0[2259718])
+      (2259201 'move' ret_tmp_x1[2259190] this_x1[2259720])
+      (2259180 'move' tmp_x0[2259172] ret_tmp_x0[2259188])
+      (2259185 'move' tmp_x1[2259174] ret_tmp_x1[2259190])
+      (2259154 'move' tmp_x0[2259146] tmp_x0[2259172])
+      (2259159 'move' tmp_x1[2259148] tmp_x1[2259174])
+    }
+    {
+      val tmp_x0[2259204]:int(64)[13] "temp"
+      val tmp_x1[2259206]:int(64)[13] "temp"
+      val call_tmp[1937498]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+      const-val call_tmp[1937500]:int(64)[13] "dead at end of block" "expr temp" "maybe param" "temp"
+      const-val count[1937980]:int(64)[13] "temp"
+      (1937985 'move' count[1937980] _ic__F1_count[2249767])
+      (1937502 'move' call_tmp[1937500] count[1937980])
+      const-val call_tmp[1937505]:int(64)[13] "dead at end of block" "expr temp" "maybe param" "temp"
+      const-val count[1937987]:int(64)[13] "temp"
+      (1937992 'move' count[1937987] _ic__F1_count[2249767])
+      const-val call_tmp[2064066]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2064068 'move' call_tmp[2064066](2064070 '-' count[1937987] 1))
+      (1937507 'move' call_tmp[1937505] call_tmp[2064066])
+      const-val call_tmp[1937512]:int(64)[13] "dead at end of block" "expr temp" "maybe param" "temp"
+      const-val low[1937994]:int(64)[13] "temp"
+      (1937999 'move' low[1937994] _ic__F0_low[2249765])
+      const-val call_tmp[2044310]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2044312 'move' call_tmp[2044310](2044314 '+' low[1937994] call_tmp[1937505]))
+      (1937514 'move' call_tmp[1937512] call_tmp[2044310])
+      val ret_tmp_x0[2259220]:int(64)[13] "temp"
+      val ret_tmp_x1[2259222]:int(64)[13] "temp"
+      const-val low[1938001]:int(64)[13] "temp"
+      (1938006 'move' low[1938001] _ic__F0_low[2249765])
+      val this_x0[2259726]:int(64)[13]
+      val this_x1[2259728]:int(64)[13]
+      (2100951 'move' this_x0[2259726] low[1938001])
+      (2100955 'move' this_x1[2259728] call_tmp[1937512])
+      (2259228 'move' ret_tmp_x0[2259220] this_x0[2259726])
+      (2259233 'move' ret_tmp_x1[2259222] this_x1[2259728])
+      (2259212 'move' tmp_x0[2259204] ret_tmp_x0[2259220])
+      (2259217 'move' tmp_x1[2259206] ret_tmp_x1[2259222])
+      (2259164 'move' tmp_x0[2259146] tmp_x0[2259204])
+      (2259169 'move' tmp_x1[2259148] tmp_x1[2259206])
+    }
+    (2259136 'move' tmp_x0[2259128] tmp_x0[2259146])
+    (2259141 'move' tmp_x1[2259130] tmp_x1[2259148])
+    (1937537 'noop')
+    1
+    const-ref call_tmp[1937539]:int(64)[13] "dead at end of block" "maybe param" "reference to a const" "temp"
+    (1937541 'move' call_tmp[1937539](2259143 'set reference' tmp_x0[2259128]))
+    const-val start[1937546]:int(64)[13] "dead at end of block" "const" "insert auto destroy"
+    const-val coerce_tmp[1937548]:int(64)[13] "dead at end of block" "coerce temp" "insert auto destroy" "maybe copy elided" "temp"
+    (1937550 'move' coerce_tmp[1937548](1937552 'deref' call_tmp[1937539]))
+    (1937554 '=' start[1937546] coerce_tmp[1937548])
+    (1937557 'noop')
+    const-ref call_tmp[1937558]:int(64)[13] "dead at end of block" "maybe param" "reference to a const" "temp"
+    (1937560 'move' call_tmp[1937558](2259145 'set reference' tmp_x1[2259130]))
+    const-val end[1937565]:int(64)[13] "dead at end of block" "const" "insert auto destroy"
+    const-val coerce_tmp[1937567]:int(64)[13] "dead at end of block" "coerce temp" "insert auto destroy" "maybe copy elided" "temp"
+    (1937569 'move' coerce_tmp[1937567](1937571 'deref' call_tmp[1937558]))
+    (1937573 '=' end[1937565] coerce_tmp[1937567])
+    (1937576 'noop')
+    val _indexOfInterest[1937577]:int(64)[13] "dead at end of block" "an _indexOfInterest or chpl__followIdx variable" "temp"
+    const-val call_tmp_F0_low[2264927]:int(64)[13] "temp"
+    const-val call_tmp_F1_high[2264929]:int(64)[13] "temp"
+    const-val ret_tmp_F0_low[2264943]:int(64)[13] "temp"
+    const-val ret_tmp_F1_high[2264945]:int(64)[13] "temp"
+    const-val _ir_F0_low[2265247]:int(64)[13] "temp"
+    const-val _ir_F1_high[2265249]:int(64)[13] "temp"
+    (2101963 'move' _ir_F0_low[2265247] coerce_tmp[1937548])
+    (2101967 'move' _ir_F1_high[2265249] coerce_tmp[1937567])
+    (2264951 'move' ret_tmp_F0_low[2264943] _ir_F0_low[2265247])
+    (2264956 'move' ret_tmp_F1_high[2264945] _ir_F1_high[2265249])
+    (2264935 'move' call_tmp_F0_low[2264927] ret_tmp_F0_low[2264943])
+    (2264940 'move' call_tmp_F1_high[2264929] ret_tmp_F1_high[2264945])
+    val _ic__super[2251825]:object[22] "temp"
+    val _ic__more[2251827]:int(64)[13] "temp"
+    const-val _ic__F0_low[2251829]:int(64)[13] "temp"
+    const-val _ic__F1_high[2251831]:int(64)[13] "temp"
+    val _ic__value[2251833]:int(64)[13] "temp"
+    const-val call_tmp[2104614]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2104616 'move' call_tmp[2104614](2104618 'sizeof_bundle' _ic_chpl_direct_param_stride_range_iter[1100243]))
+    const-val cast_tmp[2104620]:c_void_ptr[149] "dead after last mention" "temp"
+    (2104638 'move' _ic__more[2251827] 1)
+    const-val tmp[2104642]:int(64)[13] "temp"
+    (2104644 'move' tmp[2104642] call_tmp_F0_low[2264927])
+    (2104649 'move' _ic__F0_low[2251829] tmp[2104642])
+    const-val tmp[2104653]:int(64)[13] "temp"
+    (2104655 'move' tmp[2104653] call_tmp_F1_high[2264929])
+    (2104660 'move' _ic__F1_high[2251831] tmp[2104653])
+    val ret[1937599]:_ir_chpl_direct_param_stride_range_iter[1100249] "dead after last mention" "RVV" "temp"
+    val call_tmp[1937601]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    val i[1937605]:int(64)[13] "dead at end of block" "insert auto destroy"
+    val call_tmp[1937607]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    (1937609 'move' i[1937605] 0)
+    val call_tmp[1937612]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    const-val default_arg_first[1937614]:int(64)[13] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+    const-val low[1937616]:int(64)[13] "temp"
+    (1937618 'move' low[1937616] _ic__F0_low[2251829])
+    (1937623 'move' default_arg_first[1937614] low[1937616])
+    const-val default_arg_last[1937628]:int(64)[13] "dead after last mention" "default actual temp" "expr temp" "maybe param" "suppress lvalue error" "temp"
+    const-val high[1937630]:int(64)[13] "temp"
+    (1937632 'move' high[1937630] _ic__F1_high[2251831])
+    (1937637 'move' default_arg_last[1937628] high[1937630])
+    const-val _return_tmp_[1937642]:bool[10] "dead after last mention" "temp"
+    const-val low[1937644]:int(64)[13] "temp"
+    (1937646 'move' low[1937644] _ic__F0_low[2251829])
+    const-val high[1937651]:int(64)[13] "temp"
+    (1937653 'move' high[1937651] _ic__F1_high[2251831])
+    (1937658 'move' _return_tmp_[1937642](1937661 call chpl_checkIfRangeIterWillOverflow[1093055] low[1937644] high[1937651] 1 default_arg_first[1937614] default_arg_last[1937628] 1))
+    CForLoop[1937668] hazard
+    {
+      const-val yret[1937697]:int(64)[13] "dead after last mention" "YVV" "temp"
+      (1937699 'move' yret[1937697] i[1937605])
+      const-val _yieldedIndex[1937702]:int(64)[13] "temp"
+      (1937704 'move' _yieldedIndex[1937702] i[1937605])
+      const-val i[1937708]:int(64)[13] "const" "index var" "insert auto destroy"
+      (1937710 'move' i[1937708] _yieldedIndex[1937702])
+      const-val yret[1937713]:int(64)[13] "dead after last mention" "YVV" "temp"
+      (1937715 'move' yret[1937713] _yieldedIndex[1937702])
+      const-val _yieldedIndex[1937743]:int(64)[13] "temp"
+      (1937950 'move' _yieldedIndex[1937743] _yieldedIndex[1937702])
+      const-val i[1937745]:int(64)[13] "const" "index var" "insert auto destroy"
+      (1937747 'move' i[1937745] _yieldedIndex[1937743])
+      const-val yret[1937750]:int(64)[13] "dead after last mention" "YVV" "temp"
+      (1937752 'move' yret[1937750] _yieldedIndex[1937743])
+      const-val _yieldedIndex[1937755]:int(64)[13] "temp"
+      (1937757 'move' _yieldedIndex[1937755] _yieldedIndex[1937743])
+      const-val slot[1937761]:int(64)[13] "const" "index var" "insert auto destroy"
+      (1937763 'move' slot[1937761] _yieldedIndex[1937755])
+      const-val yret[1937766]:int(64)[13] "dead after last mention" "YVV" "temp"
+      (1937768 'move' yret[1937766] _yieldedIndex[1937755])
+      const-val _yieldedIndex[1937771]:int(64)[13] "temp"
+      (1937773 'move' _yieldedIndex[1937771] _yieldedIndex[1937755])
+      const-val slot[1937777]:int(64)[13] "const" "index var" "insert auto destroy"
+      (1937779 'move' slot[1937777] _yieldedIndex[1937771])
+      const-val yret[1937782]:int(64)[13] "dead after last mention" "YVV" "temp"
+      (1937784 'move' yret[1937782] _yieldedIndex[1937771])
+      const-val _yieldedIndex[1937787]:int(64)[13] "temp"
+      (1937789 'move' _yieldedIndex[1937787] _yieldedIndex[1937771])
+      const-val slot[1937793]:int(64)[13] "const" "index var" "insert auto destroy"
+      (1937795 'move' slot[1937793] _yieldedIndex[1937787])
+      const-ref call_tmp[1937798]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "maybe param" "temp"
+      const-ref this[1937800]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+      (1937802 'move' this[1937800] _ic__F0_this[2245308])
+      ref call_tmp[2202213]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "maybe param" "temp"
+      (2202215 'move' call_tmp[2202213](2202217 '.' this[1937800] table[1205202]))
+      (1937807 'move' call_tmp[1937798] call_tmp[2202213])
+      const-val call_tmp[1937812]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      val coerce_tmp[2209154]:_ddata(chpl_TableEntry(unmanaged BaseArr,nothing))[1205360] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (2209156 'move' coerce_tmp[2209154](2209158 '.v' call_tmp[1937798] table[1205278]))
+      ref call_tmp[2209161]:chpl_TableEntry(unmanaged BaseArr,nothing)[1205337] "dead after last mention" "maybe param" "temp"
+      (2209163 'move' call_tmp[2209161](2209165 'array_get' coerce_tmp[2209154] _yieldedIndex[1937787]))
+      const-val coerce_tmp[2209168]:chpl__hash_status[200420] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+      (2209170 'move' coerce_tmp[2209168](2209172 '.v' call_tmp[2209161] status[1205329]))
+      const-val call_tmp[2209175]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2209177 'move' call_tmp[2209175](2209179 '==' coerce_tmp[2209168] full[200416]))
+      (1937814 'move' call_tmp[1937812] call_tmp[2209175])
+      const-val call_tmp[1937820]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+      (1937822 'move' call_tmp[1937820] call_tmp[1937812])
+      if call_tmp[1937812]
+      {
+        val yret[1937827]:BaseArr[149545] "dead after last mention" "YVV" "temp"
+        const-ref call_tmp[1937829]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "maybe param" "temp"
+        const-ref this[1937831]:chpl__simpleSet(unmanaged BaseArr)[1205208] "temp"
+        (1937833 'move' this[1937831] _ic__F0_this[2245308])
+        ref call_tmp[2202223]:chpl__hashtable(unmanaged BaseArr,nothing)[1205294] "dead after last mention" "maybe param" "temp"
+        (2202225 'move' call_tmp[2202223](2202227 '.' this[1937831] table[1205202]))
+        (1937838 'move' call_tmp[1937829] call_tmp[2202223])
+        ref call_tmp[1937843]:chpl_TableEntry(unmanaged BaseArr,nothing)[1205337] "dead after last mention" "maybe param" "temp"
+        const-ref _this_tmp_[1937845]:_ddata(chpl_TableEntry(unmanaged BaseArr,nothing))[1205360] "dead after last mention" "temp"
+        ref call_tmp[2197872]:_ddata(chpl_TableEntry(unmanaged BaseArr,nothing))[1205360] "dead after last mention" "maybe param" "temp"
+        (2197874 'move' call_tmp[2197872](2197876 '.' call_tmp[1937829] table[1205278]))
+        (1937847 'move' _this_tmp_[1937845] call_tmp[2197872])
+        val coerce_tmp[1937852]:_ddata(chpl_TableEntry(unmanaged BaseArr,nothing))[1205360] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1937854 'move' coerce_tmp[1937852](1937856 'deref' _this_tmp_[1937845]))
+        ref call_tmp[2198295]:chpl_TableEntry(unmanaged BaseArr,nothing)[1205337] "dead after last mention" "maybe param" "temp"
+        (2198297 'move' call_tmp[2198295](2198299 'array_get' coerce_tmp[1937852] slot[1937793]))
+        (1937858 'move' call_tmp[1937843] call_tmp[2198295])
+        const-ref call_tmp[1937864]:BaseArr[149545] "dead after last mention" "maybe param" "temp"
+        ref call_tmp[2203187]:BaseArr[149545] "dead after last mention" "maybe param" "temp"
+        (2203189 'move' call_tmp[2203187](2203191 '.' call_tmp[1937843] key[1205333]))
+        (1937866 'move' call_tmp[1937864] call_tmp[2203187])
+        val _yieldedIndex[1937871]:BaseArr[149545] "temp"
+        (1937873 'move' _yieldedIndex[1937871](1937875 'deref' call_tmp[1937864]))
+        const e[1937878]:BaseArr[149545] "const" "index var" "insert auto destroy"
+        (1937880 'move' e[1937878] _yieldedIndex[1937871])
+        val call_tmp[1937884]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "expr temp" "maybe param" "temp" "type variable"
+        val call_tmp[1937886]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "maybe param" "temp"
+        val coerce_tmp[1937888]:BaseArr[149545] "dead at end of block" "coerce temp" "insert auto destroy" "temp"
+        (1937890 'move' coerce_tmp[1937888] e[1937878])
+        val _formal_type_tmp_[2209272]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "temp"
+        val ret[2209274]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "RVV" "temp"
+        val coerce_tmp[2209276]:object[22] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (2209278 'move' coerce_tmp[2209276](2209280 'cast' object[22] coerce_tmp[1937888]))
+        const-val call_tmp[2209283]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (2209285 'move' call_tmp[2209283](2209287 'ptr_eq' coerce_tmp[2209276] nil[44]))
+        if call_tmp[2209283]
+        {
+          (2209292 'move' ret[2209274](2209294 'cast' BaseArrOverRectangularDom(1,int(64),false)[1252717] nil[44]))
+          gotoReturn _end__cast[2209310] _end__cast[2209310]
+        }
+        val call_tmp[2209300]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "maybe param" "temp"
+        (2209302 'move' call_tmp[2209300](2209304 'dynamic_cast' _formal_type_tmp_[2209272] coerce_tmp[1937888]))
+        (2209307 'move' ret[2209274] call_tmp[2209300])
+        label _end__cast[2209310]
+        (1937893 'move' call_tmp[1937886] ret[2209274])
+        val eCastQ[1937898]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "insert auto destroy"
+        (1937900 'move' eCastQ[1937898] call_tmp[1937886])
+        val call_tmp[1937905]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "maybe param" "temp"
+        val coerce_tmp[2209414]:object[22] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (2209416 'move' coerce_tmp[2209414](2209418 'cast' object[22] eCastQ[1937898]))
+        const-val call_tmp[2209421]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+        (2209423 'move' call_tmp[2209421](2209425 'ptr_eq' coerce_tmp[2209414] nil[44]))
+        if call_tmp[2209421]
+        {
+          (2209431 call nilCheckHalt[210068] "argument to ! is nil")
+        }
+        (1937907 'move' call_tmp[1937905] eCastQ[1937898])
+        val eCast[1937912]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead at end of block" "insert auto destroy"
+        (1937914 'move' eCast[1937912] call_tmp[1937905])
+        const-val tmp[1937920]:chpl_localeID_t[209306] "dead after last mention" "const" "temp"
+        const-val call_tmp[1937922]:chpl_localeID_t[209306] "dead after last mention" "expr temp" "maybe param" "temp"
+        (1937924 'move' call_tmp[1937922](1937926 '_wide_get_locale' e[1937878]))
+        (1937928 'move' tmp[1937920] call_tmp[1937922])
+        val coerce_tmp[1937931]:BaseArrOverRectangularDom(1,int(64),false)[1252717] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1937933 'move' coerce_tmp[1937931] eCast[1937912])
+        val _virtual_method_tmp_[1937936]:int(32)[95] "temp"
+        (1937938 'move' _virtual_method_tmp_[1937936](1937940 'getcid' coerce_tmp[1937931]))
+        (1937942 'virtual method call' dsiPostReallocate[1293967] _virtual_method_tmp_[1937936] coerce_tmp[1937931])
+      }
+      {
+        const-val low[1937670]:int(64)[13] "temp"
+        (1937672 'move' low[1937670] _ic__F0_low[2251829])
+        (1937677 '=' i[1937605] low[1937670])
+      }
+      {
+        const-val high[1937681]:int(64)[13] "temp"
+        (1937683 'move' high[1937681] _ic__F1_high[2251831])
+        (1937688 '<=' i[1937605] high[1937681])
+      }
+      {
+        val call_tmp[1937692]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+        (1937694 '+=' i[1937605] 1)
+      }
+    }
+    label _endchpl_direct_param_stride_range_iter[1937731]
+    const-val call_tmp[2106236]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    label _endchpl_direct_counted_range_iter_helper[1937739]
+    const-val call_tmp[2107259]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    label _endchpl_direct_counted_range_iter[1919816]
+    const-val call_tmp[2107691]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    label _end_allSlots[1919821]
+    const-val call_tmp[2192849]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    label _endallSlots[1919826]
+    const-val call_tmp[2209096]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    label _endthese[1863338]
+    const-val call_tmp[2209197]:c_void_ptr[149] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1285385 return _void[55])
+  }
+}

@@ -1,0 +1,2386 @@
+AST dump for BytesStringCommon after pass parse.
+Module use list: 
+
+{
+  (173640 'use' ChapelStandard)
+  (173644 'use' SysCTypes)
+  (173647 'use' ByteBufferHelpers)
+  (173655 'use'(173652 call . String c"NVStringFactory"))
+  type decodePolicy[173668] def strict[173658]:decodePolicy[173668] def replace[173660]:decodePolicy[173668] def drop[173662]:decodePolicy[173668] def escape[173664]:decodePolicy[173668] def ignore[173666]:decodePolicy[173668]
+  type encodePolicy[173676] def unescape[173672]:encodePolicy[173676] def pass[173674]:encodePolicy[173676]
+  {
+  }
+  { scopeless
+    unknown showStringBytesInitDeprWarnings[173682] "config" "no doc" "param" 1
+    (173685 'end of statement')
+  }
+  { scopeless
+    unknown surrogateEscape[173692] "no doc" "param"(173690 call _cast byteType 220)
+    (173695 'end of statement')
+  }
+  function isBytesOrStringType[173700](arg t[173698]:_any[178](?)) param : _unknown[51] "private"
+  {
+    (173713 return(173711 call ||(173705 call == t bytes[24])(173709 call == t string[26])))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function assertArgType[173723](arg t[173721]:_any[178](?), param arg methodName[173726] :
+  string[26]) param : _unknown[51] "private"
+  {
+    if(173779 call _cond_test(173733 call !(173732 call isBytesOrStringType t)))
+    {
+      (173776 call compilerError(173773 call +(173754 call + "BytesStringCommon." methodName) " can only be called with bytes or string argument(s)"))
+    }
+  }
+  function getCStr[173793](const  ref arg x[173790] :
+  unknown t[173788]) : _unknown[51] "inline"
+  {
+    (173816 call assertArgType t "getCStr")
+    function _cast[173825](arg t[173822] :
+    c_string, arg b[173828] :
+    bufferType) : _unknown[51] "inline"
+    {
+      (173836 return(173835 'cast' t b))
+    }
+    if(173881 call _cond_test(173852 call &&(173843 call == _local 0)(173850 call !=(173846 call . x c"locale_id") chpl_nodeID)))
+    {
+      { scopeless
+        (173879 call halt(173876 call + "Cannot call .c_str() on a remote "(173874 call _cast string[26] t)))
+      }
+    }
+    (173893 return(173891 call _cast c_string(173887 call . x c"buff")))
+  }
+  { scopeless type
+    c_string
+  }
+  function decodeByteBuffer[173904](arg buff[173901] :
+  bufferType, arg length[173907] :
+  int[13], arg policy[173911] :
+  decodePolicy) : _unknown[51] throws
+  {
+    (173915 'use' SysBasic)
+    function qio_encode_char_buf[173924](arg dst[173921] :
+    c_void_ptr, arg chr[173930] :
+    (173929 call int[13] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      syserr
+    }
+    function qio_nbytes_char[173946](arg chr[173943] :
+    (173942 call int[13] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    if(173975 call _cond_test(173954 call == length 0))
+    {
+      { scopeless
+        (173973 return "")
+      }
+    }
+    { scopeless
+      unknown tmp[173992] "temp"(173991 call bufferAlloc(173988 call + length 1))
+      (173999 call _check_tuple_var_decl tmp[173992] 2)
+      unknown newBuff[173980](173993 call tmp[173992] 0)
+      unknown allocSize[173982](173996 call tmp[173992] 1)
+      (174004 'end of statement')
+    }
+    { scopeless
+      unknown hasEscapes[174006] 0
+      (174009 'end of statement')
+    }
+    { scopeless
+      unknown numCodepoints[174011] 0
+      (174014 'end of statement')
+    }
+    { scopeless
+      unknown expectedSize[174016] allocSize
+      (174019 'end of statement')
+    }
+    { scopeless
+      unknown thisIdx[174021] 0
+      (174024 'end of statement')
+    }
+    { scopeless
+      unknown decodedIdx[174026] 0
+      (174029 'end of statement')
+    }
+    {
+      unknown tmp[174341] "temp"
+      (174365 'move' tmp[174341](174360 call _cond_test(174362 call < thisIdx length)))
+      WhileDo[174346]
+      {
+        {
+          { scopeless
+            const tmp[174049] "const" "temp"(174048 call decodeHelp buff length thisIdx(allowEsc = 0))
+            (174059 call _check_tuple_var_decl tmp[174049] 3)
+            const decodeRet[174034] "const"(174050 call tmp[174049] 0)
+            const cp[174036] "const"(174053 call tmp[174049] 1)
+            const nBytes[174038] "const"(174056 call tmp[174049] 2)
+            (174064 'end of statement')
+          }
+          { scopeless
+            unknown buffToDecode[174070](174068 call + buff thisIdx)
+            (174073 'end of statement')
+          }
+          (174076 call += numCodepoints 1)
+          if(174337 call _cond_test(174081 call != decodeRet 0))
+          {
+            if(174309 call _cond_test(174088 call == policy(174085 call . decodePolicy c"strict")))
+            {
+              (174093 call bufferFree newBuff)
+              (174102 'throw'(174098 'new'(_chpl_manager = _owned[30](?))(174101 call DecodeError)))
+            }
+            {
+              { scopeless
+                const nInvalidBytes[174116] "const"(174113 IfExpr (174106 call == nBytes 1) then
+                { scopeless
+                  nBytes
+                } else
+                { scopeless
+                  (174111 call - nBytes 1)
+                } )
+                (174119 'end of statement')
+              }
+              (174123 call += thisIdx nInvalidBytes)
+              if(174304 call _cond_test(174131 call == policy(174128 call . decodePolicy c"replace")))
+              {
+                { scopeless
+                  unknown replChar[174140] "param" 65533(174136 call int[13] 32)
+                  (174143 'end of statement')
+                }
+                (174150 call += expectedSize(174148 call - 3 nInvalidBytes))
+                (174164 call =(174156 call _build_tuple newBuff allocSize)(174163 call bufferEnsureSize newBuff allocSize expectedSize))
+                (174174 call qio_encode_char_buf(174170 call + newBuff decodedIdx) replChar)
+                (174178 call += decodedIdx 3)
+              }
+              {
+                { scopeless
+                  if(174300 call _cond_test(174188 call == policy(174185 call . decodePolicy c"escape")))
+                  {
+                    (174192 call = hasEscapes 1)
+                    (174201 call += expectedSize(174199 call * 2 nInvalidBytes))
+                    (174215 call =(174207 call _build_tuple newBuff allocSize)(174214 call bufferEnsureSize newBuff allocSize expectedSize))
+                    {
+                      unknown _indexOfInterest[174252] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                      unknown _iterator[174253] "expr temp" "temp"
+                      (174262 'move' _iterator[174253](174260 call _getIterator(174269 call chpl_direct_counted_range_iter 0 nInvalidBytes)))
+                      Defer
+                      {
+                        {
+                          (174285 call _freeIterator _iterator[174253])
+                        }
+                      }
+                      { scopeless type
+                        (174274 'move' _indexOfInterest[174252](174271 call iteratorIndex _iterator[174253]))
+                      }
+                      ForLoop[174254]
+                      {
+                        unknown i[174278] "index var" "insert auto destroy"
+                        (174280 'move' i[174278] _indexOfInterest[174252])
+                        {
+                          (174244 call qio_encode_char_buf(174228 call + newBuff decodedIdx)(174242 call + 56320(174241 call buff(174238 call +(174235 call - thisIdx nInvalidBytes) i))))
+                          (174249 call += decodedIdx 3)
+                        }
+                        label _continueLabel[174257]
+                        _indexOfInterest[174252]
+                        _iterator[174253]
+                      }
+                      label _breakLabel[174258]
+                    }
+                    (174297 call += numCodepoints(174295 call - nInvalidBytes 1))
+                  }
+                }
+              }
+            }
+          }
+          {
+            (174324 call bufferMemcpyLocal(dst = newBuff)(src = buffToDecode)(len = nBytes)(dst_off = decodedIdx))
+            (174329 call += thisIdx nBytes)
+            (174334 call += decodedIdx nBytes)
+          }
+        }
+        label _continueLabel[174344]
+        (174355 'move' tmp[174341](174350 call _cond_test(174352 call < thisIdx length)))
+        tmp[174341]
+      }
+      label _breakLabel[174345]
+    }
+    (174373 call =(174371 call newBuff decodedIdx) 0)
+    { scopeless
+      unknown ret[174387](174386 call chpl_createStringWithOwnedBufferNV(x = newBuff)(length = decodedIdx)(size = allocSize)(numCodepoints = numCodepoints))
+      (174390 'end of statement')
+    }
+    (174398 call =(174394 call . ret c"hasEscapes") hasEscapes)
+    (174402 return ret)
+  }
+  function decodeHelp[174418](arg buff[174415] :
+  (174414 call c_ptr(174412 call uint[115] 8)), arg buffLen[174421] :
+  int[13], arg offset[174425] :
+  int[13], arg allowEsc[174429] :
+  bool[10]) : _unknown[51]
+  {
+    (174433 'use' SysBasic)
+    function qio_decode_char_buf[174445](ref arg chr[174442] :
+    (174441 call int[13] 32), ref arg nBytes[174448] :
+    c_int, arg buf[174452] :
+    c_string, arg buflen[174456] :
+    ssize_t) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      syserr
+    }
+    function qio_decode_char_buf_esc[174472](ref arg chr[174469] :
+    (174468 call int[13] 32), ref arg nBytes[174475] :
+    c_int, arg buf[174479] :
+    c_string, arg buffLen[174483] :
+    ssize_t) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      syserr
+    }
+    { scopeless
+      unknown chr[174494](174493 call int[13] 32)
+      (174497 'end of statement')
+    }
+    { scopeless
+      unknown nBytes[174499] c_int
+      (174502 'end of statement')
+    }
+    { scopeless
+      unknown start[174507](174505 call _cast c_int offset)
+      (174510 'end of statement')
+    }
+    { scopeless
+      unknown multibytes[174518](174516 call _cast c_string(174513 call + buff start))
+      (174521 'end of statement')
+    }
+    { scopeless
+      unknown maxbytes[174529](174527 call _cast ssize_t(174524 call - buffLen start))
+      (174532 'end of statement')
+    }
+    { scopeless
+      unknown decodeRet[174534] syserr
+      (174537 'end of statement')
+    }
+    if(174561 call _cond_test allowEsc)
+    {
+      { scopeless
+        (174547 call = decodeRet(174546 call qio_decode_char_buf_esc chr nBytes multibytes maxbytes))
+      }
+    }
+    {
+      { scopeless
+        (174558 call = decodeRet(174557 call qio_decode_char_buf chr nBytes multibytes maxbytes))
+      }
+    }
+    (174573 return(174571 call _build_tuple decodeRet chr nBytes))
+  }
+  function initWithBorrowedBuffer[174584](ref arg x[174581] :
+  unknown t[174579], arg other[174587] :
+  t) : _unknown[51]
+  {
+    (174610 call assertArgType t "initWithBorrowedBuffer")
+    (174618 call =(174614 call . x c"isOwned") 0)
+    if(174636 call _cond_test(174623 call == t string[26]))
+    {
+      { scopeless
+        (174633 call =(174626 call . x c"hasEscapes")(174630 call . other c"hasEscapes"))
+      }
+    }
+    { scopeless
+      const otherRemote[174648] "const"(174646 call !=(174642 call . other c"locale_id") chpl_nodeID)
+      (174651 'end of statement')
+    }
+    { scopeless
+      const otherLen[174656] "const"(174653 call . other c"numBytes")
+      (174659 'end of statement')
+    }
+    if(174782 call _cond_test(174662 call > otherLen 0))
+    {
+      (174669 call =(174665 call . x c"buffLen") otherLen)
+      if(174778 call _cond_test otherRemote)
+      {
+        (174679 call =(174675 call . x c"isOwned") 1)
+        (174699 call =(174684 call . x c"buff")(174698 call bufferCopyRemote(174689 call . other c"locale_id")(174694 call . other c"buff") otherLen))
+        (174710 call =(174703 call . x c"buffLen")(174708 call + otherLen 1))
+        if(174728 call _cond_test(174715 call == t string[26]))
+        {
+          { scopeless
+            (174725 call =(174718 call . x c"cachedNumCodepoints")(174722 call . other c"cachedNumCodepoints"))
+          }
+        }
+      }
+      {
+        (174741 call =(174734 call . x c"buff")(174738 call . other c"buff"))
+        (174755 call =(174748 call . x c"buffSize")(174752 call . other c"buffSize"))
+        if(174773 call _cond_test(174760 call == t string[26]))
+        {
+          { scopeless
+            (174770 call =(174763 call . x c"cachedNumCodepoints")(174767 call . other c"cachedNumCodepoints"))
+          }
+        }
+      }
+    }
+  }
+  function initWithBorrowedBuffer[174795](ref arg x[174792] :
+  unknown t[174790], arg other[174798] :
+  bufferType, arg length[174802] :
+  int[13], arg size[174806] :
+  int[13]) : _unknown[51]
+  {
+    (174813 call assertArgType t "initWithBorrowedBuffer")
+    (174821 call =(174817 call . x c"isOwned") 0)
+    (174829 call =(174825 call . x c"buff") other)
+    (174837 call =(174833 call . x c"buffSize") size)
+    (174845 call =(174841 call . x c"buffLen") length)
+  }
+  function initWithOwnedBuffer[174857](ref arg x[174854] :
+  unknown t[174852], arg other[174860] :
+  bufferType, arg length[174864] :
+  int[13], arg size[174868] :
+  int[13]) : _unknown[51] "inline"
+  {
+    (174891 call assertArgType t "initWithOwnedBuffer")
+    (174899 call =(174895 call . x c"isOwned") 1)
+    (174907 call =(174903 call . x c"buff") other)
+    (174915 call =(174911 call . x c"buffSize") size)
+    (174923 call =(174919 call . x c"buffLen") length)
+  }
+  function initWithNewBuffer[174935](ref arg x[174932] :
+  unknown t[174930], arg other[174938] :
+  t) : _unknown[51] "inline"
+  {
+    (174961 call assertArgType t "initWithNewBuffer")
+    { scopeless
+      const otherRemote[174971] "const"(174969 call !=(174965 call . other c"locale_id") chpl_nodeID)
+      (174974 'end of statement')
+    }
+    { scopeless
+      const otherLen[174979] "const"(174976 call . other c"numBytes")
+      (174982 'end of statement')
+    }
+    (174988 call =(174984 call . x c"isOwned") 1)
+    if(175006 call _cond_test(174993 call == t string[26]))
+    {
+      { scopeless
+        (175003 call =(174996 call . x c"hasEscapes")(175000 call . other c"hasEscapes"))
+      }
+    }
+    if(175026 call _cond_test(175013 call == t string[26]))
+    {
+      { scopeless
+        (175023 call =(175016 call . x c"cachedNumCodepoints")(175020 call . other c"cachedNumCodepoints"))
+      }
+    }
+    if(175142 call _cond_test(175033 call > otherLen 0))
+    {
+      (175040 call =(175036 call . x c"buffLen") otherLen)
+      if(175138 call _cond_test(175048 call &&(175045 call ! _local) otherRemote))
+      {
+        (175066 call =(175051 call . x c"buff")(175065 call bufferCopyRemote(175056 call . other c"locale_id")(175061 call . other c"buff") otherLen))
+        (175078 call =(175071 call . x c"buffSize")(175076 call + otherLen 1))
+      }
+      {
+        { scopeless
+          const tmp[175094] "const" "temp"(175093 call bufferCopyLocal(175088 call . other c"buff") otherLen)
+          (175101 call _check_tuple_var_decl tmp[175094] 2)
+          const buff[175081] "const"(175095 call tmp[175094] 0)
+          const allocSize[175083] "const"(175098 call tmp[175094] 1)
+          (175106 'end of statement')
+        }
+        (175113 call =(175109 call . x c"buff") buff)
+        (175127 call =(175125 call(175117 call . x c"buff")(175121 call . x c"buffLen")) 0)
+        (175135 call =(175131 call . x c"buffSize") allocSize)
+      }
+    }
+  }
+  function initWithNewBuffer[175155](ref arg x[175152] :
+  unknown t[175150], arg other[175158] :
+  bufferType, arg length[175162] :
+  int[13], arg size[175166] :
+  int[13]) : _unknown[51]
+  {
+    (175173 call assertArgType t "initWithNewBuffer")
+    { scopeless
+      const otherLen[175177] "const" length
+      (175180 'end of statement')
+    }
+    (175186 call =(175182 call . x c"isOwned") 1)
+    if(175258 call _cond_test(175191 call > otherLen 0))
+    {
+      { scopeless
+        const tmp[175206] "const" "temp"(175205 call bufferCopyLocal(175201 call _cast bufferType other) otherLen)
+        (175213 call _check_tuple_var_decl tmp[175206] 2)
+        const buff[175193] "const"(175207 call tmp[175206] 0)
+        const allocSize[175195] "const"(175210 call tmp[175206] 1)
+        (175218 'end of statement')
+      }
+      (175225 call =(175221 call . x c"buff") buff)
+      (175233 call =(175229 call . x c"buffLen") otherLen)
+      (175247 call =(175245 call(175237 call . x c"buff")(175241 call . x c"buffLen")) 0)
+      (175255 call =(175251 call . x c"buffSize") allocSize)
+    }
+  }
+  function getView[175271](const  ref arg x[175268] :
+  unknown t[175266], arg r[175277] :
+  (175276 call range ?[260])) : _unknown[51]
+  {
+    (175300 call assertArgType t "getView")
+    if(175338 call _cond_test(175314 call &&(175305 call == t bytes[24])(175312 call ==(175308 call . r c"idxType") codepointIndex)))
+    {
+      (175335 call compilerError "codepointIndex ranges cannot be used with bytes in getView")
+    }
+    function simpleCaseHelper[175344]() : _unknown[51]
+    {
+      { scopeless
+        const intR[175361] "const"(175359 call _cast(175358 call range int[13](175351 call . r c"boundedType")(175355 call . r c"stridable")) r)
+        (175364 'end of statement')
+      }
+      if(175453 call _cond_test boundsChecking)
+      {
+        if(175448 call _cond_test(175377 call !(175376 call(175371 call .(175368 call . x c"byteIndices") c"boundsCheck") intR)))
+        {
+          (175445 call halt "range " r(175439 call +(175420 call + " out of bounds for "(175418 call _cast string[26] t)) " with length ")(175442 call . x c"numBytes"))
+        }
+      }
+      if(175502 call _cond_test(175462 call ==(175458 call . r c"idxType") byteIndex))
+      {
+        (175477 return(175475 call _build_tuple(175470 call intR(175466 call . x c"byteIndices"))(175472 call - 1)))
+      }
+      {
+        { scopeless
+          const retRange[175487] "const"(175486 call intR(175482 call . x c"byteIndices"))
+          (175490 'end of statement')
+        }
+        (175500 return(175498 call _build_tuple retRange(175494 call . retRange c"size")))
+      }
+    }
+    if(175893 call _cond_test(175519 call ||(175510 call == t bytes[24])(175517 call ==(175513 call . r c"idxType") byteIndex)))
+    {
+      (175524 return(175523 call simpleCaseHelper))
+    }
+    {
+      { scopeless
+        if(175889 call _cond_test(175537 call &&(175529 call == t string[26])(175536 call(175532 call . x c"isASCII"))))
+        {
+          (175542 return(175541 call simpleCaseHelper))
+        }
+        {
+          if(175571 call _cond_test(175546 call . r c"stridable"))
+          {
+            (175568 call compilerError "string slicing doesn't support stridable codepoint ranges")
+          }
+          if(175596 call _cond_test(175581 call == r(175578 call . x c"indices")))
+          {
+            { scopeless
+              (175594 return(175592 call _build_tuple(175584 call . x c"byteIndices")(175588 call . x c"cachedNumCodepoints")))
+            }
+          }
+          { scopeless
+            const intR[175616] "const"(175614 call _cast(175613 call range int[13](175606 call . r c"boundedType")(175610 call . r c"stridable")) r)
+            (175619 'end of statement')
+          }
+          if(175650 call _cond_test boundsChecking)
+          {
+            if(175645 call _cond_test(175631 call !(175630 call(175625 call .(175622 call . x c"indices") c"boundsCheck") intR)))
+            {
+              (175642 call halt "range " r " out of bounds for string with length "(175639 call . x c"size"))
+            }
+          }
+          { scopeless
+            unknown cpCount[175655] 0
+            (175658 'end of statement')
+          }
+          { scopeless
+            const cpIdxLow[175688] "const"(175685 IfExpr (175675 call &&(175664 call(175660 call . intR c"hasLowBound"))(175673 call >=(175670 call _cast int[13](175666 call . intR c"alignedLow")) 0)) then
+            { scopeless
+              (175682 call _cast int[13](175678 call . intR c"alignedLow"))
+            } else
+            { scopeless
+              0
+            } )
+            (175691 'end of statement')
+          }
+          { scopeless
+            const cpIdxHigh[175715] "const"(175712 IfExpr (175697 call(175693 call . intR c"hasHighBound")) then
+            { scopeless
+              (175703 call _cast int[13](175699 call . intR c"alignedHigh"))
+            } else
+            { scopeless
+              (175710 call -(175706 call . x c"buffLen") 1)
+            } )
+            (175718 'end of statement')
+          }
+          { scopeless
+            unknown byteLow[175723](175720 call . x c"buffLen")
+            (175726 'end of statement')
+          }
+          { scopeless
+            unknown byteHigh[175734](175732 call -(175728 call . x c"buffLen") 1)
+            (175737 'end of statement')
+          }
+          if(175869 call _cond_test(175740 call >= cpIdxHigh 0))
+          {
+            {
+              unknown _indexOfInterest[175820] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[175821] "expr temp" "temp"
+              (175830 'move' _iterator[175821](175828 call _getIterator(175754 call(175750 call . x c"_indexLen"))))
+              Defer
+              {
+                {
+                  (175861 call _freeIterator _iterator[175821])
+                }
+              }
+              { scopeless type
+                (175836 'move' _indexOfInterest[175820](175833 call iteratorIndex _iterator[175821]))
+              }
+              ForLoop[175822]
+              {
+                (175841 call _check_tuple_var_decl _indexOfInterest[175820] 2)
+                unknown i[175847] "index var" "insert auto destroy"
+                (175849 'move' i[175847](175845 call _indexOfInterest[175820] 0))
+                unknown nBytes[175854] "index var" "insert auto destroy"
+                (175856 'move' nBytes[175854](175852 call _indexOfInterest[175820] 1))
+                {
+                  if(175784 call _cond_test(175757 call == cpCount cpIdxLow))
+                  {
+                    (175764 call = byteLow(175762 call _cast int[13] i))
+                    if(175779 call _cond_test(175774 call !(175773 call(175769 call . r c"hasHighBound"))))
+                    {
+                      { scopeless
+                        break nil[44]
+                      }
+                    }
+                  }
+                  if(175811 call _cond_test(175791 call == cpCount cpIdxHigh))
+                  {
+                    (175804 call = byteHigh(175802 call -(175799 call +(175796 call _cast int[13] i) nBytes) 1))
+                    break nil[44]
+                  }
+                  (175817 call += cpCount 1)
+                }
+                label _continueLabel[175825]
+                _indexOfInterest[175820]
+                _iterator[175821]
+              }
+              label _breakLabel[175826]
+            }
+          }
+          (175887 return(175885 call _build_tuple(175875 call chpl_build_bounded_range byteLow byteHigh)(175882 call +(175879 call - cpIdxHigh cpIdxLow) 1)))
+        }
+      }
+    }
+  }
+  function getSlice[175907](const  ref arg x[175904] :
+  unknown t[175902], arg r[175913] :
+  (175912 call range ?[260])) : _unknown[51]
+  {
+    (175936 call assertArgType t "getSlice")
+    if(175954 call _cond_test(175944 call(175940 call . x c"isEmpty")))
+    {
+      { scopeless
+        unknown ret[175946] t
+        (175949 'end of statement')
+      }
+      (175952 return ret)
+    }
+    { scopeless
+      const tmp[175968] "const" "temp"(175967 call getView x r)
+      (175975 call _check_tuple_var_decl tmp[175968] 2)
+      const r2[175958] "const"(175969 call tmp[175968] 0)
+      const numChars[175960] "const"(175972 call tmp[175968] 1)
+      (175980 'end of statement')
+    }
+    if(175997 call _cond_test(175986 call <=(175982 call . r2 c"size") 0))
+    {
+      { scopeless
+        unknown ret[175989] t
+        (175992 'end of statement')
+      }
+      (175995 return ret)
+    }
+    { scopeless
+      unknown buff[176002] bufferType
+      (176005 'end of statement')
+    }
+    { scopeless
+      unknown buffSize[176007] int[13]
+      (176010 'end of statement')
+    }
+    { scopeless
+      const copyLen[176024] "const"(176022 call +(176019 call -(176012 call . r2 c"high")(176016 call . r2 c"low")) 1)
+      (176027 'end of statement')
+    }
+    { scopeless
+      unknown tmp[176053] "temp"(176052 call bufferCopy(buf =(176035 call . x c"buff"))(off =(176041 call . r2 c"low"))(len = copyLen)(loc =(176048 call . x c"locale_id")))
+      (176060 call _check_tuple_var_decl tmp[176053] 2)
+      unknown copyBuf[176028](176054 call tmp[176053] 0)
+      unknown copySize[176030](176057 call tmp[176053] 1)
+      (176065 'end of statement')
+    }
+    if(176212 call _cond_test(176071 call ==(176067 call . r2 c"stride") 1))
+    {
+      (176075 call = buff copyBuf)
+      (176081 call = buffSize copySize)
+    }
+    {
+      { scopeless
+        unknown tmp[176099] "temp"(176098 call bufferAlloc(176095 call +(176091 call . r2 c"size") 1))
+        (176106 call _check_tuple_var_decl tmp[176099] 2)
+        unknown newBuff[176084](176100 call tmp[176099] 0)
+        unknown allocSize[176086](176103 call tmp[176099] 1)
+        (176111 'end of statement')
+      }
+      {
+        unknown _indexOfInterest[176142] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[176143] "expr temp" "temp"
+        (176160 'move' _iterator[176143](176123 call _build_tuple(176152 call _getIterator r2)(176157 call _getIterator(176155 call chpl_build_low_bounded_range 0))))
+        Defer
+        {
+          {
+            (176190 call _freeIterator _iterator[176143])
+          }
+        }
+        { scopeless type
+          (176165 'move' _indexOfInterest[176142](176162 call iteratorIndex _iterator[176143]))
+        }
+        ForLoop[176144]
+        {
+          (176170 call _check_tuple_var_decl _indexOfInterest[176142] 2)
+          unknown r2_i[176176] "index var" "insert auto destroy"
+          (176178 'move' r2_i[176176](176174 call _indexOfInterest[176142] 0))
+          unknown i[176183] "index var" "insert auto destroy"
+          (176185 'move' i[176183](176181 call _indexOfInterest[176142] 1))
+          {
+            (176138 call =(176127 call newBuff i)(176137 call copyBuf(176134 call - r2_i(176131 call . r2 c"low"))))
+          }
+          label _continueLabel[176147]
+          _indexOfInterest[176142]
+          _iterator[176143]
+        }
+        label _breakLabel[176148]
+      }
+      (176199 call = buff newBuff)
+      (176204 call = buffSize allocSize)
+      (176210 call bufferFree copyBuf)
+    }
+    { scopeless
+      const buffLen[176220] "const"(176217 call . r2 c"size")
+      (176223 'end of statement')
+    }
+    (176229 call =(176227 call buff buffLen) 0)
+    if(176287 call _cond_test(176234 call == t string[26]))
+    {
+      { scopeless
+        unknown numCodepoints[176237] numChars
+        (176240 'end of statement')
+      }
+      if(176258 call _cond_test(176246 call == numCodepoints(176244 call - 1)))
+      {
+        (176254 call = numCodepoints(176253 call countNumCodepoints buff buffLen))
+      }
+      (176273 return(176272 call chpl_createStringWithOwnedBufferNV(x = buff)(length = buffLen)(size = buffSize)(numCodepoints = numCodepoints)))
+    }
+    {
+      (176284 return(176283 call createBytesWithOwnedBuffer(x = buff)(length = buffLen)(size = buffSize)))
+    }
+  }
+  function getIndexType[176297](arg t[176295]:_any[178](?)) type : _unknown[51]
+  {
+    if(176348 call _cond_test(176301 call == t bytes[24]))
+    {
+      { scopeless
+        (176307 return(176304 call . Bytes c"idxType"))
+      }
+    }
+    {
+      { scopeless
+        if(176342 call _cond_test(176311 call == t string[26]))
+        {
+          { scopeless
+            (176319 return(176316 call . String c"byteIndex"))
+          }
+        }
+        {
+          { scopeless
+            (176340 call compilerError "This function should only be used by bytes or string")
+          }
+        }
+      }
+    }
+  }
+  function doReplace[176364](const  ref arg x[176361] :
+  unknown t[176359], arg needle[176367] :
+  t, arg replacement[176371] :
+  t, arg count[176378] :
+  int[13] =
+  (176376 call - 1)) : _unknown[51]
+  {
+    (176403 call assertArgType t "doReplace")
+    unknown _idxt[176410] "type variable"(176409 call getIndexType t)
+    { scopeless
+      unknown result[176415] x t
+      (176418 'end of statement')
+    }
+    { scopeless
+      unknown found[176421] 0 int[13]
+      (176424 'end of statement')
+    }
+    { scopeless
+      unknown startIdx[176427] 0 _idxt
+      (176430 'end of statement')
+    }
+    { scopeless
+      const localNeedle[176438] "const"(176437 call(176433 call . needle c"localize")) t
+      (176441 'end of statement')
+    }
+    { scopeless
+      const localReplacement[176449] "const"(176448 call(176444 call . replacement c"localize")) t
+      (176452 'end of statement')
+    }
+    {
+      unknown tmp[176538] "temp"
+      (176574 'move' tmp[176538](176563 call _cond_test(176565 call ||(176567 call < count 0)(176571 call < found count))))
+      WhileDo[176543]
+      {
+        {
+          { scopeless
+            const idx[176473] "const"(176472 call(176464 call . result c"find") localNeedle(176470 call chpl_build_low_bounded_range startIdx))
+            (176476 'end of statement')
+          }
+          if(176487 call _cond_test(176482 call == idx(176480 call - 1)))
+          {
+            { scopeless
+              break nil[44]
+            }
+          }
+          (176494 call += found 1)
+          (176524 call = result(176522 call +(176508 call +(176506 call result(176503 call chpl_build_high_bounded_range(176501 call - idx 1))) localReplacement)(176521 call result(176518 call chpl_build_low_bounded_range(176516 call + idx(176513 call . localNeedle c"numBytes"))))))
+          (176535 call = startIdx(176533 call + idx(176530 call . localReplacement c"numBytes")))
+        }
+        label _continueLabel[176541]
+        (176558 'move' tmp[176538](176547 call _cond_test(176549 call ||(176551 call < count 0)(176555 call < found count))))
+        tmp[176538]
+      }
+      label _breakLabel[176542]
+    }
+    (176578 return result)
+  }
+  { scopeless type
+    t
+  }
+  function doSplit[176590](const  ref arg x[176587] :
+  unknown t[176585], arg sep[176593] :
+  t, arg maxsplit[176600] :
+  int[13] =
+  (176598 call - 1), arg ignoreEmpty[176606] :
+  bool[10] =
+  0) : _unknown[51] "iterator fn"
+  {
+    (176631 call assertArgType t "doSplit")
+    unknown _idxt[176638] "type variable"(176637 call getIndexType t)
+    if(176872 call _cond_test(176656 call !(176654 call &&(176646 call &&(176643 call == maxsplit 0) ignoreEmpty)(176653 call(176649 call . x c"isEmpty")))))
+    {
+      { scopeless
+        const localThis[176665] "const"(176664 call(176660 call . x c"localize")) t
+        (176668 'end of statement')
+      }
+      { scopeless
+        const localSep[176677] "const"(176676 call(176672 call . sep c"localize")) t
+        (176680 'end of statement')
+      }
+      { scopeless
+        unknown splitAll[176686](176684 call <= maxsplit 0) bool[10]
+        (176689 'end of statement')
+      }
+      { scopeless
+        unknown splitCount[176692] 0 int[13]
+        (176695 'end of statement')
+      }
+      { scopeless
+        unknown start[176698] 0 _idxt
+        (176701 'end of statement')
+      }
+      { scopeless
+        unknown done[176704] 0 bool[10]
+        (176707 'end of statement')
+      }
+      {
+        unknown tmp[176847] "temp"
+        (176869 'move' tmp[176847](176865 call _cond_test(176867 call ! done)))
+        WhileDo[176852]
+        {
+          {
+            { scopeless
+              unknown chunk[176712] t
+              (176715 'end of statement')
+            }
+            { scopeless
+              unknown end[176721](176719 call - 1) _idxt
+              (176724 'end of statement')
+            }
+            if(176808 call _cond_test(176727 call == maxsplit 0))
+            {
+              (176731 call = chunk localThis)
+              (176737 call = done 1)
+            }
+            {
+              if(176761 call _cond_test(176745 call || splitAll(176743 call < splitCount maxsplit)))
+              {
+                { scopeless
+                  (176758 call = end(176757 call(176749 call . localThis c"find") localSep(176755 call chpl_build_low_bounded_range start)))
+                }
+              }
+              if(176804 call _cond_test(176771 call == end(176769 call - 1)))
+              {
+                (176780 call = chunk(176779 call localThis(176776 call chpl_build_low_bounded_range start)))
+                (176786 call = done 1)
+              }
+              {
+                (176800 call = chunk(176799 call localThis(176796 call chpl_build_bounded_range start(176794 call - end 1))))
+              }
+            }
+            if(176832 call _cond_test(176821 call !(176819 call && ignoreEmpty(176818 call(176814 call . chunk c"isEmpty")))))
+            {
+              (176824 yield chunk)
+              (176829 call += splitCount 1)
+            }
+            (176844 call = start(176842 call + end(176839 call . localSep c"numBytes")))
+          }
+          label _continueLabel[176850]
+          (176860 'move' tmp[176847](176856 call _cond_test(176858 call ! done)))
+          tmp[176847]
+        }
+        label _breakLabel[176851]
+      }
+    }
+  }
+  { scopeless type
+    t
+  }
+  function doSplitWSNoEnc[176886](const  ref arg x[176883] :
+  unknown t[176881], arg maxsplit[176892] :
+  int[13] =
+  (176890 call - 1)) : _unknown[51] "iterator fn"
+  {
+    (176917 call assertArgType t "doSplitWSNoEnc")
+    if(177303 call _cond_test(176926 call !(176925 call(176921 call . x c"isEmpty"))))
+    {
+      { scopeless
+        const localx[176935] "const"(176934 call(176930 call . x c"localize")) t
+        (176938 'end of statement')
+      }
+      { scopeless
+        unknown done[176942] 0 bool[10]
+        (176945 'end of statement')
+      }
+      { scopeless
+        unknown yieldChunk[176948] 0 bool[10]
+        (176951 'end of statement')
+      }
+      { scopeless
+        unknown chunk[176953] t
+        (176956 'end of statement')
+      }
+      { scopeless
+        const noSplits[176962] "const"(176960 call == maxsplit 0) bool[10]
+        (176965 'end of statement')
+      }
+      { scopeless
+        const limitSplits[176971] "const"(176969 call > maxsplit 0) bool[10]
+        (176974 'end of statement')
+      }
+      { scopeless
+        unknown splitCount[176977] 0 int[13]
+        (176980 'end of statement')
+      }
+      { scopeless
+        const iEnd[176989] "const"(176987 call -(176983 call . localx c"buffLen") 2) idxType
+        (176992 'end of statement')
+      }
+      { scopeless
+        unknown inChunk[176995] 0 bool[10]
+        (176998 'end of statement')
+      }
+      { scopeless
+        unknown chunkStart[177000] idxType
+        (177003 'end of statement')
+      }
+      {
+        unknown _indexOfInterest[177242] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[177243] "expr temp" "temp"
+        (177266 'move' _iterator[177243](177019 call _build_tuple(177255 call _getIterator(177252 call . x c"indices"))(177263 call _getIterator(177262 call(177259 call . localx c"chpl_bytes")))))
+        Defer
+        {
+          {
+            (177296 call _freeIterator _iterator[177243])
+          }
+        }
+        { scopeless type
+          (177271 'move' _indexOfInterest[177242](177268 call iteratorIndex _iterator[177243]))
+        }
+        ForLoop[177244]
+        {
+          (177276 call _check_tuple_var_decl _indexOfInterest[177242] 2)
+          unknown i[177282] "index var" "insert auto destroy"
+          (177284 'move' i[177282](177280 call _indexOfInterest[177242] 0))
+          unknown c[177289] "index var" "insert auto destroy"
+          (177291 'move' c[177289](177287 call _indexOfInterest[177242] 1))
+          {
+            if(177214 call _cond_test noSplits)
+            {
+              (177023 call = done 1)
+              if(177046 call _cond_test(177033 call !(177032 call(177028 call . localx c"isSpace"))))
+              {
+                (177037 call = chunk localx)
+                (177043 call = yieldChunk 1)
+              }
+            }
+            {
+              { scopeless
+                unknown cSpace[177054](177053 call byte_isWhitespace c)
+                (177057 'end of statement')
+              }
+              if(177209 call _cond_test(177063 call !(177061 call || inChunk cSpace)))
+              {
+                (177067 call = chunkStart i)
+                (177073 call = inChunk 1)
+                if(177101 call _cond_test(177078 call > i iEnd))
+                {
+                  (177087 call = chunk(177086 call localx(177083 call chpl_build_low_bounded_range chunkStart)))
+                  (177093 call = yieldChunk 1)
+                  (177098 call = done 1)
+                }
+              }
+              {
+                { scopeless
+                  if(177205 call _cond_test inChunk)
+                  {
+                    if(177199 call _cond_test cSpace)
+                    {
+                      (177109 call += splitCount 1)
+                      if(177166 call _cond_test(177118 call && limitSplits(177116 call > splitCount maxsplit)))
+                      {
+                        (177127 call = chunk(177126 call localx(177123 call chpl_build_low_bounded_range chunkStart)))
+                        (177133 call = yieldChunk 1)
+                        (177138 call = done 1)
+                      }
+                      {
+                        (177152 call = chunk(177151 call localx(177148 call chpl_build_bounded_range chunkStart(177146 call - i 1))))
+                        (177158 call = yieldChunk 1)
+                        (177163 call = inChunk 0)
+                      }
+                    }
+                    {
+                      { scopeless
+                        if(177195 call _cond_test(177172 call > i iEnd))
+                        {
+                          (177181 call = chunk(177180 call localx(177177 call chpl_build_low_bounded_range chunkStart)))
+                          (177187 call = yieldChunk 1)
+                          (177192 call = done 1)
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            if(177229 call _cond_test yieldChunk)
+            {
+              (177221 yield chunk)
+              (177226 call = yieldChunk 0)
+            }
+            if(177237 call _cond_test done)
+            {
+              { scopeless
+                break nil[44]
+              }
+            }
+          }
+          label _continueLabel[177247]
+          _indexOfInterest[177242]
+          _iterator[177243]
+        }
+        label _breakLabel[177248]
+      }
+    }
+  }
+  { scopeless type
+    t
+  }
+  function doSearchNoEnc[177317](const  ref arg x[177314] :
+  unknown t[177312], arg needle[177320] :
+  t, arg region[177327] :
+  (177326 call range ?[260]), param arg count[177331] :
+  bool[10], param arg fromLeft[177336] :
+  bool[10] =
+  1) : _unknown[51]
+  {
+    (177360 call assertArgType t "doSearch")
+    { scopeless
+      unknown ret[177367](177365 call - 1) int[13]
+      (177370 'end of statement')
+    }
+    {
+      const tmp[177771] "const" "temp"
+      (177772 'move' tmp[177771](177769 'deref'(177381 'chpl_on_locale_num'(177380 call chpl_buildLocaleID(177375 call . x c"locale_id") c_sublocid_any))))
+      {
+        { scopeless
+          unknown localRet[177386](177384 call - 2) int[13]
+          (177389 'end of statement')
+        }
+        { scopeless
+          const nLen[177395] "const"(177392 call . needle c"buffLen")
+          (177398 'end of statement')
+        }
+        { scopeless
+          const tmp[177409] "const" "temp"(177408 call getView x region)
+          (177413 call _check_tuple_var_decl tmp[177409] 2)
+          const view[177399] "const"(177410 call tmp[177409] 0)
+          (177418 'end of statement')
+        }
+        { scopeless
+          const xLen[177423] "const"(177420 call . view c"size")
+          (177426 'end of statement')
+        }
+        if(177485 call _cond_test count)
+        {
+          if(177441 call _cond_test(177430 call == nLen 0))
+          {
+            (177437 call = localRet(177434 call . view c"size"))
+          }
+        }
+        {
+          if(177480 call _cond_test(177448 call == nLen 0))
+          {
+            if(177475 call _cond_test fromLeft)
+            {
+              (177455 call = localRet(177453 call - 1))
+            }
+            {
+              (177471 call = localRet(177468 IfExpr (177462 call == xLen 0) then
+              { scopeless
+                (177465 call - 1)
+              } else
+              { scopeless
+                xLen
+              } ))
+            }
+          }
+        }
+        if(177501 call _cond_test(177491 call > nLen xLen))
+        {
+          (177497 call = localRet(177495 call - 1))
+        }
+        if(177749 call _cond_test(177509 call == localRet(177507 call - 2)))
+        {
+          (177515 call = localRet(177513 call - 1))
+          { scopeless
+            const localNeedle[177525] "const"(177524 call(177520 call . needle c"localize"))
+            (177528 'end of statement')
+          }
+          { scopeless
+            const needleLen[177533] "const"(177530 call . localNeedle c"buffLen")
+            (177536 'end of statement')
+          }
+          { scopeless
+            const numPossible[177544] "const"(177542 call +(177539 call - xLen nLen) 1)
+            (177547 'end of statement')
+          }
+          { scopeless
+            const searchSpace[177569] "const"(177566 IfExpr  fromLeft then
+            { scopeless
+              (177553 call #(177550 call chpl_build_low_bounded_range 0) numPossible)
+            } else
+            { scopeless
+              (177564 call chpl_by(177559 call #(177556 call chpl_build_low_bounded_range 0) numPossible)(177562 call - 1))
+            } )
+            (177572 'end of statement')
+          }
+          {
+            unknown _indexOfInterest[177716] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[177717] "expr temp" "temp"
+            (177726 'move' _iterator[177717](177724 call _getIterator searchSpace))
+            Defer
+            {
+              {
+                (177742 call _freeIterator _iterator[177717])
+              }
+            }
+            { scopeless type
+              (177731 'move' _indexOfInterest[177716](177728 call iteratorIndex _iterator[177717]))
+            }
+            ForLoop[177718]
+            {
+              unknown i[177735] "index var" "insert auto destroy"
+              (177737 'move' i[177735] _indexOfInterest[177716])
+              {
+                {
+                  unknown _indexOfInterest[177656] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                  unknown _iterator[177657] "expr temp" "temp"
+                  (177666 'move' _iterator[177657](177664 call _getIterator(177673 call chpl_direct_counted_range_iter 0 nLen)))
+                  Defer
+                  {
+                    {
+                      (177689 call _freeIterator _iterator[177657])
+                    }
+                  }
+                  { scopeless type
+                    (177678 'move' _indexOfInterest[177656](177675 call iteratorIndex _iterator[177657]))
+                  }
+                  ForLoop[177658]
+                  {
+                    unknown j[177682] "index var" "insert auto destroy"
+                    (177684 'move' j[177682] _indexOfInterest[177656])
+                    {
+                      { scopeless
+                        const idx[177592] "const"(177591 call(177583 call . view c"orderToIndex")(177588 call + i j))
+                        (177595 'end of statement')
+                      }
+                      if(177616 call _cond_test(177611 call !=(177603 call(177598 call . x c"buff") idx)(177610 call(177605 call . localNeedle c"buff") j)))
+                      {
+                        { scopeless
+                          break nil[44]
+                        }
+                      }
+                      if(177652 call _cond_test(177626 call == j(177624 call - nLen 1)))
+                      {
+                        if(177647 call _cond_test count)
+                        {
+                          (177631 call += localRet 1)
+                        }
+                        {
+                          (177643 call = localRet(177642 call(177637 call . view c"orderToIndex") i))
+                        }
+                      }
+                    }
+                    label _continueLabel[177661]
+                    _indexOfInterest[177656]
+                    _iterator[177657]
+                  }
+                  label _breakLabel[177662]
+                }
+                if(177711 call _cond_test(177706 call &&(177698 call ! count)(177704 call != localRet(177702 call - 1))))
+                {
+                  { scopeless
+                    break nil[44]
+                  }
+                }
+              }
+              label _continueLabel[177721]
+              _indexOfInterest[177716]
+              _iterator[177717]
+            }
+            label _breakLabel[177722]
+          }
+        }
+        if(177759 call _cond_test count)
+        {
+          { scopeless
+            (177756 call += localRet 1)
+          }
+        }
+        (177766 call = ret localRet)
+      }
+      (177775 'elided on block' 0 tmp[177771])
+    }
+    (177780 return ret)
+  }
+  function startsEndsWith[177791](const  ref arg x[177788] :
+  unknown t[177786], arg needles[177793]:_any[178](?), param arg fromLeft[177796] :
+  bool[10]) : _unknown[51] "inline" "no doc"
+  {
+    (177834 call assertArgType t "startsEndsWith")
+    { scopeless
+      unknown ret[177839] 0 bool[10]
+      (177842 'end of statement')
+    }
+    {
+      const tmp[178019] "const" "temp"
+      (178020 'move' tmp[178019](178017 'deref'(177853 'chpl_on_locale_num'(177852 call chpl_buildLocaleID(177847 call . x c"locale_id") c_sublocid_any))))
+      {
+        {
+          unknown _indexOfInterest[177983] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[177984] "expr temp" "temp"
+          (177993 'move' _iterator[177984](177991 call _getIterator needles))
+          Defer
+          {
+            {
+              (178009 call _freeIterator _iterator[177984])
+            }
+          }
+          { scopeless type
+            (177998 'move' _indexOfInterest[177983](177995 call iteratorIndex _iterator[177984]))
+          }
+          ForLoop[177985]
+          {
+            unknown needle[178002] "index var" "insert auto destroy"
+            (178004 'move' needle[178002] _indexOfInterest[177983])
+            {
+              { scopeless
+                const needleLen[177860] "const"(177857 call . needle c"buffLen")
+                (177863 'end of statement')
+              }
+              if(177878 call _cond_test(177867 call == needleLen 0))
+              {
+                (177871 call = ret 1)
+                break nil[44]
+              }
+              if(177892 call _cond_test(177887 call > needleLen(177884 call . x c"buffLen")))
+              {
+                { scopeless
+                  continue nil[44]
+                }
+              }
+              { scopeless
+                const localNeedle[177903] "const"(177902 call(177898 call . needle c"localize"))
+                (177906 'end of statement')
+              }
+              if(177967 call _cond_test fromLeft)
+              {
+                (177928 call = ret(177927 call bufferEqualsLocal(buf1 =(177911 call . x c"buff"))(off1 = 0)(buf2 =(177919 call . localNeedle c"buff"))(off2 = 0)(len = needleLen)))
+              }
+              {
+                { scopeless
+                  unknown offset[177939](177937 call -(177933 call . x c"buffLen") needleLen)
+                  (177942 'end of statement')
+                }
+                (177964 call = ret(177963 call bufferEqualsLocal(buf1 =(177947 call . x c"buff"))(off1 = offset)(buf2 =(177955 call . localNeedle c"buff"))(off2 = 0)(len = needleLen)))
+              }
+              if(177978 call _cond_test(177973 call == ret 1))
+              {
+                { scopeless
+                  break nil[44]
+                }
+              }
+            }
+            label _continueLabel[177988]
+            _indexOfInterest[177983]
+            _iterator[177984]
+          }
+          label _breakLabel[177989]
+        }
+      }
+      (178023 'elided on block' 0 tmp[178019])
+    }
+    (178028 return ret)
+  }
+  where {
+    (177812 call &&(177803 call isHomogeneousTuple needles)(177810 call ==(177808 'typeof'(177807 call needles 0)) t))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function doJoinIterator[178041](const  ref arg x[178038] :
+  unknown t[178036], arg ir[178044] :
+  _iteratorRecord) : _unknown[51]
+  {
+    (178068 call assertArgType t "doJoinIterator")
+    { scopeless
+      unknown s[178072] t
+      (178075 'end of statement')
+    }
+    { scopeless
+      unknown first[178078] 1 bool[10]
+      (178081 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[178107] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[178108] "expr temp" "temp"
+      (178117 'move' _iterator[178108](178115 call _getIterator ir))
+      Defer
+      {
+        {
+          (178133 call _freeIterator _iterator[178108])
+        }
+      }
+      { scopeless type
+        (178122 'move' _indexOfInterest[178107](178119 call iteratorIndex _iterator[178108]))
+      }
+      ForLoop[178109]
+      {
+        unknown i[178126] "index var" "insert auto destroy"
+        (178128 'move' i[178126] _indexOfInterest[178107])
+        {
+          if(178095 call _cond_test first)
+          {
+            { scopeless
+              (178087 call = first 0)
+            }
+          }
+          {
+            { scopeless
+              (178092 call += s x)
+            }
+          }
+          (178104 call += s i)
+        }
+        label _continueLabel[178112]
+        _indexOfInterest[178107]
+        _iterator[178108]
+      }
+      label _breakLabel[178113]
+    }
+    (178141 return s)
+  }
+  { scopeless type
+    t
+  }
+  function doJoin[178153](const  ref arg x[178150] :
+  unknown t[178148], const  ref arg S[178155]:_any[178](?)) : _unknown[51]
+  {
+    (178188 call assertArgType t "doJoin")
+    if(178610 call _cond_test(178196 call ==(178192 call . S c"size") 0))
+    {
+      (178218 return(178216 call _cast t ""))
+    }
+    {
+      { scopeless
+        if(178606 call _cond_test(178226 call ==(178222 call . S c"size") 1))
+        {
+          { scopeless
+            unknown ret[178229] t
+            (178232 'end of statement')
+          }
+          if(178262 call _cond_test(178237 call isArray S))
+          {
+            (178249 call = ret(178248 call S(178244 call .(178241 call . S c"_dom") c"first")))
+          }
+          {
+            (178258 call = ret(178257 call S 0))
+          }
+          (178267 return ret)
+        }
+        {
+          { scopeless
+            unknown joinedSize[178283](178281 call *(178271 call . x c"buffLen")(178279 call -(178275 call . S c"size") 1)) int[13]
+            (178286 'end of statement')
+          }
+          {
+            unknown _indexOfInterest[178298] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[178299] "expr temp" "temp"
+            (178308 'move' _iterator[178299](178306 call _getIterator S))
+            Defer
+            {
+              {
+                (178324 call _freeIterator _iterator[178299])
+              }
+            }
+            { scopeless type
+              (178313 'move' _indexOfInterest[178298](178310 call iteratorIndex _iterator[178299]))
+            }
+            ForLoop[178300]
+            {
+              unknown s[178317] "index var" "insert auto destroy"
+              (178319 'move' s[178317] _indexOfInterest[178298])
+              { scopeless
+                (178295 call += joinedSize(178292 call . s c"numBytes"))
+              }
+              label _continueLabel[178303]
+              _indexOfInterest[178298]
+              _iterator[178299]
+            }
+            label _breakLabel[178304]
+          }
+          { scopeless
+            unknown numCodepoints[178332] 0
+            (178335 'end of statement')
+          }
+          if(178362 call _cond_test(178338 call == joinedSize 0))
+          {
+            { scopeless
+              (178360 return(178358 call _cast t ""))
+            }
+          }
+          { scopeless
+            unknown tmp[178379] "temp"(178378 call bufferAlloc(178375 call + joinedSize 1))
+            (178386 call _check_tuple_var_decl tmp[178379] 2)
+            unknown newBuff[178367](178380 call tmp[178379] 0)
+            unknown allocSize[178369](178383 call tmp[178379] 1)
+            (178391 'end of statement')
+          }
+          { scopeless
+            unknown first[178393] 1
+            (178396 'end of statement')
+          }
+          { scopeless
+            unknown offset[178398] 0
+            (178401 'end of statement')
+          }
+          {
+            unknown _indexOfInterest[178531] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[178532] "expr temp" "temp"
+            (178541 'move' _iterator[178532](178539 call _getIterator S))
+            Defer
+            {
+              {
+                (178557 call _freeIterator _iterator[178532])
+              }
+            }
+            { scopeless type
+              (178546 'move' _indexOfInterest[178531](178543 call iteratorIndex _iterator[178532]))
+            }
+            ForLoop[178533]
+            {
+              unknown s[178550] "index var" "insert auto destroy"
+              (178552 'move' s[178550] _indexOfInterest[178531])
+              {
+                { scopeless
+                  const sLen[178408] "const"(178405 call . s c"buffLen")
+                  (178411 'end of statement')
+                }
+                if(178475 call _cond_test first)
+                {
+                  (178416 call = first 0)
+                }
+                {
+                  { scopeless
+                    if(178471 call _cond_test(178425 call !=(178421 call . x c"buffLen") 0))
+                    {
+                      (178443 call bufferMemcpyLocal(dst = newBuff)(src =(178432 call . x c"buff"))(len =(178437 call . x c"buffLen"))(dst_off = offset))
+                      (178451 call += offset(178448 call . x c"buffLen"))
+                      if(178466 call _cond_test(178456 call == t string[26]))
+                      {
+                        { scopeless
+                          (178463 call += numCodepoints(178460 call . x c"numCodepoints"))
+                        }
+                      }
+                    }
+                  }
+                }
+                if(178527 call _cond_test(178482 call != sLen 0))
+                {
+                  (178502 call bufferMemcpy(dst = newBuff)(dst_off = offset)(src_loc =(178491 call . s c"locale_id"))(src =(178496 call . s c"buff"))(len = sLen))
+                  (178507 call += offset sLen)
+                  if(178522 call _cond_test(178512 call == t string[26]))
+                  {
+                    { scopeless
+                      (178519 call += numCodepoints(178516 call . s c"numCodepoints"))
+                    }
+                  }
+                }
+              }
+              label _continueLabel[178536]
+              _indexOfInterest[178531]
+              _iterator[178532]
+            }
+            label _breakLabel[178537]
+          }
+          (178569 call =(178567 call newBuff joinedSize) 0)
+          if(178602 call _cond_test(178574 call == t string[26]))
+          {
+            (178587 return(178586 call chpl_createStringWithOwnedBufferNV(x = newBuff)(length = joinedSize)(size = allocSize)(numCodepoints = numCodepoints)))
+          }
+          {
+            (178599 return(178598 call createBytesWithOwnedBuffer(x = newBuff)(length = joinedSize)(size = allocSize)))
+          }
+        }
+      }
+    }
+  }
+  where {
+    (178166 call ||(178161 call isTuple S)(178165 call isArray S))
+  }
+  { scopeless type
+    t
+  }
+  function doPartition[178626](const  ref arg x[178623] :
+  unknown t[178621], arg sep[178629] :
+  t) : _unknown[51]
+  {
+    (178656 call assertArgType t "doPartition")
+    { scopeless
+      const idx[178666] "const"(178665 call(178660 call . x c"find") sep)
+      (178669 'end of statement')
+    }
+    if(178751 call _cond_test(178674 call != idx(178672 call - 1)))
+    {
+      (178701 return(178699 call _build_tuple(178684 call x(178681 call chpl_build_high_bounded_range(178679 call - idx 1))) sep(178698 call x(178695 call chpl_build_low_bounded_range(178693 call + idx(178690 call . sep c"numBytes"))))))
+    }
+    {
+      (178748 return(178746 call _build_tuple x(178723 call _cast t "")(178744 call _cast t "")))
+    }
+  }
+  { scopeless type
+    (178634 call * 3 t)
+  }
+  function doAppend[178765](ref arg lhs[178762] :
+  unknown t[178760], const  ref arg rhs[178768] :
+  t) : _unknown[51]
+  {
+    (178791 call assertArgType t "doAppend")
+    if(178803 call _cond_test(178799 call ==(178795 call . rhs c"buffLen") 0))
+    {
+      { scopeless
+        (178801 return)
+      }
+    }
+    {
+      const tmp[179087] "const" "temp"
+      (179088 'move' tmp[179087](179085 'deref'(178818 'chpl_on_locale_num'(178817 call chpl_buildLocaleID(178812 call . lhs c"locale_id") c_sublocid_any))))
+      {
+        if(178853 call _cond_test(178830 call !(178829 call safeAdd(178821 call . lhs c"buffLen")(178826 call . rhs c"buffLen"))))
+        {
+          { scopeless
+            (178851 call halt "Buffer overflow allocating string copy data")
+          }
+        }
+        { scopeless
+          const newLength[178869] "const"(178867 call +(178860 call . lhs c"buffLen")(178864 call . rhs c"buffLen"))
+          (178872 'end of statement')
+        }
+        if(179015 call _cond_test(178878 call <=(178874 call . lhs c"buffSize") newLength))
+        {
+          { scopeless
+            const requestedSize[178897] "const"(178896 call max(178883 call + newLength 1)(178894 call _cast int[13](178891 call *(178887 call . lhs c"buffLen") chpl_stringGrowthFactor)))
+            (178900 'end of statement')
+          }
+          if(179011 call _cond_test(178903 call . lhs c"isOwned"))
+          {
+            { scopeless
+              unknown tmp[178919] "temp"(178918 call bufferRealloc(178913 call . lhs c"buff") requestedSize)
+              (178926 call _check_tuple_var_decl tmp[178919] 2)
+              unknown newBuff[178906](178920 call tmp[178919] 0)
+              unknown allocSize[178908](178923 call tmp[178919] 1)
+              (178931 'end of statement')
+            }
+            (178938 call =(178934 call . lhs c"buff") newBuff)
+            (178946 call =(178942 call . lhs c"buffSize") allocSize)
+          }
+          {
+            { scopeless
+              unknown tmp[178958] "temp"(178957 call bufferAlloc requestedSize)
+              (178965 call _check_tuple_var_decl tmp[178958] 2)
+              unknown newBuff[178949](178959 call tmp[178958] 0)
+              unknown allocSize[178951](178962 call tmp[178958] 1)
+              (178970 'end of statement')
+            }
+            (178985 call bufferMemcpyLocal(dst = newBuff)(src =(178977 call . lhs c"buff"))(178982 call . lhs c"buffLen"))
+            (178992 call =(178988 call . lhs c"buff") newBuff)
+            (179000 call =(178996 call . lhs c"buffSize") allocSize)
+            (179008 call =(179004 call . lhs c"isOwned") 1)
+          }
+        }
+        (179044 call bufferMemcpy(dst =(179021 call . lhs c"buff"))(src_loc =(179027 call . rhs c"locale_id"))(179032 call . rhs c"buff")(179036 call . rhs c"buffLen")(dst_off =(179040 call . lhs c"buffLen")))
+        (179051 call =(179047 call . lhs c"buffLen") newLength)
+        (179062 call =(179060 call(179055 call . lhs c"buff") newLength) 0)
+        if(179080 call _cond_test(179067 call == t string[26]))
+        {
+          { scopeless
+            (179077 call +=(179070 call . lhs c"cachedNumCodepoints")(179074 call . rhs c"cachedNumCodepoints"))
+          }
+        }
+      }
+      (179091 'elided on block' 0 tmp[179087])
+    }
+  }
+  function reinitWithNewBuffer[179104](ref arg lhs[179101] :
+  unknown t[179099], arg buff[179107] :
+  bufferType, arg buffLen[179111] :
+  int[13], arg buffSize[179115] :
+  int[13], arg numCodepoints[179120] :
+  int[13] =
+  0) : _unknown[51]
+  {
+    if(179138 call _cond_test(179134 call &&(179129 call(179125 call . lhs c"isEmpty"))(179132 call == buff nil[44])))
+    {
+      { scopeless
+        (179136 return)
+      }
+    }
+    if(179313 call _cond_test(179146 call != buffLen 0))
+    {
+      if(179243 call _cond_test(179164 call ||(179152 call !(179149 call . lhs c"isOwned"))(179162 call >(179156 call + buffLen 1)(179159 call . lhs c"buffSize"))))
+      {
+        if(179188 call _cond_test(179178 call &&(179167 call . lhs c"isOwned")(179176 call !(179175 call(179171 call . lhs c"isEmpty")))))
+        {
+          { scopeless
+            (179186 call bufferFree(179182 call . lhs c"buff"))
+          }
+        }
+        { scopeless
+          const tmp[179206] "const" "temp"(179205 call bufferAlloc(179202 call + buffLen 1))
+          (179213 call _check_tuple_var_decl tmp[179206] 2)
+          const buff[179194] "const"(179207 call tmp[179206] 0)
+          const allocSize[179196] "const"(179210 call tmp[179206] 1)
+          (179218 'end of statement')
+        }
+        (179224 call =(179220 call . lhs c"buff") buff)
+        (179232 call =(179228 call . lhs c"buffSize") allocSize)
+        (179240 call =(179236 call . lhs c"isOwned") 1)
+      }
+      (179256 call bufferMemmoveLocal(179250 call . lhs c"buff") buff buffLen)
+      (179266 call =(179264 call(179259 call . lhs c"buff") buffLen) 0)
+    }
+    {
+      if(179291 call _cond_test(179281 call &&(179270 call . lhs c"isOwned")(179279 call !(179278 call(179274 call . lhs c"isEmpty")))))
+      {
+        { scopeless
+          (179289 call bufferFree(179285 call . lhs c"buff"))
+        }
+      }
+      (179302 call =(179298 call . lhs c"buffSize") 0)
+      (179310 call =(179306 call . lhs c"buff") nil[44])
+    }
+    (179322 call =(179318 call . lhs c"buffLen") buffLen)
+    if(179337 call _cond_test(179327 call == t string[26]))
+    {
+      { scopeless
+        (179334 call =(179330 call . lhs c"cachedNumCodepoints") numCodepoints)
+      }
+    }
+  }
+  function reinitWithOwnedBuffer[179351](ref arg lhs[179348] :
+  unknown t[179346], arg buff[179354] :
+  bufferType, arg buffLen[179358] :
+  int[13], arg buffSize[179362] :
+  int[13], arg numCodepoints[179367] :
+  int[13] =
+  0) : _unknown[51]
+  {
+    if(179385 call _cond_test(179381 call &&(179376 call(179372 call . lhs c"isEmpty"))(179379 call == buff nil[44])))
+    {
+      { scopeless
+        (179383 return)
+      }
+    }
+    if(179483 call _cond_test(179393 call != buffLen 0))
+    {
+      if(179417 call _cond_test(179407 call &&(179396 call . lhs c"isOwned")(179405 call !(179404 call(179400 call . lhs c"isEmpty")))))
+      {
+        { scopeless
+          (179415 call bufferFree(179411 call . lhs c"buff"))
+        }
+      }
+      (179428 call =(179424 call . lhs c"buff") buff)
+      (179436 call =(179432 call . lhs c"buffSize") buffSize)
+    }
+    {
+      if(179461 call _cond_test(179451 call &&(179440 call . lhs c"isOwned")(179449 call !(179448 call(179444 call . lhs c"isEmpty")))))
+      {
+        { scopeless
+          (179459 call bufferFree(179455 call . lhs c"buff"))
+        }
+      }
+      (179472 call =(179468 call . lhs c"buff") buff)
+      (179480 call =(179476 call . lhs c"buffSize") 0)
+    }
+    (179492 call =(179488 call . lhs c"isOwned") 1)
+    (179500 call =(179496 call . lhs c"buffLen") buffLen)
+    if(179515 call _cond_test(179505 call == t string[26]))
+    {
+      { scopeless
+        (179512 call =(179508 call . lhs c"cachedNumCodepoints") numCodepoints)
+      }
+    }
+  }
+  function doAssign[179529](ref arg lhs[179526] :
+  unknown t[179524], arg rhs[179532] :
+  t) : _unknown[51]
+  {
+    (179555 call assertArgType t "doAssign")
+    function helpMe[179564](ref arg lhs[179561] :
+    t, arg rhs[179567] :
+    t) : _unknown[51] "inline"
+    {
+      if(179705 call _cond_test(179578 call || _local(179576 call ==(179572 call . rhs c"locale_id") chpl_nodeID)))
+      {
+        if(179624 call _cond_test(179582 call == t string[26]))
+        {
+          (179603 call reinitWithNewBuffer lhs(179588 call . rhs c"buff")(179592 call . rhs c"buffLen")(179596 call . rhs c"buffSize")(179600 call . rhs c"numCodepoints"))
+        }
+        {
+          (179621 call reinitWithNewBuffer lhs(179610 call . rhs c"buff")(179614 call . rhs c"buffLen")(179618 call . rhs c"buffSize"))
+        }
+      }
+      {
+        { scopeless
+          const len[179633] "const"(179630 call . rhs c"buffLen")
+          (179636 'end of statement')
+        }
+        { scopeless
+          unknown remote_buf[179640] nil[44] bufferType
+          (179643 'end of statement')
+        }
+        if(179664 call _cond_test(179646 call != len 0))
+        {
+          { scopeless
+            (179661 call = remote_buf(179660 call bufferCopyRemote(179651 call . rhs c"locale_id")(179656 call . rhs c"buff") len))
+          }
+        }
+        if(179701 call _cond_test(179671 call == t string[26]))
+        {
+          (179686 call reinitWithOwnedBuffer lhs remote_buf len(179680 call + len 1)(179683 call . rhs c"cachedNumCodepoints"))
+        }
+        {
+          (179698 call reinitWithOwnedBuffer lhs remote_buf len(179696 call + len 1))
+        }
+      }
+    }
+    if(179758 call _cond_test(179720 call || _local(179718 call ==(179714 call . lhs c"locale_id") chpl_nodeID)))
+    {
+      (179726 call helpMe lhs rhs)
+    }
+    {
+      {
+        const tmp[179749] "const" "temp"
+        (179750 'move' tmp[179749](179747 'deref'(179739 'chpl_on_locale_num'(179738 call chpl_buildLocaleID(179733 call . lhs c"locale_id") c_sublocid_any))))
+        {
+          (179744 call helpMe lhs rhs)
+        }
+        (179753 'elided on block' 0 tmp[179749])
+      }
+    }
+  }
+  function doMultiply[179771](const  ref arg x[179768] :
+  unknown t[179766], arg n[179774] :
+  integral) : _unknown[51]
+  {
+    (179797 call assertArgType t "doMultiply")
+    { scopeless
+      const sLen[179804] "const"(179801 call . x c"numBytes")
+      (179807 'end of statement')
+    }
+    if(179954 call _cond_test(179811 call isBytesType t))
+    {
+      if(179834 call _cond_test(179814 call <= n 0))
+      {
+        { scopeless
+          (179832 return b"")
+        }
+      }
+      if(179862 call _cond_test(179842 call == sLen 0))
+      {
+        { scopeless
+          (179860 return b"")
+        }
+      }
+    }
+    {
+      { scopeless
+        if(179950 call _cond_test(179870 call isStringType t))
+        {
+          if(179894 call _cond_test(179873 call <= n 0))
+          {
+            { scopeless
+              (179892 return "")
+            }
+          }
+          if(179923 call _cond_test(179902 call == sLen 0))
+          {
+            { scopeless
+              (179921 return "")
+            }
+          }
+        }
+        {
+          (179947 call compilerError "Unexpected type")
+        }
+      }
+    }
+    if(179971 call _cond_test(179964 call !(179963 call safeMul sLen n)))
+    {
+      { scopeless
+        (179969 call halt "Buffer overflow allocating string copy data")
+      }
+    }
+    { scopeless
+      const buffLen[179980] "const"(179978 call * sLen n)
+      (179983 'end of statement')
+    }
+    { scopeless
+      unknown tmp[179996] "temp"(179995 call bufferAlloc(179992 call + buffLen 1))
+      (180003 call _check_tuple_var_decl tmp[179996] 2)
+      unknown buff[179984](179997 call tmp[179996] 0)
+      unknown allocSize[179986](180000 call tmp[179996] 1)
+      (180008 'end of statement')
+    }
+    (180028 call bufferMemcpy(dst = buff)(src_loc =(180014 call . x c"locale_id"))(src =(180019 call . x c"buff"))(len =(180024 call . x c"buffLen")))
+    { scopeless
+      unknown offset[180031] sLen
+      (180034 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[180064] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[180065] "expr temp" "temp"
+      (180074 'move' _iterator[180065](180072 call _getIterator(180082 call chpl_direct_range_iter 1(180079 call - n 1) 1)))
+      Defer
+      {
+        {
+          (180098 call _freeIterator _iterator[180065])
+        }
+      }
+      { scopeless type
+        (180087 'move' _indexOfInterest[180064](180084 call iteratorIndex _iterator[180065]))
+      }
+      ForLoop[180066]
+      {
+        unknown i[180091] "index var" "insert auto destroy"
+        (180093 'move' i[180091] _indexOfInterest[180064])
+        {
+          (180056 call bufferMemcpyLocal(dst = buff)(src = buff)(len =(180050 call . x c"buffLen"))(dst_off = offset))
+          (180061 call += offset sLen)
+        }
+        label _continueLabel[180069]
+        _indexOfInterest[180064]
+        _iterator[180065]
+      }
+      label _breakLabel[180070]
+    }
+    (180110 call =(180108 call buff buffLen) 0)
+    if(180142 call _cond_test(180115 call == t string[26]))
+    {
+      (180130 return(180129 call chpl_createStringWithOwnedBufferNV buff buffLen allocSize(180127 call *(180123 call . x c"cachedNumCodepoints") n)))
+    }
+    {
+      (180139 return(180138 call createBytesWithOwnedBuffer buff buffLen allocSize))
+    }
+  }
+  function doConcat[180155](arg s0[180152] :
+  unknown t[180150], arg s1[180158] :
+  t) : _unknown[51]
+  {
+    (180182 call assertArgType t "doConcat")
+    { scopeless
+      const s0len[180189] "const"(180186 call . s0 c"buffLen")
+      (180192 'end of statement')
+    }
+    if(180203 call _cond_test(180195 call == s0len 0))
+    {
+      { scopeless
+        (180201 return(180199 call _cast t s1))
+      }
+    }
+    { scopeless
+      const s1len[180212] "const"(180209 call . s1 c"buffLen")
+      (180215 'end of statement')
+    }
+    if(180223 call _cond_test(180218 call == s1len 0))
+    {
+      { scopeless
+        (180221 return s0)
+      }
+    }
+    { scopeless
+      const buffLen[180232] "const"(180230 call + s0len s1len)
+      (180235 'end of statement')
+    }
+    { scopeless
+      unknown tmp[180248] "temp"(180247 call bufferAlloc(180244 call + buffLen 1))
+      (180255 call _check_tuple_var_decl tmp[180248] 2)
+      unknown buff[180236](180249 call tmp[180248] 0)
+      unknown buffSize[180238](180252 call tmp[180248] 1)
+      (180260 'end of statement')
+    }
+    (180277 call bufferMemcpy(dst = buff)(src_loc =(180266 call . s0 c"locale_id"))(src =(180271 call . s0 c"buff"))(len = s0len))
+    (180297 call bufferMemcpy(dst = buff)(src_loc =(180284 call . s1 c"locale_id"))(src =(180289 call . s1 c"buff"))(len = s1len)(dst_off = s0len))
+    (180304 call =(180302 call buff buffLen) 0)
+    { scopeless
+      unknown ret[180308] t
+      (180311 'end of statement')
+    }
+    if(180334 call _cond_test(180314 call == t string[26]))
+    {
+      (180330 call =(180317 call . ret c"cachedNumCodepoints")(180328 call +(180321 call . s0 c"cachedNumCodepoints")(180325 call . s1 c"cachedNumCodepoints")))
+    }
+    (180344 call initWithOwnedBuffer ret buff buffLen buffSize)
+    (180347 return ret)
+  }
+  { scopeless type
+    t
+  }
+  function doStripNoEnc[180359](const  ref arg x[180356] :
+  unknown t[180354], arg chars[180362] :
+  t, arg leading[180366] :
+  bool[10], arg trailing[180370] :
+  bool[10]) : _unknown[51]
+  {
+    if(180422 call _cond_test(180379 call(180375 call . x c"isEmpty")))
+    {
+      { scopeless
+        (180420 return(180417 IfExpr (180382 call == t string[26]) then
+        { scopeless
+          ""
+        } else
+        { scopeless
+          b""
+        } ))
+      }
+    }
+    if(180437 call _cond_test(180433 call(180429 call . chars c"isEmpty")))
+    {
+      { scopeless
+        (180435 return x)
+      }
+    }
+    { scopeless
+      const localX[180449] "const"(180448 call(180444 call . x c"localize")) t
+      (180452 'end of statement')
+    }
+    { scopeless
+      const localChars[180460] "const"(180459 call(180455 call . chars c"localize")) t
+      (180463 'end of statement')
+    }
+    { scopeless
+      unknown start[180466] 0 idxType
+      (180469 'end of statement')
+    }
+    { scopeless
+      unknown end[180478](180476 call -(180472 call . localX c"buffLen") 1) idxType
+      (180481 'end of statement')
+    }
+    if(180626 call _cond_test leading)
+    {
+      {
+        unknown _indexOfInterest[180564] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[180565] "expr temp" "temp"
+        (180588 'move' _iterator[180565](180498 call _build_tuple(180577 call _getIterator(180574 call . x c"indices"))(180585 call _getIterator(180584 call(180581 call . localX c"chpl_bytes")))))
+        Defer
+        {
+          {
+            (180618 call _freeIterator _iterator[180565])
+          }
+        }
+        { scopeless type
+          (180593 'move' _indexOfInterest[180564](180590 call iteratorIndex _iterator[180565]))
+        }
+        ForLoop[180566]
+        {
+          (180598 call _check_tuple_var_decl _indexOfInterest[180564] 2)
+          unknown i[180604] "index var" "insert auto destroy"
+          (180606 'move' i[180604](180602 call _indexOfInterest[180564] 0))
+          unknown xChar[180611] "index var" "insert auto destroy"
+          (180613 'move' xChar[180611](180609 call _indexOfInterest[180564] 1))
+          {
+            {
+              unknown _indexOfInterest[180526] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[180527] "expr temp" "temp"
+              (180536 'move' _iterator[180527](180534 call _getIterator(180504 call(180501 call . localChars c"chpl_bytes"))))
+              Defer
+              {
+                {
+                  (180553 call _freeIterator _iterator[180527])
+                }
+              }
+              { scopeless type
+                (180542 'move' _indexOfInterest[180526](180539 call iteratorIndex _iterator[180527]))
+              }
+              ForLoop[180528]
+              {
+                unknown removeChar[180546] "index var" "insert auto destroy"
+                (180548 'move' removeChar[180546] _indexOfInterest[180526])
+                {
+                  if(180521 call _cond_test(180507 call == xChar removeChar))
+                  {
+                    (180514 call = start(180512 call + i 1))
+                    continue outer
+                  }
+                }
+                label _continueLabel[180531]
+                _indexOfInterest[180526]
+                _iterator[180527]
+              }
+              label _breakLabel[180532]
+            }
+            break nil[44]
+          }
+          label _continueLabel[180569]
+          _indexOfInterest[180564]
+          _iterator[180565]
+        }
+        label _breakLabel[180570]
+      }
+    }
+    if(180775 call _cond_test trailing)
+    {
+      (180635 call = end(180633 call - 1))
+      {
+        unknown _indexOfInterest[180714] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[180715] "expr temp" "temp"
+        (180738 'move' _iterator[180715](180654 call _build_tuple(180727 call _getIterator(180724 call . x c"indices"))(180735 call _getIterator(180734 call(180731 call . localX c"chpl_bytes")))))
+        Defer
+        {
+          {
+            (180768 call _freeIterator _iterator[180715])
+          }
+        }
+        { scopeless type
+          (180743 'move' _indexOfInterest[180714](180740 call iteratorIndex _iterator[180715]))
+        }
+        ForLoop[180716]
+        {
+          (180748 call _check_tuple_var_decl _indexOfInterest[180714] 2)
+          unknown i[180754] "index var" "insert auto destroy"
+          (180756 'move' i[180754](180752 call _indexOfInterest[180714] 0))
+          unknown xChar[180761] "index var" "insert auto destroy"
+          (180763 'move' xChar[180761](180759 call _indexOfInterest[180714] 1))
+          {
+            {
+              unknown _indexOfInterest[180674] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[180675] "expr temp" "temp"
+              (180684 'move' _iterator[180675](180682 call _getIterator(180660 call(180657 call . localChars c"chpl_bytes"))))
+              Defer
+              {
+                {
+                  (180701 call _freeIterator _iterator[180675])
+                }
+              }
+              { scopeless type
+                (180690 'move' _indexOfInterest[180674](180687 call iteratorIndex _iterator[180675]))
+              }
+              ForLoop[180676]
+              {
+                unknown removeChar[180694] "index var" "insert auto destroy"
+                (180696 'move' removeChar[180694] _indexOfInterest[180674])
+                {
+                  if(180669 call _cond_test(180663 call == xChar removeChar))
+                  {
+                    continue outer
+                  }
+                }
+                label _continueLabel[180679]
+                _indexOfInterest[180674]
+                _iterator[180675]
+              }
+              label _breakLabel[180680]
+            }
+            (180711 call = end i)
+          }
+          label _continueLabel[180719]
+          _indexOfInterest[180714]
+          _iterator[180715]
+        }
+        label _breakLabel[180720]
+      }
+    }
+    (180786 return(180785 call localX(180782 call chpl_build_bounded_range start end)))
+  }
+  { scopeless type
+    t
+  }
+  function doEq[180798](arg a[180795] :
+  unknown t1[180793], arg b[180802] :
+  unknown t2[180800]) : _unknown[51] "inline"
+  {
+    (180825 call assertArgType t1 "doEq")
+    (180832 call assertArgType t2 "doEq")
+    (180864 return(180862 call ==(180860 call _strcmp(180836 call . a c"buff")(180841 call . a c"buffLen")(180845 call . a c"locale_id")(180849 call . b c"buff")(180853 call . b c"buffLen")(180857 call . b c"locale_id")) 0))
+  }
+  function doLessThan[180875](arg a[180872] :
+  unknown t1[180870], arg b[180879] :
+  unknown t2[180877]) : _unknown[51] "inline"
+  {
+    (180886 call assertArgType t1 "doEq")
+    (180893 call assertArgType t2 "doEq")
+    (180925 return(180923 call <(180921 call _strcmp(180897 call . a c"buff")(180902 call . a c"buffLen")(180906 call . a c"locale_id")(180910 call . b c"buff")(180914 call . b c"buffLen")(180918 call . b c"locale_id")) 0))
+  }
+  function doGreaterThan[180936](arg a[180933] :
+  unknown t1[180931], arg b[180940] :
+  unknown t2[180938]) : _unknown[51] "inline"
+  {
+    (180947 call assertArgType t1 "doEq")
+    (180954 call assertArgType t2 "doEq")
+    (180986 return(180984 call >(180982 call _strcmp(180958 call . a c"buff")(180963 call . a c"buffLen")(180967 call . a c"locale_id")(180971 call . b c"buff")(180975 call . b c"buffLen")(180979 call . b c"locale_id")) 0))
+  }
+  function doLessThanOrEq[180997](arg a[180994] :
+  unknown t1[180992], arg b[181001] :
+  unknown t2[180999]) : _unknown[51] "inline"
+  {
+    (181008 call assertArgType t1 "doEq")
+    (181015 call assertArgType t2 "doEq")
+    (181047 return(181045 call <=(181043 call _strcmp(181019 call . a c"buff")(181024 call . a c"buffLen")(181028 call . a c"locale_id")(181032 call . b c"buff")(181036 call . b c"buffLen")(181040 call . b c"locale_id")) 0))
+  }
+  function doGreaterThanOrEq[181058](arg a[181055] :
+  unknown t1[181053], arg b[181062] :
+  unknown t2[181060]) : _unknown[51] "inline"
+  {
+    (181069 call assertArgType t1 "doEq")
+    (181076 call assertArgType t2 "doEq")
+    (181108 return(181106 call >=(181104 call _strcmp(181080 call . a c"buff")(181085 call . a c"buffLen")(181089 call . a c"locale_id")(181093 call . b c"buff")(181097 call . b c"buffLen")(181101 call . b c"locale_id")) 0))
+  }
+  function getHash[181119](arg x[181116] :
+  unknown t[181114]) : _unknown[51] "inline"
+  {
+    (181141 call assertArgType t "getHash")
+    { scopeless
+      unknown hash[181148](181147 call int[13] 64)
+      (181151 'end of statement')
+    }
+    {
+      const tmp[181256] "const" "temp"
+      (181257 'move' tmp[181256](181254 'deref'(181162 'chpl_on_locale_num'(181161 call chpl_buildLocaleID(181156 call . x c"locale_id") c_sublocid_any))))
+      {
+        { scopeless
+          unknown locHash[181170] 5381(181166 call int[13] 64)
+          (181173 'end of statement')
+        }
+        {
+          unknown _indexOfInterest[181206] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[181207] "expr temp" "temp"
+          (181216 'move' _iterator[181207](181214 call _getIterator(181226 call chpl_direct_counted_range_iter 0(181222 call . x c"numBytes"))))
+          Defer
+          {
+            {
+              (181242 call _freeIterator _iterator[181207])
+            }
+          }
+          { scopeless type
+            (181231 'move' _indexOfInterest[181206](181228 call iteratorIndex _iterator[181207]))
+          }
+          ForLoop[181208]
+          {
+            unknown c[181235] "index var" "insert auto destroy"
+            (181237 'move' c[181235] _indexOfInterest[181206])
+            {
+              (181202 call = locHash(181200 call ^(181191 call +(181188 call << locHash 5) locHash)(181199 call(181194 call . x c"buff") c)))
+            }
+            label _continueLabel[181211]
+            _indexOfInterest[181206]
+            _iterator[181207]
+          }
+          label _breakLabel[181212]
+        }
+        (181251 call = hash locHash)
+      }
+      (181260 'elided on block' 0 tmp[181256])
+    }
+    (181268 return(181266 call _cast uint[115] hash))
+  }
+  function incrementCodepoints[181278](ref arg lhs[181275] :
+  string[26], arg rhs[181281] :
+  string[26]) : _unknown[51] "private"
+  {
+    if(181333 call _cond_test(181302 call ||(181291 call ==(181285 call . lhs c"cachedNumCodepoints")(181289 call - 1))(181300 call ==(181294 call . rhs c"cachedNumCodepoints")(181298 call - 1))))
+    {
+      (181311 call =(181305 call . lhs c"cachedNumCodepoints")(181309 call - 1))
+    }
+    {
+      (181329 call =(181316 call . lhs c"cachedNumCodepoints")(181327 call +(181320 call . lhs c"cachedNumCodepoints")(181324 call . rhs c"cachedNumCodepoints")))
+    }
+  }
+  function countNumCodepoints[181346](arg x[181343] :
+  string[26]) : _unknown[51]
+  {
+    { scopeless
+      unknown ret[181349] int[13]
+      (181352 'end of statement')
+    }
+    {
+      const tmp[181383] "const" "temp"
+      (181384 'move' tmp[181383](181381 'deref'(181364 'chpl_on_locale_num'(181363 call chpl_buildLocaleID(181358 call . x c"locale_id") c_sublocid_any))))
+      {
+        (181377 call = ret(181376 call countNumCodepoints(181368 call . x c"buff")(181373 call . x c"buffLen")))
+      }
+      (181387 'elided on block' 0 tmp[181383])
+    }
+    (181392 return ret)
+  }
+  function countNumCodepoints[181402](arg buff[181399] :
+  bufferType, arg buffLen[181405] :
+  int[13]) : _unknown[51]
+  {
+    { scopeless
+      unknown n[181409] 0
+      (181412 'end of statement')
+    }
+    { scopeless
+      unknown i[181415] 0
+      (181418 'end of statement')
+    }
+    {
+      unknown tmp[181499] "temp"
+      (181523 'move' tmp[181499](181518 call _cond_test(181520 call < i buffLen)))
+      WhileDo[181504]
+      {
+        {
+          (181425 call += i 1)
+          {
+            unknown tmp[181449] "temp"
+            (181491 'move' tmp[181449](181477 call _cond_test(181479 call &&(181481 call < i buffLen)(181485 call !(181487 call isInitialByte(181489 call buff i))))))
+            WhileDo[181454]
+            {
+              { scopeless
+                (181446 call += i 1)
+              }
+              label _continueLabel[181452]
+              (181472 'move' tmp[181449](181458 call _cond_test(181460 call &&(181462 call < i buffLen)(181466 call !(181468 call isInitialByte(181470 call buff i))))))
+              tmp[181449]
+            }
+            label _breakLabel[181453]
+          }
+          (181496 call += n 1)
+        }
+        label _continueLabel[181502]
+        (181513 'move' tmp[181499](181508 call _cond_test(181510 call < i buffLen)))
+        tmp[181499]
+      }
+      label _breakLabel[181503]
+    }
+    (181527 return n)
+  }
+  function isInitialByte[181540](arg b[181537] :
+  (181536 call uint[115] 8)) : _unknown[51] "inline" "no doc"
+  {
+    (181552 return(181550 call !=(181547 call & b 192) 128))
+  }
+  { scopeless type
+    bool[10]
+  }
+  (181576 'require' "ctype.h")
+  function byte_isAscii[181584](arg c[181581] :
+  byteType) : _unknown[51] "inline"
+  {
+    function isascii[181593](arg c[181590] :
+    c_int) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (181610 return(181608 call !=(181606 call isascii(181603 call _cast c_int c)) 0))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function byte_isWhitespace[181621](arg c[181618] :
+  byteType) : _unknown[51] "inline"
+  {
+    function isspace[181630](arg c[181627] :
+    c_int) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (181647 return(181645 call !=(181643 call isspace(181640 call _cast c_int c)) 0))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function byte_isPrintable[181658](arg c[181655] :
+  byteType) : _unknown[51] "inline"
+  {
+    function isprint[181667](arg c[181664] :
+    c_int) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (181684 return(181682 call !=(181680 call isprint(181677 call _cast c_int c)) 0))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function byte_isAlpha[181695](arg c[181692] :
+  byteType) : _unknown[51] "inline"
+  {
+    function isalpha[181704](arg c[181701] :
+    c_int) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (181721 return(181719 call !=(181717 call isalpha(181714 call _cast c_int c)) 0))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function byte_isUpper[181732](arg c[181729] :
+  byteType) : _unknown[51] "inline"
+  {
+    function isupper[181741](arg c[181738] :
+    c_int) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (181758 return(181756 call !=(181754 call isupper(181751 call _cast c_int c)) 0))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function byte_isLower[181769](arg c[181766] :
+  byteType) : _unknown[51] "inline"
+  {
+    function islower[181778](arg c[181775] :
+    c_int) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (181795 return(181793 call !=(181791 call islower(181788 call _cast c_int c)) 0))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function byte_isDigit[181806](arg c[181803] :
+  byteType) : _unknown[51] "inline"
+  {
+    function isdigit[181815](arg c[181812] :
+    c_int) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (181832 return(181830 call !=(181828 call isdigit(181825 call _cast c_int c)) 0))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function byte_isAlnum[181843](arg c[181840] :
+  byteType) : _unknown[51] "inline"
+  {
+    function isalnum[181852](arg c[181849] :
+    c_int) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (181869 return(181867 call !=(181865 call isalnum(181862 call _cast c_int c)) 0))
+  }
+  { scopeless type
+    bool[10]
+  }
+  function byte_toUpper[181880](arg c[181877] :
+  byteType) : _unknown[51] "inline"
+  {
+    function toupper[181889](arg c[181886] :
+    c_int) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (181906 return(181904 call _cast byteType(181902 call toupper(181899 call _cast c_int c))))
+  }
+  { scopeless type
+    byteType
+  }
+  function byte_toLower[181917](arg c[181914] :
+  byteType) : _unknown[51] "inline"
+  {
+    function tolower[181926](arg c[181923] :
+    c_int) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free"
+    {
+    }
+    { scopeless type
+      c_int
+    }
+    (181943 return(181941 call _cast byteType(181939 call tolower(181936 call _cast c_int c))))
+  }
+  { scopeless type
+    byteType
+  }
+}

@@ -1420,7 +1420,7 @@ CallExpr* buildReduceExpr(Expr* opExpr, Expr* dataExpr, bool zippered) {
                           toCallExpr(dataExpr)->isPrimitive(PRIM_ZIP)));
 
   adjustMinMaxReduceOp(opExpr);
-  std::cout<< "in buildReduceExpr" << std::endl;
+  // std::cout<< "in buildReduceExpr" << std::endl;
   return new CallExpr(PRIM_REDUCE, opExpr, dataExpr,
                       zippered ? gTrue : gFalse);
 }
@@ -2216,7 +2216,6 @@ buildOnGPUStmt(Expr* expr, Expr* stmt){
 
 BlockStmt*
 buildOnStmt(Expr* expr, Expr* stmt) {
-  std::cout << "in buildOnStmt without isGPU" << std::endl;
   checkControlFlow(stmt, "on statement");
 
   CallExpr* onExpr = new CallExpr(PRIM_DEREF, extractLocaleID(expr));

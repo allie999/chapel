@@ -1,0 +1,138 @@
+AST dump for ChapelDebugPrint after pass readExternC.
+Module use list: 
+
+{
+  { scopeless
+    (188124 'use' ChapelStandard)
+    (188126 'use' SysCTypes)
+  }
+  (188129 'use' IO)
+  function chpl_debug_stringify[188137](arg args[188134]:_any[178](?) ...) : _unknown[51]
+  {
+    { scopeless
+      unknown str[188157] ""
+      (188160 'end of statement')
+    }
+    {
+      unknown i[188204] 0
+      unknown tmp[188205] "maybe param" "temp"
+      (188217 'move' tmp[188205](188215 call chpl_compute_low_param_loop_bound 0(188168 call -(188164 call . args c"size") 1)))
+      unknown tmp[188206] "maybe param" "temp"
+      (188230 'move' tmp[188206](188228 call chpl_compute_high_param_loop_bound 0(188222 call -(188224 call . args c"size") 1)))
+      unknown tmp[188207] "maybe param" "temp"
+      (188233 'move' tmp[188207] 1)
+      ParamForLoop[188235]
+      { i[188204] tmp[188205] tmp[188206] tmp[188207]
+        {
+          { scopeless
+            unknown tmp[188176](188175 call args i)
+            (188179 'end of statement')
+          }
+          if(188200 call _cond_test(188184 call _can_stringify_direct tmp))
+          {
+            (188190 call += str(188189 call stringify tmp))
+          }
+          {
+            (188196 call += str "\?")
+          }
+        }
+      }
+      label _unused_continueLabel[188209]
+      label _breakLabel[188208]
+    }
+    (188245 return str)
+  }
+  { scopeless type
+    string[26]
+  }
+  function chpl_debug_writeln[188256](arg args[188253]:_any[178](?) ...) : _unknown[51]
+  {
+    function printf[188264](arg fmt[188261] :
+    c_string, arg f[188267] :
+    c_string) : void[4] "extern" "local args" "no fn body"
+    {
+    }
+    { scopeless
+      unknown str[188278](188277 call chpl_debug_stringify(188275 'expand_tuple' args))
+      (188281 'end of statement')
+    }
+    (188307 call printf "%s\n"(188306 call(188302 call . str c"c_str")))
+  }
+  { scopeless
+    unknown chpl__testParFlag[188312] "config" "no doc" "param" 0
+    (188315 'end of statement')
+  }
+  { scopeless
+    unknown chpl__testParOn[188317] "no doc" 0
+    (188320 'end of statement')
+  }
+  function chpl__testParStart[188323]() : _unknown[51] "no doc"
+  {
+    (188327 call = chpl__testParOn 1)
+  }
+  function chpl__testParStop[188335]() : _unknown[51] "no doc"
+  {
+    (188339 call = chpl__testParOn 0)
+  }
+  function chpl__testPar[188351](arg args[188348]:_any[178](?) ...) : _unknown[51] "no doc"
+  {
+    if(188456 call _cond_test(188355 call && chpl__testParFlag chpl__testParOn))
+    {
+      { scopeless
+        const file_cs[188364] "const"(188363 'chpl_lookupFilename'(188362 '_get_user_file')) c_string
+        (188367 'end of statement')
+      }
+      { scopeless
+        unknown file[188370] string[26]
+        (188373 'end of statement')
+      }
+      Try!
+      {
+        {
+          (188379 call = file(188378 call createStringWithNewBuffer file_cs))
+        }
+      }
+      { scopeless
+        const line[188389] "const"(188388 '_get_user_line')
+        (188392 'end of statement')
+      }
+      { scopeless
+        unknown str[188398](188397 call chpl_debug_stringify(188395 'expand_tuple' args))
+        (188401 'end of statement')
+      }
+      function printf[188408](arg fmt[188405] :
+      c_string, arg f[188411] :
+      c_string, arg ln[188415] :
+      c_int, arg s[188419] :
+      c_string) : void[4] "extern" "local args" "no fn body"
+      {
+      }
+      (188454 call printf "CHPL TEST PAR (%s:%i): %s\n" file_cs(188446 call _cast c_int line)(188453 call(188449 call . str c"c_str")))
+    }
+  }
+  function chpl__testParWriteln[188469](arg args[188466]:_any[178](?) ...) : _unknown[51] "no doc"
+  {
+    if(188554 call _cond_test(188473 call && chpl__testParFlag chpl__testParOn))
+    {
+      { scopeless
+        const file_cs[188482] "const"(188481 'chpl_lookupFilename'(188480 '_get_user_file')) c_string
+        (188485 'end of statement')
+      }
+      { scopeless
+        unknown file[188488] string[26]
+        (188491 'end of statement')
+      }
+      Try!
+      {
+        {
+          (188497 call = file(188496 call createStringWithNewBuffer file_cs))
+        }
+      }
+      { scopeless
+        const line[188507] "const"(188506 '_get_user_line')
+        (188510 'end of statement')
+      }
+      (188552 call writeln "CHPL TEST PAR (" file ":" line "): "(188551 'expand_tuple' args))
+    }
+  }
+}

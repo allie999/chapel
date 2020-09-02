@@ -1,0 +1,408 @@
+AST dump for ArrayViewSlice after pass expandExternArrayCalls.
+Module use list: 
+
+{
+  (189700 'use' ChapelStandard)
+  { scopeless
+    unknown chpl_debugSerializeSlice[189704] "config" "param" 0
+    unknown chpl_serializeSlices[189708] "config" "param" 0
+    (189711 'end of statement')
+  }
+  function buildIndexCacheHelper[189716](arg arr[189714]:_any[178](?), arg dom[189718]:_any[178](?)) : _unknown[51] "private"
+  {
+    { scopeless
+      unknown isRankChangeReindex[189750] "param"(189748 call ||(189732 call ||(189725 call(189721 call . arr c"isRankChangeArrayView"))(189731 call(189727 call . arr c"isReindexArrayView")))(189746 call &&(189737 call chpl__isArrayView arr)(189745 call(189741 call . arr c"_containsRCRE"))))
+      (189753 'end of statement')
+    }
+    if(189807 call _cond_test(189760 call &&(189758 call chpl__isDROrDRView arr) isRankChangeReindex))
+    {
+      if(189796 call _cond_test(189765 call chpl__isArrayView arr))
+      {
+        { scopeless
+          (189778 return(189777 call(189772 call .(189767 call . arr c"indexCache") c"toSlice") dom))
+        }
+      }
+      {
+        { scopeless
+          (189794 return(189793 call(189788 call .(189787 call(189783 call . arr c"dsiGetRAD")) c"toSlice") dom))
+        }
+      }
+    }
+    {
+      (189804 return 0)
+    }
+  }
+  type ArrayViewSliceArr[191286](?) const _DomPid[189816] "const" const dom[189820] "const" const _ArrPid[189824] "const" const _ArrInstance[189828] "const" const indexCache[189832] "const" function ArrayViewSliceArr[191286](?).init[189840](arg _mt[191290]:_MT[238], arg this[191288]:ArrayViewSliceArr[191286](?), arg eltType[189838]:_any[178](?), const arg _DomPid[189842]:_any[178](?), const arg dom[189844]:_any[178](?), const arg _ArrPid[189846]:_any[178](?), const arg _ArrInstance[189848]:_any[178](?)) : _unknown[51] "method" "primary method"
+  {
+    (189857 call(189851 call . super c"init")(eltType = eltType))
+    (189867 call =(189863 call . this c"_DomPid") _DomPid)
+    (189875 call =(189871 call . this c"dom") dom)
+    (189883 call =(189879 call . this c"_ArrPid") _ArrPid)
+    (189893 call =(189889 call . this c"_ArrInstance") _ArrInstance)
+    (189905 call =(189897 call . this c"indexCache")(189904 call buildIndexCacheHelper _ArrInstance dom))
+  } function ArrayViewSliceArr[191286](?).chpl_forwarding_expr7_arr[189918](arg _mt[191294]:_MT[238], arg this[191292]:ArrayViewSliceArr[191286](?)) : _unknown[51] "compiler generated" "inline" "maybe ref" "method" "primary method" "reference to const when const this"
+  {
+    (189920 return arr)
+  } function ArrayViewSliceArr[191286](?).chpl__rvfMe[189926](arg _mt[191298]:_MT[238], arg this[191296]:ArrayViewSliceArr[191286](?)) param : _unknown[51] "method" "primary method"
+  {
+    (189929 'use' Reflection)
+    if(189939 call _cond_test(189934 call == chpl_serializeSlices 0))
+    {
+      { scopeless
+        (189937 return 0)
+      }
+    }
+    if(189994 call _cond_test(189984 call &&(189977 call &&(189956 call &&(189949 call(189945 call . dom c"dsiSupportsPrivatization"))(189955 call(189951 call . arr c"dsiSupportsPrivatization")))(189976 call canResolveMethod dom "chpl__serialize"))(189983 call canResolveMethod arr "chpl__serialize")))
+    {
+      (189987 return 1)
+    }
+    {
+      (189991 return 0)
+    }
+  } function ArrayViewSliceArr[191286](?).chpl__serialize[190002](arg _mt[191302]:_MT[238], arg this[191300]:ArrayViewSliceArr[191286](?)) : _unknown[51] "method" "primary method"
+  {
+    (190008 'use' SysCTypes)
+    if(190051 call _cond_test chpl_debugSerializeSlice)
+    {
+      function printf[190018](arg x[190015]:_any[178](?) ...) : void[4] "extern" "local args" "no fn body"
+      {
+      }
+      (190049 call printf "%d serializing a slice\n"(190047 call _cast c_int(190043 call . here c"id")))
+    }
+    (190076 return(190074 call _build_tuple(190063 call(190059 call .(190058 call _to_borrowed dom) c"chpl__serialize"))(190072 call(190068 call .(190067 call _to_borrowed arr) c"chpl__serialize"))))
+  }
+  where {
+    (190006 call chpl__rvfMe)
+  } function ArrayViewSliceArr[191286](?).chpl__deserialize[190085](arg _mt[191306]:_MT[238], arg this[191304]:ArrayViewSliceArr[191286](?), arg data[190083]:_any[178](?)) : _unknown[51] "method" "primary method"
+  {
+    unknown domType[190092] "type variable"(190091 'static field type' this "dom")
+    unknown arrType[190115] "type variable"(190114 'static field type' this "_ArrInstance")
+    { scopeless
+      const dom[190131] "const"(190130 call(190122 call .(190121 call _to_borrowed domType) c"chpl__deserialize")(190128 call data 0))
+      (190134 'end of statement')
+    }
+    { scopeless
+      const arr[190148] "const"(190147 call(190139 call .(190138 call _to_borrowed arrType) c"chpl__deserialize")(190145 call data 1))
+      (190151 'end of statement')
+    }
+    (190177 return(190154 'new'(_chpl_manager = unmanaged[220](?))(190176 call ArrayViewSliceArr(eltType =(190157 call . arr c"eltType"))(_DomPid =(190165 call data 0))(dom = dom)(_ArrPid =(190172 call data 1))(_ArrInstance = arr))))
+  } function ArrayViewSliceArr[191286](?).idxType[190183](arg _mt[191310]:_MT[238], arg this[191308]:ArrayViewSliceArr[191286](?)) type : _unknown[51] "method" "primary method" "no parens"
+  {
+    { scopeless
+      (190189 return(190186 call . dom c"idxType"))
+    }
+  } function ArrayViewSliceArr[191286](?).rank[190196](arg _mt[191314]:_MT[238], arg this[191312]:ArrayViewSliceArr[191286](?)) param : _unknown[51] "method" "primary method" "no parens"
+  {
+    { scopeless
+      (190202 return(190199 call . arr c"rank"))
+    }
+  } function ArrayViewSliceArr[191286](?).isSliceArrayView[190209](arg _mt[191318]:_MT[238], arg this[191316]:ArrayViewSliceArr[191286](?)) param : _unknown[51] "method" "primary method" "method overrides"
+  {
+    (190212 return 1)
+  } function ArrayViewSliceArr[191286](?).these[190219](arg _mt[191322]:_MT[238], arg this[191320]:ArrayViewSliceArr[191286](?)) ref : _unknown[51] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[190230] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[190231] "expr temp" "temp"
+      (190240 'move' _iterator[190231](190238 call _getIterator(190226 call chpl__serialViewIter this privDom)))
+      Defer
+      {
+        {
+          (190257 call _freeIterator _iterator[190231])
+        }
+      }
+      { scopeless type
+        (190246 'move' _indexOfInterest[190230](190243 call iteratorIndex _iterator[190231]))
+      }
+      ForLoop[190232]
+      {
+        unknown elem[190250] "index var" "insert auto destroy"
+        (190252 'move' elem[190250] _indexOfInterest[190230])
+        { scopeless
+          (190228 yield elem)
+        }
+        label _continueLabel[190235]
+        _indexOfInterest[190230]
+        _iterator[190231]
+      }
+      label _breakLabel[190236]
+    }
+  } function ArrayViewSliceArr[191286](?).these[190273](arg _mt[191326]:_MT[238], arg this[191324]:ArrayViewSliceArr[191286](?), param arg tag[190270] :
+  iterKind) ref : _unknown[51] "iterator fn" "method" "primary method"
+  {
+    { scopeless
+      const myarr[190296] "const" "ref var" arr
+      (190299 'end of statement')
+    }
+    Forall {
+      induction variables:
+        
+        unknown i[190313] "index var" "insert auto destroy"
+      iterated expressions:
+        privDom
+      shadow variables:
+      other variables
+        forall body
+      {
+        (190310 yield(190309 call(190304 call . myarr c"dsiAccess") i))
+      }
+    }
+  }
+  where {
+    (190293 call &&(190285 call &&(190280 call == tag(190277 call . iterKind c"standalone"))(190283 call ! localeModelHasSublocales))(190292 'method call resolves' privDom "these" tag))
+  } function ArrayViewSliceArr[191286](?).these[190325](arg _mt[191330]:_MT[238], arg this[191328]:ArrayViewSliceArr[191286](?), param arg tag[190322] :
+  iterKind) : _unknown[51] "iterator fn" "method" "primary method"
+  {
+    {
+      unknown _indexOfInterest[190346] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[190347] "expr temp" "temp"
+      (190356 'move' _iterator[190347](190354 call _getIterator(190341 call(190336 call . privDom c"these") tag)))
+      Defer
+      {
+        {
+          (190373 call _freeIterator _iterator[190347])
+        }
+      }
+      { scopeless type
+        (190362 'move' _indexOfInterest[190346](190359 call iteratorIndex _iterator[190347]))
+      }
+      ForLoop[190348]
+      {
+        unknown followThis[190366] "index var" "insert auto destroy"
+        (190368 'move' followThis[190366] _indexOfInterest[190346])
+        {
+          (190343 yield followThis)
+        }
+        label _continueLabel[190351]
+        _indexOfInterest[190346]
+        _iterator[190347]
+      }
+      label _breakLabel[190352]
+    }
+  }
+  where {
+    (190332 call == tag(190329 call . iterKind c"leader"))
+  } function ArrayViewSliceArr[191286](?).these[190390](arg _mt[191334]:_MT[238], arg this[191332]:ArrayViewSliceArr[191286](?), param arg tag[190387] :
+  iterKind, arg followThis[190392]:_any[178](?)) ref : _unknown[51] "iterator fn" "method" "primary method"
+  {
+    { scopeless
+      const myarr[190402] "const" "ref var" arr
+      (190405 'end of statement')
+    }
+    {
+      unknown _indexOfInterest[190426] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[190427] "expr temp" "temp"
+      (190436 'move' _iterator[190427](190434 call _getIterator(190415 call(190409 call . privDom c"these") tag followThis)))
+      Defer
+      {
+        {
+          (190453 call _freeIterator _iterator[190427])
+        }
+      }
+      { scopeless type
+        (190442 'move' _indexOfInterest[190426](190439 call iteratorIndex _iterator[190427]))
+      }
+      ForLoop[190428]
+      {
+        unknown i[190446] "index var" "insert auto destroy"
+        (190448 'move' i[190446] _indexOfInterest[190426])
+        {
+          (190423 yield(190422 call(190417 call . myarr c"dsiAccess") i))
+        }
+        label _continueLabel[190431]
+        _indexOfInterest[190426]
+        _iterator[190427]
+      }
+      label _breakLabel[190432]
+    }
+  }
+  where {
+    (190399 call == tag(190396 call . iterKind c"follower"))
+  } function ArrayViewSliceArr[191286](?).dsiSerialWrite[190467](arg _mt[191338]:_MT[238], arg this[191336]:ArrayViewSliceArr[191286](?), arg f[190465]:_any[178](?)) : _unknown[51] throws "method" "primary method"
+  {
+    (190474 call chpl_serialReadWriteRectangular f arr privDom)
+  } function ArrayViewSliceArr[191286](?).dsiSerialRead[190483](arg _mt[191342]:_MT[238], arg this[191340]:ArrayViewSliceArr[191286](?), arg f[190481]:_any[178](?)) : _unknown[51] throws "method" "primary method"
+  {
+    (190490 call chpl_serialReadWriteRectangular f arr privDom)
+  } function ArrayViewSliceArr[191286](?).dsiDisplayRepresentation[190497](arg _mt[191346]:_MT[238], arg this[191344]:ArrayViewSliceArr[191286](?)) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    (190518 call writeln "Slice view")
+    (190540 call writeln "----------")
+    (190561 call writeln "of domain:")
+    (190568 call(190564 call . privDom c"dsiDisplayRepresentation"))
+    (190589 call writeln "on array:")
+    (190596 call(190592 call . arr c"dsiDisplayRepresentation"))
+    (190601 call writeln "----------")
+  } function ArrayViewSliceArr[191286](?).dsiAccess[190613](arg _mt[191350]:_MT[238], arg this[191348]:ArrayViewSliceArr[191286](?), arg i[190609] ... :
+  idxType) ref : _unknown[51] "inline" "method" "primary method"
+  {
+    (190619 return(190618 call dsiAccess i))
+  } function ArrayViewSliceArr[191286](?).dsiAccess[190632](arg _mt[191354]:_MT[238], arg this[191352]:ArrayViewSliceArr[191286](?), arg i[190628] ... :
+  idxType) : _unknown[51] "inline" "method" "primary method"
+  {
+    (190642 return(190641 call dsiAccess i))
+  }
+  where {
+    (190637 call shouldReturnRvalueByValue eltType)
+  } function ArrayViewSliceArr[191286](?).dsiAccess[190656](arg _mt[191358]:_MT[238], arg this[191356]:ArrayViewSliceArr[191286](?), arg i[190652] ... :
+  idxType) const ref : _unknown[51] "inline" "method" "primary method"
+  {
+    (190666 return(190665 call dsiAccess i))
+  }
+  where {
+    (190661 call shouldReturnRvalueByConstRef eltType)
+  } function ArrayViewSliceArr[191286](?).dsiAccess[190676](arg _mt[191362]:_MT[238], arg this[191360]:ArrayViewSliceArr[191286](?), arg i[190674]:_any[178](?)) ref : _unknown[51] "inline" "method" "primary method"
+  {
+    if(190712 call _cond_test(190680 call shouldUseIndexCache))
+    {
+      { scopeless
+        const dataIdx[190688] "const"(190687 call(190682 call . indexCache c"getDataIndex") i)
+        (190691 'end of statement')
+      }
+      (190700 return(190699 call(190694 call . indexCache c"getDataElem") dataIdx))
+    }
+    {
+      (190709 return(190708 call(190703 call . arr c"dsiAccess") i))
+    }
+  } function ArrayViewSliceArr[191286](?).dsiAccess[190723](arg _mt[191366]:_MT[238], arg this[191364]:ArrayViewSliceArr[191286](?), arg i[190721]:_any[178](?)) : _unknown[51] "inline" "method" "primary method"
+  {
+    if(190763 call _cond_test(190731 call shouldUseIndexCache))
+    {
+      { scopeless
+        const dataIdx[190739] "const"(190738 call(190733 call . indexCache c"getDataIndex") i)
+        (190742 'end of statement')
+      }
+      (190751 return(190750 call(190745 call . indexCache c"getDataElem") dataIdx))
+    }
+    {
+      (190760 return(190759 call(190754 call . arr c"dsiAccess") i))
+    }
+  }
+  where {
+    (190728 call shouldReturnRvalueByValue eltType)
+  } function ArrayViewSliceArr[191286](?).dsiAccess[190775](arg _mt[191370]:_MT[238], arg this[191368]:ArrayViewSliceArr[191286](?), arg i[190773]:_any[178](?)) const ref : _unknown[51] "inline" "method" "primary method"
+  {
+    if(190815 call _cond_test(190783 call shouldUseIndexCache))
+    {
+      { scopeless
+        const dataIdx[190791] "const"(190790 call(190785 call . indexCache c"getDataIndex") i)
+        (190794 'end of statement')
+      }
+      (190803 return(190802 call(190797 call . indexCache c"getDataElem") dataIdx))
+    }
+    {
+      (190812 return(190811 call(190806 call . arr c"dsiAccess") i))
+    }
+  }
+  where {
+    (190780 call shouldReturnRvalueByConstRef eltType)
+  } function ArrayViewSliceArr[191286](?).dsiBoundsCheck[190827](arg _mt[191374]:_MT[238], arg this[191372]:ArrayViewSliceArr[191286](?), arg i[190825]:_any[178](?)) : _unknown[51] "inline" "method" "primary method"
+  {
+    (190836 return(190835 call(190830 call . privDom c"dsiMember") i))
+  } function ArrayViewSliceArr[191286](?).dsiHasSingleLocalSubdomain[190843](arg _mt[191378]:_MT[238], arg this[191376]:ArrayViewSliceArr[191286](?)) param : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      (190851 return(190850 call(190846 call . privDom c"dsiHasSingleLocalSubdomain")))
+    }
+  } function ArrayViewSliceArr[191286](?).dsiLocalSubdomain[190862](arg _mt[191382]:_MT[238], arg this[191380]:ArrayViewSliceArr[191286](?), arg loc[190859] :
+  locale[28]) : _unknown[51] "method" "primary method"
+  {
+    (190871 return(190870 call(190865 call . privDom c"dsiLocalSubdomain") loc))
+  } function ArrayViewSliceArr[191286](?).dsiSupportsPrivatization[190878](arg _mt[191386]:_MT[238], arg this[191384]:ArrayViewSliceArr[191286](?)) param : _unknown[51] "method" "primary method" "method overrides"
+  {
+    if(190884 call _cond_test chpl_serializeSlices)
+    {
+      { scopeless
+        (190882 return 0)
+      }
+    }
+    (190896 return(190895 call(190891 call . _ArrInstance c"dsiSupportsPrivatization")))
+  } function ArrayViewSliceArr[191286](?).dsiGetPrivatizeData[190902](arg _mt[191390]:_MT[238], arg this[191388]:ArrayViewSliceArr[191286](?)) : _unknown[51] "method" "primary method"
+  {
+    (190911 return(190909 call _build_tuple _DomPid dom _ArrPid _ArrInstance))
+  } function ArrayViewSliceArr[191286](?).dsiPrivatize[190920](arg _mt[191394]:_MT[238], arg this[191392]:ArrayViewSliceArr[191286](?), arg privatizeData[190918]:_any[178](?)) : _unknown[51] "method" "primary method"
+  {
+    (190953 return(190924 'new'(_chpl_manager = unmanaged[220](?))(190952 call ArrayViewSliceArr(eltType =(190927 call . this c"eltType"))(_DomPid =(190935 call privatizeData 0))(dom =(190940 call privatizeData 1))(_ArrPid =(190945 call privatizeData 2))(_ArrInstance =(190950 call privatizeData 3)))))
+  } function ArrayViewSliceArr[191286](?).shouldUseIndexCache[190960](arg _mt[191398]:_MT[238], arg this[191396]:ArrayViewSliceArr[191286](?)) param : _unknown[51] "method" "primary method"
+  {
+    (190971 return(190969 call &&(190965 call chpl__isDROrDRView _ArrInstance)(190968 call _containsRCRE)))
+  } function ArrayViewSliceArr[191286](?).buildIndexCache[190978](arg _mt[191402]:_MT[238], arg this[191400]:ArrayViewSliceArr[191286](?)) : _unknown[51] "method" "primary method"
+  {
+    if(191024 call _cond_test(190982 call shouldUseIndexCache))
+    {
+      if(191015 call _cond_test(190986 call chpl__isArrayView _ArrInstance))
+      {
+        (190997 return(190996 call(190991 call .(190988 call . _ArrInstance c"indexCache") c"toSlice") dom))
+      }
+      {
+        (191012 return(191011 call(191006 call .(191005 call(191001 call . _ArrInstance c"dsiGetRAD")) c"toSlice") dom))
+      }
+    }
+    {
+      (191021 return 0)
+    }
+  } function ArrayViewSliceArr[191286](?).privDom[191033](arg _mt[191406]:_MT[238], arg this[191404]:ArrayViewSliceArr[191286](?)) : _unknown[51] "inline" "method" "primary method" "no parens"
+  {
+    if(191052 call _cond_test(191038 call _isPrivatized dom))
+    {
+      (191045 return(191044 call chpl_getPrivatizedCopy(191041 'typeof' dom) _DomPid))
+    }
+    {
+      (191049 return dom)
+    }
+  } function ArrayViewSliceArr[191286](?).arr[191061](arg _mt[191410]:_MT[238], arg this[191408]:ArrayViewSliceArr[191286](?)) : _unknown[51] "inline" "method" "primary method" "no parens"
+  {
+    if(191080 call _cond_test(191066 call _isPrivatized _ArrInstance))
+    {
+      (191073 return(191072 call chpl_getPrivatizedCopy(191069 'typeof' _ArrInstance) _ArrPid))
+    }
+    {
+      (191077 return _ArrInstance)
+    }
+  } function ArrayViewSliceArr[191286](?).dsiGetBaseDom[191089](arg _mt[191414]:_MT[238], arg this[191412]:ArrayViewSliceArr[191286](?)) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    (191092 return dom)
+  } function ArrayViewSliceArr[191286](?)._getActualArray[191099](arg _mt[191418]:_MT[238], arg this[191416]:ArrayViewSliceArr[191286](?)) : _unknown[51] "method" "primary method"
+  {
+    if(191118 call _cond_test(191104 call chpl__isArrayView arr))
+    {
+      (191111 return(191110 call(191106 call . arr c"_getActualArray")))
+    }
+    {
+      (191115 return arr)
+    }
+  } function ArrayViewSliceArr[191286](?)._containsRCRE[191127](arg _mt[191422]:_MT[238], arg this[191420]:ArrayViewSliceArr[191286](?)) param : _unknown[51] "method" "primary method"
+  {
+    if(191162 call _cond_test(191132 call chpl__isArrayView arr))
+    {
+      (191155 return(191153 call ||(191145 call ||(191138 call(191134 call . arr c"isRankChangeArrayView"))(191144 call(191140 call . arr c"isReindexArrayView")))(191152 call(191148 call . arr c"_containsRCRE"))))
+    }
+    {
+      (191159 return 0)
+    }
+  } function ArrayViewSliceArr[191286](?)._getRCREView[191171](arg _mt[191426]:_MT[238], arg this[191424]:ArrayViewSliceArr[191286](?)) : _unknown[51] "method" "primary method"
+  {
+    (191181 call compilerAssert(191179 call(191175 call . this c"_containsRCRE")))
+    (191192 return(191191 call(191187 call . arr c"_getRCREView")))
+  } function ArrayViewSliceArr[191286](?).dsiElementInitializationComplete[191198](arg _mt[191430]:_MT[238], arg this[191428]:ArrayViewSliceArr[191286](?)) : _unknown[51] "method" "primary method" "method overrides"
+  {
+  } function ArrayViewSliceArr[191286](?).dsiDestroyArr[191209](arg _mt[191434]:_MT[238], arg this[191432]:ArrayViewSliceArr[191286](?), arg deinitElts[191206] :
+  bool[10]) : _unknown[51] "method" "primary method" "method overrides"
+  {
+  } function ArrayViewSliceArr[191286](?).doiCanBulkTransferRankChange[191216](arg _mt[191438]:_MT[238], arg this[191436]:ArrayViewSliceArr[191286](?)) param : _unknown[51] "method" "primary method" "method overrides"
+  {
+    (191226 return(191225 call(191221 call . arr c"doiCanBulkTransferRankChange")))
+  } function ArrayViewSliceArr[191286](?).doiBulkTransferFromKnown[191235](arg _mt[191442]:_MT[238], arg this[191440]:ArrayViewSliceArr[191286](?), arg destDom[191233]:_any[178](?), arg srcClass[191237]:_any[178](?), arg srcDom[191239]:_any[178](?)) : _unknown[51] "method" "primary method"
+  {
+    (191252 return(191251 call chpl__bulkTransferArray(191244 call . this c"arr") destDom srcClass srcDom))
+  }
+  { scopeless type
+    bool[10]
+  } function ArrayViewSliceArr[191286](?).doiBulkTransferToKnown[191262](arg _mt[191446]:_MT[238], arg this[191444]:ArrayViewSliceArr[191286](?), arg srcDom[191260]:_any[178](?), arg destClass[191264]:_any[178](?), arg destDom[191266]:_any[178](?)) : _unknown[51] "method" "primary method"
+  {
+    (191279 return(191278 call chpl__bulkTransferArray destClass destDom(191274 call . this c"arr") srcDom))
+  }
+  { scopeless type
+    bool[10]
+  } AbsBaseArr forwarding ( )
+}

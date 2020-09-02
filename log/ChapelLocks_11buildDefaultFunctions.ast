@@ -1,0 +1,455 @@
+AST dump for ChapelLocks after pass buildDefaultFunctions.
+Module use list: Atomics ChapelBase MemConsistency 
+
+{
+  function chpl__init_ChapelLocks[416105]() : void[4] "insert line file info" "module init"
+  {
+    (524076 return _void[55])
+  }
+  function chpl_LocalSpinlock[187398].lock[187289](arg _mt[187402]:_MT[238], arg this[187400]:chpl_LocalSpinlock[187398]) : _unknown[51] "inline" "method" "primary method" "no return value for void"
+  {
+    {
+      const tmp[187368] "const" "temp"
+      unknown call_tmp[690545] "expr temp" "maybe param" "maybe type" "temp"
+      (690548 'move' call_tmp[690545](187365 '_wide_get_locale' this[187400]))
+      (187369 'move' tmp[187368](187366 'deref' call_tmp[690545]))
+      {
+        unknown tmp[187314] "temp"
+        unknown tmp[429583] "maybe param" "temp"
+        unknown call_tmp[690552] "expr temp" "maybe param" "maybe type" "temp"
+        (690555 'move' call_tmp[690552](361937 call l _mt[243] this[187400]))
+        (429594 'move' tmp[429583](187352 call(187349 call (partial) read _mt[243] call_tmp[690552])))
+        unknown call_tmp[690559] "expr temp" "maybe param" "maybe type" "temp"
+        (690562 'move' call_tmp[690559](429596 call _cond_invalid tmp[429583]))
+        if call_tmp[690559]
+        {
+          (429599 call compilerError "cannot promote short-circuiting || operator")
+        }
+        unknown tmp[572141] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+        unknown tmp[572142] "maybe param" "temp"
+        unknown call_tmp[690564] "expr temp" "maybe param" "maybe type" "temp"
+        (690567 'move' call_tmp[690564](429584 call isTrue tmp[429583]))
+        (572147 'move' tmp[572142](572145 call _cond_test call_tmp[690564]))
+        if tmp[572142]
+        {
+          (572152 'move' tmp[572141](572149 '_paramFoldLogical' tmp[572142] 1))
+        }
+        {
+          unknown tmp[572154] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+          unknown call_tmp[690571] "expr temp" "maybe param" "maybe type" "temp"
+          (690574 'move' call_tmp[690571](361942 call l _mt[243] this[187400]))
+          unknown call_tmp[690578] "expr temp" "maybe param" "maybe type" "temp"
+          (690581 'move' call_tmp[690578](187357 call(187354 call (partial) testAndSet _mt[243] call_tmp[690571]) acquire[186974]))
+          (572156 'move' tmp[572154](429588 call isTrue call_tmp[690578]))
+          (572161 'move' tmp[572141](572158 '_paramFoldLogical' tmp[572142] tmp[572154]))
+        }
+        (187362 'move' tmp[187314](187345 call _cond_test tmp[572141]))
+        WhileDo[187319]
+        {
+          (187312 call chpl_task_yield)
+          (484559 'end of statement')
+          label _continueLabel[187317]
+          unknown tmp[429562] "maybe param" "temp"
+          unknown call_tmp[690585] "expr temp" "maybe param" "maybe type" "temp"
+          (690588 'move' call_tmp[690585](361926 call l _mt[243] this[187400]))
+          (429573 'move' tmp[429562](187330 call(187327 call (partial) read _mt[243] call_tmp[690585])))
+          unknown call_tmp[690592] "expr temp" "maybe param" "maybe type" "temp"
+          (690595 'move' call_tmp[690592](429575 call _cond_invalid tmp[429562]))
+          if call_tmp[690592]
+          {
+            (429578 call compilerError "cannot promote short-circuiting || operator")
+          }
+          unknown tmp[572168] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+          unknown tmp[572169] "maybe param" "temp"
+          unknown call_tmp[690597] "expr temp" "maybe param" "maybe type" "temp"
+          (690600 'move' call_tmp[690597](429563 call isTrue tmp[429562]))
+          (572174 'move' tmp[572169](572172 call _cond_test call_tmp[690597]))
+          if tmp[572169]
+          {
+            (572179 'move' tmp[572168](572176 '_paramFoldLogical' tmp[572169] 1))
+          }
+          {
+            unknown tmp[572181] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+            unknown call_tmp[690604] "expr temp" "maybe param" "maybe type" "temp"
+            (690607 'move' call_tmp[690604](361931 call l _mt[243] this[187400]))
+            unknown call_tmp[690611] "expr temp" "maybe param" "maybe type" "temp"
+            (690614 'move' call_tmp[690611](187335 call(187332 call (partial) testAndSet _mt[243] call_tmp[690604]) acquire[186974]))
+            (572183 'move' tmp[572181](429567 call isTrue call_tmp[690611]))
+            (572188 'move' tmp[572168](572185 '_paramFoldLogical' tmp[572169] tmp[572181]))
+          }
+          (187340 'move' tmp[187314](187323 call _cond_test tmp[572168]))
+          tmp[187314]
+        }
+        label _breakLabel[187318]
+      }
+      (187372 'elided on block' 0 tmp[187368])
+    }
+    (524072 return _void[55])
+  }
+  function chpl_LocalSpinlock[187398].unlock[187381](arg _mt[187406]:_MT[238], arg this[187404]:chpl_LocalSpinlock[187398]) : _unknown[51] "inline" "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[690618] "expr temp" "maybe param" "maybe type" "temp"
+    (690621 'move' call_tmp[690618](361948 call l _mt[243] this[187404]))
+    (187392 call(187384 call (partial) clear _mt[243] call_tmp[690618]) release[186972])
+    (524074 return _void[55])
+  }
+  function chpl_LocalSpinlock[187398].l[820334](arg _mt[820336]:_MT[238], ref arg this[820338]:chpl_LocalSpinlock[187398]) ref : _unknown[51] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this"
+  {
+    unknown ret[820348] "RVV" "temp"
+    unknown call_tmp[820355] "expr temp" "maybe param" "maybe type" "temp"
+    (820358 'move' call_tmp[820355](820342 '.' this[820338] c"l"))
+    (820353 'move' ret[820348](820352 'addr of' call_tmp[820355]))
+    (820350 return ret[820348])
+  }
+  function chpl_LocalSpinlock[187398].init[820360](arg _mt[820362]:_MT[238], ref arg this[820363]:chpl_LocalSpinlock[187398], in arg l[820366] :
+  (820369 call chpl__processorAtomicType bool[10]) =
+  _typeDefaultT[250]) : void[4] "compiler generated" "last resort" "method" "primary method" "suppress lvalue error"
+  {
+    (820382 'init field' this[820363] c"l" l[820366])
+    (820386 return _void[55])
+  }
+  function chpl_LocalSpinlock[187398].init=[820388](arg _mt[820391]:_MT[238], ref arg this[820392]:chpl_LocalSpinlock[187398], arg other[820393]:chpl_LocalSpinlock[187398]) : void[4] "compiler generated" "copy initializer" "last resort" "method" "primary method" "suppress lvalue error"
+  {
+    unknown call_tmp[820423] "maybe param" "maybe type" "temp"
+    (820426 'move' call_tmp[820423](820401 call l _mt[243] other[820393]))
+    unknown call_tmp[820428] "maybe param" "maybe type" "temp"
+    (820431 'move' call_tmp[820428](820410 call chpl__processorAtomicType bool[10]))
+    unknown tmp[820407] "temp"
+    (820412 'init var' tmp[820407] call_tmp[820423] call_tmp[820428])
+    (820414 'init field' this[820392] c"l" tmp[820407])
+    (820418 'end of statement')
+    (820419 return _void[55])
+  }
+  function chpl_LocalSpinlock[187398].deinit[820433](arg _mt[820435]:_MT[238], arg this[820437]:chpl_LocalSpinlock[187398]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method"
+  {
+    (820445 return _void[55])
+  }
+  function chpl_LocalSpinlock[187398].writeThis[820447](arg _mt[820451]:_MT[238], arg this[820449]:chpl_LocalSpinlock[187398], arg f[820450]:_any[178](?)) : void[4] throws "compiler generated" "inline" "last resort" "method" "primary method"
+  {
+    (820456 call writeThisDefaultImpl f[820450] this[820449])
+    (820461 return _void[55])
+  }
+  function chpl_LocalSpinlock[187398].readThis[820463](arg _mt[820467]:_MT[238], arg this[820465]:chpl_LocalSpinlock[187398], arg f[820466]:_any[178](?)) : void[4] throws "compiler generated" "inline" "last resort" "method" "primary method"
+  {
+    (820471 call readThisDefaultImpl f[820466] this[820465])
+    (820477 return _void[55])
+  }
+  function chpl_fields_are_comparable[820491](arg _arg1[820493]:chpl_LocalSpinlock[187398], arg _arg2[820494]:chpl_LocalSpinlock[187398]) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[820512]:bool[10] "RVV" "param" "temp"
+    unknown call_tmp[820519] "expr temp" "maybe param" "maybe type" "temp"
+    (820522 'move' call_tmp[820519](820497 call l _mt[243] _arg1[820493]))
+    unknown call_tmp[820524] "expr temp" "maybe param" "maybe type" "temp"
+    (820527 'move' call_tmp[820524](820501 call l _mt[243] _arg2[820494]))
+    unknown call_tmp[820529] "expr temp" "maybe param" "maybe type" "temp"
+    (820532 'move' call_tmp[820529](820505 'call resolves' c"==" call_tmp[820519] call_tmp[820524]))
+    (820517 'move' ret[820512](820516 'deref' call_tmp[820529]))
+    (820514 return ret[820512])
+  }
+  function ==[820479](arg _arg1[820481]:chpl_LocalSpinlock[187398], arg _arg2[820482]:chpl_LocalSpinlock[187398]) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[820561]:bool[10] "RVV" "temp"
+    unknown call_tmp[820573] "expr temp" "maybe param" "maybe type" "temp"
+    (820576 'move' call_tmp[820573](820540 call l _mt[243] _arg1[820481]))
+    unknown call_tmp[820578] "expr temp" "maybe param" "maybe type" "temp"
+    (820581 'move' call_tmp[820578](820544 call l _mt[243] _arg2[820482]))
+    unknown call_tmp[820583] "expr temp" "maybe param" "maybe type" "temp"
+    (820586 'move' call_tmp[820583](820548 call != call_tmp[820573] call_tmp[820578]))
+    if call_tmp[820583]
+    {
+      (820566 'move' ret[820561](820565 'deref' 0))
+      gotoReturn _end_==[820559] _end_==[820559]
+    }
+    (820571 'move' ret[820561](820570 'deref' 1))
+    label _end_==[820559]
+    (820563 return ret[820561])
+  }
+  where {
+    unknown call_tmp[820588] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820591 'move' call_tmp[820588](820485 'typeof' _arg1[820481]))
+    unknown call_tmp[820593] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820596 'move' call_tmp[820593](820487 'typeof' _arg2[820482]))
+    unknown call_tmp[820598] "expr temp" "maybe param" "maybe type" "temp"
+    (820601 'move' call_tmp[820598](820489 call == call_tmp[820588] call_tmp[820593]))
+    unknown call_tmp[820603] "expr temp" "maybe param" "maybe type" "temp"
+    (820606 'move' call_tmp[820603](820534 call chpl_fields_are_comparable[820491] _arg1[820481] _arg2[820482]))
+    (820538 '&' call_tmp[820598] call_tmp[820603])
+  }
+  function chpl_fields_are_comparable[820620](arg _arg1[820622]:chpl_LocalSpinlock[187398], arg _arg2[820623]:chpl_LocalSpinlock[187398]) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[820641]:bool[10] "RVV" "param" "temp"
+    unknown call_tmp[820648] "expr temp" "maybe param" "maybe type" "temp"
+    (820651 'move' call_tmp[820648](820626 call l _mt[243] _arg1[820622]))
+    unknown call_tmp[820653] "expr temp" "maybe param" "maybe type" "temp"
+    (820656 'move' call_tmp[820653](820630 call l _mt[243] _arg2[820623]))
+    unknown call_tmp[820658] "expr temp" "maybe param" "maybe type" "temp"
+    (820661 'move' call_tmp[820658](820634 'call resolves' c"!=" call_tmp[820648] call_tmp[820653]))
+    (820646 'move' ret[820641](820645 'deref' call_tmp[820658]))
+    (820643 return ret[820641])
+  }
+  function !=[820608](arg _arg1[820610]:chpl_LocalSpinlock[187398], arg _arg2[820611]:chpl_LocalSpinlock[187398]) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[820690]:bool[10] "RVV" "temp"
+    unknown call_tmp[820702] "expr temp" "maybe param" "maybe type" "temp"
+    (820705 'move' call_tmp[820702](820669 call l _mt[243] _arg1[820610]))
+    unknown call_tmp[820707] "expr temp" "maybe param" "maybe type" "temp"
+    (820710 'move' call_tmp[820707](820673 call l _mt[243] _arg2[820611]))
+    unknown call_tmp[820712] "expr temp" "maybe param" "maybe type" "temp"
+    (820715 'move' call_tmp[820712](820677 call != call_tmp[820702] call_tmp[820707]))
+    if call_tmp[820712]
+    {
+      (820695 'move' ret[820690](820694 'deref' 1))
+      gotoReturn _end_!=[820688] _end_!=[820688]
+    }
+    (820700 'move' ret[820690](820699 'deref' 0))
+    label _end_!=[820688]
+    (820692 return ret[820690])
+  }
+  where {
+    unknown call_tmp[820717] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820720 'move' call_tmp[820717](820614 'typeof' _arg1[820610]))
+    unknown call_tmp[820722] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820725 'move' call_tmp[820722](820616 'typeof' _arg2[820611]))
+    unknown call_tmp[820727] "expr temp" "maybe param" "maybe type" "temp"
+    (820730 'move' call_tmp[820727](820618 call == call_tmp[820717] call_tmp[820722]))
+    unknown call_tmp[820732] "expr temp" "maybe param" "maybe type" "temp"
+    (820735 'move' call_tmp[820732](820663 call chpl_fields_are_comparable[820620] _arg1[820610] _arg2[820611]))
+    (820667 '&' call_tmp[820727] call_tmp[820732])
+  }
+  function chpl_fields_are_comparable[820749](arg _arg1[820751]:chpl_LocalSpinlock[187398], arg _arg2[820752]:chpl_LocalSpinlock[187398]) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[820770]:bool[10] "RVV" "param" "temp"
+    unknown call_tmp[820777] "expr temp" "maybe param" "maybe type" "temp"
+    (820780 'move' call_tmp[820777](820755 call l _mt[243] _arg1[820751]))
+    unknown call_tmp[820782] "expr temp" "maybe param" "maybe type" "temp"
+    (820785 'move' call_tmp[820782](820759 call l _mt[243] _arg2[820752]))
+    unknown call_tmp[820787] "expr temp" "maybe param" "maybe type" "temp"
+    (820790 'move' call_tmp[820787](820763 'call resolves' c"<" call_tmp[820777] call_tmp[820782]))
+    (820775 'move' ret[820770](820774 'deref' call_tmp[820787]))
+    (820772 return ret[820770])
+  }
+  function <[820737](arg _arg1[820739]:chpl_LocalSpinlock[187398], arg _arg2[820740]:chpl_LocalSpinlock[187398]) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[820834]:bool[10] "RVV" "temp"
+    unknown call_tmp[820851] "expr temp" "maybe param" "maybe type" "temp"
+    (820854 'move' call_tmp[820851](820798 call l _mt[243] _arg1[820739]))
+    unknown call_tmp[820856] "expr temp" "maybe param" "maybe type" "temp"
+    (820859 'move' call_tmp[820856](820802 call l _mt[243] _arg2[820740]))
+    unknown call_tmp[820861] "expr temp" "maybe param" "maybe type" "temp"
+    (820864 'move' call_tmp[820861](820806 call < call_tmp[820851] call_tmp[820856]))
+    if call_tmp[820861]
+    {
+      (820839 'move' ret[820834](820838 'deref' 1))
+      gotoReturn _end_<[820832] _end_<[820832]
+    }
+    unknown call_tmp[820866] "expr temp" "maybe param" "maybe type" "temp"
+    (820869 'move' call_tmp[820866](820812 call l _mt[243] _arg1[820739]))
+    unknown call_tmp[820871] "expr temp" "maybe param" "maybe type" "temp"
+    (820874 'move' call_tmp[820871](820816 call l _mt[243] _arg2[820740]))
+    unknown call_tmp[820876] "expr temp" "maybe param" "maybe type" "temp"
+    (820879 'move' call_tmp[820876](820820 call > call_tmp[820866] call_tmp[820871]))
+    if call_tmp[820876]
+    {
+      (820844 'move' ret[820834](820843 'deref' 0))
+      gotoReturn _end_<[820832] _end_<[820832]
+    }
+    (820849 'move' ret[820834](820848 'deref' 0))
+    label _end_<[820832]
+    (820836 return ret[820834])
+  }
+  where {
+    unknown call_tmp[820881] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820884 'move' call_tmp[820881](820743 'typeof' _arg1[820739]))
+    unknown call_tmp[820886] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (820889 'move' call_tmp[820886](820745 'typeof' _arg2[820740]))
+    unknown call_tmp[820891] "expr temp" "maybe param" "maybe type" "temp"
+    (820894 'move' call_tmp[820891](820747 call == call_tmp[820881] call_tmp[820886]))
+    unknown call_tmp[820896] "expr temp" "maybe param" "maybe type" "temp"
+    (820899 'move' call_tmp[820896](820792 call chpl_fields_are_comparable[820749] _arg1[820739] _arg2[820740]))
+    (820796 '&' call_tmp[820891] call_tmp[820896])
+  }
+  function chpl_fields_are_comparable[820913](arg _arg1[820915]:chpl_LocalSpinlock[187398], arg _arg2[820916]:chpl_LocalSpinlock[187398]) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[820934]:bool[10] "RVV" "param" "temp"
+    unknown call_tmp[820941] "expr temp" "maybe param" "maybe type" "temp"
+    (820944 'move' call_tmp[820941](820919 call l _mt[243] _arg1[820915]))
+    unknown call_tmp[820946] "expr temp" "maybe param" "maybe type" "temp"
+    (820949 'move' call_tmp[820946](820923 call l _mt[243] _arg2[820916]))
+    unknown call_tmp[820951] "expr temp" "maybe param" "maybe type" "temp"
+    (820954 'move' call_tmp[820951](820927 'call resolves' c"<=" call_tmp[820941] call_tmp[820946]))
+    (820939 'move' ret[820934](820938 'deref' call_tmp[820951]))
+    (820936 return ret[820934])
+  }
+  function <=[820901](arg _arg1[820903]:chpl_LocalSpinlock[187398], arg _arg2[820904]:chpl_LocalSpinlock[187398]) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[820998]:bool[10] "RVV" "temp"
+    unknown call_tmp[821015] "expr temp" "maybe param" "maybe type" "temp"
+    (821018 'move' call_tmp[821015](820962 call l _mt[243] _arg1[820903]))
+    unknown call_tmp[821020] "expr temp" "maybe param" "maybe type" "temp"
+    (821023 'move' call_tmp[821020](820966 call l _mt[243] _arg2[820904]))
+    unknown call_tmp[821025] "expr temp" "maybe param" "maybe type" "temp"
+    (821028 'move' call_tmp[821025](820970 call < call_tmp[821015] call_tmp[821020]))
+    if call_tmp[821025]
+    {
+      (821003 'move' ret[820998](821002 'deref' 1))
+      gotoReturn _end_<=[820996] _end_<=[820996]
+    }
+    unknown call_tmp[821030] "expr temp" "maybe param" "maybe type" "temp"
+    (821033 'move' call_tmp[821030](820976 call l _mt[243] _arg1[820903]))
+    unknown call_tmp[821035] "expr temp" "maybe param" "maybe type" "temp"
+    (821038 'move' call_tmp[821035](820980 call l _mt[243] _arg2[820904]))
+    unknown call_tmp[821040] "expr temp" "maybe param" "maybe type" "temp"
+    (821043 'move' call_tmp[821040](820984 call > call_tmp[821030] call_tmp[821035]))
+    if call_tmp[821040]
+    {
+      (821008 'move' ret[820998](821007 'deref' 0))
+      gotoReturn _end_<=[820996] _end_<=[820996]
+    }
+    (821013 'move' ret[820998](821012 'deref' 1))
+    label _end_<=[820996]
+    (821000 return ret[820998])
+  }
+  where {
+    unknown call_tmp[821045] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821048 'move' call_tmp[821045](820907 'typeof' _arg1[820903]))
+    unknown call_tmp[821050] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821053 'move' call_tmp[821050](820909 'typeof' _arg2[820904]))
+    unknown call_tmp[821055] "expr temp" "maybe param" "maybe type" "temp"
+    (821058 'move' call_tmp[821055](820911 call == call_tmp[821045] call_tmp[821050]))
+    unknown call_tmp[821060] "expr temp" "maybe param" "maybe type" "temp"
+    (821063 'move' call_tmp[821060](820956 call chpl_fields_are_comparable[820913] _arg1[820903] _arg2[820904]))
+    (820960 '&' call_tmp[821055] call_tmp[821060])
+  }
+  function chpl_fields_are_comparable[821077](arg _arg1[821079]:chpl_LocalSpinlock[187398], arg _arg2[821080]:chpl_LocalSpinlock[187398]) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[821098]:bool[10] "RVV" "param" "temp"
+    unknown call_tmp[821105] "expr temp" "maybe param" "maybe type" "temp"
+    (821108 'move' call_tmp[821105](821083 call l _mt[243] _arg1[821079]))
+    unknown call_tmp[821110] "expr temp" "maybe param" "maybe type" "temp"
+    (821113 'move' call_tmp[821110](821087 call l _mt[243] _arg2[821080]))
+    unknown call_tmp[821115] "expr temp" "maybe param" "maybe type" "temp"
+    (821118 'move' call_tmp[821115](821091 'call resolves' c">" call_tmp[821105] call_tmp[821110]))
+    (821103 'move' ret[821098](821102 'deref' call_tmp[821115]))
+    (821100 return ret[821098])
+  }
+  function >[821065](arg _arg1[821067]:chpl_LocalSpinlock[187398], arg _arg2[821068]:chpl_LocalSpinlock[187398]) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[821162]:bool[10] "RVV" "temp"
+    unknown call_tmp[821179] "expr temp" "maybe param" "maybe type" "temp"
+    (821182 'move' call_tmp[821179](821126 call l _mt[243] _arg1[821067]))
+    unknown call_tmp[821184] "expr temp" "maybe param" "maybe type" "temp"
+    (821187 'move' call_tmp[821184](821130 call l _mt[243] _arg2[821068]))
+    unknown call_tmp[821189] "expr temp" "maybe param" "maybe type" "temp"
+    (821192 'move' call_tmp[821189](821134 call > call_tmp[821179] call_tmp[821184]))
+    if call_tmp[821189]
+    {
+      (821167 'move' ret[821162](821166 'deref' 1))
+      gotoReturn _end_>[821160] _end_>[821160]
+    }
+    unknown call_tmp[821194] "expr temp" "maybe param" "maybe type" "temp"
+    (821197 'move' call_tmp[821194](821140 call l _mt[243] _arg1[821067]))
+    unknown call_tmp[821199] "expr temp" "maybe param" "maybe type" "temp"
+    (821202 'move' call_tmp[821199](821144 call l _mt[243] _arg2[821068]))
+    unknown call_tmp[821204] "expr temp" "maybe param" "maybe type" "temp"
+    (821207 'move' call_tmp[821204](821148 call < call_tmp[821194] call_tmp[821199]))
+    if call_tmp[821204]
+    {
+      (821172 'move' ret[821162](821171 'deref' 0))
+      gotoReturn _end_>[821160] _end_>[821160]
+    }
+    (821177 'move' ret[821162](821176 'deref' 0))
+    label _end_>[821160]
+    (821164 return ret[821162])
+  }
+  where {
+    unknown call_tmp[821209] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821212 'move' call_tmp[821209](821071 'typeof' _arg1[821067]))
+    unknown call_tmp[821214] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821217 'move' call_tmp[821214](821073 'typeof' _arg2[821068]))
+    unknown call_tmp[821219] "expr temp" "maybe param" "maybe type" "temp"
+    (821222 'move' call_tmp[821219](821075 call == call_tmp[821209] call_tmp[821214]))
+    unknown call_tmp[821224] "expr temp" "maybe param" "maybe type" "temp"
+    (821227 'move' call_tmp[821224](821120 call chpl_fields_are_comparable[821077] _arg1[821067] _arg2[821068]))
+    (821124 '&' call_tmp[821219] call_tmp[821224])
+  }
+  function chpl_fields_are_comparable[821241](arg _arg1[821243]:chpl_LocalSpinlock[187398], arg _arg2[821244]:chpl_LocalSpinlock[187398]) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[821262]:bool[10] "RVV" "param" "temp"
+    unknown call_tmp[821269] "expr temp" "maybe param" "maybe type" "temp"
+    (821272 'move' call_tmp[821269](821247 call l _mt[243] _arg1[821243]))
+    unknown call_tmp[821274] "expr temp" "maybe param" "maybe type" "temp"
+    (821277 'move' call_tmp[821274](821251 call l _mt[243] _arg2[821244]))
+    unknown call_tmp[821279] "expr temp" "maybe param" "maybe type" "temp"
+    (821282 'move' call_tmp[821279](821255 'call resolves' c">=" call_tmp[821269] call_tmp[821274]))
+    (821267 'move' ret[821262](821266 'deref' call_tmp[821279]))
+    (821264 return ret[821262])
+  }
+  function >=[821229](arg _arg1[821231]:chpl_LocalSpinlock[187398], arg _arg2[821232]:chpl_LocalSpinlock[187398]) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[821326]:bool[10] "RVV" "temp"
+    unknown call_tmp[821343] "expr temp" "maybe param" "maybe type" "temp"
+    (821346 'move' call_tmp[821343](821290 call l _mt[243] _arg1[821231]))
+    unknown call_tmp[821348] "expr temp" "maybe param" "maybe type" "temp"
+    (821351 'move' call_tmp[821348](821294 call l _mt[243] _arg2[821232]))
+    unknown call_tmp[821353] "expr temp" "maybe param" "maybe type" "temp"
+    (821356 'move' call_tmp[821353](821298 call > call_tmp[821343] call_tmp[821348]))
+    if call_tmp[821353]
+    {
+      (821331 'move' ret[821326](821330 'deref' 1))
+      gotoReturn _end_>=[821324] _end_>=[821324]
+    }
+    unknown call_tmp[821358] "expr temp" "maybe param" "maybe type" "temp"
+    (821361 'move' call_tmp[821358](821304 call l _mt[243] _arg1[821231]))
+    unknown call_tmp[821363] "expr temp" "maybe param" "maybe type" "temp"
+    (821366 'move' call_tmp[821363](821308 call l _mt[243] _arg2[821232]))
+    unknown call_tmp[821368] "expr temp" "maybe param" "maybe type" "temp"
+    (821371 'move' call_tmp[821368](821312 call < call_tmp[821358] call_tmp[821363]))
+    if call_tmp[821368]
+    {
+      (821336 'move' ret[821326](821335 'deref' 0))
+      gotoReturn _end_>=[821324] _end_>=[821324]
+    }
+    (821341 'move' ret[821326](821340 'deref' 1))
+    label _end_>=[821324]
+    (821328 return ret[821326])
+  }
+  where {
+    unknown call_tmp[821373] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821376 'move' call_tmp[821373](821235 'typeof' _arg1[821231]))
+    unknown call_tmp[821378] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821381 'move' call_tmp[821378](821237 'typeof' _arg2[821232]))
+    unknown call_tmp[821383] "expr temp" "maybe param" "maybe type" "temp"
+    (821386 'move' call_tmp[821383](821239 call == call_tmp[821373] call_tmp[821378]))
+    unknown call_tmp[821388] "expr temp" "maybe param" "maybe type" "temp"
+    (821391 'move' call_tmp[821388](821284 call chpl_fields_are_comparable[821241] _arg1[821231] _arg2[821232]))
+    (821288 '&' call_tmp[821383] call_tmp[821388])
+  }
+  function =[821393](ref arg _arg1[821395]:chpl_LocalSpinlock[187398], const?  ref arg _arg2[821396]:chpl_LocalSpinlock[187398]) : void[4] "assignop" "compiler generated" "last resort"
+  {
+    unknown call_tmp[821422] "expr temp" "maybe param" "maybe type" "temp"
+    (821425 'move' call_tmp[821422](821406 call l _mt[243] _arg1[821395]))
+    unknown call_tmp[821429] "expr temp" "maybe param" "maybe type" "temp"
+    (821432 'move' call_tmp[821429](821410 call l _mt[243] _arg2[821396]))
+    (821414 call = call_tmp[821422] call_tmp[821429])
+    (821418 return _void[55])
+  }
+  where {
+    unknown call_tmp[821434] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821437 'move' call_tmp[821434](821399 'typeof' _arg1[821395]))
+    unknown call_tmp[821439] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (821442 'move' call_tmp[821439](821401 'typeof' _arg2[821396]))
+    (821403 call == call_tmp[821434] call_tmp[821439])
+  }
+  function chpl__defaultHash[821444](arg r[821446]:chpl_LocalSpinlock[187398]) : _unknown[51] "compiler generated" "last resort"
+  {
+    unknown ret[821459] "RVV" "temp"
+    unknown call_tmp[821466] "expr temp" "maybe param" "maybe type" "temp"
+    (821469 'move' call_tmp[821466](821448 call l _mt[243] r[821446]))
+    unknown call_tmp[821471] "expr temp" "maybe param" "maybe type" "temp"
+    (821474 'move' call_tmp[821471](821452 call chpl__defaultHash call_tmp[821466]))
+    (821464 'move' ret[821459](821463 'deref' call_tmp[821471]))
+    (821461 return ret[821459])
+  }
+  type chpl_LocalSpinlock[187398] unknown l[187283](187282 call chpl__processorAtomicType bool[10])
+  (355279 'used modules list'(187271 'use' Atomics[43961])(187273 'use' ChapelBase[307])(187276 'use' MemConsistency[186614]))
+}

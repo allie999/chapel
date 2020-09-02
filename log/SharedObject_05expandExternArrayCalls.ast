@@ -1,0 +1,460 @@
+AST dump for SharedObject after pass expandExternArrayCalls.
+Module use list: 
+
+{
+  { scopeless
+    (41669 'use' ChapelError)
+    (41671 'use' Atomics)
+    (41672 'use' ChapelBase)
+  }
+  (41675 'use' OwnedObject)
+  type ReferenceCount[41751] unknown count[41681](41679 call chpl__atomicType int[13]) function ReferenceCount[41751].init[41687](arg _mt[41755]:_MT[238], arg this[41753]:ReferenceCount[41751]) : _unknown[51] "method" "primary method"
+  {
+    (41694 call(41690 call . this c"complete"))
+    (41705 call(41700 call . count c"write") 1)
+  } function ReferenceCount[41751].retain[41711](arg _mt[41759]:_MT[238], arg this[41757]:ReferenceCount[41751]) : _unknown[51] "method" "primary method"
+  {
+    (41719 call(41714 call . count c"add") 1)
+  } function ReferenceCount[41751].release[41726](arg _mt[41763]:_MT[238], arg this[41761]:ReferenceCount[41751]) : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      unknown oldValue[41737](41736 call(41731 call . count c"fetchSub") 1)
+      (41740 'end of statement')
+    }
+    (41746 return(41744 call - oldValue 1))
+  }
+  type _shared[32](?) unknown chpl_t[41767] "no doc" "type variable" unknown chpl_p[41774] "no doc" "owned"(41773 'to nilable class' chpl_t) function _shared[32](?).chpl_forwarding_expr2[41781](arg _mt[42956]:_MT[238], arg this[42954]:_shared[32](?)) : _unknown[51] "compiler generated" "inline" "maybe ref" "method" "primary method" "reference to const when const this"
+  {
+    (41783 return(41780 call borrow))
+  } unknown chpl_pn[41790] "no doc" "owned"(41789 'to unmanaged class from unknown'(41788 'to nilable class from type' ReferenceCount)) function _shared[32](?).init[41798](arg _mt[42960]:_MT[238], arg this[42958]:_shared[32](?), arg chpl_t[41796]:_any[178](?)) : _unknown[51] "leaves this nil" "method" "primary method"
+  {
+    if(41827 call _cond_test(41804 call !(41803 call isClass chpl_t)))
+    {
+      { scopeless
+        (41825 call compilerError "shared only works with classes")
+      }
+    }
+    (41841 call =(41834 call . this c"chpl_t")(41840 call _to_borrowed chpl_t))
+    (41849 call =(41845 call . this c"chpl_p") nil[44])
+    (41859 call =(41855 call . this c"chpl_pn") nil[44])
+  } function _shared[32](?).init[41870](arg _mt[42964]:_MT[238], arg this[42962]:_shared[32](?), arg p[41867] :
+  borrowed[211](?)) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (41891 call compilerError "cannot initialize shared from a borrow")
+    (41903 call(41895 call . this c"init")(41901 call _to_unmanaged p))
+  } function _shared[32](?).init[41913](arg _mt[42968]:_MT[238], arg this[42966]:_shared[32](?), arg p[41910] :
+  unmanaged[220](?)) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (41924 call =(41916 call . this c"chpl_t")(41923 call _to_borrowed(41921 'typeof' p)))
+    { scopeless
+      unknown rc[41932] nil[44](41930 'to unmanaged class from unknown'(41929 'to nilable class from type' ReferenceCount))
+      (41935 'end of statement')
+    }
+    if(41950 call _cond_test(41938 call != p nil[44]))
+    {
+      { scopeless
+        (41947 call = rc(41943 'new'(_chpl_manager = unmanaged[220](?))(41946 call ReferenceCount)))
+      }
+    }
+    (41963 call =(41956 call . this c"chpl_p")(41962 call _to_borrowed p))
+    (41971 call =(41967 call . this c"chpl_pn") rc)
+    (41979 call(41975 call . this c"complete"))
+  } function _shared[32](?).init[41990](arg _mt[42972]:_MT[238], arg this[42970]:_shared[32](?), arg p[41987] :
+  unknown T[41985]) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (42021 call compilerError "shared only works with classes")
+    (42029 call =(42025 call . this c"chpl_t") T)
+    (42037 call =(42033 call . this c"chpl_p") p)
+  }
+  where {
+    (42016 call &&(42007 call &&(41997 call ==(41995 call isClass T) 0)(42005 call ==(42003 call isSubtype T _shared) 0))(42014 call ==(42012 call isIterator p) 0))
+  } function _shared[32](?).init[42049](arg _mt[42976]:_MT[238], arg this[42974]:_shared[32](?), in arg take[42046] :
+  _owned) : _unknown[51] "method" "primary method"
+  {
+    { scopeless
+      unknown p[42057](42056 call(42052 call . take c"release"))
+      (42060 'end of statement')
+    }
+    (42087 call =(42063 call . this c"chpl_t")(42084 IfExpr (42072 call ==(42068 call .(42067 'typeof' this) c"chpl_t") ?[260]) then
+    { scopeless
+      (42078 call _to_borrowed(42076 'typeof' p))
+    } else
+    { scopeless
+      (42081 call .(42080 'typeof' this) c"chpl_t")
+    } ))
+    if(42101 call _cond_test(42094 call !(42093 call isClass p)))
+    {
+      { scopeless
+        (42099 call compilerError "shared only works with classes")
+      }
+    }
+    { scopeless
+      unknown rc[42110] nil[44](42108 'to unmanaged class from unknown'(42107 'to nilable class from type' ReferenceCount))
+      (42113 'end of statement')
+    }
+    if(42128 call _cond_test(42116 call != p nil[44]))
+    {
+      { scopeless
+        (42125 call = rc(42121 'new'(_chpl_manager = unmanaged[220](?))(42124 call ReferenceCount)))
+      }
+    }
+    (42138 call =(42134 call . this c"chpl_p") p)
+    (42146 call =(42142 call . this c"chpl_pn") rc)
+    (42154 call(42150 call . this c"complete"))
+  } function _shared[32](?).init[42164](arg _mt[42980]:_MT[238], arg this[42978]:_shared[32](?), arg _private[42161] :
+  bool[10], arg t[42166]:_any[178](?), ref arg src[42169] :
+  _shared) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (42177 call =(42173 call . this c"chpl_t") t)
+    (42198 call =(42182 call . this c"chpl_p")(42196 call _cast(42195 call _to_nilable(42193 call _to_unmanaged t))(42186 call . src c"chpl_p")))
+    (42209 call =(42202 call . this c"chpl_pn")(42206 call . src c"chpl_pn"))
+    (42217 call =(42213 call . src c"chpl_p") nil[44])
+    (42225 call =(42221 call . src c"chpl_pn") nil[44])
+  } function _shared[32](?).init[42236](arg _mt[42984]:_MT[238], arg this[42982]:_shared[32](?), arg _private[42233] :
+  bool[10], arg t[42238]:_any[178](?), arg p[42240]:_any[178](?), arg pn[42242]:_any[178](?)) : _unknown[51] "method" "primary method" "no doc"
+  {
+    { scopeless
+      unknown ptr[42254](42252 call _cast(42251 call _to_nilable(42249 call _to_unmanaged t)) p)
+      (42257 'end of statement')
+    }
+    { scopeless
+      unknown count[42260] pn
+      (42263 'end of statement')
+    }
+    if(42284 call _cond_test(42266 call != ptr nil[44]))
+    {
+      (42275 call(42271 call .(42269 call postfix! count) c"retain"))
+    }
+    {
+      (42280 call = count nil[44])
+    }
+    (42293 call =(42289 call . this c"chpl_t") t)
+    (42301 call =(42297 call . this c"chpl_p") ptr)
+    (42309 call =(42305 call . this c"chpl_pn") count)
+  } function _shared[32](?).init=[42320](arg _mt[42988]:_MT[238], arg this[42986]:_shared[32](?), in arg take[42317] :
+  _owned) : _unknown[51] "method" "primary method" "no doc"
+  {
+    if(42356 call _cond_test(42331 call &&(42326 call isNonNilableClass(42324 'typeof' this))(42330 call isNilableClass take)))
+    {
+      { scopeless
+        (42354 call compilerError "cannot create a non-nilable shared variable from a nilable class instance")
+      }
+    }
+    (42368 call(42363 call . this c"init") take)
+  } function _shared[32](?).init=[42378](arg _mt[42992]:_MT[238], arg this[42990]:_shared[32](?), const  ref arg src[42375] :
+  _shared) : _unknown[51] "method" "primary method"
+  {
+    if(42396 call _cond_test(42389 call &&(42384 call isNonNilableClass(42382 'typeof' this))(42388 call isNilableClass src)))
+    {
+      { scopeless
+        (42394 call compilerError "cannot create a non-nilable shared variable from a nilable class instance")
+      }
+    }
+    if(42434 call _cond_test(42415 call ==(42413 call isCoercible(42404 call . src c"chpl_t")(42410 call .(42409 'typeof' this) c"chpl_t")) 0))
+    {
+      { scopeless
+        (42432 call compilerError "cannot coerce '"(42423 call _cast string[26](42421 'typeof' src)) "' to '"(42429 call _cast string[26](42427 'typeof' this)) "' in initialization")
+      }
+    }
+    (42448 call =(42440 call . this c"chpl_t")(42445 call .(42444 'typeof' this) c"chpl_t"))
+    (42459 call =(42452 call . this c"chpl_p")(42456 call . src c"chpl_p"))
+    (42470 call =(42463 call . this c"chpl_pn")(42467 call . src c"chpl_pn"))
+    (42478 call(42474 call . this c"complete"))
+    if(42499 call _cond_test(42485 call !=(42481 call . this c"chpl_pn") nil[44]))
+    {
+      { scopeless
+        (42497 call(42493 call .(42491 call postfix!(42488 call . this c"chpl_pn")) c"retain"))
+      }
+    }
+  } function _shared[32](?).init=[42512](arg _mt[42996]:_MT[238], arg this[42994]:_shared[32](?), arg src[42509] :
+  borrowed[211](?)) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (42533 call compilerError "cannot create a shared variable from a borrowed class instance")
+    (42541 call =(42537 call . this c"chpl_t") int[13])
+  } function _shared[32](?).init=[42552](arg _mt[43000]:_MT[238], arg this[42998]:_shared[32](?), arg src[42549] :
+  unmanaged[220](?)) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (42573 call compilerError "cannot create a shared variable from an unmanaged class instance")
+    (42581 call =(42577 call . this c"chpl_t") int[13])
+  } function _shared[32](?).init=[42592](arg _mt[43004]:_MT[238], arg this[43002]:_shared[32](?), arg src[42589] :
+  _nilType) : _unknown[51] "leaves this nil" "method" "primary method" "no doc"
+  {
+    (42604 call(42595 call . this c"init")(42600 call .(42599 'typeof' this) c"chpl_t"))
+    if(42632 call _cond_test(42610 call isNonNilableClass chpl_t))
+    {
+      { scopeless
+        (42630 call compilerError "Assigning non-nilable shared to nil")
+      }
+    }
+  } function _shared[32](?).doClear[42641](arg _mt[43008]:_MT[238], ref arg this[43006]:_shared[32](?)) : _unknown[51] "method" "primary method" "no doc"
+  {
+    if(42688 call _cond_test(42651 call &&(42645 call != chpl_p nil[44])(42649 call != chpl_pn nil[44])))
+    {
+      { scopeless
+        unknown count[42661](42660 call(42656 call .(42654 call postfix! chpl_pn) c"release"))
+        (42664 'end of statement')
+      }
+      if(42684 call _cond_test(42668 call == count 0))
+      {
+        (42675 call chpl__delete(42673 call _to_unmanaged chpl_p))
+        (42681 call chpl__delete chpl_pn)
+      }
+    }
+    (42695 call = chpl_p nil[44])
+    (42700 call = chpl_pn nil[44])
+  } function _shared[32](?).create[42709](arg _mt[43012]:_MT[238], arg this[43010]:_shared[32](?), arg source[42707]:_any[178](?)) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (42735 call compilerError "cannot create a 'shared' from "(42733 call _cast string[26](42731 'typeof' source)))
+  } function _shared[32](?).create[42746](arg _mt[43016]:_MT[238], arg this[43014]:_shared[32](?), in arg take[42743] :
+  _owned) : _unknown[51] "inline" "method" "primary method"
+  {
+    { scopeless
+      unknown result[42750] take _shared
+      (42753 'end of statement')
+    }
+    (42756 return result)
+  } function _shared[32](?).create[42766](arg _mt[43020]:_MT[238], arg this[43018]:_shared[32](?), in arg src[42763] :
+  _shared) : _unknown[51] "inline" "method" "primary method"
+  {
+    (42769 return src)
+  } function _shared[32](?).create[42780](arg _mt[43024]:_MT[238], arg this[43022]:_shared[32](?), arg p[42777] :
+  unmanaged[220](?)) : _unknown[51] "inline" "method" "primary method" "unsafe"
+  {
+    { scopeless
+      unknown result[42787](42785 call _cast _shared(42783 'typeof' p))
+      (42790 'end of statement')
+    }
+    (42798 call(42793 call . result c"retain") p)
+    (42801 return result)
+  } function _shared[32](?).deinit[42807](arg _mt[43028]:_MT[238], arg this[43026]:_shared[32](?)) : _unknown[51] "destructor" "method" "primary method"
+  {
+    if(42818 call _cond_test(42812 call isClass chpl_p))
+    {
+      (42815 call doClear)
+    }
+  } function _shared[32](?).retain[42831](arg _mt[43032]:_MT[238], ref arg this[43030]:_shared[32](?), arg newPtr[42828] :
+  unmanaged[220](?)) : _unknown[51] "method" "primary method"
+  {
+    if(42871 call _cond_test(42839 call !(42838 call isCoercible(42835 'typeof' newPtr) chpl_t)))
+    {
+      { scopeless
+        (42869 call compilerError(42866 call +(42863 call +(42854 call +(42851 call +(42848 call + "cannot retain '"(42846 call _cast string[26](42844 'typeof' newPtr))) "' ") "(expected '")(42861 call _cast string[26](42859 call _to_unmanaged chpl_t))) "')"))
+      }
+    }
+    (42879 call doClear)
+    (42886 call =(42882 call . this c"chpl_p") newPtr)
+    if(42907 call _cond_test(42891 call != newPtr nil[44]))
+    {
+      (42903 call =(42894 call . this c"chpl_pn")(42899 'new'(_chpl_manager = unmanaged[220](?))(42902 call ReferenceCount)))
+    }
+  } function _shared[32](?).clear[42915](arg _mt[43036]:_MT[238], ref arg this[43034]:_shared[32](?)) : _unknown[51] "leaves this nil" "method" "primary method"
+  {
+    (42919 call doClear)
+  } function _shared[32](?).borrow[42926](arg _mt[43040]:_MT[238], arg this[43038]:_shared[32](?)) : _unknown[51] "nil from this" "method" "primary method"
+  {
+    if(42945 call _cond_test(42933 call ==(42931 call _to_nilable chpl_t) chpl_t))
+    {
+      (42936 return chpl_p)
+    }
+    {
+      (42942 return(42940 call postfix! chpl_p))
+    }
+  } forwarding ( )
+  function =[43049](ref arg lhs[43046] :
+  _shared, arg rhs[43052] :
+  _shared) : _unknown[51] "assignop"
+  {
+    if(43086 call _cond_test(43072 call !=(43068 call . rhs c"chpl_pn") nil[44]))
+    {
+      { scopeless
+        (43084 call(43080 call .(43078 call postfix!(43075 call . rhs c"chpl_pn")) c"retain"))
+      }
+    }
+    { scopeless
+      const chpl_p_tmp[43096] "const"(43093 call . rhs c"chpl_p")
+      (43099 'end of statement')
+    }
+    { scopeless
+      const chpl_pn_tmp[43104] "const"(43101 call . rhs c"chpl_pn")
+      (43107 'end of statement')
+    }
+    (43115 call(43111 call . lhs c"doClear"))
+    (43122 call =(43118 call . lhs c"chpl_p") chpl_p_tmp)
+    (43130 call =(43126 call . lhs c"chpl_pn") chpl_pn_tmp)
+  }
+  where {
+    (43065 call !(43063 call &&(43058 call isNonNilableClass lhs)(43062 call isNilableClass rhs)))
+  }
+  function =[43142](ref arg lhs[43139] :
+  _shared, in arg rhs[43145] :
+  _owned) : _unknown[51] "assignop"
+  {
+    (43171 call(43161 call . lhs c"retain")(43169 call(43165 call . rhs c"release")))
+  }
+  where {
+    (43158 call !(43156 call &&(43151 call isNonNilableClass lhs)(43155 call isNilableClass rhs)))
+  }
+  function =[43183](ref arg lhs[43180] :
+  _shared, arg rhs[43186] :
+  _nilType) : _unknown[51] "assignop" "no doc"
+  {
+    (43200 call(43196 call . lhs c"clear"))
+  }
+  where {
+    (43193 call !(43192 call isNonNilableClass lhs))
+  }
+  function <=>[43212](ref arg lhs[43209] :
+  _shared, ref arg rhs[43215] :
+  _shared) : _unknown[51]
+  {
+    (43226 call <=>(43219 call . lhs c"chpl_pn")(43223 call . rhs c"chpl_pn"))
+    (43238 call <=>(43231 call . lhs c"chpl_p")(43235 call . rhs c"chpl_p"))
+  }
+  function chpl__autoDestroy[43249](ref arg x[43246] :
+  _shared) : _unknown[51] "auto destroy fn" "no doc"
+  {
+    (43257 'call destructor'(43256 'deref' x))
+  }
+  function _unknown[51].readWriteThis[43267](arg _mt[43272]:_MT[238], arg this[43269] :
+  _shared, arg f[43265]:_any[178](?)) : _unknown[51] throws "method" "no doc"
+  {
+    (43279 call <~> f(43276 call . this c"chpl_p"))
+  }
+  function _cast[43291](arg t[43288] :
+  borrowed[211](?), const  ref arg x[43294] :
+  _shared) : _unknown[51] "inline" "no doc"
+  {
+    (43313 return(43312 call(43308 call . x c"borrow")))
+  }
+  where {
+    (43304 call isSubtype t(43301 call . x c"chpl_t"))
+  }
+  function _cast[43328](arg t[43325] :
+  (43323 call _shared(43322 'to nilable class from type' class[232](?))), in arg x[43333] :
+  (43331 call _shared class[232](?))) : _unknown[51] "inline" "no doc"
+  {
+    (43363 return(43350 'new'(43362 call _shared 1(43360 call _to_nilable(43356 call . t c"chpl_t")) x)))
+  }
+  where {
+    (43349 call isSubtype(43338 call . x c"chpl_t")(43348 call _to_nonnil(43344 call . t c"chpl_t")))
+  }
+  function _cast[43378](arg t[43375] :
+  (43373 call _shared(43372 'to nilable class from type' class[232](?))), in arg x[43384] :
+  (43382 call _shared(43381 'to nilable class from type' class[232](?)))) : _unknown[51] "inline" "no doc"
+  {
+    (43408 return(43398 'new'(43407 call _shared 1(43403 call . t c"chpl_t") x)))
+  }
+  where {
+    (43397 call isSubtype(43389 call . x c"chpl_t")(43394 call . t c"chpl_t"))
+  }
+  function _cast[43422](arg t[43419] :
+  (43417 call _shared class[232](?)), in arg x[43427] :
+  (43425 call _shared class[232](?))) : _unknown[51] "inline" "no doc"
+  {
+    (43451 return(43441 'new'(43450 call _shared 1(43446 call . t c"chpl_t") x)))
+  }
+  where {
+    (43440 call isSubtype(43432 call . x c"chpl_t")(43437 call . t c"chpl_t"))
+  }
+  function _cast[43465](arg t[43462] :
+  (43460 call _shared class[232](?)), in arg x[43471] :
+  (43469 call _shared(43468 'to nilable class from type' class[232](?)))) : _unknown[51] throws "inline" "no doc"
+  {
+    if(43504 call _cond_test(43493 call ==(43489 call . x c"chpl_p") nil[44]))
+    {
+      (43501 'throw'(43497 'new'(_chpl_manager = _owned[30](?))(43500 call NilClassError)))
+    }
+    (43522 return(43509 'new'(43521 call _shared 1(43519 call _to_nonnil(43515 call . t c"chpl_t")) x)))
+  }
+  where {
+    (43487 call isSubtype(43481 call _to_nonnil(43477 call . x c"chpl_t"))(43484 call . t c"chpl_t"))
+  }
+  function _cast[43535](arg t[43532] :
+  (43530 call _shared class[232](?)), const  ref arg x[43541] :
+  (43539 call _shared(43538 'to nilable class from type' class[232](?)))) : _unknown[51] throws "inline" "no doc"
+  {
+    if(43574 call _cond_test(43563 call ==(43559 call . x c"chpl_p") nil[44]))
+    {
+      (43571 'throw'(43567 'new'(_chpl_manager = _owned[30](?))(43570 call NilClassError)))
+    }
+    { scopeless
+      unknown p[43596](43595 'try-expr'(43593 call _cast(43592 call _to_nonnil(43590 call _to_unmanaged(43586 call . t c"chpl_t")))(43580 call . x c"chpl_p")))
+      (43599 'end of statement')
+    }
+    (43615 return(43600 'new'(43614 call _shared 1(43608 call _to_borrowed(43606 'typeof' p)) p(43611 call . x c"chpl_pn"))))
+  }
+  where {
+    (43557 call isProperSubtype(43546 call . t c"chpl_t")(43556 call _to_nonnil(43552 call . x c"chpl_t")))
+  }
+  function _cast[43628](arg t[43625] :
+  (43623 call _shared class[232](?)), const  ref arg x[43633] :
+  (43631 call _shared class[232](?))) : _unknown[51] throws "inline" "no doc"
+  {
+    { scopeless
+      unknown p[43664](43663 'try-expr'(43661 call _cast(43660 call _to_nonnil(43658 call _to_unmanaged(43654 call . t c"chpl_t")))(43648 call . x c"chpl_p")))
+      (43667 'end of statement')
+    }
+    (43684 return(43669 'new'(43683 call _shared 1(43677 call _to_borrowed(43675 'typeof' p)) p(43680 call . x c"chpl_pn"))))
+  }
+  where {
+    (43646 call isProperSubtype(43638 call . t c"chpl_t")(43643 call . x c"chpl_t"))
+  }
+  function _cast[43698](arg t[43695] :
+  (43693 call _shared(43692 'to nilable class from type' class[232](?))), const  ref arg x[43704] :
+  (43702 call _shared(43701 'to nilable class from type' class[232](?)))) : _unknown[51] "inline" "no doc"
+  {
+    { scopeless
+      unknown p[43734](43732 call _cast(43731 call _to_nilable(43729 call _to_unmanaged(43725 call . t c"chpl_t")))(43719 call . x c"chpl_p"))
+      (43737 'end of statement')
+    }
+    (43754 return(43739 'new'(43753 call _shared 1(43747 call _to_borrowed(43745 'typeof' p)) p(43750 call . x c"chpl_pn"))))
+  }
+  where {
+    (43717 call isProperSubtype(43709 call . t c"chpl_t")(43714 call . x c"chpl_t"))
+  }
+  function _cast[43768](arg t[43765] :
+  (43763 call _shared(43762 'to nilable class from type' class[232](?))), const  ref arg x[43773] :
+  (43771 call _shared class[232](?))) : _unknown[51] "inline" "no doc"
+  {
+    { scopeless
+      unknown p[43806](43804 call _cast(43803 call _to_nilable(43801 call _to_unmanaged(43797 call . t c"chpl_t")))(43791 call . x c"chpl_p"))
+      (43809 'end of statement')
+    }
+    (43826 return(43811 'new'(43825 call _shared 1(43819 call _to_borrowed(43817 'typeof' p)) p(43822 call . x c"chpl_pn"))))
+  }
+  where {
+    (43789 call isProperSubtype(43778 call . t c"chpl_t")(43788 call _to_nilable(43784 call . x c"chpl_t")))
+  }
+  function _cast[43837](arg t[43834] :
+  _shared, arg x[43840] :
+  _nilType) : _unknown[51] "inline" "no doc"
+  {
+    if(43871 call _cond_test(43849 call isNonNilableClass(43845 call . t c"chpl_t")))
+    {
+      { scopeless
+        (43869 call compilerError "Illegal cast from nil to non-nilable shared type")
+      }
+    }
+    { scopeless
+      unknown tmp[43878] t
+      (43881 'end of statement')
+    }
+    (43883 return tmp)
+  }
+  function postfix![43893](arg x[43890] :
+  _shared) : _unknown[51] "always propagate line file info" "inline" "no doc"
+  {
+    (43896 'import' HaltWrappers)
+    if(43942 call _cond_test(43901 call || chpl_checkNilDereferences enablePostfixBangChecks))
+    {
+      if(43937 call _cond_test(43914 call ==(43909 call _to_nilable(43905 call . x c"chpl_t"))(43911 call . x c"chpl_t")))
+      {
+        if(43932 call _cond_test(43921 call ==(43917 call . x c"chpl_p") nil[44]))
+        {
+          (43929 call(43924 call . HaltWrappers c"nilCheckHalt") "argument to ! is nil")
+        }
+      }
+    }
+    (43953 return(43952 call _to_nonnil(43948 call . x c"chpl_p")))
+  }
+}

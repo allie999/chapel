@@ -1,0 +1,105 @@
+AST dump for ExportWrappers after pass parse.
+Module use list: 
+
+{
+  (172108 'use' ChapelStandard)
+  (172112 'use' CPtr)
+  (172115 'use' SysCTypes)
+  type chpl_byte_buffer[172143] unknown isOwned[172122](172121 call int[13] 8) unknown data[172130](172129 call c_ptr c_char) unknown size[172138](172137 call uint[115] 64)
+  function chpl_byte_buffer_free[172152](arg cb[172149] :
+  chpl_byte_buffer) : void[4] "extern" "local args" "no fn body"
+  {
+  }
+  unknown chpl__exportTypeChplByteBuffer[172157] "type variable" chpl_byte_buffer
+  function chpl__exportRetStringOrBytes[172164](ref arg val[172162]:_any[178](?)) : _unknown[51]
+  {
+    { scopeless
+      unknown result[172168] chpl_byte_buffer
+      (172171 'end of statement')
+    }
+    (172187 call =(172174 call . result c"isOwned")(172185 call _cast(172184 call int[13] 8)(172178 call . val c"isOwned")))
+    (172204 call =(172191 call . result c"data")(172202 call _cast(172201 call c_ptr c_char)(172195 call . val c"buff")))
+    (172221 call =(172208 call . result c"size")(172219 call _cast(172218 call uint[115] 64)(172212 call . val c"numBytes")))
+    (172229 call =(172225 call . val c"isOwned") 0)
+    (172233 return result)
+  }
+  { scopeless type
+    chpl_byte_buffer
+  }
+  function chpl__exportRet[172244](ref arg val[172241] :
+  string[26], arg rt[172247] :
+  chpl_byte_buffer) : _unknown[51]
+  {
+    (172255 return(172254 call chpl__exportRetStringOrBytes val))
+  }
+  { scopeless type
+    rt
+  }
+  function chpl__exportRet[172267](ref arg val[172264] :
+  bytes[24], arg rt[172270] :
+  chpl_byte_buffer) : _unknown[51]
+  {
+    (172278 return(172277 call chpl__exportRetStringOrBytes val))
+  }
+  { scopeless type
+    rt
+  }
+  function chpl__exportArg[172290](arg cp[172287] :
+  bool[10], arg val[172293] :
+  chpl_byte_buffer, arg rt[172297] :
+  string[26]) : _unknown[51]
+  {
+    { scopeless
+      unknown data[172308](172306 call _cast c_string(172302 call . val c"data"))
+      (172311 'end of statement')
+    }
+    { scopeless
+      unknown size[172323](172322 call(172317 call .(172314 call . val c"size") c"safeCast") int[13])
+      (172326 'end of statement')
+    }
+    Try!
+    {
+      {
+        if(172335 call _cond_test cp)
+        {
+          { scopeless
+            (172333 return(172332 call createStringWithNewBuffer data size))
+          }
+        }
+        (172346 return(172345 call createStringWithBorrowedBuffer data size))
+      }
+    }
+  }
+  { scopeless type
+    rt
+  }
+  function chpl__exportArg[172360](arg cp[172357] :
+  bool[10], arg val[172363] :
+  chpl_byte_buffer, arg rt[172367] :
+  bytes[24]) : _unknown[51]
+  {
+    { scopeless
+      unknown data[172378](172376 call _cast c_string(172372 call . val c"data"))
+      (172381 'end of statement')
+    }
+    { scopeless
+      unknown size[172393](172392 call(172387 call .(172384 call . val c"size") c"safeCast") int[13])
+      (172396 'end of statement')
+    }
+    Try!
+    {
+      {
+        if(172405 call _cond_test cp)
+        {
+          { scopeless
+            (172403 return(172402 call createBytesWithNewBuffer data size))
+          }
+        }
+        (172416 return(172415 call createBytesWithBorrowedBuffer data size))
+      }
+    }
+  }
+  { scopeless type
+    rt
+  }
+}

@@ -1,0 +1,760 @@
+AST dump for Set after pass scopeResolve.
+Module use list: ChapelStandard ChapelLocks IO Reflection ChapelHashtable 
+
+{ unknown _sanityChecks[331323] "no doc" "param" "private" 1(331326 'end of statement') function _sanity[331333](arg expr[331330] : bool[10]) : _unknown[51] "inline" "private" "no return value for void"
+  {
+    if(331341 call _cond_test _sanityChecks[331323])
+    {(331339 call assert expr[331330])
+    }
+  } unknown _lockType[331353] "no doc" "type variable" chpl_LocalSpinlock[187398] function _LockWrapper[331394].lock[331367](arg _mt[331398]:_MT[238], arg this[331396]:_LockWrapper[331394]) : _unknown[51] "inline" "method" "primary method" "no return value for void"
+  {(331374 call(331370 call .(365919 call . this[331396] c"lock$") c"lock"))
+  } function _LockWrapper[331394].unlock[331381](arg _mt[331402]:_MT[238], arg this[331400]:_LockWrapper[331394]) : _unknown[51] "inline" "method" "primary method" "no return value for void"
+  {(331388 call(331384 call .(365924 call . this[331400] c"lock$") c"unlock"))
+  } type _LockWrapper[331394] val super[355849]:object[22] "super class" unknown lock$[331361](331357 'new'(331360 call _lockType[331353])) type _LockWrapper[411347](?) function _checkElementType[331409](arg t[331407]:_any[178](?)) : _unknown[51] "no doc" "no return value for void"
+  {
+    if(331466 call _cond_test(331414 call isGenericType t[331407]))
+    {(331441 call compilerWarning(331437 call + "creating a set with element type "(331435 call _cast string[26] t[331407])) 2)(331464 call compilerError "set element type cannot currently be generic" 2)
+    }
+  } function set[333167](?).init[331508](arg _mt[333171]:_MT[238], arg this[333169]:set[333167](?), arg eltType[331506]:_any[178](?), param arg parSafe[331511] = 0) : _unknown[51] "method" "primary method" "no return value for void"
+  {(331517 call _checkElementType eltType[331506])(331525 call =(331521 call . this[333169] c"eltType") eltType[331506])(331533 call =(331529 call . this[333169] c"parSafe") parSafe[331511])
+  } function set[333167](?)._addElem[331544](arg _mt[333175]:_MT[238], arg this[333173]:set[333167](?), in arg elem[331541] :(411357 call . this[333173] c"eltType")) : _unknown[51] "method" "primary method" "no doc"
+  { unknown tmp[331559] "temp"(331558 call(331553 call .(365933 call . this[333173] c"_htb") c"findAvailableSlot") elem[331541])(331566 call _check_tuple_var_decl tmp[331559] 2) unknown isFullSlot[331547](331560 call tmp[331559] 0) unknown idx[331549](331563 call tmp[331559] 1)(331571 'end of statement')
+    if(331577 call _cond_test isFullSlot[331547])
+    {(331575 return 0)
+    }(331590 call(331583 call .(365938 call . this[333173] c"_htb") c"fillSlot") idx[331549] elem[331541] none[57])(331593 return 1)
+  }
+  { scopeless type bool[10]
+  } function set[333167](?).init[331602](arg _mt[333179]:_MT[238], arg this[333177]:set[333167](?), arg eltType[331600]:_any[178](?), arg iterable[331604]:_any[178](?), param arg parSafe[331607] = 0) : _unknown[51] "method" "primary method" "no return value for void"
+  {(331624 call _checkElementType eltType[331600])(331632 call =(331628 call . this[333177] c"eltType") eltType[331600])(331640 call =(331636 call . this[333177] c"parSafe") parSafe[331607])(331648 call(331644 call . this[333177] c"complete"))
+    { unknown _indexOfInterest[331657] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[331658] "expr temp" "temp"(331667 'move' _iterator[331658](331665 call _getIterator iterable[331604]))
+      Defer
+      {
+        {(331683 call _freeIterator _iterator[331658])
+        }
+      }
+      { scopeless type(331672 'move' _indexOfInterest[331657](331669 call iteratorIndex _iterator[331658]))
+      }
+      ForLoop[331659]
+      { unknown elem[331676] "index var" "insert auto destroy"(331678 'move' elem[331676] _indexOfInterest[331657])(331655 call(411374 call . this[333177] c"_addElem") elem[331676]) label _continueLabel[331662] _indexOfInterest[331657] _iterator[331658]
+      } label _breakLabel[331663]
+    }
+  }
+  {(331614 call canResolveMethod iterable[331604] "these")
+  }
+  {(331619 call <(331616 'lifetime_of' this[333177])(331618 'lifetime_of' iterable[331604]))
+  } function set[333167](?).init=[331705](arg _mt[333183]:_MT[238], arg this[333181]:set[333167](?), const  ref arg other[331702] :(331701 call set[333167](?) unknown t[331697] ?[260])) : _unknown[51] "method" "primary method" "no return value for void"
+  {(331718 call =(331714 call . this[333181] c"eltType") t[331697])(331730 call =(331723 call . this[333181] c"parSafe")(331727 call . other[331702] c"parSafe"))(331738 call(331734 call . this[333181] c"complete"))
+    if(331828 call _cond_test(331744 call !(331743 call isCopyableType(411384 call . this[333181] c"eltType"))))
+    {(331826 call compilerError(331823 call +(331804 call +(331798 call +(331779 call +(331772 call +(331769 call + "Cannot initialize "(331767 call _cast string[26](331765 'typeof' this[333181]))) " from ")(331777 call _cast string[26](331775 'typeof' other[331702]))) " because element type ")(331802 call _cast string[26](411391 call . this[333181] c"eltType"))) " is not copyable"))
+    }
+    { unknown _indexOfInterest[331840] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[331841] "expr temp" "temp"(331850 'move' _iterator[331841](331848 call _getIterator other[331702]))
+      Defer
+      {
+        {(331866 call _freeIterator _iterator[331841])
+        }
+      }
+      { scopeless type(331855 'move' _indexOfInterest[331840](331852 call iteratorIndex _iterator[331841]))
+      }
+      ForLoop[331842]
+      { unknown elem[331859] "index var" "insert auto destroy"(331861 'move' elem[331859] _indexOfInterest[331840])(331838 call(411396 call . this[333181] c"_addElem") elem[331859]) label _continueLabel[331845] _indexOfInterest[331840] _iterator[331841]
+      } label _breakLabel[331846]
+    }
+  }
+  {(331711 call <(331708 'lifetime_of' this[333181])(331710 'lifetime_of' other[331702]))
+  } function set[333167](?)._enter[331878](arg _mt[333187]:_MT[238], arg this[333185]:set[333167](?)) : _unknown[51] "inline" "method" "primary method" "no doc" "no return value for void"
+  {
+    if(331901 call _cond_test(411402 call . this[333185] c"parSafe"))
+    {
+      { const tmp[331893] "const" "temp"(331894 'move' tmp[331893](331891 'deref'(331890 '_wide_get_locale' this[333185])))
+        {(331887 call(331883 call .(365950 call . this[333185] c"_lock$") c"lock"))
+        }(331897 'elided on block' 0 tmp[331893])
+      }
+    }
+  } function set[333167](?)._leave[331911](arg _mt[333191]:_MT[238], arg this[333189]:set[333167](?)) : _unknown[51] "inline" "method" "primary method" "no doc" "no return value for void"
+  {
+    if(331934 call _cond_test(411408 call . this[333189] c"parSafe"))
+    {
+      { const tmp[331926] "const" "temp"(331927 'move' tmp[331926](331924 'deref'(331923 '_wide_get_locale' this[333189])))
+        {(331920 call(331916 call .(365955 call . this[333189] c"_lock$") c"unlock"))
+        }(331930 'elided on block' 0 tmp[331926])
+      }
+    }
+  } function set[333167](?).add[331948](arg _mt[333195]:_MT[238], ref arg this[333193]:set[333167](?), in arg x[331945] :(411414 call . this[333193] c"eltType")) : _unknown[51] "method" "primary method" "no return value for void"
+  {(331958 call(411420 call . this[333193] c"_enter"))
+    Defer
+    {
+      { scopeless(331963 call(411424 call . this[333193] c"_leave"))
+      }
+    }(331970 call(411428 call . this[333193] c"_addElem") x[331945])
+  }
+  {(331954 call <(331951 'lifetime_of' this[333193])(331953 'lifetime_of' x[331945]))
+  } function set[333167](?).contains[331981](arg _mt[333199]:_MT[238], const arg this[333197]:set[333167](?), const  ref arg x[331978] :(411434 call . this[333197] c"eltType")) : _unknown[51] "method" "primary method"
+  { unknown result[331985] 0(331988 'end of statement')
+    { const tmp[332032] "const" "temp"(332033 'move' tmp[332032](332030 'deref'(332029 '_wide_get_locale' this[333197])))
+      {(331993 call(411439 call . this[333197] c"_enter"))
+        Defer
+        {
+          { scopeless(331998 call(411443 call . this[333197] c"_leave"))
+          }
+        } unknown tmp[332014] "temp"(332013 call(332008 call .(365960 call . this[333197] c"_htb") c"findFullSlot") x[331978])(332018 call _check_tuple_var_decl tmp[332014] 2) unknown hasFoundSlot[332002](332015 call tmp[332014] 0)(332023 'end of statement')(332026 call = result[331985] hasFoundSlot[332002])
+      }(332036 'elided on block' 0 tmp[332032])
+    }(332041 return result[331985])
+  }
+  { scopeless type bool[10]
+  } function set[333167](?).isDisjoint[332056](arg _mt[333203]:_MT[238], const arg this[333201]:set[333167](?), const  ref arg other[332053] :(332052 call set[333167](?)(411453 call . this[333201] c"eltType") ?[260])) : _unknown[51] "method" "primary method"
+  { unknown result[332060] 1(332063 'end of statement')
+    { const tmp[332155] "const" "temp"(332156 'move' tmp[332155](332153 'deref'(332152 '_wide_get_locale' this[333201])))
+      {(332068 call(411458 call . this[333201] c"_enter"))
+        Defer
+        {
+          { scopeless(332073 call(411462 call . this[333201] c"_leave"))
+          }
+        }
+        if(332148 call _cond_test(332090 call !(332088 call ||(332079 call ==(411466 call . this[333201] c"size") 0)(332086 call ==(332082 call . other[332053] c"size") 0))))
+        {
+          { unknown _indexOfInterest[332114] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[332115] "expr temp" "temp"(332124 'move' _iterator[332115](332122 call _getIterator other[332053]))
+            Defer
+            {
+              {(332140 call _freeIterator _iterator[332115])
+              }
+            }
+            { scopeless type(332129 'move' _indexOfInterest[332114](332126 call iteratorIndex _iterator[332115]))
+            }
+            ForLoop[332116]
+            { unknown x[332133] "index var" "insert auto destroy"(332135 'move' x[332133] _indexOfInterest[332114])
+              if(332110 call _cond_test(332100 call(332095 call . this[333201] c"contains") x[332133]))
+              {(332103 call = result[332060] 0)
+                break _breakLabel[332120] _breakLabel[332120]
+              } label _continueLabel[332119] _indexOfInterest[332114] _iterator[332115]
+            } label _breakLabel[332120]
+          }
+        }
+      }(332159 'elided on block' 0 tmp[332155])
+    }(332164 return result[332060])
+  }
+  { scopeless type bool[10]
+  } function set[333167](?).isIntersecting[332179](arg _mt[333207]:_MT[238], const arg this[333205]:set[333167](?), const  ref arg other[332176] :(332175 call set[333167](?)(411476 call . this[333205] c"eltType") ?[260])) : _unknown[51] "method" "primary method"
+  {(332188 return(332186 call !(332185 call(411482 call . this[333205] c"isDisjoint") other[332176])))
+  }
+  { scopeless type bool[10]
+  } function set[333167](?).remove[332200](arg _mt[333211]:_MT[238], ref arg this[333209]:set[333167](?), const  ref arg x[332197] :(411488 call . this[333209] c"eltType")) : _unknown[51] "method" "primary method"
+  { unknown result[332204] 0(332207 'end of statement')
+    { const tmp[332287] "const" "temp"(332288 'move' tmp[332287](332285 'deref'(332284 '_wide_get_locale' this[333209])))
+      {(332212 call(411493 call . this[333209] c"_enter"))
+        Defer
+        {
+          { scopeless(332217 call(411497 call . this[333209] c"_leave"))
+          }
+        } unknown tmp[332233] "temp"(332232 call(332227 call .(365967 call . this[333209] c"_htb") c"findFullSlot") x[332197])(332240 call _check_tuple_var_decl tmp[332233] 2) unknown hasFoundSlot[332221](332234 call tmp[332233] 0) unknown idx[332223](332237 call tmp[332233] 1)(332245 'end of statement')
+        if(332280 call _cond_test hasFoundSlot[332221])
+        { unknown key[332248](411504 call . this[333209] c"eltType")(332251 'end of statement') unknown val[332254] nothing[7](332257 'end of statement')(332266 call(332259 call .(365972 call . this[333209] c"_htb") c"clearSlot") idx[332223] key[332248] val[332254])(332273 call(332269 call .(365977 call . this[333209] c"_htb") c"maybeShrinkAfterRemove"))(332277 call = result[332204] 1)
+        }
+      }(332291 'elided on block' 0 tmp[332287])
+    }(332296 return result[332204])
+  }
+  { scopeless type bool[10]
+  } function set[333167](?).clear[332303](arg _mt[333215]:_MT[238], ref arg this[333213]:set[333167](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    { const tmp[332413] "const" "temp"(332414 'move' tmp[332413](332411 'deref'(332410 '_wide_get_locale' this[333213])))
+      {(332308 call(411514 call . this[333213] c"_enter"))
+        Defer
+        {
+          { scopeless(332313 call(411518 call . this[333213] c"_leave"))
+          }
+        }
+        { unknown _indexOfInterest[332360] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[332361] "expr temp" "temp"(332370 'move' _iterator[332361](332368 call _getIterator(332380 call chpl_direct_counted_range_iter 0(332376 call .(365992 call . this[333213] c"_htb") c"tableSize"))))
+          Defer
+          {
+            {(332396 call _freeIterator _iterator[332361])
+            }
+          }
+          { scopeless type(332385 'move' _indexOfInterest[332360](332382 call iteratorIndex _iterator[332361]))
+          }
+          ForLoop[332362]
+          { unknown idx[332389] "index var" "insert auto destroy"(332391 'move' idx[332389] _indexOfInterest[332360])
+            {
+              if(332355 call _cond_test(332333 call(332328 call .(365982 call . this[333213] c"_htb") c"isSlotFull") idx[332389]))
+              { unknown key[332335](411524 call . this[333213] c"eltType")(332338 'end of statement') unknown val[332341] nothing[7](332344 'end of statement')(332353 call(332346 call .(365987 call . this[333213] c"_htb") c"clearSlot") idx[332389] key[332335] val[332341])
+              }
+            } label _continueLabel[332365] _indexOfInterest[332360] _iterator[332361]
+          } label _breakLabel[332366]
+        }(332408 call(332404 call .(365997 call . this[333213] c"_htb") c"maybeShrinkAfterRemove"))
+      }(332417 'elided on block' 0 tmp[332413])
+    }
+  } function set[333167](?).these[332426](arg _mt[333219]:_MT[238], const arg this[333217]:set[333167](?)) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    { unknown _indexOfInterest[332462] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[332463] "expr temp" "temp"(332472 'move' _iterator[332463](332470 call _getIterator(332482 call chpl_direct_counted_range_iter 0(332478 call .(366012 call . this[333217] c"_htb") c"tableSize"))))
+      Defer
+      {
+        {(332498 call _freeIterator _iterator[332463])
+        }
+      }
+      { scopeless type(332487 'move' _indexOfInterest[332462](332484 call iteratorIndex _iterator[332463]))
+      }
+      ForLoop[332464]
+      { unknown idx[332491] "index var" "insert auto destroy"(332493 'move' idx[332491] _indexOfInterest[332462])
+        if(332457 call _cond_test(332444 call(332439 call .(366002 call . this[333217] c"_htb") c"isSlotFull") idx[332491]))
+        {(332455 yield(332452 call .(332451 call(332446 call .(366007 call . this[333217] c"_htb") c"table") idx[332491]) c"key"))
+        } label _continueLabel[332467] _indexOfInterest[332462] _iterator[332463]
+      } label _breakLabel[332468]
+    }
+  } function set[333167](?).these[332512](arg _mt[333223]:_MT[238], const arg this[333221]:set[333167](?), param arg tag[332510]:_any[178](?)) : _unknown[51] "iterator fn" "method" "primary method" "no doc" "no return value for void"
+  { unknown space[332530](332528 call #(332522 call chpl_build_low_bounded_range 0)(332525 call .(366018 call . this[333221] c"_htb") c"tableSize"))(332533 'end of statement')
+    { unknown _indexOfInterest[332567] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[332568] "expr temp" "temp"(332577 'move' _iterator[332568](332575 call _getIterator(332542 call(332537 call . space[332530] c"these") tag[332510])))
+      Defer
+      {
+        {(332594 call _freeIterator _iterator[332568])
+        }
+      }
+      { scopeless type(332583 'move' _indexOfInterest[332567](332580 call iteratorIndex _iterator[332568]))
+      }
+      ForLoop[332569]
+      { unknown idx[332587] "index var" "insert auto destroy"(332589 'move' idx[332587] _indexOfInterest[332567])
+        if(332562 call _cond_test(332549 call(332544 call .(366024 call . this[333221] c"_htb") c"isSlotFull") idx[332587]))
+        {(332560 yield(332557 call .(332556 call(332551 call .(366029 call . this[333221] c"_htb") c"table") idx[332587]) c"key"))
+        } label _continueLabel[332572] _indexOfInterest[332567] _iterator[332568]
+      } label _breakLabel[332573]
+    }
+  }
+  {(332519 call == tag[332510] standalone[451])
+  } function set[333167](?).these[332608](arg _mt[333227]:_MT[238], const arg this[333225]:set[333167](?), param arg tag[332606]:_any[178](?)) : _unknown[51] "iterator fn" "method" "primary method" "no doc" "no return value for void"
+  { unknown space[332626](332624 call #(332618 call chpl_build_low_bounded_range 0)(332621 call .(366035 call . this[333225] c"_htb") c"tableSize"))(332629 'end of statement')
+    { unknown _indexOfInterest[332643] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[332644] "expr temp" "temp"(332653 'move' _iterator[332644](332651 call _getIterator(332638 call(332633 call . space[332626] c"these") tag[332606])))
+      Defer
+      {
+        {(332670 call _freeIterator _iterator[332644])
+        }
+      }
+      { scopeless type(332659 'move' _indexOfInterest[332643](332656 call iteratorIndex _iterator[332644]))
+      }
+      ForLoop[332645]
+      { unknown followThis[332663] "index var" "insert auto destroy"(332665 'move' followThis[332663] _indexOfInterest[332643])
+        {(332640 yield followThis[332663])
+        } label _continueLabel[332648] _indexOfInterest[332643] _iterator[332644]
+      } label _breakLabel[332649]
+    }
+  }
+  {(332615 call == tag[332606] leader[447])
+  } function set[333167](?).these[332684](arg _mt[333231]:_MT[238], const arg this[333229]:set[333167](?), param arg tag[332682]:_any[178](?), arg followThis[332686]:_any[178](?)) : _unknown[51] "iterator fn" "method" "primary method" "no doc" "no return value for void"
+  {
+    { unknown _indexOfInterest[332724] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[332725] "expr temp" "temp"(332734 'move' _iterator[332725](332732 call _getIterator(332699 call followThis[332686] 0)))
+      Defer
+      {
+        {(332751 call _freeIterator _iterator[332725])
+        }
+      }
+      { scopeless type(332740 'move' _indexOfInterest[332724](332737 call iteratorIndex _iterator[332725]))
+      }
+      ForLoop[332726]
+      { unknown idx[332744] "index var" "insert auto destroy"(332746 'move' idx[332744] _indexOfInterest[332724])
+        if(332719 call _cond_test(332706 call(332701 call .(366042 call . this[333229] c"_htb") c"isSlotFull") idx[332744]))
+        {(332717 yield(332714 call .(332713 call(332708 call .(366047 call . this[333229] c"_htb") c"table") idx[332744]) c"key"))
+        } label _continueLabel[332729] _indexOfInterest[332724] _iterator[332725]
+      } label _breakLabel[332730]
+    }
+  }
+  {(332693 call == tag[332682] follower[449])
+  } function set[333167](?).writeThis[332768](arg _mt[333235]:_MT[238], const arg this[333233]:set[333167](?), arg ch[332765] : channel[237647](?)) : _unknown[51] throws "method" "primary method" "no return value for void"
+  {
+    { const tmp[332870] "const" "temp"(332871 'move' tmp[332870](332868 'deref'(332867 '_wide_get_locale' this[333233])))
+      {(332773 call(411546 call . this[333233] c"_enter"))
+        Defer
+        {
+          { scopeless(332778 call(411550 call . this[333233] c"_leave"))
+          }
+        } unknown count[332783] 1(332786 'end of statement')(332789 call <~> ch[332765] "{")
+        { unknown _indexOfInterest[332829] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[332830] "expr temp" "temp"(332839 'move' _iterator[332830](332837 call _getIterator this[333233]))
+          Defer
+          {
+            {(332855 call _freeIterator _iterator[332830])
+            }
+          }
+          { scopeless type(332844 'move' _indexOfInterest[332829](332841 call iteratorIndex _iterator[332830]))
+          }
+          ForLoop[332831]
+          { unknown x[332848] "index var" "insert auto destroy"(332850 'move' x[332848] _indexOfInterest[332829])
+            {
+              if(332824 call _cond_test(332802 call <= count[332783](332800 call -(332796 call .(366052 call . this[333233] c"_htb") c"tableNumFullSlots") 1)))
+              {(332806 call += count[332783] 1)(332815 call <~>(332812 call <~> ch[332765] x[332848]) ", ")
+              }
+              {(332820 call <~> ch[332765] x[332848])
+              }
+            } label _continueLabel[332834] _indexOfInterest[332829] _iterator[332830]
+          } label _breakLabel[332835]
+        }(332864 call <~> ch[332765] "}")
+      }(332874 'elided on block' 0 tmp[332870])
+    }
+  } function set[333167](?).isEmpty[332883](arg _mt[333239]:_MT[238], const arg this[333237]:set[333167](?)) : _unknown[51] "inline" "method" "primary method"
+  { unknown result[332887] 0(332890 'end of statement')
+    { const tmp[332918] "const" "temp"(332919 'move' tmp[332918](332916 'deref'(332915 '_wide_get_locale' this[333237])))
+      {(332895 call(411564 call . this[333237] c"_enter"))
+        Defer
+        {
+          { scopeless(332900 call(411568 call . this[333237] c"_leave"))
+          }
+        }(332912 call = result[332887](332910 call ==(332906 call .(366057 call . this[333237] c"_htb") c"tableNumFullSlots") 0))
+      }(332922 'elided on block' 0 tmp[332918])
+    }(332927 return result[332887])
+  }
+  { scopeless type bool[10]
+  } function set[333167](?).size[332934](arg _mt[333243]:_MT[238], const arg this[333241]:set[333167](?)) : _unknown[51] "inline" "method" "primary method" "no parens"
+  { unknown result[332937] 0(332940 'end of statement')
+    { const tmp[332965] "const" "temp"(332966 'move' tmp[332965](332963 'deref'(332962 '_wide_get_locale' this[333241])))
+      {(332945 call(411575 call . this[333241] c"_enter"))
+        Defer
+        {
+          { scopeless(332950 call(411579 call . this[333241] c"_leave"))
+          }
+        }(332959 call = result[332937](332956 call .(366062 call . this[333241] c"_htb") c"tableNumFullSlots"))
+      }(332969 'elided on block' 0 tmp[332965])
+    }(332974 return result[332937])
+  } function set[333167](?).toArray[332980](arg _mt[333247]:_MT[238], const arg this[333245]:set[333167](?)) : _unknown[51] "method" "primary method"
+  {(332988 call(411590 call . this[333245] c"_enter"))
+    Defer
+    {
+      { scopeless(332993 call(411594 call . this[333245] c"_leave"))
+      }
+    } unknown result[333012](333010 call chpl__buildArrayRuntimeType(333008 call chpl__ensureDomainExpr(333004 call #(332998 call chpl_build_low_bounded_range 0)(333001 call .(366067 call . this[333245] c"_htb") c"tableNumFullSlots")))(411599 call . this[333245] c"eltType"))(333015 'end of statement')
+    if(333052 call _cond_test(333020 call !(333019 call isCopyableType(411604 call . this[333245] c"eltType"))))
+    {(333050 call compilerError(333047 call +(333044 call + "Cannot create array because set element type "(333042 call _cast string[26](411609 call . this[333245] c"eltType"))) " is not copyable"))
+    }
+    { const tmp[333152] "const" "temp"(333153 'move' tmp[333152](333150 'deref'(333149 '_wide_get_locale' this[333245])))
+      {
+        if(333144 call _cond_test(333063 call !=(333059 call .(366072 call . this[333245] c"_htb") c"tableNumFullSlots") 0))
+        { unknown count[333066] 0(333069 'end of statement') unknown array[333086](333084 call chpl__buildArrayRuntimeType(333082 call chpl__ensureDomainExpr(333078 call #(333072 call chpl_build_low_bounded_range 0)(333075 call .(366077 call . this[333245] c"_htb") c"tableNumFullSlots")))(411615 call . this[333245] c"eltType"))(333089 'end of statement')
+          { unknown _indexOfInterest[333106] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[333107] "expr temp" "temp"(333116 'move' _iterator[333107](333114 call _getIterator this[333245]))
+            Defer
+            {
+              {(333132 call _freeIterator _iterator[333107])
+              }
+            }
+            { scopeless type(333121 'move' _indexOfInterest[333106](333118 call iteratorIndex _iterator[333107]))
+            }
+            ForLoop[333108]
+            { unknown x[333125] "index var" "insert auto destroy"(333127 'move' x[333125] _indexOfInterest[333106])
+              {(333097 call =(333095 call array[333086] count[333066]) x[333125])(333103 call += count[333066] 1)
+              } label _continueLabel[333111] _indexOfInterest[333106] _iterator[333107]
+            } label _breakLabel[333112]
+          }(333141 call = result[333012] array[333086])
+        }
+      }(333156 'elided on block' 0 tmp[333152])
+    }(333161 return result[333012])
+  }
+  { scopeless type(332983 call chpl__buildArrayRuntimeType nil[44](411586 call . this[333245] c"eltType"))
+  } type set[333167](?) unknown eltType[331474] "type variable" unknown parSafe[331478] "param" 0 unknown _lock$[331491] "no doc"(331488 IfExpr  parSafe[331478] then
+  { scopeless(331483 'new'(331486 call _LockWrapper[411347](?)))
+  } else
+  { scopeless none[57]
+  } ) unknown _htb[331500] "no doc"(331499 call chpl__hashtable[204521](?) eltType[331474] nothing[7]) function =[333261](ref arg lhs[333258] :(333257 call set[333167](?) unknown t[333253] ?[260]), const  ref arg rhs[333268] :(333267 call set[333167](?) t[333253] ?[260])) : _unknown[51] "assignop" "no return value for void"
+  {(333276 call(333272 call . lhs[333258] c"clear"))
+    { unknown _indexOfInterest[333289] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[333290] "expr temp" "temp"(333299 'move' _iterator[333290](333297 call _getIterator rhs[333268]))
+      Defer
+      {
+        {(333315 call _freeIterator _iterator[333290])
+        }
+      }
+      { scopeless type(333304 'move' _indexOfInterest[333289](333301 call iteratorIndex _iterator[333290]))
+      }
+      ForLoop[333291]
+      { unknown x[333308] "index var" "insert auto destroy"(333310 'move' x[333308] _indexOfInterest[333289])(333287 call(333282 call . lhs[333258] c"add") x[333308]) label _continueLabel[333294] _indexOfInterest[333289] _iterator[333290]
+      } label _breakLabel[333295]
+    }
+  } function |[333335](const  ref arg a[333332] :(333331 call set[333167](?) unknown t[333327] ?[260]), const  ref arg b[333342] :(333341 call set[333167](?) t[333327] ?[260])) : _unknown[51]
+  { unknown result[333363](333362 call set[333167](?) t[333327](333360 call ||(333353 call . a[333332] c"parSafe")(333357 call . b[333342] c"parSafe")))(333366 'end of statement')(333370 call = result[333363] a[333332])(333375 call |= result[333363] b[333342])(333379 return result[333363])
+  }
+  { scopeless type(333348 call set[333167](?) t[333327])
+  } function |=[333395](ref arg lhs[333392] :(333391 call set[333167](?) unknown t[333387] ?[260]), const  ref arg rhs[333402] :(333401 call set[333167](?) t[333387] ?[260])) : _unknown[51] "assignop" "no return value for void"
+  {
+    { unknown _indexOfInterest[333415] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[333416] "expr temp" "temp"(333425 'move' _iterator[333416](333423 call _getIterator rhs[333402]))
+      Defer
+      {
+        {(333441 call _freeIterator _iterator[333416])
+        }
+      }
+      { scopeless type(333430 'move' _indexOfInterest[333415](333427 call iteratorIndex _iterator[333416]))
+      }
+      ForLoop[333417]
+      { unknown x[333434] "index var" "insert auto destroy"(333436 'move' x[333434] _indexOfInterest[333415])(333413 call(333408 call . lhs[333392] c"add") x[333434]) label _continueLabel[333420] _indexOfInterest[333415] _iterator[333416]
+      } label _breakLabel[333421]
+    }
+  } function +[333462](const  ref arg a[333459] :(333458 call set[333167](?) unknown t[333454] ?[260]), const  ref arg b[333469] :(333468 call set[333167](?) t[333454] ?[260])) : _unknown[51]
+  {(333481 return(333479 call | a[333459] b[333469]))
+  }
+  { scopeless type(333476 call set[333167](?) t[333454] ?[260])
+  } function +=[333498](ref arg lhs[333495] :(333494 call set[333167](?) unknown t[333490] ?[260]), const  ref arg rhs[333505] :(333504 call set[333167](?) t[333490] ?[260])) : _unknown[51] "assignop" "no return value for void"
+  {(333510 call |= lhs[333495] rhs[333505])
+  } function -[333527](const  ref arg a[333524] :(333523 call set[333167](?) unknown t[333519] ?[260]), const  ref arg b[333534] :(333533 call set[333167](?) t[333519] ?[260])) : _unknown[51]
+  { unknown result[333556](333541 'new'(333555 call set[333167](?) t[333519](333553 call ||(333546 call . a[333524] c"parSafe")(333550 call . b[333534] c"parSafe"))))(333559 'end of statement')
+    if(333658 call _cond_test(333569 call &&(333562 call . a[333524] c"parSafe")(333566 call . b[333534] c"parSafe")))
+    {
+      Forall {
+        induction variables:
+          unknown x[333596] "index var" "insert auto destroy"
+        iterated expressions:
+          a[333524]
+        shadow variables:
+        other variables
+          forall body
+        {
+          if(333590 call _cond_test(333580 call !(333579 call(333574 call . b[333534] c"contains") x[333596])))
+          {(333588 call(333583 call . result[333556] c"add") x[333596])
+          }
+        }
+      }
+    }
+    {
+      { unknown _indexOfInterest[333624] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[333625] "expr temp" "temp"(333634 'move' _iterator[333625](333632 call _getIterator a[333524]))
+        Defer
+        {
+          {(333650 call _freeIterator _iterator[333625])
+          }
+        }
+        { scopeless type(333639 'move' _indexOfInterest[333624](333636 call iteratorIndex _iterator[333625]))
+        }
+        ForLoop[333626]
+        { unknown x[333643] "index var" "insert auto destroy"(333645 'move' x[333643] _indexOfInterest[333624])
+          if(333619 call _cond_test(333609 call !(333608 call(333603 call . b[333534] c"contains") x[333643])))
+          {(333617 call(333612 call . result[333556] c"add") x[333643])
+          } label _continueLabel[333629] _indexOfInterest[333624] _iterator[333625]
+        } label _breakLabel[333630]
+      }
+    }(333663 return result[333556])
+  }
+  { scopeless type(333540 call set[333167](?) t[333519])
+  } function -=[333679](ref arg lhs[333676] :(333675 call set[333167](?) unknown t[333671] ?[260]), const  ref arg rhs[333686] :(333685 call set[333167](?) t[333671] ?[260])) : _unknown[51] "assignop" "no return value for void"
+  {
+    if(333758 call _cond_test(333697 call &&(333690 call . lhs[333676] c"parSafe")(333694 call . rhs[333686] c"parSafe")))
+    {
+      Forall {
+        induction variables:
+          unknown x[333710] "index var" "insert auto destroy"
+        iterated expressions:
+          rhs[333686]
+        shadow variables:
+        other variables
+          forall body
+        {(333707 call(333702 call . lhs[333676] c"remove") x[333710])
+        }
+      }
+    }
+    {
+      { unknown _indexOfInterest[333724] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[333725] "expr temp" "temp"(333734 'move' _iterator[333725](333732 call _getIterator rhs[333686]))
+        Defer
+        {
+          {(333750 call _freeIterator _iterator[333725])
+          }
+        }
+        { scopeless type(333739 'move' _indexOfInterest[333724](333736 call iteratorIndex _iterator[333725]))
+        }
+        ForLoop[333726]
+        { unknown x[333743] "index var" "insert auto destroy"(333745 'move' x[333743] _indexOfInterest[333724])(333722 call(333717 call . lhs[333676] c"remove") x[333743]) label _continueLabel[333729] _indexOfInterest[333724] _iterator[333725]
+        } label _breakLabel[333730]
+      }
+    }
+  } function &[333776](const  ref arg a[333773] :(333772 call set[333167](?) unknown t[333768] ?[260]), const  ref arg b[333783] :(333782 call set[333167](?) t[333768] ?[260])) : _unknown[51]
+  { unknown result[333804](333803 call set[333167](?) t[333768](333801 call ||(333794 call . a[333773] c"parSafe")(333798 call . b[333783] c"parSafe")))(333807 'end of statement')
+    if(334015 call _cond_test(333817 call <=(333810 call . a[333773] c"size")(333814 call . b[333783] c"size")))
+    {
+      if(333912 call _cond_test(333827 call &&(333820 call . a[333773] c"parSafe")(333824 call . b[333783] c"parSafe")))
+      {
+        Forall {
+          induction variables:
+            unknown x[333852] "index var" "insert auto destroy"
+          iterated expressions:
+            a[333773]
+          shadow variables:
+          other variables
+            forall body
+          {
+            if(333846 call _cond_test(333837 call(333832 call . b[333783] c"contains") x[333852]))
+            {(333844 call(333839 call . result[333804] c"add") x[333852])
+            }
+          }
+        }
+      }
+      {
+        { unknown _indexOfInterest[333878] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[333879] "expr temp" "temp"(333888 'move' _iterator[333879](333886 call _getIterator a[333773]))
+          Defer
+          {
+            {(333904 call _freeIterator _iterator[333879])
+            }
+          }
+          { scopeless type(333893 'move' _indexOfInterest[333878](333890 call iteratorIndex _iterator[333879]))
+          }
+          ForLoop[333880]
+          { unknown x[333897] "index var" "insert auto destroy"(333899 'move' x[333897] _indexOfInterest[333878])
+            if(333873 call _cond_test(333864 call(333859 call . b[333783] c"contains") x[333897]))
+            {(333871 call(333866 call . result[333804] c"add") x[333897])
+            } label _continueLabel[333883] _indexOfInterest[333878] _iterator[333879]
+          } label _breakLabel[333884]
+        }
+      }
+    }
+    {
+      if(334010 call _cond_test(333925 call &&(333918 call . a[333773] c"parSafe")(333922 call . b[333783] c"parSafe")))
+      {
+        Forall {
+          induction variables:
+            unknown x[333950] "index var" "insert auto destroy"
+          iterated expressions:
+            b[333783]
+          shadow variables:
+          other variables
+            forall body
+          {
+            if(333944 call _cond_test(333935 call(333930 call . a[333773] c"contains") x[333950]))
+            {(333942 call(333937 call . result[333804] c"add") x[333950])
+            }
+          }
+        }
+      }
+      {
+        { unknown _indexOfInterest[333976] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[333977] "expr temp" "temp"(333986 'move' _iterator[333977](333984 call _getIterator b[333783]))
+          Defer
+          {
+            {(334002 call _freeIterator _iterator[333977])
+            }
+          }
+          { scopeless type(333991 'move' _indexOfInterest[333976](333988 call iteratorIndex _iterator[333977]))
+          }
+          ForLoop[333978]
+          { unknown x[333995] "index var" "insert auto destroy"(333997 'move' x[333995] _indexOfInterest[333976])
+            if(333971 call _cond_test(333962 call(333957 call . a[333773] c"contains") x[333995]))
+            {(333969 call(333964 call . result[333804] c"add") x[333995])
+            } label _continueLabel[333981] _indexOfInterest[333976] _iterator[333977]
+          } label _breakLabel[333982]
+        }
+      }
+    }(334020 return result[333804])
+  }
+  { scopeless type(333789 call set[333167](?) t[333768])
+  } function &=[334036](ref arg lhs[334033] :(334032 call set[333167](?) unknown t[334028] ?[260]), const  ref arg rhs[334043] :(334042 call set[333167](?) t[334028] ?[260])) : _unknown[51] "assignop" "no return value for void"
+  { unknown result[334060](334059 call set[333167](?) t[334028](334057 call ||(334050 call . lhs[334033] c"parSafe")(334054 call . rhs[334043] c"parSafe")))(334063 'end of statement')
+    if(334158 call _cond_test(334073 call &&(334066 call . lhs[334033] c"parSafe")(334070 call . rhs[334043] c"parSafe")))
+    {
+      Forall {
+        induction variables:
+          unknown x[334098] "index var" "insert auto destroy"
+        iterated expressions:
+          lhs[334033]
+        shadow variables:
+        other variables
+          forall body
+        {
+          if(334092 call _cond_test(334083 call(334078 call . rhs[334043] c"contains") x[334098]))
+          {(334090 call(334085 call . result[334060] c"add") x[334098])
+          }
+        }
+      }
+    }
+    {
+      { unknown _indexOfInterest[334124] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[334125] "expr temp" "temp"(334134 'move' _iterator[334125](334132 call _getIterator lhs[334033]))
+        Defer
+        {
+          {(334150 call _freeIterator _iterator[334125])
+          }
+        }
+        { scopeless type(334139 'move' _indexOfInterest[334124](334136 call iteratorIndex _iterator[334125]))
+        }
+        ForLoop[334126]
+        { unknown x[334143] "index var" "insert auto destroy"(334145 'move' x[334143] _indexOfInterest[334124])
+          if(334119 call _cond_test(334110 call(334105 call . rhs[334043] c"contains") x[334143]))
+          {(334117 call(334112 call . result[334060] c"add") x[334143])
+          } label _continueLabel[334129] _indexOfInterest[334124] _iterator[334125]
+        } label _breakLabel[334130]
+      }
+    }(334164 call = lhs[334033] result[334060])
+  } function ^[334180](const  ref arg a[334177] :(334176 call set[333167](?) unknown t[334172] ?[260]), const  ref arg b[334187] :(334186 call set[333167](?) t[334172] ?[260])) : _unknown[51]
+  { unknown result[334208](334207 call set[333167](?) t[334172](334205 call ||(334198 call . a[334177] c"parSafe")(334202 call . b[334187] c"parSafe")))(334211 'end of statement')
+    if(334245 call _cond_test(334221 call <=(334214 call . a[334177] c"size")(334218 call . b[334187] c"size")))
+    {(334225 call = result[334208] b[334187])(334231 call ^= result[334208] a[334177])
+    }
+    {(334236 call = result[334208] a[334177])(334242 call ^= result[334208] b[334187])
+    }(334250 return result[334208])
+  }
+  { scopeless type(334193 call set[333167](?) t[334172])
+  } function ^=[334266](ref arg lhs[334263] :(334262 call set[333167](?) unknown t[334258] ?[260]), const  ref arg rhs[334273] :(334272 call set[333167](?) t[334258] ?[260])) : _unknown[51] "assignop" "no return value for void"
+  {
+    if(334389 call _cond_test(334284 call &&(334277 call . lhs[334263] c"parSafe")(334281 call . rhs[334273] c"parSafe")))
+    {
+      Forall {
+        induction variables:
+          unknown x[334319] "index var" "insert auto destroy"
+        iterated expressions:
+          rhs[334273]
+        shadow variables:
+        other variables
+          forall body
+        {
+          if(334313 call _cond_test(334294 call(334289 call . lhs[334263] c"contains") x[334319]))
+          {(334301 call(334296 call . lhs[334263] c"remove") x[334319])
+          }
+          {(334310 call(334305 call . lhs[334263] c"add") x[334319])
+          }
+        }
+      }
+    }
+    {
+      { unknown _indexOfInterest[334355] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[334356] "expr temp" "temp"(334365 'move' _iterator[334356](334363 call _getIterator rhs[334273]))
+        Defer
+        {
+          {(334381 call _freeIterator _iterator[334356])
+          }
+        }
+        { scopeless type(334370 'move' _indexOfInterest[334355](334367 call iteratorIndex _iterator[334356]))
+        }
+        ForLoop[334357]
+        { unknown x[334374] "index var" "insert auto destroy"(334376 'move' x[334374] _indexOfInterest[334355])
+          {
+            if(334350 call _cond_test(334331 call(334326 call . lhs[334263] c"contains") x[334374]))
+            {(334338 call(334333 call . lhs[334263] c"remove") x[334374])
+            }
+            {(334347 call(334342 call . lhs[334263] c"add") x[334374])
+            }
+          } label _continueLabel[334360] _indexOfInterest[334355] _iterator[334356]
+        } label _breakLabel[334361]
+      }
+    }
+  } function ==[334407](const  ref arg a[334404] :(334403 call set[333167](?) unknown t[334399] ?[260]), const  ref arg b[334414] :(334413 call set[333167](?) t[334399] ?[260])) : _unknown[51]
+  {
+    if(334431 call _cond_test(334426 call !=(334419 call . a[334404] c"size")(334423 call . b[334414] c"size")))
+    {(334429 return 0)
+    } unknown result[334438] 1(334441 'end of statement')
+    if(334531 call _cond_test(334450 call &&(334443 call . a[334404] c"parSafe")(334447 call . b[334414] c"parSafe")))
+    {
+      Forall {
+        induction variables:
+          unknown x[334474] "index var" "insert auto destroy"
+        iterated expressions:
+          a[334404]
+        shadow variables:
+        other variables
+          forall body
+        {
+          if(334468 call _cond_test(334461 call !(334460 call(334455 call . b[334414] c"contains") x[334474])))
+          {(334465 call = result[334438] 0)
+          }
+        }
+      }
+    }
+    {
+      { unknown _indexOfInterest[334497] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[334498] "expr temp" "temp"(334507 'move' _iterator[334498](334505 call _getIterator a[334404]))
+        Defer
+        {
+          {(334523 call _freeIterator _iterator[334498])
+          }
+        }
+        { scopeless type(334512 'move' _indexOfInterest[334497](334509 call iteratorIndex _iterator[334498]))
+        }
+        ForLoop[334499]
+        { unknown x[334516] "index var" "insert auto destroy"(334518 'move' x[334516] _indexOfInterest[334497])
+          if(334492 call _cond_test(334487 call !(334486 call(334481 call . b[334414] c"contains") x[334516])))
+          {(334490 return 0)
+          } label _continueLabel[334502] _indexOfInterest[334497] _iterator[334498]
+        } label _breakLabel[334503]
+      }
+    }(334536 return result[334438])
+  }
+  { scopeless type bool[10]
+  } function !=[334552](const  ref arg a[334549] :(334548 call set[333167](?) unknown t[334544] ?[260]), const  ref arg b[334559] :(334558 call set[333167](?) t[334544] ?[260])) : _unknown[51]
+  {(334569 return(334567 call !(334565 call == a[334549] b[334559])))
+  }
+  { scopeless type bool[10]
+  } function <[334586](const  ref arg a[334583] :(334582 call set[333167](?) unknown t[334578] ?[260]), const  ref arg b[334593] :(334592 call set[333167](?) t[334578] ?[260])) : _unknown[51]
+  {
+    if(334610 call _cond_test(334605 call >=(334598 call . a[334583] c"size")(334602 call . b[334593] c"size")))
+    {(334608 return 0)
+    }(334620 return(334618 call <= a[334583] b[334593]))
+  }
+  { scopeless type bool[10]
+  } function <=[334636](const  ref arg a[334633] :(334632 call set[333167](?) unknown t[334628] ?[260]), const  ref arg b[334643] :(334642 call set[333167](?) t[334628] ?[260])) : _unknown[51]
+  {
+    if(334660 call _cond_test(334655 call >(334648 call . a[334633] c"size")(334652 call . b[334643] c"size")))
+    {(334658 return 0)
+    } unknown result[334667] 1(334670 'end of statement')
+    if(334760 call _cond_test(334679 call &&(334672 call . a[334633] c"parSafe")(334676 call . b[334643] c"parSafe")))
+    {
+      Forall {
+        induction variables:
+          unknown x[334703] "index var" "insert auto destroy"
+        iterated expressions:
+          a[334633]
+        shadow variables:
+        other variables
+          forall body
+        {
+          if(334697 call _cond_test(334690 call !(334689 call(334684 call . b[334643] c"contains") x[334703])))
+          {(334694 call = result[334667] 0)
+          }
+        }
+      }
+    }
+    {
+      { unknown _indexOfInterest[334726] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[334727] "expr temp" "temp"(334736 'move' _iterator[334727](334734 call _getIterator a[334633]))
+        Defer
+        {
+          {(334752 call _freeIterator _iterator[334727])
+          }
+        }
+        { scopeless type(334741 'move' _indexOfInterest[334726](334738 call iteratorIndex _iterator[334727]))
+        }
+        ForLoop[334728]
+        { unknown x[334745] "index var" "insert auto destroy"(334747 'move' x[334745] _indexOfInterest[334726])
+          if(334721 call _cond_test(334716 call !(334715 call(334710 call . b[334643] c"contains") x[334745])))
+          {(334719 return 0)
+          } label _continueLabel[334731] _indexOfInterest[334726] _iterator[334727]
+        } label _breakLabel[334732]
+      }
+    }(334765 return result[334667])
+  }
+  { scopeless type bool[10]
+  } function >[334781](const  ref arg a[334778] :(334777 call set[333167](?) unknown t[334773] ?[260]), const  ref arg b[334788] :(334787 call set[333167](?) t[334773] ?[260])) : _unknown[51]
+  {
+    if(334805 call _cond_test(334800 call <=(334793 call . a[334778] c"size")(334797 call . b[334788] c"size")))
+    {(334803 return 0)
+    }(334815 return(334813 call >= a[334778] b[334788]))
+  }
+  { scopeless type bool[10]
+  } function >=[334831](const  ref arg a[334828] :(334827 call set[333167](?) unknown t[334823] ?[260]), const  ref arg b[334838] :(334837 call set[333167](?) t[334823] ?[260])) : _unknown[51]
+  {
+    if(334855 call _cond_test(334850 call <(334843 call . a[334828] c"size")(334847 call . b[334838] c"size")))
+    {(334853 return 0)
+    } unknown result[334862] 1(334865 'end of statement')
+    if(334955 call _cond_test(334874 call &&(334867 call . a[334828] c"parSafe")(334871 call . b[334838] c"parSafe")))
+    {
+      Forall {
+        induction variables:
+          unknown x[334898] "index var" "insert auto destroy"
+        iterated expressions:
+          b[334838]
+        shadow variables:
+        other variables
+          forall body
+        {
+          if(334892 call _cond_test(334885 call !(334884 call(334879 call . a[334828] c"contains") x[334898])))
+          {(334889 call = result[334862] 0)
+          }
+        }
+      }
+    }
+    {
+      { unknown _indexOfInterest[334921] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[334922] "expr temp" "temp"(334931 'move' _iterator[334922](334929 call _getIterator b[334838]))
+        Defer
+        {
+          {(334947 call _freeIterator _iterator[334922])
+          }
+        }
+        { scopeless type(334936 'move' _indexOfInterest[334921](334933 call iteratorIndex _iterator[334922]))
+        }
+        ForLoop[334923]
+        { unknown x[334940] "index var" "insert auto destroy"(334942 'move' x[334940] _indexOfInterest[334921])
+          if(334916 call _cond_test(334911 call !(334910 call(334905 call . a[334828] c"contains") x[334940])))
+          {(334914 return 0)
+          } label _continueLabel[334926] _indexOfInterest[334921] _iterator[334922]
+        } label _breakLabel[334927]
+      }
+    }(334960 return result[334862])
+  }
+  { scopeless type bool[10]
+  }(355624 'used modules list'(353131 'use' ChapelStandard[20264])(331310 'import' ChapelLocks[187268])(331314 'use' IO[230808])(331317 'use' Reflection[224799])(331320 'use' ChapelHashtable[200405]))(365914 'referenced modules list' ChapelLocks[187268])
+}

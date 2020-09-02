@@ -1,0 +1,974 @@
+AST dump for ChapelLocale after pass cleanup.
+Module use list: 
+
+{
+  (89850 'use' LocaleModel)
+  (89854 'import' HaltWrappers)
+  (89857 'use' SysCTypes)
+  unknown chpl_nodeID_t[89863] "no doc" "type variable"(89862 call int[13] 32)
+  unknown chpl_sublocID_t[89870] "no doc" "type variable"(89869 call int[13] 32)
+  const c_sublocid_none[89874] "const" "extern" "no doc" chpl_sublocID_t
+  (89877 'end of statement')
+  const c_sublocid_any[89879] "const" "extern" "no doc" chpl_sublocID_t
+  (89882 'end of statement')
+  const c_sublocid_all[89884] "const" "extern" "no doc" chpl_sublocID_t
+  (89887 'end of statement')
+  function chpl_isActualSublocID[89894](arg subloc[89891] :
+  chpl_sublocID_t) : _unknown[51] "inline" "no doc"
+  {
+    (89912 return(89910 call &&(89904 call &&(89898 call != subloc c_sublocid_none)(89902 call != subloc c_sublocid_any))(89908 call != subloc c_sublocid_all)))
+  }
+  type localeKind[89928] def regular[89918]:localeKind[89928] def any[89920]:localeKind[89928] def nilLocale[89922]:localeKind[89928] def dummy[89924]:localeKind[89928] def default[89926]:localeKind[89928]
+  {
+  }
+  const nilLocale[89943] "const" "locale private" "no doc"(89933 'new'(89942 call locale[28](89938 call . localeKind c"nilLocale")))
+  (89946 'end of statement')
+  unknown defaultLocale[89957] "locale private" "no doc"(89947 'new'(89956 call locale[28](89952 call . localeKind c"default")))
+  (89960 'end of statement')
+  unknown dummyLocale[89971] "no doc"(89961 'new'(89970 call locale[28](89966 call . localeKind c"dummy")))
+  (89974 'end of statement')
+  function locale[28]._value[89985](arg _mt[90374]:_MT[238], arg this[90372]:locale[28]) : _unknown[51] "inline" "method" "primary method" "no parens"
+  {
+    (89990 return(89988 call postfix! _instance))
+  }
+  function locale[28].chpl_forwarding_expr3__value[89996](arg _mt[90378]:_MT[238], arg this[90376]:locale[28]) : _unknown[51] "compiler generated" "inline" "maybe ref" "method" "primary method" "reference to const when const this"
+  {
+    (89998 return _value)
+  }
+  function locale[28].init[90004](arg _mt[90382]:_MT[238], arg this[90380]:locale[28]) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    if(90028 call _cond_test rootLocaleInitialized)
+    {
+      (90015 call =(90008 call . this c"_instance")(90012 call . defaultLocale c"_instance"))
+    }
+    {
+      (90024 call =(90020 call . this c"_instance") nil[44])
+    }
+  }
+  function locale[28].init[90041](arg _mt[90386]:_MT[238], arg this[90384]:locale[28], arg _instance[90038] :
+  BaseLocale) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (90051 call =(90044 call . this c"_instance")(90050 call _to_unmanaged _instance))
+  }
+  function locale[28].init[90061](arg _mt[90390]:_MT[238], arg this[90388]:locale[28], param arg kind[90059]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    if(90156 call _cond_test(90070 call == kind(90067 call . localeKind c"regular")))
+    {
+      (90108 call compilerError "locale.init(kind) can not be used to create " "a regular locale instance")
+    }
+    {
+      if(90150 call _cond_test(90115 call == kind(90112 call . localeKind c"dummy")))
+      {
+        (90127 call =(90118 call . this c"_instance")(90123 'new'(_chpl_manager = unmanaged[220](?))(90126 call DummyLocale)))
+      }
+      {
+        if(90145 call _cond_test(90135 call == kind(90132 call . localeKind c"default")))
+        {
+          (90142 call =(90138 call . this c"_instance") nil[44])
+        }
+      }
+    }
+  }
+  function locale[28].init=[90171](arg _mt[90394]:_MT[238], arg this[90392]:locale[28], arg other[90168] :
+  locale[28]) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (90181 call =(90174 call . this c"_instance")(90178 call . other c"_instance"))
+  }
+  function locale[28].deinit[90189](arg _mt[90398]:_MT[238], arg this[90396]:locale[28]) : _unknown[51] "destructor" "method" "primary method" "no return value for void"
+  {
+  }
+  function locale[28].localeid[90196](arg _mt[90402]:_MT[238], arg this[90400]:locale[28]) : _unknown[51] "inline" "method" "primary method" "no parens"
+  {
+    (90207 return(90204 call .(90199 call . this c"_value") c"localeid"))
+  }
+  function locale[28].chpl_id[90214](arg _mt[90406]:_MT[238], arg this[90404]:locale[28]) : _unknown[51] "inline" "method" "primary method"
+  {
+    (90227 return(90226 call(90222 call .(90217 call . this c"_value") c"chpl_id")))
+  }
+  function locale[28].chpl_localeid[90234](arg _mt[90410]:_MT[238], arg this[90408]:locale[28]) : _unknown[51] "inline" "method" "primary method"
+  {
+    (90247 return(90246 call(90242 call .(90237 call . this c"_value") c"chpl_localeid")))
+  }
+  function locale[28].chpl_name[90254](arg _mt[90414]:_MT[238], arg this[90412]:locale[28]) : _unknown[51] "inline" "method" "primary method"
+  {
+    (90267 return(90266 call(90262 call .(90257 call . this c"_value") c"chpl_name")))
+  }
+  function locale[28].defaultMemory[90274](arg _mt[90418]:_MT[238], arg this[90416]:locale[28]) : _unknown[51] "inline" "method" "primary method"
+  {
+    (90287 return(90286 call(90282 call .(90277 call . this c"_value") c"defaultMemory")))
+  }
+  function locale[28].largeMemory[90294](arg _mt[90422]:_MT[238], arg this[90420]:locale[28]) : _unknown[51] "inline" "method" "primary method"
+  {
+    (90307 return(90306 call(90302 call .(90297 call . this c"_value") c"largeMemory")))
+  }
+  function locale[28].lowLatencyMemory[90314](arg _mt[90426]:_MT[238], arg this[90424]:locale[28]) : _unknown[51] "inline" "method" "primary method"
+  {
+    (90327 return(90326 call(90322 call .(90317 call . this c"_value") c"lowLatencyMemory")))
+  }
+  function locale[28].highBandwidthMemory[90334](arg _mt[90430]:_MT[238], arg this[90428]:locale[28]) : _unknown[51] "inline" "method" "primary method"
+  {
+    (90347 return(90346 call(90342 call .(90337 call . this c"_value") c"highBandwidthMemory")))
+  }
+  function locale[28].getChildCount[90354](arg _mt[90434]:_MT[238], arg this[90432]:locale[28]) : _unknown[51] "inline" "method" "primary method"
+  {
+    (90365 return(90364 call(90360 call .(90357 call . this c"_value") c"getChildCount")))
+  }
+  type locale[28] unknown _instance[89979](89978 'to unmanaged class from unknown'(89977 'to nilable class from type' BaseLocale)) forwarding ( )
+  function here[90439]() : _unknown[51] "inline" "no parens"
+  {
+    (90445 return(90444 call chpl_localeID_to_locale here_id))
+  }
+  function _unknown[51].hostname[90453](arg _mt[90458]:_MT[238], arg this[90455] :
+  locale[28]) : _unknown[51] "inline" "method" "no parens"
+  {
+    (90479 call writeln "in locale.hostname line 212")
+    (90491 return(90488 call .(90483 call . this c"_value") c"hostname"))
+  }
+  function _unknown[51].name[90498](arg _mt[90503]:_MT[238], arg this[90500] :
+  locale[28]) : _unknown[51] "inline" "method" "no parens"
+  {
+    (90514 return(90511 call .(90506 call . this c"_value") c"name"))
+  }
+  function _unknown[51].id[90522](arg _mt[90527]:_MT[238], arg this[90524] :
+  locale[28]) : _unknown[51] "inline" "method" "no parens"
+  {
+    (90538 return(90535 call .(90530 call . this c"_value") c"id"))
+  }
+  function _unknown[51].maxTaskPar[90546](arg _mt[90551]:_MT[238], arg this[90548] :
+  locale[28]) : _unknown[51] "inline" "method" "no parens"
+  {
+    (90560 return(90557 call .(90554 call . this c"_value") c"maxTaskPar"))
+  }
+  function _unknown[51].numPUs[90574](arg _mt[90585]:_MT[238], arg this[90582] :
+  locale[28], arg logical[90570] :
+  bool[10] =
+  0, arg accessible[90578] :
+  bool[10] =
+  1) : _unknown[51] "inline" "method"
+  {
+    (90600 return(90599 call(90593 call .(90588 call . this c"_value") c"numPUs") logical accessible))
+  }
+  function _unknown[51].callStackSize[90608](arg _mt[90613]:_MT[238], arg this[90610] :
+  locale[28]) : _unknown[51] "inline" "method" "no parens"
+  {
+    (90624 return(90621 call .(90616 call . this c"_value") c"callStackSize"))
+  }
+  function =[90635](ref arg l1[90632] :
+  locale[28], const  ref arg l2[90638] :
+  locale[28]) : _unknown[51] "assignop" "no doc" "no return value for void"
+  {
+    (90649 call =(90642 call . l1 c"_instance")(90646 call . l2 c"_instance"))
+  }
+  function BaseLocale[91205].init[90658](arg _mt[91209]:_MT[238], arg this[91207]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no doc" "no return value for void"
+  {
+  }
+  function BaseLocale[91205].init[90669](arg _mt[91213]:_MT[238], arg this[91211]:BaseLocale[91205], arg parent[90666] :
+  locale[28]) : _unknown[51] "method" "primary method" "no doc" "no return value for void"
+  {
+    (90678 call =(90674 call . this c"parent") parent)
+  }
+  function BaseLocale[91205].numPUs[90717](arg _mt[91217]:_MT[238], arg this[91215]:BaseLocale[91205], arg logical[90713] :
+  bool[10] =
+  0, arg accessible[90721] :
+  bool[10] =
+  1) : _unknown[51] "inline" "method" "primary method"
+  {
+    (90741 return(90738 IfExpr  logical then
+    { scopeless(90729 IfExpr  accessible then
+      { scopeless
+        nPUsLogAcc
+      } else
+      { scopeless
+        nPUsLogAll
+      } )
+    } else
+    { scopeless(90735 IfExpr  accessible then
+      { scopeless
+        nPUsPhysAcc
+      } else
+      { scopeless
+        nPUsPhysAll
+      } )
+    } ))
+  }
+  function BaseLocale[91205].id[90758](arg _mt[91221]:_MT[238], arg this[91219]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no parens"
+  {
+    (90784 return(90783 call chpl_nodeFromLocaleID(90781 '_wide_get_locale' this)))
+  }
+  { scopeless type
+    int[13]
+  }
+  function BaseLocale[91205].localeid[90792](arg _mt[91225]:_MT[238], arg this[91223]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no doc" "no parens"
+  {
+    (90799 return(90798 '_wide_get_locale' this))
+  }
+  { scopeless type
+    chpl_localeID_t
+  }
+  function BaseLocale[91205].hostname[90807](arg _mt[91229]:_MT[238], arg this[91227]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no parens"
+  {
+    function chpl_nodeName[90812]() : _unknown[51] "extern" "local args" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      c_string
+    }
+    unknown hname[90820] string[26]
+    (90823 'end of statement')
+    {
+      const tmp[90843] "const" "temp"
+      (90844 'move' tmp[90843](90841 'deref'(90840 '_wide_get_locale' this)))
+      {
+        Try!
+        {
+          {
+            (90832 call = hname(90831 call createStringWithNewBuffer(90829 call chpl_nodeName)))
+          }
+        }
+      }
+      (90847 'elided on block' 0 tmp[90843])
+    }
+    (90852 return hname)
+  }
+  { scopeless type
+    string[26]
+  }
+  function BaseLocale[91205].writeThis[90861](arg _mt[91233]:_MT[238], arg this[91231]:BaseLocale[91205], arg f[90859]:_any[178](?)) : _unknown[51] throws "method" "primary method" "method overrides" "no return value for void"
+  {
+    (90870 call(90866 call . HaltWrappers c"pureVirtualMethodHalt"))
+  }
+  function BaseLocale[91205].name[90877](arg _mt[91237]:_MT[238], arg this[91235]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no parens"
+  {
+    (90885 return(90883 call _cast string[26](90881 call chpl_name)))
+  }
+  function BaseLocale[91205].runningTaskCntSet[90904](arg _mt[91241]:_MT[238], arg this[91239]:BaseLocale[91205], arg val[90901] :
+  int[13]) : _unknown[51] "inline" "method" "primary method" "no doc" "no return value for void"
+  {
+    (90916 call(90907 call . runningTaskCounter c"write") val(90913 call . memoryOrder c"relaxed"))
+  }
+  function BaseLocale[91205].runningTaskCntAdd[90927](arg _mt[91245]:_MT[238], arg this[91243]:BaseLocale[91205], arg val[90924] :
+  int[13]) : _unknown[51] "inline" "method" "primary method" "no doc" "no return value for void"
+  {
+    (90939 call(90930 call . runningTaskCounter c"add") val(90936 call . memoryOrder c"relaxed"))
+  }
+  function BaseLocale[91205].runningTaskCntSub[90950](arg _mt[91249]:_MT[238], arg this[91247]:BaseLocale[91205], arg val[90947] :
+  int[13]) : _unknown[51] "inline" "method" "primary method" "no doc" "no return value for void"
+  {
+    (90962 call(90953 call . runningTaskCounter c"sub") val(90959 call . memoryOrder c"relaxed"))
+  }
+  function BaseLocale[91205].runningTaskCnt[90969](arg _mt[91253]:_MT[238], arg this[91251]:BaseLocale[91205]) : _unknown[51] "inline" "method" "primary method" "no doc"
+  {
+    unknown rtc[90981](90980 call(90972 call . runningTaskCounter c"read")(90976 call . memoryOrder c"relaxed"))
+    (90984 'end of statement')
+    (90995 return(90992 IfExpr (90988 call <= rtc 0) then
+    { scopeless
+      1
+    } else
+    { scopeless
+      rtc
+    } ))
+  }
+  function BaseLocale[91205].chpl_id[91001](arg _mt[91257]:_MT[238], arg this[91255]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (91009 call(91005 call . HaltWrappers c"pureVirtualMethodHalt"))
+    (91015 return(91013 call - 1))
+  }
+  { scopeless type
+    int[13]
+  }
+  function BaseLocale[91205].chpl_localeid[91022](arg _mt[91261]:_MT[238], arg this[91259]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (91030 call(91026 call . HaltWrappers c"pureVirtualMethodHalt"))
+    (91043 return(91042 call chpl_buildLocaleID(91038 call -(91036 call _cast chpl_nodeID_t 1)) c_sublocid_none))
+  }
+  { scopeless type
+    chpl_localeID_t
+  }
+  function BaseLocale[91205].chpl_name[91050](arg _mt[91265]:_MT[238], arg this[91263]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (91058 call(91054 call . HaltWrappers c"pureVirtualMethodHalt"))
+    (91078 return "")
+  }
+  { scopeless type
+    string[26]
+  }
+  function BaseLocale[91205].defaultMemory[91085](arg _mt[91269]:_MT[238], arg this[91267]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no doc" "no return value for void"
+  {
+    (91093 call(91089 call . HaltWrappers c"pureVirtualMethodHalt"))
+  }
+  { scopeless type
+    locale[28]
+  }
+  function BaseLocale[91205].largeMemory[91101](arg _mt[91273]:_MT[238], arg this[91271]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no doc" "no return value for void"
+  {
+    (91109 call(91105 call . HaltWrappers c"pureVirtualMethodHalt"))
+  }
+  { scopeless type
+    locale[28]
+  }
+  function BaseLocale[91205].lowLatencyMemory[91117](arg _mt[91277]:_MT[238], arg this[91275]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no doc" "no return value for void"
+  {
+    (91125 call(91121 call . HaltWrappers c"pureVirtualMethodHalt"))
+  }
+  { scopeless type
+    locale[28]
+  }
+  function BaseLocale[91205].highBandwidthMemory[91133](arg _mt[91281]:_MT[238], arg this[91279]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no doc" "no return value for void"
+  {
+    (91141 call(91137 call . HaltWrappers c"pureVirtualMethodHalt"))
+  }
+  { scopeless type
+    locale[28]
+  }
+  function BaseLocale[91205].getChildCount[91149](arg _mt[91285]:_MT[238], arg this[91283]:BaseLocale[91205]) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (91157 call(91153 call . HaltWrappers c"pureVirtualMethodHalt"))
+    (91161 return 0)
+  }
+  { scopeless type
+    int[13]
+  }
+  function BaseLocale[91205].addChild[91172](arg _mt[91289]:_MT[238], arg this[91287]:BaseLocale[91205], arg loc[91169] :
+  locale[28]) : _unknown[51] "method" "primary method" "no doc" "no return value for void"
+  {
+    (91179 call(91175 call . HaltWrappers c"pureVirtualMethodHalt"))
+  }
+  function BaseLocale[91205].getChild[91190](arg _mt[91293]:_MT[238], arg this[91291]:BaseLocale[91205], arg idx[91187] :
+  int[13]) : _unknown[51] "method" "primary method" "no doc" "no return value for void"
+  {
+    (91198 call(91194 call . HaltWrappers c"pureVirtualMethodHalt"))
+  }
+  { scopeless type
+    locale[28]
+  }
+  type BaseLocale[91205] const parent[90685] "const" "no doc" nilLocale unknown nPUsLogAcc[90690] "no doc" int[13] unknown nPUsLogAll[90695] "no doc" int[13] unknown nPUsPhysAcc[90700] "no doc" int[13] unknown nPUsPhysAll[90705] "no doc" int[13] unknown maxTaskPar[90747] int[13] unknown callStackSize[90752] size_t unknown runningTaskCounter[90894] "no doc"(90893 call chpl__processorAtomicType int[13])
+  function DummyLocale[91442].init[91301](arg _mt[91446]:_MT[238], arg this[91444]:DummyLocale[91442]) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (91309 call(91304 call . super c"init") nilLocale)
+  }
+  function DummyLocale[91442].chpl_id[91316](arg _mt[91450]:_MT[238], arg this[91448]:DummyLocale[91442]) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    (91322 return(91320 call - 1))
+  }
+  { scopeless type
+    int[13]
+  }
+  function DummyLocale[91442].chpl_localeid[91330](arg _mt[91454]:_MT[238], arg this[91452]:DummyLocale[91442]) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    (91343 return(91342 call chpl_buildLocaleID(91338 call -(91336 call _cast chpl_nodeID_t 1)) c_sublocid_none))
+  }
+  { scopeless type
+    chpl_localeID_t
+  }
+  function DummyLocale[91442].chpl_name[91351](arg _mt[91458]:_MT[238], arg this[91456]:DummyLocale[91442]) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    (91371 return "dummy-locale")
+  }
+  { scopeless type
+    string[26]
+  }
+  function DummyLocale[91442].getChildCount[91379](arg _mt[91462]:_MT[238], arg this[91460]:DummyLocale[91442]) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    (91383 return 0)
+  }
+  { scopeless type
+    int[13]
+  }
+  function DummyLocale[91442].getChild[91395](arg _mt[91466]:_MT[238], arg this[91464]:DummyLocale[91442], arg idx[91392] :
+  int[13]) : _unknown[51] "method" "primary method" "method overrides"
+  {
+    (91403 return(91398 'new'(91402 call locale[28] this)))
+  }
+  { scopeless type
+    locale[28]
+  }
+  function DummyLocale[91442].addChild[91415](arg _mt[91470]:_MT[238], arg this[91468]:DummyLocale[91442], arg loc[91412] :
+  locale[28]) : _unknown[51] "method" "primary method" "method overrides" "no return value for void"
+  {
+    (91436 call halt "addChild on DummyLocale")
+  }
+  type DummyLocale[91442] BaseLocale
+  function AbstractLocaleModel[91503].init[91482](arg _mt[91507]:_MT[238], arg this[91505]:AbstractLocaleModel[91503], arg parent_loc[91479] :
+  locale[28]) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (91490 call(91485 call . super c"init") parent_loc)
+  }
+  function AbstractLocaleModel[91503].init[91497](arg _mt[91511]:_MT[238], arg this[91509]:AbstractLocaleModel[91503]) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+  }
+  type AbstractLocaleModel[91503] BaseLocale
+  unknown rootLocale[91515] "locale private" "no doc" nilLocale
+  (91518 'end of statement')
+  unknown replicateRootLocale[91520] "config" "no doc" "param" 1
+  (91523 'end of statement')
+  unknown origRootLocale[91525] "no doc" nilLocale
+  (91528 'end of statement')
+  function AbstractRootLocale[92017].init[91534](arg _mt[92021]:_MT[238], arg this[92019]:AbstractRootLocale[92017]) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+  }
+  function AbstractRootLocale[92017].init[91545](arg _mt[92025]:_MT[238], arg this[92023]:AbstractRootLocale[92017], arg parent_loc[91542] :
+  locale[28]) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (91553 call(91548 call . super c"init") parent_loc)
+  }
+  function AbstractRootLocale[92017].getDefaultLocaleSpace[91560](arg _mt[92029]:_MT[238], arg this[92027]:AbstractRootLocale[92017]) const ref : _unknown[51] "method" "primary method"
+  {
+    (91567 call(91563 call . HaltWrappers c"pureVirtualMethodHalt"))
+    (91571 return chpl_emptyLocaleSpace)
+  }
+  function AbstractRootLocale[92017].getDefaultLocaleArray[91577](arg _mt[92033]:_MT[238], arg this[92031]:AbstractRootLocale[92017]) const ref : _unknown[51] "method" "primary method"
+  {
+    (91584 call(91580 call . HaltWrappers c"pureVirtualMethodHalt"))
+    (91588 return chpl_emptyLocales)
+  }
+  function AbstractRootLocale[92017].localeIDtoLocale[91598](arg _mt[92037]:_MT[238], arg this[92035]:AbstractRootLocale[92017], arg id[91595] :
+  chpl_localeID_t) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (91606 call(91602 call . HaltWrappers c"pureVirtualMethodHalt"))
+  }
+  { scopeless type
+    locale[28]
+  }
+  function AbstractRootLocale[92017].chpl_initOnLocales[91614](arg _mt[92041]:_MT[238], arg this[92039]:AbstractRootLocale[92017]) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    if(91641 call _cond_test(91618 call > numLocales 1))
+    {
+      (91639 call halt "The locales must be initialized in parallel")
+    }
+    {
+      unknown _indexOfInterest[91680] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[91681] "expr temp" "temp"
+      (91690 'move' _iterator[91681](91688 call _getIterator(91665 call(91661 call .(91657 call postfix!(91655 call _cast(91654 'to borrowed class from unknown'(91653 'to nilable class from type' RootLocale))(91649 call . origRootLocale c"_instance"))) c"getDefaultLocaleSpace"))))
+      Defer
+      {
+        {
+          (91707 call _freeIterator _iterator[91681])
+        }
+      }
+      { scopeless type
+        (91696 'move' _indexOfInterest[91680](91693 call iteratorIndex _iterator[91681]))
+      }
+      ForLoop[91682]
+      {
+        unknown locIdx[91700] "index var" "insert auto destroy"
+        (91702 'move' locIdx[91700] _indexOfInterest[91680])
+        {
+          (91667 yield locIdx)
+          (91672 call = rootLocale origRootLocale)
+          (91677 call = rootLocaleInitialized 1)
+        }
+        label _continueLabel[91685]
+        _indexOfInterest[91680]
+        _iterator[91681]
+      }
+      label _breakLabel[91686]
+    }
+  }
+  function AbstractRootLocale[92017].chpl_initOnLocales[91722](arg _mt[92045]:_MT[238], arg this[92043]:AbstractRootLocale[92017], param arg tag[91719] :
+  iterKind) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
+  {
+    unknown b[91732] localesBarrier
+    (91735 'end of statement')
+    unknown flags[91754](91752 call chpl__buildArrayRuntimeType(91750 call chpl__ensureDomainExpr(91744 call #(91738 call chpl_build_low_bounded_range 1)(91742 call - numLocales 1)))(91749 'to unmanaged class from unknown'(91748 'to nilable class from type' localesSignal)))
+    (91757 'end of statement')
+    {
+      unknown tmpIter[91819] "expr temp" "maybe ref" "no copy" "temp"
+      (91822 'move' tmpIter[91819](91763 call #(91760 call chpl_build_low_bounded_range 0) numLocales))
+      unknown isRngDomArr[91994] "maybe param" "temp"
+      (92009 'move' isRngDomArr[91994](92007 call ||(91996 call isBoundedRange tmpIter[91819])(92005 call ||(91999 call isDomain tmpIter[91819])(92002 call isArray tmpIter[91819]))))
+      if isRngDomArr[91994]
+      {
+        const _coforallCount[91861] "const" "end count" "temp"
+        (91930 'move' _coforallCount[91861](91927 call _endCountAlloc 1))
+        unknown numTasks[91862] "temp"
+        (91914 'move' numTasks[91862](91910 call . tmpIter[91819] c"size"))
+        (91905 call _upEndCount _coforallCount[91861] 1 numTasks[91862])
+        (91902 call chpl_resetTaskSpawn numTasks[91862])
+        unknown _indexOfInterest[91869] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[91870] "expr temp" "temp"
+        (91879 'move' _iterator[91870](91877 call _getIterator tmpIter[91819]))
+        Defer
+        {
+          {
+            (91895 call _freeIterator _iterator[91870])
+          }
+        }
+        { scopeless type
+          (91884 'move' _indexOfInterest[91869](91881 call iteratorIndex _iterator[91870]))
+        }
+        ForLoop[91871]
+        {
+          unknown locIdx[91888] "coforall index var" "index var" "insert auto destroy"
+          (91890 'move' locIdx[91888] _indexOfInterest[91869])
+          {
+            {
+              const tmp[91828] "const" "temp"
+              (91830 'move' tmp[91828](91832 'deref'(91833 'chpl_on_locale_num'(91835 call chpl_buildLocaleID(91837 call _cast chpl_nodeID_t locIdx) c_sublocid_any))))
+              {
+                (91843 call chpl_defaultDistInitPrivate)
+                (91844 yield locIdx)
+                (91850 call(91847 call . b c"wait") locIdx flags)
+                (91854 call chpl_rootLocaleInitPrivate locIdx)
+                (91857 call chpl_defaultLocaleInitPrivate)
+                (91859 call warmupRuntime)
+              }
+              (91825 'elided on block' 0 tmp[91828])
+            }
+            (91864 call _downEndCount _coforallCount[91861] nil[44])
+            (91863 'coforall loop')
+          }
+          label _continueLabel[91874]
+          _indexOfInterest[91869]
+          _iterator[91870]
+        }
+        label _breakLabel[91875]
+        Defer
+        {
+          {
+            (91917 call _endCountFree _coforallCount[91861])
+          }
+        }
+        (91922 call _waitEndCount _coforallCount[91861] 1 numTasks[91862])
+      }
+      {
+        const _coforallCount[91934] "const" "end count" "temp"
+        (91991 'move' _coforallCount[91934](91988 call _endCountAlloc 1))
+        unknown _indexOfInterest[91942] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[91943] "expr temp" "temp"
+        (91952 'move' _iterator[91943](91950 call _getIterator tmpIter[91819]))
+        Defer
+        {
+          {
+            (91968 call _freeIterator _iterator[91943])
+          }
+        }
+        { scopeless type
+          (91957 'move' _indexOfInterest[91942](91954 call iteratorIndex _iterator[91943]))
+        }
+        ForLoop[91944]
+        {
+          unknown locIdx[91961] "coforall index var" "index var" "insert auto destroy"
+          (91963 'move' locIdx[91961] _indexOfInterest[91942])
+          (91975 call _upEndCount _coforallCount[91934] 1)
+          {
+            {
+              const tmp[91810] "const" "temp"
+              (91811 'move' tmp[91810](91808 'deref'(91775 'chpl_on_locale_num'(91774 call chpl_buildLocaleID(91770 call _cast chpl_nodeID_t locIdx) c_sublocid_any))))
+              {
+                (91778 call chpl_defaultDistInitPrivate)
+                (91782 yield locIdx)
+                (91793 call(91787 call . b c"wait") locIdx flags)
+                (91798 call chpl_rootLocaleInitPrivate locIdx)
+                (91802 call chpl_defaultLocaleInitPrivate)
+                (91806 call warmupRuntime)
+              }
+              (91814 'elided on block' 0 tmp[91810])
+            }
+            (91937 call _downEndCount _coforallCount[91934] nil[44])
+            (91936 'coforall loop')
+          }
+          label _continueLabel[91947]
+          _indexOfInterest[91942]
+          _iterator[91943]
+        }
+        label _breakLabel[91948]
+        Defer
+        {
+          {
+            (91979 call _endCountFree _coforallCount[91934])
+          }
+        }
+        (91984 call _waitEndCount _coforallCount[91934] 1)
+      }
+    }
+  }
+  where {
+    (91729 call == tag(91726 call . iterKind c"standalone"))
+  }
+  type AbstractRootLocale[92017] BaseLocale
+  function warmupRuntime[92050]() : _unknown[51] "private" "no return value for void"
+  {
+    function chpl_task_getFixedNumThreads[92054]() : _unknown[51] "extern" "local args" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (92059 call uint[115] 32)
+    }
+    {
+      unknown tmpIter[92096] "expr temp" "maybe ref" "no copy" "temp"
+      (92099 'move' tmpIter[92096](92071 call #(92066 call chpl_build_low_bounded_range 0)(92070 call chpl_task_getFixedNumThreads)))
+      unknown isRngDomArr[92253] "maybe param" "temp"
+      (92268 'move' isRngDomArr[92253](92266 call ||(92255 call isBoundedRange tmpIter[92096])(92264 call ||(92258 call isDomain tmpIter[92096])(92261 call isArray tmpIter[92096]))))
+      if isRngDomArr[92253]
+      {
+        const _coforallCount[92120] "const" "end count" "temp"
+        (92189 'move' _coforallCount[92120](92186 call _endCountAlloc 1))
+        unknown numTasks[92121] "temp"
+        (92173 'move' numTasks[92121](92169 call . tmpIter[92096] c"size"))
+        (92164 call _upEndCount _coforallCount[92120] 1 numTasks[92121])
+        (92161 call chpl_resetTaskSpawn numTasks[92121])
+        unknown _indexOfInterest[92128] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[92129] "expr temp" "temp"
+        (92138 'move' _iterator[92129](92136 call _getIterator tmpIter[92096]))
+        Defer
+        {
+          {
+            (92154 call _freeIterator _iterator[92129])
+          }
+        }
+        { scopeless type
+          (92143 'move' _indexOfInterest[92128](92140 call iteratorIndex _iterator[92129]))
+        }
+        ForLoop[92130]
+        {
+          unknown i[92147] "coforall index var" "index var" "insert auto destroy"
+          (92149 'move' i[92147] _indexOfInterest[92128])
+          {
+            {
+              unknown p[92103](92105 call c_malloc int[13] 1)
+              (92109 'end of statement')
+              (92111 call =(92113 call p 0) i)
+              (92117 call c_free p)
+            }
+            (92123 call _downEndCount _coforallCount[92120] nil[44])
+            (92122 'coforall loop')
+          }
+          label _continueLabel[92133]
+          _indexOfInterest[92128]
+          _iterator[92129]
+        }
+        label _breakLabel[92134]
+        Defer
+        {
+          {
+            (92176 call _endCountFree _coforallCount[92120])
+          }
+        }
+        (92181 call _waitEndCount _coforallCount[92120] 1 numTasks[92121])
+      }
+      {
+        const _coforallCount[92193] "const" "end count" "temp"
+        (92250 'move' _coforallCount[92193](92247 call _endCountAlloc 1))
+        unknown _indexOfInterest[92201] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[92202] "expr temp" "temp"
+        (92211 'move' _iterator[92202](92209 call _getIterator tmpIter[92096]))
+        Defer
+        {
+          {
+            (92227 call _freeIterator _iterator[92202])
+          }
+        }
+        { scopeless type
+          (92216 'move' _indexOfInterest[92201](92213 call iteratorIndex _iterator[92202]))
+        }
+        ForLoop[92203]
+        {
+          unknown i[92220] "coforall index var" "index var" "insert auto destroy"
+          (92222 'move' i[92220] _indexOfInterest[92201])
+          (92234 call _upEndCount _coforallCount[92193] 1)
+          {
+            {
+              unknown p[92078](92077 call c_malloc int[13] 1)
+              (92081 'end of statement')
+              (92088 call =(92086 call p 0) i)
+              (92094 call c_free p)
+            }
+            (92196 call _downEndCount _coforallCount[92193] nil[44])
+            (92195 'coforall loop')
+          }
+          label _continueLabel[92206]
+          _indexOfInterest[92201]
+          _iterator[92202]
+        }
+        label _breakLabel[92207]
+        Defer
+        {
+          {
+            (92238 call _endCountFree _coforallCount[92193])
+          }
+        }
+        (92243 call _waitEndCount _coforallCount[92193] 1)
+      }
+    }
+  }
+  type localesSignal[92283] unknown s[92278](92276 call chpl__atomicType bool[10])
+  function localesBarrier[92491].wait[92291](arg _mt[92495]:_MT[238], arg this[92493]:localesBarrier[92491], arg locIdx[92289]:_any[178](?), arg flags[92293]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    if(92483 call _cond_test(92297 call == locIdx 0))
+    {
+      {
+        unknown tmp[92375] "temp"
+        (92393 'move' tmp[92375](92391 call _cond_test 1))
+        WhileDo[92380]
+        {
+          {
+            (92302 call atomicFence)
+            unknown count[92306] 0
+            (92309 'end of statement')
+            {
+              unknown _indexOfInterest[92323] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[92324] "expr temp" "temp"
+              (92333 'move' _iterator[92324](92331 call _getIterator flags))
+              Defer
+              {
+                {
+                  (92349 call _freeIterator _iterator[92324])
+                }
+              }
+              { scopeless type
+                (92338 'move' _indexOfInterest[92323](92335 call iteratorIndex _iterator[92324]))
+              }
+              ForLoop[92325]
+              {
+                unknown f[92342] "index var" "insert auto destroy"
+                (92344 'move' f[92342] _indexOfInterest[92323])
+                if(92318 call _cond_test f)
+                {
+                  (92315 call += count 1)
+                }
+                label _continueLabel[92328]
+                _indexOfInterest[92323]
+                _iterator[92324]
+              }
+              label _breakLabel[92329]
+            }
+            if(92366 call _cond_test(92361 call == count(92359 call - numLocales 1)))
+            {
+              break nil[44]
+            }
+            (92373 call chpl_task_yield)
+          }
+          label _continueLabel[92378]
+          (92386 'move' tmp[92375](92384 call _cond_test 1))
+          tmp[92375]
+        }
+        label _breakLabel[92379]
+      }
+      {
+        unknown _indexOfInterest[92415] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[92416] "expr temp" "temp"
+        (92425 'move' _iterator[92416](92423 call _getIterator flags))
+        Defer
+        {
+          {
+            (92441 call _freeIterator _iterator[92416])
+          }
+        }
+        { scopeless type
+          (92430 'move' _indexOfInterest[92415](92427 call iteratorIndex _iterator[92416]))
+        }
+        ForLoop[92417]
+        {
+          unknown f[92434] "index var" "insert auto destroy"
+          (92436 'move' f[92434] _indexOfInterest[92415])
+          (92413 call(92409 call .(92404 call .(92400 call postfix! f) c"s") c"testAndSet"))
+          label _continueLabel[92420]
+          _indexOfInterest[92415]
+          _iterator[92416]
+        }
+        label _breakLabel[92421]
+      }
+    }
+    {
+      unknown f[92454](92450 'new'(_chpl_manager = unmanaged[220](?))(92453 call localesSignal))
+      (92457 'end of statement')
+      (92464 call =(92462 call flags locIdx) f)
+      (92476 call(92471 call .(92468 call . f c"s") c"waitFor") 1)
+      (92480 call chpl__delete f)
+    }
+  }
+  type localesBarrier[92491]
+  function chpl_init_rootLocale[92500]() : _unknown[51] "no doc" "no return value for void"
+  {
+    if(92530 call _cond_test(92507 call &&(92504 call > numLocales 1) _local))
+    {
+      (92528 call halt "Cannot run a program compiled with --local in more than 1 locale")
+    }
+    (92546 call =(92537 call . origRootLocale c"_instance")(92542 'new'(_chpl_manager = unmanaged[220](?))(92545 call RootLocale)))
+    (92566 call(92562 call .(92558 call postfix!(92556 call _cast(92555 'to borrowed class from unknown'(92554 'to nilable class from type' RootLocale))(92550 call . origRootLocale c"_instance"))) c"setup"))
+  }
+  function chpl_defaultLocaleInitPrivate[92572]() : _unknown[51] "inline" "no doc" "no return value for void"
+  {
+    const rl[92592] "const" "no auto destroy" "no copy" "ref var"(92591 call(92587 call .(92583 call postfix!(92581 call _cast(92580 'to borrowed class from unknown'(92579 'to nilable class from type' RootLocale))(92575 call . rootLocale c"_instance"))) c"getDefaultLocaleArray"))
+    (92595 'end of statement')
+    (92608 call =(92598 call . defaultLocale c"_instance")(92605 call .(92604 call rl 0) c"_instance"))
+  }
+  function chpl_rootLocaleInitPrivate[92617](arg locIdx[92615]:_any[178](?)) : _unknown[51] "no doc" "no return value for void"
+  {
+    (92621 call = rootLocale origRootLocale)
+    if(92735 call _cond_test(92630 call && replicateRootLocale(92628 call != locIdx 0)))
+    {
+      unknown newRootLocale[92638](92634 'new'(_chpl_manager = unmanaged[220](?))(92637 call RootLocale))
+      (92641 'end of statement')
+      const origLocales[92659] "const" "no auto destroy" "no copy" "ref var"(92658 call(92654 call .(92652 call postfix!(92650 call _cast(92649 'to borrowed class from unknown'(92648 'to nilable class from type' RootLocale))(92644 call . origRootLocale c"_instance"))) c"getDefaultLocaleArray"))
+      (92662 'end of statement')
+      unknown origRL[92672](92669 call .(92664 call . origLocales c"_value") c"theData")
+      (92675 'end of statement')
+      unknown newRL[92688](92685 call .(92682 call .(92681 call(92677 call . newRootLocale c"getDefaultLocaleArray")) c"_value") c"theData")
+      (92691 'end of statement')
+      (92725 'chpl_comm_array_get'(92714 'array_get' newRL 0) 0(92720 'array_get' origRL 0)(92723 call _cast size_t numLocales))
+      (92732 call =(92728 call . rootLocale c"_instance") newRootLocale)
+    }
+    if(92786 call _cond_test(92741 call != locIdx 0))
+    {
+      const tmp[92759] "const" "no auto destroy" "ref var"(92758 call(92754 call .(92752 call postfix!(92750 call _cast(92749 'to borrowed class from unknown'(92748 'to nilable class from type' RootLocale))(92744 call . rootLocale c"_instance"))) c"getDefaultLocaleArray"))
+      (92762 'end of statement')
+      (92784 'move' Locales tmp)
+    }
+    (92792 call = rootLocaleInitialized 1)
+  }
+  function chpl_task_getRequestedSubloc[92799]() : _unknown[51] "extern" "local args" "no fn body" "no doc" "fn synchronization free" "no return value for void"
+  {
+  }
+  { scopeless type
+    chpl_sublocID_t
+  }
+  function chpl_getLocaleID[92811](ref arg localeID[92808] :
+  chpl_localeID_t) : _unknown[51] "export" "insert line file info" "local args" "no doc" "no return value for void"
+  {
+    (92815 call = localeID here_id)
+  }
+  function here_id[92823]() : _unknown[51] "inline" "no doc" "no parens"
+  {
+    if(92842 call _cond_test localeModelHasSublocales)
+    {
+      (92833 return(92832 call chpl_rt_buildLocaleID chpl_nodeID(92831 call chpl_task_getRequestedSubloc)))
+    }
+    {
+      (92840 return(92839 call chpl_rt_buildLocaleID chpl_nodeID c_sublocid_any))
+    }
+  }
+  function chpl_localeID_to_locale[92857](arg id[92854] :
+  chpl_localeID_t) : _unknown[51] "no doc" "fn returns infinite lifetime"
+  {
+    if(92917 call _cond_test(92865 call !=(92861 call . rootLocale c"_instance") nil[44]))
+    {
+      (92886 return(92885 call(92880 call .(92876 call postfix!(92874 call _cast(92873 'to borrowed class from unknown'(92872 'to nilable class from type' AbstractRootLocale))(92868 call . rootLocale c"_instance"))) c"localeIDtoLocale") id))
+    }
+    {
+      if(92909 call _cond_test(92893 call ==(92889 call . dummyLocale c"_instance") nil[44]))
+      {
+        (92905 call =(92896 call . dummyLocale c"_instance")(92901 'new'(_chpl_manager = unmanaged[220](?))(92904 call DummyLocale)))
+      }
+      (92915 return dummyLocale)
+    }
+  }
+  { scopeless type
+    locale[28]
+  }
+  type chpl_privateObject_t[92933] unknown obj[92928] c_void_ptr
+  unknown chpl_privateObjects[92940] "extern" "no doc"(92939 call c_ptr chpl_privateObject_t)
+  (92943 'end of statement')
+  function chpl_getPrivatizedCopy[92948](arg objectType[92946]:_any[178](?), arg objectPid[92951] :
+  int[13]) : _unknown[51] "inline" "no doc" "fn returns infinite lifetime"
+  {
+    (92968 return(92967 'cast' objectType(92964 call .(92961 call chpl_privateObjects objectPid) c"obj")))
+  }
+  { scopeless type
+    objectType
+  }
+  function _unknown[51].totalThreads[92977](arg _mt[92982]:_MT[238], arg this[92979] :
+  locale[28]) : _unknown[51] "method" "no doc"
+  {
+    unknown totalThreads[92985] int[13]
+    (92988 'end of statement')
+    function chpl_task_getNumThreads[92992]() : _unknown[51] "extern" "local args" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (92997 call uint[115] 32)
+    }
+    {
+      const tmp[93012] "const" "temp"
+      (93013 'move' tmp[93012](93010 'deref'(93009 '_wide_get_locale' this)))
+      (93006 call = totalThreads(93005 call chpl_task_getNumThreads))
+      (93016 'elided on block' 0 tmp[93012])
+    }
+    (93021 return totalThreads)
+  }
+  function _unknown[51].idleThreads[93028](arg _mt[93033]:_MT[238], arg this[93030] :
+  locale[28]) : _unknown[51] "method" "no doc"
+  {
+    unknown idleThreads[93036] int[13]
+    (93039 'end of statement')
+    function chpl_task_getNumIdleThreads[93043]() : _unknown[51] "extern" "local args" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (93048 call uint[115] 32)
+    }
+    {
+      const tmp[93063] "const" "temp"
+      (93064 'move' tmp[93063](93061 'deref'(93060 '_wide_get_locale' this)))
+      (93057 call = idleThreads(93056 call chpl_task_getNumIdleThreads))
+      (93067 'elided on block' 0 tmp[93063])
+    }
+    (93072 return idleThreads)
+  }
+  function _unknown[51].queuedTasks[93079](arg _mt[93084]:_MT[238], arg this[93081] :
+  locale[28]) : _unknown[51] "method" "no doc"
+  {
+    unknown queuedTasks[93087] int[13]
+    (93090 'end of statement')
+    function chpl_task_getNumQueuedTasks[93094]() : _unknown[51] "extern" "local args" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (93099 call uint[115] 32)
+    }
+    {
+      const tmp[93114] "const" "temp"
+      (93115 'move' tmp[93114](93112 'deref'(93111 '_wide_get_locale' this)))
+      (93108 call = queuedTasks(93107 call chpl_task_getNumQueuedTasks))
+      (93118 'elided on block' 0 tmp[93114])
+    }
+    (93123 return queuedTasks)
+  }
+  function _unknown[51].runningTasks[93130](arg _mt[93135]:_MT[238], arg this[93132] :
+  locale[28]) : _unknown[51] "method" "no doc" "fn synchronization free"
+  {
+    (93145 return(93144 call(93140 call . this c"runningTaskCnt")))
+  }
+  function _unknown[51].blockedTasks[93153](arg _mt[93158]:_MT[238], arg this[93155] :
+  locale[28]) : _unknown[51] "method" "no doc"
+  {
+    unknown blockedTasks[93161] int[13]
+    (93164 'end of statement')
+    function chpl_task_getNumBlockedTasks[93168]() : _unknown[51] "extern" "local args" "no fn body" "no return value for void"
+    {
+    }
+    { scopeless type
+      (93173 call int[13] 32)
+    }
+    {
+      const tmp[93188] "const" "temp"
+      (93189 'move' tmp[93188](93186 'deref'(93185 '_wide_get_locale' this)))
+      (93182 call = blockedTasks(93181 call chpl_task_getNumBlockedTasks))
+      (93192 'elided on block' 0 tmp[93188])
+    }
+    (93197 return blockedTasks)
+  }
+  function chpl_taskRunningCntInc[93203]() : _unknown[51] "export" "insert line file info" "inc running task" "local args" "no doc" "no return value for void"
+  {
+    if(93215 call _cond_test rootLocaleInitialized)
+    {
+      (93212 call(93207 call . here c"runningTaskCntAdd") 1)
+    }
+  }
+  function chpl_taskRunningCntDec[93224]() : _unknown[51] "export" "insert line file info" "dec running task" "local args" "no doc" "no return value for void"
+  {
+    if(93236 call _cond_test rootLocaleInitialized)
+    {
+      (93233 call(93228 call . here c"runningTaskCntSub") 1)
+    }
+  }
+  function chpl_taskRunningCntReset[93245]() : _unknown[51] "export" "insert line file info" "local args" "no doc" "no return value for void"
+  {
+    (93255 call(93250 call . here c"runningTaskCntSet") 0)
+  }
+  function deinit[93262]() : _unknown[51] "destructor" "no doc" "no return value for void"
+  {
+    (93269 call chpl__delete(93265 call . origRootLocale c"_instance"))
+    (93278 call chpl__delete(93274 call . dummyLocale c"_instance"))
+  }
+}

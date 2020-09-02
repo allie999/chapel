@@ -1,0 +1,53 @@
+AST dump for TwoArrayRadixSort after pass parse.
+Module use list: 
+
+{
+  (353103 'use' ChapelStandard)
+  (287518 'import'(287515 call . Sort c"defaultComparator"))
+  (287527 'use'(287524 call . super c"TwoArrayPartitioning"))
+  (287535 'use'(287532 call . super c"RadixSortHelp"))
+  function twoArrayRadixSort[287545](arg Data[287542] :
+  (287539 call chpl__buildArrayRuntimeType nil[44]), arg comparator[287550] :
+  unknown rec[287547] =
+  defaultComparator) : _unknown[51]
+  {
+    { scopeless
+      unknown sequentialSizePerTask[287555] 4096
+      (287558 'end of statement')
+    }
+    { scopeless
+      unknown baseCaseSize[287561] 16
+      (287564 'end of statement')
+    }
+    { scopeless
+      unknown endbit[287566] int[13]
+      (287569 'end of statement')
+    }
+    (287576 call = endbit(287575 call msbRadixSortParamLastStartBit Data comparator))
+    if(287591 call _cond_test(287581 call < endbit 0))
+    {
+      { scopeless
+        (287588 call = endbit(287587 call max int[13]))
+      }
+    }
+    { scopeless
+      unknown Scratch[287598](287597 'typeof' Data)
+      (287601 'end of statement')
+    }
+    if(287702 call _cond_test(287610 call(287606 call .(287603 call . Data c"_instance") c"isDefaultRectangular")))
+    {
+      { scopeless
+        unknown state[287626](287611 'new'(287625 call TwoArrayBucketizerSharedState(bucketizer =(287613 'new'(287616 call RadixBucketizer)))(baseCaseSize = baseCaseSize)(sequentialSizePerTask = sequentialSizePerTask)(endbit = endbit)))
+        (287629 'end of statement')
+      }
+      (287652 call partitioningSortWithScratchSpace(287636 call .(287633 call . Data c"_dom") c"low")(287644 call .(287641 call . Data c"_dom") c"high") Data Scratch state comparator 0)
+    }
+    {
+      { scopeless
+        unknown state[287674](287654 'new'(287673 call TwoArrayDistributedBucketizerSharedState(bucketizerType = RadixBucketizer)(numLocales =(287665 call .(287664 call(287660 call . Data c"targetLocales")) c"size"))(baseCaseSize = baseCaseSize)(endbit = endbit)))
+        (287677 'end of statement')
+      }
+      (287700 call distributedPartitioningSortWithScratchSpace(287684 call .(287681 call . Data c"_dom") c"low")(287692 call .(287689 call . Data c"_dom") c"high") Data Scratch state comparator 0)
+    }
+  }
+}

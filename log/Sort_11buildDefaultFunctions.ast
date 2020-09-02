@@ -1,0 +1,2218 @@
+AST dump for Sort after pass buildDefaultFunctions.
+Module use list: ChapelStandard List Reflection MSBRadixSort QuickSort 
+
+{
+  function chpl__init_Sort[416183]() : void[4] "insert line file info" "module init"
+  {
+    (548705 'default init var' defaultComparator[267894] DefaultComparator[290466])
+    (267897 'end of statement')
+    unknown call_tmp[735857] "expr temp" "maybe param" "maybe type" "temp"
+    (735860 'move' call_tmp[735857](267901 call ReverseComparator[291103](?) DefaultComparator[290466]))
+    (548707 'default init var' reverseComparator[267902] call_tmp[735857])
+    (267905 'end of statement')
+    (537927 return _void[55])
+  }
+  def module InsertionSort[270009]  
+  def module QuickSort[271956]  
+  def module ShellSort[273437]  
+  def module RadixSortHelp[275991]  
+  def module ShallowCopy[277298]  
+  def module MSBRadixSort[287918]  
+  const defaultComparator[267894] "dead at end of block" "const" "insert auto destroy"
+  const reverseComparator[267902] "dead at end of block" "const" "insert auto destroy"
+  function compareByPart[267913](arg a[267910]:_any[178](?), arg b[267916] :
+  (466665 'typeof' a[267910]), arg comparator[267921]:_any[178](?)) : _unknown[51] "inline" "private"
+  {
+    unknown ret[537529] "RVV" "temp"
+    unknown curPart[267925] "dead at end of block" "insert auto destroy"
+    (548709 'init var' curPart[267925] 0)
+    (267928 'end of statement')
+    {
+      unknown tmp[268038] "temp"
+      (268056 'move' tmp[268038](268054 call _cond_test 1))
+      WhileDo[268043]
+      {
+        {
+          unknown call_tmp[735864] "maybe param" "maybe type" "temp"
+          (735867 'move' call_tmp[735864](267945 call(267939 call (partial) keyPart _mt[243] comparator[267921]) a[267910] curPart[267925]))
+          unknown tmp[267946] "dead at end of block" "insert auto destroy" "temp"
+          (548711 'init var' tmp[267946] call_tmp[735864])
+          (267953 call _check_tuple_var_decl tmp[267946] 2)
+          (489821 'end of statement')
+          unknown call_tmp[735869] "maybe param" "maybe type" "temp"
+          (735872 'move' call_tmp[735869](267947 call tmp[267946] 0))
+          unknown aSection[267931] "dead at end of block" "insert auto destroy"
+          (548713 'init var' aSection[267931] call_tmp[735869])
+          unknown call_tmp[735874] "maybe param" "maybe type" "temp"
+          (735877 'move' call_tmp[735874](267950 call tmp[267946] 1))
+          unknown aPart[267933] "dead at end of block" "insert auto destroy"
+          (548715 'init var' aPart[267933] call_tmp[735874])
+          (267958 'end of statement')
+          unknown call_tmp[735881] "maybe param" "maybe type" "temp"
+          (735884 'move' call_tmp[735881](267972 call(267966 call (partial) keyPart _mt[243] comparator[267921]) b[267916] curPart[267925]))
+          unknown tmp[267973] "dead at end of block" "insert auto destroy" "temp"
+          (548717 'init var' tmp[267973] call_tmp[735881])
+          (267980 call _check_tuple_var_decl tmp[267973] 2)
+          (489822 'end of statement')
+          unknown call_tmp[735886] "maybe param" "maybe type" "temp"
+          (735889 'move' call_tmp[735886](267974 call tmp[267973] 0))
+          unknown bSection[267960] "dead at end of block" "insert auto destroy"
+          (548719 'init var' bSection[267960] call_tmp[735886])
+          unknown call_tmp[735891] "maybe param" "maybe type" "temp"
+          (735894 'move' call_tmp[735891](267977 call tmp[267973] 1))
+          unknown bPart[267962] "dead at end of block" "insert auto destroy"
+          (548721 'init var' bPart[267962] call_tmp[735891])
+          (267985 'end of statement')
+          unknown tmp[434161] "maybe param" "temp"
+          (434172 'move' tmp[434161](267988 call != aSection[267931] 0))
+          unknown call_tmp[735896] "expr temp" "maybe param" "maybe type" "temp"
+          (735899 'move' call_tmp[735896](434174 call _cond_invalid tmp[434161]))
+          if call_tmp[735896]
+          {
+            (434177 call compilerError "cannot promote short-circuiting || operator")
+          }
+          unknown tmp[579459] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+          unknown tmp[579460] "maybe param" "temp"
+          unknown call_tmp[735901] "expr temp" "maybe param" "maybe type" "temp"
+          (735904 'move' call_tmp[735901](434162 call isTrue tmp[434161]))
+          (579465 'move' tmp[579460](579463 call _cond_test call_tmp[735901]))
+          if tmp[579460]
+          {
+            (579470 'move' tmp[579459](579467 '_paramFoldLogical' tmp[579460] 1))
+          }
+          {
+            unknown tmp[579472] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+            unknown call_tmp[735906] "expr temp" "maybe param" "maybe type" "temp"
+            (735909 'move' call_tmp[735906](267992 call != bSection[267960] 0))
+            (579474 'move' tmp[579472](434166 call isTrue call_tmp[735906]))
+            (579479 'move' tmp[579459](579476 '_paramFoldLogical' tmp[579460] tmp[579472]))
+          }
+          unknown call_tmp[735911] "expr temp" "maybe param" "maybe type" "temp"
+          (735914 'move' call_tmp[735911](268003 call _cond_test tmp[579459]))
+          if call_tmp[735911]
+          {
+            unknown call_tmp[735916] "expr temp" "maybe param" "maybe type" "temp"
+            (735919 'move' call_tmp[735916](267998 call - aSection[267931] bSection[267960]))
+            (537534 'move' ret[537529](537533 'deref' call_tmp[735916]))
+            gotoReturn _end_compareByPart[537527] _end_compareByPart[537527]
+            (489824 'end of statement' aSection[267931] bSection[267960])
+          }
+          unknown call_tmp[735921] "expr temp" "maybe param" "maybe type" "temp"
+          (735924 'move' call_tmp[735921](268009 call < aPart[267933] bPart[267962]))
+          unknown call_tmp[735926] "expr temp" "maybe param" "maybe type" "temp"
+          (735929 'move' call_tmp[735926](268017 call _cond_test call_tmp[735921]))
+          if call_tmp[735926]
+          {
+            unknown call_tmp[735931] "expr temp" "maybe param" "maybe type" "temp"
+            (735934 'move' call_tmp[735931](268012 call - 1))
+            (537539 'move' ret[537529](537538 'deref' call_tmp[735931]))
+            gotoReturn _end_compareByPart[537527] _end_compareByPart[537527]
+          }
+          unknown call_tmp[735936] "expr temp" "maybe param" "maybe type" "temp"
+          (735939 'move' call_tmp[735936](268023 call > aPart[267933] bPart[267962]))
+          unknown call_tmp[735941] "expr temp" "maybe param" "maybe type" "temp"
+          (735944 'move' call_tmp[735941](268029 call _cond_test call_tmp[735936]))
+          if call_tmp[735941]
+          {
+            (537544 'move' ret[537529](537543 'deref' 1))
+            gotoReturn _end_compareByPart[537527] _end_compareByPart[537527]
+          }
+          (268035 call += curPart[267925] 1)
+          (489829 'end of statement' curPart[267925])
+        }
+        label _continueLabel[268041]
+        (268049 'move' tmp[268038](268047 call _cond_test 1))
+        tmp[268038]
+      }
+      label _breakLabel[268042]
+    }
+    (537549 'move' ret[537529](537548 'deref' 1))
+    label _end_compareByPart[537527]
+    (537531 return ret[537529])
+  }
+  function chpl_compare[268071](arg a[268068]:_any[178](?), arg b[268074] :
+  (466667 'typeof' a[268068]), arg comparator[268079]:_any[178](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[537553] "RVV" "temp"
+    unknown call_tmp[735946] "expr temp" "maybe param" "maybe type" "temp"
+    (735949 'move' call_tmp[735946](268101 call canResolveMethod comparator[268079] "key" a[268068]))
+    unknown call_tmp[735951] "expr temp" "maybe param" "maybe type" "temp"
+    (735954 'move' call_tmp[735951](268246 call _cond_test call_tmp[735946]))
+    if call_tmp[735951]
+    {
+      unknown call_tmp[735960] "expr temp" "maybe param" "maybe type" "temp"
+      (735963 'move' call_tmp[735960](268114 call(268109 call (partial) key _mt[243] comparator[268079]) a[268068]))
+      unknown call_tmp[735967] "expr temp" "maybe param" "maybe type" "temp"
+      (735970 'move' call_tmp[735967](268122 call(268117 call (partial) key _mt[243] comparator[268079]) b[268074]))
+      unknown call_tmp[735972] "expr temp" "maybe param" "maybe type" "temp"
+      (735975 'move' call_tmp[735972](268123 call(268105 call (partial) compare _mt[243] defaultComparator[267894]) call_tmp[735960] call_tmp[735967]))
+      (537558 'move' ret[537553](537557 'deref' call_tmp[735972]))
+      gotoReturn _end_chpl_compare[537551] _end_chpl_compare[537551]
+    }
+    {
+      unknown call_tmp[735977] "expr temp" "maybe param" "maybe type" "temp"
+      (735980 'move' call_tmp[735977](268147 call canResolveMethod comparator[268079] "compare" a[268068] b[268074]))
+      unknown call_tmp[735982] "expr temp" "maybe param" "maybe type" "temp"
+      (735985 'move' call_tmp[735982](268241 call _cond_test call_tmp[735977]))
+      if call_tmp[735982]
+      {
+        unknown call_tmp[735989] "expr temp" "maybe param" "maybe type" "temp"
+        (735992 'move' call_tmp[735989](268155 call(268149 call (partial) compare _mt[243] comparator[268079]) a[268068] b[268074]))
+        (537563 'move' ret[537553](537562 'deref' call_tmp[735989]))
+        gotoReturn _end_chpl_compare[537551] _end_chpl_compare[537551]
+      }
+      {
+        unknown call_tmp[735994] "expr temp" "maybe param" "maybe type" "temp"
+        (735997 'move' call_tmp[735994](268179 call canResolveMethod comparator[268079] "keyPart" a[268068] 0))
+        unknown call_tmp[735999] "expr temp" "maybe param" "maybe type" "temp"
+        (736002 'move' call_tmp[735999](268237 call _cond_test call_tmp[735994]))
+        if call_tmp[735999]
+        {
+          unknown call_tmp[736004] "expr temp" "maybe param" "maybe type" "temp"
+          (736007 'move' call_tmp[736004](268185 call compareByPart a[268068] b[268074] comparator[268079]))
+          (537568 'move' ret[537553](537567 'deref' call_tmp[736004]))
+          gotoReturn _end_chpl_compare[537551] _end_chpl_compare[537551]
+        }
+        {
+          unknown call_tmp[736009] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+          (736012 'move' call_tmp[736009](268208 'typeof' comparator[268079]))
+          unknown call_tmp[736014] "expr temp" "maybe param" "maybe type" "temp"
+          (736017 'move' call_tmp[736014](268210 call _cast string[26] call_tmp[736009]))
+          unknown call_tmp[736019] "expr temp" "maybe param" "maybe type" "temp"
+          (736022 'move' call_tmp[736019](268212 call + "The comparator " call_tmp[736014]))
+          unknown call_tmp[736024] "expr temp" "maybe param" "maybe type" "temp"
+          (736027 'move' call_tmp[736024](268231 call + call_tmp[736019] " requires a 'key(a)', 'compare(a, b)', or 'keyPart(a, i)' method"))
+          (268234 call compilerError call_tmp[736024])
+        }
+      }
+    }
+    label _end_chpl_compare[537551]
+    (537555 return ret[537553])
+  }
+  function chpl_check_comparator[268258](arg comparator[268256]:_any[178](?), arg eltType[268260]:_any[178](?)) param : _unknown[51] "no doc" "unsafe"
+  {
+    unknown ret[537574] "RVV" "param" "temp"
+    const data[268263] "dead at end of block" "const" "insert auto destroy"
+    (548723 'default init var' data[268263] eltType[268260])
+    (268266 'end of statement')
+    unknown errorDepth[268269] "dead at end of block" "param"
+    (548725 'init var' errorDepth[268269] 2)
+    (268272 'end of statement')
+    unknown call_tmp[736029] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (736032 'move' call_tmp[736029](268274 'typeof' comparator[268256]))
+    unknown call_tmp[736034] "expr temp" "maybe param" "maybe type" "temp"
+    (736037 'move' call_tmp[736034](268276 call == call_tmp[736029] DefaultComparator[290466]))
+    unknown call_tmp[736039] "expr temp" "maybe param" "maybe type" "temp"
+    (736042 'move' call_tmp[736039](268804 call _cond_test call_tmp[736034]))
+    if call_tmp[736039]
+    {
+    }
+    {
+      unknown call_tmp[736044] "expr temp" "maybe param" "maybe type" "temp"
+      (736047 'move' call_tmp[736044](268284 call canResolveMethod comparator[268256] "key" data[268263]))
+      unknown call_tmp[736049] "expr temp" "maybe param" "maybe type" "temp"
+      (736052 'move' call_tmp[736049](268799 call _cond_test call_tmp[736044]))
+      if call_tmp[736049]
+      {
+        unknown call_tmp[736056] "maybe param" "maybe type" "temp"
+        (736059 'move' call_tmp[736056](268291 call(268286 call (partial) key _mt[243] comparator[268256]) data[268263]))
+        const keydata[268292] "dead at end of block" "const" "insert auto destroy"
+        (548727 'init var' keydata[268292] call_tmp[736056])
+        (268295 'end of statement' data[268263])
+        unknown keytype[268299] "dead at end of block" "insert auto destroy" "type variable"(268298 'typeof' keydata[268292])
+        (548731 'move' keytype[268299](548729 'typeof' keydata[268292]))
+        (489837 'end of statement' keydata[268292])
+        unknown call_tmp[736061] "expr temp" "maybe param" "maybe type" "temp"
+        (736064 'move' call_tmp[736061](268307 call canResolve "<" keydata[268292] keydata[268292]))
+        unknown call_tmp[736066] "expr temp" "maybe param" "maybe type" "temp"
+        (736069 'move' call_tmp[736066](268308 call ! call_tmp[736061]))
+        unknown call_tmp[736071] "expr temp" "maybe param" "maybe type" "temp"
+        (736074 'move' call_tmp[736071](268360 call _cond_test call_tmp[736066]))
+        if call_tmp[736071]
+        {
+          unknown call_tmp[736076] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+          (736079 'move' call_tmp[736076](268332 'typeof' comparator[268256]))
+          unknown call_tmp[736081] "expr temp" "maybe param" "maybe type" "temp"
+          (736084 'move' call_tmp[736081](268334 call _cast string[26] call_tmp[736076]))
+          unknown call_tmp[736086] "expr temp" "maybe param" "maybe type" "temp"
+          (736089 'move' call_tmp[736086](268355 call _cast string[26] eltType[268260]))
+          (268358 call compilerError(errorDepth = errorDepth[268269]) "The key method in " call_tmp[736081] " must return an object that supports the '<' function when used with " call_tmp[736086] " elements")
+        }
+        unknown call_tmp[736091] "expr temp" "maybe param" "maybe type" "temp"
+        (736094 'move' call_tmp[736091](268371 call canResolveMethod comparator[268256] "compare" data[268263] data[268263]))
+        unknown call_tmp[736096] "expr temp" "maybe param" "maybe type" "temp"
+        (736099 'move' call_tmp[736096](268401 call _cond_test call_tmp[736091]))
+        if call_tmp[736096]
+        {
+          unknown call_tmp[736101] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+          (736104 'move' call_tmp[736101](268377 'typeof' comparator[268256]))
+          unknown call_tmp[736106] "expr temp" "maybe param" "maybe type" "temp"
+          (736109 'move' call_tmp[736106](268379 call _cast string[26] call_tmp[736101]))
+          (268398 call compilerError(errorDepth = errorDepth[268269]) call_tmp[736106] " contains both a key method and a compare method")
+        }
+        unknown call_tmp[736111] "expr temp" "maybe param" "maybe type" "temp"
+        (736114 'move' call_tmp[736111](268411 call canResolveMethod comparator[268256] "keyPart" data[268263] 0))
+        unknown call_tmp[736116] "expr temp" "maybe param" "maybe type" "temp"
+        (736119 'move' call_tmp[736116](268441 call _cond_test call_tmp[736111]))
+        if call_tmp[736116]
+        {
+          unknown call_tmp[736121] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+          (736124 'move' call_tmp[736121](268417 'typeof' comparator[268256]))
+          unknown call_tmp[736126] "expr temp" "maybe param" "maybe type" "temp"
+          (736129 'move' call_tmp[736126](268419 call _cast string[26] call_tmp[736121]))
+          (268438 call compilerError(errorDepth = errorDepth[268269]) call_tmp[736126] " contains both a key method and a keyPart method")
+        }
+      }
+      {
+        unknown call_tmp[736131] "expr temp" "maybe param" "maybe type" "temp"
+        (736134 'move' call_tmp[736131](268451 call canResolveMethod comparator[268256] "compare" data[268263] data[268263]))
+        unknown call_tmp[736136] "expr temp" "maybe param" "maybe type" "temp"
+        (736139 'move' call_tmp[736136](268794 call _cond_test call_tmp[736131]))
+        if call_tmp[736136]
+        {
+          { scopeless type
+            unknown call_type_tmp[493233] "expr temp" "maybe type" "temp" "type variable"
+            unknown call_tmp[736143] "expr temp" "maybe param" "maybe type" "temp"
+            (736146 'move' call_tmp[736143](268459 call(268453 call (partial) compare _mt[243] comparator[268256]) data[268263] data[268263]))
+            (493237 'move' call_type_tmp[493233](268460 'typeof' call_tmp[736143]))
+          }
+          unknown comparetype[268461] "dead at end of block" "insert auto destroy" "type variable" call_type_tmp[493233]
+          (548734 'move' comparetype[268461] call_type_tmp[493233])
+          (489842 'end of statement' data[268263] data[268263])
+          unknown call_tmp[736148] "expr temp" "maybe param" "maybe type" "temp"
+          (736151 'move' call_tmp[736148](268468 call isNumericType comparetype[268461]))
+          unknown call_tmp[736153] "expr temp" "maybe param" "maybe type" "temp"
+          (736156 'move' call_tmp[736153](268469 call ! call_tmp[736148]))
+          unknown call_tmp[736158] "expr temp" "maybe param" "maybe type" "temp"
+          (736161 'move' call_tmp[736158](268521 call _cond_test call_tmp[736153]))
+          if call_tmp[736158]
+          {
+            unknown call_tmp[736163] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+            (736166 'move' call_tmp[736163](268493 'typeof' comparator[268256]))
+            unknown call_tmp[736168] "expr temp" "maybe param" "maybe type" "temp"
+            (736171 'move' call_tmp[736168](268495 call _cast string[26] call_tmp[736163]))
+            unknown call_tmp[736173] "expr temp" "maybe param" "maybe type" "temp"
+            (736176 'move' call_tmp[736173](268516 call _cast string[26] eltType[268260]))
+            (268519 call compilerError(errorDepth = errorDepth[268269]) "The compare method in " call_tmp[736168] " must return a numeric type when used with " call_tmp[736173] " elements")
+          }
+        }
+        {
+          unknown call_tmp[736178] "expr temp" "maybe param" "maybe type" "temp"
+          (736181 'move' call_tmp[736178](268532 call canResolveMethod comparator[268256] "keyPart" data[268263] 0))
+          unknown call_tmp[736183] "expr temp" "maybe param" "maybe type" "temp"
+          (736186 'move' call_tmp[736183](268790 call _cond_test call_tmp[736178]))
+          if call_tmp[736183]
+          {
+            unknown idx[268535] "dead at end of block" "insert auto destroy"
+            (548736 'init var' idx[268535] 0 int(64)[13])
+            (268538 'end of statement')
+            { scopeless type
+              unknown call_type_tmp[493239] "expr temp" "maybe type" "temp" "type variable"
+              unknown call_tmp[736190] "expr temp" "maybe param" "maybe type" "temp"
+              (736193 'move' call_tmp[736190](268547 call(268541 call (partial) keyPart _mt[243] comparator[268256]) data[268263] idx[268535]))
+              (493243 'move' call_type_tmp[493239](268548 'typeof' call_tmp[736190]))
+            }
+            unknown partType[268549] "dead at end of block" "insert auto destroy" "type variable" call_type_tmp[493239]
+            (548739 'move' partType[268549] call_type_tmp[493239])
+            unknown call_tmp[736195] "expr temp" "maybe param" "maybe type" "temp"
+            (736198 'move' call_tmp[736195](268555 call isTupleType partType[268549]))
+            unknown call_tmp[736200] "expr temp" "maybe param" "maybe type" "temp"
+            (736203 'move' call_tmp[736200](268556 call ! call_tmp[736195]))
+            unknown call_tmp[736205] "expr temp" "maybe param" "maybe type" "temp"
+            (736208 'move' call_tmp[736205](268608 call _cond_test call_tmp[736200]))
+            if call_tmp[736205]
+            {
+              unknown call_tmp[736210] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+              (736213 'move' call_tmp[736210](268580 'typeof' comparator[268256]))
+              unknown call_tmp[736215] "expr temp" "maybe param" "maybe type" "temp"
+              (736218 'move' call_tmp[736215](268582 call _cast string[26] call_tmp[736210]))
+              unknown call_tmp[736220] "expr temp" "maybe param" "maybe type" "temp"
+              (736223 'move' call_tmp[736220](268603 call _cast string[26] eltType[268260]))
+              (268606 call compilerError(errorDepth = errorDepth[268269]) "The keyPart method in " call_tmp[736215] " must return a tuple when used with " call_tmp[736220] " elements")
+            }
+            unknown tmp[268614] "dead at end of block" "insert auto destroy"
+            (548741 'default init var' tmp[268614] partType[268549])
+            (268617 'end of statement')
+            unknown call_tmp[736225] "maybe param" "maybe type" "temp"
+            (736228 'move' call_tmp[736225](268621 call tmp[268614] 0))
+            unknown expectInt[268622] "dead at end of block" "insert auto destroy"
+            (548743 'init var' expectInt[268622] call_tmp[736225])
+            (268625 'end of statement')
+            unknown call_tmp[736230] "maybe param" "maybe type" "temp"
+            (736233 'move' call_tmp[736230](268629 call tmp[268614] 1))
+            unknown expectIntUint[268630] "dead at end of block" "insert auto destroy"
+            (548745 'init var' expectIntUint[268630] call_tmp[736230])
+            (268633 'end of statement' data[268263] idx[268535] partType[268549] tmp[268614] tmp[268614])
+            unknown call_tmp[736235] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+            (736238 'move' call_tmp[736235](268636 'typeof' expectInt[268622]))
+            unknown call_tmp[736240] "expr temp" "maybe param" "maybe type" "temp"
+            (736243 'move' call_tmp[736240](268638 call isInt call_tmp[736235]))
+            unknown call_tmp[736245] "expr temp" "maybe param" "maybe type" "temp"
+            (736248 'move' call_tmp[736245](268639 call ! call_tmp[736240]))
+            unknown call_tmp[736250] "expr temp" "maybe param" "maybe type" "temp"
+            (736253 'move' call_tmp[736250](268675 call _cond_test call_tmp[736245]))
+            if call_tmp[736250]
+            {
+              unknown call_tmp[736255] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+              (736258 'move' call_tmp[736255](268647 'typeof' comparator[268256]))
+              unknown call_tmp[736260] "expr temp" "maybe param" "maybe type" "temp"
+              (736263 'move' call_tmp[736260](268649 call _cast string[26] call_tmp[736255]))
+              unknown call_tmp[736265] "expr temp" "maybe param" "maybe type" "temp"
+              (736268 'move' call_tmp[736265](268670 call _cast string[26] eltType[268260]))
+              (268673 call compilerError(errorDepth = errorDepth[268269]) "The keyPart method in " call_tmp[736260] " must return a tuple with element 0 of type int(\?) when used with " call_tmp[736265] " elements")
+            }
+            unknown tmp[434182] "maybe param" "temp"
+            (434193 'move' tmp[434182](268683 call isInt expectIntUint[268630]))
+            unknown call_tmp[736270] "expr temp" "maybe param" "maybe type" "temp"
+            (736273 'move' call_tmp[736270](434195 call _cond_invalid tmp[434182]))
+            if call_tmp[736270]
+            {
+              (434198 call compilerError "cannot promote short-circuiting || operator")
+            }
+            unknown tmp[579486] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+            unknown tmp[579487] "maybe param" "temp"
+            unknown call_tmp[736275] "expr temp" "maybe param" "maybe type" "temp"
+            (736278 'move' call_tmp[736275](434183 call isTrue tmp[434182]))
+            (579492 'move' tmp[579487](579490 call _cond_test call_tmp[736275]))
+            if tmp[579487]
+            {
+              (579497 'move' tmp[579486](579494 '_paramFoldLogical' tmp[579487] 1))
+            }
+            {
+              unknown tmp[579499] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+              unknown call_tmp[736280] "expr temp" "maybe param" "maybe type" "temp"
+              (736283 'move' call_tmp[736280](268687 call isUint expectIntUint[268630]))
+              (579501 'move' tmp[579499](434187 call isTrue call_tmp[736280]))
+              (579506 'move' tmp[579486](579503 '_paramFoldLogical' tmp[579487] tmp[579499]))
+            }
+            unknown call_tmp[736285] "expr temp" "maybe param" "maybe type" "temp"
+            (736288 'move' call_tmp[736285](268690 call ! tmp[579486]))
+            unknown call_tmp[736290] "expr temp" "maybe param" "maybe type" "temp"
+            (736293 'move' call_tmp[736290](268726 call _cond_test call_tmp[736285]))
+            if call_tmp[736290]
+            {
+              unknown call_tmp[736295] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+              (736298 'move' call_tmp[736295](268698 'typeof' comparator[268256]))
+              unknown call_tmp[736300] "expr temp" "maybe param" "maybe type" "temp"
+              (736303 'move' call_tmp[736300](268700 call _cast string[26] call_tmp[736295]))
+              unknown call_tmp[736305] "expr temp" "maybe param" "maybe type" "temp"
+              (736308 'move' call_tmp[736305](268721 call _cast string[26] eltType[268260]))
+              (268724 call compilerError(errorDepth = errorDepth[268269]) "The keyPart method in " call_tmp[736300] " must return a tuple with element 1 of type  int(\?) or uint(\?) when used with " call_tmp[736305] " elements")
+            }
+          }
+          {
+            unknown call_tmp[736310] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+            (736313 'move' call_tmp[736310](268737 'typeof' comparator[268256]))
+            unknown call_tmp[736315] "expr temp" "maybe param" "maybe type" "temp"
+            (736318 'move' call_tmp[736315](268739 call _cast string[26] call_tmp[736310]))
+            unknown call_tmp[736320] "expr temp" "maybe param" "maybe type" "temp"
+            (736323 'move' call_tmp[736320](268741 call + "The comparator " call_tmp[736315]))
+            unknown call_tmp[736325] "expr temp" "maybe param" "maybe type" "temp"
+            (736328 'move' call_tmp[736325](268760 call + call_tmp[736320] " requires a 'key(a)', 'compare(a, b)', or 'keyPart(a, i)' method "))
+            unknown call_tmp[736330] "expr temp" "maybe param" "maybe type" "temp"
+            (736333 'move' call_tmp[736330](268779 call + call_tmp[736325] " for element type "))
+            unknown call_tmp[736335] "expr temp" "maybe param" "maybe type" "temp"
+            (736338 'move' call_tmp[736335](268783 call _cast string[26] eltType[268260]))
+            unknown call_tmp[736340] "expr temp" "maybe param" "maybe type" "temp"
+            (736343 'move' call_tmp[736340](268785 call + call_tmp[736330] call_tmp[736335]))
+            (268787 call compilerError(errorDepth = errorDepth[268269]) call_tmp[736340])
+          }
+        }
+      }
+    }
+    (537579 'move' ret[537574](537578 'deref' 1))
+    (537576 return ret[537574])
+  }
+  function radixSortOk[268826](arg Data[268823]:_array[133600](?), arg comparator[268828]:_any[178](?)) param : _unknown[51] "private" "unsafe"
+  {
+    unknown ret[537583] "RVV" "param" "temp"
+    unknown call_tmp[736347] "expr temp" "maybe param" "maybe type" "temp"
+    (736350 'move' call_tmp[736347](466671 call _dom _mt[243] Data[268823]))
+    unknown call_tmp[736354] "expr temp" "maybe param" "maybe type" "temp"
+    (736357 'move' call_tmp[736354](268831 call stridable _mt[243] call_tmp[736347]))
+    unknown call_tmp[736359] "expr temp" "maybe param" "maybe type" "temp"
+    (736362 'move' call_tmp[736359](268834 call ! call_tmp[736354]))
+    unknown call_tmp[736364] "expr temp" "maybe param" "maybe type" "temp"
+    (736367 'move' call_tmp[736364](268903 call _cond_test call_tmp[736359]))
+    if call_tmp[736364]
+    {
+      { scopeless type
+        unknown call_type_tmp[493245] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[736371] "expr temp" "maybe param" "maybe type" "temp"
+        (736374 'move' call_tmp[736371](466675 call _dom _mt[243] Data[268823]))
+        unknown call_tmp[736378] "expr temp" "maybe param" "maybe type" "temp"
+        (736381 'move' call_tmp[736378](268838 call alignedLow _mt[243] call_tmp[736371]))
+        unknown call_tmp[736383] "expr temp" "maybe param" "maybe type" "temp"
+        (736386 'move' call_tmp[736383](268842 call Data[268823] call_tmp[736378]))
+        (493249 'move' call_type_tmp[493245](268843 'typeof' call_tmp[736383]))
+      }
+      unknown tmp[268844] "dead at end of block" "insert auto destroy"
+      (548747 'default init var' tmp[268844] call_type_tmp[493245])
+      (268847 'end of statement')
+      unknown call_tmp[736388] "expr temp" "maybe param" "maybe type" "temp"
+      (736391 'move' call_tmp[736388](268855 call canResolveMethod comparator[268828] "keyPart" tmp[268844] 0))
+      unknown call_tmp[736393] "expr temp" "maybe param" "maybe type" "temp"
+      (736396 'move' call_tmp[736393](268898 call _cond_test call_tmp[736388]))
+      if call_tmp[736393]
+      {
+        (537588 'move' ret[537583](537587 'deref' 1))
+        gotoReturn _end_radixSortOk[537581] _end_radixSortOk[537581]
+      }
+      {
+        unknown call_tmp[736398] "expr temp" "maybe param" "maybe type" "temp"
+        (736401 'move' call_tmp[736398](268865 call canResolveMethod comparator[268828] "key" tmp[268844]))
+        unknown call_tmp[736403] "expr temp" "maybe param" "maybe type" "temp"
+        (736406 'move' call_tmp[736403](268894 call _cond_test call_tmp[736398]))
+        if call_tmp[736403]
+        {
+          { scopeless type
+            unknown call_type_tmp[493251] "expr temp" "maybe type" "temp" "type variable"
+            unknown call_tmp[736410] "expr temp" "maybe param" "maybe type" "temp"
+            (736413 'move' call_tmp[736410](268872 call(268867 call (partial) key _mt[243] comparator[268828]) tmp[268844]))
+            (493255 'move' call_type_tmp[493251](268873 'typeof' call_tmp[736410]))
+          }
+          unknown key[268874] "dead at end of block" "insert auto destroy"
+          (548749 'default init var' key[268874] call_type_tmp[493251])
+          (268877 'end of statement' tmp[268844])
+          unknown call_tmp[736415] "expr temp" "maybe param" "maybe type" "temp"
+          (736418 'move' call_tmp[736415](268885 call canResolveMethod defaultComparator[267894] "keyPart" key[268874] 0))
+          unknown call_tmp[736420] "expr temp" "maybe param" "maybe type" "temp"
+          (736423 'move' call_tmp[736420](268889 call _cond_test call_tmp[736415]))
+          if call_tmp[736420]
+          {
+            (537593 'move' ret[537583](537592 'deref' 1))
+            gotoReturn _end_radixSortOk[537581] _end_radixSortOk[537581]
+          }
+        }
+      }
+    }
+    (537598 'move' ret[537583](537597 'deref' 0))
+    label _end_radixSortOk[537581]
+    (537585 return ret[537583])
+  }
+  function sort[268925](arg Data[268922]:_array[133600](?), arg comparator[268930]:_any[178](?) :
+  defaultComparator[267894] =
+  defaultComparator[267894]) : _unknown[51] "no return value for void"
+  {
+    unknown call_tmp[736427] "expr temp" "maybe param" "maybe type" "temp"
+    (736430 'move' call_tmp[736427](466689 call eltType _mt[243] Data[268922]))
+    (268938 call chpl_check_comparator comparator[268930] call_tmp[736427])
+    (489861 'end of statement')
+    unknown call_tmp[736434] "expr temp" "maybe param" "maybe type" "temp"
+    (736437 'move' call_tmp[736434](466681 call _dom _mt[243] Data[268922]))
+    unknown call_tmp[736441] "expr temp" "maybe param" "maybe type" "temp"
+    (736444 'move' call_tmp[736441](268942 call low _mt[243] call_tmp[736434]))
+    unknown call_tmp[736448] "expr temp" "maybe param" "maybe type" "temp"
+    (736451 'move' call_tmp[736448](466685 call _dom _mt[243] Data[268922]))
+    unknown call_tmp[736455] "expr temp" "maybe param" "maybe type" "temp"
+    (736458 'move' call_tmp[736455](268946 call high _mt[243] call_tmp[736448]))
+    unknown call_tmp[736460] "expr temp" "maybe param" "maybe type" "temp"
+    (736463 'move' call_tmp[736460](268949 call >= call_tmp[736441] call_tmp[736455]))
+    unknown call_tmp[736465] "expr temp" "maybe param" "maybe type" "temp"
+    (736468 'move' call_tmp[736465](268953 call _cond_test call_tmp[736460]))
+    if call_tmp[736465]
+    {
+      gotoReturn _end_sort[537600] _end_sort[537600]
+    }
+    unknown call_tmp[736470] "expr temp" "maybe param" "maybe type" "temp"
+    (736473 'move' call_tmp[736470](268962 call radixSortOk Data[268922] comparator[268930]))
+    unknown call_tmp[736475] "expr temp" "maybe param" "maybe type" "temp"
+    (736478 'move' call_tmp[736475](268989 call _cond_test call_tmp[736470]))
+    if call_tmp[736475]
+    {
+      (268973 call msbRadixSort module=[255] MSBRadixSort[287918] Data[268922](comparator = comparator[268930]))
+      (364166 'referenced modules list' MSBRadixSort[287918])
+    }
+    {
+      (268986 call quickSort module=[255] QuickSort[271956] Data[268922](comparator = comparator[268930]))
+      (364172 'referenced modules list' QuickSort[271956])
+    }
+    label _end_sort[537600]
+    (537602 return _void[55])
+  }
+  function sort[269007](arg Data[269004]:_array[133600](?), arg comparator[269012]:_any[178](?) :
+  defaultComparator[267894] =
+  defaultComparator[267894]) : _unknown[51] "no doc" "no return value for void"
+  {
+    (269042 call compilerError "sort() requires 1-D array")
+    (537606 return _void[55])
+  }
+  where {
+    unknown call_tmp[736482] "expr temp" "maybe param" "maybe type" "temp"
+    (736485 'move' call_tmp[736482](466695 call _dom _mt[243] Data[269004]))
+    unknown call_tmp[736489] "expr temp" "maybe param" "maybe type" "temp"
+    (736492 'move' call_tmp[736489](269017 call rank _mt[243] call_tmp[736482]))
+    (269021 call != call_tmp[736489] 1)
+  }
+  function isSorted[269060](arg Data[269057]:_array[133600](?), arg comparator[269065]:_any[178](?) :
+  defaultComparator[267894] =
+  defaultComparator[267894]) : _unknown[51]
+  {
+    unknown ret[537610] "RVV" "temp"
+    unknown call_tmp[736496] "expr temp" "maybe param" "maybe type" "temp"
+    (736499 'move' call_tmp[736496](466717 call eltType _mt[243] Data[269057]))
+    (269074 call chpl_check_comparator comparator[269065] call_tmp[736496])
+    (489866 'end of statement')
+    const stride[269092] "dead at end of block" "const" "insert auto destroy"
+    unknown tmp[579513] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[579514] "maybe param" "temp"
+    unknown call_tmp[736503] "expr temp" "maybe param" "maybe type" "temp"
+    (736506 'move' call_tmp[736503](466701 call _dom _mt[243] Data[269057]))
+    unknown call_tmp[736510] "expr temp" "maybe param" "maybe type" "temp"
+    (736513 'move' call_tmp[736510](269078 call stridable _mt[243] call_tmp[736503]))
+    (579519 'move' tmp[579514](579517 call _cond_test call_tmp[736510]))
+    if tmp[579514]
+    {
+      unknown tmp[579521] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[736517] "expr temp" "maybe param" "maybe type" "temp"
+      (736520 'move' call_tmp[736517](466705 call _dom _mt[243] Data[269057]))
+      unknown call_tmp[736524] "expr temp" "maybe param" "maybe type" "temp"
+      (736527 'move' call_tmp[736524](269083 call stride _mt[243] call_tmp[736517]))
+      (579523 'move' tmp[579521](269087 call abs call_tmp[736524]))
+      (579528 'move' tmp[579513](579525 '_paramFoldLogical' tmp[579514] tmp[579521]))
+    }
+    {
+      (579533 'move' tmp[579513](579530 '_paramFoldLogical' tmp[579514] 1))
+    }
+    (548751 'init var' stride[269092] tmp[579513])
+    (269095 'end of statement')
+    unknown sorted[269097] "dead at end of block" "insert auto destroy"
+    (548753 'init var' sorted[269097] 1)
+    (269100 'end of statement')
+    unknown call_tmp[736531] "expr temp" "maybe param" "maybe type" "temp"
+    (736534 'move' call_tmp[736531](466709 call _dom _mt[243] Data[269057]))
+    Forall {
+      induction variables:
+        
+        unknown element[269160] "index var" "insert auto destroy"
+        
+        unknown i[269162] "index var" "insert auto destroy"
+      iterated expressions:
+        Data[269057]
+        call_tmp[736531]
+      shadow variables:
+        sorted[269112] 'reduce' intent outer var sorted[269097]
+          init block
+          {
+          }
+          deinit block
+          {
+          }
+      other variables
+        forall body
+      {
+        unknown call_tmp[736538] "expr temp" "maybe param" "maybe type" "temp"
+        (736541 'move' call_tmp[736538](466713 call _dom _mt[243] Data[269057]))
+        unknown call_tmp[736545] "expr temp" "maybe param" "maybe type" "temp"
+        (736548 'move' call_tmp[736545](269120 call alignedLow _mt[243] call_tmp[736538]))
+        unknown call_tmp[736550] "expr temp" "maybe param" "maybe type" "temp"
+        (736553 'move' call_tmp[736550](269123 call > i[269162] call_tmp[736545]))
+        unknown call_tmp[736555] "expr temp" "maybe param" "maybe type" "temp"
+        (736558 'move' call_tmp[736555](269154 call _cond_test call_tmp[736550]))
+        if call_tmp[736555]
+        {
+          {
+            unknown tmp[269142] "temp"
+            (269145 'move' tmp[269142](269144 'addr of' sorted[269112]))
+            unknown tmp[434203] "maybe param" "temp"
+            (434214 'move' tmp[434203] tmp[269142])
+            unknown call_tmp[736560] "expr temp" "maybe param" "maybe type" "temp"
+            (736563 'move' call_tmp[736560](434216 call _cond_invalid tmp[434203]))
+            if call_tmp[736560]
+            {
+              (434219 call compilerError "cannot promote short-circuiting && operator")
+            }
+            unknown tmp[579540] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+            unknown tmp[579541] "maybe param" "temp"
+            unknown call_tmp[736565] "expr temp" "maybe param" "maybe type" "temp"
+            (736568 'move' call_tmp[736565](434204 call isTrue tmp[434203]))
+            (579546 'move' tmp[579541](579544 call _cond_test call_tmp[736565]))
+            if tmp[579541]
+            {
+              unknown tmp[579548] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+              unknown call_tmp[736570] "expr temp" "maybe param" "maybe type" "temp"
+              (736573 'move' call_tmp[736570](269130 call - i[269162] stride[269092]))
+              unknown call_tmp[736575] "expr temp" "maybe param" "maybe type" "temp"
+              (736578 'move' call_tmp[736575](269133 call Data[269057] call_tmp[736570]))
+              unknown call_tmp[736580] "expr temp" "maybe param" "maybe type" "temp"
+              (736583 'move' call_tmp[736580](269137 call chpl_compare call_tmp[736575] element[269160] comparator[269065]))
+              unknown call_tmp[736585] "expr temp" "maybe param" "maybe type" "temp"
+              (736588 'move' call_tmp[736585](269139 call <= call_tmp[736580] 0))
+              (579550 'move' tmp[579548](434207 call isTrue call_tmp[736585]))
+              (579555 'move' tmp[579540](579552 '_paramFoldLogical' tmp[579541] tmp[579548]))
+            }
+            {
+              (579560 'move' tmp[579540](579557 '_paramFoldLogical' tmp[579541] 0))
+            }
+            (269150 call = tmp[269142] tmp[579540])
+            (489868 'end of statement' i[269162] stride[269092] element[269160])
+          }
+        }
+      }
+    }
+    (537616 'move' ret[537610](537615 'coerce' sorted[269097] bool[10]))
+    gotoReturn _end_isSorted[537608] _end_isSorted[537608]
+    (489872 'end of statement' sorted[269097])
+    label _end_isSorted[537608]
+    (537612 return ret[537610])
+  }
+  { scopeless type
+    bool[10]
+  }
+  function isSorted[269183](arg Data[269180]:_array[133600](?), arg comparator[269188]:_any[178](?) :
+  defaultComparator[267894] =
+  defaultComparator[267894]) : _unknown[51] "no doc" "no return value for void"
+  {
+    (269218 call compilerError "isSorted() requires 1-D array")
+    (537620 return _void[55])
+  }
+  where {
+    unknown call_tmp[736592] "expr temp" "maybe param" "maybe type" "temp"
+    (736595 'move' call_tmp[736592](466723 call _dom _mt[243] Data[269180]))
+    unknown call_tmp[736599] "expr temp" "maybe param" "maybe type" "temp"
+    (736602 'move' call_tmp[736599](269193 call rank _mt[243] call_tmp[736592]))
+    (269197 call != call_tmp[736599] 1)
+  }
+  function sorted[269228](arg x[269226]:_any[178](?), arg comparator[269233]:_any[178](?) :
+  defaultComparator[267894] =
+  defaultComparator[267894]) : _unknown[51] "iterator fn" "no return value for void"
+  {
+    unknown ret[537624] "RVV" "temp"
+    unknown y[269238] "dead at end of block" "insert auto destroy"
+    (548755 'init var' y[269238] x[269226])
+    (269241 'end of statement')
+    unknown call_tmp[736604] "expr temp" "maybe param" "maybe type" "temp"
+    (736607 'move' call_tmp[736604](269246 call isArrayValue y[269238]))
+    unknown call_tmp[736609] "expr temp" "maybe param" "maybe type" "temp"
+    (736612 'move' call_tmp[736609](269247 call ! call_tmp[736604]))
+    unknown call_tmp[736614] "expr temp" "maybe param" "maybe type" "temp"
+    (736617 'move' call_tmp[736614](269270 call _cond_test call_tmp[736609]))
+    if call_tmp[736614]
+    {
+      (269268 call compilerError "Sort.sorted called on non-iterable")
+    }
+    (269280 call sort y[269238](comparator = comparator[269233]))
+    (489876 'end of statement' y[269238])
+    {
+      unknown _indexOfInterest[269287] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[269288] "expr temp" "temp"
+      (269297 'move' _iterator[269288](269295 call _getIterator y[269238]))
+      Defer
+      {
+        {
+          (269313 call _freeIterator _iterator[269288])
+        }
+      }
+      { scopeless type
+        (269302 'move' _indexOfInterest[269287](269299 call iteratorIndex _iterator[269288]))
+      }
+      ForLoop[269289]
+      {
+        unknown i[269306] "index var" "insert auto destroy"
+        (489879 'end of statement')
+        (269308 'move' i[269306] _indexOfInterest[269287])
+        (489880 'end of statement' i[269306])
+        unknown yret[537628] "YVV" "temp"
+        (537631 'move' yret[537628](537630 'deref' i[269306]))
+        (537633 yield yret[537628])
+        (489882 'end of statement' i[269306])
+        label _continueLabel[269292]
+        _indexOfInterest[269287]
+        _iterator[269288]
+      }
+      label _breakLabel[269293]
+    }
+    (537626 return ret[537624])
+  }
+  function DefaultComparator[290466].compare[289829](arg _mt[290470]:_MT[238], arg this[290468]:DefaultComparator[290466], arg a[289827]:_any[178](?), arg b[289831]:_any[178](?)) : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[537637] "RVV" "temp"
+    unknown call_tmp[736619] "expr temp" "maybe param" "maybe type" "temp"
+    (736622 'move' call_tmp[736619](289835 call < a[289827] b[289831]))
+    unknown call_tmp[736624] "expr temp" "maybe param" "maybe type" "temp"
+    (736627 'move' call_tmp[736624](289859 call _cond_test call_tmp[736619]))
+    if call_tmp[736624]
+    {
+      unknown call_tmp[736629] "expr temp" "maybe param" "maybe type" "temp"
+      (736632 'move' call_tmp[736629](289838 call - 1))
+      (537642 'move' ret[537637](537641 'deref' call_tmp[736629]))
+      gotoReturn _end_compare[537635] _end_compare[537635]
+    }
+    {
+      unknown call_tmp[736634] "expr temp" "maybe param" "maybe type" "temp"
+      (736637 'move' call_tmp[736634](289845 call < b[289831] a[289827]))
+      unknown call_tmp[736639] "expr temp" "maybe param" "maybe type" "temp"
+      (736642 'move' call_tmp[736639](289854 call _cond_test call_tmp[736634]))
+      if call_tmp[736639]
+      {
+        (537647 'move' ret[537637](537646 'deref' 1))
+        gotoReturn _end_compare[537635] _end_compare[537635]
+      }
+      {
+        (537652 'move' ret[537637](537651 'deref' 0))
+        gotoReturn _end_compare[537635] _end_compare[537635]
+      }
+    }
+    label _end_compare[537635]
+    (537639 return ret[537637])
+  }
+  function DefaultComparator[290466].keyPart[289873](arg _mt[290474]:_MT[238], arg this[290472]:DefaultComparator[290466], arg x[289870]:integral[199](?), arg i[289876]:int(64)[13]) : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[537658] "RVV" "temp"
+    unknown section[289915] "dead at end of block" "insert auto destroy"
+    unknown tmp[579567] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[579568] "maybe param" "temp"
+    unknown call_tmp[736644] "expr temp" "maybe param" "maybe type" "temp"
+    (736647 'move' call_tmp[736644](289894 call > i[289876] 0))
+    (579573 'move' tmp[579568](579571 call _cond_test call_tmp[736644]))
+    if tmp[579568]
+    {
+      unknown tmp[579575] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[736649] "expr temp" "maybe param" "maybe type" "temp"
+      (736652 'move' call_tmp[736649](289900 call int(64)[13] 8))
+      unknown call_tmp[736654] "expr temp" "maybe param" "maybe type" "temp"
+      (736657 'move' call_tmp[736654](289901 call _cast call_tmp[736649] 1))
+      (579577 'move' tmp[579575](289903 call - call_tmp[736654]))
+      (579582 'move' tmp[579567](579579 '_paramFoldLogical' tmp[579568] tmp[579575]))
+    }
+    {
+      unknown tmp[579584] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[736659] "expr temp" "maybe param" "maybe type" "temp"
+      (736662 'move' call_tmp[736659](289909 call int(64)[13] 8))
+      (579586 'move' tmp[579584](289910 call _cast call_tmp[736659] 0))
+      (579591 'move' tmp[579567](579588 '_paramFoldLogical' tmp[579568] tmp[579584]))
+    }
+    unknown call_tmp[736664] "maybe param" "maybe type" "temp"
+    (736667 'move' call_tmp[736664](289891 call int(64)[13] 8))
+    (548757 'init var' section[289915] tmp[579567] call_tmp[736664])
+    (289918 'end of statement')
+    unknown call_tmp[736669] "expr temp" "maybe param" "maybe type" "temp"
+    (736672 'move' call_tmp[736669](289923 call _build_tuple section[289915] x[289870]))
+    unknown call_tmp[736674] "expr temp" "maybe param" "maybe type" "temp"
+    (736677 'move' call_tmp[736674](537665 call int(64)[13] 8))
+    unknown call_tmp[736679] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (736682 'move' call_tmp[736679](537667 'typeof' x[289870]))
+    unknown call_tmp[736684] "expr temp" "maybe param" "maybe type" "temp"
+    (736687 'move' call_tmp[736684](537663 call _build_tuple call_tmp[736674] call_tmp[736679]))
+    (537670 'move' ret[537658](537669 'coerce' call_tmp[736669] call_tmp[736684]))
+    gotoReturn _end_keyPart[537656] _end_keyPart[537656]
+    (489887 'end of statement' section[289915])
+    label _end_keyPart[537656]
+    (537660 return ret[537658])
+  }
+  { scopeless type
+    unknown call_tmp[736689] "expr temp" "maybe param" "maybe type" "temp"
+    (736692 'move' call_tmp[736689](289882 call int(64)[13] 8))
+    unknown call_tmp[736694] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (736697 'move' call_tmp[736694](289884 'typeof' x[289870]))
+    (289886 call _build_tuple call_tmp[736689] call_tmp[736694])
+  }
+  function DefaultComparator[290466].keyPart[289936](arg _mt[290478]:_MT[238], arg this[290476]:DefaultComparator[290466], arg x[289933]:chpl_anyreal[193](?), arg i[289939]:int(64)[13]) : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[537676] "RVV" "temp"
+    unknown section[289984] "dead at end of block" "insert auto destroy"
+    unknown tmp[579598] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[579599] "maybe param" "temp"
+    unknown call_tmp[736699] "expr temp" "maybe param" "maybe type" "temp"
+    (736702 'move' call_tmp[736699](289963 call > i[289939] 0))
+    (579604 'move' tmp[579599](579602 call _cond_test call_tmp[736699]))
+    if tmp[579599]
+    {
+      unknown tmp[579606] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[736704] "expr temp" "maybe param" "maybe type" "temp"
+      (736707 'move' call_tmp[736704](289969 call int(64)[13] 8))
+      unknown call_tmp[736709] "expr temp" "maybe param" "maybe type" "temp"
+      (736712 'move' call_tmp[736709](289970 call _cast call_tmp[736704] 1))
+      (579608 'move' tmp[579606](289972 call - call_tmp[736709]))
+      (579613 'move' tmp[579598](579610 '_paramFoldLogical' tmp[579599] tmp[579606]))
+    }
+    {
+      unknown tmp[579615] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[736714] "expr temp" "maybe param" "maybe type" "temp"
+      (736717 'move' call_tmp[736714](289978 call int(64)[13] 8))
+      (579617 'move' tmp[579615](289979 call _cast call_tmp[736714] 0))
+      (579622 'move' tmp[579598](579619 '_paramFoldLogical' tmp[579599] tmp[579615]))
+    }
+    unknown call_tmp[736719] "maybe param" "maybe type" "temp"
+    (736722 'move' call_tmp[736719](289960 call int(64)[13] 8))
+    (548759 'init var' section[289984] tmp[579598] call_tmp[736719])
+    (289987 'end of statement')
+    unknown call_tmp[736724] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (736727 'move' call_tmp[736724](289991 'typeof' x[289933]))
+    unknown call_tmp[736729] "maybe param" "maybe type" "temp"
+    (736732 'move' call_tmp[736729](289993 call numBits call_tmp[736724]))
+    unknown nbits[289994] "dead at end of block" "param"
+    (548761 'init var' nbits[289994] call_tmp[736729])
+    (289997 'end of statement')
+    unknown src[289999] "dead at end of block" "insert auto destroy"
+    (548763 'init var' src[289999] x[289933])
+    (290002 'end of statement')
+    unknown dst[290007] "dead at end of block" "insert auto destroy"
+    unknown call_tmp[736734] "expr temp" "maybe param" "maybe type" "temp"
+    (736737 'move' call_tmp[736734](290006 call uint(64)[115] nbits[289994]))
+    (548765 'default init var' dst[290007] call_tmp[736734])
+    (290010 'end of statement')
+    unknown call_tmp[736739] "expr temp" "maybe param" "maybe type" "temp"
+    (736742 'move' call_tmp[736739](290015 call c_ptrTo dst[290007]))
+    unknown call_tmp[736744] "expr temp" "maybe param" "maybe type" "temp"
+    (736747 'move' call_tmp[736744](290020 call c_ptrTo src[289999]))
+    unknown call_tmp[736749] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (736752 'move' call_tmp[736749](290023 'typeof' src[289999]))
+    unknown call_tmp[736754] "expr temp" "maybe param" "maybe type" "temp"
+    (736757 'move' call_tmp[736754](290025 call c_sizeof call_tmp[736749]))
+    (290026 call c_memcpy call_tmp[736739] call_tmp[736744] call_tmp[736754])
+    (489889 'end of statement' dst[290007] src[289999] src[289999])
+    unknown call_tmp[736759] "expr temp" "maybe param" "maybe type" "temp"
+    (736762 'move' call_tmp[736759](290031 call - nbits[289994] 1))
+    unknown call_tmp[736764] "expr temp" "maybe param" "maybe type" "temp"
+    (736767 'move' call_tmp[736764](290033 call >> dst[290007] call_tmp[736759]))
+    unknown call_tmp[736769] "expr temp" "maybe param" "maybe type" "temp"
+    (736772 'move' call_tmp[736769](290036 call == call_tmp[736764] 1))
+    unknown call_tmp[736774] "expr temp" "maybe param" "maybe type" "temp"
+    (736777 'move' call_tmp[736774](290070 call _cond_test call_tmp[736769]))
+    if call_tmp[736774]
+    {
+      unknown call_tmp[736779] "expr temp" "maybe param" "maybe type" "temp"
+      (736782 'move' call_tmp[736779](290040 call ~ dst[290007]))
+      (290042 call = dst[290007] call_tmp[736779])
+      (489893 'end of statement' dst[290007] dst[290007])
+    }
+    {
+      unknown call_tmp[736784] "maybe param" "maybe type" "temp"
+      (736787 'move' call_tmp[736784](290049 call uint(64)[115] nbits[289994]))
+      const one[290051] "dead at end of block" "const" "insert auto destroy"
+      (548767 'init var' one[290051] 1 call_tmp[736784])
+      (290054 'end of statement')
+      unknown call_tmp[736789] "expr temp" "maybe param" "maybe type" "temp"
+      (736792 'move' call_tmp[736789](290061 call - nbits[289994] 1))
+      unknown call_tmp[736794] "expr temp" "maybe param" "maybe type" "temp"
+      (736797 'move' call_tmp[736794](290063 call << one[290051] call_tmp[736789]))
+      unknown call_tmp[736799] "expr temp" "maybe param" "maybe type" "temp"
+      (736802 'move' call_tmp[736799](290065 call ^ dst[290007] call_tmp[736794]))
+      (290067 call = dst[290007] call_tmp[736799])
+      (489896 'end of statement' dst[290007] dst[290007] one[290051])
+    }
+    unknown call_tmp[736804] "expr temp" "maybe param" "maybe type" "temp"
+    (736807 'move' call_tmp[736804](290077 call _build_tuple section[289984] dst[290007]))
+    unknown call_tmp[736809] "expr temp" "maybe param" "maybe type" "temp"
+    (736812 'move' call_tmp[736809](537683 call int(64)[13] 8))
+    unknown call_tmp[736814] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (736817 'move' call_tmp[736814](537689 'typeof' x[289933]))
+    unknown call_tmp[736819] "expr temp" "maybe param" "maybe type" "temp"
+    (736822 'move' call_tmp[736819](537688 call numBits call_tmp[736814]))
+    unknown call_tmp[736824] "expr temp" "maybe param" "maybe type" "temp"
+    (736827 'move' call_tmp[736824](537686 call uint(64)[115] call_tmp[736819]))
+    unknown call_tmp[736829] "expr temp" "maybe param" "maybe type" "temp"
+    (736832 'move' call_tmp[736829](537681 call _build_tuple call_tmp[736809] call_tmp[736824]))
+    (537692 'move' ret[537676](537691 'coerce' call_tmp[736804] call_tmp[736829]))
+    gotoReturn _end_keyPart[537674] _end_keyPart[537674]
+    (489900 'end of statement' section[289984] dst[290007])
+    label _end_keyPart[537674]
+    (537678 return ret[537676])
+  }
+  { scopeless type
+    unknown call_tmp[736834] "expr temp" "maybe param" "maybe type" "temp"
+    (736837 'move' call_tmp[736834](289945 call int(64)[13] 8))
+    unknown call_tmp[736839] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (736842 'move' call_tmp[736839](289949 'typeof' x[289933]))
+    unknown call_tmp[736844] "expr temp" "maybe param" "maybe type" "temp"
+    (736847 'move' call_tmp[736844](289951 call numBits call_tmp[736839]))
+    unknown call_tmp[736849] "expr temp" "maybe param" "maybe type" "temp"
+    (736852 'move' call_tmp[736849](289953 call uint(64)[115] call_tmp[736844]))
+    (289955 call _build_tuple call_tmp[736834] call_tmp[736849])
+  }
+  function DefaultComparator[290466].keyPart[290090](arg _mt[290482]:_MT[238], arg this[290480]:DefaultComparator[290466], arg x[290087]:chpl_anyimag[190](?), arg i[290093]:int(64)[13]) : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[537698] "RVV" "temp"
+    unknown call_tmp[736856] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (736859 'move' call_tmp[736856](290116 'typeof' x[290087]))
+    unknown call_tmp[736861] "expr temp" "maybe param" "maybe type" "temp"
+    (736864 'move' call_tmp[736861](290118 call numBits call_tmp[736856]))
+    unknown call_tmp[736866] "expr temp" "maybe param" "maybe type" "temp"
+    (736869 'move' call_tmp[736866](290120 call real(64)[16] call_tmp[736861]))
+    unknown call_tmp[736871] "expr temp" "maybe param" "maybe type" "temp"
+    (736874 'move' call_tmp[736871](290121 call _cast call_tmp[736866] x[290087]))
+    unknown call_tmp[736876] "expr temp" "maybe param" "maybe type" "temp"
+    (736879 'move' call_tmp[736876](290125 call(404073 call (partial) keyPart _mt[243] this[290480]) call_tmp[736871] i[290093]))
+    unknown call_tmp[736881] "expr temp" "maybe param" "maybe type" "temp"
+    (736884 'move' call_tmp[736881](537705 call int(64)[13] 8))
+    unknown call_tmp[736886] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (736889 'move' call_tmp[736886](537711 'typeof' x[290087]))
+    unknown call_tmp[736891] "expr temp" "maybe param" "maybe type" "temp"
+    (736894 'move' call_tmp[736891](537710 call numBits call_tmp[736886]))
+    unknown call_tmp[736896] "expr temp" "maybe param" "maybe type" "temp"
+    (736899 'move' call_tmp[736896](537708 call uint(64)[115] call_tmp[736891]))
+    unknown call_tmp[736901] "expr temp" "maybe param" "maybe type" "temp"
+    (736904 'move' call_tmp[736901](537703 call _build_tuple call_tmp[736881] call_tmp[736896]))
+    (537714 'move' ret[537698](537713 'coerce' call_tmp[736876] call_tmp[736901]))
+    (537700 return ret[537698])
+  }
+  { scopeless type
+    unknown call_tmp[736906] "expr temp" "maybe param" "maybe type" "temp"
+    (736909 'move' call_tmp[736906](290099 call int(64)[13] 8))
+    unknown call_tmp[736911] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (736914 'move' call_tmp[736911](290103 'typeof' x[290087]))
+    unknown call_tmp[736916] "expr temp" "maybe param" "maybe type" "temp"
+    (736919 'move' call_tmp[736916](290105 call numBits call_tmp[736911]))
+    unknown call_tmp[736921] "expr temp" "maybe param" "maybe type" "temp"
+    (736924 'move' call_tmp[736921](290107 call uint(64)[115] call_tmp[736916]))
+    (290109 call _build_tuple call_tmp[736906] call_tmp[736921])
+  }
+  function DefaultComparator[290466].keyPart[290138](arg _mt[290486]:_MT[238], arg this[290484]:DefaultComparator[290466], arg x[290135]:_tuple[56199](?), arg i[290141]:int(64)[13]) : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[537718] "RVV" "temp"
+    unknown call_tmp[736928] "expr temp" "maybe param" "maybe type" "temp"
+    (736931 'move' call_tmp[736928](290196 call x[290135] i[290141]))
+    unknown call_tmp[736933] "maybe param" "maybe type" "temp"
+    (736936 'move' call_tmp[736933](290199 call(290190 call (partial) keyPart _mt[243] this[290484]) call_tmp[736928] 1))
+    const tmp[290200] "dead at end of block" "const" "insert auto destroy" "temp"
+    (548769 'init var' tmp[290200] call_tmp[736933])
+    (290204 call _check_tuple_var_decl tmp[290200] 2)
+    (489904 'end of statement')
+    unknown call_tmp[736938] "maybe param" "maybe type" "temp"
+    (736941 'move' call_tmp[736938](290201 call tmp[290200] 1))
+    const part[290186] "dead at end of block" "const" "insert auto destroy"
+    (548771 'init var' part[290186] call_tmp[736938])
+    (290209 'end of statement')
+    unknown call_tmp[736945] "expr temp" "maybe param" "maybe type" "temp"
+    (736948 'move' call_tmp[736945](290213 call size _mt[243] x[290135]))
+    unknown call_tmp[736950] "expr temp" "maybe param" "maybe type" "temp"
+    (736953 'move' call_tmp[736950](290216 call >= i[290141] call_tmp[736945]))
+    unknown call_tmp[736955] "expr temp" "maybe param" "maybe type" "temp"
+    (736958 'move' call_tmp[736955](290238 call _cond_test call_tmp[736950]))
+    if call_tmp[736955]
+    {
+      unknown call_tmp[736960] "expr temp" "maybe param" "maybe type" "temp"
+      (736963 'move' call_tmp[736960](290219 call - 1))
+      unknown call_tmp[736965] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (736968 'move' call_tmp[736965](290223 'typeof' part[290186]))
+      unknown call_tmp[736970] "expr temp" "maybe param" "maybe type" "temp"
+      (736973 'move' call_tmp[736970](290224 call _cast call_tmp[736965] 0))
+      unknown call_tmp[736975] "expr temp" "maybe param" "maybe type" "temp"
+      (736978 'move' call_tmp[736975](290227 call _build_tuple call_tmp[736960] call_tmp[736970]))
+      (537723 'move' ret[537718](537722 'deref' call_tmp[736975]))
+      gotoReturn _end_keyPart[537716] _end_keyPart[537716]
+      (489905 'end of statement' part[290186])
+    }
+    {
+      unknown call_tmp[736980] "expr temp" "maybe param" "maybe type" "temp"
+      (736983 'move' call_tmp[736980](290234 call _build_tuple 0 part[290186]))
+      (537728 'move' ret[537718](537727 'deref' call_tmp[736980]))
+      gotoReturn _end_keyPart[537716] _end_keyPart[537716]
+      (489907 'end of statement' part[290186])
+    }
+    label _end_keyPart[537716]
+    (537720 return ret[537718])
+  }
+  where {
+    unknown tmp[434602] "maybe param" "temp"
+    (434613 'move' tmp[434602](290147 call isHomogeneousTuple x[290135]))
+    unknown call_tmp[736985] "expr temp" "maybe param" "maybe type" "temp"
+    (736988 'move' call_tmp[736985](434615 call _cond_invalid tmp[434602]))
+    if call_tmp[736985]
+    {
+      (434618 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[579710] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[579711] "maybe param" "temp"
+    unknown call_tmp[736990] "expr temp" "maybe param" "maybe type" "temp"
+    (736993 'move' call_tmp[736990](434603 call isTrue tmp[434602]))
+    (579716 'move' tmp[579711](579714 call _cond_test call_tmp[736990]))
+    if tmp[579711]
+    {
+      unknown tmp[434623] "maybe param" "temp"
+      unknown tmp[434644] "maybe param" "temp"
+      unknown tmp[434665] "maybe param" "temp"
+      unknown call_tmp[736995] "expr temp" "maybe param" "maybe type" "temp"
+      (736998 'move' call_tmp[736995](290152 call x[290135] 0))
+      (434676 'move' tmp[434665](290154 call isInt call_tmp[736995]))
+      unknown call_tmp[737000] "expr temp" "maybe param" "maybe type" "temp"
+      (737003 'move' call_tmp[737000](434678 call _cond_invalid tmp[434665]))
+      if call_tmp[737000]
+      {
+        (434681 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[579629] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[579630] "maybe param" "temp"
+      unknown call_tmp[737005] "expr temp" "maybe param" "maybe type" "temp"
+      (737008 'move' call_tmp[737005](434666 call isTrue tmp[434665]))
+      (579635 'move' tmp[579630](579633 call _cond_test call_tmp[737005]))
+      if tmp[579630]
+      {
+        (579640 'move' tmp[579629](579637 '_paramFoldLogical' tmp[579630] 1))
+      }
+      {
+        unknown tmp[579642] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[737010] "expr temp" "maybe param" "maybe type" "temp"
+        (737013 'move' call_tmp[737010](290159 call x[290135] 0))
+        unknown call_tmp[737015] "expr temp" "maybe param" "maybe type" "temp"
+        (737018 'move' call_tmp[737015](290161 call isUint call_tmp[737010]))
+        (579644 'move' tmp[579642](434670 call isTrue call_tmp[737015]))
+        (579649 'move' tmp[579629](579646 '_paramFoldLogical' tmp[579630] tmp[579642]))
+      }
+      (434655 'move' tmp[434644] tmp[579629])
+      unknown call_tmp[737020] "expr temp" "maybe param" "maybe type" "temp"
+      (737023 'move' call_tmp[737020](434657 call _cond_invalid tmp[434644]))
+      if call_tmp[737020]
+      {
+        (434660 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[579656] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[579657] "maybe param" "temp"
+      unknown call_tmp[737025] "expr temp" "maybe param" "maybe type" "temp"
+      (737028 'move' call_tmp[737025](434645 call isTrue tmp[434644]))
+      (579662 'move' tmp[579657](579660 call _cond_test call_tmp[737025]))
+      if tmp[579657]
+      {
+        (579667 'move' tmp[579656](579664 '_paramFoldLogical' tmp[579657] 1))
+      }
+      {
+        unknown tmp[579669] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[737030] "expr temp" "maybe param" "maybe type" "temp"
+        (737033 'move' call_tmp[737030](290168 call x[290135] 0))
+        unknown call_tmp[737035] "expr temp" "maybe param" "maybe type" "temp"
+        (737038 'move' call_tmp[737035](290170 call isReal call_tmp[737030]))
+        (579671 'move' tmp[579669](434649 call isTrue call_tmp[737035]))
+        (579676 'move' tmp[579656](579673 '_paramFoldLogical' tmp[579657] tmp[579669]))
+      }
+      (434634 'move' tmp[434623] tmp[579656])
+      unknown call_tmp[737040] "expr temp" "maybe param" "maybe type" "temp"
+      (737043 'move' call_tmp[737040](434636 call _cond_invalid tmp[434623]))
+      if call_tmp[737040]
+      {
+        (434639 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[579683] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[579684] "maybe param" "temp"
+      unknown call_tmp[737045] "expr temp" "maybe param" "maybe type" "temp"
+      (737048 'move' call_tmp[737045](434624 call isTrue tmp[434623]))
+      (579689 'move' tmp[579684](579687 call _cond_test call_tmp[737045]))
+      if tmp[579684]
+      {
+        (579694 'move' tmp[579683](579691 '_paramFoldLogical' tmp[579684] 1))
+      }
+      {
+        unknown tmp[579696] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[737050] "expr temp" "maybe param" "maybe type" "temp"
+        (737053 'move' call_tmp[737050](290177 call x[290135] 0))
+        unknown call_tmp[737055] "expr temp" "maybe param" "maybe type" "temp"
+        (737058 'move' call_tmp[737055](290179 call isImag call_tmp[737050]))
+        (579698 'move' tmp[579696](434628 call isTrue call_tmp[737055]))
+        (579703 'move' tmp[579683](579700 '_paramFoldLogical' tmp[579684] tmp[579696]))
+      }
+      unknown tmp[579718] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      (579720 'move' tmp[579718](434606 call isTrue tmp[579683]))
+      (579725 'move' tmp[579710](579722 '_paramFoldLogical' tmp[579711] tmp[579718]))
+    }
+    {
+      (579730 'move' tmp[579710](579727 '_paramFoldLogical' tmp[579711] 0))
+    }
+    (748453 call chpl_statementLevelSymbol tmp[579710])
+  }
+  function DefaultComparator[290466].keyPart[290253](arg _mt[290490]:_MT[238], arg this[290488]:DefaultComparator[290466], arg x[290250]:string[26], arg i[290256]:int(64)[13]) : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[537734] "RVV" "temp"
+    unknown call_tmp[737060] "expr temp" "maybe param" "maybe type" "temp"
+    (737063 'move' call_tmp[737060](290285 call _cond_test 1))
+    if call_tmp[737060]
+    {
+      unknown call_tmp[737067] "expr temp" "maybe param" "maybe type" "temp"
+      (737070 'move' call_tmp[737067](290273 call locale_id _mt[243] x[290250]))
+      unknown call_tmp[737072] "expr temp" "maybe param" "maybe type" "temp"
+      (737075 'move' call_tmp[737072](364779 call here[90439]))
+      unknown call_tmp[737079] "expr temp" "maybe param" "maybe type" "temp"
+      (737082 'move' call_tmp[737079](290277 call id _mt[243] call_tmp[737072]))
+      unknown call_tmp[737084] "expr temp" "maybe param" "maybe type" "temp"
+      (737087 'move' call_tmp[737084](290280 call == call_tmp[737067] call_tmp[737079]))
+      (290283 call assert call_tmp[737084])
+    }
+    unknown call_tmp[737089] "expr temp" "maybe param" "maybe type" "temp"
+    (737092 'move' call_tmp[737089](290301 call uint(64)[115] 8))
+    unknown call_tmp[737094] "expr temp" "maybe param" "maybe type" "temp"
+    (737097 'move' call_tmp[737094](290303 call c_ptr[205057](?) call_tmp[737089]))
+    unknown call_tmp[737101] "expr temp" "maybe param" "maybe type" "temp"
+    (737104 'move' call_tmp[737101](290296 call(290292 call (partial) c_str _mt[243] x[290250])))
+    unknown call_tmp[737106] "maybe param" "maybe type" "temp"
+    (737109 'move' call_tmp[737106](290304 call _cast call_tmp[737094] call_tmp[737101]))
+    unknown ptr[290306] "dead at end of block" "insert auto destroy"
+    (548773 'init var' ptr[290306] call_tmp[737106])
+    (290309 'end of statement')
+    unknown call_tmp[737113] "maybe param" "maybe type" "temp"
+    (737116 'move' call_tmp[737113](290311 call numBytes _mt[243] x[290250]))
+    unknown len[290314] "dead at end of block" "insert auto destroy"
+    (548775 'init var' len[290314] call_tmp[737113])
+    (290317 'end of statement')
+    unknown section[290341] "dead at end of block" "insert auto destroy"
+    unknown tmp[579737] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[579738] "maybe param" "temp"
+    unknown call_tmp[737118] "expr temp" "maybe param" "maybe type" "temp"
+    (737121 'move' call_tmp[737118](290320 call < i[290256] len[290314]))
+    (579743 'move' tmp[579738](579741 call _cond_test call_tmp[737118]))
+    if tmp[579738]
+    {
+      unknown tmp[579745] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[737123] "expr temp" "maybe param" "maybe type" "temp"
+      (737126 'move' call_tmp[737123](290326 call int(64)[13] 8))
+      (579747 'move' tmp[579745](290327 call _cast call_tmp[737123] 0))
+      (579752 'move' tmp[579737](579749 '_paramFoldLogical' tmp[579738] tmp[579745]))
+    }
+    {
+      unknown tmp[579754] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[737128] "expr temp" "maybe param" "maybe type" "temp"
+      (737131 'move' call_tmp[737128](290333 call int(64)[13] 8))
+      unknown call_tmp[737133] "expr temp" "maybe param" "maybe type" "temp"
+      (737136 'move' call_tmp[737133](290334 call _cast call_tmp[737128] 1))
+      (579756 'move' tmp[579754](290336 call - call_tmp[737133]))
+      (579761 'move' tmp[579737](579758 '_paramFoldLogical' tmp[579738] tmp[579754]))
+    }
+    (548777 'init var' section[290341] tmp[579737])
+    (290344 'end of statement')
+    unknown part[290363] "dead at end of block" "insert auto destroy"
+    unknown tmp[579768] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[579769] "maybe param" "temp"
+    unknown call_tmp[737138] "expr temp" "maybe param" "maybe type" "temp"
+    (737141 'move' call_tmp[737138](290347 call < i[290256] len[290314]))
+    (579774 'move' tmp[579769](579772 call _cond_test call_tmp[737138]))
+    if tmp[579769]
+    {
+      unknown tmp[579776] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      (579778 'move' tmp[579776](290352 call ptr[290306] i[290256]))
+      (579783 'move' tmp[579768](579780 '_paramFoldLogical' tmp[579769] tmp[579776]))
+    }
+    {
+      unknown tmp[579785] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[737143] "expr temp" "maybe param" "maybe type" "temp"
+      (737146 'move' call_tmp[737143](290357 call uint(64)[115] 8))
+      (579787 'move' tmp[579785](290358 call _cast call_tmp[737143] 0))
+      (579792 'move' tmp[579768](579789 '_paramFoldLogical' tmp[579769] tmp[579785]))
+    }
+    (548779 'init var' part[290363] tmp[579768])
+    (290366 'end of statement' len[290314] len[290314] ptr[290306])
+    unknown call_tmp[737148] "expr temp" "maybe param" "maybe type" "temp"
+    (737151 'move' call_tmp[737148](290370 call _build_tuple section[290341] part[290363]))
+    unknown call_tmp[737153] "expr temp" "maybe param" "maybe type" "temp"
+    (737156 'move' call_tmp[737153](537741 call int(64)[13] 8))
+    unknown call_tmp[737158] "expr temp" "maybe param" "maybe type" "temp"
+    (737161 'move' call_tmp[737158](537744 call uint(64)[115] 8))
+    unknown call_tmp[737163] "expr temp" "maybe param" "maybe type" "temp"
+    (737166 'move' call_tmp[737163](537739 call _build_tuple call_tmp[737153] call_tmp[737158]))
+    (537747 'move' ret[537734](537746 'coerce' call_tmp[737148] call_tmp[737163]))
+    gotoReturn _end_keyPart[537732] _end_keyPart[537732]
+    (489913 'end of statement' section[290341] part[290363])
+    label _end_keyPart[537732]
+    (537736 return ret[537734])
+  }
+  { scopeless type
+    unknown call_tmp[737168] "expr temp" "maybe param" "maybe type" "temp"
+    (737171 'move' call_tmp[737168](290262 call int(64)[13] 8))
+    unknown call_tmp[737173] "expr temp" "maybe param" "maybe type" "temp"
+    (737176 'move' call_tmp[737173](290266 call uint(64)[115] 8))
+    (290268 call _build_tuple call_tmp[737168] call_tmp[737173])
+  }
+  function DefaultComparator[290466].keyPart[290383](arg _mt[290494]:_MT[238], arg this[290492]:DefaultComparator[290466], arg x[290380]:c_string[19], arg i[290386]:int(64)[13]) : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[537753] "RVV" "temp"
+    unknown call_tmp[737178] "expr temp" "maybe param" "maybe type" "temp"
+    (737181 'move' call_tmp[737178](290405 call uint(64)[115] 8))
+    unknown call_tmp[737183] "expr temp" "maybe param" "maybe type" "temp"
+    (737186 'move' call_tmp[737183](290407 call c_ptr[205057](?) call_tmp[737178]))
+    unknown call_tmp[737188] "maybe param" "maybe type" "temp"
+    (737191 'move' call_tmp[737188](290408 call _cast call_tmp[737183] x[290380]))
+    unknown ptr[290410] "dead at end of block" "insert auto destroy"
+    (548781 'init var' ptr[290410] call_tmp[737188])
+    (290413 'end of statement')
+    unknown call_tmp[737193] "maybe param" "maybe type" "temp"
+    (737196 'move' call_tmp[737193](290418 call ptr[290410] i[290386]))
+    unknown byte[290419] "dead at end of block" "insert auto destroy"
+    (548783 'init var' byte[290419] call_tmp[737193])
+    (290422 'end of statement')
+    unknown section[290446] "dead at end of block" "insert auto destroy"
+    unknown tmp[579799] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[579800] "maybe param" "temp"
+    unknown call_tmp[737198] "expr temp" "maybe param" "maybe type" "temp"
+    (737201 'move' call_tmp[737198](290425 call != byte[290419] 0))
+    (579805 'move' tmp[579800](579803 call _cond_test call_tmp[737198]))
+    if tmp[579800]
+    {
+      unknown tmp[579807] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[737203] "expr temp" "maybe param" "maybe type" "temp"
+      (737206 'move' call_tmp[737203](290431 call int(64)[13] 8))
+      (579809 'move' tmp[579807](290432 call _cast call_tmp[737203] 0))
+      (579814 'move' tmp[579799](579811 '_paramFoldLogical' tmp[579800] tmp[579807]))
+    }
+    {
+      unknown tmp[579816] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[737208] "expr temp" "maybe param" "maybe type" "temp"
+      (737211 'move' call_tmp[737208](290438 call int(64)[13] 8))
+      unknown call_tmp[737213] "expr temp" "maybe param" "maybe type" "temp"
+      (737216 'move' call_tmp[737213](290439 call _cast call_tmp[737208] 1))
+      (579818 'move' tmp[579816](290441 call - call_tmp[737213]))
+      (579823 'move' tmp[579799](579820 '_paramFoldLogical' tmp[579800] tmp[579816]))
+    }
+    (548785 'init var' section[290446] tmp[579799])
+    (290449 'end of statement')
+    unknown part[290451] "dead at end of block" "insert auto destroy"
+    (548787 'init var' part[290451] byte[290419])
+    (290454 'end of statement' ptr[290410] byte[290419] byte[290419])
+    unknown call_tmp[737218] "expr temp" "maybe param" "maybe type" "temp"
+    (737221 'move' call_tmp[737218](290458 call _build_tuple section[290446] part[290451]))
+    unknown call_tmp[737223] "expr temp" "maybe param" "maybe type" "temp"
+    (737226 'move' call_tmp[737223](537760 call int(64)[13] 8))
+    unknown call_tmp[737228] "expr temp" "maybe param" "maybe type" "temp"
+    (737231 'move' call_tmp[737228](537763 call uint(64)[115] 8))
+    unknown call_tmp[737233] "expr temp" "maybe param" "maybe type" "temp"
+    (737236 'move' call_tmp[737233](537758 call _build_tuple call_tmp[737223] call_tmp[737228]))
+    (537766 'move' ret[537753](537765 'coerce' call_tmp[737218] call_tmp[737233]))
+    gotoReturn _end_keyPart[537751] _end_keyPart[537751]
+    (489919 'end of statement' section[290446] part[290451])
+    label _end_keyPart[537751]
+    (537755 return ret[537753])
+  }
+  { scopeless type
+    unknown call_tmp[737238] "expr temp" "maybe param" "maybe type" "temp"
+    (737241 'move' call_tmp[737238](290392 call int(64)[13] 8))
+    unknown call_tmp[737243] "expr temp" "maybe param" "maybe type" "temp"
+    (737246 'move' call_tmp[737243](290396 call uint(64)[115] 8))
+    (290398 call _build_tuple call_tmp[737238] call_tmp[737243])
+  }
+  function DefaultComparator[290466].init[911163](arg _mt[911165]:_MT[238], ref arg this[911166]:DefaultComparator[290466]) : void[4] "compiler generated" "last resort" "method" "primary method" "suppress lvalue error"
+  {
+    (911170 return _void[55])
+  }
+  function DefaultComparator[290466].init=[911172](arg _mt[911175]:_MT[238], ref arg this[911176]:DefaultComparator[290466], arg other[911177]:DefaultComparator[290466]) : void[4] "compiler generated" "copy initializer" "last resort" "method" "primary method" "suppress lvalue error"
+  {
+    (911181 return _void[55])
+  }
+  function DefaultComparator[290466].deinit[911183](arg _mt[911185]:_MT[238], arg this[911187]:DefaultComparator[290466]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method"
+  {
+    (911195 return _void[55])
+  }
+  function DefaultComparator[290466].writeThis[911197](arg _mt[911201]:_MT[238], arg this[911199]:DefaultComparator[290466], arg f[911200]:_any[178](?)) : void[4] throws "compiler generated" "inline" "last resort" "method" "primary method"
+  {
+    (911206 call writeThisDefaultImpl f[911200] this[911199])
+    (911211 return _void[55])
+  }
+  function DefaultComparator[290466].readThis[911213](arg _mt[911217]:_MT[238], arg this[911215]:DefaultComparator[290466], arg f[911216]:_any[178](?)) : void[4] throws "compiler generated" "inline" "last resort" "method" "primary method"
+  {
+    (911221 call readThisDefaultImpl f[911216] this[911215])
+    (911227 return _void[55])
+  }
+  function chpl_fields_are_comparable[911241](arg _arg1[911243]:DefaultComparator[290466], arg _arg2[911244]:DefaultComparator[290466]) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[911253]:bool[10] "RVV" "param" "temp"
+    (911258 'move' ret[911253](911257 'deref' 1))
+    (911255 return ret[911253])
+  }
+  function ==[911229](arg _arg1[911231]:DefaultComparator[290466], arg _arg2[911232]:DefaultComparator[290466]) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[911272]:bool[10] "RVV" "temp"
+    (911277 'move' ret[911272](911276 'deref' 1))
+    (911274 return ret[911272])
+  }
+  where {
+    unknown call_tmp[911279] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911282 'move' call_tmp[911279](911235 'typeof' _arg1[911231]))
+    unknown call_tmp[911284] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911287 'move' call_tmp[911284](911237 'typeof' _arg2[911232]))
+    unknown call_tmp[911289] "expr temp" "maybe param" "maybe type" "temp"
+    (911292 'move' call_tmp[911289](911239 call == call_tmp[911279] call_tmp[911284]))
+    unknown call_tmp[911294] "expr temp" "maybe param" "maybe type" "temp"
+    (911297 'move' call_tmp[911294](911260 call chpl_fields_are_comparable[911241] _arg1[911231] _arg2[911232]))
+    (911264 '&' call_tmp[911289] call_tmp[911294])
+  }
+  function chpl_fields_are_comparable[911311](arg _arg1[911313]:DefaultComparator[290466], arg _arg2[911314]:DefaultComparator[290466]) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[911323]:bool[10] "RVV" "param" "temp"
+    (911328 'move' ret[911323](911327 'deref' 1))
+    (911325 return ret[911323])
+  }
+  function !=[911299](arg _arg1[911301]:DefaultComparator[290466], arg _arg2[911302]:DefaultComparator[290466]) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[911342]:bool[10] "RVV" "temp"
+    (911347 'move' ret[911342](911346 'deref' 0))
+    (911344 return ret[911342])
+  }
+  where {
+    unknown call_tmp[911349] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911352 'move' call_tmp[911349](911305 'typeof' _arg1[911301]))
+    unknown call_tmp[911354] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911357 'move' call_tmp[911354](911307 'typeof' _arg2[911302]))
+    unknown call_tmp[911359] "expr temp" "maybe param" "maybe type" "temp"
+    (911362 'move' call_tmp[911359](911309 call == call_tmp[911349] call_tmp[911354]))
+    unknown call_tmp[911364] "expr temp" "maybe param" "maybe type" "temp"
+    (911367 'move' call_tmp[911364](911330 call chpl_fields_are_comparable[911311] _arg1[911301] _arg2[911302]))
+    (911334 '&' call_tmp[911359] call_tmp[911364])
+  }
+  function chpl_fields_are_comparable[911381](arg _arg1[911383]:DefaultComparator[290466], arg _arg2[911384]:DefaultComparator[290466]) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[911393]:bool[10] "RVV" "param" "temp"
+    (911398 'move' ret[911393](911397 'deref' 1))
+    (911395 return ret[911393])
+  }
+  function <[911369](arg _arg1[911371]:DefaultComparator[290466], arg _arg2[911372]:DefaultComparator[290466]) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[911412]:bool[10] "RVV" "temp"
+    (911417 'move' ret[911412](911416 'deref' 0))
+    (911414 return ret[911412])
+  }
+  where {
+    unknown call_tmp[911419] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911422 'move' call_tmp[911419](911375 'typeof' _arg1[911371]))
+    unknown call_tmp[911424] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911427 'move' call_tmp[911424](911377 'typeof' _arg2[911372]))
+    unknown call_tmp[911429] "expr temp" "maybe param" "maybe type" "temp"
+    (911432 'move' call_tmp[911429](911379 call == call_tmp[911419] call_tmp[911424]))
+    unknown call_tmp[911434] "expr temp" "maybe param" "maybe type" "temp"
+    (911437 'move' call_tmp[911434](911400 call chpl_fields_are_comparable[911381] _arg1[911371] _arg2[911372]))
+    (911404 '&' call_tmp[911429] call_tmp[911434])
+  }
+  function chpl_fields_are_comparable[911451](arg _arg1[911453]:DefaultComparator[290466], arg _arg2[911454]:DefaultComparator[290466]) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[911463]:bool[10] "RVV" "param" "temp"
+    (911468 'move' ret[911463](911467 'deref' 1))
+    (911465 return ret[911463])
+  }
+  function <=[911439](arg _arg1[911441]:DefaultComparator[290466], arg _arg2[911442]:DefaultComparator[290466]) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[911482]:bool[10] "RVV" "temp"
+    (911487 'move' ret[911482](911486 'deref' 1))
+    (911484 return ret[911482])
+  }
+  where {
+    unknown call_tmp[911489] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911492 'move' call_tmp[911489](911445 'typeof' _arg1[911441]))
+    unknown call_tmp[911494] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911497 'move' call_tmp[911494](911447 'typeof' _arg2[911442]))
+    unknown call_tmp[911499] "expr temp" "maybe param" "maybe type" "temp"
+    (911502 'move' call_tmp[911499](911449 call == call_tmp[911489] call_tmp[911494]))
+    unknown call_tmp[911504] "expr temp" "maybe param" "maybe type" "temp"
+    (911507 'move' call_tmp[911504](911470 call chpl_fields_are_comparable[911451] _arg1[911441] _arg2[911442]))
+    (911474 '&' call_tmp[911499] call_tmp[911504])
+  }
+  function chpl_fields_are_comparable[911521](arg _arg1[911523]:DefaultComparator[290466], arg _arg2[911524]:DefaultComparator[290466]) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[911533]:bool[10] "RVV" "param" "temp"
+    (911538 'move' ret[911533](911537 'deref' 1))
+    (911535 return ret[911533])
+  }
+  function >[911509](arg _arg1[911511]:DefaultComparator[290466], arg _arg2[911512]:DefaultComparator[290466]) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[911552]:bool[10] "RVV" "temp"
+    (911557 'move' ret[911552](911556 'deref' 0))
+    (911554 return ret[911552])
+  }
+  where {
+    unknown call_tmp[911559] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911562 'move' call_tmp[911559](911515 'typeof' _arg1[911511]))
+    unknown call_tmp[911564] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911567 'move' call_tmp[911564](911517 'typeof' _arg2[911512]))
+    unknown call_tmp[911569] "expr temp" "maybe param" "maybe type" "temp"
+    (911572 'move' call_tmp[911569](911519 call == call_tmp[911559] call_tmp[911564]))
+    unknown call_tmp[911574] "expr temp" "maybe param" "maybe type" "temp"
+    (911577 'move' call_tmp[911574](911540 call chpl_fields_are_comparable[911521] _arg1[911511] _arg2[911512]))
+    (911544 '&' call_tmp[911569] call_tmp[911574])
+  }
+  function chpl_fields_are_comparable[911591](arg _arg1[911593]:DefaultComparator[290466], arg _arg2[911594]:DefaultComparator[290466]) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[911603]:bool[10] "RVV" "param" "temp"
+    (911608 'move' ret[911603](911607 'deref' 1))
+    (911605 return ret[911603])
+  }
+  function >=[911579](arg _arg1[911581]:DefaultComparator[290466], arg _arg2[911582]:DefaultComparator[290466]) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[911622]:bool[10] "RVV" "temp"
+    (911627 'move' ret[911622](911626 'deref' 1))
+    (911624 return ret[911622])
+  }
+  where {
+    unknown call_tmp[911629] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911632 'move' call_tmp[911629](911585 'typeof' _arg1[911581]))
+    unknown call_tmp[911634] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911637 'move' call_tmp[911634](911587 'typeof' _arg2[911582]))
+    unknown call_tmp[911639] "expr temp" "maybe param" "maybe type" "temp"
+    (911642 'move' call_tmp[911639](911589 call == call_tmp[911629] call_tmp[911634]))
+    unknown call_tmp[911644] "expr temp" "maybe param" "maybe type" "temp"
+    (911647 'move' call_tmp[911644](911610 call chpl_fields_are_comparable[911591] _arg1[911581] _arg2[911582]))
+    (911614 '&' call_tmp[911639] call_tmp[911644])
+  }
+  function =[911649](ref arg _arg1[911651]:DefaultComparator[290466], const?  ref arg _arg2[911652]:DefaultComparator[290466]) : void[4] "assignop" "compiler generated" "last resort"
+  {
+    (911663 return _void[55])
+  }
+  where {
+    unknown call_tmp[911665] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911668 'move' call_tmp[911665](911655 'typeof' _arg1[911651]))
+    unknown call_tmp[911670] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911673 'move' call_tmp[911670](911657 'typeof' _arg2[911652]))
+    (911659 call == call_tmp[911665] call_tmp[911670])
+  }
+  function chpl__defaultHash[911675](arg r[911677]:DefaultComparator[290466]) : _unknown[51] "compiler generated" "inline" "last resort"
+  {
+    unknown ret[911685] "RVV" "temp"
+    (911690 'move' ret[911685](911689 'deref' 0))
+    (911687 return ret[911685])
+  }
+  type DefaultComparator[290466]
+  function ReverseComparator[291103](?).init[290504](arg _mt[291107]:_MT[238], ref arg this[291105]:ReverseComparator[291103](?)) : void[4] "method" "primary method" "no return value for void"
+  {
+    unknown tmp[466851] "temp"
+    (466853 'init var' tmp[466851] defaultComparator[267894])
+    (466855 'init field' this[291105] c"comparator" tmp[466851])
+    (489922 'end of statement')
+    (537770 return _void[55])
+  }
+  function ReverseComparator[291103](?).init[290523](arg _mt[291111]:_MT[238], ref arg this[291109]:ReverseComparator[291103](?), arg comparator[290521]:_any[178](?)) : void[4] "method" "primary method" "no return value for void"
+  {
+    unknown tmp[466859] "temp"
+    (466861 'init var' tmp[466859] comparator[290521])
+    (466863 'init field' this[291109] c"comparator" tmp[466859])
+    (489923 'end of statement')
+    (537772 return _void[55])
+  }
+  function ReverseComparator[291103](?).init=[290545](arg _mt[291115]:_MT[238], ref arg this[291113]:ReverseComparator[291103](?), arg revcomp[290542]:ReverseComparator[291103](?)) : void[4] "method" "primary method" "no doc" "no return value for void"
+  {
+    unknown call_tmp[737250] "maybe param" "maybe type" "temp"
+    (737253 'move' call_tmp[737250](290552 call comparator _mt[243] revcomp[290542]))
+    unknown tmp[466874] "temp"
+    (466876 'init var' tmp[466874] call_tmp[737250])
+    (466878 'init field' this[291113] c"comparator" tmp[466874])
+    (489924 'end of statement')
+    (537774 return _void[55])
+  }
+  function ReverseComparator[291103](?).typeIsBitReversible[290565](arg _mt[291119]:_MT[238], arg this[291117]:ReverseComparator[291103](?), arg t[290563]:_any[178](?)) param : _unknown[51] "method" "primary method" "no doc"
+  {
+    unknown ret[537778] "RVV" "param" "temp"
+    unknown call_tmp[737255] "expr temp" "maybe param" "maybe type" "temp"
+    (737258 'move' call_tmp[737255](290570 call isHomogeneousTupleType t[290563]))
+    unknown call_tmp[737260] "expr temp" "maybe param" "maybe type" "temp"
+    (737263 'move' call_tmp[737260](290587 call _cond_test call_tmp[737255]))
+    if call_tmp[737260]
+    {
+      unknown tmp[290572] "dead at end of block" "insert auto destroy"
+      (548789 'default init var' tmp[290572] t[290563])
+      (290575 'end of statement')
+      { scopeless type
+        unknown call_type_tmp[493257] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[737265] "expr temp" "maybe param" "maybe type" "temp"
+        (737268 'move' call_tmp[737265](290581 call tmp[290572] 0))
+        (493261 'move' call_type_tmp[493257](290582 'typeof' call_tmp[737265]))
+      }
+      unknown call_tmp[737272] "expr temp" "maybe param" "maybe type" "temp"
+      (737275 'move' call_tmp[737272](290584 call(404117 call (partial) typeIsBitReversible _mt[243] this[291117]) call_type_tmp[493257]))
+      (537783 'move' ret[537778](537782 'deref' call_tmp[737272]))
+      gotoReturn _end_typeIsBitReversible[537776] _end_typeIsBitReversible[537776]
+      (489925 'end of statement' tmp[290572])
+    }
+    unknown call_tmp[737277] "expr temp" "maybe param" "maybe type" "temp"
+    (737280 'move' call_tmp[737277](290595 call isUintType t[290563]))
+    unknown call_tmp[737282] "expr temp" "maybe param" "maybe type" "temp"
+    (737285 'move' call_tmp[737282](290599 call _cond_test call_tmp[737277]))
+    if call_tmp[737282]
+    {
+      (537788 'move' ret[537778](537787 'deref' 1))
+      gotoReturn _end_typeIsBitReversible[537776] _end_typeIsBitReversible[537776]
+    }
+    unknown call_tmp[737287] "expr temp" "maybe param" "maybe type" "temp"
+    (737290 'move' call_tmp[737287](290607 call isIntType t[290563]))
+    unknown call_tmp[737292] "expr temp" "maybe param" "maybe type" "temp"
+    (737295 'move' call_tmp[737292](290611 call _cond_test call_tmp[737287]))
+    if call_tmp[737292]
+    {
+      (537793 'move' ret[537778](537792 'deref' 1))
+      gotoReturn _end_typeIsBitReversible[537776] _end_typeIsBitReversible[537776]
+    }
+    (537798 'move' ret[537778](537797 'deref' 0))
+    label _end_typeIsBitReversible[537776]
+    (537780 return ret[537778])
+  }
+  function ReverseComparator[291103](?).typeIsNegateReversible[290625](arg _mt[291123]:_MT[238], arg this[291121]:ReverseComparator[291103](?), arg t[290623]:_any[178](?)) param : _unknown[51] "method" "primary method" "no doc"
+  {
+    unknown ret[537802] "RVV" "param" "temp"
+    unknown call_tmp[737297] "expr temp" "maybe param" "maybe type" "temp"
+    (737300 'move' call_tmp[737297](290630 call isHomogeneousTupleType t[290623]))
+    unknown call_tmp[737302] "expr temp" "maybe param" "maybe type" "temp"
+    (737305 'move' call_tmp[737302](290647 call _cond_test call_tmp[737297]))
+    if call_tmp[737302]
+    {
+      unknown tmp[290632] "dead at end of block" "insert auto destroy"
+      (548791 'default init var' tmp[290632] t[290623])
+      (290635 'end of statement')
+      { scopeless type
+        unknown call_type_tmp[493263] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[737307] "expr temp" "maybe param" "maybe type" "temp"
+        (737310 'move' call_tmp[737307](290641 call tmp[290632] 0))
+        (493267 'move' call_type_tmp[493263](290642 'typeof' call_tmp[737307]))
+      }
+      unknown call_tmp[737314] "expr temp" "maybe param" "maybe type" "temp"
+      (737317 'move' call_tmp[737314](290644 call(404128 call (partial) typeIsNegateReversible _mt[243] this[291121]) call_type_tmp[493263]))
+      (537807 'move' ret[537802](537806 'deref' call_tmp[737314]))
+      gotoReturn _end_typeIsNegateReversible[537800] _end_typeIsNegateReversible[537800]
+      (489930 'end of statement' tmp[290632])
+    }
+    unknown tmp[434686] "maybe param" "temp"
+    (434697 'move' tmp[434686](290655 call isIntType t[290623]))
+    unknown call_tmp[737319] "expr temp" "maybe param" "maybe type" "temp"
+    (737322 'move' call_tmp[737319](434699 call _cond_invalid tmp[434686]))
+    if call_tmp[737319]
+    {
+      (434702 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[579830] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[579831] "maybe param" "temp"
+    unknown call_tmp[737324] "expr temp" "maybe param" "maybe type" "temp"
+    (737327 'move' call_tmp[737324](434687 call isTrue tmp[434686]))
+    (579836 'move' tmp[579831](579834 call _cond_test call_tmp[737324]))
+    if tmp[579831]
+    {
+      (579841 'move' tmp[579830](579838 '_paramFoldLogical' tmp[579831] 1))
+    }
+    {
+      unknown tmp[579843] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[737329] "expr temp" "maybe param" "maybe type" "temp"
+      (737332 'move' call_tmp[737329](290659 call isUintType t[290623]))
+      (579845 'move' tmp[579843](434691 call isTrue call_tmp[737329]))
+      (579850 'move' tmp[579830](579847 '_paramFoldLogical' tmp[579831] tmp[579843]))
+    }
+    unknown call_tmp[737334] "expr temp" "maybe param" "maybe type" "temp"
+    (737337 'move' call_tmp[737334](290665 call _cond_test tmp[579830]))
+    if call_tmp[737334]
+    {
+      (537812 'move' ret[537802](537811 'deref' 0))
+      gotoReturn _end_typeIsNegateReversible[537800] _end_typeIsNegateReversible[537800]
+    }
+    unknown call_tmp[737339] "expr temp" "maybe param" "maybe type" "temp"
+    (737342 'move' call_tmp[737339](290673 call isNumericType t[290623]))
+    unknown call_tmp[737344] "expr temp" "maybe param" "maybe type" "temp"
+    (737347 'move' call_tmp[737344](290677 call _cond_test call_tmp[737339]))
+    if call_tmp[737344]
+    {
+      (537817 'move' ret[537802](537816 'deref' 1))
+      gotoReturn _end_typeIsNegateReversible[537800] _end_typeIsNegateReversible[537800]
+    }
+    (537822 'move' ret[537802](537821 'deref' 0))
+    label _end_typeIsNegateReversible[537800]
+    (537804 return ret[537802])
+  }
+  function ReverseComparator[291103](?).hasKeyPart[290691](arg _mt[291127]:_MT[238], arg this[291125]:ReverseComparator[291103](?), arg a[290689]:_any[178](?)) param : _unknown[51] "method" "primary method" "no doc"
+  {
+    unknown ret[537826] "RVV" "param" "temp"
+    unknown call_tmp[737351] "expr temp" "maybe param" "maybe type" "temp"
+    (737354 'move' call_tmp[737351](290695 call comparator _mt[243] this[291125]))
+    unknown call_tmp[737356] "expr temp" "maybe param" "maybe type" "temp"
+    (737359 'move' call_tmp[737356](290702 call canResolveMethod call_tmp[737351] "keyPart" a[290689] 0))
+    (537831 'move' ret[537826](537830 'deref' call_tmp[737356]))
+    (537828 return ret[537826])
+  }
+  function ReverseComparator[291103](?).hasKeyPartFromKey[290712](arg _mt[291131]:_MT[238], arg this[291129]:ReverseComparator[291103](?), arg a[290710]:_any[178](?)) param : _unknown[51] "method" "primary method" "no doc"
+  {
+    unknown ret[537835] "RVV" "param" "temp"
+    unknown call_tmp[737363] "expr temp" "maybe param" "maybe type" "temp"
+    (737366 'move' call_tmp[737363](290716 call comparator _mt[243] this[291129]))
+    unknown call_tmp[737368] "expr temp" "maybe param" "maybe type" "temp"
+    (737371 'move' call_tmp[737368](290722 call canResolveMethod call_tmp[737363] "key" a[290710]))
+    unknown call_tmp[737373] "expr temp" "maybe param" "maybe type" "temp"
+    (737376 'move' call_tmp[737373](290745 call _cond_test call_tmp[737368]))
+    if call_tmp[737373]
+    {
+      { scopeless type
+        unknown call_type_tmp[493269] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[737380] "expr temp" "maybe param" "maybe type" "temp"
+        (737383 'move' call_tmp[737380](364791 call comparator _mt[243] this[291129]))
+        unknown call_tmp[737387] "expr temp" "maybe param" "maybe type" "temp"
+        (737390 'move' call_tmp[737387](290729 call(290724 call (partial) key _mt[243] call_tmp[737380]) a[290710]))
+        (493273 'move' call_type_tmp[493269](290730 'typeof' call_tmp[737387]))
+      }
+      unknown key[290731] "dead at end of block" "insert auto destroy"
+      (548793 'default init var' key[290731] call_type_tmp[493269])
+      (290734 'end of statement')
+      unknown call_tmp[737392] "expr temp" "maybe param" "maybe type" "temp"
+      (737395 'move' call_tmp[737392](290742 call canResolveMethod defaultComparator[267894] "keyPart" key[290731] 0))
+      (537840 'move' ret[537835](537839 'deref' call_tmp[737392]))
+      gotoReturn _end_hasKeyPartFromKey[537833] _end_hasKeyPartFromKey[537833]
+      (489937 'end of statement' key[290731])
+    }
+    (537845 'move' ret[537835](537844 'deref' 0))
+    label _end_hasKeyPartFromKey[537833]
+    (537837 return ret[537835])
+  }
+  function ReverseComparator[291103](?).hasCompare[290759](arg _mt[291135]:_MT[238], arg this[291133]:ReverseComparator[291103](?), arg a[290757]:_any[178](?), arg b[290761]:_any[178](?)) param : _unknown[51] "method" "primary method" "no doc"
+  {
+    unknown ret[537849] "RVV" "param" "temp"
+    unknown call_tmp[737399] "expr temp" "maybe param" "maybe type" "temp"
+    (737402 'move' call_tmp[737399](290765 call comparator _mt[243] this[291133]))
+    unknown call_tmp[737404] "expr temp" "maybe param" "maybe type" "temp"
+    (737407 'move' call_tmp[737404](290772 call canResolveMethod call_tmp[737399] "compare" a[290757] b[290761]))
+    (537854 'move' ret[537849](537853 'deref' call_tmp[737404]))
+    (537851 return ret[537849])
+  }
+  function ReverseComparator[291103](?).hasCompareFromKey[290782](arg _mt[291139]:_MT[238], arg this[291137]:ReverseComparator[291103](?), arg a[290780]:_any[178](?)) param : _unknown[51] "method" "primary method" "no doc"
+  {
+    unknown ret[537858] "RVV" "param" "temp"
+    unknown call_tmp[737411] "expr temp" "maybe param" "maybe type" "temp"
+    (737414 'move' call_tmp[737411](290786 call comparator _mt[243] this[291137]))
+    unknown call_tmp[737416] "expr temp" "maybe param" "maybe type" "temp"
+    (737419 'move' call_tmp[737416](290792 call canResolveMethod call_tmp[737411] "key" a[290780]))
+    unknown call_tmp[737421] "expr temp" "maybe param" "maybe type" "temp"
+    (737424 'move' call_tmp[737421](290815 call _cond_test call_tmp[737416]))
+    if call_tmp[737421]
+    {
+      { scopeless type
+        unknown call_type_tmp[493275] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[737428] "expr temp" "maybe param" "maybe type" "temp"
+        (737431 'move' call_tmp[737428](364798 call comparator _mt[243] this[291137]))
+        unknown call_tmp[737435] "expr temp" "maybe param" "maybe type" "temp"
+        (737438 'move' call_tmp[737435](290799 call(290794 call (partial) key _mt[243] call_tmp[737428]) a[290780]))
+        (493279 'move' call_type_tmp[493275](290800 'typeof' call_tmp[737435]))
+      }
+      unknown key[290801] "dead at end of block" "insert auto destroy"
+      (548795 'default init var' key[290801] call_type_tmp[493275])
+      (290804 'end of statement')
+      unknown call_tmp[737440] "expr temp" "maybe param" "maybe type" "temp"
+      (737443 'move' call_tmp[737440](290812 call canResolveMethod defaultComparator[267894] "compare" key[290801] key[290801]))
+      (537863 'move' ret[537858](537862 'deref' call_tmp[737440]))
+      gotoReturn _end_hasCompareFromKey[537856] _end_hasCompareFromKey[537856]
+      (489941 'end of statement' key[290801] key[290801])
+    }
+    (537868 'move' ret[537858](537867 'deref' 0))
+    label _end_hasCompareFromKey[537856]
+    (537860 return ret[537858])
+  }
+  function ReverseComparator[291103](?).getKeyPart[290829](arg _mt[291143]:_MT[238], arg this[291141]:ReverseComparator[291103](?), arg cmp[290827]:_any[178](?), arg a[290831]:_any[178](?), arg i[290833]:_any[178](?)) : _unknown[51] "inline" "method" "primary method" "no doc"
+  {
+    unknown ret[537872] "RVV" "temp"
+    unknown call_tmp[737447] "maybe param" "maybe type" "temp"
+    (737450 'move' call_tmp[737447](290847 call(290841 call (partial) keyPart _mt[243] cmp[290827]) a[290831] i[290833]))
+    unknown tmp[290848] "dead at end of block" "insert auto destroy" "temp"
+    (548797 'init var' tmp[290848] call_tmp[737447])
+    (290855 call _check_tuple_var_decl tmp[290848] 2)
+    (489945 'end of statement')
+    unknown call_tmp[737452] "maybe param" "maybe type" "temp"
+    (737455 'move' call_tmp[737452](290849 call tmp[290848] 0))
+    unknown section[290835] "dead at end of block" "insert auto destroy"
+    (548799 'init var' section[290835] call_tmp[737452])
+    unknown call_tmp[737457] "maybe param" "maybe type" "temp"
+    (737460 'move' call_tmp[737457](290852 call tmp[290848] 1))
+    unknown part[290837] "dead at end of block" "insert auto destroy"
+    (548801 'init var' part[290837] call_tmp[737457])
+    (290860 'end of statement')
+    unknown call_tmp[737464] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (737467 'move' call_tmp[737464](290864 'typeof' part[290837]))
+    unknown call_tmp[737469] "expr temp" "maybe param" "maybe type" "temp"
+    (737472 'move' call_tmp[737469](290866 call(404150 call (partial) typeIsBitReversible _mt[243] this[291141]) call_tmp[737464]))
+    unknown call_tmp[737474] "expr temp" "maybe param" "maybe type" "temp"
+    (737477 'move' call_tmp[737474](290922 call _cond_test call_tmp[737469]))
+    if call_tmp[737474]
+    {
+      unknown call_tmp[737479] "expr temp" "maybe param" "maybe type" "temp"
+      (737482 'move' call_tmp[737479](290868 call - section[290835]))
+      unknown call_tmp[737484] "expr temp" "maybe param" "maybe type" "temp"
+      (737487 'move' call_tmp[737484](290871 call ~ part[290837]))
+      unknown call_tmp[737489] "expr temp" "maybe param" "maybe type" "temp"
+      (737492 'move' call_tmp[737489](290874 call _build_tuple call_tmp[737479] call_tmp[737484]))
+      (537877 'move' ret[537872](537876 'deref' call_tmp[737489]))
+      gotoReturn _end_getKeyPart[537870] _end_getKeyPart[537870]
+      (489946 'end of statement' section[290835] part[290837])
+    }
+    {
+      unknown call_tmp[737496] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (737499 'move' call_tmp[737496](290881 'typeof' part[290837]))
+      unknown call_tmp[737501] "expr temp" "maybe param" "maybe type" "temp"
+      (737504 'move' call_tmp[737501](290883 call(404157 call (partial) typeIsNegateReversible _mt[243] this[291141]) call_tmp[737496]))
+      unknown call_tmp[737506] "expr temp" "maybe param" "maybe type" "temp"
+      (737509 'move' call_tmp[737506](290918 call _cond_test call_tmp[737501]))
+      if call_tmp[737506]
+      {
+        unknown call_tmp[737511] "expr temp" "maybe param" "maybe type" "temp"
+        (737514 'move' call_tmp[737511](290885 call - section[290835]))
+        unknown call_tmp[737516] "expr temp" "maybe param" "maybe type" "temp"
+        (737519 'move' call_tmp[737516](290888 call - part[290837]))
+        unknown call_tmp[737521] "expr temp" "maybe param" "maybe type" "temp"
+        (737524 'move' call_tmp[737521](290891 call _build_tuple call_tmp[737511] call_tmp[737516]))
+        (537882 'move' ret[537872](537881 'deref' call_tmp[737521]))
+        gotoReturn _end_getKeyPart[537870] _end_getKeyPart[537870]
+        (489949 'end of statement' section[290835] part[290837])
+      }
+      {
+        (290915 call compilerError "keyPart must return int or uint")
+      }
+    }
+    label _end_getKeyPart[537870]
+    (537874 return ret[537872])
+  }
+  function ReverseComparator[291103](?).keyPart[290933](arg _mt[291147]:_MT[238], arg this[291145]:ReverseComparator[291103](?), arg a[290931]:_any[178](?), arg i[290935]:_any[178](?)) : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[537888] "RVV" "temp"
+    unknown call_tmp[737528] "expr temp" "maybe param" "maybe type" "temp"
+    (737531 'move' call_tmp[737528](290949 call comparator _mt[243] this[291145]))
+    unknown call_tmp[737533] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (737536 'move' call_tmp[737533](290954 'typeof' a[290931]))
+    (290955 call chpl_check_comparator call_tmp[737528] call_tmp[737533])
+    (489953 'end of statement')
+    unknown call_tmp[737540] "expr temp" "maybe param" "maybe type" "temp"
+    (737543 'move' call_tmp[737540](290961 call(404179 call (partial) hasKeyPartFromKey _mt[243] this[291145]) a[290931]))
+    unknown call_tmp[737545] "expr temp" "maybe param" "maybe type" "temp"
+    (737548 'move' call_tmp[737545](290992 call _cond_test call_tmp[737540]))
+    if call_tmp[737545]
+    {
+      unknown call_tmp[737554] "expr temp" "maybe param" "maybe type" "temp"
+      (737557 'move' call_tmp[737554](290966 call comparator _mt[243] this[291145]))
+      unknown call_tmp[737561] "expr temp" "maybe param" "maybe type" "temp"
+      (737564 'move' call_tmp[737561](290974 call(290969 call (partial) key _mt[243] call_tmp[737554]) a[290931]))
+      unknown call_tmp[737566] "expr temp" "maybe param" "maybe type" "temp"
+      (737569 'move' call_tmp[737566](290976 call(404186 call (partial) getKeyPart _mt[243] this[291145]) defaultComparator[267894] call_tmp[737561] i[290935]))
+      (537893 'move' ret[537888](537892 'deref' call_tmp[737566]))
+      gotoReturn _end_keyPart[537886] _end_keyPart[537886]
+    }
+    {
+      unknown call_tmp[737575] "expr temp" "maybe param" "maybe type" "temp"
+      (737578 'move' call_tmp[737575](290982 call comparator _mt[243] this[291145]))
+      unknown call_tmp[737580] "expr temp" "maybe param" "maybe type" "temp"
+      (737583 'move' call_tmp[737580](290988 call(404193 call (partial) getKeyPart _mt[243] this[291145]) call_tmp[737575] a[290931] i[290935]))
+      (537898 'move' ret[537888](537897 'deref' call_tmp[737580]))
+      gotoReturn _end_keyPart[537886] _end_keyPart[537886]
+    }
+    label _end_keyPart[537886]
+    (537890 return ret[537888])
+  }
+  where {
+    unknown tmp[434707] "maybe param" "temp"
+    (434718 'move' tmp[434707](290940 call(404166 call (partial) hasKeyPart _mt[243] this[291145]) a[290931]))
+    unknown call_tmp[737587] "expr temp" "maybe param" "maybe type" "temp"
+    (737590 'move' call_tmp[737587](434720 call _cond_invalid tmp[434707]))
+    if call_tmp[737587]
+    {
+      (434723 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[579857] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[579858] "maybe param" "temp"
+    unknown call_tmp[737592] "expr temp" "maybe param" "maybe type" "temp"
+    (737595 'move' call_tmp[737592](434708 call isTrue tmp[434707]))
+    (579863 'move' tmp[579858](579861 call _cond_test call_tmp[737592]))
+    if tmp[579858]
+    {
+      (579868 'move' tmp[579857](579865 '_paramFoldLogical' tmp[579858] 1))
+    }
+    {
+      unknown tmp[579870] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[737599] "expr temp" "maybe param" "maybe type" "temp"
+      (737602 'move' call_tmp[737599](290944 call(404173 call (partial) hasKeyPartFromKey _mt[243] this[291145]) a[290931]))
+      (579872 'move' tmp[579870](434712 call isTrue call_tmp[737599]))
+      (579877 'move' tmp[579857](579874 '_paramFoldLogical' tmp[579858] tmp[579870]))
+    }
+    (748455 call chpl_statementLevelSymbol tmp[579857])
+  }
+  function ReverseComparator[291103](?).doCompare[291003](arg _mt[291151]:_MT[238], arg this[291149]:ReverseComparator[291103](?), arg cmp[291001]:_any[178](?), arg a[291005]:_any[178](?), arg b[291007]:_any[178](?)) : _unknown[51] "inline" "method" "primary method" "no doc"
+  {
+    unknown ret[537904] "RVV" "temp"
+    unknown call_tmp[737606] "expr temp" "maybe param" "maybe type" "temp"
+    (737609 'move' call_tmp[737606](291016 call(291010 call (partial) compare _mt[243] cmp[291001]) b[291007] a[291005]))
+    (537909 'move' ret[537904](537908 'deref' call_tmp[737606]))
+    (537906 return ret[537904])
+  }
+  function ReverseComparator[291103](?).compare[291026](arg _mt[291155]:_MT[238], arg this[291153]:ReverseComparator[291103](?), arg a[291024]:_any[178](?), arg b[291028]:_any[178](?)) : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[537913] "RVV" "temp"
+    unknown call_tmp[737613] "expr temp" "maybe param" "maybe type" "temp"
+    (737616 'move' call_tmp[737613](291043 call comparator _mt[243] this[291153]))
+    unknown call_tmp[737618] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (737621 'move' call_tmp[737618](291048 'typeof' a[291024]))
+    (291049 call chpl_check_comparator call_tmp[737613] call_tmp[737618])
+    (489957 'end of statement')
+    unknown call_tmp[737625] "expr temp" "maybe param" "maybe type" "temp"
+    (737628 'move' call_tmp[737625](291055 call(404217 call (partial) hasCompareFromKey _mt[243] this[291153]) a[291024]))
+    unknown call_tmp[737630] "expr temp" "maybe param" "maybe type" "temp"
+    (737633 'move' call_tmp[737630](291095 call _cond_test call_tmp[737625]))
+    if call_tmp[737630]
+    {
+      unknown call_tmp[737639] "expr temp" "maybe param" "maybe type" "temp"
+      (737642 'move' call_tmp[737639](291060 call comparator _mt[243] this[291153]))
+      unknown call_tmp[737646] "expr temp" "maybe param" "maybe type" "temp"
+      (737649 'move' call_tmp[737646](291068 call(291063 call (partial) key _mt[243] call_tmp[737639]) a[291024]))
+      unknown call_tmp[737653] "expr temp" "maybe param" "maybe type" "temp"
+      (737656 'move' call_tmp[737653](291070 call comparator _mt[243] this[291153]))
+      unknown call_tmp[737660] "expr temp" "maybe param" "maybe type" "temp"
+      (737663 'move' call_tmp[737660](291078 call(291073 call (partial) key _mt[243] call_tmp[737653]) b[291028]))
+      unknown call_tmp[737665] "expr temp" "maybe param" "maybe type" "temp"
+      (737668 'move' call_tmp[737665](291079 call(404224 call (partial) doCompare _mt[243] this[291153]) defaultComparator[267894] call_tmp[737646] call_tmp[737660]))
+      (537918 'move' ret[537913](537917 'deref' call_tmp[737665]))
+      gotoReturn _end_compare[537911] _end_compare[537911]
+    }
+    {
+      unknown call_tmp[737674] "expr temp" "maybe param" "maybe type" "temp"
+      (737677 'move' call_tmp[737674](291085 call comparator _mt[243] this[291153]))
+      unknown call_tmp[737679] "expr temp" "maybe param" "maybe type" "temp"
+      (737682 'move' call_tmp[737679](291091 call(404231 call (partial) doCompare _mt[243] this[291153]) call_tmp[737674] a[291024] b[291028]))
+      (537923 'move' ret[537913](537922 'deref' call_tmp[737679]))
+      gotoReturn _end_compare[537911] _end_compare[537911]
+    }
+    label _end_compare[537911]
+    (537915 return ret[537913])
+  }
+  where {
+    unknown tmp[434728] "maybe param" "temp"
+    (434739 'move' tmp[434728](291034 call(404203 call (partial) hasCompare _mt[243] this[291153]) a[291024] b[291028]))
+    unknown call_tmp[737686] "expr temp" "maybe param" "maybe type" "temp"
+    (737689 'move' call_tmp[737686](434741 call _cond_invalid tmp[434728]))
+    if call_tmp[737686]
+    {
+      (434744 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[579884] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[579885] "maybe param" "temp"
+    unknown call_tmp[737691] "expr temp" "maybe param" "maybe type" "temp"
+    (737694 'move' call_tmp[737691](434729 call isTrue tmp[434728]))
+    (579890 'move' tmp[579885](579888 call _cond_test call_tmp[737691]))
+    if tmp[579885]
+    {
+      (579895 'move' tmp[579884](579892 '_paramFoldLogical' tmp[579885] 1))
+    }
+    {
+      unknown tmp[579897] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[737698] "expr temp" "maybe param" "maybe type" "temp"
+      (737701 'move' call_tmp[737698](291038 call(404211 call (partial) hasCompareFromKey _mt[243] this[291153]) a[291024]))
+      (579899 'move' tmp[579897](434733 call isTrue call_tmp[737698]))
+      (579904 'move' tmp[579884](579901 '_paramFoldLogical' tmp[579885] tmp[579897]))
+    }
+    (748457 call chpl_statementLevelSymbol tmp[579884])
+  }
+  function ReverseComparator[291103](?).comparator[911692](arg _mt[911694]:_MT[238], ref arg this[911696]:ReverseComparator[291103](?)) ref : _unknown[51] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "reference to const when const this"
+  {
+    unknown ret[911706] "RVV" "temp"
+    unknown call_tmp[911713] "expr temp" "maybe param" "maybe type" "temp"
+    (911716 'move' call_tmp[911713](911700 '.' this[911696] c"comparator"))
+    (911711 'move' ret[911706](911710 'addr of' call_tmp[911713]))
+    (911708 return ret[911706])
+  }
+  function ReverseComparator[291103](?).deinit[911718](arg _mt[911720]:_MT[238], arg this[911722]:ReverseComparator[291103](?)) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method"
+  {
+    (911730 return _void[55])
+  }
+  function ReverseComparator[291103](?).writeThis[911732](arg _mt[911736]:_MT[238], arg this[911734]:ReverseComparator[291103](?), arg f[911735]:_any[178](?)) : void[4] throws "compiler generated" "inline" "last resort" "method" "primary method"
+  {
+    (911741 call writeThisDefaultImpl f[911735] this[911734])
+    (911746 return _void[55])
+  }
+  function ReverseComparator[291103](?).readThis[911748](arg _mt[911752]:_MT[238], arg this[911750]:ReverseComparator[291103](?), arg f[911751]:_any[178](?)) : void[4] throws "compiler generated" "inline" "last resort" "method" "primary method"
+  {
+    (911756 call readThisDefaultImpl f[911751] this[911750])
+    (911762 return _void[55])
+  }
+  function chpl_fields_are_comparable[911776](arg _arg1[911778]:ReverseComparator[291103](?), arg _arg2[911779]:ReverseComparator[291103](?)) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[911797]:bool[10] "RVV" "param" "temp"
+    unknown call_tmp[911804] "expr temp" "maybe param" "maybe type" "temp"
+    (911807 'move' call_tmp[911804](911782 call comparator _mt[243] _arg1[911778]))
+    unknown call_tmp[911809] "expr temp" "maybe param" "maybe type" "temp"
+    (911812 'move' call_tmp[911809](911786 call comparator _mt[243] _arg2[911779]))
+    unknown call_tmp[911814] "expr temp" "maybe param" "maybe type" "temp"
+    (911817 'move' call_tmp[911814](911790 'call resolves' c"==" call_tmp[911804] call_tmp[911809]))
+    (911802 'move' ret[911797](911801 'deref' call_tmp[911814]))
+    (911799 return ret[911797])
+  }
+  function ==[911764](arg _arg1[911766]:ReverseComparator[291103](?), arg _arg2[911767]:ReverseComparator[291103](?)) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[911846]:bool[10] "RVV" "temp"
+    unknown call_tmp[911858] "expr temp" "maybe param" "maybe type" "temp"
+    (911861 'move' call_tmp[911858](911825 call comparator _mt[243] _arg1[911766]))
+    unknown call_tmp[911863] "expr temp" "maybe param" "maybe type" "temp"
+    (911866 'move' call_tmp[911863](911829 call comparator _mt[243] _arg2[911767]))
+    unknown call_tmp[911868] "expr temp" "maybe param" "maybe type" "temp"
+    (911871 'move' call_tmp[911868](911833 call != call_tmp[911858] call_tmp[911863]))
+    if call_tmp[911868]
+    {
+      (911851 'move' ret[911846](911850 'deref' 0))
+      gotoReturn _end_==[911844] _end_==[911844]
+    }
+    (911856 'move' ret[911846](911855 'deref' 1))
+    label _end_==[911844]
+    (911848 return ret[911846])
+  }
+  where {
+    unknown call_tmp[911873] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911876 'move' call_tmp[911873](911770 'typeof' _arg1[911766]))
+    unknown call_tmp[911878] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (911881 'move' call_tmp[911878](911772 'typeof' _arg2[911767]))
+    unknown call_tmp[911883] "expr temp" "maybe param" "maybe type" "temp"
+    (911886 'move' call_tmp[911883](911774 call == call_tmp[911873] call_tmp[911878]))
+    unknown call_tmp[911888] "expr temp" "maybe param" "maybe type" "temp"
+    (911891 'move' call_tmp[911888](911819 call chpl_fields_are_comparable[911776] _arg1[911766] _arg2[911767]))
+    (911823 '&' call_tmp[911883] call_tmp[911888])
+  }
+  function chpl_fields_are_comparable[911905](arg _arg1[911907]:ReverseComparator[291103](?), arg _arg2[911908]:ReverseComparator[291103](?)) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[911926]:bool[10] "RVV" "param" "temp"
+    unknown call_tmp[911933] "expr temp" "maybe param" "maybe type" "temp"
+    (911936 'move' call_tmp[911933](911911 call comparator _mt[243] _arg1[911907]))
+    unknown call_tmp[911938] "expr temp" "maybe param" "maybe type" "temp"
+    (911941 'move' call_tmp[911938](911915 call comparator _mt[243] _arg2[911908]))
+    unknown call_tmp[911943] "expr temp" "maybe param" "maybe type" "temp"
+    (911946 'move' call_tmp[911943](911919 'call resolves' c"!=" call_tmp[911933] call_tmp[911938]))
+    (911931 'move' ret[911926](911930 'deref' call_tmp[911943]))
+    (911928 return ret[911926])
+  }
+  function !=[911893](arg _arg1[911895]:ReverseComparator[291103](?), arg _arg2[911896]:ReverseComparator[291103](?)) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[911975]:bool[10] "RVV" "temp"
+    unknown call_tmp[911987] "expr temp" "maybe param" "maybe type" "temp"
+    (911990 'move' call_tmp[911987](911954 call comparator _mt[243] _arg1[911895]))
+    unknown call_tmp[911992] "expr temp" "maybe param" "maybe type" "temp"
+    (911995 'move' call_tmp[911992](911958 call comparator _mt[243] _arg2[911896]))
+    unknown call_tmp[911997] "expr temp" "maybe param" "maybe type" "temp"
+    (912000 'move' call_tmp[911997](911962 call != call_tmp[911987] call_tmp[911992]))
+    if call_tmp[911997]
+    {
+      (911980 'move' ret[911975](911979 'deref' 1))
+      gotoReturn _end_!=[911973] _end_!=[911973]
+    }
+    (911985 'move' ret[911975](911984 'deref' 0))
+    label _end_!=[911973]
+    (911977 return ret[911975])
+  }
+  where {
+    unknown call_tmp[912002] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (912005 'move' call_tmp[912002](911899 'typeof' _arg1[911895]))
+    unknown call_tmp[912007] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (912010 'move' call_tmp[912007](911901 'typeof' _arg2[911896]))
+    unknown call_tmp[912012] "expr temp" "maybe param" "maybe type" "temp"
+    (912015 'move' call_tmp[912012](911903 call == call_tmp[912002] call_tmp[912007]))
+    unknown call_tmp[912017] "expr temp" "maybe param" "maybe type" "temp"
+    (912020 'move' call_tmp[912017](911948 call chpl_fields_are_comparable[911905] _arg1[911895] _arg2[911896]))
+    (911952 '&' call_tmp[912012] call_tmp[912017])
+  }
+  function chpl_fields_are_comparable[912034](arg _arg1[912036]:ReverseComparator[291103](?), arg _arg2[912037]:ReverseComparator[291103](?)) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[912055]:bool[10] "RVV" "param" "temp"
+    unknown call_tmp[912062] "expr temp" "maybe param" "maybe type" "temp"
+    (912065 'move' call_tmp[912062](912040 call comparator _mt[243] _arg1[912036]))
+    unknown call_tmp[912067] "expr temp" "maybe param" "maybe type" "temp"
+    (912070 'move' call_tmp[912067](912044 call comparator _mt[243] _arg2[912037]))
+    unknown call_tmp[912072] "expr temp" "maybe param" "maybe type" "temp"
+    (912075 'move' call_tmp[912072](912048 'call resolves' c"<" call_tmp[912062] call_tmp[912067]))
+    (912060 'move' ret[912055](912059 'deref' call_tmp[912072]))
+    (912057 return ret[912055])
+  }
+  function <[912022](arg _arg1[912024]:ReverseComparator[291103](?), arg _arg2[912025]:ReverseComparator[291103](?)) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[912119]:bool[10] "RVV" "temp"
+    unknown call_tmp[912136] "expr temp" "maybe param" "maybe type" "temp"
+    (912139 'move' call_tmp[912136](912083 call comparator _mt[243] _arg1[912024]))
+    unknown call_tmp[912141] "expr temp" "maybe param" "maybe type" "temp"
+    (912144 'move' call_tmp[912141](912087 call comparator _mt[243] _arg2[912025]))
+    unknown call_tmp[912146] "expr temp" "maybe param" "maybe type" "temp"
+    (912149 'move' call_tmp[912146](912091 call < call_tmp[912136] call_tmp[912141]))
+    if call_tmp[912146]
+    {
+      (912124 'move' ret[912119](912123 'deref' 1))
+      gotoReturn _end_<[912117] _end_<[912117]
+    }
+    unknown call_tmp[912151] "expr temp" "maybe param" "maybe type" "temp"
+    (912154 'move' call_tmp[912151](912097 call comparator _mt[243] _arg1[912024]))
+    unknown call_tmp[912156] "expr temp" "maybe param" "maybe type" "temp"
+    (912159 'move' call_tmp[912156](912101 call comparator _mt[243] _arg2[912025]))
+    unknown call_tmp[912161] "expr temp" "maybe param" "maybe type" "temp"
+    (912164 'move' call_tmp[912161](912105 call > call_tmp[912151] call_tmp[912156]))
+    if call_tmp[912161]
+    {
+      (912129 'move' ret[912119](912128 'deref' 0))
+      gotoReturn _end_<[912117] _end_<[912117]
+    }
+    (912134 'move' ret[912119](912133 'deref' 0))
+    label _end_<[912117]
+    (912121 return ret[912119])
+  }
+  where {
+    unknown call_tmp[912166] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (912169 'move' call_tmp[912166](912028 'typeof' _arg1[912024]))
+    unknown call_tmp[912171] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (912174 'move' call_tmp[912171](912030 'typeof' _arg2[912025]))
+    unknown call_tmp[912176] "expr temp" "maybe param" "maybe type" "temp"
+    (912179 'move' call_tmp[912176](912032 call == call_tmp[912166] call_tmp[912171]))
+    unknown call_tmp[912181] "expr temp" "maybe param" "maybe type" "temp"
+    (912184 'move' call_tmp[912181](912077 call chpl_fields_are_comparable[912034] _arg1[912024] _arg2[912025]))
+    (912081 '&' call_tmp[912176] call_tmp[912181])
+  }
+  function chpl_fields_are_comparable[912198](arg _arg1[912200]:ReverseComparator[291103](?), arg _arg2[912201]:ReverseComparator[291103](?)) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[912219]:bool[10] "RVV" "param" "temp"
+    unknown call_tmp[912226] "expr temp" "maybe param" "maybe type" "temp"
+    (912229 'move' call_tmp[912226](912204 call comparator _mt[243] _arg1[912200]))
+    unknown call_tmp[912231] "expr temp" "maybe param" "maybe type" "temp"
+    (912234 'move' call_tmp[912231](912208 call comparator _mt[243] _arg2[912201]))
+    unknown call_tmp[912236] "expr temp" "maybe param" "maybe type" "temp"
+    (912239 'move' call_tmp[912236](912212 'call resolves' c"<=" call_tmp[912226] call_tmp[912231]))
+    (912224 'move' ret[912219](912223 'deref' call_tmp[912236]))
+    (912221 return ret[912219])
+  }
+  function <=[912186](arg _arg1[912188]:ReverseComparator[291103](?), arg _arg2[912189]:ReverseComparator[291103](?)) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[912283]:bool[10] "RVV" "temp"
+    unknown call_tmp[912300] "expr temp" "maybe param" "maybe type" "temp"
+    (912303 'move' call_tmp[912300](912247 call comparator _mt[243] _arg1[912188]))
+    unknown call_tmp[912305] "expr temp" "maybe param" "maybe type" "temp"
+    (912308 'move' call_tmp[912305](912251 call comparator _mt[243] _arg2[912189]))
+    unknown call_tmp[912310] "expr temp" "maybe param" "maybe type" "temp"
+    (912313 'move' call_tmp[912310](912255 call < call_tmp[912300] call_tmp[912305]))
+    if call_tmp[912310]
+    {
+      (912288 'move' ret[912283](912287 'deref' 1))
+      gotoReturn _end_<=[912281] _end_<=[912281]
+    }
+    unknown call_tmp[912315] "expr temp" "maybe param" "maybe type" "temp"
+    (912318 'move' call_tmp[912315](912261 call comparator _mt[243] _arg1[912188]))
+    unknown call_tmp[912320] "expr temp" "maybe param" "maybe type" "temp"
+    (912323 'move' call_tmp[912320](912265 call comparator _mt[243] _arg2[912189]))
+    unknown call_tmp[912325] "expr temp" "maybe param" "maybe type" "temp"
+    (912328 'move' call_tmp[912325](912269 call > call_tmp[912315] call_tmp[912320]))
+    if call_tmp[912325]
+    {
+      (912293 'move' ret[912283](912292 'deref' 0))
+      gotoReturn _end_<=[912281] _end_<=[912281]
+    }
+    (912298 'move' ret[912283](912297 'deref' 1))
+    label _end_<=[912281]
+    (912285 return ret[912283])
+  }
+  where {
+    unknown call_tmp[912330] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (912333 'move' call_tmp[912330](912192 'typeof' _arg1[912188]))
+    unknown call_tmp[912335] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (912338 'move' call_tmp[912335](912194 'typeof' _arg2[912189]))
+    unknown call_tmp[912340] "expr temp" "maybe param" "maybe type" "temp"
+    (912343 'move' call_tmp[912340](912196 call == call_tmp[912330] call_tmp[912335]))
+    unknown call_tmp[912345] "expr temp" "maybe param" "maybe type" "temp"
+    (912348 'move' call_tmp[912345](912241 call chpl_fields_are_comparable[912198] _arg1[912188] _arg2[912189]))
+    (912245 '&' call_tmp[912340] call_tmp[912345])
+  }
+  function chpl_fields_are_comparable[912362](arg _arg1[912364]:ReverseComparator[291103](?), arg _arg2[912365]:ReverseComparator[291103](?)) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[912383]:bool[10] "RVV" "param" "temp"
+    unknown call_tmp[912390] "expr temp" "maybe param" "maybe type" "temp"
+    (912393 'move' call_tmp[912390](912368 call comparator _mt[243] _arg1[912364]))
+    unknown call_tmp[912395] "expr temp" "maybe param" "maybe type" "temp"
+    (912398 'move' call_tmp[912395](912372 call comparator _mt[243] _arg2[912365]))
+    unknown call_tmp[912400] "expr temp" "maybe param" "maybe type" "temp"
+    (912403 'move' call_tmp[912400](912376 'call resolves' c">" call_tmp[912390] call_tmp[912395]))
+    (912388 'move' ret[912383](912387 'deref' call_tmp[912400]))
+    (912385 return ret[912383])
+  }
+  function >[912350](arg _arg1[912352]:ReverseComparator[291103](?), arg _arg2[912353]:ReverseComparator[291103](?)) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[912447]:bool[10] "RVV" "temp"
+    unknown call_tmp[912464] "expr temp" "maybe param" "maybe type" "temp"
+    (912467 'move' call_tmp[912464](912411 call comparator _mt[243] _arg1[912352]))
+    unknown call_tmp[912469] "expr temp" "maybe param" "maybe type" "temp"
+    (912472 'move' call_tmp[912469](912415 call comparator _mt[243] _arg2[912353]))
+    unknown call_tmp[912474] "expr temp" "maybe param" "maybe type" "temp"
+    (912477 'move' call_tmp[912474](912419 call > call_tmp[912464] call_tmp[912469]))
+    if call_tmp[912474]
+    {
+      (912452 'move' ret[912447](912451 'deref' 1))
+      gotoReturn _end_>[912445] _end_>[912445]
+    }
+    unknown call_tmp[912479] "expr temp" "maybe param" "maybe type" "temp"
+    (912482 'move' call_tmp[912479](912425 call comparator _mt[243] _arg1[912352]))
+    unknown call_tmp[912484] "expr temp" "maybe param" "maybe type" "temp"
+    (912487 'move' call_tmp[912484](912429 call comparator _mt[243] _arg2[912353]))
+    unknown call_tmp[912489] "expr temp" "maybe param" "maybe type" "temp"
+    (912492 'move' call_tmp[912489](912433 call < call_tmp[912479] call_tmp[912484]))
+    if call_tmp[912489]
+    {
+      (912457 'move' ret[912447](912456 'deref' 0))
+      gotoReturn _end_>[912445] _end_>[912445]
+    }
+    (912462 'move' ret[912447](912461 'deref' 0))
+    label _end_>[912445]
+    (912449 return ret[912447])
+  }
+  where {
+    unknown call_tmp[912494] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (912497 'move' call_tmp[912494](912356 'typeof' _arg1[912352]))
+    unknown call_tmp[912499] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (912502 'move' call_tmp[912499](912358 'typeof' _arg2[912353]))
+    unknown call_tmp[912504] "expr temp" "maybe param" "maybe type" "temp"
+    (912507 'move' call_tmp[912504](912360 call == call_tmp[912494] call_tmp[912499]))
+    unknown call_tmp[912509] "expr temp" "maybe param" "maybe type" "temp"
+    (912512 'move' call_tmp[912509](912405 call chpl_fields_are_comparable[912362] _arg1[912352] _arg2[912353]))
+    (912409 '&' call_tmp[912504] call_tmp[912509])
+  }
+  function chpl_fields_are_comparable[912526](arg _arg1[912528]:ReverseComparator[291103](?), arg _arg2[912529]:ReverseComparator[291103](?)) param : bool[10] "compiler generated" "last resort" "param"
+  {
+    val ret[912547]:bool[10] "RVV" "param" "temp"
+    unknown call_tmp[912554] "expr temp" "maybe param" "maybe type" "temp"
+    (912557 'move' call_tmp[912554](912532 call comparator _mt[243] _arg1[912528]))
+    unknown call_tmp[912559] "expr temp" "maybe param" "maybe type" "temp"
+    (912562 'move' call_tmp[912559](912536 call comparator _mt[243] _arg2[912529]))
+    unknown call_tmp[912564] "expr temp" "maybe param" "maybe type" "temp"
+    (912567 'move' call_tmp[912564](912540 'call resolves' c">=" call_tmp[912554] call_tmp[912559]))
+    (912552 'move' ret[912547](912551 'deref' call_tmp[912564]))
+    (912549 return ret[912547])
+  }
+  function >=[912514](arg _arg1[912516]:ReverseComparator[291103](?), arg _arg2[912517]:ReverseComparator[291103](?)) : bool[10] "compiler generated" "last resort"
+  {
+    val ret[912611]:bool[10] "RVV" "temp"
+    unknown call_tmp[912628] "expr temp" "maybe param" "maybe type" "temp"
+    (912631 'move' call_tmp[912628](912575 call comparator _mt[243] _arg1[912516]))
+    unknown call_tmp[912633] "expr temp" "maybe param" "maybe type" "temp"
+    (912636 'move' call_tmp[912633](912579 call comparator _mt[243] _arg2[912517]))
+    unknown call_tmp[912638] "expr temp" "maybe param" "maybe type" "temp"
+    (912641 'move' call_tmp[912638](912583 call > call_tmp[912628] call_tmp[912633]))
+    if call_tmp[912638]
+    {
+      (912616 'move' ret[912611](912615 'deref' 1))
+      gotoReturn _end_>=[912609] _end_>=[912609]
+    }
+    unknown call_tmp[912643] "expr temp" "maybe param" "maybe type" "temp"
+    (912646 'move' call_tmp[912643](912589 call comparator _mt[243] _arg1[912516]))
+    unknown call_tmp[912648] "expr temp" "maybe param" "maybe type" "temp"
+    (912651 'move' call_tmp[912648](912593 call comparator _mt[243] _arg2[912517]))
+    unknown call_tmp[912653] "expr temp" "maybe param" "maybe type" "temp"
+    (912656 'move' call_tmp[912653](912597 call < call_tmp[912643] call_tmp[912648]))
+    if call_tmp[912653]
+    {
+      (912621 'move' ret[912611](912620 'deref' 0))
+      gotoReturn _end_>=[912609] _end_>=[912609]
+    }
+    (912626 'move' ret[912611](912625 'deref' 1))
+    label _end_>=[912609]
+    (912613 return ret[912611])
+  }
+  where {
+    unknown call_tmp[912658] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (912661 'move' call_tmp[912658](912520 'typeof' _arg1[912516]))
+    unknown call_tmp[912663] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (912666 'move' call_tmp[912663](912522 'typeof' _arg2[912517]))
+    unknown call_tmp[912668] "expr temp" "maybe param" "maybe type" "temp"
+    (912671 'move' call_tmp[912668](912524 call == call_tmp[912658] call_tmp[912663]))
+    unknown call_tmp[912673] "expr temp" "maybe param" "maybe type" "temp"
+    (912676 'move' call_tmp[912673](912569 call chpl_fields_are_comparable[912526] _arg1[912516] _arg2[912517]))
+    (912573 '&' call_tmp[912668] call_tmp[912673])
+  }
+  function =[912678](ref arg _arg1[912680]:ReverseComparator[291103](?), const?  ref arg _arg2[912681]:ReverseComparator[291103](?)) : void[4] "assignop" "compiler generated" "last resort"
+  {
+    unknown call_tmp[912707] "expr temp" "maybe param" "maybe type" "temp"
+    (912710 'move' call_tmp[912707](912691 call comparator _mt[243] _arg1[912680]))
+    unknown call_tmp[912714] "expr temp" "maybe param" "maybe type" "temp"
+    (912717 'move' call_tmp[912714](912695 call comparator _mt[243] _arg2[912681]))
+    (912699 call = call_tmp[912707] call_tmp[912714])
+    (912703 return _void[55])
+  }
+  where {
+    unknown call_tmp[912719] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (912722 'move' call_tmp[912719](912684 'typeof' _arg1[912680]))
+    unknown call_tmp[912724] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (912727 'move' call_tmp[912724](912686 'typeof' _arg2[912681]))
+    (912688 call == call_tmp[912719] call_tmp[912724])
+  }
+  function chpl__defaultHash[912729](arg r[912731]:ReverseComparator[291103](?)) : _unknown[51] "compiler generated" "last resort"
+  {
+    unknown ret[912744] "RVV" "temp"
+    unknown call_tmp[912751] "expr temp" "maybe param" "maybe type" "temp"
+    (912754 'move' call_tmp[912751](912733 call comparator _mt[243] r[912731]))
+    unknown call_tmp[912756] "expr temp" "maybe param" "maybe type" "temp"
+    (912759 'move' call_tmp[912756](912737 call chpl__defaultHash call_tmp[912751]))
+    (912749 'move' ret[912744](912748 'deref' call_tmp[912756]))
+    (912746 return ret[912744])
+  }
+  type ReverseComparator[291103](?) unknown comparator[290498]
+  (355385 'used modules list'(353075 'use' ChapelStandard[20264])(267887 'use' List[298145])(267891 'use' Reflection[224799]))
+}

@@ -1,0 +1,1478 @@
+AST dump for CPtr after pass normalize.
+Module use list: ChapelStandard SysBasic SysError SysCTypes HaltWrappers IO Reflection 
+
+{
+  function chpl__init_CPtr[416132]() : void[4] "insert line file info" "module init"
+  {
+    (527657 return _void[55])
+  }
+  function c_nil[204963]() : _unknown[51] "inline" "no parens"
+  {
+    unknown ret[527029] "RVV" "temp"
+    unknown call_tmp[702633] "expr temp" "maybe param" "maybe type" "temp"
+    (702636 'move' call_tmp[702633](204970 'cast' c_void_ptr[149] nil[44]))
+    (527035 'move' ret[527029](527034 'coerce' call_tmp[702633] c_void_ptr[149]))
+    (527031 return ret[527029])
+  }
+  { scopeless type
+    c_void_ptr[149]
+  }
+  function is_c_nil[204981](arg x[204979]:_any[178](?)) : _unknown[51] "inline"
+  {
+    unknown ret[527039] "RVV" "temp"
+    unknown call_tmp[702638] "expr temp" "maybe param" "maybe type" "temp"
+    (702641 'move' call_tmp[702638](204988 'cast' c_void_ptr[149] x[204979]))
+    unknown call_tmp[702643] "expr temp" "maybe param" "maybe type" "temp"
+    (702646 'move' call_tmp[702643](393622 call c_nil[204963]))
+    unknown call_tmp[702648] "expr temp" "maybe param" "maybe type" "temp"
+    (702651 'move' call_tmp[702648](204990 call == call_tmp[702638] call_tmp[702643]))
+    (527045 'move' ret[527039](527044 'coerce' call_tmp[702648] bool[10]))
+    (527041 return ret[527039])
+  }
+  { scopeless type
+    bool[10]
+  }
+  function c_ptr[205057](?).this[205008](arg _mt[205061]:_MT[238], arg this[205059]:c_ptr[205057](?), arg i[205005]:integral[199](?)) ref : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[527049] "RVV" "temp"
+    unknown call_tmp[702653] "expr temp" "maybe param" "maybe type" "temp"
+    (702656 'move' call_tmp[702653](205014 'array_get' this[205059] i[205005]))
+    (527054 'move' ret[527049](527053 'addr of' call_tmp[702653]))
+    (527051 return ret[527049])
+  }
+  function c_ptr[205057](?).deref[205022](arg _mt[205065]:_MT[238], arg this[205063]:c_ptr[205057](?)) ref : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[527058] "RVV" "temp"
+    unknown call_tmp[702658] "expr temp" "maybe param" "maybe type" "temp"
+    (702661 'move' call_tmp[702658](205028 'array_get' this[205063] 0))
+    (527063 'move' ret[527058](527062 'addr of' call_tmp[702658]))
+    (527060 return ret[527058])
+  }
+  function c_ptr[205057](?).writeThis[205038](arg _mt[205069]:_MT[238], arg this[205067]:c_ptr[205057](?), arg ch[205036]:_any[178](?)) : _unknown[51] throws "inline" "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[702663] "expr temp" "maybe param" "maybe type" "temp"
+    (702666 'move' call_tmp[702663](205042 call _cast c_void_ptr[149] this[205067]))
+    (205051 call(205046 call (partial) writeThis _mt[243] call_tmp[702663]) ch[205036])
+    (527065 return _void[55])
+  }
+  type c_ptr[205057](?) unknown eltType[204999] "type variable"
+  function c_array[205797](?).init[205087](arg _mt[205801]:_MT[238], ref arg this[205799]:c_array[205797](?), arg eltType[205085]:_any[178](?), param arg size[205089]:_any[178](?)) : void[4] "method" "primary method" "no return value for void"
+  {
+    unknown tmp[463365] "temp" "type variable"
+    (463367 'move' tmp[463365] eltType[205085])
+    (463369 'init field' this[205799] c"eltType" tmp[463365])
+    (485747 'end of statement')
+    unknown tmp[463373] "param" "temp"
+    (463375 'init var' tmp[463373] size[205089])
+    (463377 'init field' this[205799] c"size" tmp[463373])
+    (485748 'end of statement')
+    unknown i[205116] "dead at end of block" "insert auto destroy"
+    (545940 'init var' i[205116] 0)
+    (205119 'end of statement')
+    {
+      unknown tmp[205150] "temp"
+      unknown call_tmp[702670] "expr temp" "maybe param" "maybe type" "temp"
+      (702673 'move' call_tmp[702670](205171 call < i[205116] size[205089]))
+      (205174 'move' tmp[205150](205169 call _cond_test call_tmp[702670]))
+      WhileDo[205155]
+      {
+        {
+          unknown default[205125] "dead at end of block" "no auto destroy"
+          (545942 'default init var' default[205125] eltType[205085])
+          (205128 'end of statement')
+          unknown eltRef[205135] "dead at end of block" "ref var"
+          unknown call_tmp[702675] "expr temp" "maybe param" "maybe type" "temp"
+          (702678 'move' call_tmp[702675](205134 'array_get' this[205799] i[205116]))
+          (545945 'move' eltRef[205135](545944 'addr of' call_tmp[702675]))
+          (205138 'end of statement' i[205116])
+          (205143 '=' eltRef[205135] default[205125])
+          (485750 'end of statement' eltRef[205135] default[205125])
+          (205147 call += i[205116] 1)
+          (485753 'end of statement' i[205116])
+        }
+        label _continueLabel[205153]
+        unknown call_tmp[702680] "expr temp" "maybe param" "maybe type" "temp"
+        (702683 'move' call_tmp[702680](205161 call < i[205116] size[205089]))
+        (205164 'move' tmp[205150](205159 call _cond_test call_tmp[702680]))
+        tmp[205150]
+      }
+      label _breakLabel[205154]
+    }
+    (527067 return _void[55])
+  }
+  function c_array[205797](?).deinit[205181](arg _mt[205805]:_MT[238], arg this[205803]:c_array[205797](?)) : _unknown[51] "destructor" "method" "primary method" "no return value for void"
+  {
+    unknown i[205184] "dead at end of block" "insert auto destroy"
+    (545947 'init var' i[205184] 0)
+    (205187 'end of statement')
+    {
+      unknown tmp[205208] "temp"
+      unknown call_tmp[702687] "expr temp" "maybe param" "maybe type" "temp"
+      (702690 'move' call_tmp[702687](393655 call size _mt[243] this[205803]))
+      unknown call_tmp[702692] "expr temp" "maybe param" "maybe type" "temp"
+      (702695 'move' call_tmp[702692](205229 call < i[205184] call_tmp[702687]))
+      (205232 'move' tmp[205208](205227 call _cond_test call_tmp[702692]))
+      WhileDo[205213]
+      {
+        {
+          unknown call_tmp[702697] "expr temp" "maybe param" "maybe type" "temp"
+          (702700 'move' call_tmp[702697](205198 'array_get' this[205803] i[205184]))
+          (205200 call chpl__autoDestroy call_tmp[702697])
+          (485755 'end of statement' i[205184])
+          (205205 call += i[205184] 1)
+          (485757 'end of statement' i[205184])
+        }
+        label _continueLabel[205211]
+        unknown call_tmp[702704] "expr temp" "maybe param" "maybe type" "temp"
+        (702707 'move' call_tmp[702704](393649 call size _mt[243] this[205803]))
+        unknown call_tmp[702709] "expr temp" "maybe param" "maybe type" "temp"
+        (702712 'move' call_tmp[702709](205219 call < i[205184] call_tmp[702704]))
+        (205222 'move' tmp[205208](205217 call _cond_test call_tmp[702709]))
+        tmp[205208]
+      }
+      label _breakLabel[205212]
+    }
+    (527069 return _void[55])
+  }
+  function c_array[205797](?).this[205243](arg _mt[205809]:_MT[238], ref arg this[205807]:c_array[205797](?), arg i[205240]:integral[199](?)) ref : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[527073] "RVV" "temp"
+    unknown call_tmp[702714] "expr temp" "maybe param" "maybe type" "temp"
+    (702717 'move' call_tmp[702714](205323 call _cond_test 1))
+    if call_tmp[702714]
+    {
+      unknown tmp[430654] "maybe param" "temp"
+      (430665 'move' tmp[430654](205249 call < i[205240] 0))
+      unknown call_tmp[702719] "expr temp" "maybe param" "maybe type" "temp"
+      (702722 'move' call_tmp[702719](430667 call _cond_invalid tmp[430654]))
+      if call_tmp[702719]
+      {
+        (430670 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[573630] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[573631] "maybe param" "temp"
+      unknown call_tmp[702724] "expr temp" "maybe param" "maybe type" "temp"
+      (702727 'move' call_tmp[702724](430655 call isTrue tmp[430654]))
+      (573636 'move' tmp[573631](573634 call _cond_test call_tmp[702724]))
+      if tmp[573631]
+      {
+        (573641 'move' tmp[573630](573638 '_paramFoldLogical' tmp[573631] 1))
+      }
+      {
+        unknown tmp[573643] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[702731] "expr temp" "maybe param" "maybe type" "temp"
+        (702734 'move' call_tmp[702731](393669 call size _mt[243] this[205807]))
+        unknown call_tmp[702736] "expr temp" "maybe param" "maybe type" "temp"
+        (702739 'move' call_tmp[702736](205253 call >= i[205240] call_tmp[702731]))
+        (573645 'move' tmp[573643](430659 call isTrue call_tmp[702736]))
+        (573650 'move' tmp[573630](573647 '_paramFoldLogical' tmp[573631] tmp[573643]))
+      }
+      unknown call_tmp[702741] "expr temp" "maybe param" "maybe type" "temp"
+      (702744 'move' call_tmp[702741](205318 call _cond_test tmp[573630]))
+      if call_tmp[702741]
+      {
+        unknown call_tmp[702746] "expr temp" "maybe param" "maybe type" "temp"
+        (702749 'move' call_tmp[702746](205280 call _cast string[26] i[205240]))
+        unknown call_tmp[702751] "expr temp" "maybe param" "maybe type" "temp"
+        (702754 'move' call_tmp[702751](205282 call + "c array index out of bounds " call_tmp[702746]))
+        unknown call_tmp[702756] "expr temp" "maybe param" "maybe type" "temp"
+        (702759 'move' call_tmp[702756](205301 call + call_tmp[702751] "(indices are 0.."))
+        unknown call_tmp[702763] "expr temp" "maybe param" "maybe type" "temp"
+        (702766 'move' call_tmp[702763](393675 call size _mt[243] this[205807]))
+        unknown call_tmp[702768] "expr temp" "maybe param" "maybe type" "temp"
+        (702771 'move' call_tmp[702768](205305 call - call_tmp[702763] 1))
+        unknown call_tmp[702773] "expr temp" "maybe param" "maybe type" "temp"
+        (702776 'move' call_tmp[702773](205308 call _cast string[26] call_tmp[702768]))
+        unknown call_tmp[702778] "expr temp" "maybe param" "maybe type" "temp"
+        (702781 'move' call_tmp[702778](205310 call + call_tmp[702756] call_tmp[702773]))
+        unknown call_tmp[702783] "expr temp" "maybe param" "maybe type" "temp"
+        (702786 'move' call_tmp[702783](205313 call + call_tmp[702778] ")"))
+        (205316 call boundsCheckHalt module=[255] HaltWrappers[209915] call_tmp[702783])
+        (362964 'referenced modules list' HaltWrappers[209915])
+      }
+    }
+    unknown call_tmp[702788] "expr temp" "maybe param" "maybe type" "temp"
+    (702791 'move' call_tmp[702788](205333 'array_get' this[205807] i[205240]))
+    (527078 'move' ret[527073](527077 'addr of' call_tmp[702788]))
+    (527075 return ret[527073])
+  }
+  { scopeless type
+    (393661 call eltType _mt[243] this[205807])
+  }
+  function c_array[205797](?).this[205345](arg _mt[205813]:_MT[238], const  ref arg this[205811]:c_array[205797](?), arg i[205342]:integral[199](?)) const ref : _unknown[51] "inline" "method" "primary method" "no doc"
+  {
+    unknown ret[527082] "RVV" "temp"
+    unknown call_tmp[702795] "expr temp" "maybe param" "maybe type" "temp"
+    (702798 'move' call_tmp[702795](205393 call _cond_test 1))
+    if call_tmp[702795]
+    {
+      unknown tmp[430675] "maybe param" "temp"
+      (430686 'move' tmp[430675](205351 call < i[205342] 0))
+      unknown call_tmp[702800] "expr temp" "maybe param" "maybe type" "temp"
+      (702803 'move' call_tmp[702800](430688 call _cond_invalid tmp[430675]))
+      if call_tmp[702800]
+      {
+        (430691 call compilerError "cannot promote short-circuiting || operator")
+      }
+      unknown tmp[573657] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+      unknown tmp[573658] "maybe param" "temp"
+      unknown call_tmp[702805] "expr temp" "maybe param" "maybe type" "temp"
+      (702808 'move' call_tmp[702805](430676 call isTrue tmp[430675]))
+      (573663 'move' tmp[573658](573661 call _cond_test call_tmp[702805]))
+      if tmp[573658]
+      {
+        (573668 'move' tmp[573657](573665 '_paramFoldLogical' tmp[573658] 1))
+      }
+      {
+        unknown tmp[573670] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+        unknown call_tmp[702812] "expr temp" "maybe param" "maybe type" "temp"
+        (702815 'move' call_tmp[702812](393691 call size _mt[243] this[205811]))
+        unknown call_tmp[702817] "expr temp" "maybe param" "maybe type" "temp"
+        (702820 'move' call_tmp[702817](205355 call >= i[205342] call_tmp[702812]))
+        (573672 'move' tmp[573670](430680 call isTrue call_tmp[702817]))
+        (573677 'move' tmp[573657](573674 '_paramFoldLogical' tmp[573658] tmp[573670]))
+      }
+      unknown call_tmp[702822] "expr temp" "maybe param" "maybe type" "temp"
+      (702825 'move' call_tmp[702822](205388 call _cond_test tmp[573657]))
+      if call_tmp[702822]
+      {
+        unknown call_tmp[702827] "expr temp" "maybe param" "maybe type" "temp"
+        (702830 'move' call_tmp[702827](205366 call _cast string[26] i[205342]))
+        unknown call_tmp[702832] "expr temp" "maybe param" "maybe type" "temp"
+        (702835 'move' call_tmp[702832](205368 call + "c array index out of bounds " call_tmp[702827]))
+        unknown call_tmp[702837] "expr temp" "maybe param" "maybe type" "temp"
+        (702840 'move' call_tmp[702837](205371 call + call_tmp[702832] "(indices are 0.."))
+        unknown call_tmp[702844] "expr temp" "maybe param" "maybe type" "temp"
+        (702847 'move' call_tmp[702844](393697 call size _mt[243] this[205811]))
+        unknown call_tmp[702849] "expr temp" "maybe param" "maybe type" "temp"
+        (702852 'move' call_tmp[702849](205375 call - call_tmp[702844] 1))
+        unknown call_tmp[702854] "expr temp" "maybe param" "maybe type" "temp"
+        (702857 'move' call_tmp[702854](205378 call _cast string[26] call_tmp[702849]))
+        unknown call_tmp[702859] "expr temp" "maybe param" "maybe type" "temp"
+        (702862 'move' call_tmp[702859](205380 call + call_tmp[702837] call_tmp[702854]))
+        unknown call_tmp[702864] "expr temp" "maybe param" "maybe type" "temp"
+        (702867 'move' call_tmp[702864](205383 call + call_tmp[702859] ")"))
+        (205386 call boundsCheckHalt module=[255] HaltWrappers[209915] call_tmp[702864])
+        (362970 'referenced modules list' HaltWrappers[209915])
+      }
+    }
+    unknown call_tmp[702869] "expr temp" "maybe param" "maybe type" "temp"
+    (702872 'move' call_tmp[702869](205403 'array_get' this[205811] i[205342]))
+    (527087 'move' ret[527082](527086 'addr of' call_tmp[702869]))
+    (527084 return ret[527082])
+  }
+  { scopeless type
+    (393683 call eltType _mt[243] this[205811])
+  }
+  function c_array[205797](?).this[205415](arg _mt[205817]:_MT[238], ref arg this[205815]:c_array[205797](?), param arg i[205412]:integral[199](?)) ref : _unknown[51] "inline" "method" "primary method"
+  {
+    unknown ret[527091] "RVV" "temp"
+    unknown tmp[430696] "maybe param" "temp"
+    (430707 'move' tmp[430696](205420 call < i[205412] 0))
+    unknown call_tmp[702876] "expr temp" "maybe param" "maybe type" "temp"
+    (702879 'move' call_tmp[702876](430709 call _cond_invalid tmp[430696]))
+    if call_tmp[702876]
+    {
+      (430712 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[573684] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[573685] "maybe param" "temp"
+    unknown call_tmp[702881] "expr temp" "maybe param" "maybe type" "temp"
+    (702884 'move' call_tmp[702881](430697 call isTrue tmp[430696]))
+    (573690 'move' tmp[573685](573688 call _cond_test call_tmp[702881]))
+    if tmp[573685]
+    {
+      (573695 'move' tmp[573684](573692 '_paramFoldLogical' tmp[573685] 1))
+    }
+    {
+      unknown tmp[573697] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[702888] "expr temp" "maybe param" "maybe type" "temp"
+      (702891 'move' call_tmp[702888](393712 call size _mt[243] this[205815]))
+      unknown call_tmp[702893] "expr temp" "maybe param" "maybe type" "temp"
+      (702896 'move' call_tmp[702893](205424 call >= i[205412] call_tmp[702888]))
+      (573699 'move' tmp[573697](430701 call isTrue call_tmp[702893]))
+      (573704 'move' tmp[573684](573701 '_paramFoldLogical' tmp[573685] tmp[573697]))
+    }
+    unknown call_tmp[702898] "expr temp" "maybe param" "maybe type" "temp"
+    (702901 'move' call_tmp[702898](205454 call _cond_test tmp[573684]))
+    if call_tmp[702898]
+    {
+      unknown call_tmp[702903] "expr temp" "maybe param" "maybe type" "temp"
+      (702906 'move' call_tmp[702903](205432 call _cast string[26] i[205412]))
+      unknown call_tmp[702908] "expr temp" "maybe param" "maybe type" "temp"
+      (702911 'move' call_tmp[702908](205434 call + "c array index out of bounds " call_tmp[702903]))
+      unknown call_tmp[702913] "expr temp" "maybe param" "maybe type" "temp"
+      (702916 'move' call_tmp[702913](205437 call + call_tmp[702908] "(indices are 0.."))
+      unknown call_tmp[702920] "expr temp" "maybe param" "maybe type" "temp"
+      (702923 'move' call_tmp[702920](393718 call size _mt[243] this[205815]))
+      unknown call_tmp[702925] "expr temp" "maybe param" "maybe type" "temp"
+      (702928 'move' call_tmp[702925](205441 call - call_tmp[702920] 1))
+      unknown call_tmp[702930] "expr temp" "maybe param" "maybe type" "temp"
+      (702933 'move' call_tmp[702930](205444 call _cast string[26] call_tmp[702925]))
+      unknown call_tmp[702935] "expr temp" "maybe param" "maybe type" "temp"
+      (702938 'move' call_tmp[702935](205446 call + call_tmp[702913] call_tmp[702930]))
+      unknown call_tmp[702940] "expr temp" "maybe param" "maybe type" "temp"
+      (702943 'move' call_tmp[702940](205449 call + call_tmp[702935] ")"))
+      (205452 call compilerError call_tmp[702940])
+    }
+    unknown call_tmp[702945] "expr temp" "maybe param" "maybe type" "temp"
+    (702948 'move' call_tmp[702945](205464 'array_get' this[205815] i[205412]))
+    (527096 'move' ret[527091](527095 'addr of' call_tmp[702945]))
+    (527093 return ret[527091])
+  }
+  { scopeless type
+    (393705 call eltType _mt[243] this[205815])
+  }
+  function c_array[205797](?).this[205476](arg _mt[205821]:_MT[238], const  ref arg this[205819]:c_array[205797](?), param arg i[205473]:integral[199](?)) const ref : _unknown[51] "inline" "method" "primary method" "no doc"
+  {
+    unknown ret[527100] "RVV" "temp"
+    unknown tmp[430717] "maybe param" "temp"
+    (430728 'move' tmp[430717](205481 call < i[205473] 0))
+    unknown call_tmp[702952] "expr temp" "maybe param" "maybe type" "temp"
+    (702955 'move' call_tmp[702952](430730 call _cond_invalid tmp[430717]))
+    if call_tmp[702952]
+    {
+      (430733 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[573711] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[573712] "maybe param" "temp"
+    unknown call_tmp[702957] "expr temp" "maybe param" "maybe type" "temp"
+    (702960 'move' call_tmp[702957](430718 call isTrue tmp[430717]))
+    (573717 'move' tmp[573712](573715 call _cond_test call_tmp[702957]))
+    if tmp[573712]
+    {
+      (573722 'move' tmp[573711](573719 '_paramFoldLogical' tmp[573712] 1))
+    }
+    {
+      unknown tmp[573724] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[702964] "expr temp" "maybe param" "maybe type" "temp"
+      (702967 'move' call_tmp[702964](393733 call size _mt[243] this[205819]))
+      unknown call_tmp[702969] "expr temp" "maybe param" "maybe type" "temp"
+      (702972 'move' call_tmp[702969](205485 call >= i[205473] call_tmp[702964]))
+      (573726 'move' tmp[573724](430722 call isTrue call_tmp[702969]))
+      (573731 'move' tmp[573711](573728 '_paramFoldLogical' tmp[573712] tmp[573724]))
+    }
+    unknown call_tmp[702974] "expr temp" "maybe param" "maybe type" "temp"
+    (702977 'move' call_tmp[702974](205515 call _cond_test tmp[573711]))
+    if call_tmp[702974]
+    {
+      unknown call_tmp[702979] "expr temp" "maybe param" "maybe type" "temp"
+      (702982 'move' call_tmp[702979](205493 call _cast string[26] i[205473]))
+      unknown call_tmp[702984] "expr temp" "maybe param" "maybe type" "temp"
+      (702987 'move' call_tmp[702984](205495 call + "c array index out of bounds " call_tmp[702979]))
+      unknown call_tmp[702989] "expr temp" "maybe param" "maybe type" "temp"
+      (702992 'move' call_tmp[702989](205498 call + call_tmp[702984] "(indices are 0.."))
+      unknown call_tmp[702996] "expr temp" "maybe param" "maybe type" "temp"
+      (702999 'move' call_tmp[702996](393739 call size _mt[243] this[205819]))
+      unknown call_tmp[703001] "expr temp" "maybe param" "maybe type" "temp"
+      (703004 'move' call_tmp[703001](205502 call - call_tmp[702996] 1))
+      unknown call_tmp[703006] "expr temp" "maybe param" "maybe type" "temp"
+      (703009 'move' call_tmp[703006](205505 call _cast string[26] call_tmp[703001]))
+      unknown call_tmp[703011] "expr temp" "maybe param" "maybe type" "temp"
+      (703014 'move' call_tmp[703011](205507 call + call_tmp[702989] call_tmp[703006]))
+      unknown call_tmp[703016] "expr temp" "maybe param" "maybe type" "temp"
+      (703019 'move' call_tmp[703016](205510 call + call_tmp[703011] ")"))
+      (205513 call compilerError call_tmp[703016])
+    }
+    unknown call_tmp[703021] "expr temp" "maybe param" "maybe type" "temp"
+    (703024 'move' call_tmp[703021](205525 'array_get' this[205819] i[205473]))
+    (527105 'move' ret[527100](527104 'addr of' call_tmp[703021]))
+    (527102 return ret[527100])
+  }
+  { scopeless type
+    (393726 call eltType _mt[243] this[205819])
+  }
+  function c_array[205797](?).writeThis[205535](arg _mt[205825]:_MT[238], arg this[205823]:c_array[205797](?), arg ch[205533]:_any[178](?)) : _unknown[51] throws "method" "primary method" "no return value for void"
+  {
+    unknown call_tmp[703028] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (703031 'move' call_tmp[703028](748061 'new' ioLiteral[238670] "["))
+    (205543 call <~> ch[205533] call_tmp[703028])
+    (485771 'end of statement')
+    unknown first[205548] "dead at end of block" "insert auto destroy"
+    (545949 'init var' first[205548] 1)
+    (205551 'end of statement')
+    {
+      unknown _indexOfInterest[205589] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[205590] "expr temp" "temp"
+      unknown call_tmp[703035] "expr temp" "maybe param" "maybe type" "temp"
+      (703038 'move' call_tmp[703035](393759 call size _mt[243] this[205823]))
+      unknown call_tmp[703040] "expr temp" "maybe param" "maybe type" "temp"
+      (703043 'move' call_tmp[703040](205606 call chpl_direct_counted_range_iter 0 call_tmp[703035]))
+      (205599 'move' _iterator[205590](205597 call _getIterator call_tmp[703040]))
+      Defer
+      {
+        {
+          (205622 call _freeIterator _iterator[205590])
+        }
+      }
+      { scopeless type
+        (205611 'move' _indexOfInterest[205589](205608 call iteratorIndex _iterator[205590]))
+      }
+      ForLoop[205591]
+      {
+        unknown i[205615] "index var" "insert auto destroy"
+        (485773 'end of statement')
+        (205617 'move' i[205615] _indexOfInterest[205589])
+        (485774 'end of statement' i[205615])
+        {
+          unknown call_tmp[703045] "expr temp" "maybe param" "maybe type" "temp"
+          (703048 'move' call_tmp[703045](205563 call this[205823] i[205615]))
+          (205564 call <~> ch[205533] call_tmp[703045])
+          (485776 'end of statement' i[205615])
+          unknown call_tmp[703052] "expr temp" "maybe param" "maybe type" "temp"
+          (703055 'move' call_tmp[703052](393752 call size _mt[243] this[205823]))
+          unknown call_tmp[703057] "expr temp" "maybe param" "maybe type" "temp"
+          (703060 'move' call_tmp[703057](205571 call - call_tmp[703052] 1))
+          unknown call_tmp[703062] "expr temp" "maybe param" "maybe type" "temp"
+          (703065 'move' call_tmp[703062](205573 call != i[205615] call_tmp[703057]))
+          unknown call_tmp[703067] "expr temp" "maybe param" "maybe type" "temp"
+          (703070 'move' call_tmp[703067](205584 call _cond_test call_tmp[703062]))
+          if call_tmp[703067]
+          {
+            unknown call_tmp[703072] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+            (703075 'move' call_tmp[703072](748062 'new' ioLiteral[238670] ", "))
+            (205581 call <~> ch[205533] call_tmp[703072])
+          }
+        }
+        label _continueLabel[205594]
+        _indexOfInterest[205589]
+        _iterator[205590]
+      }
+      label _breakLabel[205595]
+    }
+    unknown call_tmp[703077] "insert auto destroy for explicit new" "maybe param" "maybe type" "temp"
+    (703080 'move' call_tmp[703077](748063 'new' ioLiteral[238670] "]"))
+    (205635 call <~> ch[205533] call_tmp[703077])
+    (527107 return _void[55])
+  }
+  function c_array[205797](?).length[205642](arg _mt[205829]:_MT[238], arg this[205827]:c_array[205797](?)) : _unknown[51] "inline" "method" "primary method" "no parens"
+  {
+    unknown ret[527111] "RVV" "temp"
+    unknown call_tmp[703082] "expr temp" "maybe param" "maybe type" "temp"
+    (703085 'move' call_tmp[703082](205679 call + "'c_array.length' is deprecated - " "please use 'c_array.size' instead"))
+    (205682 call compilerWarning call_tmp[703082])
+    (485780 'end of statement')
+    unknown call_tmp[703089] "expr temp" "maybe param" "maybe type" "temp"
+    (703092 'move' call_tmp[703089](393766 call size _mt[243] this[205827]))
+    (527116 'move' ret[527111](527115 'deref' call_tmp[703089]))
+    (527113 return ret[527111])
+  }
+  function c_array[205797](?).init=[205696](arg _mt[205833]:_MT[238], ref arg this[205831]:c_array[205797](?), arg other[205693]:c_array[205797](?)) : void[4] "method" "primary method" "no return value for void"
+  {
+    unknown tmp[463381] "temp" "type variable"
+    (463383 'move' tmp[463381](205703 call eltType _mt[243] other[205693]))
+    (463385 'init field' this[205831] c"eltType" tmp[463381])
+    (485782 'end of statement')
+    unknown call_tmp[703098] "maybe param" "maybe type" "temp"
+    (703101 'move' call_tmp[703098](205715 call size _mt[243] other[205693]))
+    unknown tmp[463389] "param" "temp"
+    (463391 'init var' tmp[463389] call_tmp[703098])
+    (463393 'init field' this[205831] c"size" tmp[463389])
+    (485783 'end of statement')
+    {
+      unknown _indexOfInterest[205754] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[205755] "expr temp" "temp"
+      unknown call_tmp[703105] "expr temp" "maybe param" "maybe type" "temp"
+      (703108 'move' call_tmp[703105](393782 call size _mt[243] this[205831]))
+      unknown call_tmp[703110] "expr temp" "maybe param" "maybe type" "temp"
+      (703113 'move' call_tmp[703110](205771 call chpl_direct_counted_range_iter 0 call_tmp[703105]))
+      (205764 'move' _iterator[205755](205762 call _getIterator call_tmp[703110]))
+      Defer
+      {
+        {
+          (205787 call _freeIterator _iterator[205755])
+        }
+      }
+      { scopeless type
+        (205776 'move' _indexOfInterest[205754](205773 call iteratorIndex _iterator[205755]))
+      }
+      ForLoop[205756]
+      {
+        unknown i[205780] "index var" "insert auto destroy"
+        (485785 'end of statement')
+        (205782 'move' i[205780] _indexOfInterest[205754])
+        (485786 'end of statement' i[205780])
+        {
+          unknown call_tmp[703115] "maybe param" "maybe type" "temp"
+          (703118 'move' call_tmp[703115](205739 call other[205693] i[205780]))
+          unknown call_tmp[703122] "maybe param" "maybe type" "temp"
+          (703125 'move' call_tmp[703122](393772 call eltType _mt[243] this[205831]))
+          unknown value[205740] "dead at end of block" "no auto destroy"
+          (545951 'init var' value[205740] call_tmp[703115] call_tmp[703122])
+          (205743 'end of statement' i[205780])
+          unknown call_tmp[703127] "expr temp" "maybe param" "maybe type" "temp"
+          (703130 'move' call_tmp[703127](205750 call this[205831] i[205780]))
+          (205752 '=' call_tmp[703127] value[205740])
+          (485789 'end of statement' i[205780] value[205740])
+        }
+        label _continueLabel[205759]
+        _indexOfInterest[205754]
+        _iterator[205755]
+      }
+      label _breakLabel[205760]
+    }
+    (527118 return _void[55])
+  }
+  type c_array[205797](?) unknown eltType[205076] "type variable" unknown size[205079] "param"
+  function =[205842](ref arg lhs[205839]:c_array[205797](?), arg rhs[205845]:c_array[205797](?)) : _unknown[51] "assignop" "no return value for void"
+  {
+    unknown call_tmp[703134] "expr temp" "maybe param" "maybe type" "temp"
+    (703137 'move' call_tmp[703134](205849 call eltType _mt[243] lhs[205839]))
+    unknown call_tmp[703141] "expr temp" "maybe param" "maybe type" "temp"
+    (703144 'move' call_tmp[703141](205853 call eltType _mt[243] rhs[205845]))
+    unknown call_tmp[703146] "expr temp" "maybe param" "maybe type" "temp"
+    (703149 'move' call_tmp[703146](205856 call != call_tmp[703134] call_tmp[703141]))
+    unknown call_tmp[703151] "expr temp" "maybe param" "maybe type" "temp"
+    (703154 'move' call_tmp[703151](205879 call _cond_test call_tmp[703146]))
+    if call_tmp[703151]
+    {
+      (205877 call compilerError "element type mismatch in c_array assignment")
+    }
+    unknown call_tmp[703158] "expr temp" "maybe param" "maybe type" "temp"
+    (703161 'move' call_tmp[703158](205886 call size _mt[243] lhs[205839]))
+    unknown call_tmp[703165] "expr temp" "maybe param" "maybe type" "temp"
+    (703168 'move' call_tmp[703165](205890 call size _mt[243] rhs[205845]))
+    unknown call_tmp[703170] "expr temp" "maybe param" "maybe type" "temp"
+    (703173 'move' call_tmp[703170](205893 call != call_tmp[703158] call_tmp[703165]))
+    unknown call_tmp[703175] "expr temp" "maybe param" "maybe type" "temp"
+    (703178 'move' call_tmp[703175](205916 call _cond_test call_tmp[703170]))
+    if call_tmp[703175]
+    {
+      (205914 call compilerError "size mismatch in c_array assignment")
+    }
+    {
+      unknown _indexOfInterest[205943] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[205944] "expr temp" "temp"
+      unknown call_tmp[703182] "expr temp" "maybe param" "maybe type" "temp"
+      (703185 'move' call_tmp[703182](205959 call size _mt[243] lhs[205839]))
+      unknown call_tmp[703187] "expr temp" "maybe param" "maybe type" "temp"
+      (703190 'move' call_tmp[703187](205963 call chpl_direct_counted_range_iter 0 call_tmp[703182]))
+      (205953 'move' _iterator[205944](205951 call _getIterator call_tmp[703187]))
+      Defer
+      {
+        {
+          (205979 call _freeIterator _iterator[205944])
+        }
+      }
+      { scopeless type
+        (205968 'move' _indexOfInterest[205943](205965 call iteratorIndex _iterator[205944]))
+      }
+      ForLoop[205945]
+      {
+        unknown i[205972] "index var" "insert auto destroy"
+        (485795 'end of statement')
+        (205974 'move' i[205972] _indexOfInterest[205943])
+        (485796 'end of statement' i[205972])
+        {
+          unknown call_tmp[703192] "expr temp" "maybe param" "maybe type" "temp"
+          (703195 'move' call_tmp[703192](205934 call lhs[205839] i[205972]))
+          unknown call_tmp[703197] "expr temp" "maybe param" "maybe type" "temp"
+          (703200 'move' call_tmp[703197](205938 call rhs[205845] i[205972]))
+          (205939 call = call_tmp[703192] call_tmp[703197])
+          (485798 'end of statement' i[205972] i[205972])
+        }
+        label _continueLabel[205948]
+        _indexOfInterest[205943]
+        _iterator[205944]
+      }
+      label _breakLabel[205949]
+    }
+    (527120 return _void[55])
+  }
+  function =[205994](ref arg lhs[205991]:c_ptr[205057](?), ref arg rhs[205997]:c_array[205797](?)) : _unknown[51] "assignop" "no return value for void"
+  {
+    unknown call_tmp[703202] "expr temp" "maybe param" "maybe type" "temp"
+    (703205 'move' call_tmp[703202](206015 call rhs[205997] 0))
+    unknown call_tmp[703207] "expr temp" "maybe param" "maybe type" "temp"
+    (703210 'move' call_tmp[703207](206017 call c_ptrTo call_tmp[703202]))
+    (206018 call = lhs[205991] call_tmp[703207])
+    (527122 return _void[55])
+  }
+  where {
+    unknown call_tmp[703214] "expr temp" "maybe param" "maybe type" "temp"
+    (703217 'move' call_tmp[703214](206001 call eltType _mt[243] lhs[205991]))
+    unknown call_tmp[703221] "expr temp" "maybe param" "maybe type" "temp"
+    (703224 'move' call_tmp[703221](206005 call eltType _mt[243] rhs[205997]))
+    (206008 call == call_tmp[703214] call_tmp[703221])
+  }
+  function c_void_ptr[149].writeThis[206030](arg _mt[206035]:_MT[238], arg this[206032]:c_void_ptr[149] :
+  c_void_ptr[149], arg ch[206028]:_any[178](?)) : _unknown[51] throws "inline" "method" "no doc" "no return value for void"
+  {
+    unknown call_tmp[703228] "expr temp" "maybe param" "maybe type" "temp"
+    (703231 'move' call_tmp[703228](206061 call _cast c_uintptr[20633] this[206032]))
+    (206063 call(206038 call (partial) writef _mt[243] ch[206028]) "0x%xu" call_tmp[703228])
+    (527124 return _void[55])
+  }
+  function =[206074](ref arg a[206071]:c_ptr[205057](?), arg b[206077]:c_ptr[205057](?)) : _unknown[51] "assignop" "inline" "no doc" "no return value for void"
+  {
+    (206084 '=' a[206071] b[206077])
+    (527126 return _void[55])
+  }
+  function =[206095](ref arg a[206092]:c_ptr[205057](?), arg b[206098]:c_void_ptr[149]) : _unknown[51] "assignop" "inline" "no doc" "no return value for void"
+  {
+    (206105 '=' a[206092] b[206098])
+    (527128 return _void[55])
+  }
+  function _cast[206116](arg t[206113]:c_void_ptr[149], arg x[206119]:c_fn_ptr[152]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527132] "RVV" "temp"
+    unknown call_tmp[703233] "expr temp" "maybe param" "maybe type" "temp"
+    (703236 'move' call_tmp[703233](206126 'cast' c_void_ptr[149] x[206119]))
+    (527137 'move' ret[527132](527136 'deref' call_tmp[703233]))
+    (527134 return ret[527132])
+  }
+  function _cast[206138](arg t[206135]:c_ptr[205057](?), arg x[206141]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527141] "RVV" "temp"
+    unknown call_tmp[703238] "expr temp" "maybe param" "maybe type" "temp"
+    (703241 'move' call_tmp[703238](206148 'cast' t[206135] x[206141]))
+    (527146 'move' ret[527141](527145 'deref' call_tmp[703238]))
+    (527143 return ret[527141])
+  }
+  function _cast[206164](arg t[206161]:c_ptr[205057](?), ref arg x[206167]:c_array[205797](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527150] "RVV" "temp"
+    unknown call_tmp[703243] "expr temp" "maybe param" "maybe type" "temp"
+    (703246 'move' call_tmp[703243](206181 call x[206167] 0))
+    unknown call_tmp[703248] "expr temp" "maybe param" "maybe type" "temp"
+    (703251 'move' call_tmp[703248](206183 call c_ptrTo call_tmp[703243]))
+    (527155 'move' ret[527150](527154 'deref' call_tmp[703248]))
+    (527152 return ret[527150])
+  }
+  where {
+    unknown call_tmp[703255] "expr temp" "maybe param" "maybe type" "temp"
+    (703258 'move' call_tmp[703255](206171 call eltType _mt[243] x[206167]))
+    unknown call_tmp[703260] "expr temp" "maybe param" "maybe type" "temp"
+    (703263 'move' call_tmp[703260](463403 'query' t[206161] 1))
+    (206175 call == call_tmp[703255] call_tmp[703260])
+  }
+  function _cast[206196](arg t[206193]:c_void_ptr[149], ref arg x[206199]:c_array[205797](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527159] "RVV" "temp"
+    unknown call_tmp[703265] "expr temp" "maybe param" "maybe type" "temp"
+    (703268 'move' call_tmp[703265](206206 call x[206199] 0))
+    unknown call_tmp[703270] "expr temp" "maybe param" "maybe type" "temp"
+    (703273 'move' call_tmp[703270](206208 call c_ptrTo call_tmp[703265]))
+    unknown call_tmp[703275] "expr temp" "maybe param" "maybe type" "temp"
+    (703278 'move' call_tmp[703275](206210 call _cast c_void_ptr[149] call_tmp[703270]))
+    (527164 'move' ret[527159](527163 'deref' call_tmp[703275]))
+    (527161 return ret[527159])
+  }
+  function _cast[206223](arg t[206220]:c_void_ptr[149], arg x[206226]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527168] "RVV" "temp"
+    unknown call_tmp[703280] "expr temp" "maybe param" "maybe type" "temp"
+    (703283 'move' call_tmp[703280](206233 'cast' t[206220] x[206226]))
+    (527173 'move' ret[527168](527172 'deref' call_tmp[703280]))
+    (527170 return ret[527168])
+  }
+  function _cast[206245](arg t[206242]:c_ptr[205057](?), arg x[206248]:c_void_ptr[149]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527177] "RVV" "temp"
+    unknown call_tmp[703285] "expr temp" "maybe param" "maybe type" "temp"
+    (703288 'move' call_tmp[703285](206255 'cast' t[206242] x[206248]))
+    (527182 'move' ret[527177](527181 'deref' call_tmp[703285]))
+    (527179 return ret[527177])
+  }
+  function _cast[206267](arg t[206264]:string[26], arg x[206270]:c_void_ptr[149]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527186] "RVV" "temp"
+    Try!
+    {
+      {
+        unknown call_tmp[703290] "expr temp" "maybe param" "maybe type" "temp"
+        (703293 'move' call_tmp[703290](206293 'ref to string' x[206270]))
+        unknown call_tmp[703295] "expr temp" "maybe param" "maybe type" "temp"
+        (703298 'move' call_tmp[703295](206295 call createStringWithOwnedBuffer call_tmp[703290]))
+        (527191 'move' ret[527186](527190 'deref' call_tmp[703295]))
+        gotoReturn _end__cast[527184] _end__cast[527184]
+      }
+    }
+    label _end__cast[527184]
+    (527188 return ret[527186])
+  }
+  function _cast[206311](arg t[206308]:string[26], arg x[206314]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527197] "RVV" "temp"
+    Try!
+    {
+      {
+        unknown call_tmp[703300] "expr temp" "maybe param" "maybe type" "temp"
+        (703303 'move' call_tmp[703300](206321 'ref to string' x[206314]))
+        unknown call_tmp[703305] "expr temp" "maybe param" "maybe type" "temp"
+        (703308 'move' call_tmp[703305](206323 call createStringWithOwnedBuffer call_tmp[703300]))
+        (527202 'move' ret[527197](527201 'deref' call_tmp[703305]))
+        gotoReturn _end__cast[527195] _end__cast[527195]
+      }
+    }
+    label _end__cast[527195]
+    (527199 return ret[527197])
+  }
+  function _cast[206339](arg t[206336]:_anyManagementAnyNilable[229](?), arg x[206342]:c_void_ptr[149]) : _unknown[51] "inline" "last resort" "no doc"
+  {
+    unknown ret[527208] "RVV" "temp"
+    unknown tmp[430738] "maybe param" "temp"
+    (430749 'move' tmp[430738](206348 call isUnmanagedClass t[206336]))
+    unknown call_tmp[703310] "expr temp" "maybe param" "maybe type" "temp"
+    (703313 'move' call_tmp[703310](430751 call _cond_invalid tmp[430738]))
+    if call_tmp[703310]
+    {
+      (430754 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[573738] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[573739] "maybe param" "temp"
+    unknown call_tmp[703315] "expr temp" "maybe param" "maybe type" "temp"
+    (703318 'move' call_tmp[703315](430739 call isTrue tmp[430738]))
+    (573744 'move' tmp[573739](573742 call _cond_test call_tmp[703315]))
+    if tmp[573739]
+    {
+      (573749 'move' tmp[573738](573746 '_paramFoldLogical' tmp[573739] 1))
+    }
+    {
+      unknown tmp[573751] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[703320] "expr temp" "maybe param" "maybe type" "temp"
+      (703323 'move' call_tmp[703320](206352 call isBorrowedClass t[206336]))
+      (573753 'move' tmp[573751](430743 call isTrue call_tmp[703320]))
+      (573758 'move' tmp[573738](573755 '_paramFoldLogical' tmp[573739] tmp[573751]))
+    }
+    unknown call_tmp[703325] "expr temp" "maybe param" "maybe type" "temp"
+    (703328 'move' call_tmp[703325](206486 call _cond_test tmp[573738]))
+    if call_tmp[703325]
+    {
+      unknown call_tmp[703330] "expr temp" "maybe param" "maybe type" "temp"
+      (703333 'move' call_tmp[703330](206375 call _cast string[26] t[206336]))
+      unknown call_tmp[703335] "expr temp" "maybe param" "maybe type" "temp"
+      (703338 'move' call_tmp[703335](206377 call + "cast from c_void_ptr to " call_tmp[703330]))
+      unknown call_tmp[703340] "expr temp" "maybe param" "maybe type" "temp"
+      (703343 'move' call_tmp[703340](206396 call + call_tmp[703335] " is deprecated"))
+      (206399 call compilerWarning call_tmp[703340])
+      (485814 'end of statement')
+      unknown call_tmp[703345] "expr temp" "maybe param" "maybe type" "temp"
+      (703348 'move' call_tmp[703345](206423 call _to_nilable t[206336]))
+      unknown call_tmp[703350] "expr temp" "maybe param" "maybe type" "temp"
+      (703353 'move' call_tmp[703350](206425 call _cast string[26] call_tmp[703345]))
+      unknown call_tmp[703355] "expr temp" "maybe param" "maybe type" "temp"
+      (703358 'move' call_tmp[703355](206427 call + "cast to " call_tmp[703350]))
+      unknown call_tmp[703360] "expr temp" "maybe param" "maybe type" "temp"
+      (703363 'move' call_tmp[703360](206446 call + call_tmp[703355] " instead"))
+      (206449 call compilerWarning call_tmp[703360])
+      (485815 'end of statement')
+      unknown call_tmp[703365] "expr temp" "maybe param" "maybe type" "temp"
+      (703368 'move' call_tmp[703365](206455 'cast' t[206336] x[206342]))
+      (527213 'move' ret[527208](527212 'deref' call_tmp[703365]))
+      gotoReturn _end__cast[527206] _end__cast[527206]
+    }
+    {
+      unknown call_tmp[703370] "expr temp" "maybe param" "maybe type" "temp"
+      (703373 'move' call_tmp[703370](206478 call _cast string[26] t[206336]))
+      unknown call_tmp[703375] "expr temp" "maybe param" "maybe type" "temp"
+      (703378 'move' call_tmp[703375](206480 call + "invalid cast from c_void_ptr to managed type " call_tmp[703370]))
+      (206483 call compilerWarning call_tmp[703375])
+    }
+    label _end__cast[527206]
+    (527210 return ret[527208])
+  }
+  function _cast[206501](arg t[206498]:_unmanagedNilable[226](?), arg x[206504]:c_void_ptr[149]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527219] "RVV" "temp"
+    unknown call_tmp[703380] "expr temp" "maybe param" "maybe type" "temp"
+    (703383 'move' call_tmp[703380](206511 'cast' t[206498] x[206504]))
+    (527224 'move' ret[527219](527223 'deref' call_tmp[703380]))
+    (527221 return ret[527219])
+  }
+  function _cast[206525](arg t[206522]:_borrowedNilable[217](?), arg x[206528]:c_void_ptr[149]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527228] "RVV" "temp"
+    unknown call_tmp[703385] "expr temp" "maybe param" "maybe type" "temp"
+    (703388 'move' call_tmp[703385](206535 'cast' t[206522] x[206528]))
+    (527233 'move' ret[527228](527232 'deref' call_tmp[703385]))
+    (527230 return ret[527228])
+  }
+  function _cast[206547](arg t[206544]:c_void_ptr[149], arg x[206550]:borrowed[211](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527237] "RVV" "temp"
+    unknown call_tmp[703390] "expr temp" "maybe param" "maybe type" "temp"
+    (703393 'move' call_tmp[703390](206557 'cast' t[206544] x[206550]))
+    (527242 'move' ret[527237](527241 'deref' call_tmp[703390]))
+    (527239 return ret[527237])
+  }
+  function _cast[206569](arg t[206566]:c_void_ptr[149], arg x[206572]:unmanaged[220](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527246] "RVV" "temp"
+    unknown call_tmp[703395] "expr temp" "maybe param" "maybe type" "temp"
+    (703398 'move' call_tmp[703395](206579 'cast' t[206566] x[206572]))
+    (527251 'move' ret[527246](527250 'deref' call_tmp[703395]))
+    (527248 return ret[527246])
+  }
+  function _cast[206591](arg t[206588]:_ddata[11695](?), arg x[206594]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527255] "RVV" "temp"
+    unknown call_tmp[703400] "expr temp" "maybe param" "maybe type" "temp"
+    (703403 'move' call_tmp[703400](206611 'cast' t[206588] x[206594]))
+    (527260 'move' ret[527255](527259 'deref' call_tmp[703400]))
+    (527257 return ret[527255])
+  }
+  where {
+    unknown call_tmp[703407] "expr temp" "maybe param" "maybe type" "temp"
+    (703410 'move' call_tmp[703407](206598 call eltType _mt[243] t[206588]))
+    unknown call_tmp[703414] "expr temp" "maybe param" "maybe type" "temp"
+    (703417 'move' call_tmp[703414](206602 call eltType _mt[243] x[206594]))
+    (206605 call == call_tmp[703407] call_tmp[703414])
+  }
+  function _cast[206624](arg t[206621]:_ddata[11695](?), arg x[206627]:c_void_ptr[149]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527264] "RVV" "temp"
+    unknown call_tmp[703419] "expr temp" "maybe param" "maybe type" "temp"
+    (703422 'move' call_tmp[703419](206634 'cast' t[206621] x[206627]))
+    (527269 'move' ret[527264](527268 'deref' call_tmp[703419]))
+    (527266 return ret[527264])
+  }
+  function _cast[206646](arg t[206643]:c_void_ptr[149], arg x[206649]:_ddata[11695](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527273] "RVV" "temp"
+    unknown call_tmp[703424] "expr temp" "maybe param" "maybe type" "temp"
+    (703427 'move' call_tmp[703424](206656 'cast' t[206643] x[206649]))
+    (527278 'move' ret[527273](527277 'deref' call_tmp[703424]))
+    (527275 return ret[527273])
+  }
+  function _cast[206668](arg t[206665] :
+  c_intptr[20626], arg x[206671]:c_void_ptr[149]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527282] "RVV" "temp"
+    unknown call_tmp[703429] "expr temp" "maybe param" "maybe type" "temp"
+    (703432 'move' call_tmp[703429](206678 'cast' t[206665] x[206671]))
+    (527287 'move' ret[527282](527286 'deref' call_tmp[703429]))
+    (527284 return ret[527282])
+  }
+  function _cast[206690](arg t[206687] :
+  c_uintptr[20633], arg x[206693]:c_void_ptr[149]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527291] "RVV" "temp"
+    unknown call_tmp[703434] "expr temp" "maybe param" "maybe type" "temp"
+    (703437 'move' call_tmp[703434](206700 'cast' t[206687] x[206693]))
+    (527296 'move' ret[527291](527295 'deref' call_tmp[703434]))
+    (527293 return ret[527291])
+  }
+  function _cast[206715](arg t[206712] :
+  (206711 call int(64)[13] 64), arg x[206718]:c_void_ptr[149]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527300] "RVV" "temp"
+    unknown call_tmp[703439] "expr temp" "maybe param" "maybe type" "temp"
+    (703442 'move' call_tmp[703439](206732 'cast' t[206712] x[206718]))
+    (527305 'move' ret[527300](527304 'deref' call_tmp[703439]))
+    (527302 return ret[527300])
+  }
+  where {
+    unknown call_tmp[703444] "expr temp" "maybe param" "maybe type" "temp"
+    (703447 'move' call_tmp[703444](206725 call int(64)[13] 64))
+    (206726 call != c_uintptr[20633] call_tmp[703444])
+  }
+  function _cast[206748](arg t[206745] :
+  (206744 call uint(64)[115] 64), arg x[206751]:c_void_ptr[149]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527309] "RVV" "temp"
+    unknown call_tmp[703449] "expr temp" "maybe param" "maybe type" "temp"
+    (703452 'move' call_tmp[703449](206765 'cast' t[206745] x[206751]))
+    (527314 'move' ret[527309](527313 'deref' call_tmp[703449]))
+    (527311 return ret[527309])
+  }
+  where {
+    unknown call_tmp[703454] "expr temp" "maybe param" "maybe type" "temp"
+    (703457 'move' call_tmp[703454](206758 call uint(64)[115] 64))
+    (206759 call != c_uintptr[20633] call_tmp[703454])
+  }
+  function _cast[206778](arg t[206775] :
+  c_intptr[20626], arg x[206781]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527318] "RVV" "temp"
+    unknown call_tmp[703459] "expr temp" "maybe param" "maybe type" "temp"
+    (703462 'move' call_tmp[703459](206788 'cast' t[206775] x[206781]))
+    (527323 'move' ret[527318](527322 'deref' call_tmp[703459]))
+    (527320 return ret[527318])
+  }
+  function _cast[206800](arg t[206797] :
+  c_uintptr[20633], arg x[206803]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527327] "RVV" "temp"
+    unknown call_tmp[703464] "expr temp" "maybe param" "maybe type" "temp"
+    (703467 'move' call_tmp[703464](206810 'cast' t[206797] x[206803]))
+    (527332 'move' ret[527327](527331 'deref' call_tmp[703464]))
+    (527329 return ret[527327])
+  }
+  function _cast[206825](arg t[206822] :
+  (206821 call int(64)[13] 64), arg x[206828]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527336] "RVV" "temp"
+    unknown call_tmp[703469] "expr temp" "maybe param" "maybe type" "temp"
+    (703472 'move' call_tmp[703469](206842 'cast' t[206822] x[206828]))
+    (527341 'move' ret[527336](527340 'deref' call_tmp[703469]))
+    (527338 return ret[527336])
+  }
+  where {
+    unknown call_tmp[703474] "expr temp" "maybe param" "maybe type" "temp"
+    (703477 'move' call_tmp[703474](206835 call int(64)[13] 64))
+    (206836 call != c_intptr[20626] call_tmp[703474])
+  }
+  function _cast[206858](arg t[206855] :
+  (206854 call uint(64)[115] 64), arg x[206861]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527345] "RVV" "temp"
+    unknown call_tmp[703479] "expr temp" "maybe param" "maybe type" "temp"
+    (703482 'move' call_tmp[703479](206875 'cast' t[206855] x[206861]))
+    (527350 'move' ret[527345](527349 'deref' call_tmp[703479]))
+    (527347 return ret[527345])
+  }
+  where {
+    unknown call_tmp[703484] "expr temp" "maybe param" "maybe type" "temp"
+    (703487 'move' call_tmp[703484](206868 call int(64)[13] 64))
+    (206869 call != c_uintptr[20633] call_tmp[703484])
+  }
+  function =[206888](ref arg a[206885]:c_fn_ptr[152], arg b[206891]:c_fn_ptr[152]) : _unknown[51] "assignop" "inline" "no doc" "no return value for void"
+  {
+    (206898 '=' a[206885] b[206891])
+    (527352 return _void[55])
+  }
+  function ==[206909](arg a[206906]:c_ptr[205057](?), arg b[206912]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527356] "RVV" "temp"
+    unknown call_tmp[703489] "expr temp" "maybe param" "maybe type" "temp"
+    (703492 'move' call_tmp[703489](206929 'ptr_eq' a[206906] b[206912]))
+    (527361 'move' ret[527356](527360 'deref' call_tmp[703489]))
+    (527358 return ret[527356])
+  }
+  where {
+    unknown call_tmp[703496] "expr temp" "maybe param" "maybe type" "temp"
+    (703499 'move' call_tmp[703496](206916 call eltType _mt[243] a[206906]))
+    unknown call_tmp[703503] "expr temp" "maybe param" "maybe type" "temp"
+    (703506 'move' call_tmp[703503](206920 call eltType _mt[243] b[206912]))
+    (206923 call == call_tmp[703496] call_tmp[703503])
+  }
+  function ==[206942](arg a[206939]:c_ptr[205057](?), arg b[206945]:c_void_ptr[149]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527365] "RVV" "temp"
+    unknown call_tmp[703508] "expr temp" "maybe param" "maybe type" "temp"
+    (703511 'move' call_tmp[703508](206952 'ptr_eq' a[206939] b[206945]))
+    (527370 'move' ret[527365](527369 'deref' call_tmp[703508]))
+    (527367 return ret[527365])
+  }
+  function ==[206964](arg a[206961]:c_void_ptr[149], arg b[206967]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527374] "RVV" "temp"
+    unknown call_tmp[703513] "expr temp" "maybe param" "maybe type" "temp"
+    (703516 'move' call_tmp[703513](206974 'ptr_eq' a[206961] b[206967]))
+    (527379 'move' ret[527374](527378 'deref' call_tmp[703513]))
+    (527376 return ret[527374])
+  }
+  function !=[206986](arg a[206983]:c_ptr[205057](?), arg b[206989]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527383] "RVV" "temp"
+    unknown call_tmp[703518] "expr temp" "maybe param" "maybe type" "temp"
+    (703521 'move' call_tmp[703518](207006 'ptr_neq' a[206983] b[206989]))
+    (527388 'move' ret[527383](527387 'deref' call_tmp[703518]))
+    (527385 return ret[527383])
+  }
+  where {
+    unknown call_tmp[703525] "expr temp" "maybe param" "maybe type" "temp"
+    (703528 'move' call_tmp[703525](206993 call eltType _mt[243] a[206983]))
+    unknown call_tmp[703532] "expr temp" "maybe param" "maybe type" "temp"
+    (703535 'move' call_tmp[703532](206997 call eltType _mt[243] b[206989]))
+    (207000 call == call_tmp[703525] call_tmp[703532])
+  }
+  function !=[207019](arg a[207016]:c_ptr[205057](?), arg b[207022]:c_void_ptr[149]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527392] "RVV" "temp"
+    unknown call_tmp[703537] "expr temp" "maybe param" "maybe type" "temp"
+    (703540 'move' call_tmp[703537](207029 'ptr_neq' a[207016] b[207022]))
+    (527397 'move' ret[527392](527396 'deref' call_tmp[703537]))
+    (527394 return ret[527392])
+  }
+  function !=[207041](arg a[207038]:c_void_ptr[149], arg b[207044]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527401] "RVV" "temp"
+    unknown call_tmp[703542] "expr temp" "maybe param" "maybe type" "temp"
+    (703545 'move' call_tmp[703542](207051 'ptr_neq' a[207038] b[207044]))
+    (527406 'move' ret[527401](527405 'deref' call_tmp[703542]))
+    (527403 return ret[527401])
+  }
+  function _cond_test[207063](arg x[207060]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527410] "RVV" "temp"
+    unknown call_tmp[703547] "expr temp" "maybe param" "maybe type" "temp"
+    (703550 'move' call_tmp[703547](393928 call c_nil[204963]))
+    unknown call_tmp[703552] "expr temp" "maybe param" "maybe type" "temp"
+    (703555 'move' call_tmp[703552](207067 call != x[207060] call_tmp[703547]))
+    (527415 'move' ret[527410](527414 'deref' call_tmp[703552]))
+    (527412 return ret[527410])
+  }
+  function ![207080](arg x[207077]:c_ptr[205057](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527419] "RVV" "temp"
+    unknown call_tmp[703557] "expr temp" "maybe param" "maybe type" "temp"
+    (703560 'move' call_tmp[703557](393932 call c_nil[204963]))
+    unknown call_tmp[703562] "expr temp" "maybe param" "maybe type" "temp"
+    (703565 'move' call_tmp[703562](207084 call == x[207077] call_tmp[703557]))
+    (527424 'move' ret[527419](527423 'deref' call_tmp[703562]))
+    (527421 return ret[527419])
+  }
+  function +[207097](arg a[207094]:c_ptr[205057](?), arg b[207100]:integral[199](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527428] "RVV" "temp"
+    unknown call_tmp[703567] "expr temp" "maybe param" "maybe type" "temp"
+    (703570 'move' call_tmp[703567](207107 '+' a[207094] b[207100]))
+    (527433 'move' ret[527428](527432 'deref' call_tmp[703567]))
+    (527430 return ret[527428])
+  }
+  function -[207119](arg a[207116]:c_ptr[205057](?), arg b[207122]:integral[199](?)) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527437] "RVV" "temp"
+    unknown call_tmp[703572] "expr temp" "maybe param" "maybe type" "temp"
+    (703575 'move' call_tmp[703572](207129 '-' a[207116] b[207122]))
+    (527442 'move' ret[527437](527441 'deref' call_tmp[703572]))
+    (527439 return ret[527437])
+  }
+  function -[207145](arg a[207142]:c_ptr[205057](?), arg b[207151] :
+  unknown call_tmp[703577] "expr temp" "maybe param" "maybe type" "temp") : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527446] "RVV" "temp"
+    unknown call_tmp[703584] "expr temp" "maybe param" "maybe type" "temp"
+    (703587 'move' call_tmp[703584](207161 call eltType _mt[243] a[207142]))
+    unknown call_tmp[703589] "expr temp" "maybe param" "maybe type" "temp"
+    (703592 'move' call_tmp[703589](207165 call c_sizeof call_tmp[703584]))
+    unknown call_tmp[703594] "expr temp" "maybe param" "maybe type" "temp"
+    (703597 'move' call_tmp[703594](207167 call _cast c_ptrdiff[20640] call_tmp[703589]))
+    unknown call_tmp[703599] "expr temp" "maybe param" "maybe type" "temp"
+    (703602 'move' call_tmp[703599](207169 call c_pointer_diff a[207142] b[207151] call_tmp[703594]))
+    (527452 'move' ret[527446](527451 'coerce' call_tmp[703599] c_ptrdiff[20640]))
+    (527448 return ret[527446])
+  }
+  { scopeless type
+    c_ptrdiff[20640]
+  }
+  function c_pointer_return[207183](ref arg x[207180]:_any[178](?)) : _unknown[51] "extern" "local args" "no fn body" "no doc" "fn synchronization free" "no return value for void"
+  {
+    unknown ret[527456] "RVV" "temp"
+    (527458 return ret[527456])
+  }
+  { scopeless type
+    unknown call_tmp[703604] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (703607 'move' call_tmp[703604](463417 'typeof' x[207180]))
+    (207188 call c_ptr[205057](?) call_tmp[703604])
+  }
+  function c_pointer_diff[207198](arg a[207195]:c_void_ptr[149], arg b[207201]:c_void_ptr[149], arg eltSize[207205] :
+  c_ptrdiff[20640]) : _unknown[51] "extern" "local args" "no fn body" "no doc" "fn synchronization free" "no return value for void"
+  {
+    unknown ret[527462] "RVV" "temp"
+    (527464 return ret[527462])
+  }
+  { scopeless type
+    c_ptrdiff[20640]
+  }
+  function c_ptrTo[207220](arg arr[207217]:_array[133600](?)) : _unknown[51] "inline"
+  {
+    unknown ret[527468] "RVV" "temp"
+    unknown call_tmp[703611] "expr temp" "maybe param" "maybe type" "temp"
+    (703614 'move' call_tmp[703611](207229 call _dom _mt[243] arr[207217]))
+    unknown call_tmp[703618] "expr temp" "maybe param" "maybe type" "temp"
+    (703621 'move' call_tmp[703618](207232 call low _mt[243] call_tmp[703611]))
+    unknown call_tmp[703623] "expr temp" "maybe param" "maybe type" "temp"
+    (703626 'move' call_tmp[703623](207236 call arr[207217] call_tmp[703618]))
+    unknown call_tmp[703628] "expr temp" "maybe param" "maybe type" "temp"
+    (703631 'move' call_tmp[703628](207238 call c_pointer_return call_tmp[703623]))
+    (527473 'move' ret[527468](527472 'deref' call_tmp[703628]))
+    (527470 return ret[527468])
+  }
+  where {
+    (207225 call isRectangularArr arr[207217])
+  }
+  function c_ptrTo[207252](ref arg x[207249]:_any[178](?)) : _unknown[51] "inline"
+  {
+    unknown ret[527477] "RVV" "temp"
+    unknown call_tmp[703633] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (703636 'move' call_tmp[703633](463421 'typeof' x[207249]))
+    unknown call_tmp[703638] "expr temp" "maybe param" "maybe type" "temp"
+    (703641 'move' call_tmp[703638](207261 call isArrayType call_tmp[703633]))
+    unknown call_tmp[703643] "expr temp" "maybe param" "maybe type" "temp"
+    (703646 'move' call_tmp[703643](207284 call _cond_test call_tmp[703638]))
+    if call_tmp[703643]
+    {
+      (207282 call compilerError "c_ptrTo unsupported array type" 2)
+    }
+    unknown call_tmp[703648] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (703651 'move' call_tmp[703648](463423 'typeof' x[207249]))
+    unknown call_tmp[703653] "expr temp" "maybe param" "maybe type" "temp"
+    (703656 'move' call_tmp[703653](207293 call isDomainType call_tmp[703648]))
+    unknown call_tmp[703658] "expr temp" "maybe param" "maybe type" "temp"
+    (703661 'move' call_tmp[703658](207316 call _cond_test call_tmp[703653]))
+    if call_tmp[703658]
+    {
+      (207314 call compilerError "c_ptrTo domain type not supported" 2)
+    }
+    unknown call_tmp[703663] "expr temp" "maybe param" "maybe type" "temp"
+    (703666 'move' call_tmp[703663](207324 call c_pointer_return x[207249]))
+    unknown call_tmp[703668] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (703671 'move' call_tmp[703668](527483 'typeof' x[207249]))
+    unknown call_tmp[703673] "expr temp" "maybe param" "maybe type" "temp"
+    (703676 'move' call_tmp[703673](527482 call c_ptr[205057](?) call_tmp[703668]))
+    (527486 'move' ret[527477](527485 'coerce' call_tmp[703663] call_tmp[703673]))
+    (527479 return ret[527477])
+  }
+  { scopeless type
+    unknown call_tmp[703678] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (703681 'move' call_tmp[703678](463425 'typeof' x[207249]))
+    (207257 call c_ptr[205057](?) call_tmp[703678])
+  }
+  function c_ptrTo[207336](arg x[207333]:c_fn_ptr[152]) : _unknown[51] "inline" "no doc"
+  {
+    unknown ret[527490] "RVV" "temp"
+    (527495 'move' ret[527490](527494 'deref' x[207333]))
+    (527492 return ret[527490])
+  }
+  function c_fn_ptr[152].this[207347](arg _mt[207352]:_MT[238], arg this[207349]:c_fn_ptr[152] :
+  c_fn_ptr[152]) : _unknown[51] "method" "no doc" "no return value for void"
+  {
+    (207373 call compilerError "Can't call a C function pointer within Chapel")
+    (527497 return _void[55])
+  }
+  function c_fn_ptr[152].this[207385](arg _mt[207390]:_MT[238], arg this[207387]:c_fn_ptr[152] :
+  c_fn_ptr[152], arg args[207382]:_any[178](?) ...) : _unknown[51] "method" "no doc" "no return value for void"
+  {
+    (207395 call compilerError "Can't call a C function pointer within Chapel")
+    (527499 return _void[55])
+  }
+  function offset_ARRAY_ELEMENTS[207402]() : _unknown[51] "no parens" "private"
+  {
+    unknown ret[527509] "RVV" "temp"
+    const CHPL_RT_MD_ARRAY_ELEMENTS[207405] "dead at end of block" "const" "extern" "insert auto destroy"
+    { scopeless type extern
+      (545953 'default init var' CHPL_RT_MD_ARRAY_ELEMENTS[207405] chpl_mem_descInt_t[11653])
+    }
+    (207408 'end of statement')
+    function chpl_memhook_md_num[207412]() : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+      unknown ret[527503] "RVV" "temp"
+      (527505 return ret[527503])
+    }
+    { scopeless type
+      chpl_mem_descInt_t[11653]
+    }
+    unknown call_tmp[703683] "expr temp" "maybe param" "maybe type" "temp"
+    (703686 'move' call_tmp[703683](207421 call chpl_memhook_md_num))
+    unknown call_tmp[703688] "expr temp" "maybe param" "maybe type" "temp"
+    (703691 'move' call_tmp[703688](207422 call - CHPL_RT_MD_ARRAY_ELEMENTS[207405] call_tmp[703683]))
+    (527514 'move' ret[527509](527513 'deref' call_tmp[703688]))
+    gotoReturn _end_offset_ARRAY_ELEMENTS[527507] _end_offset_ARRAY_ELEMENTS[527507]
+    (485852 'end of statement' CHPL_RT_MD_ARRAY_ELEMENTS[207405])
+    label _end_offset_ARRAY_ELEMENTS[527507]
+    (527511 return ret[527509])
+  }
+  function c_sizeof[207432](arg x[207430]:_any[178](?)) : _unknown[51] "inline"
+  {
+    unknown ret[527526] "RVV" "temp"
+    function sizeof[207439](arg x[207437]:_any[178](?)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+      unknown ret[527520] "RVV" "temp"
+      (527522 return ret[527520])
+    }
+    { scopeless type
+      size_t[20654]
+    }
+    unknown call_tmp[703693] "expr temp" "maybe param" "maybe type" "temp"
+    (703696 'move' call_tmp[703693](207449 call sizeof x[207430]))
+    (527532 'move' ret[527526](527531 'coerce' call_tmp[703693] size_t[20654]))
+    (527528 return ret[527526])
+  }
+  { scopeless type
+    size_t[20654]
+  }
+  function c_offsetof[207459](arg t[207457]:_any[178](?), param arg fieldname[207462]:string[26]) : _unknown[51]
+  {
+    unknown ret[527536] "RVV" "temp"
+    unknown x[207475] "dead at end of block" "no auto destroy" "no init"
+    (545956 'default init var' x[207475] t[207457])
+    (207478 'end of statement')
+    unknown call_tmp[703698] "expr temp" "maybe param" "maybe type" "temp"
+    (703701 'move' call_tmp[703698](207484 call getFieldRef x[207475] fieldname[207462]))
+    unknown call_tmp[703703] "expr temp" "maybe param" "maybe type" "temp"
+    (703706 'move' call_tmp[703703](207486 call c_ptrTo call_tmp[703698]))
+    unknown call_tmp[703708] "expr temp" "maybe param" "maybe type" "temp"
+    (703711 'move' call_tmp[703708](207488 call _cast size_t[20654] call_tmp[703703]))
+    unknown call_tmp[703713] "expr temp" "maybe param" "maybe type" "temp"
+    (703716 'move' call_tmp[703713](207493 call c_ptrTo x[207475]))
+    unknown call_tmp[703718] "expr temp" "maybe param" "maybe type" "temp"
+    (703721 'move' call_tmp[703718](207495 call _cast size_t[20654] call_tmp[703713]))
+    unknown call_tmp[703723] "expr temp" "maybe param" "maybe type" "temp"
+    (703726 'move' call_tmp[703723](207497 call - call_tmp[703708] call_tmp[703718]))
+    (527542 'move' ret[527536](527541 'coerce' call_tmp[703723] size_t[20654]))
+    gotoReturn _end_c_offsetof[527534] _end_c_offsetof[527534]
+    (485855 'end of statement' x[207475] x[207475])
+    label _end_c_offsetof[527534]
+    (527538 return ret[527536])
+    (355318 'used modules list'(207471 'use' Reflection[224799]))
+  }
+  where {
+    (207469 call isRecordType t[207457])
+  }
+  { scopeless type
+    size_t[20654]
+  }
+  function c_offsetof[207509](arg t[207507]:_any[178](?), param arg fieldname[207512]:string[26]) : _unknown[51] "no doc" "no return value for void"
+  {
+    (207540 call compilerError "Cannot call c_offsetof on type that is not a record")
+    (527546 return _void[55])
+  }
+  where {
+    unknown call_tmp[703728] "expr temp" "maybe param" "maybe type" "temp"
+    (703731 'move' call_tmp[703728](207518 call isRecordType t[207507]))
+    (207519 call ! call_tmp[703728])
+  }
+  function c_calloc[207550](arg eltType[207548]:_any[178](?), arg size[207553]:integral[199](?)) : _unknown[51] "inline"
+  {
+    unknown ret[527550] "RVV" "temp"
+    unknown call_tmp[703735] "expr temp" "maybe param" "maybe type" "temp"
+    (703738 'move' call_tmp[703735](207566 call(207561 call (partial) safeCast _mt[243] size[207553]) size_t[20654]))
+    unknown call_tmp[703740] "expr temp" "maybe param" "maybe type" "temp"
+    (703743 'move' call_tmp[703740](207570 call c_sizeof eltType[207548]))
+    unknown call_tmp[703745] "maybe param" "maybe type" "temp"
+    (703748 'move' call_tmp[703745](207571 call * call_tmp[703735] call_tmp[703740]))
+    const alloc_size[207573] "dead at end of block" "const" "insert auto destroy"
+    (545958 'init var' alloc_size[207573] call_tmp[703745])
+    (207576 'end of statement')
+    unknown call_tmp[703750] "expr temp" "maybe param" "maybe type" "temp"
+    (703753 'move' call_tmp[703750](207587 call c_ptr[205057](?) eltType[207548]))
+    unknown call_tmp[703755] "expr temp" "maybe param" "maybe type" "temp"
+    (703758 'move' call_tmp[703755](393985 call offset_ARRAY_ELEMENTS[207402]))
+    unknown call_tmp[703760] "expr temp" "maybe param" "maybe type" "temp"
+    (703763 'move' call_tmp[703760](207583 call chpl_here_calloc alloc_size[207573] 1 call_tmp[703755]))
+    unknown call_tmp[703765] "expr temp" "maybe param" "maybe type" "temp"
+    (703768 'move' call_tmp[703765](207588 call _cast call_tmp[703750] call_tmp[703760]))
+    unknown call_tmp[703770] "expr temp" "maybe param" "maybe type" "temp"
+    (703773 'move' call_tmp[703770](527555 call c_ptr[205057](?) eltType[207548]))
+    (527558 'move' ret[527550](527557 'coerce' call_tmp[703765] call_tmp[703770]))
+    gotoReturn _end_c_calloc[527548] _end_c_calloc[527548]
+    (485859 'end of statement' alloc_size[207573])
+    label _end_c_calloc[527548]
+    (527552 return ret[527550])
+  }
+  { scopeless type
+    (207559 call c_ptr[205057](?) eltType[207548])
+  }
+  function c_malloc[207599](arg eltType[207597]:_any[178](?), arg size[207602]:integral[199](?)) : _unknown[51] "inline"
+  {
+    unknown ret[527564] "RVV" "temp"
+    unknown call_tmp[703777] "expr temp" "maybe param" "maybe type" "temp"
+    (703780 'move' call_tmp[703777](207615 call(207610 call (partial) safeCast _mt[243] size[207602]) size_t[20654]))
+    unknown call_tmp[703782] "expr temp" "maybe param" "maybe type" "temp"
+    (703785 'move' call_tmp[703782](207619 call c_sizeof eltType[207597]))
+    unknown call_tmp[703787] "maybe param" "maybe type" "temp"
+    (703790 'move' call_tmp[703787](207620 call * call_tmp[703777] call_tmp[703782]))
+    const alloc_size[207622] "dead at end of block" "const" "insert auto destroy"
+    (545960 'init var' alloc_size[207622] call_tmp[703787])
+    (207625 'end of statement')
+    unknown call_tmp[703792] "expr temp" "maybe param" "maybe type" "temp"
+    (703795 'move' call_tmp[703792](207635 call c_ptr[205057](?) eltType[207597]))
+    unknown call_tmp[703797] "expr temp" "maybe param" "maybe type" "temp"
+    (703800 'move' call_tmp[703797](393995 call offset_ARRAY_ELEMENTS[207402]))
+    unknown call_tmp[703802] "expr temp" "maybe param" "maybe type" "temp"
+    (703805 'move' call_tmp[703802](207631 call chpl_here_alloc alloc_size[207622] call_tmp[703797]))
+    unknown call_tmp[703807] "expr temp" "maybe param" "maybe type" "temp"
+    (703810 'move' call_tmp[703807](207636 call _cast call_tmp[703792] call_tmp[703802]))
+    unknown call_tmp[703812] "expr temp" "maybe param" "maybe type" "temp"
+    (703815 'move' call_tmp[703812](527569 call c_ptr[205057](?) eltType[207597]))
+    (527572 'move' ret[527564](527571 'coerce' call_tmp[703807] call_tmp[703812]))
+    gotoReturn _end_c_malloc[527562] _end_c_malloc[527562]
+    (485861 'end of statement' alloc_size[207622])
+    label _end_c_malloc[527562]
+    (527566 return ret[527564])
+  }
+  { scopeless type
+    (207608 call c_ptr[205057](?) eltType[207597])
+  }
+  function c_aligned_alloc[207647](arg eltType[207645]:_any[178](?), arg alignment[207650]:integral[199](?), arg size[207654]:integral[199](?)) : _unknown[51] "inline"
+  {
+    unknown ret[527578] "RVV" "temp"
+    unknown call_tmp[703817] "expr temp" "maybe param" "maybe type" "temp"
+    (703820 'move' call_tmp[703817](207813 call _cond_test 1))
+    if call_tmp[703817]
+    {
+      unknown one[207664] "dead at end of block" "insert auto destroy"
+      (545962 'init var' one[207664] 1 size_t[20654])
+      (207667 'end of statement')
+      unknown call_tmp[703824] "maybe param" "maybe type" "temp"
+      (703827 'move' call_tmp[703824](207675 call(207670 call (partial) safeCast _mt[243] alignment[207650]) size_t[20654]))
+      unknown aln[207676] "dead at end of block" "insert auto destroy"
+      (545964 'init var' aln[207676] call_tmp[703824])
+      (207679 'end of statement')
+      unknown call_tmp[703829] "expr temp" "maybe param" "maybe type" "temp"
+      (703832 'move' call_tmp[703829](207682 call == aln[207676] 0))
+      unknown call_tmp[703834] "expr temp" "maybe param" "maybe type" "temp"
+      (703837 'move' call_tmp[703834](207705 call _cond_test call_tmp[703829]))
+      if call_tmp[703834]
+      {
+        (207703 call halt "c_aligned_alloc called with alignment of 0")
+      }
+      unknown call_tmp[703839] "maybe param" "maybe type" "temp"
+      (703842 'move' call_tmp[703839](207713 call log2 aln[207676]))
+      unknown p[207714] "dead at end of block" "insert auto destroy"
+      (545966 'init var' p[207714] call_tmp[703839])
+      (207717 'end of statement' aln[207676])
+      unknown call_tmp[703844] "expr temp" "maybe param" "maybe type" "temp"
+      (703847 'move' call_tmp[703844](207720 call << one[207664] p[207714]))
+      unknown call_tmp[703849] "expr temp" "maybe param" "maybe type" "temp"
+      (703852 'move' call_tmp[703849](207723 call < call_tmp[703844] aln[207676]))
+      unknown call_tmp[703854] "expr temp" "maybe param" "maybe type" "temp"
+      (703857 'move' call_tmp[703854](207730 call _cond_test call_tmp[703849]))
+      if call_tmp[703854]
+      {
+        (207727 call += p[207714] 1)
+        (485865 'end of statement' p[207714])
+      }
+      unknown call_tmp[703859] "expr temp" "maybe param" "maybe type" "temp"
+      (703862 'move' call_tmp[703859](207739 call << one[207664] p[207714]))
+      unknown call_tmp[703864] "expr temp" "maybe param" "maybe type" "temp"
+      (703867 'move' call_tmp[703864](207741 call <= aln[207676] call_tmp[703859]))
+      (207744 call assert call_tmp[703864])
+      (485867 'end of statement' aln[207676] one[207664] p[207714])
+      unknown call_tmp[703869] "expr temp" "maybe param" "maybe type" "temp"
+      (703872 'move' call_tmp[703869](207749 call << one[207664] p[207714]))
+      unknown call_tmp[703874] "expr temp" "maybe param" "maybe type" "temp"
+      (703877 'move' call_tmp[703874](207751 call != aln[207676] call_tmp[703869]))
+      unknown call_tmp[703879] "expr temp" "maybe param" "maybe type" "temp"
+      (703882 'move' call_tmp[703879](207775 call _cond_test call_tmp[703874]))
+      if call_tmp[703879]
+      {
+        (207773 call halt "c_aligned_alloc called with non-power-of-2 alignment " aln[207676])
+        (485871 'end of statement' aln[207676])
+      }
+      unknown call_tmp[703884] "expr temp" "maybe param" "maybe type" "temp"
+      (703887 'move' call_tmp[703884](207784 call c_sizeof c_void_ptr[149]))
+      unknown call_tmp[703889] "expr temp" "maybe param" "maybe type" "temp"
+      (703892 'move' call_tmp[703889](207785 call < alignment[207650] call_tmp[703884]))
+      unknown call_tmp[703894] "expr temp" "maybe param" "maybe type" "temp"
+      (703897 'move' call_tmp[703894](207808 call _cond_test call_tmp[703889]))
+      if call_tmp[703894]
+      {
+        (207806 call halt "c_aligned_alloc called with alignment smaller than pointer size")
+      }
+    }
+    unknown call_tmp[703901] "expr temp" "maybe param" "maybe type" "temp"
+    (703904 'move' call_tmp[703901](207824 call(207819 call (partial) safeCast _mt[243] size[207654]) size_t[20654]))
+    unknown call_tmp[703906] "expr temp" "maybe param" "maybe type" "temp"
+    (703909 'move' call_tmp[703906](207828 call c_sizeof eltType[207645]))
+    unknown call_tmp[703911] "maybe param" "maybe type" "temp"
+    (703914 'move' call_tmp[703911](207829 call * call_tmp[703901] call_tmp[703906]))
+    const alloc_size[207831] "dead at end of block" "const" "insert auto destroy"
+    (545968 'init var' alloc_size[207831] call_tmp[703911])
+    (207834 'end of statement')
+    unknown call_tmp[703916] "expr temp" "maybe param" "maybe type" "temp"
+    (703919 'move' call_tmp[703916](207850 call c_ptr[205057](?) eltType[207645]))
+    unknown call_tmp[703923] "expr temp" "maybe param" "maybe type" "temp"
+    (703926 'move' call_tmp[703923](207842 call(207837 call (partial) safeCast _mt[243] alignment[207650]) size_t[20654]))
+    unknown call_tmp[703928] "expr temp" "maybe param" "maybe type" "temp"
+    (703931 'move' call_tmp[703928](394025 call offset_ARRAY_ELEMENTS[207402]))
+    unknown call_tmp[703933] "expr temp" "maybe param" "maybe type" "temp"
+    (703936 'move' call_tmp[703933](207846 call chpl_here_aligned_alloc call_tmp[703923] alloc_size[207831] call_tmp[703928]))
+    unknown call_tmp[703938] "expr temp" "maybe param" "maybe type" "temp"
+    (703941 'move' call_tmp[703938](207851 call _cast call_tmp[703916] call_tmp[703933]))
+    unknown call_tmp[703943] "expr temp" "maybe param" "maybe type" "temp"
+    (703946 'move' call_tmp[703943](527583 call c_ptr[205057](?) eltType[207645]))
+    (527586 'move' ret[527578](527585 'coerce' call_tmp[703938] call_tmp[703943]))
+    gotoReturn _end_c_aligned_alloc[527576] _end_c_aligned_alloc[527576]
+    (485874 'end of statement' alloc_size[207831])
+    label _end_c_aligned_alloc[527576]
+    (527580 return ret[527578])
+  }
+  { scopeless type
+    (207660 call c_ptr[205057](?) eltType[207645])
+  }
+  function c_free[207864](arg data[207861]:c_void_ptr[149]) : _unknown[51] "inline" "no return value for void"
+  {
+    (207869 call chpl_here_free data[207861])
+    (527590 return _void[55])
+  }
+  function isAnyCPtr[207880](arg t[207877]:c_ptr[205057](?)) param : _unknown[51]
+  {
+    unknown ret[527594] "RVV" "param" "temp"
+    (527599 'move' ret[527594](527598 'deref' 1))
+    (527596 return ret[527594])
+  }
+  function isAnyCPtr[207894](arg t[207891]:c_void_ptr[149]) param : _unknown[51] "no doc"
+  {
+    unknown ret[527603] "RVV" "param" "temp"
+    (527608 'move' ret[527603](527607 'deref' 1))
+    (527605 return ret[527603])
+  }
+  function isAnyCPtr[207906](arg t[207904]:_any[178](?)) param : _unknown[51] "no doc"
+  {
+    unknown ret[527612] "RVV" "param" "temp"
+    (527617 'move' ret[527612](527616 'deref' 0))
+    (527614 return ret[527612])
+  }
+  function c_memmove[207920](arg dest[207917]:c_void_ptr[149], const arg src[207923]:c_void_ptr[149], arg n[207927]:integral[199](?)) : _unknown[51] "inline" "fn synchronization free" "no return value for void"
+  {
+    function memmove[207936](arg dest[207933]:c_void_ptr[149], const arg src[207939]:c_void_ptr[149], arg n[207943] :
+    size_t[20654]) : void[4] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+      (527619 return _void[55])
+    }
+    unknown call_tmp[703950] "expr temp" "maybe param" "maybe type" "temp"
+    (703953 'move' call_tmp[703950](207959 call(207954 call (partial) safeCast _mt[243] n[207927]) size_t[20654]))
+    (207960 call memmove dest[207917] src[207923] call_tmp[703950])
+    (527621 return _void[55])
+  }
+  function c_memcpy[207970](arg dest[207967]:c_void_ptr[149], const arg src[207973]:c_void_ptr[149], arg n[207977]:integral[199](?)) : _unknown[51] "inline" "fn synchronization free" "no return value for void"
+  {
+    function memcpy[207986](arg dest[207983]:c_void_ptr[149], const arg src[207989]:c_void_ptr[149], arg n[207993] :
+    size_t[20654]) : void[4] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+      (527623 return _void[55])
+    }
+    unknown call_tmp[703957] "expr temp" "maybe param" "maybe type" "temp"
+    (703960 'move' call_tmp[703957](208009 call(208004 call (partial) safeCast _mt[243] n[207977]) size_t[20654]))
+    (208010 call memcpy dest[207967] src[207973] call_tmp[703957])
+    (527625 return _void[55])
+  }
+  function c_memcmp[208020](const arg s1[208017]:c_void_ptr[149], const arg s2[208023]:c_void_ptr[149], arg n[208027]:integral[199](?)) : _unknown[51] "inline" "fn synchronization free"
+  {
+    unknown ret[527635] "RVV" "temp"
+    function memcmp[208036](const arg s1[208033]:c_void_ptr[149], const arg s2[208039]:c_void_ptr[149], arg n[208043] :
+    size_t[20654]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+      unknown ret[527629] "RVV" "temp"
+      (527631 return ret[527629])
+    }
+    { scopeless type
+      c_int[20549]
+    }
+    unknown call_tmp[703964] "expr temp" "maybe param" "maybe type" "temp"
+    (703967 'move' call_tmp[703964](208061 call(208056 call (partial) safeCast _mt[243] n[208027]) size_t[20654]))
+    unknown call_tmp[703969] "expr temp" "maybe param" "maybe type" "temp"
+    (703972 'move' call_tmp[703969](208062 call memcmp s1[208017] s2[208023] call_tmp[703964]))
+    unknown call_tmp[703976] "expr temp" "maybe param" "maybe type" "temp"
+    (703979 'move' call_tmp[703976](208068 call(208063 call (partial) safeCast _mt[243] call_tmp[703969]) int(64)[13]))
+    (527640 'move' ret[527635](527639 'deref' call_tmp[703976]))
+    (527637 return ret[527635])
+  }
+  function c_memset[208079](arg s[208076]:c_void_ptr[149], arg c[208082]:integral[199](?), arg n[208086]:integral[199](?)) : _unknown[51] "inline" "fn synchronization free"
+  {
+    unknown ret[527650] "RVV" "temp"
+    function memset[208095](arg s[208092]:c_void_ptr[149], arg c[208098] :
+    c_int[20549], arg n[208102] :
+    size_t[20654]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    {
+      unknown ret[527644] "RVV" "temp"
+      (527646 return ret[527644])
+    }
+    { scopeless type
+      c_void_ptr[149]
+    }
+    unknown call_tmp[703983] "expr temp" "maybe param" "maybe type" "temp"
+    (703986 'move' call_tmp[703983](208119 call(208114 call (partial) safeCast _mt[243] c[208082]) c_int[20549]))
+    unknown call_tmp[703990] "expr temp" "maybe param" "maybe type" "temp"
+    (703993 'move' call_tmp[703990](208126 call(208121 call (partial) safeCast _mt[243] n[208086]) size_t[20654]))
+    (208127 call memset s[208076] call_tmp[703983] call_tmp[703990])
+    (485883 'end of statement')
+    (527655 'move' ret[527650](527654 'deref' s[208076]))
+    (527652 return ret[527650])
+  }
+  (355311 'used modules list'(204948 'use' ChapelStandard[20264])(204954 'use' SysBasic[223433])(204956 'use' SysError[264148])(204957 'use' SysCTypes[20940])(204959 'import' HaltWrappers[209915])(205073 'use' IO[230808]))
+}

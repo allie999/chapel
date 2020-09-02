@@ -1,0 +1,261 @@
+AST dump for NPBRandom after pass scopeResolve.
+Module use list: ChapelStandard RandomSupport ChapelLocks HaltWrappers DSIUtil 
+
+{ function NPBRandomStream[315308](?).init[314354](arg _mt[315312]:_MT[238], arg this[315310]:NPBRandomStream[315308](?), arg eltType[314351]:_any[178](?) =(314350 call real(64)[16] 64), arg seed[314364] :(314359 call int(64)[13] 64) =(314361 call . SeedGenerator[307461] c"oddCurrentTime"), param arg parSafe[314370] : bool[10] = 1) : _unknown[51] "method" "primary method" "no return value for void"
+  {(314383 call =(314379 call . this[315310] c"eltType") eltType[314351]) unknown one[314391] 1(314389 call uint(64)[115] 64)(314394 'end of statement') unknown two_46[314403](314401 call << one[314391] 46)(314398 call uint(64)[115] 64)(314406 'end of statement') unknown two_46_mask[314415](314413 call - two_46[314403] 1)(314410 call uint(64)[115] 64)(314418 'end of statement') unknown useed[314426](314424 call _cast(314423 call uint(64)[115] 64) seed[314364])(314429 'end of statement') unknown mod[314434](314433 call uint(64)[115] 64)(314437 'end of statement')
+    if(314471 call _cond_test(314443 call ==(314440 call % useed[314426] 2) 0))
+    {(314469 call initHalt module=[255] HaltWrappers[209915] "NPBRandomStream seed must be an odd integer")(365199 'referenced modules list' HaltWrappers[209915])
+    }(314481 call = mod[314434](314479 call & useed[314426] two_46_mask[314415]))(314495 call =(314485 call . this[315310] c"seed")(314493 call _cast(314492 call int(64)[13] 64) mod[314434]))(314503 call =(314499 call . this[315310] c"parSafe") parSafe[314370])(314511 call(314507 call . this[315310] c"complete"))
+    if(314571 call _cond_test(314545 call ||(314530 call ||(314521 call ==(314518 call %(314514 call . this[315310] c"seed") 2) 0)(314528 call <(314524 call . this[315310] c"seed") 1))(314543 call >(314533 call . this[315310] c"seed")(314541 call _cast(314540 call int(64)[13] 64) two_46[314403]))))
+    {(314569 call initHalt module=[255] HaltWrappers[209915] "NPBRandomStream seed must be an odd integer between 0 and 2**46")(365211 'referenced modules list' HaltWrappers[209915])
+    }(314578 call =(408494 call . this[315310] c"NPBRandomStreamPrivate_cursor") seed[314364])(314583 call =(408502 call . this[315310] c"NPBRandomStreamPrivate_count") 1)
+    if(314625 call _cond_test(314600 call ||(314594 call ||(314588 call == eltType[314351] real(64)[16])(314592 call == eltType[314351] imag(64)[130]))(314598 call == eltType[314351] complex(128)[140])))
+    {
+    }
+    {(314622 call compilerError "NPBRandomStream only supports eltType=real(64), imag(64), or complex(128)")
+    }(355607 'used modules list'(314375 'use' HaltWrappers[209915]))
+  } function NPBRandomStream[315308](?).NPBRandomStreamPrivate_getNext_noLock[314633](arg _mt[315316]:_MT[238], arg this[315314]:NPBRandomStream[315308](?)) : _unknown[51] "method" "primary method" "no doc"
+  {
+    if(314651 call _cond_test(314637 call ==(408510 call . this[315314] c"eltType") complex(128)[140]))
+    {(314641 call +=(408515 call . this[315314] c"NPBRandomStreamPrivate_count") 2)
+    }
+    {(314647 call +=(408520 call . this[315314] c"NPBRandomStreamPrivate_count") 1)
+    }(314661 return(314660 call randlc(408525 call . this[315314] c"eltType")(408530 call . this[315314] c"NPBRandomStreamPrivate_cursor")))
+  } function NPBRandomStream[315308](?).NPBRandomStreamPrivate_skipToNth_noLock[314671](arg _mt[315320]:_MT[238], arg this[315318]:NPBRandomStream[315308](?), in arg n[314668] : integral[199](?)) : _unknown[51] "method" "primary method" "no doc" "no return value for void"
+  {(314675 call += n[314668] 1)
+    if(314694 call _cond_test(314681 call ==(408537 call . this[315318] c"eltType") complex(128)[140]))
+    {(314691 call = n[314668](314689 call -(314686 call * n[314668] 2) 1))
+    }(314701 call =(408544 call . this[315318] c"NPBRandomStreamPrivate_count") n[314668])(314710 call =(408550 call . this[315318] c"NPBRandomStreamPrivate_cursor")(314709 call randlc_skipto(408555 call . this[315318] c"seed") n[314668]))
+  } function NPBRandomStream[315308](?).getNext[314717](arg _mt[315324]:_MT[238], arg this[315322]:NPBRandomStream[315308](?)) : _unknown[51] "method" "primary method"
+  {(314722 call(408565 call . this[315322] c"_lock")) const result[314728] "const"(314727 call(408571 call . this[315322] c"NPBRandomStreamPrivate_getNext_noLock"))(314731 'end of statement')(314734 call(408575 call . this[315322] c"_unlock"))(314737 return result[314728])
+  }
+  { scopeless type(408561 call . this[315322] c"eltType")
+  } function NPBRandomStream[315308](?).skipToNth[314748](arg _mt[315328]:_MT[238], arg this[315326]:NPBRandomStream[315308](?), arg n[314745] : integral[199](?)) : _unknown[51] throws "method" "primary method" "no return value for void"
+  {
+    if(314785 call _cond_test(314752 call < n[314745] 0))
+    {(314783 'throw'(314756 'new'(_chpl_manager = _owned[30](?))(314782 call IllegalArgumentError[388835](?)(314779 call + "NPBRandomStream.skipToNth(n) called with negative 'n' value "(314777 call _cast string[26] n[314745])))))
+    }(314793 call(408584 call . this[315326] c"_lock"))(314798 call(408590 call . this[315326] c"NPBRandomStreamPrivate_skipToNth_noLock") n[314745])(314802 call(408595 call . this[315326] c"_unlock"))
+  } function NPBRandomStream[315308](?).getNth[314812](arg _mt[315332]:_MT[238], arg this[315330]:NPBRandomStream[315308](?), arg n[314809] : integral[199](?)) : _unknown[51] throws "method" "primary method"
+  {
+    if(314850 call _cond_test(314817 call < n[314809] 0))
+    {(314848 'throw'(314821 'new'(_chpl_manager = _owned[30](?))(314847 call IllegalArgumentError[388835](?)(314844 call + "NPBRandomStream.getNth(n) called with negative 'n' value "(314842 call _cast string[26] n[314809])))))
+    }(314858 call(408608 call . this[315330] c"_lock"))(314863 call(408612 call . this[315330] c"NPBRandomStreamPrivate_skipToNth_noLock") n[314809]) const result[314868] "const"(314867 call(408617 call . this[315330] c"NPBRandomStreamPrivate_getNext_noLock"))(314871 'end of statement')(314874 call(408621 call . this[315330] c"_unlock"))(314877 return result[314868])
+  }
+  { scopeless type(408601 call . this[315330] c"eltType")
+  } function NPBRandomStream[315308](?).fillRandom[314891](arg _mt[315336]:_MT[238], arg this[315334]:NPBRandomStream[315308](?), arg arr[314888] :(314885 call chpl__buildArrayRuntimeType nil[44](408627 call . this[315334] c"eltType"))) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    Forall {
+      induction variables:
+        unknown x[314918] "index var" "insert auto destroy"
+        unknown r[314920] "index var" "insert auto destroy"
+      iterated expressions:
+        arr[314888]
+        (314910 call(408632 call . this[315334] c"iterate")(314902 call . arr[314888] c"_dom")(314907 call . arr[314888] c"eltType"))
+      shadow variables:
+      other variables
+        forall body
+      {(314914 call = x[314918] r[314920])
+      }
+    }
+  } function NPBRandomStream[315308](?).fillRandom[314934](arg _mt[315340]:_MT[238], arg this[315338]:NPBRandomStream[315308](?), arg arr[314931] :(314928 call chpl__buildArrayRuntimeType nil[44])) : _unknown[51] "method" "primary method" "no doc" "no return value for void"
+  {(314964 call compilerError "NPBRandomStream(eltType="(314957 call _cast string[26](408639 call . this[315338] c"eltType")) ") can only be used to fill arrays of "(314962 call _cast string[26](408644 call . this[315338] c"eltType")))
+  } function NPBRandomStream[315308](?).choice[314977](arg _mt[315344]:_MT[238], arg this[315342]:NPBRandomStream[315308](?), arg x[314974] :(314971 call chpl__buildArrayRuntimeType nil[44]), arg size[314982] : unknown sizeType[314979] = none[57], arg replace[314987] = 1, arg prob[314993] : unknown probType[314990] = none[57]) : _unknown[51] throws "method" "primary method" "no doc" "no return value for void"
+  {(315016 call compilerError "NPBRandomStream.choice() is not supported.")
+  } function NPBRandomStream[315308](?).choice[315031](arg _mt[315348]:_MT[238], arg this[315346]:NPBRandomStream[315308](?), arg x[315028] :(315027 call range[64316](?)(stridable = ?[260])), arg size[315036] : unknown sizeType[315033] = none[57], arg replace[315041] = 1, arg prob[315047] : unknown probType[315044] = none[57]) : _unknown[51] throws "method" "primary method" "no doc" "no return value for void"
+  {(315054 call compilerError "NPBRandomStream.choice() is not supported.")
+  } function NPBRandomStream[315308](?).choice[315065](arg _mt[315352]:_MT[238], arg this[315350]:NPBRandomStream[315308](?), arg x[315062] : _domain[125914](?), arg size[315070] : unknown sizeType[315067] = none[57], arg replace[315075] = 1, arg prob[315081] : unknown probType[315078] = none[57]) : _unknown[51] throws "method" "primary method" "no doc" "no return value for void"
+  {(315088 call compilerError "NPBRandomStream.choice() is not supported.")
+  } function NPBRandomStream[315308](?).iterate[315099](arg _mt[315356]:_MT[238], arg this[315354]:NPBRandomStream[315308](?), arg D[315096] : _domain[125914](?), arg resultType[315102]:_any[178](?) = real(64)[16]) : _unknown[51] "method" "primary method" "fn returns iterator"
+  {(315107 call(408651 call . this[315354] c"_lock")) const start[315111] "const"(408656 call . this[315354] c"NPBRandomStreamPrivate_count")(315114 'end of statement')(315129 call +=(408661 call . this[315354] c"NPBRandomStreamPrivate_count")(315128 call(315120 call .(315117 call . D[315096] c"size") c"safeCast")(315126 call int(64)[13] 64)))(315138 call(408665 call . this[315354] c"NPBRandomStreamPrivate_skipToNth_noLock")(315135 call -(408670 call . this[315354] c"NPBRandomStreamPrivate_count") 1))(315142 call(408674 call . this[315354] c"_unlock"))(315151 return(315150 call NPBRandomPrivate_iterate resultType[315102] D[315096](408681 call . this[315354] c"seed") start[315111]))
+  } function NPBRandomStream[315308](?).iterate[315161](arg _mt[315360]:_MT[238], arg this[315358]:NPBRandomStream[315308](?), arg D[315158] : _domain[125914](?), arg resultType[315164]:_any[178](?) = real(64)[16], param arg tag[315167]:_any[178](?)) : _unknown[51] "method" "primary method" "no doc" "fn returns iterator"
+  { const start[315177] "const"(408689 call . this[315358] c"NPBRandomStreamPrivate_count")(315180 'end of statement')(315190 return(315189 call NPBRandomPrivate_iterate resultType[315164] D[315158](408696 call . this[315358] c"seed") start[315177] tag[315167]))
+  }
+  {(315174 call == tag[315167] leader[447])
+  } function NPBRandomStream[315308](?).writeThis[315199](arg _mt[315364]:_MT[238], arg this[315362]:NPBRandomStream[315308](?), arg f[315197]:_any[178](?)) : _unknown[51] throws "method" "primary method" "no doc" "method overrides" "no return value for void"
+  {(315203 call <~> f[315197] "NPBRandomStream(eltType=")(315212 call <~> f[315197](315210 call _cast string[26](408705 call . this[315362] c"eltType")))(315217 call <~> f[315197] ", parSafe=")(315222 call <~> f[315197](408712 call . this[315362] c"parSafe"))(315227 call <~> f[315197] ", seed=")(315232 call <~> f[315197](408719 call . this[315362] c"seed"))(315237 call <~> f[315197] ")")
+  } function NPBRandomStream[315308](?)._lock[315254](arg _mt[315368]:_MT[238], arg this[315366]:NPBRandomStream[315308](?)) : _unknown[51] "inline" "method" "primary method" "no doc" "no return value for void"
+  {
+    if(315264 call _cond_test(408727 call . this[315366] c"parSafe"))
+    {(315262 call(315258 call .(365222 call . this[315366] c"_l") c"lock"))
+    }
+  } function NPBRandomStream[315308](?)._unlock[315274](arg _mt[315372]:_MT[238], arg this[315370]:NPBRandomStream[315308](?)) : _unknown[51] "inline" "method" "primary method" "no doc" "no return value for void"
+  {
+    if(315284 call _cond_test(408732 call . this[315370] c"parSafe"))
+    {(315282 call(315278 call .(365227 call . this[315370] c"_l") c"unlock"))
+    }
+  } type NPBRandomStream[315308](?) val super[355835]:object[22] "super class" unknown eltType[314328] "type variable"(314327 call real(64)[16] 64) const seed[314335] "const"(314334 call int(64)[13] 64) unknown parSafe[314341] "param" 1 bool[10] unknown _l[315248] "no doc"(315245 IfExpr  parSafe[314341] then
+  { scopeless chpl_LocalSpinlock[187398]
+  } else
+  { scopeless nothing[7]
+  } ) unknown NPBRandomStreamPrivate_cursor[315294] "no doc" seed[314335] real(64)[16] unknown NPBRandomStreamPrivate_count[315303] "no doc" 1(315301 call int(64)[13] 64) type NPBRandomStream[406934](?) const r23[315381] "const" "private"(315379 call ** 0.5 23) const t23[315390] "const" "private"(315388 call ** 2.0 23) const r46[315397] "const" "private"(315395 call ** 0.5 46) const t46[315404] "const" "private"(315402 call ** 2.0 46) const arand[315410] "const" "private" 1.2207e+09(315413 'end of statement') function randlc[315420](inout arg x[315417] : real(64)[16], arg a[315424] : real(64)[16] = arand[315410]) : _unknown[51] "private"
+  { unknown t1[315432](315430 call * r23[315381] a[315424])(315435 'end of statement') const a1[315441] "const"(315440 call floor t1[315432]) const a2[315451] "const"(315449 call - a[315424](315447 call * t23[315390] a1[315441]))(315454 'end of statement')(315460 call = t1[315432](315458 call * r23[315381] x[315417])) const x1[315467] "const"(315466 call floor t1[315432]) const x2[315477] "const"(315475 call - x[315417](315473 call * t23[315390] x1[315467]))(315480 'end of statement')(315492 call = t1[315432](315490 call +(315484 call * a1[315441] x2[315477])(315488 call * a2[315451] x1[315467]))) const t2[315502] "const"(315501 call floor(315498 call * r23[315381] t1[315432])) const z[315512] "const"(315510 call - t1[315432](315508 call * t23[315390] t2[315502])) const t3[315525] "const"(315523 call +(315517 call * t23[315390] z[315512])(315521 call * a2[315451] x2[315477])) const t4[315535] "const"(315534 call floor(315531 call * r46[315397] t3[315525])) const x3[315545] "const"(315543 call - t3[315525](315541 call * t46[315404] t4[315535]))(315548 'end of statement')(315551 call = x[315417] x3[315545])(315558 return(315556 call * r46[315397] x3[315545]))
+  } function randlc[315566](arg resultType[315564]:_any[178](?), inout arg x[315569] : real(64)[16]) : _unknown[51] "private"
+  {
+    if(315617 call _cond_test(315574 call == resultType[315564] complex(128)[140]))
+    {(315590 return(315588 call _cast complex(128)[140](315585 call _build_tuple(315579 call randlc x[315569])(315583 call randlc x[315569]))))
+    }
+    {
+      if(315611 call _cond_test(315594 call == resultType[315564] imag(64)[130]))
+      {(315603 return(315602 call _r2i(315600 call randlc x[315569])))
+      }
+      {(315609 return(315608 call randlc x[315569]))
+      }
+    }
+  } function randlc_skipto[315635](arg seed[315632] :(315631 call int(64)[13] 64), in arg n[315638] : integral[199](?)) : _unknown[51] "private"
+  { unknown cursor[315646](315644 call _cast real(64)[16] seed[315632])(315649 'end of statement')(315653 call -= n[315638] 1) unknown t[315657] arand[315410](315660 'end of statement') arand[315410]
+    { unknown tmp[315723] "temp"(315747 'move' tmp[315723](315742 call _cond_test(315744 call != n[315638] 0)))
+      WhileDo[315728]
+      {
+        { const i[315671] "const"(315669 call / n[315638] 2)(315674 'end of statement')
+          if(315689 call _cond_test(315681 call !=(315678 call * 2 i[315671]) n[315638]))
+          {(315687 call randlc cursor[315646] t[315657])
+          }
+          if(315706 call _cond_test(315696 call == i[315671] 0))
+          {
+            break _breakLabel[315727] _breakLabel[315727]
+          }
+          {(315703 call = n[315638] i[315671])
+          }(315716 call randlc t[315657] t[315657])(315720 call = n[315638] i[315671])
+        } label _continueLabel[315726](315737 'move' tmp[315723](315732 call _cond_test(315734 call != n[315638] 0))) tmp[315723]
+      } label _breakLabel[315727]
+    }(315751 return cursor[315646])
+  }
+  { scopeless type real(64)[16]
+  } function outer[315760](arg ranges[315758]:_any[178](?), param arg dim[315764] : int(64)[13] = 0) : _unknown[51] "iterator fn" "private" "no return value for void"
+  {
+    if(315932 call _cond_test(315776 call ==(315770 call + dim[315764] 2)(315773 call . ranges[315758] c"size")))
+    {
+      { unknown _indexOfInterest[315788] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[315789] "expr temp" "temp"(315798 'move' _iterator[315789](315796 call _getIterator(315782 call ranges[315758] dim[315764])))
+        Defer
+        {
+          {(315815 call _freeIterator _iterator[315789])
+          }
+        }
+        { scopeless type(315804 'move' _indexOfInterest[315788](315801 call iteratorIndex _iterator[315789]))
+        }
+        ForLoop[315790]
+        { unknown i[315808] "index var" "insert auto destroy"(315810 'move' i[315808] _indexOfInterest[315788])(315786 yield(315784 call _build_tuple i[315808])) label _continueLabel[315793] _indexOfInterest[315788] _iterator[315789]
+        } label _breakLabel[315794]
+      }
+    }
+    {
+      if(315928 call _cond_test(315831 call <(315825 call + dim[315764] 2)(315828 call . ranges[315758] c"size")))
+      {
+        { unknown _indexOfInterest[315889] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[315890] "expr temp" "temp"(315899 'move' _iterator[315890](315897 call _getIterator(315837 call ranges[315758] dim[315764])))
+          Defer
+          {
+            {(315916 call _freeIterator _iterator[315890])
+            }
+          }
+          { scopeless type(315905 'move' _indexOfInterest[315889](315902 call iteratorIndex _iterator[315890]))
+          }
+          ForLoop[315891]
+          { unknown i[315909] "index var" "insert auto destroy"(315911 'move' i[315909] _indexOfInterest[315889])
+            { unknown _indexOfInterest[315855] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[315856] "expr temp" "temp"(315865 'move' _iterator[315856](315863 call _getIterator(315846 call outer ranges[315758](315844 call + dim[315764] 1))))
+              Defer
+              {
+                {(315882 call _freeIterator _iterator[315856])
+                }
+              }
+              { scopeless type(315871 'move' _indexOfInterest[315855](315868 call iteratorIndex _iterator[315856]))
+              }
+              ForLoop[315857]
+              { unknown j[315875] "index var" "insert auto destroy"(315877 'move' j[315875] _indexOfInterest[315855])(315853 yield(315851 call _build_tuple i[315909](315849 'expand_tuple' j[315875]))) label _continueLabel[315860] _indexOfInterest[315855] _iterator[315856]
+              } label _breakLabel[315861]
+            } label _continueLabel[315894] _indexOfInterest[315889] _iterator[315890]
+          } label _breakLabel[315895]
+        }
+      }
+      {(315925 yield 0)
+      }
+    }
+  } function NPBRandomPrivate_iterate[315944](arg resultType[315942]:_any[178](?), arg D[315947] : _domain[125914](?), arg seed[315954] :(315953 call int(64)[13] 64), arg start[315961] :(315960 call int(64)[13] 64)) : _unknown[51] "iterator fn" "no doc" "no return value for void"
+  { unknown cursor[315969](315968 call randlc_skipto seed[315954] start[315961])(315972 'end of statement')
+    { unknown _indexOfInterest[315983] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[315984] "expr temp" "temp"(315993 'move' _iterator[315984](315991 call _getIterator D[315947]))
+      Defer
+      {
+        {(316009 call _freeIterator _iterator[315984])
+        }
+      }
+      { scopeless type(315998 'move' _indexOfInterest[315983](315995 call iteratorIndex _iterator[315984]))
+      }
+      ForLoop[315985]
+      { unknown i[316002] "index var" "insert auto destroy"(316004 'move' i[316002] _indexOfInterest[315983])(315981 yield(315980 call randlc resultType[315942] cursor[315969])) label _continueLabel[315988] _indexOfInterest[315983] _iterator[315984]
+      } label _breakLabel[315989]
+    }
+  } function NPBRandomPrivate_iterate[316022](arg resultType[316020]:_any[178](?), arg D[316025] : _domain[125914](?), arg seed[316032] :(316031 call int(64)[13] 64), arg start[316039] :(316038 call int(64)[13] 64), param arg tag[316043] : iterKind[453]) : _unknown[51] "iterator fn" "no doc" "no return value for void"
+  {
+    { unknown _indexOfInterest[316068] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[316069] "expr temp" "temp"(316078 'move' _iterator[316069](316076 call _getIterator(316064 call(316055 call . D[316025] c"these")(tag = leader[447]))))
+      Defer
+      {
+        {(316095 call _freeIterator _iterator[316069])
+        }
+      }
+      { scopeless type(316084 'move' _indexOfInterest[316068](316081 call iteratorIndex _iterator[316069]))
+      }
+      ForLoop[316070]
+      { unknown block[316088] "index var" "insert auto destroy"(316090 'move' block[316088] _indexOfInterest[316068])(316066 yield block[316088]) label _continueLabel[316073] _indexOfInterest[316068] _iterator[316069]
+      } label _breakLabel[316074]
+    }
+  }
+  {(316051 call == tag[316043] leader[447])
+  } function NPBRandomPrivate_iterate[316110](arg resultType[316108]:_any[178](?), arg D[316113] : _domain[125914](?), arg seed[316120] :(316119 call int(64)[13] 64), arg start[316127] :(316126 call int(64)[13] 64), param arg tag[316131] : iterKind[453], arg followThis[316134]:_any[178](?)) : _unknown[51] "iterator fn" "no doc" "no return value for void"
+  { unknown multiplier[316156] "param"(316153 IfExpr (316149 call == resultType[316108] complex(128)[140]) then
+    { scopeless 2
+    } else
+    { scopeless 1
+    } )(316159 'end of statement') const ZD[316164] "const"(316163 call computeZeroBasedDomain D[316113])(316167 'end of statement') const innerRange[316178] "const"(316177 call followThis[316134](316174 call -(316170 call . ZD[316164] c"rank") 1))(316181 'end of statement') unknown cursor[316183] real(64)[16](316186 'end of statement')
+    { unknown _indexOfInterest[316415] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[316416] "expr temp" "temp"(316425 'move' _iterator[316416](316423 call _getIterator(316191 call outer followThis[316134])))
+      Defer
+      {
+        {(316442 call _freeIterator _iterator[316416])
+        }
+      }
+      { scopeless type(316431 'move' _indexOfInterest[316415](316428 call iteratorIndex _iterator[316416]))
+      }
+      ForLoop[316417]
+      { unknown outer[316435] "index var" "insert auto destroy"(316437 'move' outer[316435] _indexOfInterest[316415])
+        { unknown myStart[316193] start[316127](316196 'end of statement')
+          if(316262 call _cond_test(316203 call >(316199 call . ZD[316164] c"rank") 1))
+          {(316233 call += myStart[316193](316231 call * multiplier[316156](316230 call(316222 call .(316221 call(316208 call . ZD[316164] c"indexOrder")(316218 call _build_tuple(316212 'expand_tuple' outer[316435])(316214 call . innerRange[316178] c"low"))) c"safeCast")(316228 call int(64)[13] 64))))
+          }
+          {(316259 call += myStart[316193](316257 call * multiplier[316156](316256 call(316248 call .(316247 call(316239 call . ZD[316164] c"indexOrder")(316243 call . innerRange[316178] c"low")) c"safeCast")(316254 call int(64)[13] 64))))
+          }
+          if(316411 call _cond_test(316272 call !(316269 call . innerRange[316178] c"stridable")))
+          {(316280 call = cursor[316183](316279 call randlc_skipto seed[316120] myStart[316193]))
+            { unknown _indexOfInterest[316293] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[316294] "expr temp" "temp"(316303 'move' _iterator[316294](316301 call _getIterator innerRange[316178]))
+              Defer
+              {
+                {(316319 call _freeIterator _iterator[316294])
+                }
+              }
+              { scopeless type(316308 'move' _indexOfInterest[316293](316305 call iteratorIndex _iterator[316294]))
+              }
+              ForLoop[316295]
+              { unknown i[316312] "index var" "insert auto destroy"(316314 'move' i[316312] _indexOfInterest[316293])(316291 yield(316290 call randlc resultType[316108] cursor[316183])) label _continueLabel[316298] _indexOfInterest[316293] _iterator[316294]
+              } label _breakLabel[316299]
+            }
+          }
+          {(316340 call -= myStart[316193](316339 call(316331 call .(316328 call . innerRange[316178] c"low") c"safeCast")(316337 call int(64)[13] 64)))
+            { unknown _indexOfInterest[316378] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[316379] "expr temp" "temp"(316388 'move' _iterator[316379](316386 call _getIterator innerRange[316178]))
+              Defer
+              {
+                {(316404 call _freeIterator _iterator[316379])
+                }
+              }
+              { scopeless type(316393 'move' _indexOfInterest[316378](316390 call iteratorIndex _iterator[316379]))
+              }
+              ForLoop[316380]
+              { unknown i[316397] "index var" "insert auto destroy"(316399 'move' i[316397] _indexOfInterest[316378])
+                {(316367 call = cursor[316183](316366 call randlc_skipto seed[316120](316364 call + myStart[316193](316362 call *(316360 call(316352 call . i[316397] c"safeCast")(316358 call int(64)[13] 64)) multiplier[316156]))))(316376 yield(316375 call randlc resultType[316108] cursor[316183]))
+                } label _continueLabel[316383] _indexOfInterest[316378] _iterator[316379]
+              } label _breakLabel[316384]
+            }
+          }
+        } label _continueLabel[316420] _indexOfInterest[316415] _iterator[316416]
+      } label _breakLabel[316421]
+    }(355609 'used modules list'(316144 'use' DSIUtil[230805]))
+  }
+  {(316141 call == tag[316131] follower[449])
+  }(355603 'used modules list'(353127 'use' ChapelStandard[20264])(314317 'use' RandomSupport[307365])(314321 'use' ChapelLocks[187268]))
+}

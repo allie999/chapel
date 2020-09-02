@@ -1,0 +1,419 @@
+AST dump for ShallowCopy after pass buildDefaultFunctions.
+Module use list: ChapelStandard SysCTypes 
+
+{
+  function chpl__init_ShallowCopy[416198]() : void[4] "insert line file info" "module init"
+  {
+    (538201 return _void[55])
+  }
+  function ptrTo[277307](ref arg x[277305]:_any[178](?)) : _unknown[51] "inline" "private"
+  {
+    unknown ret[538175] "RVV" "temp"
+    unknown call_tmp[739714] "expr temp" "maybe param" "maybe type" "temp"
+    (739717 'move' call_tmp[739714](277312 call c_pointer_return x[277305]))
+    (538180 'move' ret[538175](538179 'deref' call_tmp[739714]))
+    (538177 return ret[538175])
+  }
+  function shallowCopy[277322](ref arg dst[277320]:_any[178](?), ref arg src[277324]:_any[178](?)) : _unknown[51] "inline" "no return value for void"
+  {
+    unknown st[277330] "dead at end of block" "insert auto destroy" "type variable"(277329 'static typeof' dst[277320])
+    (548964 'move' st[277330](548962 'static typeof' dst[277320]))
+    (490273 'end of statement')
+    unknown call_tmp[739719] "expr temp" "maybe param" "maybe type" "temp"
+    (739722 'move' call_tmp[739719](277337 call isPODType st[277330]))
+    unknown call_tmp[739724] "expr temp" "maybe param" "maybe type" "temp"
+    (739727 'move' call_tmp[739724](277382 call _cond_test call_tmp[739719]))
+    if call_tmp[739724]
+    {
+      (277340 call = dst[277320] src[277324])
+    }
+    {
+      unknown call_tmp[739729] "maybe param" "maybe type" "temp"
+      (739732 'move' call_tmp[739729](277347 call c_sizeof st[277330]))
+      unknown size[277348] "dead at end of block" "insert auto destroy"
+      (548966 'init var' size[277348] call_tmp[739729])
+      (277351 'end of statement' st[277330])
+      unknown call_tmp[739734] "expr temp" "maybe param" "maybe type" "temp"
+      (739737 'move' call_tmp[739734](277357 call ptrTo dst[277320]))
+      unknown call_tmp[739739] "expr temp" "maybe param" "maybe type" "temp"
+      (739742 'move' call_tmp[739739](277362 call ptrTo src[277324]))
+      (277364 call c_memcpy call_tmp[739734] call_tmp[739739] size[277348])
+      (490276 'end of statement' size[277348])
+      unknown call_tmp[739744] "expr temp" "maybe param" "maybe type" "temp"
+      (739747 'move' call_tmp[739744](277378 call _cond_test 1))
+      if call_tmp[739744]
+      {
+        unknown call_tmp[739749] "expr temp" "maybe param" "maybe type" "temp"
+        (739752 'move' call_tmp[739749](277371 call ptrTo src[277324]))
+        (277375 call c_memset call_tmp[739749] 0 size[277348])
+        (490278 'end of statement' size[277348])
+      }
+    }
+    (538182 return _void[55])
+  }
+  function shallowCopyInit[277392](ref arg src[277390]:_any[178](?)) : _unknown[51] "inline" "no copy return" "unsafe"
+  {
+    unknown ret[538186] "RVV" "temp"
+    unknown st[277398] "dead at end of block" "insert auto destroy" "type variable"(277397 'static typeof' src[277390])
+    (548970 'move' st[277398](548968 'static typeof' src[277390]))
+    unknown dst[277403] "dead at end of block" "no auto destroy" "no init"
+    (548972 'default init var' dst[277403] st[277398])
+    (277406 'end of statement' st[277398])
+    (277411 call shallowCopy dst[277403] src[277390])
+    (490281 'end of statement' dst[277403])
+    (538191 'move' ret[538186](538190 'deref' dst[277403]))
+    gotoReturn _end_shallowCopyInit[538184] _end_shallowCopyInit[538184]
+    (490283 'end of statement' dst[277403])
+    label _end_shallowCopyInit[538184]
+    (538188 return ret[538186])
+  }
+  function shallowSwap[277425](ref arg lhs[277422]:_any[178](?), ref arg rhs[277428] :
+  (466845 'typeof' lhs[277422])) : _unknown[51] "inline" "unsafe" "no return value for void"
+  {
+    unknown st[277435] "dead at end of block" "insert auto destroy" "type variable"(277434 'static typeof' lhs[277422])
+    (548976 'move' st[277435](548974 'static typeof' lhs[277422]))
+    unknown tmp[277440] "dead at end of block" "no auto destroy" "no init"
+    (548978 'default init var' tmp[277440] st[277435])
+    (277443 'end of statement' st[277435])
+    unknown call_tmp[739754] "expr temp" "maybe param" "maybe type" "temp"
+    (739757 'move' call_tmp[739754](277447 call isPODType st[277435]))
+    unknown call_tmp[739759] "expr temp" "maybe param" "maybe type" "temp"
+    (739762 'move' call_tmp[739759](277512 call _cond_test call_tmp[739754]))
+    if call_tmp[739759]
+    {
+      (277450 call = tmp[277440] lhs[277422])
+      (490286 'end of statement' tmp[277440])
+      (277456 call = lhs[277422] rhs[277428])
+      (490288 'end of statement')
+      (277461 call = rhs[277428] tmp[277440])
+      (490289 'end of statement' tmp[277440])
+    }
+    {
+      unknown call_tmp[739764] "maybe param" "maybe type" "temp"
+      (739767 'move' call_tmp[739764](277467 call c_sizeof st[277435]))
+      unknown size[277468] "dead at end of block" "insert auto destroy"
+      (548980 'init var' size[277468] call_tmp[739764])
+      (277471 'end of statement' st[277435])
+      unknown call_tmp[739769] "expr temp" "maybe param" "maybe type" "temp"
+      (739772 'move' call_tmp[739769](277477 call ptrTo tmp[277440]))
+      unknown call_tmp[739774] "expr temp" "maybe param" "maybe type" "temp"
+      (739777 'move' call_tmp[739774](277482 call ptrTo lhs[277422]))
+      (277484 call c_memcpy call_tmp[739769] call_tmp[739774] size[277468])
+      (490292 'end of statement' tmp[277440] size[277468])
+      unknown call_tmp[739779] "expr temp" "maybe param" "maybe type" "temp"
+      (739782 'move' call_tmp[739779](277490 call ptrTo lhs[277422]))
+      unknown call_tmp[739784] "expr temp" "maybe param" "maybe type" "temp"
+      (739787 'move' call_tmp[739784](277495 call ptrTo rhs[277428]))
+      (277497 call c_memcpy call_tmp[739779] call_tmp[739784] size[277468])
+      (490295 'end of statement' size[277468])
+      unknown call_tmp[739789] "expr temp" "maybe param" "maybe type" "temp"
+      (739792 'move' call_tmp[739789](277503 call ptrTo rhs[277428]))
+      unknown call_tmp[739794] "expr temp" "maybe param" "maybe type" "temp"
+      (739797 'move' call_tmp[739794](277508 call ptrTo tmp[277440]))
+      (277510 call c_memcpy call_tmp[739789] call_tmp[739794] size[277468])
+      (490297 'end of statement' tmp[277440] size[277468])
+    }
+    (538195 return _void[55])
+  }
+  function shallowCopy[277522](ref arg A[277520]:_any[178](?), arg dst[277524]:_any[178](?), arg src[277526]:_any[178](?), arg nElts[277528]:_any[178](?)) : _unknown[51] "inline" "no return value for void"
+  {
+    unknown call_tmp[739799] "expr temp" "maybe param" "maybe type" "temp"
+    (739802 'move' call_tmp[739799](277582 call _cond_test 1))
+    if call_tmp[739799]
+    {
+      unknown call_tmp[739804] "expr temp" "maybe param" "maybe type" "temp"
+      (739807 'move' call_tmp[739804](277538 call > nElts[277528] 0))
+      (277541 call assert call_tmp[739804])
+      (490300 'end of statement')
+      unknown call_tmp[739811] "expr temp" "maybe param" "maybe type" "temp"
+      (739814 'move' call_tmp[739811](277546 call _dom _mt[243] A[277520]))
+      unknown call_tmp[739818] "expr temp" "maybe param" "maybe type" "temp"
+      (739821 'move' call_tmp[739818](277553 call chpl_build_low_bounded_range dst[277524]))
+      unknown call_tmp[739823] "expr temp" "maybe param" "maybe type" "temp"
+      (739826 'move' call_tmp[739823](277556 call # call_tmp[739818] nElts[277528]))
+      unknown call_tmp[739828] "expr temp" "maybe param" "maybe type" "temp"
+      (739831 'move' call_tmp[739828](277559 call(277549 call (partial) contains _mt[243] call_tmp[739811]) call_tmp[739823]))
+      (277561 call assert call_tmp[739828])
+      (490301 'end of statement')
+      unknown call_tmp[739835] "expr temp" "maybe param" "maybe type" "temp"
+      (739838 'move' call_tmp[739835](277565 call _dom _mt[243] A[277520]))
+      unknown call_tmp[739842] "expr temp" "maybe param" "maybe type" "temp"
+      (739845 'move' call_tmp[739842](277572 call chpl_build_low_bounded_range src[277526]))
+      unknown call_tmp[739847] "expr temp" "maybe param" "maybe type" "temp"
+      (739850 'move' call_tmp[739847](277575 call # call_tmp[739842] nElts[277528]))
+      unknown call_tmp[739852] "expr temp" "maybe param" "maybe type" "temp"
+      (739855 'move' call_tmp[739852](277578 call(277568 call (partial) contains _mt[243] call_tmp[739835]) call_tmp[739847]))
+      (277580 call assert call_tmp[739852])
+    }
+    unknown call_tmp[739859] "expr temp" "maybe param" "maybe type" "temp"
+    (739862 'move' call_tmp[739859](277587 call _instance _mt[243] A[277520]))
+    unknown call_tmp[739866] "expr temp" "maybe param" "maybe type" "temp"
+    (739869 'move' call_tmp[739866](277594 call(277590 call (partial) isDefaultRectangular _mt[243] call_tmp[739859])))
+    unknown call_tmp[739871] "expr temp" "maybe param" "maybe type" "temp"
+    (739874 'move' call_tmp[739871](277760 call _cond_test call_tmp[739866]))
+    if call_tmp[739871]
+    {
+      unknown call_tmp[739878] "expr temp" "maybe param" "maybe type" "temp"
+      (739881 'move' call_tmp[739878](277598 call _value _mt[243] A[277520]))
+      unknown st[277603] "dead at end of block" "insert auto destroy" "type variable"(277602 'static field type' call_tmp[739878] "eltType")
+      unknown call_tmp[739885] "expr temp" "maybe param" "maybe type" "temp"
+      (739888 'move' call_tmp[739885](548984 call _value _mt[243] A[277520]))
+      (548988 'move' st[277603](548982 'static field type' call_tmp[739885] "eltType"))
+      unknown call_tmp[739890] "expr temp" "maybe param" "maybe type" "temp"
+      (739893 'move' call_tmp[739890](277609 call _cast size_t[20654] nElts[277528]))
+      unknown call_tmp[739895] "expr temp" "maybe param" "maybe type" "temp"
+      (739898 'move' call_tmp[739895](277614 call c_sizeof st[277603]))
+      unknown call_tmp[739900] "maybe param" "maybe type" "temp"
+      (739903 'move' call_tmp[739900](277615 call * call_tmp[739890] call_tmp[739895]))
+      unknown size[277617] "dead at end of block" "insert auto destroy"
+      (548990 'init var' size[277617] call_tmp[739900])
+      (277620 'end of statement' st[277603])
+      unknown call_tmp[739905] "expr temp" "maybe param" "maybe type" "temp"
+      (739908 'move' call_tmp[739905](277626 call A[277520] dst[277524]))
+      unknown call_tmp[739910] "expr temp" "maybe param" "maybe type" "temp"
+      (739913 'move' call_tmp[739910](277628 call ptrTo call_tmp[739905]))
+      unknown call_tmp[739915] "expr temp" "maybe param" "maybe type" "temp"
+      (739918 'move' call_tmp[739915](277634 call A[277520] src[277526]))
+      unknown call_tmp[739920] "expr temp" "maybe param" "maybe type" "temp"
+      (739923 'move' call_tmp[739920](277636 call ptrTo call_tmp[739915]))
+      (277638 call c_memcpy call_tmp[739910] call_tmp[739920] size[277617])
+      (490304 'end of statement' size[277617])
+    }
+    {
+      unknown call_tmp[739925] "expr temp" "maybe param" "maybe type" "temp"
+      (739928 'move' call_tmp[739925](277644 call chpl_build_low_bounded_range dst[277524]))
+      unknown call_tmp[739930] "expr temp" "maybe param" "maybe type" "temp"
+      (739933 'move' call_tmp[739930](277647 call # call_tmp[739925] nElts[277528]))
+      unknown call_tmp[739935] "expr temp" "maybe param" "maybe type" "temp"
+      (739938 'move' call_tmp[739935](277650 call chpl__buildDomainExpr call_tmp[739930]))
+      unknown call_tmp[739940] "expr temp" "maybe param" "maybe type" "temp"
+      (739943 'move' call_tmp[739940](277654 call chpl_build_low_bounded_range src[277526]))
+      unknown call_tmp[739945] "expr temp" "maybe param" "maybe type" "temp"
+      (739948 'move' call_tmp[739945](277657 call # call_tmp[739940] nElts[277528]))
+      unknown call_tmp[739950] "expr temp" "maybe param" "maybe type" "temp"
+      (739953 'move' call_tmp[739950](277660 call chpl__buildDomainExpr call_tmp[739945]))
+      unknown call_tmp[739955] "maybe param" "maybe type" "temp"
+      (739958 'move' call_tmp[739955](277662 call chpl__bulkTransferArray A[277520] call_tmp[739935] A[277520] call_tmp[739950]))
+      unknown ok[277663] "dead at end of block" "insert auto destroy"
+      (548992 'init var' ok[277663] call_tmp[739955])
+      (277666 'end of statement')
+      unknown call_tmp[739960] "expr temp" "maybe param" "maybe type" "temp"
+      (739963 'move' call_tmp[739960](277669 call ! ok[277663]))
+      unknown call_tmp[739965] "expr temp" "maybe param" "maybe type" "temp"
+      (739968 'move' call_tmp[739965](277756 call _cond_test call_tmp[739960]))
+      if call_tmp[739965]
+      {
+        (277690 call halt "bulk transfer failed in sorting")
+        (490306 'end of statement')
+        {
+          unknown _indexOfInterest[277722] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[277723] "expr temp" "temp"
+          unknown call_tmp[739970] "expr temp" "maybe param" "maybe type" "temp"
+          (739973 'move' call_tmp[739970](277696 call chpl_build_low_bounded_range 0))
+          unknown call_tmp[739975] "expr temp" "maybe param" "maybe type" "temp"
+          (739978 'move' call_tmp[739975](277699 call # call_tmp[739970] nElts[277528]))
+          unknown call_tmp[739980] "expr temp" "maybe param" "maybe type" "temp"
+          (739983 'move' call_tmp[739980](277702 call vectorizeOnly call_tmp[739975]))
+          (277732 'move' _iterator[277723](277730 call _getIterator call_tmp[739980]))
+          Defer
+          {
+            {
+              (277749 call _freeIterator _iterator[277723])
+            }
+          }
+          { scopeless type
+            (277738 'move' _indexOfInterest[277722](277735 call iteratorIndex _iterator[277723]))
+          }
+          ForLoop[277724]
+          {
+            unknown i[277742] "index var" "insert auto destroy"
+            (490308 'end of statement')
+            (277744 'move' i[277742] _indexOfInterest[277722])
+            (490309 'end of statement' i[277742])
+            {
+              unknown call_tmp[739985] "expr temp" "maybe param" "maybe type" "temp"
+              (739988 'move' call_tmp[739985](277708 call + dst[277524] i[277742]))
+              unknown call_tmp[739990] "expr temp" "maybe param" "maybe type" "temp"
+              (739993 'move' call_tmp[739990](277711 call A[277520] call_tmp[739985]))
+              unknown call_tmp[739995] "expr temp" "maybe param" "maybe type" "temp"
+              (739998 'move' call_tmp[739995](277715 call + src[277526] i[277742]))
+              unknown call_tmp[740000] "expr temp" "maybe param" "maybe type" "temp"
+              (740003 'move' call_tmp[740000](277718 call A[277520] call_tmp[739995]))
+              (277719 '=' call_tmp[739990] call_tmp[740000])
+              (490311 'end of statement' i[277742] i[277742])
+            }
+            label _continueLabel[277727]
+            _indexOfInterest[277722]
+            _iterator[277723]
+          }
+          label _breakLabel[277728]
+        }
+      }
+    }
+    (538197 return _void[55])
+    (355431 'used modules list'(277531 'use' SysCTypes[20940]))
+  }
+  function shallowCopy[277770](ref arg DstA[277768]:_any[178](?), arg dst[277772]:_any[178](?), ref arg SrcA[277774]:_any[178](?), arg src[277776]:_any[178](?), arg nElts[277778]:_any[178](?)) : _unknown[51] "inline" "no return value for void"
+  {
+    unknown call_tmp[740005] "expr temp" "maybe param" "maybe type" "temp"
+    (740008 'move' call_tmp[740005](277832 call _cond_test 1))
+    if call_tmp[740005]
+    {
+      unknown call_tmp[740010] "expr temp" "maybe param" "maybe type" "temp"
+      (740013 'move' call_tmp[740010](277788 call > nElts[277778] 0))
+      (277791 call assert call_tmp[740010])
+      (490314 'end of statement')
+      unknown call_tmp[740017] "expr temp" "maybe param" "maybe type" "temp"
+      (740020 'move' call_tmp[740017](277796 call _dom _mt[243] DstA[277768]))
+      unknown call_tmp[740024] "expr temp" "maybe param" "maybe type" "temp"
+      (740027 'move' call_tmp[740024](277803 call chpl_build_low_bounded_range dst[277772]))
+      unknown call_tmp[740029] "expr temp" "maybe param" "maybe type" "temp"
+      (740032 'move' call_tmp[740029](277806 call # call_tmp[740024] nElts[277778]))
+      unknown call_tmp[740034] "expr temp" "maybe param" "maybe type" "temp"
+      (740037 'move' call_tmp[740034](277809 call(277799 call (partial) contains _mt[243] call_tmp[740017]) call_tmp[740029]))
+      (277811 call assert call_tmp[740034])
+      (490315 'end of statement')
+      unknown call_tmp[740041] "expr temp" "maybe param" "maybe type" "temp"
+      (740044 'move' call_tmp[740041](277815 call _dom _mt[243] SrcA[277774]))
+      unknown call_tmp[740048] "expr temp" "maybe param" "maybe type" "temp"
+      (740051 'move' call_tmp[740048](277822 call chpl_build_low_bounded_range src[277776]))
+      unknown call_tmp[740053] "expr temp" "maybe param" "maybe type" "temp"
+      (740056 'move' call_tmp[740053](277825 call # call_tmp[740048] nElts[277778]))
+      unknown call_tmp[740058] "expr temp" "maybe param" "maybe type" "temp"
+      (740061 'move' call_tmp[740058](277828 call(277818 call (partial) contains _mt[243] call_tmp[740041]) call_tmp[740053]))
+      (277830 call assert call_tmp[740058])
+    }
+    unknown tmp[434371] "maybe param" "temp"
+    unknown call_tmp[740065] "expr temp" "maybe param" "maybe type" "temp"
+    (740068 'move' call_tmp[740065](277837 call _instance _mt[243] DstA[277768]))
+    (434382 'move' tmp[434371](277844 call(277840 call (partial) isDefaultRectangular _mt[243] call_tmp[740065])))
+    unknown call_tmp[740072] "expr temp" "maybe param" "maybe type" "temp"
+    (740075 'move' call_tmp[740072](434384 call _cond_invalid tmp[434371]))
+    if call_tmp[740072]
+    {
+      (434387 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[580100] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[580101] "maybe param" "temp"
+    unknown call_tmp[740077] "expr temp" "maybe param" "maybe type" "temp"
+    (740080 'move' call_tmp[740077](434372 call isTrue tmp[434371]))
+    (580106 'move' tmp[580101](580104 call _cond_test call_tmp[740077]))
+    if tmp[580101]
+    {
+      unknown tmp[580108] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[740084] "expr temp" "maybe param" "maybe type" "temp"
+      (740087 'move' call_tmp[740084](277846 call _instance _mt[243] SrcA[277774]))
+      unknown call_tmp[740091] "expr temp" "maybe param" "maybe type" "temp"
+      (740094 'move' call_tmp[740091](277853 call(277849 call (partial) isDefaultRectangular _mt[243] call_tmp[740084])))
+      (580110 'move' tmp[580108](434375 call isTrue call_tmp[740091]))
+      (580115 'move' tmp[580100](580112 '_paramFoldLogical' tmp[580101] tmp[580108]))
+    }
+    {
+      (580120 'move' tmp[580100](580117 '_paramFoldLogical' tmp[580101] 0))
+    }
+    unknown call_tmp[740096] "expr temp" "maybe param" "maybe type" "temp"
+    (740099 'move' call_tmp[740096](278005 call _cond_test tmp[580100]))
+    if call_tmp[740096]
+    {
+      unknown call_tmp[740103] "expr temp" "maybe param" "maybe type" "temp"
+      (740106 'move' call_tmp[740103](277859 call _value _mt[243] DstA[277768]))
+      unknown st[277864] "dead at end of block" "insert auto destroy" "type variable"(277863 'static field type' call_tmp[740103] "eltType")
+      unknown call_tmp[740110] "expr temp" "maybe param" "maybe type" "temp"
+      (740113 'move' call_tmp[740110](548996 call _value _mt[243] DstA[277768]))
+      (549000 'move' st[277864](548994 'static field type' call_tmp[740110] "eltType"))
+      unknown call_tmp[740115] "expr temp" "maybe param" "maybe type" "temp"
+      (740118 'move' call_tmp[740115](277870 call _cast size_t[20654] nElts[277778]))
+      unknown call_tmp[740120] "expr temp" "maybe param" "maybe type" "temp"
+      (740123 'move' call_tmp[740120](277875 call c_sizeof st[277864]))
+      unknown call_tmp[740125] "maybe param" "maybe type" "temp"
+      (740128 'move' call_tmp[740125](277876 call * call_tmp[740115] call_tmp[740120]))
+      unknown size[277878] "dead at end of block" "insert auto destroy"
+      (549002 'init var' size[277878] call_tmp[740125])
+      (277881 'end of statement' st[277864])
+      unknown call_tmp[740130] "expr temp" "maybe param" "maybe type" "temp"
+      (740133 'move' call_tmp[740130](277887 call DstA[277768] dst[277772]))
+      unknown call_tmp[740135] "expr temp" "maybe param" "maybe type" "temp"
+      (740138 'move' call_tmp[740135](277889 call ptrTo call_tmp[740130]))
+      unknown call_tmp[740140] "expr temp" "maybe param" "maybe type" "temp"
+      (740143 'move' call_tmp[740140](277895 call SrcA[277774] src[277776]))
+      unknown call_tmp[740145] "expr temp" "maybe param" "maybe type" "temp"
+      (740148 'move' call_tmp[740145](277897 call ptrTo call_tmp[740140]))
+      (277899 call c_memcpy call_tmp[740135] call_tmp[740145] size[277878])
+      (490319 'end of statement' size[277878])
+    }
+    {
+      unknown call_tmp[740150] "expr temp" "maybe param" "maybe type" "temp"
+      (740153 'move' call_tmp[740150](277905 call chpl_build_low_bounded_range dst[277772]))
+      unknown call_tmp[740155] "expr temp" "maybe param" "maybe type" "temp"
+      (740158 'move' call_tmp[740155](277908 call # call_tmp[740150] nElts[277778]))
+      unknown call_tmp[740160] "expr temp" "maybe param" "maybe type" "temp"
+      (740163 'move' call_tmp[740160](277911 call chpl__buildDomainExpr call_tmp[740155]))
+      unknown call_tmp[740165] "expr temp" "maybe param" "maybe type" "temp"
+      (740168 'move' call_tmp[740165](277915 call chpl_build_low_bounded_range src[277776]))
+      unknown call_tmp[740170] "expr temp" "maybe param" "maybe type" "temp"
+      (740173 'move' call_tmp[740170](277918 call # call_tmp[740165] nElts[277778]))
+      unknown call_tmp[740175] "expr temp" "maybe param" "maybe type" "temp"
+      (740178 'move' call_tmp[740175](277921 call chpl__buildDomainExpr call_tmp[740170]))
+      unknown call_tmp[740180] "maybe param" "maybe type" "temp"
+      (740183 'move' call_tmp[740180](277923 call chpl__bulkTransferArray DstA[277768] call_tmp[740160] SrcA[277774] call_tmp[740175]))
+      unknown ok[277924] "dead at end of block" "insert auto destroy"
+      (549004 'init var' ok[277924] call_tmp[740180])
+      (277927 'end of statement')
+      unknown call_tmp[740185] "expr temp" "maybe param" "maybe type" "temp"
+      (740188 'move' call_tmp[740185](277930 call ! ok[277924]))
+      unknown call_tmp[740190] "expr temp" "maybe param" "maybe type" "temp"
+      (740193 'move' call_tmp[740190](278001 call _cond_test call_tmp[740185]))
+      if call_tmp[740190]
+      {
+        (277935 call halt "bulk transfer failed in sorting")
+        (490321 'end of statement')
+        {
+          unknown _indexOfInterest[277967] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[277968] "expr temp" "temp"
+          unknown call_tmp[740195] "expr temp" "maybe param" "maybe type" "temp"
+          (740198 'move' call_tmp[740195](277941 call chpl_build_low_bounded_range 0))
+          unknown call_tmp[740200] "expr temp" "maybe param" "maybe type" "temp"
+          (740203 'move' call_tmp[740200](277944 call # call_tmp[740195] nElts[277778]))
+          unknown call_tmp[740205] "expr temp" "maybe param" "maybe type" "temp"
+          (740208 'move' call_tmp[740205](277947 call vectorizeOnly call_tmp[740200]))
+          (277977 'move' _iterator[277968](277975 call _getIterator call_tmp[740205]))
+          Defer
+          {
+            {
+              (277994 call _freeIterator _iterator[277968])
+            }
+          }
+          { scopeless type
+            (277983 'move' _indexOfInterest[277967](277980 call iteratorIndex _iterator[277968]))
+          }
+          ForLoop[277969]
+          {
+            unknown i[277987] "index var" "insert auto destroy"
+            (490323 'end of statement')
+            (277989 'move' i[277987] _indexOfInterest[277967])
+            (490324 'end of statement' i[277987])
+            {
+              unknown call_tmp[740210] "expr temp" "maybe param" "maybe type" "temp"
+              (740213 'move' call_tmp[740210](277953 call + dst[277772] i[277987]))
+              unknown call_tmp[740215] "expr temp" "maybe param" "maybe type" "temp"
+              (740218 'move' call_tmp[740215](277956 call DstA[277768] call_tmp[740210]))
+              unknown call_tmp[740220] "expr temp" "maybe param" "maybe type" "temp"
+              (740223 'move' call_tmp[740220](277960 call + src[277776] i[277987]))
+              unknown call_tmp[740225] "expr temp" "maybe param" "maybe type" "temp"
+              (740228 'move' call_tmp[740225](277963 call SrcA[277774] call_tmp[740220]))
+              (277964 '=' call_tmp[740215] call_tmp[740225])
+              (490326 'end of statement' i[277987] i[277987])
+            }
+            label _continueLabel[277972]
+            _indexOfInterest[277967]
+            _iterator[277968]
+          }
+          label _breakLabel[277973]
+        }
+      }
+    }
+    (538199 return _void[55])
+    (355433 'used modules list'(277781 'use' SysCTypes[20940]))
+  }
+  (355428 'used modules list'(353097 'use' ChapelStandard[20264])(277300 'use' SysCTypes[20940]))
+}
