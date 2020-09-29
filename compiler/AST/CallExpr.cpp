@@ -246,6 +246,7 @@ void CallExpr::verify() {
     case PRIM_BLOCK_WHILEDO_LOOP:
     case PRIM_BLOCK_DOWHILE_LOOP:
     case PRIM_BLOCK_FOR_LOOP:
+    case PRIM_BLOCK_FORALL_LOOP:
     case PRIM_BLOCK_BEGIN:
     case PRIM_BLOCK_COBEGIN:
     case PRIM_BLOCK_COFORALL:

@@ -2,172 +2,172 @@ AST dump for ShallowCopy after pass expandExternArrayCalls.
 Module use list: 
 
 {
-  (353097 'use' ChapelStandard)
-  (277300 'use' SysCTypes)
-  function ptrTo[277307](ref arg x[277305]:_any[178](?)) : _unknown[51] "inline" "private"
+  (353080 'use' ChapelStandard)
+  (277404 'use' SysCTypes)
+  function ptrTo[277411](ref arg x[277409]:_any[178](?)) : _unknown[51] "inline" "private"
   {
-    (277313 return(277312 call c_pointer_return x))
+    (277417 return(277416 call c_pointer_return x))
   }
-  function shallowCopy[277322](ref arg dst[277320]:_any[178](?), ref arg src[277324]:_any[178](?)) : _unknown[51] "inline"
+  function shallowCopy[277426](ref arg dst[277424]:_any[178](?), ref arg src[277428]:_any[178](?)) : _unknown[51] "inline"
   {
-    unknown st[277330] "type variable"(277329 'static typeof' dst)
-    if(277382 call _cond_test(277337 call isPODType st))
+    unknown st[277434] "type variable"(277433 'static typeof' dst)
+    if(277486 call _cond_test(277441 call isPODType st))
     {
-      (277340 call = dst src)
+      (277444 call = dst src)
     }
     {
       { scopeless
-        unknown size[277348](277347 call c_sizeof st)
-        (277351 'end of statement')
+        unknown size[277452](277451 call c_sizeof st)
+        (277455 'end of statement')
       }
-      (277364 call c_memcpy(277357 call ptrTo dst)(277362 call ptrTo src) size)
-      if(277378 call _cond_test boundsChecking)
+      (277468 call c_memcpy(277461 call ptrTo dst)(277466 call ptrTo src) size)
+      if(277482 call _cond_test boundsChecking)
       {
-        (277375 call c_memset(277371 call ptrTo src) 0 size)
+        (277479 call c_memset(277475 call ptrTo src) 0 size)
       }
     }
   }
-  function shallowCopyInit[277392](ref arg src[277390]:_any[178](?)) : _unknown[51] "inline" "no copy return" "unsafe"
+  function shallowCopyInit[277496](ref arg src[277494]:_any[178](?)) : _unknown[51] "inline" "no copy return" "unsafe"
   {
-    unknown st[277398] "type variable"(277397 'static typeof' src)
+    unknown st[277502] "type variable"(277501 'static typeof' src)
     { scopeless
-      unknown dst[277403] "no auto destroy" "no init" st
-      (277406 'end of statement')
+      unknown dst[277507] "no auto destroy" "no init" st
+      (277510 'end of statement')
     }
-    (277411 call shallowCopy dst src)
-    (277414 return dst)
+    (277515 call shallowCopy dst src)
+    (277518 return dst)
   }
-  function shallowSwap[277425](ref arg lhs[277422] :
-  unknown t[277420], ref arg rhs[277428] :
+  function shallowSwap[277529](ref arg lhs[277526] :
+  unknown t[277524], ref arg rhs[277532] :
   t) : _unknown[51] "inline" "unsafe"
   {
-    unknown st[277435] "type variable"(277434 'static typeof' lhs)
+    unknown st[277539] "type variable"(277538 'static typeof' lhs)
     { scopeless
-      unknown tmp[277440] "no auto destroy" "no init" st
-      (277443 'end of statement')
+      unknown tmp[277544] "no auto destroy" "no init" st
+      (277547 'end of statement')
     }
-    if(277512 call _cond_test(277447 call isPODType st))
+    if(277616 call _cond_test(277551 call isPODType st))
     {
-      (277450 call = tmp lhs)
-      (277456 call = lhs rhs)
-      (277461 call = rhs tmp)
+      (277554 call = tmp lhs)
+      (277560 call = lhs rhs)
+      (277565 call = rhs tmp)
     }
     {
       { scopeless
-        unknown size[277468](277467 call c_sizeof st)
-        (277471 'end of statement')
+        unknown size[277572](277571 call c_sizeof st)
+        (277575 'end of statement')
       }
-      (277484 call c_memcpy(277477 call ptrTo tmp)(277482 call ptrTo lhs) size)
-      (277497 call c_memcpy(277490 call ptrTo lhs)(277495 call ptrTo rhs) size)
-      (277510 call c_memcpy(277503 call ptrTo rhs)(277508 call ptrTo tmp) size)
+      (277588 call c_memcpy(277581 call ptrTo tmp)(277586 call ptrTo lhs) size)
+      (277601 call c_memcpy(277594 call ptrTo lhs)(277599 call ptrTo rhs) size)
+      (277614 call c_memcpy(277607 call ptrTo rhs)(277612 call ptrTo tmp) size)
     }
   }
-  function shallowCopy[277522](ref arg A[277520]:_any[178](?), arg dst[277524]:_any[178](?), arg src[277526]:_any[178](?), arg nElts[277528]:_any[178](?)) : _unknown[51] "inline"
+  function shallowCopy[277626](ref arg A[277624]:_any[178](?), arg dst[277628]:_any[178](?), arg src[277630]:_any[178](?), arg nElts[277632]:_any[178](?)) : _unknown[51] "inline"
   {
-    (277531 'use' SysCTypes)
-    if(277582 call _cond_test boundsChecking)
+    (277635 'use' SysCTypes)
+    if(277686 call _cond_test boundsChecking)
     {
-      (277541 call assert(277538 call > nElts 0))
-      (277561 call assert(277559 call(277549 call .(277546 call . A c"_dom") c"contains")(277556 call #(277553 call chpl_build_low_bounded_range dst) nElts)))
-      (277580 call assert(277578 call(277568 call .(277565 call . A c"_dom") c"contains")(277575 call #(277572 call chpl_build_low_bounded_range src) nElts)))
+      (277645 call assert(277642 call > nElts 0))
+      (277665 call assert(277663 call(277653 call .(277650 call . A c"_dom") c"contains")(277660 call #(277657 call chpl_build_low_bounded_range dst) nElts)))
+      (277684 call assert(277682 call(277672 call .(277669 call . A c"_dom") c"contains")(277679 call #(277676 call chpl_build_low_bounded_range src) nElts)))
     }
-    if(277760 call _cond_test(277594 call(277590 call .(277587 call . A c"_instance") c"isDefaultRectangular")))
+    if(277864 call _cond_test(277698 call(277694 call .(277691 call . A c"_instance") c"isDefaultRectangular")))
     {
-      unknown st[277603] "type variable"(277602 'static field type'(277598 call . A c"_value") "eltType")
+      unknown st[277707] "type variable"(277706 'static field type'(277702 call . A c"_value") "eltType")
       { scopeless
-        unknown size[277617](277615 call *(277609 call _cast size_t nElts)(277614 call c_sizeof st))
-        (277620 'end of statement')
+        unknown size[277721](277719 call *(277713 call _cast size_t nElts)(277718 call c_sizeof st))
+        (277724 'end of statement')
       }
-      (277638 call c_memcpy(277628 call ptrTo(277626 call A dst))(277636 call ptrTo(277634 call A src)) size)
+      (277742 call c_memcpy(277732 call ptrTo(277730 call A dst))(277740 call ptrTo(277738 call A src)) size)
     }
     {
       { scopeless
-        unknown ok[277663](277662 call chpl__bulkTransferArray A(277650 call chpl__buildDomainExpr(277647 call #(277644 call chpl_build_low_bounded_range dst) nElts)) A(277660 call chpl__buildDomainExpr(277657 call #(277654 call chpl_build_low_bounded_range src) nElts)))
-        (277666 'end of statement')
+        unknown ok[277767](277766 call chpl__bulkTransferArray A(277754 call chpl__buildDomainExpr(277751 call #(277748 call chpl_build_low_bounded_range dst) nElts)) A(277764 call chpl__buildDomainExpr(277761 call #(277758 call chpl_build_low_bounded_range src) nElts)))
+        (277770 'end of statement')
       }
-      if(277756 call _cond_test(277669 call ! ok))
+      if(277860 call _cond_test(277773 call ! ok))
       {
-        (277690 call halt "bulk transfer failed in sorting")
+        (277794 call halt "bulk transfer failed in sorting")
         {
-          unknown _indexOfInterest[277722] "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[277723] "expr temp" "temp"
-          (277732 'move' _iterator[277723](277730 call _getIterator(277702 call vectorizeOnly(277699 call #(277696 call chpl_build_low_bounded_range 0) nElts))))
+          unknown _indexOfInterest[277826] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[277827] "expr temp" "temp"
+          (277836 'move' _iterator[277827](277834 call _getIterator(277806 call vectorizeOnly(277803 call #(277800 call chpl_build_low_bounded_range 0) nElts))))
           Defer
           {
             {
-              (277749 call _freeIterator _iterator[277723])
+              (277853 call _freeIterator _iterator[277827])
             }
           }
           { scopeless type
-            (277738 'move' _indexOfInterest[277722](277735 call iteratorIndex _iterator[277723]))
+            (277842 'move' _indexOfInterest[277826](277839 call iteratorIndex _iterator[277827]))
           }
-          ForLoop[277724]
+          ForLoop[277828]
           {
-            unknown i[277742] "index var" "insert auto destroy"
-            (277744 'move' i[277742] _indexOfInterest[277722])
+            unknown i[277846] "index var" "insert auto destroy"
+            (277848 'move' i[277846] _indexOfInterest[277826])
             {
-              (277719 '='(277711 call A(277708 call + dst i))(277718 call A(277715 call + src i)))
+              (277823 '='(277815 call A(277812 call + dst i))(277822 call A(277819 call + src i)))
             }
-            label _continueLabel[277727]
-            _indexOfInterest[277722]
-            _iterator[277723]
+            label _continueLabel[277831]
+            _indexOfInterest[277826]
+            _iterator[277827]
           }
-          label _breakLabel[277728]
+          label _breakLabel[277832]
         }
       }
     }
   }
-  function shallowCopy[277770](ref arg DstA[277768]:_any[178](?), arg dst[277772]:_any[178](?), ref arg SrcA[277774]:_any[178](?), arg src[277776]:_any[178](?), arg nElts[277778]:_any[178](?)) : _unknown[51] "inline"
+  function shallowCopy[277874](ref arg DstA[277872]:_any[178](?), arg dst[277876]:_any[178](?), ref arg SrcA[277878]:_any[178](?), arg src[277880]:_any[178](?), arg nElts[277882]:_any[178](?)) : _unknown[51] "inline"
   {
-    (277781 'use' SysCTypes)
-    if(277832 call _cond_test boundsChecking)
+    (277885 'use' SysCTypes)
+    if(277936 call _cond_test boundsChecking)
     {
-      (277791 call assert(277788 call > nElts 0))
-      (277811 call assert(277809 call(277799 call .(277796 call . DstA c"_dom") c"contains")(277806 call #(277803 call chpl_build_low_bounded_range dst) nElts)))
-      (277830 call assert(277828 call(277818 call .(277815 call . SrcA c"_dom") c"contains")(277825 call #(277822 call chpl_build_low_bounded_range src) nElts)))
+      (277895 call assert(277892 call > nElts 0))
+      (277915 call assert(277913 call(277903 call .(277900 call . DstA c"_dom") c"contains")(277910 call #(277907 call chpl_build_low_bounded_range dst) nElts)))
+      (277934 call assert(277932 call(277922 call .(277919 call . SrcA c"_dom") c"contains")(277929 call #(277926 call chpl_build_low_bounded_range src) nElts)))
     }
-    if(278005 call _cond_test(277854 call &&(277844 call(277840 call .(277837 call . DstA c"_instance") c"isDefaultRectangular"))(277853 call(277849 call .(277846 call . SrcA c"_instance") c"isDefaultRectangular"))))
+    if(278109 call _cond_test(277958 call &&(277948 call(277944 call .(277941 call . DstA c"_instance") c"isDefaultRectangular"))(277957 call(277953 call .(277950 call . SrcA c"_instance") c"isDefaultRectangular"))))
     {
-      unknown st[277864] "type variable"(277863 'static field type'(277859 call . DstA c"_value") "eltType")
+      unknown st[277968] "type variable"(277967 'static field type'(277963 call . DstA c"_value") "eltType")
       { scopeless
-        unknown size[277878](277876 call *(277870 call _cast size_t nElts)(277875 call c_sizeof st))
-        (277881 'end of statement')
+        unknown size[277982](277980 call *(277974 call _cast size_t nElts)(277979 call c_sizeof st))
+        (277985 'end of statement')
       }
-      (277899 call c_memcpy(277889 call ptrTo(277887 call DstA dst))(277897 call ptrTo(277895 call SrcA src)) size)
+      (278003 call c_memcpy(277993 call ptrTo(277991 call DstA dst))(278001 call ptrTo(277999 call SrcA src)) size)
     }
     {
       { scopeless
-        unknown ok[277924](277923 call chpl__bulkTransferArray DstA(277911 call chpl__buildDomainExpr(277908 call #(277905 call chpl_build_low_bounded_range dst) nElts)) SrcA(277921 call chpl__buildDomainExpr(277918 call #(277915 call chpl_build_low_bounded_range src) nElts)))
-        (277927 'end of statement')
+        unknown ok[278028](278027 call chpl__bulkTransferArray DstA(278015 call chpl__buildDomainExpr(278012 call #(278009 call chpl_build_low_bounded_range dst) nElts)) SrcA(278025 call chpl__buildDomainExpr(278022 call #(278019 call chpl_build_low_bounded_range src) nElts)))
+        (278031 'end of statement')
       }
-      if(278001 call _cond_test(277930 call ! ok))
+      if(278105 call _cond_test(278034 call ! ok))
       {
-        (277935 call halt "bulk transfer failed in sorting")
+        (278039 call halt "bulk transfer failed in sorting")
         {
-          unknown _indexOfInterest[277967] "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[277968] "expr temp" "temp"
-          (277977 'move' _iterator[277968](277975 call _getIterator(277947 call vectorizeOnly(277944 call #(277941 call chpl_build_low_bounded_range 0) nElts))))
+          unknown _indexOfInterest[278071] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[278072] "expr temp" "temp"
+          (278081 'move' _iterator[278072](278079 call _getIterator(278051 call vectorizeOnly(278048 call #(278045 call chpl_build_low_bounded_range 0) nElts))))
           Defer
           {
             {
-              (277994 call _freeIterator _iterator[277968])
+              (278098 call _freeIterator _iterator[278072])
             }
           }
           { scopeless type
-            (277983 'move' _indexOfInterest[277967](277980 call iteratorIndex _iterator[277968]))
+            (278087 'move' _indexOfInterest[278071](278084 call iteratorIndex _iterator[278072]))
           }
-          ForLoop[277969]
+          ForLoop[278073]
           {
-            unknown i[277987] "index var" "insert auto destroy"
-            (277989 'move' i[277987] _indexOfInterest[277967])
+            unknown i[278091] "index var" "insert auto destroy"
+            (278093 'move' i[278091] _indexOfInterest[278071])
             {
-              (277964 '='(277956 call DstA(277953 call + dst i))(277963 call SrcA(277960 call + src i)))
+              (278068 '='(278060 call DstA(278057 call + dst i))(278067 call SrcA(278064 call + src i)))
             }
-            label _continueLabel[277972]
-            _indexOfInterest[277967]
-            _iterator[277968]
+            label _continueLabel[278076]
+            _indexOfInterest[278071]
+            _iterator[278072]
           }
-          label _breakLabel[277973]
+          label _breakLabel[278077]
         }
       }
     }

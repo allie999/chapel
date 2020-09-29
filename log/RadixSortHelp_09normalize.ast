@@ -2,764 +2,764 @@ AST dump for RadixSortHelp after pass normalize.
 Module use list: ChapelStandard Sort Reflection 
 
 {
-  function chpl__init_RadixSortHelp[416195]() : void[4] "insert line file info" "module init"
+  function chpl__init_RadixSortHelp[416175]() : void[4] "insert line file info" "module init"
   {
-    (548894 'init var' RADIX_BITS[276003] 8)
-    (276006 'end of statement')
-    (548896 'init var' classifyUnrollFactor[276008] 7)
-    (276011 'end of statement')
-    (538171 return _void[55])
+    (548869 'init var' RADIX_BITS[276107] 8)
+    (276110 'end of statement')
+    (548871 'init var' classifyUnrollFactor[276112] 7)
+    (276115 'end of statement')
+    (538148 return _void[55])
   }
-  unknown RADIX_BITS[276003] "dead at end of block" "param"
-  unknown classifyUnrollFactor[276008] "dead at end of block" "param"
-  function binForRecordKeyPart[276016](arg a[276014]:_any[178](?), arg criterion[276018]:_any[178](?), arg startbit[276021]:int(64)[13]) : _unknown[51] "inline"
+  unknown RADIX_BITS[276107] "dead at end of block" "param"
+  unknown classifyUnrollFactor[276112] "dead at end of block" "param"
+  function binForRecordKeyPart[276120](arg a[276118]:_any[178](?), arg criterion[276122]:_any[178](?), arg startbit[276125]:int(64)[13]) : _unknown[51] "inline"
   {
-    unknown ret[538010] "RVV" "temp"
+    unknown ret[537987] "RVV" "temp"
     { scopeless type
-      unknown call_type_tmp[493281] "expr temp" "maybe type" "temp" "type variable"
-      unknown call_tmp[738978] "expr temp" "maybe param" "maybe type" "temp"
-      (738981 'move' call_tmp[738978](276031 call(276025 call (partial) keyPart _mt[243] criterion[276018]) a[276014] 1))
-      (493285 'move' call_type_tmp[493281](276032 'typeof' call_tmp[738978]))
+      unknown call_type_tmp[493258] "expr temp" "maybe type" "temp" "type variable"
+      unknown call_tmp[738958] "expr temp" "maybe param" "maybe type" "temp"
+      (738961 'move' call_tmp[738958](276135 call(276129 call (partial) keyPart _mt[243] criterion[276122]) a[276118] 1))
+      (493262 'move' call_type_tmp[493258](276136 'typeof' call_tmp[738958]))
     }
-    const testRet[276033] "dead at end of block" "const" "insert auto destroy"
-    (548898 'default init var' testRet[276033] call_type_tmp[493281])
-    (276036 'end of statement')
-    unknown call_tmp[738983] "maybe param" "maybe type" "temp"
-    (738986 'move' call_tmp[738983](276041 call testRet[276033] 1))
-    const testPart[276042] "dead at end of block" "const" "insert auto destroy"
-    (548900 'init var' testPart[276042] call_tmp[738983])
-    (276045 'end of statement')
-    unknown call_tmp[738988] "expr temp" "maybe param" "maybe type" "temp" "type variable"
-    (738991 'move' call_tmp[738988](276048 'typeof' testPart[276042]))
+    const testRet[276137] "dead at end of block" "const" "insert auto destroy"
+    (548873 'default init var' testRet[276137] call_type_tmp[493258])
+    (276140 'end of statement')
+    unknown call_tmp[738963] "maybe param" "maybe type" "temp"
+    (738966 'move' call_tmp[738963](276145 call testRet[276137] 1))
+    const testPart[276146] "dead at end of block" "const" "insert auto destroy"
+    (548875 'init var' testPart[276146] call_tmp[738963])
+    (276149 'end of statement')
+    unknown call_tmp[738968] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (738971 'move' call_tmp[738968](276152 'typeof' testPart[276146]))
+    unknown call_tmp[738973] "maybe param" "maybe type" "temp"
+    (738976 'move' call_tmp[738973](276154 call numBits call_tmp[738968]))
+    unknown bitsPerPart[276155] "dead at end of block" "param"
+    (548877 'init var' bitsPerPart[276155] call_tmp[738973])
+    (276158 'end of statement')
+    unknown call_tmp[738978] "maybe param" "maybe type" "temp"
+    (738981 'move' call_tmp[738978](276161 call % bitsPerPart[276155] RADIX_BITS[276107]))
+    unknown bitsPerPartModRadixBits[276163] "dead at end of block" "param"
+    (548879 'init var' bitsPerPartModRadixBits[276163] call_tmp[738978])
+    (276166 'end of statement')
+    unknown call_tmp[738983] "expr temp" "maybe param" "maybe type" "temp"
+    (738986 'move' call_tmp[738983](276169 call != bitsPerPartModRadixBits[276163] 0))
+    unknown call_tmp[738988] "expr temp" "maybe param" "maybe type" "temp"
+    (738991 'move' call_tmp[738988](276192 call _cond_test call_tmp[738983]))
+    if call_tmp[738988]
+    {
+      (276190 call compilerError "part size must be a multiple of radix bits")
+    }
     unknown call_tmp[738993] "maybe param" "maybe type" "temp"
-    (738996 'move' call_tmp[738993](276050 call numBits call_tmp[738988]))
-    unknown bitsPerPart[276051] "dead at end of block" "param"
-    (548902 'init var' bitsPerPart[276051] call_tmp[738993])
-    (276054 'end of statement')
+    (738996 'move' call_tmp[738993](276199 call / startbit[276125] bitsPerPart[276155]))
+    const whichpart[276201] "dead at end of block" "const" "insert auto destroy"
+    (548881 'init var' whichpart[276201] call_tmp[738993])
+    (276204 'end of statement')
     unknown call_tmp[738998] "maybe param" "maybe type" "temp"
-    (739001 'move' call_tmp[738998](276057 call % bitsPerPart[276051] RADIX_BITS[276003]))
-    unknown bitsPerPartModRadixBits[276059] "dead at end of block" "param"
-    (548904 'init var' bitsPerPartModRadixBits[276059] call_tmp[738998])
-    (276062 'end of statement')
-    unknown call_tmp[739003] "expr temp" "maybe param" "maybe type" "temp"
-    (739006 'move' call_tmp[739003](276065 call != bitsPerPartModRadixBits[276059] 0))
-    unknown call_tmp[739008] "expr temp" "maybe param" "maybe type" "temp"
-    (739011 'move' call_tmp[739008](276088 call _cond_test call_tmp[739003]))
-    if call_tmp[739008]
-    {
-      (276086 call compilerError "part size must be a multiple of radix bits")
-    }
-    unknown call_tmp[739013] "maybe param" "maybe type" "temp"
-    (739016 'move' call_tmp[739013](276095 call / startbit[276021] bitsPerPart[276051]))
-    const whichpart[276097] "dead at end of block" "const" "insert auto destroy"
-    (548906 'init var' whichpart[276097] call_tmp[739013])
-    (276100 'end of statement')
-    unknown call_tmp[739018] "maybe param" "maybe type" "temp"
-    (739021 'move' call_tmp[739018](276103 call % startbit[276021] bitsPerPart[276051]))
-    const bitsinpart[276105] "dead at end of block" "const" "insert auto destroy"
-    (548908 'init var' bitsinpart[276105] call_tmp[739018])
-    (276108 'end of statement')
+    (739001 'move' call_tmp[738998](276207 call % startbit[276125] bitsPerPart[276155]))
+    const bitsinpart[276209] "dead at end of block" "const" "insert auto destroy"
+    (548883 'init var' bitsinpart[276209] call_tmp[738998])
+    (276212 'end of statement')
+    unknown call_tmp[739005] "maybe param" "maybe type" "temp"
+    (739008 'move' call_tmp[739005](276225 call(276219 call (partial) keyPart _mt[243] criterion[276122]) a[276118] whichpart[276201]))
+    const tmp[276226] "dead at end of block" "const" "insert auto destroy" "temp"
+    (548885 'init var' tmp[276226] call_tmp[739005])
+    (276233 call _check_tuple_var_decl tmp[276226] 2)
+    (490161 'end of statement')
+    unknown call_tmp[739010] "maybe param" "maybe type" "temp"
+    (739013 'move' call_tmp[739010](276227 call tmp[276226] 0))
+    const section[276213] "dead at end of block" "const" "insert auto destroy"
+    (548887 'init var' section[276213] call_tmp[739010])
+    unknown call_tmp[739015] "maybe param" "maybe type" "temp"
+    (739018 'move' call_tmp[739015](276230 call tmp[276226] 1))
+    const part[276215] "dead at end of block" "const" "insert auto destroy"
+    (548889 'init var' part[276215] call_tmp[739015])
+    (276238 'end of statement')
+    unknown call_tmp[739020] "expr temp" "maybe param" "maybe type" "temp"
+    (739023 'move' call_tmp[739020](276243 call uint(64)[115] bitsPerPart[276155]))
     unknown call_tmp[739025] "maybe param" "maybe type" "temp"
-    (739028 'move' call_tmp[739025](276121 call(276115 call (partial) keyPart _mt[243] criterion[276018]) a[276014] whichpart[276097]))
-    const tmp[276122] "dead at end of block" "const" "insert auto destroy" "temp"
-    (548910 'init var' tmp[276122] call_tmp[739025])
-    (276129 call _check_tuple_var_decl tmp[276122] 2)
-    (490184 'end of statement')
-    unknown call_tmp[739030] "maybe param" "maybe type" "temp"
-    (739033 'move' call_tmp[739030](276123 call tmp[276122] 0))
-    const section[276109] "dead at end of block" "const" "insert auto destroy"
-    (548912 'init var' section[276109] call_tmp[739030])
-    unknown call_tmp[739035] "maybe param" "maybe type" "temp"
-    (739038 'move' call_tmp[739035](276126 call tmp[276122] 1))
-    const part[276111] "dead at end of block" "const" "insert auto destroy"
-    (548914 'init var' part[276111] call_tmp[739035])
-    (276134 'end of statement')
-    unknown call_tmp[739040] "expr temp" "maybe param" "maybe type" "temp"
-    (739043 'move' call_tmp[739040](276139 call uint(64)[115] bitsPerPart[276051]))
-    unknown call_tmp[739045] "maybe param" "maybe type" "temp"
-    (739048 'move' call_tmp[739045](276140 call _cast call_tmp[739040] part[276111]))
-    unknown ubits[276142] "dead at end of block" "insert auto destroy"
-    (548916 'init var' ubits[276142] call_tmp[739045])
-    (276145 'end of statement')
-    unknown call_tmp[739050] "expr temp" "maybe param" "maybe type" "temp"
-    (739053 'move' call_tmp[739050](276149 call isInt part[276111]))
-    unknown call_tmp[739055] "expr temp" "maybe param" "maybe type" "temp"
-    (739058 'move' call_tmp[739055](276172 call _cond_test call_tmp[739050]))
-    if call_tmp[739055]
+    (739028 'move' call_tmp[739025](276244 call _cast call_tmp[739020] part[276215]))
+    unknown ubits[276246] "dead at end of block" "insert auto destroy"
+    (548891 'init var' ubits[276246] call_tmp[739025])
+    (276249 'end of statement')
+    unknown call_tmp[739030] "expr temp" "maybe param" "maybe type" "temp"
+    (739033 'move' call_tmp[739030](276253 call isInt part[276215]))
+    unknown call_tmp[739035] "expr temp" "maybe param" "maybe type" "temp"
+    (739038 'move' call_tmp[739035](276276 call _cond_test call_tmp[739030]))
+    if call_tmp[739035]
     {
-      unknown call_tmp[739060] "maybe param" "maybe type" "temp" "type variable"
-      (739063 'move' call_tmp[739060](276151 'typeof' ubits[276142]))
-      const one[276153] "dead at end of block" "const" "insert auto destroy"
-      (548918 'init var' one[276153] 1 call_tmp[739060])
-      (276156 'end of statement' ubits[276142])
-      unknown call_tmp[739065] "expr temp" "maybe param" "maybe type" "temp"
-      (739068 'move' call_tmp[739065](276163 call - bitsPerPart[276051] 1))
-      unknown call_tmp[739070] "expr temp" "maybe param" "maybe type" "temp"
-      (739073 'move' call_tmp[739070](276165 call << one[276153] call_tmp[739065]))
-      unknown call_tmp[739075] "expr temp" "maybe param" "maybe type" "temp"
-      (739078 'move' call_tmp[739075](276167 call ^ ubits[276142] call_tmp[739070]))
-      (276169 call = ubits[276142] call_tmp[739075])
-      (490187 'end of statement' ubits[276142] ubits[276142] one[276153])
+      unknown call_tmp[739040] "maybe param" "maybe type" "temp" "type variable"
+      (739043 'move' call_tmp[739040](276255 'typeof' ubits[276246]))
+      const one[276257] "dead at end of block" "const" "insert auto destroy"
+      (548893 'init var' one[276257] 1 call_tmp[739040])
+      (276260 'end of statement' ubits[276246])
+      unknown call_tmp[739045] "expr temp" "maybe param" "maybe type" "temp"
+      (739048 'move' call_tmp[739045](276267 call - bitsPerPart[276155] 1))
+      unknown call_tmp[739050] "expr temp" "maybe param" "maybe type" "temp"
+      (739053 'move' call_tmp[739050](276269 call << one[276257] call_tmp[739045]))
+      unknown call_tmp[739055] "expr temp" "maybe param" "maybe type" "temp"
+      (739058 'move' call_tmp[739055](276271 call ^ ubits[276246] call_tmp[739050]))
+      (276273 call = ubits[276246] call_tmp[739055])
+      (490164 'end of statement' ubits[276246] ubits[276246] one[276257])
     }
+    unknown call_tmp[739060] "expr temp" "maybe param" "maybe type" "temp"
+    (739063 'move' call_tmp[739060](276283 call << 1 RADIX_BITS[276107]))
+    unknown call_tmp[739065] "maybe param" "maybe type" "temp"
+    (739068 'move' call_tmp[739065](276286 call - call_tmp[739060] 1))
+    unknown mask[276288] "dead at end of block" "param"
+    (548895 'init var' mask[276288] call_tmp[739065] uint(64)[115])
+    (276291 'end of statement')
+    unknown call_tmp[739070] "expr temp" "maybe param" "maybe type" "temp"
+    (739073 'move' call_tmp[739070](276295 call - bitsPerPart[276155] bitsinpart[276209]))
+    unknown call_tmp[739075] "expr temp" "maybe param" "maybe type" "temp"
+    (739078 'move' call_tmp[739075](276298 call - call_tmp[739070] RADIX_BITS[276107]))
     unknown call_tmp[739080] "expr temp" "maybe param" "maybe type" "temp"
-    (739083 'move' call_tmp[739080](276179 call << 1 RADIX_BITS[276003]))
+    (739083 'move' call_tmp[739080](276300 call >> ubits[276246] call_tmp[739075]))
     unknown call_tmp[739085] "maybe param" "maybe type" "temp"
-    (739088 'move' call_tmp[739085](276182 call - call_tmp[739080] 1))
-    unknown mask[276184] "dead at end of block" "param"
-    (548920 'init var' mask[276184] call_tmp[739085] uint(64)[115])
-    (276187 'end of statement')
+    (739088 'move' call_tmp[739085](276303 call & call_tmp[739080] mask[276288]))
+    const ubin[276305] "dead at end of block" "const" "insert auto destroy"
+    (548897 'init var' ubin[276305] call_tmp[739085])
+    (276308 'end of statement' testRet[276137] testPart[276146] part[276215] ubits[276246] bitsinpart[276209])
     unknown call_tmp[739090] "expr temp" "maybe param" "maybe type" "temp"
-    (739093 'move' call_tmp[739090](276191 call - bitsPerPart[276051] bitsinpart[276105]))
+    (739093 'move' call_tmp[739090](276311 call == section[276213] 0))
     unknown call_tmp[739095] "expr temp" "maybe param" "maybe type" "temp"
-    (739098 'move' call_tmp[739095](276194 call - call_tmp[739090] RADIX_BITS[276003]))
-    unknown call_tmp[739100] "expr temp" "maybe param" "maybe type" "temp"
-    (739103 'move' call_tmp[739100](276196 call >> ubits[276142] call_tmp[739095]))
-    unknown call_tmp[739105] "maybe param" "maybe type" "temp"
-    (739108 'move' call_tmp[739105](276199 call & call_tmp[739100] mask[276184]))
-    const ubin[276201] "dead at end of block" "const" "insert auto destroy"
-    (548922 'init var' ubin[276201] call_tmp[739105])
-    (276204 'end of statement' testRet[276033] testPart[276042] part[276111] ubits[276142] bitsinpart[276105])
-    unknown call_tmp[739110] "expr temp" "maybe param" "maybe type" "temp"
-    (739113 'move' call_tmp[739110](276207 call == section[276109] 0))
-    unknown call_tmp[739115] "expr temp" "maybe param" "maybe type" "temp"
-    (739118 'move' call_tmp[739115](276252 call _cond_test call_tmp[739110]))
-    if call_tmp[739115]
+    (739098 'move' call_tmp[739095](276356 call _cond_test call_tmp[739090]))
+    if call_tmp[739095]
     {
+      unknown call_tmp[739100] "expr temp" "maybe param" "maybe type" "temp"
+      (739103 'move' call_tmp[739100](276315 call _cast int(64)[13] ubin[276305]))
+      unknown call_tmp[739105] "expr temp" "maybe param" "maybe type" "temp"
+      (739108 'move' call_tmp[739105](276318 call + call_tmp[739100] 1))
+      unknown call_tmp[739110] "expr temp" "maybe param" "maybe type" "temp"
+      (739113 'move' call_tmp[739110](276322 call _build_tuple call_tmp[739105] ubits[276246]))
+      (537992 'move' ret[537987](537991 'deref' call_tmp[739110]))
+      gotoReturn _end_binForRecordKeyPart[537985] _end_binForRecordKeyPart[537985]
+      (490170 'end of statement' ubin[276305] ubits[276246])
+    }
+    {
+      unknown call_tmp[739115] "expr temp" "maybe param" "maybe type" "temp"
+      (739118 'move' call_tmp[739115](276328 call < section[276213] 0))
       unknown call_tmp[739120] "expr temp" "maybe param" "maybe type" "temp"
-      (739123 'move' call_tmp[739120](276211 call _cast int(64)[13] ubin[276201]))
-      unknown call_tmp[739125] "expr temp" "maybe param" "maybe type" "temp"
-      (739128 'move' call_tmp[739125](276214 call + call_tmp[739120] 1))
-      unknown call_tmp[739130] "expr temp" "maybe param" "maybe type" "temp"
-      (739133 'move' call_tmp[739130](276218 call _build_tuple call_tmp[739125] ubits[276142]))
-      (538015 'move' ret[538010](538014 'deref' call_tmp[739130]))
-      gotoReturn _end_binForRecordKeyPart[538008] _end_binForRecordKeyPart[538008]
-      (490193 'end of statement' ubin[276201] ubits[276142])
-    }
-    {
-      unknown call_tmp[739135] "expr temp" "maybe param" "maybe type" "temp"
-      (739138 'move' call_tmp[739135](276224 call < section[276109] 0))
-      unknown call_tmp[739140] "expr temp" "maybe param" "maybe type" "temp"
-      (739143 'move' call_tmp[739140](276246 call _cond_test call_tmp[739135]))
-      if call_tmp[739140]
+      (739123 'move' call_tmp[739120](276350 call _cond_test call_tmp[739115]))
+      if call_tmp[739120]
       {
-        unknown call_tmp[739145] "expr temp" "maybe param" "maybe type" "temp"
-        (739148 'move' call_tmp[739145](276229 call _build_tuple 0 ubits[276142]))
-        (538020 'move' ret[538010](538019 'deref' call_tmp[739145]))
-        gotoReturn _end_binForRecordKeyPart[538008] _end_binForRecordKeyPart[538008]
-        (490196 'end of statement' ubits[276142])
+        unknown call_tmp[739125] "expr temp" "maybe param" "maybe type" "temp"
+        (739128 'move' call_tmp[739125](276333 call _build_tuple 0 ubits[276246]))
+        (537997 'move' ret[537987](537996 'deref' call_tmp[739125]))
+        gotoReturn _end_binForRecordKeyPart[537985] _end_binForRecordKeyPart[537985]
+        (490173 'end of statement' ubits[276246])
       }
       {
-        unknown call_tmp[739150] "expr temp" "maybe param" "maybe type" "temp"
-        (739153 'move' call_tmp[739150](276235 call << 1 RADIX_BITS[276003]))
-        unknown call_tmp[739155] "expr temp" "maybe param" "maybe type" "temp"
-        (739158 'move' call_tmp[739155](276238 call + call_tmp[739150] 1))
-        unknown call_tmp[739160] "expr temp" "maybe param" "maybe type" "temp"
-        (739163 'move' call_tmp[739160](276242 call _build_tuple call_tmp[739155] ubits[276142]))
-        (538025 'move' ret[538010](538024 'deref' call_tmp[739160]))
-        gotoReturn _end_binForRecordKeyPart[538008] _end_binForRecordKeyPart[538008]
-        (490198 'end of statement' ubits[276142])
+        unknown call_tmp[739130] "expr temp" "maybe param" "maybe type" "temp"
+        (739133 'move' call_tmp[739130](276339 call << 1 RADIX_BITS[276107]))
+        unknown call_tmp[739135] "expr temp" "maybe param" "maybe type" "temp"
+        (739138 'move' call_tmp[739135](276342 call + call_tmp[739130] 1))
+        unknown call_tmp[739140] "expr temp" "maybe param" "maybe type" "temp"
+        (739143 'move' call_tmp[739140](276346 call _build_tuple call_tmp[739135] ubits[276246]))
+        (538002 'move' ret[537987](538001 'deref' call_tmp[739140]))
+        gotoReturn _end_binForRecordKeyPart[537985] _end_binForRecordKeyPart[537985]
+        (490175 'end of statement' ubits[276246])
       }
     }
-    label _end_binForRecordKeyPart[538008]
-    (538012 return ret[538010])
+    label _end_binForRecordKeyPart[537985]
+    (537989 return ret[537987])
   }
-  function binForRecord[276264](arg a[276262]:_any[178](?), arg criterion[276266]:_any[178](?), arg startbit[276269]:int(64)[13]) : _unknown[51] "inline"
+  function binForRecord[276368](arg a[276366]:_any[178](?), arg criterion[276370]:_any[178](?), arg startbit[276373]:int(64)[13]) : _unknown[51] "inline"
   {
-    unknown ret[538031] "RVV" "temp"
-    unknown call_tmp[739165] "expr temp" "maybe param" "maybe type" "temp"
-    (739168 'move' call_tmp[739165](276278 call canResolveMethod criterion[276266] "keyPart" a[276262] 0))
-    unknown call_tmp[739170] "expr temp" "maybe param" "maybe type" "temp"
-    (739173 'move' call_tmp[739170](276362 call _cond_test call_tmp[739165]))
-    if call_tmp[739170]
+    unknown ret[538008] "RVV" "temp"
+    unknown call_tmp[739145] "expr temp" "maybe param" "maybe type" "temp"
+    (739148 'move' call_tmp[739145](276382 call canResolveMethod criterion[276370] "keyPart" a[276366] 0))
+    unknown call_tmp[739150] "expr temp" "maybe param" "maybe type" "temp"
+    (739153 'move' call_tmp[739150](276466 call _cond_test call_tmp[739145]))
+    if call_tmp[739150]
     {
-      unknown call_tmp[739175] "expr temp" "maybe param" "maybe type" "temp"
-      (739178 'move' call_tmp[739175](276284 call binForRecordKeyPart a[276262] criterion[276266] startbit[276269]))
-      (538036 'move' ret[538031](538035 'deref' call_tmp[739175]))
-      gotoReturn _end_binForRecord[538029] _end_binForRecord[538029]
+      unknown call_tmp[739155] "expr temp" "maybe param" "maybe type" "temp"
+      (739158 'move' call_tmp[739155](276388 call binForRecordKeyPart a[276366] criterion[276370] startbit[276373]))
+      (538013 'move' ret[538008](538012 'deref' call_tmp[739155]))
+      gotoReturn _end_binForRecord[538006] _end_binForRecord[538006]
     }
     {
-      unknown call_tmp[739180] "expr temp" "maybe param" "maybe type" "temp"
-      (739183 'move' call_tmp[739180](276293 call canResolveMethod criterion[276266] "key" a[276262]))
-      unknown call_tmp[739185] "expr temp" "maybe param" "maybe type" "temp"
-      (739188 'move' call_tmp[739185](276358 call _cond_test call_tmp[739180]))
-      if call_tmp[739185]
+      unknown call_tmp[739160] "expr temp" "maybe param" "maybe type" "temp"
+      (739163 'move' call_tmp[739160](276397 call canResolveMethod criterion[276370] "key" a[276366]))
+      unknown call_tmp[739165] "expr temp" "maybe param" "maybe type" "temp"
+      (739168 'move' call_tmp[739165](276462 call _cond_test call_tmp[739160]))
+      if call_tmp[739165]
       {
-        unknown call_tmp[739192] "expr temp" "maybe param" "maybe type" "temp"
-        (739195 'move' call_tmp[739192](276301 call(276296 call (partial) key _mt[243] criterion[276266]) a[276262]))
+        unknown call_tmp[739172] "expr temp" "maybe param" "maybe type" "temp"
+        (739175 'move' call_tmp[739172](276405 call(276400 call (partial) key _mt[243] criterion[276370]) a[276366]))
+        unknown call_tmp[739177] "expr temp" "maybe param" "maybe type" "temp"
+        (739180 'move' call_tmp[739177](276409 call binForRecordKeyPart call_tmp[739172] defaultComparator[267996] startbit[276373]))
+        (538018 'move' ret[538008](538017 'deref' call_tmp[739177]))
+        gotoReturn _end_binForRecord[538006] _end_binForRecord[538006]
+      }
+      {
+        unknown call_tmp[739182] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (739185 'move' call_tmp[739182](276433 'typeof' criterion[276370]))
+        unknown call_tmp[739187] "expr temp" "maybe param" "maybe type" "temp"
+        (739190 'move' call_tmp[739187](276435 call _cast string[26] call_tmp[739182]))
+        unknown call_tmp[739192] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+        (739195 'move' call_tmp[739192](276455 'typeof' a[276366]))
         unknown call_tmp[739197] "expr temp" "maybe param" "maybe type" "temp"
-        (739200 'move' call_tmp[739197](276305 call binForRecordKeyPart call_tmp[739192] defaultComparator[267894] startbit[276269]))
-        (538041 'move' ret[538031](538040 'deref' call_tmp[739197]))
-        gotoReturn _end_binForRecord[538029] _end_binForRecord[538029]
-      }
-      {
-        unknown call_tmp[739202] "expr temp" "maybe param" "maybe type" "temp" "type variable"
-        (739205 'move' call_tmp[739202](276329 'typeof' criterion[276266]))
-        unknown call_tmp[739207] "expr temp" "maybe param" "maybe type" "temp"
-        (739210 'move' call_tmp[739207](276331 call _cast string[26] call_tmp[739202]))
-        unknown call_tmp[739212] "expr temp" "maybe param" "maybe type" "temp" "type variable"
-        (739215 'move' call_tmp[739212](276351 'typeof' a[276262]))
-        unknown call_tmp[739217] "expr temp" "maybe param" "maybe type" "temp"
-        (739220 'move' call_tmp[739217](276353 call _cast string[26] call_tmp[739212]))
-        (276355 call compilerError "Bad comparator for radix sort " call_tmp[739207] " with eltType " call_tmp[739217])
+        (739200 'move' call_tmp[739197](276457 call _cast string[26] call_tmp[739192]))
+        (276459 call compilerError "Bad comparator for radix sort " call_tmp[739187] " with eltType " call_tmp[739197])
       }
     }
-    label _end_binForRecord[538029]
-    (538033 return ret[538031])
+    label _end_binForRecord[538006]
+    (538010 return ret[538008])
   }
-  function fixedWidth[276374](arg eltTy[276372]:_any[178](?)) param : _unknown[51]
+  function fixedWidth[276478](arg eltTy[276476]:_any[178](?)) param : _unknown[51]
   {
-    unknown ret[538047] "RVV" "param" "temp"
-    unknown tmp[434287] "maybe param" "temp"
-    unknown tmp[434308] "maybe param" "temp"
-    unknown tmp[434329] "maybe param" "temp"
-    (434340 'move' tmp[434329](276379 call isUintType eltTy[276372]))
+    unknown ret[538024] "RVV" "param" "temp"
+    unknown tmp[434267] "maybe param" "temp"
+    unknown tmp[434288] "maybe param" "temp"
+    unknown tmp[434309] "maybe param" "temp"
+    (434320 'move' tmp[434309](276483 call isUintType eltTy[276476]))
+    unknown call_tmp[739202] "expr temp" "maybe param" "maybe type" "temp"
+    (739205 'move' call_tmp[739202](434322 call _cond_invalid tmp[434309]))
+    if call_tmp[739202]
+    {
+      (434325 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[579967] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[579968] "maybe param" "temp"
+    unknown call_tmp[739207] "expr temp" "maybe param" "maybe type" "temp"
+    (739210 'move' call_tmp[739207](434310 call isTrue tmp[434309]))
+    (579973 'move' tmp[579968](579971 call _cond_test call_tmp[739207]))
+    if tmp[579968]
+    {
+      (579978 'move' tmp[579967](579975 '_paramFoldLogical' tmp[579968] 1))
+    }
+    {
+      unknown tmp[579980] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[739212] "expr temp" "maybe param" "maybe type" "temp"
+      (739215 'move' call_tmp[739212](276487 call isIntType eltTy[276476]))
+      (579982 'move' tmp[579980](434314 call isTrue call_tmp[739212]))
+      (579987 'move' tmp[579967](579984 '_paramFoldLogical' tmp[579968] tmp[579980]))
+    }
+    (434299 'move' tmp[434288] tmp[579967])
+    unknown call_tmp[739217] "expr temp" "maybe param" "maybe type" "temp"
+    (739220 'move' call_tmp[739217](434301 call _cond_invalid tmp[434288]))
+    if call_tmp[739217]
+    {
+      (434304 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[579994] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[579995] "maybe param" "temp"
     unknown call_tmp[739222] "expr temp" "maybe param" "maybe type" "temp"
-    (739225 'move' call_tmp[739222](434342 call _cond_invalid tmp[434329]))
-    if call_tmp[739222]
+    (739225 'move' call_tmp[739222](434289 call isTrue tmp[434288]))
+    (580000 'move' tmp[579995](579998 call _cond_test call_tmp[739222]))
+    if tmp[579995]
     {
-      (434345 call compilerError "cannot promote short-circuiting || operator")
-    }
-    unknown tmp[579992] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
-    unknown tmp[579993] "maybe param" "temp"
-    unknown call_tmp[739227] "expr temp" "maybe param" "maybe type" "temp"
-    (739230 'move' call_tmp[739227](434330 call isTrue tmp[434329]))
-    (579998 'move' tmp[579993](579996 call _cond_test call_tmp[739227]))
-    if tmp[579993]
-    {
-      (580003 'move' tmp[579992](580000 '_paramFoldLogical' tmp[579993] 1))
+      (580005 'move' tmp[579994](580002 '_paramFoldLogical' tmp[579995] 1))
     }
     {
-      unknown tmp[580005] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
-      unknown call_tmp[739232] "expr temp" "maybe param" "maybe type" "temp"
-      (739235 'move' call_tmp[739232](276383 call isIntType eltTy[276372]))
-      (580007 'move' tmp[580005](434334 call isTrue call_tmp[739232]))
-      (580012 'move' tmp[579992](580009 '_paramFoldLogical' tmp[579993] tmp[580005]))
+      unknown tmp[580007] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[739227] "expr temp" "maybe param" "maybe type" "temp"
+      (739230 'move' call_tmp[739227](276493 call isRealType eltTy[276476]))
+      (580009 'move' tmp[580007](434293 call isTrue call_tmp[739227]))
+      (580014 'move' tmp[579994](580011 '_paramFoldLogical' tmp[579995] tmp[580007]))
     }
-    (434319 'move' tmp[434308] tmp[579992])
+    (434278 'move' tmp[434267] tmp[579994])
+    unknown call_tmp[739232] "expr temp" "maybe param" "maybe type" "temp"
+    (739235 'move' call_tmp[739232](434280 call _cond_invalid tmp[434267]))
+    if call_tmp[739232]
+    {
+      (434283 call compilerError "cannot promote short-circuiting || operator")
+    }
+    unknown tmp[580021] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[580022] "maybe param" "temp"
     unknown call_tmp[739237] "expr temp" "maybe param" "maybe type" "temp"
-    (739240 'move' call_tmp[739237](434321 call _cond_invalid tmp[434308]))
-    if call_tmp[739237]
+    (739240 'move' call_tmp[739237](434268 call isTrue tmp[434267]))
+    (580027 'move' tmp[580022](580025 call _cond_test call_tmp[739237]))
+    if tmp[580022]
     {
-      (434324 call compilerError "cannot promote short-circuiting || operator")
-    }
-    unknown tmp[580019] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
-    unknown tmp[580020] "maybe param" "temp"
-    unknown call_tmp[739242] "expr temp" "maybe param" "maybe type" "temp"
-    (739245 'move' call_tmp[739242](434309 call isTrue tmp[434308]))
-    (580025 'move' tmp[580020](580023 call _cond_test call_tmp[739242]))
-    if tmp[580020]
-    {
-      (580030 'move' tmp[580019](580027 '_paramFoldLogical' tmp[580020] 1))
+      (580032 'move' tmp[580021](580029 '_paramFoldLogical' tmp[580022] 1))
     }
     {
-      unknown tmp[580032] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
-      unknown call_tmp[739247] "expr temp" "maybe param" "maybe type" "temp"
-      (739250 'move' call_tmp[739247](276389 call isRealType eltTy[276372]))
-      (580034 'move' tmp[580032](434313 call isTrue call_tmp[739247]))
-      (580039 'move' tmp[580019](580036 '_paramFoldLogical' tmp[580020] tmp[580032]))
+      unknown tmp[580034] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[739242] "expr temp" "maybe param" "maybe type" "temp"
+      (739245 'move' call_tmp[739242](276499 call isImagType eltTy[276476]))
+      (580036 'move' tmp[580034](434272 call isTrue call_tmp[739242]))
+      (580041 'move' tmp[580021](580038 '_paramFoldLogical' tmp[580022] tmp[580034]))
     }
-    (434298 'move' tmp[434287] tmp[580019])
-    unknown call_tmp[739252] "expr temp" "maybe param" "maybe type" "temp"
-    (739255 'move' call_tmp[739252](434300 call _cond_invalid tmp[434287]))
-    if call_tmp[739252]
+    unknown call_tmp[739247] "expr temp" "maybe param" "maybe type" "temp"
+    (739250 'move' call_tmp[739247](276508 call _cond_test tmp[580021]))
+    if call_tmp[739247]
     {
-      (434303 call compilerError "cannot promote short-circuiting || operator")
+      unknown call_tmp[739252] "expr temp" "maybe param" "maybe type" "temp"
+      (739255 'move' call_tmp[739252](276505 call numBits eltTy[276476]))
+      (538029 'move' ret[538024](538028 'deref' call_tmp[739252]))
+      gotoReturn _end_fixedWidth[538022] _end_fixedWidth[538022]
     }
-    unknown tmp[580046] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
-    unknown tmp[580047] "maybe param" "temp"
     unknown call_tmp[739257] "expr temp" "maybe param" "maybe type" "temp"
-    (739260 'move' call_tmp[739257](434288 call isTrue tmp[434287]))
-    (580052 'move' tmp[580047](580050 call _cond_test call_tmp[739257]))
-    if tmp[580047]
+    (739260 'move' call_tmp[739257](276517 call isHomogeneousTuple eltTy[276476]))
+    unknown call_tmp[739262] "expr temp" "maybe param" "maybe type" "temp"
+    (739265 'move' call_tmp[739262](276540 call _cond_test call_tmp[739257]))
+    if call_tmp[739262]
     {
-      (580057 'move' tmp[580046](580054 '_paramFoldLogical' tmp[580047] 1))
-    }
-    {
-      unknown tmp[580059] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
-      unknown call_tmp[739262] "expr temp" "maybe param" "maybe type" "temp"
-      (739265 'move' call_tmp[739262](276395 call isImagType eltTy[276372]))
-      (580061 'move' tmp[580059](434292 call isTrue call_tmp[739262]))
-      (580066 'move' tmp[580046](580063 '_paramFoldLogical' tmp[580047] tmp[580059]))
-    }
-    unknown call_tmp[739267] "expr temp" "maybe param" "maybe type" "temp"
-    (739270 'move' call_tmp[739267](276404 call _cond_test tmp[580046]))
-    if call_tmp[739267]
-    {
-      unknown call_tmp[739272] "expr temp" "maybe param" "maybe type" "temp"
-      (739275 'move' call_tmp[739272](276401 call numBits eltTy[276372]))
-      (538052 'move' ret[538047](538051 'deref' call_tmp[739272]))
-      gotoReturn _end_fixedWidth[538045] _end_fixedWidth[538045]
-    }
-    unknown call_tmp[739277] "expr temp" "maybe param" "maybe type" "temp"
-    (739280 'move' call_tmp[739277](276413 call isHomogeneousTuple eltTy[276372]))
-    unknown call_tmp[739282] "expr temp" "maybe param" "maybe type" "temp"
-    (739285 'move' call_tmp[739282](276436 call _cond_test call_tmp[739277]))
-    if call_tmp[739282]
-    {
-      unknown tmp[276415] "dead at end of block" "insert auto destroy"
-      (548924 'default init var' tmp[276415] eltTy[276372])
-      (276418 'end of statement')
+      unknown tmp[276519] "dead at end of block" "insert auto destroy"
+      (548899 'default init var' tmp[276519] eltTy[276476])
+      (276522 'end of statement')
       { scopeless type
-        unknown call_type_tmp[493287] "expr temp" "maybe type" "temp" "type variable"
-        unknown call_tmp[739287] "expr temp" "maybe param" "maybe type" "temp"
-        (739290 'move' call_tmp[739287](276428 call tmp[276415] 0))
-        (493291 'move' call_type_tmp[493287](276429 'typeof' call_tmp[739287]))
+        unknown call_type_tmp[493264] "expr temp" "maybe type" "temp" "type variable"
+        unknown call_tmp[739267] "expr temp" "maybe param" "maybe type" "temp"
+        (739270 'move' call_tmp[739267](276532 call tmp[276519] 0))
+        (493268 'move' call_type_tmp[493264](276533 'typeof' call_tmp[739267]))
       }
-      unknown call_tmp[739294] "expr temp" "maybe param" "maybe type" "temp"
-      (739297 'move' call_tmp[739294](276421 call size _mt[243] tmp[276415]))
-      unknown call_tmp[739299] "expr temp" "maybe param" "maybe type" "temp"
-      (739302 'move' call_tmp[739299](276431 call numBits call_type_tmp[493287]))
-      unknown call_tmp[739304] "expr temp" "maybe param" "maybe type" "temp"
-      (739307 'move' call_tmp[739304](276432 call * call_tmp[739294] call_tmp[739299]))
-      (538057 'move' ret[538047](538056 'deref' call_tmp[739304]))
-      gotoReturn _end_fixedWidth[538045] _end_fixedWidth[538045]
-      (490207 'end of statement' tmp[276415] tmp[276415])
+      unknown call_tmp[739274] "expr temp" "maybe param" "maybe type" "temp"
+      (739277 'move' call_tmp[739274](276525 call size _mt[243] tmp[276519]))
+      unknown call_tmp[739279] "expr temp" "maybe param" "maybe type" "temp"
+      (739282 'move' call_tmp[739279](276535 call numBits call_type_tmp[493264]))
+      unknown call_tmp[739284] "expr temp" "maybe param" "maybe type" "temp"
+      (739287 'move' call_tmp[739284](276536 call * call_tmp[739274] call_tmp[739279]))
+      (538034 'move' ret[538024](538033 'deref' call_tmp[739284]))
+      gotoReturn _end_fixedWidth[538022] _end_fixedWidth[538022]
+      (490184 'end of statement' tmp[276519] tmp[276519])
     }
-    unknown call_tmp[739309] "expr temp" "maybe param" "maybe type" "temp"
-    (739312 'move' call_tmp[739309](276441 call - 1))
-    (538062 'move' ret[538047](538061 'deref' call_tmp[739309]))
-    label _end_fixedWidth[538045]
-    (538049 return ret[538047])
+    unknown call_tmp[739289] "expr temp" "maybe param" "maybe type" "temp"
+    (739292 'move' call_tmp[739289](276545 call - 1))
+    (538039 'move' ret[538024](538038 'deref' call_tmp[739289]))
+    label _end_fixedWidth[538022]
+    (538026 return ret[538024])
   }
-  function msbRadixSortParamLastStartBit[276455](arg Data[276452]:_array[133600](?), arg comparator[276457]:_any[178](?)) param : _unknown[51]
+  function msbRadixSortParamLastStartBit[276559](arg Data[276556]:_array[133594](?), arg comparator[276561]:_any[178](?)) param : _unknown[51]
   {
-    unknown ret[538066] "RVV" "param" "temp"
-    const element[276469] "dead at end of block" "const" "ref var"
-    unknown call_tmp[739316] "expr temp" "maybe param" "maybe type" "temp"
-    (739319 'move' call_tmp[739316](276461 call _dom _mt[243] Data[276452]))
+    unknown ret[538043] "RVV" "param" "temp"
+    const element[276573] "dead at end of block" "const" "ref var"
+    unknown call_tmp[739296] "expr temp" "maybe param" "maybe type" "temp"
+    (739299 'move' call_tmp[739296](276565 call _dom _mt[243] Data[276556]))
+    unknown call_tmp[739303] "expr temp" "maybe param" "maybe type" "temp"
+    (739306 'move' call_tmp[739303](276568 call low _mt[243] call_tmp[739296]))
+    unknown call_tmp[739308] "expr temp" "maybe param" "maybe type" "temp"
+    (739311 'move' call_tmp[739308](276572 call Data[276556] call_tmp[739303]))
+    (548902 'move' element[276573](548901 'addr of' call_tmp[739308]))
+    (276576 'end of statement')
+    unknown tmp[434330] "maybe param" "temp"
+    unknown call_tmp[739313] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (739316 'move' call_tmp[739313](276579 'typeof' comparator[276561]))
+    (434341 'move' tmp[434330](276581 call == call_tmp[739313] DefaultComparator[290564]))
+    unknown call_tmp[739318] "expr temp" "maybe param" "maybe type" "temp"
+    (739321 'move' call_tmp[739318](434343 call _cond_invalid tmp[434330]))
+    if call_tmp[739318]
+    {
+      (434346 call compilerError "cannot promote short-circuiting && operator")
+    }
+    unknown tmp[580048] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
+    unknown tmp[580049] "maybe param" "temp"
     unknown call_tmp[739323] "expr temp" "maybe param" "maybe type" "temp"
-    (739326 'move' call_tmp[739323](276464 call low _mt[243] call_tmp[739316]))
-    unknown call_tmp[739328] "expr temp" "maybe param" "maybe type" "temp"
-    (739331 'move' call_tmp[739328](276468 call Data[276452] call_tmp[739323]))
-    (548927 'move' element[276469](548926 'addr of' call_tmp[739328]))
-    (276472 'end of statement')
-    unknown tmp[434350] "maybe param" "temp"
-    unknown call_tmp[739333] "expr temp" "maybe param" "maybe type" "temp" "type variable"
-    (739336 'move' call_tmp[739333](276475 'typeof' comparator[276457]))
-    (434361 'move' tmp[434350](276477 call == call_tmp[739333] DefaultComparator[290466]))
-    unknown call_tmp[739338] "expr temp" "maybe param" "maybe type" "temp"
-    (739341 'move' call_tmp[739338](434363 call _cond_invalid tmp[434350]))
-    if call_tmp[739338]
+    (739326 'move' call_tmp[739323](434331 call isTrue tmp[434330]))
+    (580054 'move' tmp[580049](580052 call _cond_test call_tmp[739323]))
+    if tmp[580049]
     {
-      (434366 call compilerError "cannot promote short-circuiting && operator")
+      unknown tmp[580056] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
+      unknown call_tmp[739328] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+      (739331 'move' call_tmp[739328](276585 'typeof' element[276573]))
+      unknown call_tmp[739333] "expr temp" "maybe param" "maybe type" "temp"
+      (739336 'move' call_tmp[739333](276587 call fixedWidth call_tmp[739328]))
+      unknown call_tmp[739338] "expr temp" "maybe param" "maybe type" "temp"
+      (739341 'move' call_tmp[739338](276589 call > call_tmp[739333] 0))
+      (580058 'move' tmp[580056](434334 call isTrue call_tmp[739338]))
+      (580063 'move' tmp[580048](580060 '_paramFoldLogical' tmp[580049] tmp[580056]))
     }
-    unknown tmp[580073] "expr temp" "if-expr result" "insert auto destroy" "maybe type" "temp"
-    unknown tmp[580074] "maybe param" "temp"
+    {
+      (580068 'move' tmp[580048](580065 '_paramFoldLogical' tmp[580049] 0))
+    }
     unknown call_tmp[739343] "expr temp" "maybe param" "maybe type" "temp"
-    (739346 'move' call_tmp[739343](434351 call isTrue tmp[434350]))
-    (580079 'move' tmp[580074](580077 call _cond_test call_tmp[739343]))
-    if tmp[580074]
+    (739346 'move' call_tmp[739343](276647 call _cond_test tmp[580048]))
+    if call_tmp[739343]
     {
-      unknown tmp[580081] "expr temp" "maybe param" "maybe type" "no auto destroy" "temp"
       unknown call_tmp[739348] "expr temp" "maybe param" "maybe type" "temp" "type variable"
-      (739351 'move' call_tmp[739348](276481 'typeof' element[276469]))
+      (739351 'move' call_tmp[739348](276595 'typeof' element[276573]))
       unknown call_tmp[739353] "expr temp" "maybe param" "maybe type" "temp"
-      (739356 'move' call_tmp[739353](276483 call fixedWidth call_tmp[739348]))
+      (739356 'move' call_tmp[739353](276597 call fixedWidth call_tmp[739348]))
       unknown call_tmp[739358] "expr temp" "maybe param" "maybe type" "temp"
-      (739361 'move' call_tmp[739358](276485 call > call_tmp[739353] 0))
-      (580083 'move' tmp[580081](434354 call isTrue call_tmp[739358]))
-      (580088 'move' tmp[580073](580085 '_paramFoldLogical' tmp[580074] tmp[580081]))
+      (739361 'move' call_tmp[739358](276599 call - call_tmp[739353] RADIX_BITS[276107]))
+      (538048 'move' ret[538043](538047 'deref' call_tmp[739358]))
+      gotoReturn _end_msbRadixSortParamLastStartBit[538041] _end_msbRadixSortParamLastStartBit[538041]
+      (490189 'end of statement' element[276573])
     }
     {
-      (580093 'move' tmp[580073](580090 '_paramFoldLogical' tmp[580074] 0))
-    }
-    unknown call_tmp[739363] "expr temp" "maybe param" "maybe type" "temp"
-    (739366 'move' call_tmp[739363](276543 call _cond_test tmp[580073]))
-    if call_tmp[739363]
-    {
-      unknown call_tmp[739368] "expr temp" "maybe param" "maybe type" "temp" "type variable"
-      (739371 'move' call_tmp[739368](276491 'typeof' element[276469]))
-      unknown call_tmp[739373] "expr temp" "maybe param" "maybe type" "temp"
-      (739376 'move' call_tmp[739373](276493 call fixedWidth call_tmp[739368]))
-      unknown call_tmp[739378] "expr temp" "maybe param" "maybe type" "temp"
-      (739381 'move' call_tmp[739378](276495 call - call_tmp[739373] RADIX_BITS[276003]))
-      (538071 'move' ret[538066](538070 'deref' call_tmp[739378]))
-      gotoReturn _end_msbRadixSortParamLastStartBit[538064] _end_msbRadixSortParamLastStartBit[538064]
-      (490212 'end of statement' element[276469])
-    }
-    {
-      unknown call_tmp[739383] "expr temp" "maybe param" "maybe type" "temp"
-      (739386 'move' call_tmp[739383](276505 call canResolveMethod comparator[276457] "key" element[276469]))
-      unknown call_tmp[739388] "expr temp" "maybe param" "maybe type" "temp"
-      (739391 'move' call_tmp[739388](276539 call _cond_test call_tmp[739383]))
-      if call_tmp[739388]
+      unknown call_tmp[739363] "expr temp" "maybe param" "maybe type" "temp"
+      (739366 'move' call_tmp[739363](276609 call canResolveMethod comparator[276561] "key" element[276573]))
+      unknown call_tmp[739368] "expr temp" "maybe param" "maybe type" "temp"
+      (739371 'move' call_tmp[739368](276643 call _cond_test call_tmp[739363]))
+      if call_tmp[739368]
       {
         { scopeless type
-          unknown call_type_tmp[493293] "expr temp" "maybe type" "temp" "type variable"
-          unknown call_tmp[739395] "expr temp" "maybe param" "maybe type" "temp"
-          (739398 'move' call_tmp[739395](276512 call(276507 call (partial) key _mt[243] comparator[276457]) element[276469]))
-          (493297 'move' call_type_tmp[493293](276513 'typeof' call_tmp[739395]))
+          unknown call_type_tmp[493270] "expr temp" "maybe type" "temp" "type variable"
+          unknown call_tmp[739375] "expr temp" "maybe param" "maybe type" "temp"
+          (739378 'move' call_tmp[739375](276616 call(276611 call (partial) key _mt[243] comparator[276561]) element[276573]))
+          (493274 'move' call_type_tmp[493270](276617 'typeof' call_tmp[739375]))
         }
-        unknown keyType[276514] "dead at end of block" "insert auto destroy" "type variable" call_type_tmp[493293]
-        (548930 'move' keyType[276514] call_type_tmp[493293])
-        (490214 'end of statement' element[276469])
-        unknown call_tmp[739400] "expr temp" "maybe param" "maybe type" "temp"
-        (739403 'move' call_tmp[739400](276521 call fixedWidth keyType[276514]))
-        unknown call_tmp[739405] "expr temp" "maybe param" "maybe type" "temp"
-        (739408 'move' call_tmp[739405](276523 call > call_tmp[739400] 0))
-        unknown call_tmp[739410] "expr temp" "maybe param" "maybe type" "temp"
-        (739413 'move' call_tmp[739410](276534 call _cond_test call_tmp[739405]))
-        if call_tmp[739410]
+        unknown keyType[276618] "dead at end of block" "insert auto destroy" "type variable" call_type_tmp[493270]
+        (548905 'move' keyType[276618] call_type_tmp[493270])
+        (490191 'end of statement' element[276573])
+        unknown call_tmp[739380] "expr temp" "maybe param" "maybe type" "temp"
+        (739383 'move' call_tmp[739380](276625 call fixedWidth keyType[276618]))
+        unknown call_tmp[739385] "expr temp" "maybe param" "maybe type" "temp"
+        (739388 'move' call_tmp[739385](276627 call > call_tmp[739380] 0))
+        unknown call_tmp[739390] "expr temp" "maybe param" "maybe type" "temp"
+        (739393 'move' call_tmp[739390](276638 call _cond_test call_tmp[739385]))
+        if call_tmp[739390]
         {
-          unknown call_tmp[739415] "expr temp" "maybe param" "maybe type" "temp"
-          (739418 'move' call_tmp[739415](276528 call fixedWidth keyType[276514]))
-          unknown call_tmp[739420] "expr temp" "maybe param" "maybe type" "temp"
-          (739423 'move' call_tmp[739420](276530 call - call_tmp[739415] RADIX_BITS[276003]))
-          (538076 'move' ret[538066](538075 'deref' call_tmp[739420]))
-          gotoReturn _end_msbRadixSortParamLastStartBit[538064] _end_msbRadixSortParamLastStartBit[538064]
-          (490216 'end of statement' keyType[276514])
+          unknown call_tmp[739395] "expr temp" "maybe param" "maybe type" "temp"
+          (739398 'move' call_tmp[739395](276632 call fixedWidth keyType[276618]))
+          unknown call_tmp[739400] "expr temp" "maybe param" "maybe type" "temp"
+          (739403 'move' call_tmp[739400](276634 call - call_tmp[739395] RADIX_BITS[276107]))
+          (538053 'move' ret[538043](538052 'deref' call_tmp[739400]))
+          gotoReturn _end_msbRadixSortParamLastStartBit[538041] _end_msbRadixSortParamLastStartBit[538041]
+          (490193 'end of statement' keyType[276618])
         }
       }
     }
-    unknown call_tmp[739425] "expr temp" "maybe param" "maybe type" "temp"
-    (739428 'move' call_tmp[739425](276549 call - 1))
-    (538081 'move' ret[538066](538080 'deref' call_tmp[739425]))
-    label _end_msbRadixSortParamLastStartBit[538064]
-    (538068 return ret[538066])
+    unknown call_tmp[739405] "expr temp" "maybe param" "maybe type" "temp"
+    (739408 'move' call_tmp[739405](276653 call - 1))
+    (538058 'move' ret[538043](538057 'deref' call_tmp[739405]))
+    label _end_msbRadixSortParamLastStartBit[538041]
+    (538045 return ret[538043])
   }
-  function radixSortClz[276559](arg val[276557]:_any[178](?)) : _unknown[51]
+  function radixSortClz[276663](arg val[276661]:_any[178](?)) : _unknown[51]
   {
-    unknown ret[538085] "RVV" "temp"
-    unknown call_tmp[739430] "expr temp" "maybe param" "maybe type" "temp" "type variable"
-    (739433 'move' call_tmp[739430](276563 'typeof' val[276557]))
-    unknown call_tmp[739435] "maybe param" "maybe type" "temp"
-    (739438 'move' call_tmp[739435](276565 call numBits call_tmp[739430]))
-    unknown nBits[276566] "dead at end of block" "param"
-    (548932 'init var' nBits[276566] call_tmp[739435])
-    (276569 'end of statement')
-    unknown call_tmp[739440] "expr temp" "maybe param" "maybe type" "temp"
-    (739443 'move' call_tmp[739440](276573 call == val[276557] 0))
-    unknown call_tmp[739445] "expr temp" "maybe param" "maybe type" "temp"
-    (739448 'move' call_tmp[739445](276579 call _cond_test call_tmp[739440]))
-    if call_tmp[739445]
+    unknown ret[538062] "RVV" "temp"
+    unknown call_tmp[739410] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (739413 'move' call_tmp[739410](276667 'typeof' val[276661]))
+    unknown call_tmp[739415] "maybe param" "maybe type" "temp"
+    (739418 'move' call_tmp[739415](276669 call numBits call_tmp[739410]))
+    unknown nBits[276670] "dead at end of block" "param"
+    (548907 'init var' nBits[276670] call_tmp[739415])
+    (276673 'end of statement')
+    unknown call_tmp[739420] "expr temp" "maybe param" "maybe type" "temp"
+    (739423 'move' call_tmp[739420](276677 call == val[276661] 0))
+    unknown call_tmp[739425] "expr temp" "maybe param" "maybe type" "temp"
+    (739428 'move' call_tmp[739425](276683 call _cond_test call_tmp[739420]))
+    if call_tmp[739425]
     {
-      (538090 'move' ret[538085](538089 'deref' nBits[276566]))
-      gotoReturn _end_radixSortClz[538083] _end_radixSortClz[538083]
+      (538067 'move' ret[538062](538066 'deref' nBits[276670]))
+      gotoReturn _end_radixSortClz[538060] _end_radixSortClz[538060]
     }
-    unknown cur[276584] "dead at end of block" "insert auto destroy"
-    (548934 'init var' cur[276584] val[276557])
-    (276587 'end of statement')
-    unknown call_tmp[739450] "expr temp" "maybe param" "maybe type" "temp" "type variable"
-    (739453 'move' call_tmp[739450](276590 'typeof' val[276557]))
-    unknown call_tmp[739455] "maybe param" "maybe type" "temp"
-    (739458 'move' call_tmp[739455](276591 call _cast call_tmp[739450] 1))
-    unknown one[276593] "dead at end of block" "insert auto destroy"
-    (548936 'init var' one[276593] call_tmp[739455])
-    (276596 'end of statement')
-    unknown call_tmp[739460] "expr temp" "maybe param" "maybe type" "temp"
-    (739463 'move' call_tmp[739460](276600 call - nBits[276566] 1))
-    unknown call_tmp[739465] "maybe param" "maybe type" "temp"
-    (739468 'move' call_tmp[739465](276602 call << one[276593] call_tmp[739460]))
-    unknown hi[276604] "dead at end of block" "insert auto destroy"
-    (548938 'init var' hi[276604] call_tmp[739465])
-    (276607 'end of statement')
-    unknown n[276609] "dead at end of block" "insert auto destroy"
-    (548940 'init var' n[276609] 0)
-    (276612 'end of statement' one[276593])
+    unknown cur[276688] "dead at end of block" "insert auto destroy"
+    (548909 'init var' cur[276688] val[276661])
+    (276691 'end of statement')
+    unknown call_tmp[739430] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (739433 'move' call_tmp[739430](276694 'typeof' val[276661]))
+    unknown call_tmp[739435] "maybe param" "maybe type" "temp"
+    (739438 'move' call_tmp[739435](276695 call _cast call_tmp[739430] 1))
+    unknown one[276697] "dead at end of block" "insert auto destroy"
+    (548911 'init var' one[276697] call_tmp[739435])
+    (276700 'end of statement')
+    unknown call_tmp[739440] "expr temp" "maybe param" "maybe type" "temp"
+    (739443 'move' call_tmp[739440](276704 call - nBits[276670] 1))
+    unknown call_tmp[739445] "maybe param" "maybe type" "temp"
+    (739448 'move' call_tmp[739445](276706 call << one[276697] call_tmp[739440]))
+    unknown hi[276708] "dead at end of block" "insert auto destroy"
+    (548913 'init var' hi[276708] call_tmp[739445])
+    (276711 'end of statement')
+    unknown n[276713] "dead at end of block" "insert auto destroy"
+    (548915 'init var' n[276713] 0)
+    (276716 'end of statement' one[276697])
     {
-      unknown tmp[276631] "temp"
-      unknown call_tmp[739470] "expr temp" "maybe param" "maybe type" "temp"
-      (739473 'move' call_tmp[739470](276657 call & cur[276584] hi[276604]))
-      unknown call_tmp[739475] "expr temp" "maybe param" "maybe type" "temp"
-      (739478 'move' call_tmp[739475](276655 call == call_tmp[739470] 0))
-      (276661 'move' tmp[276631](276653 call _cond_test call_tmp[739475]))
-      WhileDo[276636]
+      unknown tmp[276735] "temp"
+      unknown call_tmp[739450] "expr temp" "maybe param" "maybe type" "temp"
+      (739453 'move' call_tmp[739450](276761 call & cur[276688] hi[276708]))
+      unknown call_tmp[739455] "expr temp" "maybe param" "maybe type" "temp"
+      (739458 'move' call_tmp[739455](276759 call == call_tmp[739450] 0))
+      (276765 'move' tmp[276735](276757 call _cond_test call_tmp[739455]))
+      WhileDo[276740]
       {
         {
-          (276622 call += n[276609] 1)
-          (490221 'end of statement' n[276609])
-          (276628 call <<= cur[276584] 1)
-          (490223 'end of statement' cur[276584])
+          (276726 call += n[276713] 1)
+          (490198 'end of statement' n[276713])
+          (276732 call <<= cur[276688] 1)
+          (490200 'end of statement' cur[276688])
         }
-        label _continueLabel[276634]
-        unknown call_tmp[739480] "expr temp" "maybe param" "maybe type" "temp"
-        (739483 'move' call_tmp[739480](276644 call & cur[276584] hi[276604]))
-        unknown call_tmp[739485] "expr temp" "maybe param" "maybe type" "temp"
-        (739488 'move' call_tmp[739485](276642 call == call_tmp[739480] 0))
-        (276648 'move' tmp[276631](276640 call _cond_test call_tmp[739485]))
-        tmp[276631]
+        label _continueLabel[276738]
+        unknown call_tmp[739460] "expr temp" "maybe param" "maybe type" "temp"
+        (739463 'move' call_tmp[739460](276748 call & cur[276688] hi[276708]))
+        unknown call_tmp[739465] "expr temp" "maybe param" "maybe type" "temp"
+        (739468 'move' call_tmp[739465](276746 call == call_tmp[739460] 0))
+        (276752 'move' tmp[276735](276744 call _cond_test call_tmp[739465]))
+        tmp[276735]
       }
-      label _breakLabel[276635]
+      label _breakLabel[276739]
     }
-    (538095 'move' ret[538085](538094 'deref' n[276609]))
-    gotoReturn _end_radixSortClz[538083] _end_radixSortClz[538083]
-    (490225 'end of statement' n[276609])
-    label _end_radixSortClz[538083]
-    (538087 return ret[538085])
+    (538072 'move' ret[538062](538071 'deref' n[276713]))
+    gotoReturn _end_radixSortClz[538060] _end_radixSortClz[538060]
+    (490202 'end of statement' n[276713])
+    label _end_radixSortClz[538060]
+    (538064 return ret[538062])
   }
-  function findDataStartBit[276675](arg startbit[276672]:int(64)[13], arg min_ubits[276677]:_any[178](?), arg max_ubits[276679]:_any[178](?)) : _unknown[51]
+  function findDataStartBit[276779](arg startbit[276776]:int(64)[13], arg min_ubits[276781]:_any[178](?), arg max_ubits[276783]:_any[178](?)) : _unknown[51]
   {
-    unknown ret[538101] "RVV" "temp"
+    unknown ret[538078] "RVV" "temp"
+    unknown call_tmp[739470] "maybe param" "maybe type" "temp"
+    (739473 'move' call_tmp[739470](276788 call ^ min_ubits[276781] max_ubits[276783]))
+    unknown xor[276790] "dead at end of block" "insert auto destroy"
+    (548917 'init var' xor[276790] call_tmp[739470])
+    (276793 'end of statement')
+    unknown call_tmp[739475] "expr temp" "maybe param" "maybe type" "temp" "type variable"
+    (739478 'move' call_tmp[739475](276797 'typeof' min_ubits[276781]))
+    unknown call_tmp[739480] "maybe param" "maybe type" "temp"
+    (739483 'move' call_tmp[739480](276799 call numBits call_tmp[739475]))
+    unknown bitsPerPart[276800] "dead at end of block" "param"
+    (548919 'init var' bitsPerPart[276800] call_tmp[739480])
+    (276803 'end of statement')
+    unknown call_tmp[739485] "maybe param" "maybe type" "temp"
+    (739488 'move' call_tmp[739485](276806 call % startbit[276776] bitsPerPart[276800]))
+    const bitsinpart[276808] "dead at end of block" "const" "insert auto destroy"
+    (548921 'init var' bitsinpart[276808] call_tmp[739485])
+    (276811 'end of statement')
+    (276814 call <<= xor[276790] bitsinpart[276808])
+    (490204 'end of statement' xor[276790] bitsinpart[276808])
+    (276819 call >>= xor[276790] bitsinpart[276808])
+    (490207 'end of statement' xor[276790] bitsinpart[276808])
     unknown call_tmp[739490] "maybe param" "maybe type" "temp"
-    (739493 'move' call_tmp[739490](276684 call ^ min_ubits[276677] max_ubits[276679]))
-    unknown xor[276686] "dead at end of block" "insert auto destroy"
-    (548942 'init var' xor[276686] call_tmp[739490])
-    (276689 'end of statement')
-    unknown call_tmp[739495] "expr temp" "maybe param" "maybe type" "temp" "type variable"
-    (739498 'move' call_tmp[739495](276693 'typeof' min_ubits[276677]))
+    (739493 'move' call_tmp[739490](276825 call radixSortClz xor[276790]))
+    unknown new_start[276826] "dead at end of block" "insert auto destroy"
+    (548923 'init var' new_start[276826] call_tmp[739490])
+    (276829 'end of statement')
+    unknown call_tmp[739495] "maybe param" "maybe type" "temp"
+    (739498 'move' call_tmp[739495](276832 call / new_start[276826] RADIX_BITS[276107]))
+    unknown new_digit[276834] "dead at end of block" "insert auto destroy"
+    (548925 'init var' new_digit[276834] call_tmp[739495])
+    (276837 'end of statement')
     unknown call_tmp[739500] "maybe param" "maybe type" "temp"
-    (739503 'move' call_tmp[739500](276695 call numBits call_tmp[739495]))
-    unknown bitsPerPart[276696] "dead at end of block" "param"
-    (548944 'init var' bitsPerPart[276696] call_tmp[739500])
-    (276699 'end of statement')
-    unknown call_tmp[739505] "maybe param" "maybe type" "temp"
-    (739508 'move' call_tmp[739505](276702 call % startbit[276672] bitsPerPart[276696]))
-    const bitsinpart[276704] "dead at end of block" "const" "insert auto destroy"
-    (548946 'init var' bitsinpart[276704] call_tmp[739505])
-    (276707 'end of statement')
-    (276710 call <<= xor[276686] bitsinpart[276704])
-    (490227 'end of statement' xor[276686] bitsinpart[276704])
-    (276715 call >>= xor[276686] bitsinpart[276704])
-    (490230 'end of statement' xor[276686] bitsinpart[276704])
-    unknown call_tmp[739510] "maybe param" "maybe type" "temp"
-    (739513 'move' call_tmp[739510](276721 call radixSortClz xor[276686]))
-    unknown new_start[276722] "dead at end of block" "insert auto destroy"
-    (548948 'init var' new_start[276722] call_tmp[739510])
-    (276725 'end of statement')
-    unknown call_tmp[739515] "maybe param" "maybe type" "temp"
-    (739518 'move' call_tmp[739515](276728 call / new_start[276722] RADIX_BITS[276003]))
-    unknown new_digit[276730] "dead at end of block" "insert auto destroy"
-    (548950 'init var' new_digit[276730] call_tmp[739515])
-    (276733 'end of statement')
-    unknown call_tmp[739520] "maybe param" "maybe type" "temp"
-    (739523 'move' call_tmp[739520](276736 call * new_digit[276730] RADIX_BITS[276003]))
-    unknown new_start_bit_rounded[276738] "dead at end of block" "insert auto destroy"
-    (548952 'init var' new_start_bit_rounded[276738] call_tmp[739520])
-    (276741 'end of statement' xor[276686] new_start[276722] new_digit[276730])
-    unknown call_tmp[739525] "expr temp" "maybe param" "maybe type" "temp"
-    (739528 'move' call_tmp[739525](276744 call _cast int(64)[13] new_start_bit_rounded[276738]))
-    (538107 'move' ret[538101](538106 'coerce' call_tmp[739525] int(64)[13]))
-    gotoReturn _end_findDataStartBit[538099] _end_findDataStartBit[538099]
-    (490236 'end of statement' new_start_bit_rounded[276738])
-    label _end_findDataStartBit[538099]
-    (538103 return ret[538101])
+    (739503 'move' call_tmp[739500](276840 call * new_digit[276834] RADIX_BITS[276107]))
+    unknown new_start_bit_rounded[276842] "dead at end of block" "insert auto destroy"
+    (548927 'init var' new_start_bit_rounded[276842] call_tmp[739500])
+    (276845 'end of statement' xor[276790] new_start[276826] new_digit[276834])
+    unknown call_tmp[739505] "expr temp" "maybe param" "maybe type" "temp"
+    (739508 'move' call_tmp[739505](276848 call _cast int(64)[13] new_start_bit_rounded[276842]))
+    (538084 'move' ret[538078](538083 'coerce' call_tmp[739505] int(64)[13]))
+    gotoReturn _end_findDataStartBit[538076] _end_findDataStartBit[538076]
+    (490213 'end of statement' new_start_bit_rounded[276842])
+    label _end_findDataStartBit[538076]
+    (538080 return ret[538078])
   }
   { scopeless type
     int(64)[13]
   }
-  function checkSorted[276757](arg start_n[276754]:int(64)[13], arg end_n[276760]:int(64)[13], arg A[276766]:_array[133600](?), arg criterion[276769]:_any[178](?), arg startbit[276772] :
+  function checkSorted[276861](arg start_n[276858]:int(64)[13], arg end_n[276864]:int(64)[13], arg A[276870]:_array[133594](?), arg criterion[276873]:_any[178](?), arg startbit[276876] :
   0 =
   0) : _unknown[51] "always propagate line file info" "insert line file info" "no return value for void"
   {
     {
-      unknown _indexOfInterest[276941] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[276942] "expr temp" "temp"
-      unknown call_tmp[739530] "expr temp" "maybe param" "maybe type" "temp"
-      (739533 'move' call_tmp[739530](276955 call + start_n[276754] 1))
-      unknown call_tmp[739535] "expr temp" "maybe param" "maybe type" "temp"
-      (739538 'move' call_tmp[739535](276959 call chpl_direct_range_iter call_tmp[739530] end_n[276760] 1))
-      (276951 'move' _iterator[276942](276949 call _getIterator call_tmp[739535]))
+      unknown _indexOfInterest[277045] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[277046] "expr temp" "temp"
+      unknown call_tmp[739510] "expr temp" "maybe param" "maybe type" "temp"
+      (739513 'move' call_tmp[739510](277059 call + start_n[276858] 1))
+      unknown call_tmp[739515] "expr temp" "maybe param" "maybe type" "temp"
+      (739518 'move' call_tmp[739515](277063 call chpl_direct_range_iter call_tmp[739510] end_n[276864] 1))
+      (277055 'move' _iterator[277046](277053 call _getIterator call_tmp[739515]))
       Defer
       {
         {
-          (276975 call _freeIterator _iterator[276942])
+          (277079 call _freeIterator _iterator[277046])
         }
       }
       { scopeless type
-        (276964 'move' _indexOfInterest[276941](276961 call iteratorIndex _iterator[276942]))
+        (277068 'move' _indexOfInterest[277045](277065 call iteratorIndex _iterator[277046]))
       }
-      ForLoop[276943]
+      ForLoop[277047]
       {
-        unknown i[276968] "index var" "insert auto destroy"
-        (490239 'end of statement')
-        (276970 'move' i[276968] _indexOfInterest[276941])
-        (490240 'end of statement' i[276968])
+        unknown i[277072] "index var" "insert auto destroy"
+        (490216 'end of statement')
+        (277074 'move' i[277072] _indexOfInterest[277045])
+        (490217 'end of statement' i[277072])
         {
+          unknown call_tmp[739520] "expr temp" "maybe param" "maybe type" "temp"
+          (739523 'move' call_tmp[739520](276891 call - i[277072] 1))
+          unknown call_tmp[739525] "expr temp" "maybe param" "maybe type" "temp"
+          (739528 'move' call_tmp[739525](276894 call A[276870] call_tmp[739520]))
+          unknown call_tmp[739530] "expr temp" "maybe param" "maybe type" "temp"
+          (739533 'move' call_tmp[739530](276899 call A[276870] i[277072]))
+          unknown call_tmp[739535] "maybe param" "maybe type" "temp"
+          (739538 'move' call_tmp[739535](276901 call chpl_compare call_tmp[739525] call_tmp[739530] criterion[276873]))
+          unknown cmp[276902] "dead at end of block" "insert auto destroy"
+          (548929 'init var' cmp[276902] call_tmp[739535])
+          (276905 'end of statement' i[277072] i[277072])
           unknown call_tmp[739540] "expr temp" "maybe param" "maybe type" "temp"
-          (739543 'move' call_tmp[739540](276787 call - i[276968] 1))
+          (739543 'move' call_tmp[739540](276909 call > cmp[276902] 0))
           unknown call_tmp[739545] "expr temp" "maybe param" "maybe type" "temp"
-          (739548 'move' call_tmp[739545](276790 call A[276766] call_tmp[739540]))
-          unknown call_tmp[739550] "expr temp" "maybe param" "maybe type" "temp"
-          (739553 'move' call_tmp[739550](276795 call A[276766] i[276968]))
-          unknown call_tmp[739555] "maybe param" "maybe type" "temp"
-          (739558 'move' call_tmp[739555](276797 call chpl_compare call_tmp[739545] call_tmp[739550] criterion[276769]))
-          unknown cmp[276798] "dead at end of block" "insert auto destroy"
-          (548954 'init var' cmp[276798] call_tmp[739555])
-          (276801 'end of statement' i[276968] i[276968])
-          unknown call_tmp[739560] "expr temp" "maybe param" "maybe type" "temp"
-          (739563 'move' call_tmp[739560](276805 call > cmp[276798] 0))
-          unknown call_tmp[739565] "expr temp" "maybe param" "maybe type" "temp"
-          (739568 'move' call_tmp[739565](276937 call _cond_test call_tmp[739560]))
-          if call_tmp[739565]
+          (739548 'move' call_tmp[739545](277041 call _cond_test call_tmp[739540]))
+          if call_tmp[739545]
           {
-            unknown call_tmp[739570] "expr temp" "maybe param" "maybe type" "temp"
-            (739573 'move' call_tmp[739570](276847 call - i[276968] 1))
-            unknown call_tmp[739575] "expr temp" "maybe param" "maybe type" "temp"
-            (739578 'move' call_tmp[739575](276850 call A[276766] call_tmp[739570]))
-            unknown call_tmp[739580] "expr temp" "maybe param" "maybe type" "temp"
-            (739583 'move' call_tmp[739580](276871 call A[276766] i[276968]))
-            (276908 call writeln "Error: not sorted properly at i=" i[276968] " A[i-1]=" call_tmp[739575] " A[i]=" call_tmp[739580] " in start=" start_n[276754] " end=" end_n[276760])
-            (490244 'end of statement' i[276968] i[276968] i[276968])
-            (276914 call writeln A[276766])
-            (490248 'end of statement')
-            (276935 call halt "failed checkSorted")
+            unknown call_tmp[739550] "expr temp" "maybe param" "maybe type" "temp"
+            (739553 'move' call_tmp[739550](276951 call - i[277072] 1))
+            unknown call_tmp[739555] "expr temp" "maybe param" "maybe type" "temp"
+            (739558 'move' call_tmp[739555](276954 call A[276870] call_tmp[739550]))
+            unknown call_tmp[739560] "expr temp" "maybe param" "maybe type" "temp"
+            (739563 'move' call_tmp[739560](276975 call A[276870] i[277072]))
+            (277012 call writeln "Error: not sorted properly at i=" i[277072] " A[i-1]=" call_tmp[739555] " A[i]=" call_tmp[739560] " in start=" start_n[276858] " end=" end_n[276864])
+            (490221 'end of statement' i[277072] i[277072] i[277072])
+            (277018 call writeln A[276870])
+            (490225 'end of statement')
+            (277039 call halt "failed checkSorted")
           }
         }
-        label _continueLabel[276946]
-        _indexOfInterest[276941]
-        _iterator[276942]
+        label _continueLabel[277050]
+        _indexOfInterest[277045]
+        _iterator[277046]
       }
-      label _breakLabel[276947]
+      label _breakLabel[277051]
     }
-    (538111 return _void[55])
+    (538088 return _void[55])
   }
-  function RadixBucketizer[277273].getNumBuckets[276988](arg _mt[277277]:_MT[238], arg this[277275]:RadixBucketizer[277273]) : _unknown[51] "method" "primary method"
+  function RadixBucketizer[277377].getNumBuckets[277092](arg _mt[277381]:_MT[238], arg this[277379]:RadixBucketizer[277377]) : _unknown[51] "method" "primary method"
   {
-    unknown ret[538115] "RVV" "temp"
+    unknown ret[538092] "RVV" "temp"
+    unknown call_tmp[739565] "expr temp" "maybe param" "maybe type" "temp"
+    (739568 'move' call_tmp[739565](277096 call << 1 RADIX_BITS[276107]))
+    unknown call_tmp[739570] "expr temp" "maybe param" "maybe type" "temp"
+    (739573 'move' call_tmp[739570](277099 call + call_tmp[739565] 2))
+    (538097 'move' ret[538092](538096 'deref' call_tmp[739570]))
+    (538094 return ret[538092])
+  }
+  function RadixBucketizer[277377].getBinsToRecursivelySort[277108](arg _mt[277385]:_MT[238], arg this[277383]:RadixBucketizer[277377]) : _unknown[51] "method" "primary method"
+  {
+    unknown ret[538101] "RVV" "temp"
+    unknown call_tmp[739575] "expr temp" "maybe param" "maybe type" "temp"
+    (739578 'move' call_tmp[739575](277113 call << 1 RADIX_BITS[276107]))
+    unknown call_tmp[739580] "expr temp" "maybe param" "maybe type" "temp"
+    (739583 'move' call_tmp[739580](277115 call chpl_build_bounded_range 1 call_tmp[739575]))
+    (538106 'move' ret[538101](538105 'deref' call_tmp[739580]))
+    (538103 return ret[538101])
+  }
+  function RadixBucketizer[277377].getNextStartBit[277128](arg _mt[277389]:_MT[238], arg this[277387]:RadixBucketizer[277377], arg start_bit[277125]:int(64)[13]) : _unknown[51] "method" "primary method"
+  {
+    unknown ret[538110] "RVV" "temp"
     unknown call_tmp[739585] "expr temp" "maybe param" "maybe type" "temp"
-    (739588 'move' call_tmp[739585](276992 call << 1 RADIX_BITS[276003]))
-    unknown call_tmp[739590] "expr temp" "maybe param" "maybe type" "temp"
-    (739593 'move' call_tmp[739590](276995 call + call_tmp[739585] 2))
-    (538120 'move' ret[538115](538119 'deref' call_tmp[739590]))
-    (538117 return ret[538115])
+    (739588 'move' call_tmp[739585](277132 call + start_bit[277125] 8))
+    (538115 'move' ret[538110](538114 'deref' call_tmp[739585]))
+    (538112 return ret[538110])
   }
-  function RadixBucketizer[277273].getBinsToRecursivelySort[277004](arg _mt[277281]:_MT[238], arg this[277279]:RadixBucketizer[277273]) : _unknown[51] "method" "primary method"
+  function RadixBucketizer[277377].bucketForRecord[277143](arg _mt[277393]:_MT[238], arg this[277391]:RadixBucketizer[277377], arg a[277141]:_any[178](?), arg criterion[277145]:_any[178](?), arg startbit[277147]:_any[178](?)) : _unknown[51] "inline" "method" "primary method"
   {
-    unknown ret[538124] "RVV" "temp"
-    unknown call_tmp[739595] "expr temp" "maybe param" "maybe type" "temp"
-    (739598 'move' call_tmp[739595](277009 call << 1 RADIX_BITS[276003]))
-    unknown call_tmp[739600] "expr temp" "maybe param" "maybe type" "temp"
-    (739603 'move' call_tmp[739600](277011 call chpl_build_bounded_range 1 call_tmp[739595]))
-    (538129 'move' ret[538124](538128 'deref' call_tmp[739600]))
-    (538126 return ret[538124])
+    unknown ret[538119] "RVV" "temp"
+    unknown call_tmp[739590] "maybe param" "maybe type" "temp"
+    (739593 'move' call_tmp[739590](277159 call binForRecord a[277141] criterion[277145] startbit[277147]))
+    const tmp[277160] "dead at end of block" "const" "insert auto destroy" "temp"
+    (548931 'init var' tmp[277160] call_tmp[739590])
+    (277164 call _check_tuple_var_decl tmp[277160] 2)
+    (490230 'end of statement')
+    unknown call_tmp[739595] "maybe param" "maybe type" "temp"
+    (739598 'move' call_tmp[739595](277161 call tmp[277160] 0))
+    const bin[277149] "dead at end of block" "const" "insert auto destroy"
+    (548933 'init var' bin[277149] call_tmp[739595])
+    (277169 'end of statement')
+    (538124 'move' ret[538119](538123 'deref' bin[277149]))
+    gotoReturn _end_bucketForRecord[538117] _end_bucketForRecord[538117]
+    (490231 'end of statement' bin[277149])
+    label _end_bucketForRecord[538117]
+    (538121 return ret[538119])
   }
-  function RadixBucketizer[277273].getNextStartBit[277024](arg _mt[277285]:_MT[238], arg this[277283]:RadixBucketizer[277273], arg start_bit[277021]:int(64)[13]) : _unknown[51] "method" "primary method"
+  function RadixBucketizer[277377].classify[277180](arg _mt[277397]:_MT[238], arg this[277395]:RadixBucketizer[277377], arg A[277178]:_any[178](?), arg start_n[277182]:_any[178](?), arg end_n[277184]:_any[178](?), arg criterion[277186]:_any[178](?), arg startbit[277188]:_any[178](?)) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
   {
-    unknown ret[538133] "RVV" "temp"
-    unknown call_tmp[739605] "expr temp" "maybe param" "maybe type" "temp"
-    (739608 'move' call_tmp[739605](277028 call + start_bit[277021] 8))
-    (538138 'move' ret[538133](538137 'deref' call_tmp[739605]))
-    (538135 return ret[538133])
-  }
-  function RadixBucketizer[277273].bucketForRecord[277039](arg _mt[277289]:_MT[238], arg this[277287]:RadixBucketizer[277273], arg a[277037]:_any[178](?), arg criterion[277041]:_any[178](?), arg startbit[277043]:_any[178](?)) : _unknown[51] "inline" "method" "primary method"
-  {
-    unknown ret[538142] "RVV" "temp"
-    unknown call_tmp[739610] "maybe param" "maybe type" "temp"
-    (739613 'move' call_tmp[739610](277055 call binForRecord a[277037] criterion[277041] startbit[277043]))
-    const tmp[277056] "dead at end of block" "const" "insert auto destroy" "temp"
-    (548956 'init var' tmp[277056] call_tmp[739610])
-    (277060 call _check_tuple_var_decl tmp[277056] 2)
-    (490253 'end of statement')
-    unknown call_tmp[739615] "maybe param" "maybe type" "temp"
-    (739618 'move' call_tmp[739615](277057 call tmp[277056] 0))
-    const bin[277045] "dead at end of block" "const" "insert auto destroy"
-    (548958 'init var' bin[277045] call_tmp[739615])
-    (277065 'end of statement')
-    (538147 'move' ret[538142](538146 'deref' bin[277045]))
-    gotoReturn _end_bucketForRecord[538140] _end_bucketForRecord[538140]
-    (490254 'end of statement' bin[277045])
-    label _end_bucketForRecord[538140]
-    (538144 return ret[538142])
-  }
-  function RadixBucketizer[277273].classify[277076](arg _mt[277293]:_MT[238], arg this[277291]:RadixBucketizer[277273], arg A[277074]:_any[178](?), arg start_n[277078]:_any[178](?), arg end_n[277080]:_any[178](?), arg criterion[277082]:_any[178](?), arg startbit[277084]:_any[178](?)) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
-  {
-    unknown ret[538153] "RVV" "temp"
-    unknown cur[277087] "dead at end of block" "insert auto destroy"
-    (548960 'init var' cur[277087] start_n[277078])
-    (277090 'end of statement')
+    unknown ret[538130] "RVV" "temp"
+    unknown cur[277191] "dead at end of block" "insert auto destroy"
+    (548935 'init var' cur[277191] start_n[277182])
+    (277194 'end of statement')
     {
-      unknown tmp[277179] "temp"
-      unknown call_tmp[739620] "expr temp" "maybe param" "maybe type" "temp"
-      (739623 'move' call_tmp[739620](277212 call - classifyUnrollFactor[276008] 1))
-      unknown call_tmp[739625] "expr temp" "maybe param" "maybe type" "temp"
-      (739628 'move' call_tmp[739625](277209 call - end_n[277080] call_tmp[739620]))
-      unknown call_tmp[739630] "expr temp" "maybe param" "maybe type" "temp"
-      (739633 'move' call_tmp[739630](277206 call <= cur[277087] call_tmp[739625]))
-      (277215 'move' tmp[277179](277204 call _cond_test call_tmp[739630]))
-      WhileDo[277184]
+      unknown tmp[277283] "temp"
+      unknown call_tmp[739600] "expr temp" "maybe param" "maybe type" "temp"
+      (739603 'move' call_tmp[739600](277316 call - classifyUnrollFactor[276112] 1))
+      unknown call_tmp[739605] "expr temp" "maybe param" "maybe type" "temp"
+      (739608 'move' call_tmp[739605](277313 call - end_n[277184] call_tmp[739600]))
+      unknown call_tmp[739610] "expr temp" "maybe param" "maybe type" "temp"
+      (739613 'move' call_tmp[739610](277310 call <= cur[277191] call_tmp[739605]))
+      (277319 'move' tmp[277283](277308 call _cond_test call_tmp[739610]))
+      WhileDo[277288]
       {
         {
           {
-            unknown _indexOfInterest[277132] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[277133] "expr temp" "temp"
-            unknown call_tmp[739635] "expr temp" "maybe param" "maybe type" "temp"
-            (739638 'move' call_tmp[739635](277147 call - classifyUnrollFactor[276008] 1))
-            unknown call_tmp[739640] "expr temp" "maybe param" "maybe type" "temp"
-            (739643 'move' call_tmp[739640](277150 call chpl_direct_range_iter 0 call_tmp[739635] 1))
-            (277142 'move' _iterator[277133](277140 call _getIterator call_tmp[739640]))
+            unknown _indexOfInterest[277236] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[277237] "expr temp" "temp"
+            unknown call_tmp[739615] "expr temp" "maybe param" "maybe type" "temp"
+            (739618 'move' call_tmp[739615](277251 call - classifyUnrollFactor[276112] 1))
+            unknown call_tmp[739620] "expr temp" "maybe param" "maybe type" "temp"
+            (739623 'move' call_tmp[739620](277254 call chpl_direct_range_iter 0 call_tmp[739615] 1))
+            (277246 'move' _iterator[277237](277244 call _getIterator call_tmp[739620]))
             Defer
             {
               {
-                (277166 call _freeIterator _iterator[277133])
+                (277270 call _freeIterator _iterator[277237])
               }
             }
             { scopeless type
-              (277155 'move' _indexOfInterest[277132](277152 call iteratorIndex _iterator[277133]))
+              (277259 'move' _indexOfInterest[277236](277256 call iteratorIndex _iterator[277237]))
             }
-            ForLoop[277134]
+            ForLoop[277238]
             {
-              unknown j[277159] "index var" "insert auto destroy"
-              (490257 'end of statement')
-              (277161 'move' j[277159] _indexOfInterest[277132])
-              (490258 'end of statement' j[277159])
+              unknown j[277263] "index var" "insert auto destroy"
+              (490234 'end of statement')
+              (277265 'move' j[277263] _indexOfInterest[277236])
+              (490235 'end of statement' j[277263])
               {
-                unknown yret[538157] "YVV" "temp"
-                unknown call_tmp[739645] "expr temp" "maybe param" "maybe type" "temp"
-                (739648 'move' call_tmp[739645](277112 call + cur[277087] j[277159]))
-                unknown call_tmp[739652] "expr temp" "maybe param" "maybe type" "temp"
-                (739655 'move' call_tmp[739652](277118 call + cur[277087] j[277159]))
-                unknown call_tmp[739657] "expr temp" "maybe param" "maybe type" "temp"
-                (739660 'move' call_tmp[739657](277121 call A[277074] call_tmp[739652]))
-                unknown call_tmp[739662] "expr temp" "maybe param" "maybe type" "temp"
-                (739665 'move' call_tmp[739662](277125 call(402618 call (partial) bucketForRecord _mt[243] this[277291]) call_tmp[739657] criterion[277082] startbit[277084]))
-                unknown call_tmp[739667] "expr temp" "maybe param" "maybe type" "temp"
-                (739670 'move' call_tmp[739667](277127 call _build_tuple call_tmp[739645] call_tmp[739662]))
-                (538160 'move' yret[538157](538159 'deref' call_tmp[739667]))
-                (538162 yield yret[538157])
-                (490260 'end of statement' cur[277087] j[277159] cur[277087] j[277159])
+                unknown yret[538134] "YVV" "temp"
+                unknown call_tmp[739625] "expr temp" "maybe param" "maybe type" "temp"
+                (739628 'move' call_tmp[739625](277216 call + cur[277191] j[277263]))
+                unknown call_tmp[739632] "expr temp" "maybe param" "maybe type" "temp"
+                (739635 'move' call_tmp[739632](277222 call + cur[277191] j[277263]))
+                unknown call_tmp[739637] "expr temp" "maybe param" "maybe type" "temp"
+                (739640 'move' call_tmp[739637](277225 call A[277178] call_tmp[739632]))
+                unknown call_tmp[739642] "expr temp" "maybe param" "maybe type" "temp"
+                (739645 'move' call_tmp[739642](277229 call(402598 call (partial) bucketForRecord _mt[243] this[277395]) call_tmp[739637] criterion[277186] startbit[277188]))
+                unknown call_tmp[739647] "expr temp" "maybe param" "maybe type" "temp"
+                (739650 'move' call_tmp[739647](277231 call _build_tuple call_tmp[739625] call_tmp[739642]))
+                (538137 'move' yret[538134](538136 'deref' call_tmp[739647]))
+                (538139 yield yret[538134])
+                (490237 'end of statement' cur[277191] j[277263] cur[277191] j[277263])
               }
-              label _continueLabel[277137]
-              _indexOfInterest[277132]
-              _iterator[277133]
+              label _continueLabel[277241]
+              _indexOfInterest[277236]
+              _iterator[277237]
             }
-            label _breakLabel[277138]
+            label _breakLabel[277242]
           }
-          (277176 call += cur[277087] classifyUnrollFactor[276008])
-          (490265 'end of statement' cur[277087])
+          (277280 call += cur[277191] classifyUnrollFactor[276112])
+          (490242 'end of statement' cur[277191])
         }
-        label _continueLabel[277182]
-        unknown call_tmp[739672] "expr temp" "maybe param" "maybe type" "temp"
-        (739675 'move' call_tmp[739672](277196 call - classifyUnrollFactor[276008] 1))
-        unknown call_tmp[739677] "expr temp" "maybe param" "maybe type" "temp"
-        (739680 'move' call_tmp[739677](277193 call - end_n[277080] call_tmp[739672]))
-        unknown call_tmp[739682] "expr temp" "maybe param" "maybe type" "temp"
-        (739685 'move' call_tmp[739682](277190 call <= cur[277087] call_tmp[739677]))
-        (277199 'move' tmp[277179](277188 call _cond_test call_tmp[739682]))
-        tmp[277179]
+        label _continueLabel[277286]
+        unknown call_tmp[739652] "expr temp" "maybe param" "maybe type" "temp"
+        (739655 'move' call_tmp[739652](277300 call - classifyUnrollFactor[276112] 1))
+        unknown call_tmp[739657] "expr temp" "maybe param" "maybe type" "temp"
+        (739660 'move' call_tmp[739657](277297 call - end_n[277184] call_tmp[739652]))
+        unknown call_tmp[739662] "expr temp" "maybe param" "maybe type" "temp"
+        (739665 'move' call_tmp[739662](277294 call <= cur[277191] call_tmp[739657]))
+        (277303 'move' tmp[277283](277292 call _cond_test call_tmp[739662]))
+        tmp[277283]
       }
-      label _breakLabel[277183]
+      label _breakLabel[277287]
     }
     {
-      unknown tmp[277243] "temp"
-      unknown call_tmp[739687] "expr temp" "maybe param" "maybe type" "temp"
-      (739690 'move' call_tmp[739687](277264 call <= cur[277087] end_n[277080]))
-      (277267 'move' tmp[277243](277262 call _cond_test call_tmp[739687]))
-      WhileDo[277248]
+      unknown tmp[277347] "temp"
+      unknown call_tmp[739667] "expr temp" "maybe param" "maybe type" "temp"
+      (739670 'move' call_tmp[739667](277368 call <= cur[277191] end_n[277184]))
+      (277371 'move' tmp[277347](277366 call _cond_test call_tmp[739667]))
+      WhileDo[277352]
       {
         {
-          unknown yret[538164] "YVV" "temp"
-          unknown call_tmp[739694] "expr temp" "maybe param" "maybe type" "temp"
-          (739697 'move' call_tmp[739694](277227 call A[277074] cur[277087]))
-          unknown call_tmp[739699] "expr temp" "maybe param" "maybe type" "temp"
-          (739702 'move' call_tmp[739699](277231 call(402637 call (partial) bucketForRecord _mt[243] this[277291]) call_tmp[739694] criterion[277082] startbit[277084]))
-          unknown call_tmp[739704] "expr temp" "maybe param" "maybe type" "temp"
-          (739707 'move' call_tmp[739704](277233 call _build_tuple cur[277087] call_tmp[739699]))
-          (538167 'move' yret[538164](538166 'deref' call_tmp[739704]))
-          (538169 yield yret[538164])
-          (490267 'end of statement' cur[277087] cur[277087])
-          (277240 call += cur[277087] 1)
-          (490270 'end of statement' cur[277087])
+          unknown yret[538141] "YVV" "temp"
+          unknown call_tmp[739674] "expr temp" "maybe param" "maybe type" "temp"
+          (739677 'move' call_tmp[739674](277331 call A[277178] cur[277191]))
+          unknown call_tmp[739679] "expr temp" "maybe param" "maybe type" "temp"
+          (739682 'move' call_tmp[739679](277335 call(402617 call (partial) bucketForRecord _mt[243] this[277395]) call_tmp[739674] criterion[277186] startbit[277188]))
+          unknown call_tmp[739684] "expr temp" "maybe param" "maybe type" "temp"
+          (739687 'move' call_tmp[739684](277337 call _build_tuple cur[277191] call_tmp[739679]))
+          (538144 'move' yret[538141](538143 'deref' call_tmp[739684]))
+          (538146 yield yret[538141])
+          (490244 'end of statement' cur[277191] cur[277191])
+          (277344 call += cur[277191] 1)
+          (490247 'end of statement' cur[277191])
         }
-        label _continueLabel[277246]
-        unknown call_tmp[739709] "expr temp" "maybe param" "maybe type" "temp"
-        (739712 'move' call_tmp[739709](277254 call <= cur[277087] end_n[277080]))
-        (277257 'move' tmp[277243](277252 call _cond_test call_tmp[739709]))
-        tmp[277243]
+        label _continueLabel[277350]
+        unknown call_tmp[739689] "expr temp" "maybe param" "maybe type" "temp"
+        (739692 'move' call_tmp[739689](277358 call <= cur[277191] end_n[277184]))
+        (277361 'move' tmp[277347](277356 call _cond_test call_tmp[739689]))
+        tmp[277347]
       }
-      label _breakLabel[277247]
+      label _breakLabel[277351]
     }
-    (538155 return ret[538153])
+    (538132 return ret[538130])
   }
-  type RadixBucketizer[277273]
-  (355424 'used modules list'(353095 'use' ChapelStandard[20264])(275993 'use' Sort[267885])(276000 'import' Reflection[224799].{canResolveMethod}))
+  type RadixBucketizer[277377]
+  (355407 'used modules list'(353078 'use' ChapelStandard[20267])(276097 'use' Sort[267987])(276104 'import' Reflection[224901].{canResolveMethod}))
 }

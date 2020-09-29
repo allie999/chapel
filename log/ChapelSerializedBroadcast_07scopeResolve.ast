@@ -2,278 +2,264 @@ AST dump for ChapelSerializedBroadcast after pass scopeResolve.
 Module use list: ChapelLocale CPtr 
 
 {
-  unknown chpl__enableSerializedGlobals[171427] "config" "param" 1
-  (171430 'end of statement')
-  function chpl_get_global_serialize_table[171437](arg idx[171434] :
+  unknown chpl__enableSerializedGlobals[171469] "config" "param" 1
+  (171472 'end of statement')
+  function chpl_get_global_serialize_table[171479](arg idx[171476] :
   int(64)[13]) : _unknown[51] "extern" "local args" "no fn body" "no return value for void"
   {
   }
   { scopeless type
     c_void_ptr[149]
   }
-  function chpl__broadcastGlobal[171450](ref arg localeZeroGlobal[171447] :
-  unknown T[171445], arg id[171453] :
+  function chpl__broadcastGlobal[171492](ref arg localeZeroGlobal[171489] :
+  unknown T[171487], arg id[171495] :
   int(64)[13]) : _unknown[51] "no return value for void"
   {
-    if(171795 call _cond_test(171465 call &&(171460 call isArray localeZeroGlobal[171447])(171464 call chpl__isArrayView localeZeroGlobal[171447])))
+    if(171833 call _cond_test(171507 call &&(171502 call isArray localeZeroGlobal[171489])(171506 call chpl__isArrayView localeZeroGlobal[171489])))
     {
-      (171486 call halt "internal error: can't broadcast module-scope arrays yet")
+      (171528 call halt "internal error: can't broadcast module-scope arrays yet")
     }
     {
-      const data[171495] "const"(171494 call(171490 call . localeZeroGlobal[171447] c"chpl__serialize"))
-      (171498 'end of statement')
-      const root[171504] "const"(171501 call .(361490 call here[90439]) c"id")
-      (171507 'end of statement')
+      const data[171537] "const"(171536 call(171532 call . localeZeroGlobal[171489] c"chpl__serialize"))
+      (171540 'end of statement')
+      const root[171546] "const"(171543 call .(361473 call here[90438]) c"id")
+      (171549 'end of statement')
       {
-        unknown tmpIter[171578] "expr temp" "maybe ref" "no copy" "temp"
-        (171581 'move' tmpIter[171578] Locales[113668])
-        unknown isRngDomArr[171776] "maybe param" "temp"
-        (171791 'move' isRngDomArr[171776](171789 call ||(171778 call isBoundedRange tmpIter[171578])(171787 call ||(171781 call isDomain tmpIter[171578])(171784 call isArray tmpIter[171578]))))
-        if isRngDomArr[171776]
+        unknown tmpIter[171620] "expr temp" "maybe ref" "no copy" "temp"
+        (171623 'move' tmpIter[171620] Locales[113662])
+        unknown isRngDomArr[171814] "maybe param" "temp"
+        (171829 'move' isRngDomArr[171814](171827 call ||(171816 call isBoundedRange tmpIter[171620])(171825 call ||(171819 call isDomain tmpIter[171620])(171822 call isArray tmpIter[171620]))))
+        if isRngDomArr[171814]
         {
-          const _coforallCount[171643] "const" "end count" "temp"
-          (171712 'move' _coforallCount[171643](171709 call _endCountAlloc 1))
-          unknown numTasks[171644] "temp"
-          (171696 'move' numTasks[171644](171692 call . tmpIter[171578] c"size"))
-          (171687 call _upEndCount _coforallCount[171643] 1 numTasks[171644])
-          (171684 call chpl_resetTaskSpawn numTasks[171644])
-          unknown _indexOfInterest[171651] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[171652] "expr temp" "temp"
-          (171661 'move' _iterator[171652](171659 call _getIterator tmpIter[171578]))
+          const _coforallCount[171686] "const" "end count" "temp"
+          (171751 'move' _coforallCount[171686](171748 call _endCountAlloc 0))
+          unknown numTasks[171687] "temp"
+          (171735 'move' numTasks[171687](171731 call . tmpIter[171620] c"size"))
+          (171726 call _upEndCount _coforallCount[171686] 0 numTasks[171687])
+          unknown _indexOfInterest[171693] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[171694] "expr temp" "temp"
+          (171703 'move' _iterator[171694](171701 call _getIterator tmpIter[171620]))
           Defer
           {
             {
-              (171677 call _freeIterator _iterator[171652])
+              (171719 call _freeIterator _iterator[171694])
             }
           }
           { scopeless type
-            (171666 'move' _indexOfInterest[171651](171663 call iteratorIndex _iterator[171652]))
+            (171708 'move' _indexOfInterest[171693](171705 call iteratorIndex _iterator[171694]))
           }
-          ForLoop[171653]
+          ForLoop[171695]
           {
-            unknown loc[171670] "coforall index var" "index var" "insert auto destroy"
-            (171672 'move' loc[171670] _indexOfInterest[171651])
+            unknown loc[171712] "coforall index var" "index var" "insert auto destroy"
+            (171714 'move' loc[171712] _indexOfInterest[171693])
+            const tmp[171626] "const" "temp"
+            (171628 'move' tmp[171626](171630 'deref'(171631 '_wide_get_locale' loc[171712])))
             {
               {
-                const tmp[171587] "const" "temp"
-                (171589 'move' tmp[171587](171591 'deref'(171592 '_wide_get_locale' loc[171670])))
+                if(171639 call _cond_test(171641 call !=(171643 call .(361478 call here[90438]) c"id") root[171546]))
                 {
-                  if(171596 call _cond_test(171598 call !=(171600 call .(361495 call here[90439]) c"id") root[171504]))
-                  {
-                    unknown temp[171606] "no auto destroy" "no copy"(171612 call(171608 call .(171609 'typeof' localeZeroGlobal[171447]) c"chpl__deserialize") data[171495])
-                    (171615 'end of statement')
-                    const destVoidPtr[171617] "const"(171619 call chpl_get_global_serialize_table id[171453])
-                    (171622 'end of statement')
-                    const dest[171624] "const"(171626 call _cast(171628 call c_ptr[205057](?)(171629 'typeof' localeZeroGlobal[171447])) destVoidPtr[171617])
-                    (171633 'end of statement')
-                    (171634 '='(171639 call(171636 call . dest[171624] c"deref")) temp[171606])
-                  }
+                  unknown temp[171649] "no auto destroy" "no copy"(171655 call(171651 call .(171652 'typeof' localeZeroGlobal[171489]) c"chpl__deserialize") data[171537])
+                  (171658 'end of statement')
+                  const destVoidPtr[171660] "const"(171662 call chpl_get_global_serialize_table id[171495])
+                  (171665 'end of statement')
+                  const dest[171667] "const"(171669 call _cast(171671 call c_ptr[205100](?)(171672 'typeof' localeZeroGlobal[171489])) destVoidPtr[171660])
+                  (171676 'end of statement')
+                  (171677 '='(171682 call(171679 call . dest[171667] c"deref")) temp[171649])
                 }
-                (171584 'elided on block' 0 tmp[171587])
               }
-              (171646 call _downEndCount _coforallCount[171643] nil[44])
-              (171645 'coforall loop')
+              (171688 call _downEndCount _coforallCount[171686] nil[44])
+              (171634 'coforall on block' 0 tmp[171626])
             }
-            label _continueLabel[171656]
-            _indexOfInterest[171651]
-            _iterator[171652]
+            label _continueLabel[171698]
+            _indexOfInterest[171693]
+            _iterator[171694]
           }
-          label _breakLabel[171657]
+          label _breakLabel[171699]
           Defer
           {
             {
-              (171699 call _endCountFree _coforallCount[171643])
+              (171738 call _endCountFree _coforallCount[171686])
             }
           }
-          (171704 call _waitEndCount _coforallCount[171643] 1 numTasks[171644])
+          (171743 call _waitEndCount _coforallCount[171686] 0 numTasks[171687])
         }
         {
-          const _coforallCount[171716] "const" "end count" "temp"
-          (171773 'move' _coforallCount[171716](171770 call _endCountAlloc 1))
-          unknown _indexOfInterest[171724] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[171725] "expr temp" "temp"
-          (171734 'move' _iterator[171725](171732 call _getIterator tmpIter[171578]))
+          const _coforallCount[171755] "const" "end count" "temp"
+          (171811 'move' _coforallCount[171755](171808 call _endCountAlloc 0))
+          unknown _indexOfInterest[171762] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[171763] "expr temp" "temp"
+          (171772 'move' _iterator[171763](171770 call _getIterator tmpIter[171620]))
           Defer
           {
             {
-              (171750 call _freeIterator _iterator[171725])
+              (171788 call _freeIterator _iterator[171763])
             }
           }
           { scopeless type
-            (171739 'move' _indexOfInterest[171724](171736 call iteratorIndex _iterator[171725]))
+            (171777 'move' _indexOfInterest[171762](171774 call iteratorIndex _iterator[171763]))
           }
-          ForLoop[171726]
+          ForLoop[171764]
           {
-            unknown loc[171743] "coforall index var" "index var" "insert auto destroy"
-            (171745 'move' loc[171743] _indexOfInterest[171724])
-            (171757 call _upEndCount _coforallCount[171716] 1)
+            unknown loc[171781] "coforall index var" "index var" "insert auto destroy"
+            (171783 'move' loc[171781] _indexOfInterest[171762])
+            (171795 call _upEndCount _coforallCount[171755] 0)
+            const tmp[171612] "const" "temp"
+            (171614 'move' tmp[171612](171610 'deref'(171609 '_wide_get_locale' loc[171781])))
             {
               {
-                const tmp[171570] "const" "temp"
-                (171571 'move' tmp[171570](171568 'deref'(171567 '_wide_get_locale' loc[171743])))
+                if(171604 call _cond_test(171558 call !=(171554 call .(361475 call here[90438]) c"id") root[171546]))
                 {
-                  if(171562 call _cond_test(171516 call !=(171512 call .(361492 call here[90439]) c"id") root[171504]))
-                  {
-                    unknown temp[171526] "no auto destroy" "no copy"(171525 call(171520 call .(171519 'typeof' localeZeroGlobal[171447]) c"chpl__deserialize") data[171495])
-                    (171529 'end of statement')
-                    const destVoidPtr[171535] "const"(171534 call chpl_get_global_serialize_table id[171453])
-                    (171538 'end of statement')
-                    const dest[171547] "const"(171545 call _cast(171544 call c_ptr[205057](?)(171542 'typeof' localeZeroGlobal[171447])) destVoidPtr[171535])
-                    (171550 'end of statement')
-                    (171560 '='(171558 call(171554 call . dest[171547] c"deref")) temp[171526])
-                  }
+                  unknown temp[171568] "no auto destroy" "no copy"(171567 call(171562 call .(171561 'typeof' localeZeroGlobal[171489]) c"chpl__deserialize") data[171537])
+                  (171571 'end of statement')
+                  const destVoidPtr[171577] "const"(171576 call chpl_get_global_serialize_table id[171495])
+                  (171580 'end of statement')
+                  const dest[171589] "const"(171587 call _cast(171586 call c_ptr[205100](?)(171584 'typeof' localeZeroGlobal[171489])) destVoidPtr[171577])
+                  (171592 'end of statement')
+                  (171602 '='(171600 call(171596 call . dest[171589] c"deref")) temp[171568])
                 }
-                (171574 'elided on block' 0 tmp[171570])
               }
-              (171719 call _downEndCount _coforallCount[171716] nil[44])
-              (171718 'coforall loop')
+              (171757 call _downEndCount _coforallCount[171755] nil[44])
+              (171617 'coforall on block' 0 tmp[171612])
             }
-            label _continueLabel[171729]
-            _indexOfInterest[171724]
-            _iterator[171725]
+            label _continueLabel[171767]
+            _indexOfInterest[171762]
+            _iterator[171763]
           }
-          label _breakLabel[171730]
+          label _breakLabel[171768]
           Defer
           {
             {
-              (171761 call _endCountFree _coforallCount[171716])
+              (171799 call _endCountFree _coforallCount[171755])
             }
           }
-          (171766 call _waitEndCount _coforallCount[171716] 1)
+          (171804 call _waitEndCount _coforallCount[171755] 0)
         }
       }
     }
   }
   where {
-    chpl__enableSerializedGlobals[171427]
+    chpl__enableSerializedGlobals[171469]
   }
-  function chpl__destroyBroadcastedGlobal[171807](ref arg localeZeroGlobal[171805]:_any[178](?), arg id[171810] :
+  function chpl__destroyBroadcastedGlobal[171845](ref arg localeZeroGlobal[171843]:_any[178](?), arg id[171848] :
   int(64)[13]) : _unknown[51] "no return value for void"
   {
-    unknown globalType[171816] "type variable"(171815 'typeof' localeZeroGlobal[171805])
-    const root[171824] "const"(171821 call .(361498 call here[90439]) c"id")
-    (171827 'end of statement')
+    unknown globalType[171854] "type variable"(171853 'typeof' localeZeroGlobal[171843])
+    const root[171862] "const"(171859 call .(361481 call here[90438]) c"id")
+    (171865 'end of statement')
     {
-      unknown tmpIter[171889] "expr temp" "maybe ref" "no copy" "temp"
-      (171892 'move' tmpIter[171889] Locales[113668])
-      unknown isRngDomArr[172080] "maybe param" "temp"
-      (172095 'move' isRngDomArr[172080](172093 call ||(172082 call isBoundedRange tmpIter[171889])(172091 call ||(172085 call isDomain tmpIter[171889])(172088 call isArray tmpIter[171889]))))
-      if isRngDomArr[172080]
+      unknown tmpIter[171927] "expr temp" "maybe ref" "no copy" "temp"
+      (171930 'move' tmpIter[171927] Locales[113662])
+      unknown isRngDomArr[172114] "maybe param" "temp"
+      (172129 'move' isRngDomArr[172114](172127 call ||(172116 call isBoundedRange tmpIter[171927])(172125 call ||(172119 call isDomain tmpIter[171927])(172122 call isArray tmpIter[171927]))))
+      if isRngDomArr[172114]
       {
-        const _coforallCount[171947] "const" "end count" "temp"
-        (172016 'move' _coforallCount[171947](172013 call _endCountAlloc 1))
-        unknown numTasks[171948] "temp"
-        (172000 'move' numTasks[171948](171996 call . tmpIter[171889] c"size"))
-        (171991 call _upEndCount _coforallCount[171947] 1 numTasks[171948])
-        (171988 call chpl_resetTaskSpawn numTasks[171948])
-        unknown _indexOfInterest[171955] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[171956] "expr temp" "temp"
-        (171965 'move' _iterator[171956](171963 call _getIterator tmpIter[171889]))
+        const _coforallCount[171986] "const" "end count" "temp"
+        (172051 'move' _coforallCount[171986](172048 call _endCountAlloc 0))
+        unknown numTasks[171987] "temp"
+        (172035 'move' numTasks[171987](172031 call . tmpIter[171927] c"size"))
+        (172026 call _upEndCount _coforallCount[171986] 0 numTasks[171987])
+        unknown _indexOfInterest[171993] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[171994] "expr temp" "temp"
+        (172003 'move' _iterator[171994](172001 call _getIterator tmpIter[171927]))
         Defer
         {
           {
-            (171981 call _freeIterator _iterator[171956])
+            (172019 call _freeIterator _iterator[171994])
           }
         }
         { scopeless type
-          (171970 'move' _indexOfInterest[171955](171967 call iteratorIndex _iterator[171956]))
+          (172008 'move' _indexOfInterest[171993](172005 call iteratorIndex _iterator[171994]))
         }
-        ForLoop[171957]
+        ForLoop[171995]
         {
-          unknown loc[171974] "coforall index var" "index var" "insert auto destroy"
-          (171976 'move' loc[171974] _indexOfInterest[171955])
+          unknown loc[172012] "coforall index var" "index var" "insert auto destroy"
+          (172014 'move' loc[172012] _indexOfInterest[171993])
+          const tmp[171933] "const" "temp"
+          (171935 'move' tmp[171933](171937 'deref'(171938 '_wide_get_locale' loc[172012])))
           {
             {
-              const tmp[171898] "const" "temp"
-              (171900 'move' tmp[171898](171902 'deref'(171903 '_wide_get_locale' loc[171974])))
+              if(171946 call _cond_test(171948 call !=(171950 call .(361486 call here[90438]) c"id") root[171862]))
               {
-                if(171907 call _cond_test(171909 call !=(171911 call .(361503 call here[90439]) c"id") root[171824]))
-                {
-                  const voidPtr[171917] "const"(171919 call chpl_get_global_serialize_table id[171810])
-                  (171922 'end of statement')
-                  unknown ptr[171924](171926 call _cast(171928 call c_ptr[205057](?) globalType[171816]) voidPtr[171917])
-                  (171932 'end of statement')
-                  unknown temp[171934] "no auto destroy" "no copy"(171939 call(171936 call . ptr[171924] c"deref"))
-                  (171941 'end of statement')
-                  (171943 call chpl__autoDestroy temp[171934])
-                }
+                const voidPtr[171956] "const"(171958 call chpl_get_global_serialize_table id[171848])
+                (171961 'end of statement')
+                unknown ptr[171963](171965 call _cast(171967 call c_ptr[205100](?) globalType[171854]) voidPtr[171956])
+                (171971 'end of statement')
+                unknown temp[171973] "no auto destroy" "no copy"(171978 call(171975 call . ptr[171963] c"deref"))
+                (171980 'end of statement')
+                (171982 call chpl__autoDestroy temp[171973])
               }
-              (171895 'elided on block' 0 tmp[171898])
             }
-            (171950 call _downEndCount _coforallCount[171947] nil[44])
-            (171949 'coforall loop')
+            (171988 call _downEndCount _coforallCount[171986] nil[44])
+            (171941 'coforall on block' 0 tmp[171933])
           }
-          label _continueLabel[171960]
-          _indexOfInterest[171955]
-          _iterator[171956]
+          label _continueLabel[171998]
+          _indexOfInterest[171993]
+          _iterator[171994]
         }
-        label _breakLabel[171961]
+        label _breakLabel[171999]
         Defer
         {
           {
-            (172003 call _endCountFree _coforallCount[171947])
+            (172038 call _endCountFree _coforallCount[171986])
           }
         }
-        (172008 call _waitEndCount _coforallCount[171947] 1 numTasks[171948])
+        (172043 call _waitEndCount _coforallCount[171986] 0 numTasks[171987])
       }
       {
-        const _coforallCount[172020] "const" "end count" "temp"
-        (172077 'move' _coforallCount[172020](172074 call _endCountAlloc 1))
-        unknown _indexOfInterest[172028] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[172029] "expr temp" "temp"
-        (172038 'move' _iterator[172029](172036 call _getIterator tmpIter[171889]))
+        const _coforallCount[172055] "const" "end count" "temp"
+        (172111 'move' _coforallCount[172055](172108 call _endCountAlloc 0))
+        unknown _indexOfInterest[172062] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[172063] "expr temp" "temp"
+        (172072 'move' _iterator[172063](172070 call _getIterator tmpIter[171927]))
         Defer
         {
           {
-            (172054 call _freeIterator _iterator[172029])
+            (172088 call _freeIterator _iterator[172063])
           }
         }
         { scopeless type
-          (172043 'move' _indexOfInterest[172028](172040 call iteratorIndex _iterator[172029]))
+          (172077 'move' _indexOfInterest[172062](172074 call iteratorIndex _iterator[172063]))
         }
-        ForLoop[172030]
+        ForLoop[172064]
         {
-          unknown loc[172047] "coforall index var" "index var" "insert auto destroy"
-          (172049 'move' loc[172047] _indexOfInterest[172028])
-          (172061 call _upEndCount _coforallCount[172020] 1)
+          unknown loc[172081] "coforall index var" "index var" "insert auto destroy"
+          (172083 'move' loc[172081] _indexOfInterest[172062])
+          (172095 call _upEndCount _coforallCount[172055] 0)
+          const tmp[171919] "const" "temp"
+          (171921 'move' tmp[171919](171917 'deref'(171916 '_wide_get_locale' loc[172081])))
           {
             {
-              const tmp[171881] "const" "temp"
-              (171882 'move' tmp[171881](171879 'deref'(171878 '_wide_get_locale' loc[172047])))
+              if(171911 call _cond_test(171874 call !=(171870 call .(361483 call here[90438]) c"id") root[171862]))
               {
-                if(171873 call _cond_test(171836 call !=(171832 call .(361500 call here[90439]) c"id") root[171824]))
-                {
-                  const voidPtr[171842] "const"(171841 call chpl_get_global_serialize_table id[171810])
-                  (171845 'end of statement')
-                  unknown ptr[171854](171852 call _cast(171851 call c_ptr[205057](?) globalType[171816]) voidPtr[171842])
-                  (171857 'end of statement')
-                  unknown temp[171864] "no auto destroy" "no copy"(171863 call(171859 call . ptr[171854] c"deref"))
-                  (171867 'end of statement')
-                  (171871 call chpl__autoDestroy temp[171864])
-                }
+                const voidPtr[171880] "const"(171879 call chpl_get_global_serialize_table id[171848])
+                (171883 'end of statement')
+                unknown ptr[171892](171890 call _cast(171889 call c_ptr[205100](?) globalType[171854]) voidPtr[171880])
+                (171895 'end of statement')
+                unknown temp[171902] "no auto destroy" "no copy"(171901 call(171897 call . ptr[171892] c"deref"))
+                (171905 'end of statement')
+                (171909 call chpl__autoDestroy temp[171902])
               }
-              (171885 'elided on block' 0 tmp[171881])
             }
-            (172023 call _downEndCount _coforallCount[172020] nil[44])
-            (172022 'coforall loop')
+            (172057 call _downEndCount _coforallCount[172055] nil[44])
+            (171924 'coforall on block' 0 tmp[171919])
           }
-          label _continueLabel[172033]
-          _indexOfInterest[172028]
-          _iterator[172029]
+          label _continueLabel[172067]
+          _indexOfInterest[172062]
+          _iterator[172063]
         }
-        label _breakLabel[172034]
+        label _breakLabel[172068]
         Defer
         {
           {
-            (172065 call _endCountFree _coforallCount[172020])
+            (172099 call _endCountFree _coforallCount[172055])
           }
         }
-        (172070 call _waitEndCount _coforallCount[172020] 1)
+        (172104 call _waitEndCount _coforallCount[172055] 0)
       }
     }
   }
   where {
-    chpl__enableSerializedGlobals[171427]
+    chpl__enableSerializedGlobals[171469]
   }
-  (355239 'used modules list'(171420 'use' ChapelLocale[89848])(171424 'use' CPtr[204946]))
+  (355222 'used modules list'(171462 'use' ChapelLocale[89847])(171466 'use' CPtr[204989]))
 }

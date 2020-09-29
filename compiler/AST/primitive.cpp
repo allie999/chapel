@@ -903,6 +903,8 @@ initPrimitive() {
   prim_def(PRIM_BLOCK_DOWHILE_LOOP, "do...while loop", returnInfoVoid);
   // BlockStmt::blockInfo - for loop (index, iterator)
   prim_def(PRIM_BLOCK_FOR_LOOP, "for loop", returnInfoVoid);
+  // BlockStmt::blockInfo - forall loop (index, iterator)
+  prim_def(PRIM_BLOCK_FORALL_LOOP, "forall loop", returnInfoVoid);
   // BlockStmt::blockInfo - C for loop (initExpr, testExpr, incrExpr)
   prim_def(PRIM_BLOCK_C_FOR_LOOP, "C for loop", returnInfoVoid);
   // BlockStmt::blockInfo - begin block

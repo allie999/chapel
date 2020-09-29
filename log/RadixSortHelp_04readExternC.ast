@@ -2,361 +2,361 @@ AST dump for RadixSortHelp after pass readExternC.
 Module use list: 
 
 {
-  (353095 'use' ChapelStandard)
-  (275993 'use' Sort)
-  (276000 'import'(275997 call . Reflection c"canResolveMethod"))
+  (353078 'use' ChapelStandard)
+  (276097 'use' Sort)
+  (276104 'import'(276101 call . Reflection c"canResolveMethod"))
   { scopeless
-    unknown RADIX_BITS[276003] "param" 8
-    (276006 'end of statement')
+    unknown RADIX_BITS[276107] "param" 8
+    (276110 'end of statement')
   }
   { scopeless
-    unknown classifyUnrollFactor[276008] "param" 7
-    (276011 'end of statement')
+    unknown classifyUnrollFactor[276112] "param" 7
+    (276115 'end of statement')
   }
-  function binForRecordKeyPart[276016](arg a[276014]:_any[178](?), arg criterion[276018]:_any[178](?), arg startbit[276021] :
+  function binForRecordKeyPart[276120](arg a[276118]:_any[178](?), arg criterion[276122]:_any[178](?), arg startbit[276125] :
   int[13]) : _unknown[51] "inline"
   {
     { scopeless
-      const testRet[276033] "const"(276032 'typeof'(276031 call(276025 call . criterion c"keyPart") a 1))
-      (276036 'end of statement')
+      const testRet[276137] "const"(276136 'typeof'(276135 call(276129 call . criterion c"keyPart") a 1))
+      (276140 'end of statement')
     }
     { scopeless
-      const testPart[276042] "const"(276041 call testRet 1)
-      (276045 'end of statement')
+      const testPart[276146] "const"(276145 call testRet 1)
+      (276149 'end of statement')
     }
     { scopeless
-      unknown bitsPerPart[276051] "param"(276050 call numBits(276048 'typeof' testPart))
-      (276054 'end of statement')
+      unknown bitsPerPart[276155] "param"(276154 call numBits(276152 'typeof' testPart))
+      (276158 'end of statement')
     }
     { scopeless
-      unknown bitsPerPartModRadixBits[276059] "param"(276057 call % bitsPerPart RADIX_BITS)
-      (276062 'end of statement')
+      unknown bitsPerPartModRadixBits[276163] "param"(276161 call % bitsPerPart RADIX_BITS)
+      (276166 'end of statement')
     }
-    if(276088 call _cond_test(276065 call != bitsPerPartModRadixBits 0))
+    if(276192 call _cond_test(276169 call != bitsPerPartModRadixBits 0))
     {
       { scopeless
-        (276086 call compilerError "part size must be a multiple of radix bits")
+        (276190 call compilerError "part size must be a multiple of radix bits")
       }
     }
     { scopeless
-      const whichpart[276097] "const"(276095 call / startbit bitsPerPart)
-      (276100 'end of statement')
-    }
-    { scopeless
-      const bitsinpart[276105] "const"(276103 call % startbit bitsPerPart)
-      (276108 'end of statement')
-    }
-    { scopeless
-      const tmp[276122] "const" "temp"(276121 call(276115 call . criterion c"keyPart") a whichpart)
-      (276129 call _check_tuple_var_decl tmp[276122] 2)
-      const section[276109] "const"(276123 call tmp[276122] 0)
-      const part[276111] "const"(276126 call tmp[276122] 1)
-      (276134 'end of statement')
-    }
-    { scopeless
-      unknown ubits[276142](276140 call _cast(276139 call uint[115] bitsPerPart) part)
-      (276145 'end of statement')
-    }
-    if(276172 call _cond_test(276149 call isInt part))
-    {
-      { scopeless
-        const one[276153] "const" 1(276151 'typeof' ubits)
-        (276156 'end of statement')
-      }
-      (276169 call = ubits(276167 call ^ ubits(276165 call << one(276163 call - bitsPerPart 1))))
-    }
-    { scopeless
-      unknown mask[276184] "param"(276182 call -(276179 call << 1 RADIX_BITS) 1) uint[115]
-      (276187 'end of statement')
-    }
-    { scopeless
-      const ubin[276201] "const"(276199 call &(276196 call >> ubits(276194 call -(276191 call - bitsPerPart bitsinpart) RADIX_BITS)) mask)
+      const whichpart[276201] "const"(276199 call / startbit bitsPerPart)
       (276204 'end of statement')
     }
-    if(276252 call _cond_test(276207 call == section 0))
+    { scopeless
+      const bitsinpart[276209] "const"(276207 call % startbit bitsPerPart)
+      (276212 'end of statement')
+    }
+    { scopeless
+      const tmp[276226] "const" "temp"(276225 call(276219 call . criterion c"keyPart") a whichpart)
+      (276233 call _check_tuple_var_decl tmp[276226] 2)
+      const section[276213] "const"(276227 call tmp[276226] 0)
+      const part[276215] "const"(276230 call tmp[276226] 1)
+      (276238 'end of statement')
+    }
+    { scopeless
+      unknown ubits[276246](276244 call _cast(276243 call uint[115] bitsPerPart) part)
+      (276249 'end of statement')
+    }
+    if(276276 call _cond_test(276253 call isInt part))
     {
       { scopeless
-        (276220 return(276218 call _build_tuple(276214 call +(276211 call _cast int[13] ubin) 1) ubits))
+        const one[276257] "const" 1(276255 'typeof' ubits)
+        (276260 'end of statement')
+      }
+      (276273 call = ubits(276271 call ^ ubits(276269 call << one(276267 call - bitsPerPart 1))))
+    }
+    { scopeless
+      unknown mask[276288] "param"(276286 call -(276283 call << 1 RADIX_BITS) 1) uint[115]
+      (276291 'end of statement')
+    }
+    { scopeless
+      const ubin[276305] "const"(276303 call &(276300 call >> ubits(276298 call -(276295 call - bitsPerPart bitsinpart) RADIX_BITS)) mask)
+      (276308 'end of statement')
+    }
+    if(276356 call _cond_test(276311 call == section 0))
+    {
+      { scopeless
+        (276324 return(276322 call _build_tuple(276318 call +(276315 call _cast int[13] ubin) 1) ubits))
       }
     }
     {
       { scopeless
-        if(276246 call _cond_test(276224 call < section 0))
+        if(276350 call _cond_test(276328 call < section 0))
         {
           { scopeless
-            (276231 return(276229 call _build_tuple 0 ubits))
+            (276335 return(276333 call _build_tuple 0 ubits))
           }
         }
         {
           { scopeless
-            (276244 return(276242 call _build_tuple(276238 call +(276235 call << 1 RADIX_BITS) 1) ubits))
+            (276348 return(276346 call _build_tuple(276342 call +(276339 call << 1 RADIX_BITS) 1) ubits))
           }
         }
       }
     }
   }
-  function binForRecord[276264](arg a[276262]:_any[178](?), arg criterion[276266]:_any[178](?), arg startbit[276269] :
+  function binForRecord[276368](arg a[276366]:_any[178](?), arg criterion[276370]:_any[178](?), arg startbit[276373] :
   int[13]) : _unknown[51] "inline"
   {
-    if(276362 call _cond_test(276278 call canResolveMethod criterion "keyPart" a 0))
+    if(276466 call _cond_test(276382 call canResolveMethod criterion "keyPart" a 0))
     {
-      (276285 return(276284 call binForRecordKeyPart a criterion startbit))
+      (276389 return(276388 call binForRecordKeyPart a criterion startbit))
     }
     {
       { scopeless
-        if(276358 call _cond_test(276293 call canResolveMethod criterion "key" a))
+        if(276462 call _cond_test(276397 call canResolveMethod criterion "key" a))
         {
-          (276306 return(276305 call binForRecordKeyPart(276301 call(276296 call . criterion c"key") a) defaultComparator startbit))
+          (276410 return(276409 call binForRecordKeyPart(276405 call(276400 call . criterion c"key") a) defaultComparator startbit))
         }
         {
-          (276355 call compilerError "Bad comparator for radix sort "(276331 call _cast string[26](276329 'typeof' criterion)) " with eltType "(276353 call _cast string[26](276351 'typeof' a)))
+          (276459 call compilerError "Bad comparator for radix sort "(276435 call _cast string[26](276433 'typeof' criterion)) " with eltType "(276457 call _cast string[26](276455 'typeof' a)))
         }
       }
     }
   }
-  function fixedWidth[276374](arg eltTy[276372]:_any[178](?)) param : _unknown[51]
+  function fixedWidth[276478](arg eltTy[276476]:_any[178](?)) param : _unknown[51]
   {
-    if(276404 call _cond_test(276396 call ||(276390 call ||(276384 call ||(276379 call isUintType eltTy)(276383 call isIntType eltTy))(276389 call isRealType eltTy))(276395 call isImagType eltTy)))
+    if(276508 call _cond_test(276500 call ||(276494 call ||(276488 call ||(276483 call isUintType eltTy)(276487 call isIntType eltTy))(276493 call isRealType eltTy))(276499 call isImagType eltTy)))
     {
       { scopeless
-        (276402 return(276401 call numBits eltTy))
+        (276506 return(276505 call numBits eltTy))
       }
     }
-    if(276436 call _cond_test(276413 call isHomogeneousTuple eltTy))
+    if(276540 call _cond_test(276517 call isHomogeneousTuple eltTy))
     {
       { scopeless
-        unknown tmp[276415] eltTy
-        (276418 'end of statement')
+        unknown tmp[276519] eltTy
+        (276522 'end of statement')
       }
-      (276434 return(276432 call *(276421 call . tmp c"size")(276431 call numBits(276429 'typeof'(276428 call tmp 0)))))
+      (276538 return(276536 call *(276525 call . tmp c"size")(276535 call numBits(276533 'typeof'(276532 call tmp 0)))))
     }
-    (276443 return(276441 call - 1))
+    (276547 return(276545 call - 1))
   }
-  function msbRadixSortParamLastStartBit[276455](arg Data[276452] :
-  (276449 call chpl__buildArrayRuntimeType nil[44]), arg comparator[276457]:_any[178](?)) param : _unknown[51]
+  function msbRadixSortParamLastStartBit[276559](arg Data[276556] :
+  (276553 call chpl__buildArrayRuntimeType nil[44]), arg comparator[276561]:_any[178](?)) param : _unknown[51]
   {
     { scopeless
-      const element[276469] "const" "ref var"(276468 call Data(276464 call .(276461 call . Data c"_dom") c"low"))
-      (276472 'end of statement')
+      const element[276573] "const" "ref var"(276572 call Data(276568 call .(276565 call . Data c"_dom") c"low"))
+      (276576 'end of statement')
     }
-    if(276543 call _cond_test(276487 call &&(276477 call ==(276475 'typeof' comparator) DefaultComparator)(276485 call >(276483 call fixedWidth(276481 'typeof' element)) 0)))
+    if(276647 call _cond_test(276591 call &&(276581 call ==(276579 'typeof' comparator) DefaultComparator)(276589 call >(276587 call fixedWidth(276585 'typeof' element)) 0)))
     {
-      (276497 return(276495 call -(276493 call fixedWidth(276491 'typeof' element)) RADIX_BITS))
+      (276601 return(276599 call -(276597 call fixedWidth(276595 'typeof' element)) RADIX_BITS))
     }
     {
       { scopeless
-        if(276539 call _cond_test(276505 call canResolveMethod comparator "key" element))
+        if(276643 call _cond_test(276609 call canResolveMethod comparator "key" element))
         {
-          unknown keyType[276514] "type variable"(276513 'typeof'(276512 call(276507 call . comparator c"key") element))
-          if(276534 call _cond_test(276523 call >(276521 call fixedWidth keyType) 0))
+          unknown keyType[276618] "type variable"(276617 'typeof'(276616 call(276611 call . comparator c"key") element))
+          if(276638 call _cond_test(276627 call >(276625 call fixedWidth keyType) 0))
           {
             { scopeless
-              (276532 return(276530 call -(276528 call fixedWidth keyType) RADIX_BITS))
+              (276636 return(276634 call -(276632 call fixedWidth keyType) RADIX_BITS))
             }
           }
         }
       }
     }
-    (276551 return(276549 call - 1))
+    (276655 return(276653 call - 1))
   }
-  function radixSortClz[276559](arg val[276557]:_any[178](?)) : _unknown[51]
+  function radixSortClz[276663](arg val[276661]:_any[178](?)) : _unknown[51]
   {
     { scopeless
-      unknown nBits[276566] "param"(276565 call numBits(276563 'typeof' val))
-      (276569 'end of statement')
+      unknown nBits[276670] "param"(276669 call numBits(276667 'typeof' val))
+      (276673 'end of statement')
     }
-    if(276579 call _cond_test(276573 call == val 0))
+    if(276683 call _cond_test(276677 call == val 0))
     {
-      (276576 return nBits)
+      (276680 return nBits)
     }
     { scopeless
-      unknown cur[276584] val
-      (276587 'end of statement')
+      unknown cur[276688] val
+      (276691 'end of statement')
     }
     { scopeless
-      unknown one[276593](276591 call _cast(276590 'typeof' val) 1)
-      (276596 'end of statement')
+      unknown one[276697](276695 call _cast(276694 'typeof' val) 1)
+      (276700 'end of statement')
     }
     { scopeless
-      unknown hi[276604](276602 call << one(276600 call - nBits 1))
-      (276607 'end of statement')
+      unknown hi[276708](276706 call << one(276704 call - nBits 1))
+      (276711 'end of statement')
     }
     { scopeless
-      unknown n[276609] 0
-      (276612 'end of statement')
+      unknown n[276713] 0
+      (276716 'end of statement')
     }
     {
-      unknown tmp[276631] "temp"
-      (276661 'move' tmp[276631](276653 call _cond_test(276655 call ==(276657 call & cur hi) 0)))
-      WhileDo[276636]
+      unknown tmp[276735] "temp"
+      (276765 'move' tmp[276735](276757 call _cond_test(276759 call ==(276761 call & cur hi) 0)))
+      WhileDo[276740]
       {
         {
-          (276622 call += n 1)
-          (276628 call <<= cur 1)
+          (276726 call += n 1)
+          (276732 call <<= cur 1)
         }
-        label _continueLabel[276634]
-        (276648 'move' tmp[276631](276640 call _cond_test(276642 call ==(276644 call & cur hi) 0)))
-        tmp[276631]
+        label _continueLabel[276738]
+        (276752 'move' tmp[276735](276744 call _cond_test(276746 call ==(276748 call & cur hi) 0)))
+        tmp[276735]
       }
-      label _breakLabel[276635]
+      label _breakLabel[276739]
     }
-    (276665 return n)
+    (276769 return n)
   }
-  function findDataStartBit[276675](arg startbit[276672] :
-  int[13], arg min_ubits[276677]:_any[178](?), arg max_ubits[276679]:_any[178](?)) : _unknown[51]
+  function findDataStartBit[276779](arg startbit[276776] :
+  int[13], arg min_ubits[276781]:_any[178](?), arg max_ubits[276783]:_any[178](?)) : _unknown[51]
   {
     { scopeless
-      unknown xor[276686](276684 call ^ min_ubits max_ubits)
-      (276689 'end of statement')
+      unknown xor[276790](276788 call ^ min_ubits max_ubits)
+      (276793 'end of statement')
     }
     { scopeless
-      unknown bitsPerPart[276696] "param"(276695 call numBits(276693 'typeof' min_ubits))
-      (276699 'end of statement')
+      unknown bitsPerPart[276800] "param"(276799 call numBits(276797 'typeof' min_ubits))
+      (276803 'end of statement')
     }
     { scopeless
-      const bitsinpart[276704] "const"(276702 call % startbit bitsPerPart)
-      (276707 'end of statement')
+      const bitsinpart[276808] "const"(276806 call % startbit bitsPerPart)
+      (276811 'end of statement')
     }
-    (276710 call <<= xor bitsinpart)
-    (276715 call >>= xor bitsinpart)
+    (276814 call <<= xor bitsinpart)
+    (276819 call >>= xor bitsinpart)
     { scopeless
-      unknown new_start[276722](276721 call radixSortClz xor)
-      (276725 'end of statement')
-    }
-    { scopeless
-      unknown new_digit[276730](276728 call / new_start RADIX_BITS)
-      (276733 'end of statement')
+      unknown new_start[276826](276825 call radixSortClz xor)
+      (276829 'end of statement')
     }
     { scopeless
-      unknown new_start_bit_rounded[276738](276736 call * new_digit RADIX_BITS)
-      (276741 'end of statement')
+      unknown new_digit[276834](276832 call / new_start RADIX_BITS)
+      (276837 'end of statement')
     }
-    (276746 return(276744 call _cast int[13] new_start_bit_rounded))
+    { scopeless
+      unknown new_start_bit_rounded[276842](276840 call * new_digit RADIX_BITS)
+      (276845 'end of statement')
+    }
+    (276850 return(276848 call _cast int[13] new_start_bit_rounded))
   }
   { scopeless type
     int[13]
   }
-  function checkSorted[276757](arg start_n[276754] :
-  int[13], arg end_n[276760] :
-  int[13], arg A[276766] :
-  (276763 call chpl__buildArrayRuntimeType nil[44]), arg criterion[276769]:_any[178](?), arg startbit[276772] =
+  function checkSorted[276861](arg start_n[276858] :
+  int[13], arg end_n[276864] :
+  int[13], arg A[276870] :
+  (276867 call chpl__buildArrayRuntimeType nil[44]), arg criterion[276873]:_any[178](?), arg startbit[276876] =
   0) : _unknown[51] "always propagate line file info" "insert line file info"
   {
     {
-      unknown _indexOfInterest[276941] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[276942] "expr temp" "temp"
-      (276951 'move' _iterator[276942](276949 call _getIterator(276959 call chpl_direct_range_iter(276955 call + start_n 1) end_n 1)))
+      unknown _indexOfInterest[277045] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[277046] "expr temp" "temp"
+      (277055 'move' _iterator[277046](277053 call _getIterator(277063 call chpl_direct_range_iter(277059 call + start_n 1) end_n 1)))
       Defer
       {
         {
-          (276975 call _freeIterator _iterator[276942])
+          (277079 call _freeIterator _iterator[277046])
         }
       }
       { scopeless type
-        (276964 'move' _indexOfInterest[276941](276961 call iteratorIndex _iterator[276942]))
+        (277068 'move' _indexOfInterest[277045](277065 call iteratorIndex _iterator[277046]))
       }
-      ForLoop[276943]
+      ForLoop[277047]
       {
-        unknown i[276968] "index var" "insert auto destroy"
-        (276970 'move' i[276968] _indexOfInterest[276941])
+        unknown i[277072] "index var" "insert auto destroy"
+        (277074 'move' i[277072] _indexOfInterest[277045])
         {
           { scopeless
-            unknown cmp[276798](276797 call chpl_compare(276790 call A(276787 call - i 1))(276795 call A i) criterion)
-            (276801 'end of statement')
+            unknown cmp[276902](276901 call chpl_compare(276894 call A(276891 call - i 1))(276899 call A i) criterion)
+            (276905 'end of statement')
           }
-          if(276937 call _cond_test(276805 call > cmp 0))
+          if(277041 call _cond_test(276909 call > cmp 0))
           {
-            (276908 call writeln "Error: not sorted properly at i=" i " A[i-1]="(276850 call A(276847 call - i 1)) " A[i]="(276871 call A i) " in start=" start_n " end=" end_n)
-            (276914 call writeln A)
-            (276935 call halt "failed checkSorted")
+            (277012 call writeln "Error: not sorted properly at i=" i " A[i-1]="(276954 call A(276951 call - i 1)) " A[i]="(276975 call A i) " in start=" start_n " end=" end_n)
+            (277018 call writeln A)
+            (277039 call halt "failed checkSorted")
           }
         }
-        label _continueLabel[276946]
-        _indexOfInterest[276941]
-        _iterator[276942]
+        label _continueLabel[277050]
+        _indexOfInterest[277045]
+        _iterator[277046]
       }
-      label _breakLabel[276947]
+      label _breakLabel[277051]
     }
   }
-  type RadixBucketizer[277273] function RadixBucketizer[277273].getNumBuckets[276988](arg _mt[277277]:_MT[238], arg this[277275]:RadixBucketizer[277273]) : _unknown[51] "method" "primary method"
+  type RadixBucketizer[277377] function RadixBucketizer[277377].getNumBuckets[277092](arg _mt[277381]:_MT[238], arg this[277379]:RadixBucketizer[277377]) : _unknown[51] "method" "primary method"
   {
-    (276997 return(276995 call +(276992 call << 1 RADIX_BITS) 2))
-  } function RadixBucketizer[277273].getBinsToRecursivelySort[277004](arg _mt[277281]:_MT[238], arg this[277279]:RadixBucketizer[277273]) : _unknown[51] "method" "primary method"
+    (277101 return(277099 call +(277096 call << 1 RADIX_BITS) 2))
+  } function RadixBucketizer[277377].getBinsToRecursivelySort[277108](arg _mt[277385]:_MT[238], arg this[277383]:RadixBucketizer[277377]) : _unknown[51] "method" "primary method"
   {
-    (277013 return(277011 call chpl_build_bounded_range 1(277009 call << 1 RADIX_BITS)))
-  } function RadixBucketizer[277273].getNextStartBit[277024](arg _mt[277285]:_MT[238], arg this[277283]:RadixBucketizer[277273], arg start_bit[277021] :
+    (277117 return(277115 call chpl_build_bounded_range 1(277113 call << 1 RADIX_BITS)))
+  } function RadixBucketizer[277377].getNextStartBit[277128](arg _mt[277389]:_MT[238], arg this[277387]:RadixBucketizer[277377], arg start_bit[277125] :
   int[13]) : _unknown[51] "method" "primary method"
   {
-    (277030 return(277028 call + start_bit 8))
-  } function RadixBucketizer[277273].bucketForRecord[277039](arg _mt[277289]:_MT[238], arg this[277287]:RadixBucketizer[277273], arg a[277037]:_any[178](?), arg criterion[277041]:_any[178](?), arg startbit[277043]:_any[178](?)) : _unknown[51] "inline" "method" "primary method"
+    (277134 return(277132 call + start_bit 8))
+  } function RadixBucketizer[277377].bucketForRecord[277143](arg _mt[277393]:_MT[238], arg this[277391]:RadixBucketizer[277377], arg a[277141]:_any[178](?), arg criterion[277145]:_any[178](?), arg startbit[277147]:_any[178](?)) : _unknown[51] "inline" "method" "primary method"
   {
     { scopeless
-      const tmp[277056] "const" "temp"(277055 call binForRecord a criterion startbit)
-      (277060 call _check_tuple_var_decl tmp[277056] 2)
-      const bin[277045] "const"(277057 call tmp[277056] 0)
-      (277065 'end of statement')
+      const tmp[277160] "const" "temp"(277159 call binForRecord a criterion startbit)
+      (277164 call _check_tuple_var_decl tmp[277160] 2)
+      const bin[277149] "const"(277161 call tmp[277160] 0)
+      (277169 'end of statement')
     }
-    (277068 return bin)
-  } function RadixBucketizer[277273].classify[277076](arg _mt[277293]:_MT[238], arg this[277291]:RadixBucketizer[277273], arg A[277074]:_any[178](?), arg start_n[277078]:_any[178](?), arg end_n[277080]:_any[178](?), arg criterion[277082]:_any[178](?), arg startbit[277084]:_any[178](?)) : _unknown[51] "iterator fn" "method" "primary method"
+    (277172 return bin)
+  } function RadixBucketizer[277377].classify[277180](arg _mt[277397]:_MT[238], arg this[277395]:RadixBucketizer[277377], arg A[277178]:_any[178](?), arg start_n[277182]:_any[178](?), arg end_n[277184]:_any[178](?), arg criterion[277186]:_any[178](?), arg startbit[277188]:_any[178](?)) : _unknown[51] "iterator fn" "method" "primary method"
   {
     { scopeless
-      unknown cur[277087] start_n
-      (277090 'end of statement')
+      unknown cur[277191] start_n
+      (277194 'end of statement')
     }
     {
-      unknown tmp[277179] "temp"
-      (277215 'move' tmp[277179](277204 call _cond_test(277206 call <= cur(277209 call - end_n(277212 call - classifyUnrollFactor 1)))))
-      WhileDo[277184]
+      unknown tmp[277283] "temp"
+      (277319 'move' tmp[277283](277308 call _cond_test(277310 call <= cur(277313 call - end_n(277316 call - classifyUnrollFactor 1)))))
+      WhileDo[277288]
       {
         {
           {
-            unknown _indexOfInterest[277132] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[277133] "expr temp" "temp"
-            (277142 'move' _iterator[277133](277140 call _getIterator(277150 call chpl_direct_range_iter 0(277147 call - classifyUnrollFactor 1) 1)))
+            unknown _indexOfInterest[277236] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[277237] "expr temp" "temp"
+            (277246 'move' _iterator[277237](277244 call _getIterator(277254 call chpl_direct_range_iter 0(277251 call - classifyUnrollFactor 1) 1)))
             Defer
             {
               {
-                (277166 call _freeIterator _iterator[277133])
+                (277270 call _freeIterator _iterator[277237])
               }
             }
             { scopeless type
-              (277155 'move' _indexOfInterest[277132](277152 call iteratorIndex _iterator[277133]))
+              (277259 'move' _indexOfInterest[277236](277256 call iteratorIndex _iterator[277237]))
             }
-            ForLoop[277134]
+            ForLoop[277238]
             {
-              unknown j[277159] "index var" "insert auto destroy"
-              (277161 'move' j[277159] _indexOfInterest[277132])
+              unknown j[277263] "index var" "insert auto destroy"
+              (277265 'move' j[277263] _indexOfInterest[277236])
               {
-                (277129 yield(277127 call _build_tuple(277112 call + cur j)(277125 call bucketForRecord(277121 call A(277118 call + cur j)) criterion startbit)))
+                (277233 yield(277231 call _build_tuple(277216 call + cur j)(277229 call bucketForRecord(277225 call A(277222 call + cur j)) criterion startbit)))
               }
-              label _continueLabel[277137]
-              _indexOfInterest[277132]
-              _iterator[277133]
+              label _continueLabel[277241]
+              _indexOfInterest[277236]
+              _iterator[277237]
             }
-            label _breakLabel[277138]
+            label _breakLabel[277242]
           }
-          (277176 call += cur classifyUnrollFactor)
+          (277280 call += cur classifyUnrollFactor)
         }
-        label _continueLabel[277182]
-        (277199 'move' tmp[277179](277188 call _cond_test(277190 call <= cur(277193 call - end_n(277196 call - classifyUnrollFactor 1)))))
-        tmp[277179]
+        label _continueLabel[277286]
+        (277303 'move' tmp[277283](277292 call _cond_test(277294 call <= cur(277297 call - end_n(277300 call - classifyUnrollFactor 1)))))
+        tmp[277283]
       }
-      label _breakLabel[277183]
+      label _breakLabel[277287]
     }
     {
-      unknown tmp[277243] "temp"
-      (277267 'move' tmp[277243](277262 call _cond_test(277264 call <= cur end_n)))
-      WhileDo[277248]
+      unknown tmp[277347] "temp"
+      (277371 'move' tmp[277347](277366 call _cond_test(277368 call <= cur end_n)))
+      WhileDo[277352]
       {
         {
-          (277235 yield(277233 call _build_tuple cur(277231 call bucketForRecord(277227 call A cur) criterion startbit)))
-          (277240 call += cur 1)
+          (277339 yield(277337 call _build_tuple cur(277335 call bucketForRecord(277331 call A cur) criterion startbit)))
+          (277344 call += cur 1)
         }
-        label _continueLabel[277246]
-        (277257 'move' tmp[277243](277252 call _cond_test(277254 call <= cur end_n)))
-        tmp[277243]
+        label _continueLabel[277350]
+        (277361 'move' tmp[277347](277356 call _cond_test(277358 call <= cur end_n)))
+        tmp[277347]
       }
-      label _breakLabel[277247]
+      label _breakLabel[277351]
     }
   }
 }

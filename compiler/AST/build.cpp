@@ -41,8 +41,6 @@
 
 #include <map>
 #include <utility>
-// for debugging
-#include <iostream> 
 
 static BlockStmt* findStmtWithTag(PrimitiveTag tag, BlockStmt* blockStmt);
 
@@ -353,19 +351,11 @@ Expr* buildDotExpr(BaseAST* base, const char* member) {
     // chpl_localeID_to_locale(_wide_get_node(x)).
     return new CallExpr("chpl_localeID_to_locale",
                         new CallExpr(PRIM_WIDE_GET_LOCALE, base));
-
-  if (!strcmp("GPU", member)){
-    // "x.GPU" e.g "here.GPU" "locales[0].GPU"
-      // assert(false);
-      std::cout << "LINE 361 member is GPU" << std::endl;
-  }
-
   return new CallExpr(".", base, new_CStringSymbol(member));
 }
 
 
 Expr* buildDotExpr(const char* base, const char* member) {
-  std::cout << "base is " << base << "member is " << member << std::endl;
   return buildDotExpr(new UnresolvedSymExpr(base), member);
 }
 
@@ -1420,7 +1410,6 @@ CallExpr* buildReduceExpr(Expr* opExpr, Expr* dataExpr, bool zippered) {
                           toCallExpr(dataExpr)->isPrimitive(PRIM_ZIP)));
 
   adjustMinMaxReduceOp(opExpr);
-  // std::cout<< "in buildReduceExpr" << std::endl;
   return new CallExpr(PRIM_REDUCE, opExpr, dataExpr,
                       zippered ? gTrue : gFalse);
 }
@@ -2206,12 +2195,106 @@ static Expr* extractLocaleID(Expr* expr) {
   return new CallExpr(PRIM_WIDE_GET_LOCALE, expr);
 }
 
-BlockStmt*
-buildOnGPUStmt(Expr* expr, Expr* stmt){
-    // create and pass a context to all the expr inside the code block;
-    std::cout << "in buildOnGPUStmt" << std::endl;
+void replaceWithGPUExpression(BlockStmt* block){
+  // find reduce expression
+  std::vector<CallExpr *> callsVector;
+  collectCallExprs(block, callsVector);
+  for_vector(CallExpr, call, callsVector)
+  {
+    if (call->isPrimitive(PRIM_REDUCE))
+    {
+      // TODO replace to GPU reduce Call expression
+      call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
+    }
+  }
+  // find forall expression
+  for_alist(expr, block->body)
+  {
+    if (BlockStmt *currentBlock = toBlockStmt(expr))
+    {
+      if (currentBlock->isBlockType(PRIM_BLOCK_FORALL_LOOP)){
+        // TODO replace to GPU forall expression
+        currentBlock -> replace(new CallExpr(new UnresolvedSymExpr("writeln"), buildStringLiteral("beef ")));
+        return;
+      }
+    }
+    if (ForallStmt* fs = toForallStmt(expr)){
+      // TODO replace to GPU forall expression
+      fs -> replace(new CallExpr(new UnresolvedSymExpr("writeln"), buildStringLiteral("beef ")));
+    }
+  }
+}
 
-  return buildOnStmt(expr, stmt);
+BlockStmt*
+buildOnGPUStmt(Expr* expr, Expr* stmt) {
+  checkControlFlow(stmt, "on statement");
+
+  CallExpr* onExpr = new CallExpr(PRIM_DEREF, extractLocaleID(expr));
+
+  BlockStmt* body = toBlockStmt(stmt);
+
+  //
+  // detect begin statement directly inside on-statement
+  //
+  BlockStmt* beginBlock = findStmtWithTag(PRIM_BLOCK_BEGIN, body);
+
+  // If the locale model doesn't require outlined on functions and this is a
+  // --local compile, then we take the on-expression, execute it to evaluate
+  // it for side effects, and then evaluate the body directly.
+  if (!requireOutlinedOn()) {
+    BlockStmt* block = new BlockStmt(stmt);
+    if (BlockStmt *blockstmt = toBlockStmt(stmt))
+    {
+      replaceWithGPUExpression(blockstmt);
+    }else{
+      replaceWithGPUExpression(block);
+    }
+    Symbol* tmp = newTempConst();
+    block->insertAtHead(new CallExpr(PRIM_MOVE, tmp, onExpr)); // evaluate the expression for side effects
+    block->insertAtHead(new DefExpr(tmp));
+    block->blockInfoSet(new CallExpr(PRIM_BLOCK_ELIDED_ON, gFalse, tmp));
+    return buildChapelStmt(block);
+  }
+
+  if (beginBlock) {
+    if (BlockStmt *blockstmt = toBlockStmt(stmt))
+    {
+      replaceWithGPUExpression(blockstmt);
+    }else{
+      replaceWithGPUExpression(body);
+    }
+
+    // OPTIMIZATION: If "on x" is immediately followed by a "begin", then collapse
+    // remote_fork (node) {
+    //   branch /*local*/ { foo(); }
+    // } wait;
+    // to
+    // remote_fork (node) { foo(); } // no wait();
+    
+    // Execute the construct "on x begin ..." asynchronously.
+    Symbol* tmp = newTempConst();
+    body->insertAtHead(new CallExpr(PRIM_MOVE, tmp, onExpr));
+    body->insertAtHead(new DefExpr(tmp));
+    beginBlock->blockInfoSet(new CallExpr(PRIM_BLOCK_BEGIN_ON, gFalse, tmp));
+    // If there are beginBlock->byrefVars, they will be preserved.
+    return body;
+  } else {
+    // Otherwise, wait for the "on" statement to complete before proceeding.
+    BlockStmt* block = buildChapelStmt();
+    Symbol* tmp = newTempConst();
+    block->insertAtTail(new DefExpr(tmp));
+    block->insertAtTail(new CallExpr(PRIM_MOVE, tmp, onExpr));
+    BlockStmt* onBlock = new BlockStmt(stmt);
+    onBlock->blockInfoSet(new CallExpr(PRIM_BLOCK_ON, gFalse, tmp));
+    block->insertAtTail(onBlock);
+    if (BlockStmt *blockstmt = toBlockStmt(stmt))
+    {
+      replaceWithGPUExpression(blockstmt);
+    }else{
+      replaceWithGPUExpression(onBlock);
+    }
+    return block;
+  }
 }
 
 BlockStmt*

@@ -3,33 +3,35 @@ Module use list:
 
 {
   { scopeless
-    (187271 'use' Atomics)
-    (187273 'use' ChapelBase)
+    (187305 'use' Atomics)
+    (187307 'use' ChapelBase)
   }
-  (187276 'use' MemConsistency)
-  type chpl_LocalSpinlock[187398] unknown l[187283](187282 call chpl__processorAtomicType bool[10]) function chpl_LocalSpinlock[187398].lock[187289](arg _mt[187402]:_MT[238], arg this[187400]:chpl_LocalSpinlock[187398]) : _unknown[51] "inline" "method" "primary method"
+  (187310 'use' MemConsistency)
+  type chpl_LocalSpinlock[187432] unknown l[187317](187316 call chpl__processorAtomicType bool[10]) function chpl_LocalSpinlock[187432].lock[187323](arg _mt[187436]:_MT[238], arg this[187434]:chpl_LocalSpinlock[187432]) : _unknown[51] "inline" "method" "primary method"
   {
-    {
-      const tmp[187368] "const" "temp"
-      (187369 'move' tmp[187368](187366 'deref'(187365 '_wide_get_locale' this)))
+    { scopeless
+      const tmp[187402] "const" "temp"
+      (187404 'move' tmp[187402](187400 'deref'(187399 '_wide_get_locale' this)))
       {
-        unknown tmp[187314] "temp"
-        (187362 'move' tmp[187314](187345 call _cond_test(187347 call ||(187352 call(187349 call . l c"read"))(187357 call(187354 call . l c"testAndSet")(187359 call . memoryOrder c"acquire")))))
-        WhileDo[187319]
         {
-          { scopeless
-            (187312 call chpl_task_yield)
+          unknown tmp[187348] "temp"
+          (187396 'move' tmp[187348](187379 call _cond_test(187381 call ||(187386 call(187383 call . l c"read"))(187391 call(187388 call . l c"testAndSet")(187393 call . memoryOrder c"acquire")))))
+          WhileDo[187353]
+          {
+            { scopeless
+              (187346 call chpl_task_yield)
+            }
+            label _continueLabel[187351]
+            (187374 'move' tmp[187348](187357 call _cond_test(187359 call ||(187364 call(187361 call . l c"read"))(187369 call(187366 call . l c"testAndSet")(187371 call . memoryOrder c"acquire")))))
+            tmp[187348]
           }
-          label _continueLabel[187317]
-          (187340 'move' tmp[187314](187323 call _cond_test(187325 call ||(187330 call(187327 call . l c"read"))(187335 call(187332 call . l c"testAndSet")(187337 call . memoryOrder c"acquire")))))
-          tmp[187314]
+          label _breakLabel[187352]
         }
-        label _breakLabel[187318]
+        (187407 'on block' 0 tmp[187402])
       }
-      (187372 'elided on block' 0 tmp[187368])
     }
-  } function chpl_LocalSpinlock[187398].unlock[187381](arg _mt[187406]:_MT[238], arg this[187404]:chpl_LocalSpinlock[187398]) : _unknown[51] "inline" "method" "primary method"
+  } function chpl_LocalSpinlock[187432].unlock[187415](arg _mt[187440]:_MT[238], arg this[187438]:chpl_LocalSpinlock[187432]) : _unknown[51] "inline" "method" "primary method"
   {
-    (187392 call(187384 call . l c"clear")(187388 call . memoryOrder c"release"))
+    (187426 call(187418 call . l c"clear")(187422 call . memoryOrder c"release"))
   }
 }
