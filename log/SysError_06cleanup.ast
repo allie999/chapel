@@ -2,130 +2,130 @@ AST dump for SysError after pass cleanup.
 Module use list: 
 
 {
-  (353054 'use' ChapelStandard)
-  (264252 'use' SysBasic)
-  (264256 'use' SysCTypes)
-  function SystemError[264864].init[264277](arg _mt[264868]:_MT[238], arg this[264866]:SystemError[264864], arg err[264274] :
-  syserr, arg details[264297] :
+  (353123 'use' ChapelStandard)
+  (264321 'use' SysBasic)
+  (264325 'use' SysCTypes)
+  function SystemError[264933].init[264346](arg _mt[264937]:_MT[238], arg this[264935]:SystemError[264933], arg err[264343] :
+  syserr, arg details[264366] :
   string[26] =
   "") : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (264306 call =(264302 call . this c"err") err)
-    (264317 call =(264313 call . this c"details") details)
+    (264375 call =(264371 call . this c"err") err)
+    (264386 call =(264382 call . this c"details") details)
   }
-  function SystemError[264864].message[264324](arg _mt[264872]:_MT[238], arg this[264870]:SystemError[264864]) : _unknown[51] "method" "primary method" "method overrides"
+  function SystemError[264933].message[264393](arg _mt[264941]:_MT[238], arg this[264939]:SystemError[264933]) : _unknown[51] "method" "primary method" "method overrides"
   {
-    unknown strerror_err[264328] ENOERR err_t
-    (264331 'end of statement')
-    unknown errstr[264338](264337 call sys_strerror_syserr_str err strerror_err)
-    (264341 'end of statement')
-    unknown err_msg[264343] string[26]
-    (264346 'end of statement')
+    unknown strerror_err[264397] ENOERR err_t
+    (264400 'end of statement')
+    unknown errstr[264407](264406 call sys_strerror_syserr_str err strerror_err)
+    (264410 'end of statement')
+    unknown err_msg[264412] string[26]
+    (264415 'end of statement')
     Try!
     {
       {
-        (264352 call = err_msg(264351 call createStringWithOwnedBuffer errstr))
+        (264421 call = err_msg(264420 call createStringWithOwnedBuffer errstr))
       }
     }
-    if(264378 call _cond_test(264365 call !(264364 call(264360 call . details c"isEmpty"))))
+    if(264447 call _cond_test(264434 call !(264433 call(264429 call . details c"isEmpty"))))
     {
-      (264375 call += err_msg(264373 call +(264370 call + " (" details) ")"))
+      (264444 call += err_msg(264442 call +(264439 call + " (" details) ")"))
     }
-    (264384 return err_msg)
+    (264453 return err_msg)
   }
-  function SystemError[264864].fromSyserr[264394](arg _mt[264876]:_MT[238], arg this[264874]:SystemError[264864], arg err[264391] :
-  syserr, arg details[264414] :
+  function SystemError[264933].fromSyserr[264463](arg _mt[264945]:_MT[238], arg this[264943]:SystemError[264933], arg err[264460] :
+  syserr, arg details[264483] :
   string[26] =
   "") : _unknown[51] "always propagate line file info" "insert line file info" "method" "primary method"
   {
-    if(264802 call _cond_test(264438 call ||(264432 call ||(264426 call ||(264420 call == err EAGAIN)(264424 call == err EALREADY))(264430 call == err EWOULDBLOCK))(264436 call == err EINPROGRESS)))
+    if(264871 call _cond_test(264507 call ||(264501 call ||(264495 call ||(264489 call == err EAGAIN)(264493 call == err EALREADY))(264499 call == err EWOULDBLOCK))(264505 call == err EINPROGRESS)))
     {
-      (264448 return(264442 'new'(_chpl_manager = _owned[30](?))(264447 call BlockingIOError details err)))
+      (264517 return(264511 'new'(_chpl_manager = _owned[30](?))(264516 call BlockingIOError details err)))
     }
     {
-      if(264797 call _cond_test(264453 call == err ECHILD))
+      if(264866 call _cond_test(264522 call == err ECHILD))
       {
-        (264463 return(264457 'new'(_chpl_manager = _owned[30](?))(264462 call ChildProcessError details err)))
+        (264532 return(264526 'new'(_chpl_manager = _owned[30](?))(264531 call ChildProcessError details err)))
       }
       {
-        if(264792 call _cond_test(264474 call ||(264468 call == err EPIPE)(264472 call == err ESHUTDOWN)))
+        if(264861 call _cond_test(264543 call ||(264537 call == err EPIPE)(264541 call == err ESHUTDOWN)))
         {
-          (264484 return(264478 'new'(_chpl_manager = _owned[30](?))(264483 call BrokenPipeError details err)))
+          (264553 return(264547 'new'(_chpl_manager = _owned[30](?))(264552 call BrokenPipeError details err)))
         }
         {
-          if(264787 call _cond_test(264489 call == err ECONNABORTED))
+          if(264856 call _cond_test(264558 call == err ECONNABORTED))
           {
-            (264499 return(264493 'new'(_chpl_manager = _owned[30](?))(264498 call ConnectionAbortedError details err)))
+            (264568 return(264562 'new'(_chpl_manager = _owned[30](?))(264567 call ConnectionAbortedError details err)))
           }
           {
-            if(264782 call _cond_test(264504 call == err ECONNREFUSED))
+            if(264851 call _cond_test(264573 call == err ECONNREFUSED))
             {
-              (264514 return(264508 'new'(_chpl_manager = _owned[30](?))(264513 call ConnectionRefusedError details err)))
+              (264583 return(264577 'new'(_chpl_manager = _owned[30](?))(264582 call ConnectionRefusedError details err)))
             }
             {
-              if(264777 call _cond_test(264519 call == err ECONNRESET))
+              if(264846 call _cond_test(264588 call == err ECONNRESET))
               {
-                (264529 return(264523 'new'(_chpl_manager = _owned[30](?))(264528 call ConnectionResetError details err)))
+                (264598 return(264592 'new'(_chpl_manager = _owned[30](?))(264597 call ConnectionResetError details err)))
               }
               {
-                if(264772 call _cond_test(264534 call == err EEXIST))
+                if(264841 call _cond_test(264603 call == err EEXIST))
                 {
-                  (264544 return(264538 'new'(_chpl_manager = _owned[30](?))(264543 call FileExistsError details err)))
+                  (264613 return(264607 'new'(_chpl_manager = _owned[30](?))(264612 call FileExistsError details err)))
                 }
                 {
-                  if(264767 call _cond_test(264549 call == err ENOENT))
+                  if(264836 call _cond_test(264618 call == err ENOENT))
                   {
-                    (264559 return(264553 'new'(_chpl_manager = _owned[30](?))(264558 call FileNotFoundError details err)))
+                    (264628 return(264622 'new'(_chpl_manager = _owned[30](?))(264627 call FileNotFoundError details err)))
                   }
                   {
-                    if(264762 call _cond_test(264564 call == err EINTR))
+                    if(264831 call _cond_test(264633 call == err EINTR))
                     {
-                      (264574 return(264568 'new'(_chpl_manager = _owned[30](?))(264573 call InterruptedError details err)))
+                      (264643 return(264637 'new'(_chpl_manager = _owned[30](?))(264642 call InterruptedError details err)))
                     }
                     {
-                      if(264757 call _cond_test(264579 call == err EISDIR))
+                      if(264826 call _cond_test(264648 call == err EISDIR))
                       {
-                        (264589 return(264583 'new'(_chpl_manager = _owned[30](?))(264588 call IsADirectoryError details err)))
+                        (264658 return(264652 'new'(_chpl_manager = _owned[30](?))(264657 call IsADirectoryError details err)))
                       }
                       {
-                        if(264752 call _cond_test(264594 call == err ENOTDIR))
+                        if(264821 call _cond_test(264663 call == err ENOTDIR))
                         {
-                          (264604 return(264598 'new'(_chpl_manager = _owned[30](?))(264603 call NotADirectoryError details err)))
+                          (264673 return(264667 'new'(_chpl_manager = _owned[30](?))(264672 call NotADirectoryError details err)))
                         }
                         {
-                          if(264747 call _cond_test(264615 call ||(264609 call == err EACCES)(264613 call == err EPERM)))
+                          if(264816 call _cond_test(264684 call ||(264678 call == err EACCES)(264682 call == err EPERM)))
                           {
-                            (264625 return(264619 'new'(_chpl_manager = _owned[30](?))(264624 call PermissionError details err)))
+                            (264694 return(264688 'new'(_chpl_manager = _owned[30](?))(264693 call PermissionError details err)))
                           }
                           {
-                            if(264742 call _cond_test(264630 call == err ESRCH))
+                            if(264811 call _cond_test(264699 call == err ESRCH))
                             {
-                              (264640 return(264634 'new'(_chpl_manager = _owned[30](?))(264639 call ProcessLookupError details err)))
+                              (264709 return(264703 'new'(_chpl_manager = _owned[30](?))(264708 call ProcessLookupError details err)))
                             }
                             {
-                              if(264737 call _cond_test(264645 call == err ETIMEDOUT))
+                              if(264806 call _cond_test(264714 call == err ETIMEDOUT))
                               {
-                                (264655 return(264649 'new'(_chpl_manager = _owned[30](?))(264654 call TimeoutError details err)))
+                                (264724 return(264718 'new'(_chpl_manager = _owned[30](?))(264723 call TimeoutError details err)))
                               }
                               {
-                                if(264732 call _cond_test(264660 call == err EEOF))
+                                if(264801 call _cond_test(264729 call == err EEOF))
                                 {
-                                  (264670 return(264664 'new'(_chpl_manager = _owned[30](?))(264669 call EOFError details err)))
+                                  (264739 return(264733 'new'(_chpl_manager = _owned[30](?))(264738 call EOFError details err)))
                                 }
                                 {
-                                  if(264727 call _cond_test(264675 call == err ESHORT))
+                                  if(264796 call _cond_test(264744 call == err ESHORT))
                                   {
-                                    (264685 return(264679 'new'(_chpl_manager = _owned[30](?))(264684 call UnexpectedEOFError details err)))
+                                    (264754 return(264748 'new'(_chpl_manager = _owned[30](?))(264753 call UnexpectedEOFError details err)))
                                   }
                                   {
-                                    if(264722 call _cond_test(264690 call == err EFORMAT))
+                                    if(264791 call _cond_test(264759 call == err EFORMAT))
                                     {
-                                      (264700 return(264694 'new'(_chpl_manager = _owned[30](?))(264699 call BadFormatError details err)))
+                                      (264769 return(264763 'new'(_chpl_manager = _owned[30](?))(264768 call BadFormatError details err)))
                                     }
                                     {
-                                      if(264718 call _cond_test(264705 call == err EIO))
+                                      if(264787 call _cond_test(264774 call == err EIO))
                                       {
-                                        (264715 return(264709 'new'(_chpl_manager = _owned[30](?))(264714 call IOError err details)))
+                                        (264784 return(264778 'new'(_chpl_manager = _owned[30](?))(264783 call IOError err details)))
                                       }
                                     }
                                   }
@@ -144,295 +144,295 @@ Module use list:
         }
       }
     }
-    (264816 return(264810 'new'(_chpl_manager = _owned[30](?))(264815 call SystemError err details)))
+    (264885 return(264879 'new'(_chpl_manager = _owned[30](?))(264884 call SystemError err details)))
   }
-  function SystemError[264864].fromSyserr[264826](arg _mt[264880]:_MT[238], arg this[264878]:SystemError[264864], arg err[264823] :
-  int[13], arg details[264846] :
+  function SystemError[264933].fromSyserr[264895](arg _mt[264949]:_MT[238], arg this[264947]:SystemError[264933], arg err[264892] :
+  int[13], arg details[264915] :
   string[26] =
   "") : _unknown[51] "always propagate line file info" "insert line file info" "method" "primary method"
   {
-    (264858 return(264857 call fromSyserr(264853 call _cast syserr err) details))
+    (264927 return(264926 call fromSyserr(264922 call _cast syserr err) details))
   }
-  type SystemError[264864] unknown err[264262] syserr unknown details[264267] string[26] Error
-  function BlockingIOError[264934].init[264910](arg _mt[264938]:_MT[238], arg this[264936]:BlockingIOError[264934], arg details[264906] :
+  type SystemError[264933] unknown err[264331] syserr unknown details[264336] string[26] Error
+  function BlockingIOError[265003].init[264979](arg _mt[265007]:_MT[238], arg this[265005]:BlockingIOError[265003], arg details[264975] :
   string[26] =
-  "", arg err[264917] :
+  "", arg err[264986] :
   syserr =
-  (264915 call _cast syserr EWOULDBLOCK)) : _unknown[51] "method" "primary method" "no return value for void"
+  (264984 call _cast syserr EWOULDBLOCK)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (264928 call(264922 call . super c"init") err details)
+    (264997 call(264991 call . super c"init") err details)
   }
-  type BlockingIOError[264934] SystemError
-  function ChildProcessError[264992].init[264968](arg _mt[264996]:_MT[238], arg this[264994]:ChildProcessError[264992], arg details[264964] :
+  type BlockingIOError[265003] SystemError
+  function ChildProcessError[265061].init[265037](arg _mt[265065]:_MT[238], arg this[265063]:ChildProcessError[265061], arg details[265033] :
   string[26] =
-  "", arg err[264975] :
+  "", arg err[265044] :
   syserr =
-  (264973 call _cast syserr ECHILD)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265042 call _cast syserr ECHILD)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (264986 call(264980 call . super c"init") err details)
+    (265055 call(265049 call . super c"init") err details)
   }
-  type ChildProcessError[264992] SystemError
-  function ConnectionError[265045].init[265008](arg _mt[265049]:_MT[238], arg this[265047]:ConnectionError[265045], arg err[265005] :
-  syserr, arg details[265028] :
+  type ChildProcessError[265061] SystemError
+  function ConnectionError[265114].init[265077](arg _mt[265118]:_MT[238], arg this[265116]:ConnectionError[265114], arg err[265074] :
+  syserr, arg details[265097] :
   string[26] =
   "") : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265039 call(265033 call . super c"init") err details)
+    (265108 call(265102 call . super c"init") err details)
   }
-  type ConnectionError[265045] SystemError
-  function BrokenPipeError[265103].init[265079](arg _mt[265107]:_MT[238], arg this[265105]:BrokenPipeError[265103], arg details[265075] :
+  type ConnectionError[265114] SystemError
+  function BrokenPipeError[265172].init[265148](arg _mt[265176]:_MT[238], arg this[265174]:BrokenPipeError[265172], arg details[265144] :
   string[26] =
-  "", arg err[265086] :
+  "", arg err[265155] :
   syserr =
-  (265084 call _cast syserr EPIPE)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265153 call _cast syserr EPIPE)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265097 call(265091 call . super c"init") err details)
+    (265166 call(265160 call . super c"init") err details)
   }
-  type BrokenPipeError[265103] ConnectionError
-  function ConnectionAbortedError[265161].init[265137](arg _mt[265165]:_MT[238], arg this[265163]:ConnectionAbortedError[265161], arg details[265133] :
+  type BrokenPipeError[265172] ConnectionError
+  function ConnectionAbortedError[265230].init[265206](arg _mt[265234]:_MT[238], arg this[265232]:ConnectionAbortedError[265230], arg details[265202] :
   string[26] =
-  "", arg err[265144] :
+  "", arg err[265213] :
   syserr =
-  (265142 call _cast syserr ECONNABORTED)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265211 call _cast syserr ECONNABORTED)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265155 call(265149 call . super c"init") err details)
+    (265224 call(265218 call . super c"init") err details)
   }
-  type ConnectionAbortedError[265161] ConnectionError
-  function ConnectionRefusedError[265219].init[265195](arg _mt[265223]:_MT[238], arg this[265221]:ConnectionRefusedError[265219], arg details[265191] :
+  type ConnectionAbortedError[265230] ConnectionError
+  function ConnectionRefusedError[265288].init[265264](arg _mt[265292]:_MT[238], arg this[265290]:ConnectionRefusedError[265288], arg details[265260] :
   string[26] =
-  "", arg err[265202] :
+  "", arg err[265271] :
   syserr =
-  (265200 call _cast syserr ECONNREFUSED)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265269 call _cast syserr ECONNREFUSED)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265213 call(265207 call . super c"init") err details)
+    (265282 call(265276 call . super c"init") err details)
   }
-  type ConnectionRefusedError[265219] ConnectionError
-  function ConnectionResetError[265277].init[265253](arg _mt[265281]:_MT[238], arg this[265279]:ConnectionResetError[265277], arg details[265249] :
+  type ConnectionRefusedError[265288] ConnectionError
+  function ConnectionResetError[265346].init[265322](arg _mt[265350]:_MT[238], arg this[265348]:ConnectionResetError[265346], arg details[265318] :
   string[26] =
-  "", arg err[265260] :
+  "", arg err[265329] :
   syserr =
-  (265258 call _cast syserr ECONNRESET)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265327 call _cast syserr ECONNRESET)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265271 call(265265 call . super c"init") err details)
+    (265340 call(265334 call . super c"init") err details)
   }
-  type ConnectionResetError[265277] ConnectionError
-  function FileExistsError[265335].init[265311](arg _mt[265339]:_MT[238], arg this[265337]:FileExistsError[265335], arg details[265307] :
+  type ConnectionResetError[265346] ConnectionError
+  function FileExistsError[265404].init[265380](arg _mt[265408]:_MT[238], arg this[265406]:FileExistsError[265404], arg details[265376] :
   string[26] =
-  "", arg err[265318] :
+  "", arg err[265387] :
   syserr =
-  (265316 call _cast syserr EEXIST)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265385 call _cast syserr EEXIST)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265329 call(265323 call . super c"init") err details)
+    (265398 call(265392 call . super c"init") err details)
   }
-  type FileExistsError[265335] SystemError
-  function FileNotFoundError[265393].init[265369](arg _mt[265397]:_MT[238], arg this[265395]:FileNotFoundError[265393], arg details[265365] :
+  type FileExistsError[265404] SystemError
+  function FileNotFoundError[265462].init[265438](arg _mt[265466]:_MT[238], arg this[265464]:FileNotFoundError[265462], arg details[265434] :
   string[26] =
-  "", arg err[265376] :
+  "", arg err[265445] :
   syserr =
-  (265374 call _cast syserr ENOENT)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265443 call _cast syserr ENOENT)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265387 call(265381 call . super c"init") err details)
+    (265456 call(265450 call . super c"init") err details)
   }
-  type FileNotFoundError[265393] SystemError
-  function InterruptedError[265451].init[265427](arg _mt[265455]:_MT[238], arg this[265453]:InterruptedError[265451], arg details[265423] :
+  type FileNotFoundError[265462] SystemError
+  function InterruptedError[265520].init[265496](arg _mt[265524]:_MT[238], arg this[265522]:InterruptedError[265520], arg details[265492] :
   string[26] =
-  "", arg err[265434] :
+  "", arg err[265503] :
   syserr =
-  (265432 call _cast syserr EINTR)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265501 call _cast syserr EINTR)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265445 call(265439 call . super c"init") err details)
+    (265514 call(265508 call . super c"init") err details)
   }
-  type InterruptedError[265451] SystemError
-  function IsADirectoryError[265509].init[265485](arg _mt[265513]:_MT[238], arg this[265511]:IsADirectoryError[265509], arg details[265481] :
+  type InterruptedError[265520] SystemError
+  function IsADirectoryError[265578].init[265554](arg _mt[265582]:_MT[238], arg this[265580]:IsADirectoryError[265578], arg details[265550] :
   string[26] =
-  "", arg err[265492] :
+  "", arg err[265561] :
   syserr =
-  (265490 call _cast syserr EISDIR)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265559 call _cast syserr EISDIR)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265503 call(265497 call . super c"init") err details)
+    (265572 call(265566 call . super c"init") err details)
   }
-  type IsADirectoryError[265509] SystemError
-  function NotADirectoryError[265567].init[265543](arg _mt[265571]:_MT[238], arg this[265569]:NotADirectoryError[265567], arg details[265539] :
+  type IsADirectoryError[265578] SystemError
+  function NotADirectoryError[265636].init[265612](arg _mt[265640]:_MT[238], arg this[265638]:NotADirectoryError[265636], arg details[265608] :
   string[26] =
-  "", arg err[265550] :
+  "", arg err[265619] :
   syserr =
-  (265548 call _cast syserr ENOTDIR)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265617 call _cast syserr ENOTDIR)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265561 call(265555 call . super c"init") err details)
+    (265630 call(265624 call . super c"init") err details)
   }
-  type NotADirectoryError[265567] SystemError
-  function PermissionError[265625].init[265601](arg _mt[265629]:_MT[238], arg this[265627]:PermissionError[265625], arg details[265597] :
+  type NotADirectoryError[265636] SystemError
+  function PermissionError[265694].init[265670](arg _mt[265698]:_MT[238], arg this[265696]:PermissionError[265694], arg details[265666] :
   string[26] =
-  "", arg err[265608] :
+  "", arg err[265677] :
   syserr =
-  (265606 call _cast syserr EPERM)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265675 call _cast syserr EPERM)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265619 call(265613 call . super c"init") err details)
+    (265688 call(265682 call . super c"init") err details)
   }
-  type PermissionError[265625] SystemError
-  function ProcessLookupError[265683].init[265659](arg _mt[265687]:_MT[238], arg this[265685]:ProcessLookupError[265683], arg details[265655] :
+  type PermissionError[265694] SystemError
+  function ProcessLookupError[265752].init[265728](arg _mt[265756]:_MT[238], arg this[265754]:ProcessLookupError[265752], arg details[265724] :
   string[26] =
-  "", arg err[265666] :
+  "", arg err[265735] :
   syserr =
-  (265664 call _cast syserr ESRCH)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265733 call _cast syserr ESRCH)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265677 call(265671 call . super c"init") err details)
+    (265746 call(265740 call . super c"init") err details)
   }
-  type ProcessLookupError[265683] SystemError
-  function TimeoutError[265741].init[265717](arg _mt[265745]:_MT[238], arg this[265743]:TimeoutError[265741], arg details[265713] :
+  type ProcessLookupError[265752] SystemError
+  function TimeoutError[265810].init[265786](arg _mt[265814]:_MT[238], arg this[265812]:TimeoutError[265810], arg details[265782] :
   string[26] =
-  "", arg err[265724] :
+  "", arg err[265793] :
   syserr =
-  (265722 call _cast syserr ETIMEDOUT)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265791 call _cast syserr ETIMEDOUT)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265735 call(265729 call . super c"init") err details)
+    (265804 call(265798 call . super c"init") err details)
   }
-  type TimeoutError[265741] SystemError
-  function IOError[265794].init[265757](arg _mt[265798]:_MT[238], arg this[265796]:IOError[265794], arg err[265754] :
-  syserr, arg details[265777] :
+  type TimeoutError[265810] SystemError
+  function IOError[265863].init[265826](arg _mt[265867]:_MT[238], arg this[265865]:IOError[265863], arg err[265823] :
+  syserr, arg details[265846] :
   string[26] =
   "") : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265788 call(265782 call . super c"init") err details)
+    (265857 call(265851 call . super c"init") err details)
   }
-  type IOError[265794] SystemError
-  function EOFError[265852].init[265828](arg _mt[265856]:_MT[238], arg this[265854]:EOFError[265852], arg details[265824] :
+  type IOError[265863] SystemError
+  function EOFError[265921].init[265897](arg _mt[265925]:_MT[238], arg this[265923]:EOFError[265921], arg details[265893] :
   string[26] =
-  "", arg err[265835] :
+  "", arg err[265904] :
   syserr =
-  (265833 call _cast syserr EEOF)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265902 call _cast syserr EEOF)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265846 call(265840 call . super c"init") err details)
+    (265915 call(265909 call . super c"init") err details)
   }
-  type EOFError[265852] IOError
-  function UnexpectedEOFError[265910].init[265886](arg _mt[265914]:_MT[238], arg this[265912]:UnexpectedEOFError[265910], arg details[265882] :
+  type EOFError[265921] IOError
+  function UnexpectedEOFError[265979].init[265955](arg _mt[265983]:_MT[238], arg this[265981]:UnexpectedEOFError[265979], arg details[265951] :
   string[26] =
-  "", arg err[265893] :
+  "", arg err[265962] :
   syserr =
-  (265891 call _cast syserr ESHORT)) : _unknown[51] "method" "primary method" "no return value for void"
+  (265960 call _cast syserr ESHORT)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265904 call(265898 call . super c"init") err details)
+    (265973 call(265967 call . super c"init") err details)
   }
-  type UnexpectedEOFError[265910] IOError
-  function BadFormatError[265968].init[265944](arg _mt[265972]:_MT[238], arg this[265970]:BadFormatError[265968], arg details[265940] :
+  type UnexpectedEOFError[265979] IOError
+  function BadFormatError[266037].init[266013](arg _mt[266041]:_MT[238], arg this[266039]:BadFormatError[266037], arg details[266009] :
   string[26] =
-  "", arg err[265951] :
+  "", arg err[266020] :
   syserr =
-  (265949 call _cast syserr EFORMAT)) : _unknown[51] "method" "primary method" "no return value for void"
+  (266018 call _cast syserr EFORMAT)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (265962 call(265956 call . super c"init") err details)
+    (266031 call(266025 call . super c"init") err details)
   }
-  type BadFormatError[265968] IOError
-  function sys_strerror_syserr_str[265981](arg error[265978] :
-  syserr, out arg err_in_strerror[265984] :
+  type BadFormatError[266037] IOError
+  function sys_strerror_syserr_str[266050](arg error[266047] :
+  syserr, out arg err_in_strerror[266053] :
   err_t) : _unknown[51] "extern" "local args" "no fn body" "private" "no return value for void"
   {
   }
   { scopeless type
     c_string
   }
-  function quote_string[265997](arg s[265994] :
-  string[26], arg len[266000] :
+  function quote_string[266066](arg s[266063] :
+  string[26], arg len[266069] :
   ssize_t) : _unknown[51] "private"
   {
-    const QIO_STRING_FORMAT_CHPL[266007] "const" "extern"(266006 call uint[115] 8)
-    (266010 'end of statement')
-    function qio_quote_string[266021](arg s[266018] :
-    (266017 call uint[115] 8), arg e[266027] :
-    (266026 call uint[115] 8), arg f[266034] :
-    (266033 call uint[115] 8), arg ptr[266038] :
-    c_string, arg len[266042] :
-    ssize_t, ref arg ret[266046] :
-    c_string, arg ti[266050] :
+    const QIO_STRING_FORMAT_CHPL[266076] "const" "extern"(266075 call uint[115] 8)
+    (266079 'end of statement')
+    function qio_quote_string[266090](arg s[266087] :
+    (266086 call uint[115] 8), arg e[266096] :
+    (266095 call uint[115] 8), arg f[266103] :
+    (266102 call uint[115] 8), arg ptr[266107] :
+    c_string, arg len[266111] :
+    ssize_t, ref arg ret[266115] :
+    c_string, arg ti[266119] :
     c_void_ptr) : _unknown[51] "extern" "local args" "no fn body" "no return value for void"
     {
     }
     { scopeless type
       syserr
     }
-    function qio_strdup[266063](arg s[266060] :
+    function qio_strdup[266132](arg s[266129] :
     c_string) : _unknown[51] "extern" "local args" "no fn body" "no return value for void"
     {
     }
     { scopeless type
       c_string
     }
-    unknown ret[266070] c_string
-    (266073 'end of statement')
-    unknown err[266107](266106 call qio_quote_string(266081 call _cast(266080 call uint[115] 8) 34)(266089 call _cast(266088 call uint[115] 8) 34) QIO_STRING_FORMAT_CHPL(266102 call(266098 call .(266097 call(266093 call . s c"localize")) c"c_str")) len ret c_nil) syserr
-    (266110 'end of statement')
+    unknown ret[266139] c_string
+    (266142 'end of statement')
+    unknown err[266176](266175 call qio_quote_string(266150 call _cast(266149 call uint[115] 8) 34)(266158 call _cast(266157 call uint[115] 8) 34) QIO_STRING_FORMAT_CHPL(266171 call(266167 call .(266166 call(266162 call . s c"localize")) c"c_str")) len ret c_nil) syserr
+    (266179 'end of statement')
     Try!
     {
       {
-        if(266137 call _cond_test err)
+        if(266206 call _cond_test err)
         {
-          (266135 return(266134 call createStringWithOwnedBuffer(266132 call qio_strdup "<error>")))
+          (266204 return(266203 call createStringWithOwnedBuffer(266201 call qio_strdup "<error>")))
         }
-        (266147 return(266146 call createStringWithOwnedBuffer ret))
+        (266216 return(266215 call createStringWithOwnedBuffer ret))
       }
     }
   }
-  function ioerror[266160](arg error[266157] :
-  syserr, arg msg[266163] :
-  string[26], arg path[266167] :
-  string[26], arg offset[266174] :
-  (266173 call int[13] 64)) : _unknown[51] throws "always propagate line file info" "insert line file info" "no return value for void"
+  function ioerror[266229](arg error[266226] :
+  syserr, arg msg[266232] :
+  string[26], arg path[266236] :
+  string[26], arg offset[266243] :
+  (266242 call int[13] 64)) : _unknown[51] throws "always propagate line file info" "insert line file info" "no return value for void"
   {
-    if(266256 call _cond_test error)
+    if(266325 call _cond_test error)
     {
-      const quotedpath[266189] "const"(266188 call quote_string path(266186 call _cast ssize_t(266182 call . path c"numBytes")))
-      (266192 'end of statement')
-      unknown details[266242](266240 call +(266234 call +(266215 call +(266212 call + msg " with path ") quotedpath) " offset ")(266238 call _cast string[26] offset))
-      (266245 'end of statement')
-      (266254 'throw'(266253 call(266247 call . SystemError c"fromSyserr") error details))
+      const quotedpath[266258] "const"(266257 call quote_string path(266255 call _cast ssize_t(266251 call . path c"numBytes")))
+      (266261 'end of statement')
+      unknown details[266311](266309 call +(266303 call +(266284 call +(266281 call + msg " with path ") quotedpath) " offset ")(266307 call _cast string[26] offset))
+      (266314 'end of statement')
+      (266323 'throw'(266322 call(266316 call . SystemError c"fromSyserr") error details))
     }
   }
-  function ioerror[266269](arg error[266266] :
-  syserr, arg msg[266272] :
-  string[26], arg path[266276] :
+  function ioerror[266338](arg error[266335] :
+  syserr, arg msg[266341] :
+  string[26], arg path[266345] :
   string[26]) : _unknown[51] throws "always propagate line file info" "insert line file info" "no doc" "no return value for void"
   {
-    if(266317 call _cond_test error)
+    if(266386 call _cond_test error)
     {
-      const quotedpath[266291] "const"(266290 call quote_string path(266288 call _cast ssize_t(266284 call . path c"numBytes")))
-      (266294 'end of statement')
-      unknown details[266303](266301 call +(266298 call + msg " with path ") quotedpath)
-      (266306 'end of statement')
-      (266315 'throw'(266314 call(266308 call . SystemError c"fromSyserr") error details))
+      const quotedpath[266360] "const"(266359 call quote_string path(266357 call _cast ssize_t(266353 call . path c"numBytes")))
+      (266363 'end of statement')
+      unknown details[266372](266370 call +(266367 call + msg " with path ") quotedpath)
+      (266375 'end of statement')
+      (266384 'throw'(266383 call(266377 call . SystemError c"fromSyserr") error details))
     }
   }
-  function ioerror[266330](arg error[266327] :
-  syserr, arg msg[266333] :
+  function ioerror[266399](arg error[266396] :
+  syserr, arg msg[266402] :
   string[26]) : _unknown[51] throws "always propagate line file info" "insert line file info" "no doc" "no return value for void"
   {
-    if(266347 call _cond_test error)
+    if(266416 call _cond_test error)
     {
-      (266345 'throw'(266344 call(266338 call . SystemError c"fromSyserr") error msg))
+      (266414 'throw'(266413 call(266407 call . SystemError c"fromSyserr") error msg))
     }
   }
-  function ioerror[266361](arg errstr[266358] :
-  string[26], arg msg[266364] :
-  string[26], arg path[266368] :
-  string[26], arg offset[266375] :
-  (266374 call int[13] 64)) : _unknown[51] throws "always propagate line file info" "insert line file info" "no return value for void"
+  function ioerror[266430](arg errstr[266427] :
+  string[26], arg msg[266433] :
+  string[26], arg path[266437] :
+  string[26], arg offset[266444] :
+  (266443 call int[13] 64)) : _unknown[51] throws "always propagate line file info" "insert line file info" "no return value for void"
   {
-    const quotedpath[266389] "const"(266388 call quote_string path(266386 call _cast ssize_t(266382 call . path c"numBytes")))
-    (266392 'end of statement')
-    const details[266416] "const"(266414 call +(266408 call +(266405 call +(266402 call +(266399 call +(266396 call + errstr " ") msg) " with path ") quotedpath) " offset ")(266412 call _cast string[26] offset))
-    (266419 'end of statement')
-    (266431 'throw'(266430 call(266421 call . SystemError c"fromSyserr")(266426 call _cast syserr EIO) details))
+    const quotedpath[266458] "const"(266457 call quote_string path(266455 call _cast ssize_t(266451 call . path c"numBytes")))
+    (266461 'end of statement')
+    const details[266485] "const"(266483 call +(266477 call +(266474 call +(266471 call +(266468 call +(266465 call + errstr " ") msg) " with path ") quotedpath) " offset ")(266481 call _cast string[26] offset))
+    (266488 'end of statement')
+    (266500 'throw'(266499 call(266490 call . SystemError c"fromSyserr")(266495 call _cast syserr EIO) details))
   }
-  function errorToString[266441](arg error[266438] :
+  function errorToString[266510](arg error[266507] :
   syserr) : _unknown[51]
   {
-    unknown strerror_err[266446] ENOERR err_t
-    (266449 'end of statement')
-    const errstr[266456] "const"(266455 call sys_strerror_syserr_str error strerror_err)
-    (266459 'end of statement')
+    unknown strerror_err[266515] ENOERR err_t
+    (266518 'end of statement')
+    const errstr[266525] "const"(266524 call sys_strerror_syserr_str error strerror_err)
+    (266528 'end of statement')
     Try!
     {
       {
-        (266464 return(266463 call createStringWithOwnedBuffer errstr))
+        (266533 return(266532 call createStringWithOwnedBuffer errstr))
       }
     }
   }

@@ -25,8 +25,6 @@
 #include "passes.h"
 #include "stringutil.h"
 #include "wellknown.h"
-// for debugging
-#include <iostream> 
 
 
 static void callExprHelper(CallExpr* call, BaseAST* arg);
@@ -37,7 +35,6 @@ CallExpr::CallExpr(BaseAST* base,
                    BaseAST* arg3,
                    BaseAST* arg4,
                    BaseAST* arg5) : Expr(E_CallExpr) {
-  // std::cout<< "CallExpr 1 " << std::endl;
   primitive  = NULL;
   baseExpr   = NULL;
   partialTag = false;

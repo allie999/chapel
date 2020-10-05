@@ -2,9 +2,129 @@ AST dump for RangeChunk after pass optimizeOnClauses.
 Module use list: ChapelStandard 
 
 {
-  function chpl__init_RangeChunk[416160]() : void[4] "fast on" "insert line file info" "local fn" "module init" "resolved"
+  function chpl__init_RangeChunk[416238]() : void[4] "fast on" "insert line file info" "local fn" "module init" "resolved"
   {
-    (537502 return _void[55])
+    (537603 return _void[55])
   }
-  type RemElems[266485] def Thru[266479]:RemElems[266485] def Pack[266481]:RemElems[266485] def Mod[266483]:RemElems[266485]
+  type RemElems[266554] def Thru[266548]:RemElems[266554] def Pack[266550]:RemElems[266554] def Mod[266552]:RemElems[266554]
+  type _ir_chunks[1400366] const-val F0_r[2141849]:range(int(64),bounded,false)[1027003] const-val F1_numChunks[2141853]:int(64)[13] const-val F2_remPol[2141857]:RemElems[266554]
+  function chunkOrderThru[1401798](const in arg nElems[1401800]:int(64)[13], const in arg nChunks[1401805]:int(64)[13], const in arg i[1401810]:int(64)[13], ref arg _retArg[1914817]:2*int(64)[1040245]) : void[4] "fn returns via _retArg" "instantiated generic" "invisible fn" "no doc" "private" "resolved" "fn synchronization free"
+  {
+    const-val call_tmp[2334738]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2334740 'move' call_tmp[2334738](2334742 '*' nElems[1401800] i[1401810]))
+    val tmp[1401855]:int(64)[13] "dead at end of block" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    const-val call_tmp[2233711]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2233713 'move' call_tmp[2233711](2233715 '==' i[1401810] 0))
+    if call_tmp[2233711]
+    {
+      (1401888 'move' tmp[1401855] 0)
+    }
+    {
+      const-val tmp[1401894]:int(64)[13] "dead at end of block" "expr temp" "maybe param" "no auto destroy" "temp"
+      (1401896 'move' tmp[1401894](1401899 call divceil[1401581] call_tmp[2334738] nChunks[1401805]))
+      (1401902 'move' tmp[1401855] tmp[1401894])
+    }
+    val tmp[1401914]:int(64)[13] "dead at end of block" "expr temp" "if-expr result" "insert auto destroy" "temp"
+    const-val call_tmp[2261344]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2261346 'move' call_tmp[2261344](2261348 '-' nChunks[1401805] 1))
+    const-val call_tmp[2233721]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2233723 'move' call_tmp[2233721](2233725 '==' i[1401810] call_tmp[2261344]))
+    if call_tmp[2233721]
+    {
+      const-val call_tmp[2261354]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2261356 'move' call_tmp[2261354](2261358 '-' nElems[1401800] 1))
+      (1401949 'move' tmp[1401914] call_tmp[2261354])
+    }
+    {
+      const-val call_tmp[2242276]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2242278 'move' call_tmp[2242276](2242280 '+' call_tmp[2334738] nElems[1401800]))
+      const-val call_tmp[1401965]:int(64)[13] "dead at end of block" "expr temp" "maybe param" "temp"
+      (1401967 'move' call_tmp[1401965](1401970 call divceil[1401581] call_tmp[2242276] nChunks[1401805]))
+      const-val call_tmp[2261364]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2261366 'move' call_tmp[2261364](2261368 '-' call_tmp[1401965] 1))
+      (1401979 'move' tmp[1401914] call_tmp[2261364])
+    }
+    const-val ret_tmp[1908792]:2*int(64)[1040245] "temp"
+    (2551847 'set svec member' ret_tmp[1908792] 0 tmp[1401855])
+    (2551851 'set svec member' ret_tmp[1908792] 1 tmp[1401914])
+    label _end_chunkOrderThru[1402029]
+    (1914819 '=' _retArg[1914817] ret_tmp[1908792])
+    (1914821 return _void[55])
+  }
+  function chunkOrderPack[1402274](const in arg chunkSize[1402276]:int(64)[13], const in arg nElems[1402281]:int(64)[13], const in arg i[1402286]:int(64)[13], ref arg _retArg[1914829]:2*int(64)[1040245]) : void[4] "fast on" "fn returns via _retArg" "instantiated generic" "invisible fn" "local fn" "no doc" "private" "resolved" "fn synchronization free"
+  {
+    val ret[1402305]:2*int(64)[1040245] "dead after last mention" "RVV" "temp"
+    const-val call_tmp[2334748]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2334750 'move' call_tmp[2334748](2334752 '*' chunkSize[1402276] i[1402286]))
+    const-val call_tmp[2245435]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2245437 'move' call_tmp[2245435](2245439 '>=' call_tmp[2334748] nElems[1402281]))
+    if call_tmp[2245435]
+    {
+      const-val ret_tmp[1908798]:2*int(64)[1040245] "temp"
+      (2551861 'set svec member' ret_tmp[1908798] 0 1)
+      (2551865 'set svec member' ret_tmp[1908798] 1 0)
+      (1402524 'move' ret[1402305] ret_tmp[1908798])
+      gotoReturn _end_chunkOrderPack[1402503] _end_chunkOrderPack[1402503]
+    }
+    const-val call_tmp[2242286]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2242288 'move' call_tmp[2242286](2242290 '+' call_tmp[2334748] chunkSize[1402276]))
+    const-val call_tmp[2261374]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2261376 'move' call_tmp[2261374](2261378 '-' call_tmp[2242286] 1))
+    val end[1402426]:int(64)[13] "dead at end of block" "insert auto destroy"
+    (1402428 'move' end[1402426] call_tmp[2261374])
+    const-val call_tmp[2245445]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2245447 'move' call_tmp[2245445](2245449 '>=' call_tmp[2261374] nElems[1402281]))
+    if call_tmp[2245445]
+    {
+      const-val call_tmp[2261384]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2261386 'move' call_tmp[2261384](2261388 '-' nElems[1402281] 1))
+      (2237613 '=' end[1402426] call_tmp[2261384])
+    }
+    const-val ret_tmp[1908804]:2*int(64)[1040245] "temp"
+    (2551875 'set svec member' ret_tmp[1908804] 0 call_tmp[2334748])
+    (2551879 'set svec member' ret_tmp[1908804] 1 end[1402426])
+    (1402527 'move' ret[1402305] ret_tmp[1908804])
+    label _end_chunkOrderPack[1402503]
+    (1914831 '=' _retArg[1914829] ret[1402305])
+    (1914833 return _void[55])
+  }
+  function chunkOrderMod[1402531](const in arg chunkSize[1402533]:int(64)[13], const in arg rem[1402538]:int(64)[13], const in arg nElems[1402543]:int(64)[13], const in arg nChunks[1402548]:int(64)[13], const in arg i[1402553]:int(64)[13], ref arg _retArg[1914841]:2*int(64)[1040245]) : void[4] "fast on" "fn returns via _retArg" "instantiated generic" "invisible fn" "local fn" "no doc" "private" "resolved" "fn synchronization free"
+  {
+    val start[1402582]:int(64)[13] "dead at end of block" "insert auto destroy"
+    (1402778 'move' start[1402582] 0)
+    val end[1402593]:int(64)[13] "dead at end of block" "insert auto destroy" "split inited"
+    const-val call_tmp[2244868]:bool[10] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2244870 'move' call_tmp[2244868](2244872 '<' i[1402553] rem[1402538]))
+    if call_tmp[2244868]
+    {
+      const-val call_tmp[2236260]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2236262 'move' call_tmp[2236260](2236264 '+' chunkSize[1402533] 1))
+      const-val call_tmp[2334758]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2334760 'move' call_tmp[2334758](2334762 '*' i[1402553] call_tmp[2236260]))
+      (2237625 '=' start[1402582] call_tmp[2334758])
+      const-val call_tmp[2242296]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2242298 'move' call_tmp[2242296](2242300 '+' call_tmp[2334758] chunkSize[1402533]))
+      (1402653 'move' end[1402593] call_tmp[2242296])
+    }
+    {
+      const-val call_tmp[2243687]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2243689 'move' call_tmp[2243687](2243691 '-' nChunks[1402548] i[1402553]))
+      const-val call_tmp[2334768]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2334770 'move' call_tmp[2334768](2334772 '*' call_tmp[2243687] chunkSize[1402533]))
+      const-val call_tmp[2243697]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2243699 'move' call_tmp[2243697](2243701 '-' nElems[1402543] call_tmp[2334768]))
+      (2237637 '=' start[1402582] call_tmp[2243697])
+      const-val call_tmp[2242306]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2242308 'move' call_tmp[2242306](2242310 '+' call_tmp[2243697] chunkSize[1402533]))
+      const-val call_tmp[2261394]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+      (2261396 'move' call_tmp[2261394](2261398 '-' call_tmp[2242306] 1))
+      (1402707 'move' end[1402593] call_tmp[2261394])
+    }
+    const-val ret_tmp[1908810]:2*int(64)[1040245] "temp"
+    (2551889 'set svec member' ret_tmp[1908810] 0 start[1402582])
+    (2551893 'set svec member' ret_tmp[1908810] 1 end[1402593])
+    label _end_chunkOrderMod[1402753]
+    (1914843 '=' _retArg[1914841] ret_tmp[1908810])
+    (1914845 return _void[55])
+  }
 }

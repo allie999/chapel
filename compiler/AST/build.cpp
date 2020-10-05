@@ -41,6 +41,7 @@
 
 #include <map>
 #include <utility>
+#include <iostream>
 
 static BlockStmt* findStmtWithTag(PrimitiveTag tag, BlockStmt* blockStmt);
 
@@ -1421,6 +1422,7 @@ CallExpr* buildScanExpr(Expr* opExpr, Expr* dataExpr, bool zippered) {
   FnSymbol* fn = new FnSymbol(astr("chpl__scan", istr(uid++)));
   fn->addFlag(FLAG_COMPILER_NESTED_FUNCTION);
   fn->addFlag(FLAG_FN_RETURNS_ITERATOR);
+  fn->addFlag(FLAG_REDUCESCANOP);
 
   // data will hold the reduce-d expression as an argument
   // we'll store dataExpr in the call to the chpl__scan function.
@@ -2195,6 +2197,7 @@ static Expr* extractLocaleID(Expr* expr) {
   return new CallExpr(PRIM_WIDE_GET_LOCALE, expr);
 }
 
+// Find all reduce, forall and scan expression, replace them with GPU version expression.
 void replaceWithGPUExpression(BlockStmt* block){
   // find reduce expression
   std::vector<CallExpr *> callsVector;
@@ -2203,25 +2206,40 @@ void replaceWithGPUExpression(BlockStmt* block){
   {
     if (call->isPrimitive(PRIM_REDUCE))
     {
-      // TODO replace to GPU reduce Call expression
+      // TODO: replace to GPU reduce Call expression
       call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
+    }
+
+    if (CallExpr* b = toCallExpr(call->baseExpr))
+    {
+       if (FnSymbol* fn = b->theFnSymbol()){
+       std::cout << "get fn" << std::endl;
+       std::cout << fn->hasFlag(FLAG_REDUCESCANOP) << std::endl;
+       std::cout << fn->hasFlag(FLAG_COMPILER_NESTED_FUNCTION) << std::endl;
+       std::cout << fn->hasFlag(FLAG_FN_RETURNS_ITERATOR) << std::endl;
+      if(fn->hasFlag(FLAG_REDUCESCANOP)){
+        std::cout << "find" << std::endl;
+      }
+      }
+    }
+    
+    if (FnSymbol* fn = call->theFnSymbol()){
+       std::cout << "get fn" << std::endl;
+       std::cout << fn->hasFlag(FLAG_REDUCESCANOP) << std::endl;
+       std::cout << fn->hasFlag(FLAG_COMPILER_NESTED_FUNCTION) << std::endl;
+       std::cout << fn->hasFlag(FLAG_FN_RETURNS_ITERATOR) << std::endl;
+      if(fn->hasFlag(FLAG_REDUCESCANOP)){
+        std::cout << "find" << std::endl;
+      }
     }
   }
   // find forall expression
-  for_alist(expr, block->body)
+  std::vector<ForallStmt*> forallVector;
+  collectForallStmts(block, forallVector);
+  for_vector(ForallStmt, forall, forallVector)
   {
-    if (BlockStmt *currentBlock = toBlockStmt(expr))
-    {
-      if (currentBlock->isBlockType(PRIM_BLOCK_FORALL_LOOP)){
-        // TODO replace to GPU forall expression
-        currentBlock -> replace(new CallExpr(new UnresolvedSymExpr("writeln"), buildStringLiteral("beef ")));
-        return;
-      }
-    }
-    if (ForallStmt* fs = toForallStmt(expr)){
-      // TODO replace to GPU forall expression
-      fs -> replace(new CallExpr(new UnresolvedSymExpr("writeln"), buildStringLiteral("beef ")));
-    }
+       // TODO: replace to GPU forall expression, there may contains nested forall.
+      // forall -> replace(new CallExpr(new UnresolvedSymExpr("writeln"), buildStringLiteral("beef ")));
   }
 }
 

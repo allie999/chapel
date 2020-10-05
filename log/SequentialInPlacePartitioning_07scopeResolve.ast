@@ -1,157 +1,157 @@
 AST dump for SequentialInPlacePartitioning after pass scopeResolve.
 Module use list: ChapelStandard 
 
-{ unknown DISTRIBUTE_BUFFER[278119] "param" "private" 5(278122 'end of statement') function bucketize[278130](arg start_n[278127] : int(64)[13], arg end_n[278133] : int(64)[13], arg A[278139] :(278136 call chpl__buildArrayRuntimeType nil[44]), arg bucketizer[278142]:_any[178](?), arg criterion[278144]:_any[178](?), arg startbit[278147] : int(64)[13]) : _unknown[51]
-  { unknown nBuckets[278158](278157 call(278153 call . bucketizer[278142] c"getNumBuckets"))(278161 'end of statement') const nTasks[278175] "const"(278172 IfExpr (278165 call > dataParTasksPerLocale[93284] 0) then
+{ unknown DISTRIBUTE_BUFFER[278188] "param" "private" 5(278191 'end of statement') function bucketize[278199](arg start_n[278196] : int(64)[13], arg end_n[278202] : int(64)[13], arg A[278208] :(278205 call chpl__buildArrayRuntimeType nil[44]), arg bucketizer[278211]:_any[178](?), arg criterion[278213]:_any[178](?), arg startbit[278216] : int(64)[13]) : _unknown[51]
+  { unknown nBuckets[278227](278226 call(278222 call . bucketizer[278211] c"getNumBuckets"))(278230 'end of statement') const nTasks[278244] "const"(278241 IfExpr (278234 call > dataParTasksPerLocale[93284] 0) then
     { scopeless dataParTasksPerLocale[93284]
     } else
-    { scopeless(278169 call .(364352 call here[90438]) c"maxTaskPar")
-    } )(278178 'end of statement') const countsSize[278183] "const"(278181 call * nTasks[278175] nBuckets[278158])(278186 'end of statement') const n[278194] "const"(278192 call +(278189 call - end_n[278133] start_n[278127]) 1)(278197 'end of statement') const blockSize[278203] "const"(278202 call divceil n[278194] nTasks[278175])(278206 'end of statement') const nBlocks[278212] "const"(278211 call divceil n[278194] blockSize[278203])(278215 'end of statement') unknown counts[278228](278226 call chpl__buildArrayRuntimeType(278224 call chpl__ensureDomainExpr(278220 call #(278217 call chpl_build_low_bounded_range 0) nBuckets[278158])) int(64)[13])(278231 'end of statement')
-    { unknown tmpIter[278360] "expr temp" "maybe ref" "no copy" "temp"(278363 'move' tmpIter[278360](278237 call #(278234 call chpl_build_low_bounded_range 0) nTasks[278175])) unknown isRngDomArr[278599] "maybe param" "temp"(278614 'move' isRngDomArr[278599](278612 call ||(278601 call isBoundedRange tmpIter[278360])(278610 call ||(278604 call isDomain tmpIter[278360])(278607 call isArray tmpIter[278360]))))
-      if isRngDomArr[278599]
-      { const _coforallCount[278466] "const" "end count" "temp"(278535 'move' _coforallCount[278466](278532 call _endCountAlloc 1)) unknown numTasks[278467] "temp"(278519 'move' numTasks[278467](278515 call . tmpIter[278360] c"size"))(278510 call _upEndCount _coforallCount[278466] 1 numTasks[278467])(278507 call chpl_resetTaskSpawn numTasks[278467]) unknown _indexOfInterest[278474] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[278475] "expr temp" "temp"(278484 'move' _iterator[278475](278482 call _getIterator tmpIter[278360]))
+    { scopeless(278238 call .(364423 call here[90438]) c"maxTaskPar")
+    } )(278247 'end of statement') const countsSize[278252] "const"(278250 call * nTasks[278244] nBuckets[278227])(278255 'end of statement') const n[278263] "const"(278261 call +(278258 call - end_n[278202] start_n[278196]) 1)(278266 'end of statement') const blockSize[278272] "const"(278271 call divceil n[278263] nTasks[278244])(278275 'end of statement') const nBlocks[278281] "const"(278280 call divceil n[278263] blockSize[278272])(278284 'end of statement') unknown counts[278297](278295 call chpl__buildArrayRuntimeType(278293 call chpl__ensureDomainExpr(278289 call #(278286 call chpl_build_low_bounded_range 0) nBuckets[278227])) int(64)[13])(278300 'end of statement')
+    { unknown tmpIter[278429] "expr temp" "maybe ref" "no copy" "temp"(278432 'move' tmpIter[278429](278306 call #(278303 call chpl_build_low_bounded_range 0) nTasks[278244])) unknown isRngDomArr[278668] "maybe param" "temp"(278683 'move' isRngDomArr[278668](278681 call ||(278670 call isBoundedRange tmpIter[278429])(278679 call ||(278673 call isDomain tmpIter[278429])(278676 call isArray tmpIter[278429]))))
+      if isRngDomArr[278668]
+      { const _coforallCount[278535] "const" "end count" "temp"(278604 'move' _coforallCount[278535](278601 call _endCountAlloc 1)) unknown numTasks[278536] "temp"(278588 'move' numTasks[278536](278584 call . tmpIter[278429] c"size"))(278579 call _upEndCount _coforallCount[278535] 1 numTasks[278536])(278576 call chpl_resetTaskSpawn numTasks[278536]) unknown _indexOfInterest[278543] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[278544] "expr temp" "temp"(278553 'move' _iterator[278544](278551 call _getIterator tmpIter[278429]))
         Defer
         {
-          {(278500 call _freeIterator _iterator[278475])
+          {(278569 call _freeIterator _iterator[278544])
           }
         }
-        { scopeless type(278489 'move' _indexOfInterest[278474](278486 call iteratorIndex _iterator[278475]))
+        { scopeless type(278558 'move' _indexOfInterest[278543](278555 call iteratorIndex _iterator[278544]))
         }
-        ForLoop[278476]
-        { unknown tid[278493] "coforall index var" "index var" "insert auto destroy"(278495 'move' tid[278493] _indexOfInterest[278474])
+        ForLoop[278545]
+        { unknown tid[278562] "coforall index var" "index var" "insert auto destroy"(278564 'move' tid[278562] _indexOfInterest[278543])
           {
-            { unknown start[278370](278372 call + start_n[278127](278375 call * tid[278493] blockSize[278203]))(278379 'end of statement') unknown end[278381](278383 call -(278385 call + start[278370] blockSize[278203]) 1)(278390 'end of statement')
-              if(278392 call _cond_test(278394 call > end[278381] end_n[278133]))
-              {(278399 call = end[278381] end_n[278133])
+            { unknown start[278439](278441 call + start_n[278196](278444 call * tid[278562] blockSize[278272]))(278448 'end of statement') unknown end[278450](278452 call -(278454 call + start[278439] blockSize[278272]) 1)(278459 'end of statement')
+              if(278461 call _cond_test(278463 call > end[278450] end_n[278202]))
+              {(278468 call = end[278450] end_n[278202])
               }
-              { unknown _indexOfInterest[278404] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[278406] "expr temp" "temp"(278408 'move' _iterator[278406](278411 call _getIterator(278416 call(278413 call . bucketizer[278142] c"classify") A[278139] start[278370] end[278381] criterion[278144] startbit[278147])))
+              { unknown _indexOfInterest[278473] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[278475] "expr temp" "temp"(278477 'move' _iterator[278475](278480 call _getIterator(278485 call(278482 call . bucketizer[278211] c"classify") A[278208] start[278439] end[278450] criterion[278213] startbit[278216])))
                 Defer
                 {
-                  {(278424 call _freeIterator _iterator[278406])
+                  {(278493 call _freeIterator _iterator[278475])
                   }
                 }
-                { scopeless type(278428 'move' _indexOfInterest[278404](278431 call iteratorIndex _iterator[278406]))
+                { scopeless type(278497 'move' _indexOfInterest[278473](278500 call iteratorIndex _iterator[278475]))
                 }
-                ForLoop[278433]
-                {(278437 call _check_tuple_var_decl _indexOfInterest[278404] 2) unknown i[278440] "index var" "insert auto destroy"(278442 'move' i[278440](278445 call _indexOfInterest[278404] 0)) unknown bin[278447] "index var" "insert auto destroy"(278449 'move' bin[278447](278452 call _indexOfInterest[278404] 1))
-                  {(278456 call +=(278458 call counts[278228] bin[278447]) 1)
-                  } label _continueLabel[278461] _indexOfInterest[278404] _iterator[278406]
-                } label _breakLabel[278463]
+                ForLoop[278502]
+                {(278506 call _check_tuple_var_decl _indexOfInterest[278473] 2) unknown i[278509] "index var" "insert auto destroy"(278511 'move' i[278509](278514 call _indexOfInterest[278473] 0)) unknown bin[278516] "index var" "insert auto destroy"(278518 'move' bin[278516](278521 call _indexOfInterest[278473] 1))
+                  {(278525 call +=(278527 call counts[278297] bin[278516]) 1)
+                  } label _continueLabel[278530] _indexOfInterest[278473] _iterator[278475]
+                } label _breakLabel[278532]
               }
-            }(278469 call _downEndCount _coforallCount[278466] nil[44])(278468 'coforall loop')(278365 'actuals list' SumReduceScanOp[376412](?) counts[278228])
-          } label _continueLabel[278479] _indexOfInterest[278474] _iterator[278475]
-        } label _breakLabel[278480]
+            }(278538 call _downEndCount _coforallCount[278535] nil[44])(278537 'coforall loop')(278434 'actuals list' SumReduceScanOp[376483](?) counts[278297])
+          } label _continueLabel[278548] _indexOfInterest[278543] _iterator[278544]
+        } label _breakLabel[278549]
         Defer
         {
-          {(278522 call _endCountFree _coforallCount[278466])
+          {(278591 call _endCountFree _coforallCount[278535])
           }
-        }(278527 call _waitEndCount _coforallCount[278466] 1 numTasks[278467])
+        }(278596 call _waitEndCount _coforallCount[278535] 1 numTasks[278536])
       }
-      { const _coforallCount[278539] "const" "end count" "temp"(278596 'move' _coforallCount[278539](278593 call _endCountAlloc 1)) unknown _indexOfInterest[278547] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[278548] "expr temp" "temp"(278557 'move' _iterator[278548](278555 call _getIterator tmpIter[278360]))
+      { const _coforallCount[278608] "const" "end count" "temp"(278665 'move' _coforallCount[278608](278662 call _endCountAlloc 1)) unknown _indexOfInterest[278616] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[278617] "expr temp" "temp"(278626 'move' _iterator[278617](278624 call _getIterator tmpIter[278429]))
         Defer
         {
-          {(278573 call _freeIterator _iterator[278548])
+          {(278642 call _freeIterator _iterator[278617])
           }
         }
-        { scopeless type(278562 'move' _indexOfInterest[278547](278559 call iteratorIndex _iterator[278548]))
+        { scopeless type(278631 'move' _indexOfInterest[278616](278628 call iteratorIndex _iterator[278617]))
         }
-        ForLoop[278549]
-        { unknown tid[278566] "coforall index var" "index var" "insert auto destroy"(278568 'move' tid[278566] _indexOfInterest[278547])(278580 call _upEndCount _coforallCount[278539] 1)
+        ForLoop[278618]
+        { unknown tid[278635] "coforall index var" "index var" "insert auto destroy"(278637 'move' tid[278635] _indexOfInterest[278616])(278649 call _upEndCount _coforallCount[278608] 1)
           {
-            { unknown start[278255](278253 call + start_n[278127](278251 call * tid[278566] blockSize[278203]))(278258 'end of statement') unknown end[278267](278265 call -(278262 call + start[278255] blockSize[278203]) 1)(278270 'end of statement')
-              if(278281 call _cond_test(278273 call > end[278267] end_n[278133]))
-              {(278277 call = end[278267] end_n[278133])
+            { unknown start[278324](278322 call + start_n[278196](278320 call * tid[278635] blockSize[278272]))(278327 'end of statement') unknown end[278336](278334 call -(278331 call + start[278324] blockSize[278272]) 1)(278339 'end of statement')
+              if(278350 call _cond_test(278342 call > end[278336] end_n[278202]))
+              {(278346 call = end[278336] end_n[278202])
               }
-              { unknown _indexOfInterest[278312] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[278313] "expr temp" "temp"(278322 'move' _iterator[278313](278320 call _getIterator(278302 call(278293 call . bucketizer[278142] c"classify") A[278139] start[278255] end[278267] criterion[278144] startbit[278147])))
+              { unknown _indexOfInterest[278381] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[278382] "expr temp" "temp"(278391 'move' _iterator[278382](278389 call _getIterator(278371 call(278362 call . bucketizer[278211] c"classify") A[278208] start[278324] end[278336] criterion[278213] startbit[278216])))
                 Defer
                 {
-                  {(278353 call _freeIterator _iterator[278313])
+                  {(278422 call _freeIterator _iterator[278382])
                   }
                 }
-                { scopeless type(278328 'move' _indexOfInterest[278312](278325 call iteratorIndex _iterator[278313]))
+                { scopeless type(278397 'move' _indexOfInterest[278381](278394 call iteratorIndex _iterator[278382]))
                 }
-                ForLoop[278314]
-                {(278333 call _check_tuple_var_decl _indexOfInterest[278312] 2) unknown i[278339] "index var" "insert auto destroy"(278341 'move' i[278339](278337 call _indexOfInterest[278312] 0)) unknown bin[278346] "index var" "insert auto destroy"(278348 'move' bin[278346](278344 call _indexOfInterest[278312] 1))
-                  {(278308 call +=(278306 call counts[278228] bin[278346]) 1)
-                  } label _continueLabel[278317] _indexOfInterest[278312] _iterator[278313]
-                } label _breakLabel[278318]
+                ForLoop[278383]
+                {(278402 call _check_tuple_var_decl _indexOfInterest[278381] 2) unknown i[278408] "index var" "insert auto destroy"(278410 'move' i[278408](278406 call _indexOfInterest[278381] 0)) unknown bin[278415] "index var" "insert auto destroy"(278417 'move' bin[278415](278413 call _indexOfInterest[278381] 1))
+                  {(278377 call +=(278375 call counts[278297] bin[278415]) 1)
+                  } label _continueLabel[278386] _indexOfInterest[278381] _iterator[278382]
+                } label _breakLabel[278387]
               }
-            }(278542 call _downEndCount _coforallCount[278539] nil[44])(278541 'coforall loop')(278246 'actuals list' SumReduceScanOp[376412](?) counts[278228])
-          } label _continueLabel[278552] _indexOfInterest[278547] _iterator[278548]
-        } label _breakLabel[278553]
+            }(278611 call _downEndCount _coforallCount[278608] nil[44])(278610 'coforall loop')(278315 'actuals list' SumReduceScanOp[376483](?) counts[278297])
+          } label _continueLabel[278621] _indexOfInterest[278616] _iterator[278617]
+        } label _breakLabel[278622]
         Defer
         {
-          {(278584 call _endCountFree _coforallCount[278539])
+          {(278653 call _endCountFree _coforallCount[278608])
           }
-        }(278589 call _waitEndCount _coforallCount[278539] 1)
+        }(278658 call _waitEndCount _coforallCount[278608] 1)
       }
-    } function chpl__scan1[278620](arg chpl_toScan[278622]:_any[178](?)) : _unknown[51] "compiler nested function" "fn returns iterator"
-    { unknown chpl_eltType[278624] "maybe type" "temp"
-      { scopeless type(278628 'move' chpl_eltType[278624](278630 'typeof'(278632 call chpl__initCopy(278634 call iteratorIndex(278636 call _getIterator chpl_toScan[278622])))))
-      } const tmp[278625] "const" "temp"(278645 'move' tmp[278625](278644 'new'(278643 call SumReduceScanOp[376412](?)(eltType = chpl_eltType[278624])(_chpl_manager = unmanaged[220](?)))))(278647 return(278649 call chpl__scanIterator tmp[278625] chpl_toScan[278622]))
-    } unknown end_offsets[278657](278655 call +(278653 call chpl__scan1 counts[278228]) start_n[278127])(278660 'end of statement') unknown offsets[278665](278663 call - end_offsets[278657] counts[278228])(278668 'end of statement') unknown curbin[278670] 0(278673 'end of statement')
-    { unknown tmp[279187] "temp"(279205 'move' tmp[279187](279203 call _cond_test 1))
-      WhileDo[279192]
+    } function chpl__scan3[278689](arg chpl_toScan[278691]:_any[178](?)) : _unknown[51] "compiler nested function" "ReduceScanOp" "fn returns iterator"
+    { unknown chpl_eltType[278693] "maybe type" "temp"
+      { scopeless type(278697 'move' chpl_eltType[278693](278699 'typeof'(278701 call chpl__initCopy(278703 call iteratorIndex(278705 call _getIterator chpl_toScan[278691])))))
+      } const tmp[278694] "const" "temp"(278714 'move' tmp[278694](278713 'new'(278712 call SumReduceScanOp[376483](?)(eltType = chpl_eltType[278693])(_chpl_manager = unmanaged[220](?)))))(278716 return(278718 call chpl__scanIterator tmp[278694] chpl_toScan[278691]))
+    } unknown end_offsets[278726](278724 call +(278722 call chpl__scan3 counts[278297]) start_n[278196])(278729 'end of statement') unknown offsets[278734](278732 call - end_offsets[278726] counts[278297])(278737 'end of statement') unknown curbin[278739] 0(278742 'end of statement')
+    { unknown tmp[279256] "temp"(279274 'move' tmp[279256](279272 call _cond_test 1))
+      WhileDo[279261]
       {
         {
-          { unknown tmp[278697] "temp"(278741 'move' tmp[278697](278726 call _cond_test(278728 call &&(278730 call < curbin[278670] nBuckets[278158])(278734 call ==(278736 call offsets[278665] curbin[278670])(278739 call end_offsets[278657] curbin[278670])))))
-            WhileDo[278702]
+          { unknown tmp[278766] "temp"(278810 'move' tmp[278766](278795 call _cond_test(278797 call &&(278799 call < curbin[278739] nBuckets[278227])(278803 call ==(278805 call offsets[278734] curbin[278739])(278808 call end_offsets[278726] curbin[278739])))))
+            WhileDo[278771]
             {
-              {(278693 call += curbin[278670] 1)
-              } label _continueLabel[278700](278721 'move' tmp[278697](278706 call _cond_test(278708 call &&(278710 call < curbin[278670] nBuckets[278158])(278714 call ==(278716 call offsets[278665] curbin[278670])(278719 call end_offsets[278657] curbin[278670]))))) tmp[278697]
-            } label _breakLabel[278701]
+              {(278762 call += curbin[278739] 1)
+              } label _continueLabel[278769](278790 'move' tmp[278766](278775 call _cond_test(278777 call &&(278779 call < curbin[278739] nBuckets[278227])(278783 call ==(278785 call offsets[278734] curbin[278739])(278788 call end_offsets[278726] curbin[278739]))))) tmp[278766]
+            } label _breakLabel[278770]
           }
-          if(278753 call _cond_test(278747 call >= curbin[278670] nBuckets[278158]))
+          if(278822 call _cond_test(278816 call >= curbin[278739] nBuckets[278227]))
           {
-            break _breakLabel[279191] _breakLabel[279191]
-          } unknown max_buf[278758] "param" DISTRIBUTE_BUFFER[278119](278761 'end of statement') unknown buf[278769](278767 call * max_buf[278758](278764 call . A[278139] c"eltType"))(278772 'end of statement') unknown used_buf[278774] 0(278777 'end of statement') unknown end[278782](278781 call end_offsets[278657] curbin[278670])(278785 'end of statement') unknown endfast[278803](278802 call max(278790 call offsets[278665] curbin[278670])(278800 call -(278795 call end_offsets[278657] curbin[278670])(278798 call * 2 max_buf[278758])))(278806 'end of statement') unknown bufstart[278821](278820 call max(278811 call offsets[278665] curbin[278670])(278818 call -(278816 call end_offsets[278657] curbin[278670]) max_buf[278758]))(278824 'end of statement') unknown i[278826] bufstart[278821](278829 'end of statement')
-          { unknown tmp[278856] "temp"(278880 'move' tmp[278856](278875 call _cond_test(278877 call < i[278826] end[278782])))
-            WhileDo[278861]
+            break _breakLabel[279260] _breakLabel[279260]
+          } unknown max_buf[278827] "param" DISTRIBUTE_BUFFER[278188](278830 'end of statement') unknown buf[278838](278836 call * max_buf[278827](278833 call . A[278208] c"eltType"))(278841 'end of statement') unknown used_buf[278843] 0(278846 'end of statement') unknown end[278851](278850 call end_offsets[278726] curbin[278739])(278854 'end of statement') unknown endfast[278872](278871 call max(278859 call offsets[278734] curbin[278739])(278869 call -(278864 call end_offsets[278726] curbin[278739])(278867 call * 2 max_buf[278827])))(278875 'end of statement') unknown bufstart[278890](278889 call max(278880 call offsets[278734] curbin[278739])(278887 call -(278885 call end_offsets[278726] curbin[278739]) max_buf[278827]))(278893 'end of statement') unknown i[278895] bufstart[278890](278898 'end of statement')
+          { unknown tmp[278925] "temp"(278949 'move' tmp[278925](278944 call _cond_test(278946 call < i[278895] end[278851])))
+            WhileDo[278930]
             {
-              {(278842 call <=>(278837 call buf[278769] used_buf[278774])(278841 call A[278139] i[278826]))(278848 call += used_buf[278774] 1)(278853 call += i[278826] 1)
-              } label _continueLabel[278859](278870 'move' tmp[278856](278865 call _cond_test(278867 call < i[278826] end[278782]))) tmp[278856]
-            } label _breakLabel[278860]
+              {(278911 call <=>(278906 call buf[278838] used_buf[278843])(278910 call A[278208] i[278895]))(278917 call += used_buf[278843] 1)(278922 call += i[278895] 1)
+              } label _continueLabel[278928](278939 'move' tmp[278925](278934 call _cond_test(278936 call < i[278895] end[278851]))) tmp[278925]
+            } label _breakLabel[278929]
           }
-          { unknown tmp[278981] "temp"(279009 'move' tmp[278981](279002 call _cond_test(279004 call <(279006 call offsets[278665] curbin[278670]) endfast[278803])))
-            WhileDo[278986]
+          { unknown tmp[279050] "temp"(279078 'move' tmp[279050](279071 call _cond_test(279073 call <(279075 call offsets[278734] curbin[278739]) endfast[278872])))
+            WhileDo[279055]
             {
               {
-                { unknown _indexOfInterest[278932] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[278933] "expr temp" "temp"(278942 'move' _iterator[278933](278940 call _getIterator(278908 call(278896 call . bucketizer[278142] c"classify") buf[278769] 0(278904 call - max_buf[278758] 1) criterion[278144] startbit[278147])))
+                { unknown _indexOfInterest[279001] "an _indexOfInterest or chpl__followIdx variable" "temp" unknown _iterator[279002] "expr temp" "temp"(279011 'move' _iterator[279002](279009 call _getIterator(278977 call(278965 call . bucketizer[278211] c"classify") buf[278838] 0(278973 call - max_buf[278827] 1) criterion[278213] startbit[278216])))
                   Defer
                   {
-                    {(278973 call _freeIterator _iterator[278933])
+                    {(279042 call _freeIterator _iterator[279002])
                     }
                   }
-                  { scopeless type(278948 'move' _indexOfInterest[278932](278945 call iteratorIndex _iterator[278933]))
+                  { scopeless type(279017 'move' _indexOfInterest[279001](279014 call iteratorIndex _iterator[279002]))
                   }
-                  ForLoop[278934]
-                  {(278953 call _check_tuple_var_decl _indexOfInterest[278932] 2) unknown idx[278959] "index var" "insert auto destroy"(278961 'move' idx[278959](278957 call _indexOfInterest[278932] 0)) unknown bin[278966] "index var" "insert auto destroy"(278968 'move' bin[278966](278964 call _indexOfInterest[278932] 1))
-                    {(278920 call <=>(278915 call A[278139](278913 call offsets[278665] bin[278966]))(278919 call buf[278769] idx[278959]))(278929 call +=(278927 call offsets[278665] bin[278966]) 1)
-                    } label _continueLabel[278937] _indexOfInterest[278932] _iterator[278933]
-                  } label _breakLabel[278938]
+                  ForLoop[279003]
+                  {(279022 call _check_tuple_var_decl _indexOfInterest[279001] 2) unknown idx[279028] "index var" "insert auto destroy"(279030 'move' idx[279028](279026 call _indexOfInterest[279001] 0)) unknown bin[279035] "index var" "insert auto destroy"(279037 'move' bin[279035](279033 call _indexOfInterest[279001] 1))
+                    {(278989 call <=>(278984 call A[278208](278982 call offsets[278734] bin[279035]))(278988 call buf[278838] idx[279028]))(278998 call +=(278996 call offsets[278734] bin[279035]) 1)
+                    } label _continueLabel[279006] _indexOfInterest[279001] _iterator[279002]
+                  } label _breakLabel[279007]
                 }
-              } label _continueLabel[278984](278997 'move' tmp[278981](278990 call _cond_test(278992 call <(278994 call offsets[278665] curbin[278670]) endfast[278803]))) tmp[278981]
-            } label _breakLabel[278985]
+              } label _continueLabel[279053](279066 'move' tmp[279050](279059 call _cond_test(279061 call <(279063 call offsets[278734] curbin[278739]) endfast[278872]))) tmp[279050]
+            } label _breakLabel[279054]
           }
-          { unknown tmp[279156] "temp"(279184 'move' tmp[279156](279177 call _cond_test(279179 call <(279181 call offsets[278665] curbin[278670]) end[278782])))
-            WhileDo[279161]
+          { unknown tmp[279225] "temp"(279253 'move' tmp[279225](279246 call _cond_test(279248 call <(279250 call offsets[278734] curbin[278739]) end[278851])))
+            WhileDo[279230]
             {
-              { unknown j[279020] 0(279023 'end of statement')
-                { unknown tmp[279117] "temp"(279153 'move' tmp[279117](279142 call _cond_test(279144 call &&(279146 call >= used_buf[278774] 0)(279150 call < j[279020] used_buf[278774]))))
-                  WhileDo[279122]
+              { unknown j[279089] 0(279092 'end of statement')
+                { unknown tmp[279186] "temp"(279222 'move' tmp[279186](279211 call _cond_test(279213 call &&(279215 call >= used_buf[278843] 0)(279219 call < j[279089] used_buf[278843]))))
+                  WhileDo[279191]
                   {
-                    { const bin[279049] "const"(279048 call(279038 call . bucketizer[278142] c"bucketForRecord")(279044 call buf[278769] j[279020]) criterion[278144] startbit[278147])(279052 'end of statement') unknown offset[279058](279057 call offsets[278665] bin[279049])(279061 'end of statement')(279070 call <=>(279065 call A[278139] offset[279058])(279069 call buf[278769] j[279020]))(279078 call +=(279076 call offsets[278665] bin[279049]) 1)
-                      if(279108 call _cond_test(279089 call &&(279083 call == bin[279049] curbin[278670])(279087 call >= offset[279058] bufstart[278821])))
-                      {(279093 call -= used_buf[278774] 1)(279105 call <=>(279100 call buf[278769] j[279020])(279104 call buf[278769] used_buf[278774]))
-                      }(279114 call += j[279020] 1)
-                    } label _continueLabel[279120](279137 'move' tmp[279117](279126 call _cond_test(279128 call &&(279130 call >= used_buf[278774] 0)(279134 call < j[279020] used_buf[278774])))) tmp[279117]
-                  } label _breakLabel[279121]
+                    { const bin[279118] "const"(279117 call(279107 call . bucketizer[278211] c"bucketForRecord")(279113 call buf[278838] j[279089]) criterion[278213] startbit[278216])(279121 'end of statement') unknown offset[279127](279126 call offsets[278734] bin[279118])(279130 'end of statement')(279139 call <=>(279134 call A[278208] offset[279127])(279138 call buf[278838] j[279089]))(279147 call +=(279145 call offsets[278734] bin[279118]) 1)
+                      if(279177 call _cond_test(279158 call &&(279152 call == bin[279118] curbin[278739])(279156 call >= offset[279127] bufstart[278890])))
+                      {(279162 call -= used_buf[278843] 1)(279174 call <=>(279169 call buf[278838] j[279089])(279173 call buf[278838] used_buf[278843]))
+                      }(279183 call += j[279089] 1)
+                    } label _continueLabel[279189](279206 'move' tmp[279186](279195 call _cond_test(279197 call &&(279199 call >= used_buf[278843] 0)(279203 call < j[279089] used_buf[278843])))) tmp[279186]
+                  } label _breakLabel[279190]
                 }
-              } label _continueLabel[279159](279172 'move' tmp[279156](279165 call _cond_test(279167 call <(279169 call offsets[278665] curbin[278670]) end[278782]))) tmp[279156]
-            } label _breakLabel[279160]
+              } label _continueLabel[279228](279241 'move' tmp[279225](279234 call _cond_test(279236 call <(279238 call offsets[278734] curbin[278739]) end[278851]))) tmp[279225]
+            } label _breakLabel[279229]
           }
-        } label _continueLabel[279190](279198 'move' tmp[279187](279196 call _cond_test 1)) tmp[279187]
-      } label _breakLabel[279191]
-    }(279209 return counts[278228])
-  }(355418 'used modules list'(353082 'use' ChapelStandard[20267]))
+        } label _continueLabel[279259](279267 'move' tmp[279256](279265 call _cond_test 1)) tmp[279256]
+      } label _breakLabel[279260]
+    }(279278 return counts[278297])
+  }(355489 'used modules list'(353151 'use' ChapelStandard[20267]))
 }
