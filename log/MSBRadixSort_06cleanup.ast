@@ -2,98 +2,98 @@ AST dump for MSBRadixSort after pass cleanup.
 Module use list: 
 
 {
-  (353161 'use' ChapelStandard)
-  (288087 'import' Sort.{defaultComparator, ShellSort})
-  (288094 'use'(288091 call . super c"RadixSortHelp"))
-  type MSBRadixSortSettings[288136](?) unknown DISTRIBUTE_BUFFER[288098] "param" 5 const sortSwitch[288103] "const" 256 const minForTask[288108] "const" 256 unknown CHECK_SORTS[288113] "param" 0 unknown progress[288118] "param" 0 const alwaysSerial[288123] "const" 0 const maxTasks[288131] "const"(288128 call . here c"maxTaskPar")
-  function msbRadixSort[288147](arg Data[288144] :
-  (288141 call chpl__buildArrayRuntimeType nil[44]), arg comparator[288152] :
-  unknown rec[288149] =
+  (353094 'use' ChapelStandard)
+  (288020 'import' Sort.{defaultComparator, ShellSort})
+  (288027 'use'(288024 call . super c"RadixSortHelp"))
+  type MSBRadixSortSettings[288069](?) unknown DISTRIBUTE_BUFFER[288031] "param" 5 const sortSwitch[288036] "const" 256 const minForTask[288041] "const" 256 unknown CHECK_SORTS[288046] "param" 0 unknown progress[288051] "param" 0 const alwaysSerial[288056] "const" 0 const maxTasks[288064] "const"(288061 call . here c"maxTaskPar")
+  function msbRadixSort[288080](arg Data[288077] :
+  (288074 call chpl__buildArrayRuntimeType nil[44]), arg comparator[288085] :
+  unknown rec[288082] =
   defaultComparator) : _unknown[51] "no return value for void"
   {
-    unknown endbit[288157] int[13]
-    (288160 'end of statement')
-    (288168 call = endbit(288167 call msbRadixSortParamLastStartBit Data comparator))
-    if(288183 call _cond_test(288173 call < endbit 0))
+    unknown endbit[288090] int[13]
+    (288093 'end of statement')
+    (288101 call = endbit(288100 call msbRadixSortParamLastStartBit Data comparator))
+    if(288116 call _cond_test(288106 call < endbit 0))
     {
-      (288180 call = endbit(288179 call max int[13]))
+      (288113 call = endbit(288112 call max int[13]))
     }
-    (288217 call msbRadixSort(start_n =(288193 call .(288190 call . Data c"_dom") c"low"))(end_n =(288202 call .(288199 call . Data c"_dom") c"high")) Data comparator(startbit = 0)(endbit = endbit)(settings =(288212 'new'(288215 call MSBRadixSortSettings))))
+    (288150 call msbRadixSort(start_n =(288126 call .(288123 call . Data c"_dom") c"low"))(end_n =(288135 call .(288132 call . Data c"_dom") c"high")) Data comparator(startbit = 0)(endbit = endbit)(settings =(288145 'new'(288148 call MSBRadixSortSettings))))
   }
-  function msbRadixSort[288227](arg start_n[288224] :
-  int[13], arg end_n[288230] :
-  int[13], arg A[288236] :
-  (288233 call chpl__buildArrayRuntimeType nil[44]), arg criterion[288239]:_any[178](?), arg startbit[288242] :
-  int[13], arg endbit[288246] :
-  int[13], arg settings[288249]:_any[178](?)) : _unknown[51] "no return value for void"
+  function msbRadixSort[288160](arg start_n[288157] :
+  int[13], arg end_n[288163] :
+  int[13], arg A[288169] :
+  (288166 call chpl__buildArrayRuntimeType nil[44]), arg criterion[288172]:_any[178](?), arg startbit[288175] :
+  int[13], arg endbit[288179] :
+  int[13], arg settings[288182]:_any[178](?)) : _unknown[51] "no return value for void"
   {
-    if(288257 call _cond_test(288253 call > startbit endbit))
+    if(288190 call _cond_test(288186 call > startbit endbit))
     {
-      (288255 return _void[55])
+      (288188 return _void[55])
     }
-    if(288310 call _cond_test(288273 call <(288265 call - end_n start_n)(288270 call . settings c"sortSwitch")))
+    if(288243 call _cond_test(288206 call <(288198 call - end_n start_n)(288203 call . settings c"sortSwitch")))
     {
-      (288286 call(288276 call . ShellSort c"shellSort") A criterion(start = start_n)(end = end_n))
-      if(288303 call _cond_test(288292 call . settings c"CHECK_SORTS"))
+      (288219 call(288209 call . ShellSort c"shellSort") A criterion(start = start_n)(end = end_n))
+      if(288236 call _cond_test(288225 call . settings c"CHECK_SORTS"))
       {
-        (288301 call checkSorted start_n end_n A criterion)
+        (288234 call checkSorted start_n end_n A criterion)
       }
-      (288308 return _void[55])
+      (288241 return _void[55])
     }
-    if(288364 call _cond_test(288317 call . settings c"progress"))
+    if(288297 call _cond_test(288250 call . settings c"progress"))
     {
-      (288362 call writeln "radix sort start=" start_n " end=" end_n " startbit=" startbit " endbit=" endbit)
+      (288295 call writeln "radix sort start=" start_n " end=" end_n " startbit=" startbit " endbit=" endbit)
     }
-    const radixbits[288370] "const" RADIX_BITS
-    (288373 'end of statement')
-    const radix[288381] "const"(288379 call +(288376 call << 1 radixbits) 1)
+    const radixbits[288303] "const" RADIX_BITS
+    (288306 'end of statement')
+    const radix[288314] "const"(288312 call +(288309 call << 1 radixbits) 1)
+    (288317 'end of statement')
+    unknown offsets[288328](288326 call chpl__buildArrayRuntimeType(288324 call chpl__ensureDomainExpr(288320 call chpl_build_bounded_range 0 radix)) int[13])
+    (288331 'end of statement')
+    unknown end_offsets[288342](288340 call chpl__buildArrayRuntimeType(288338 call chpl__ensureDomainExpr(288334 call chpl_build_bounded_range 0 radix)) int[13])
+    (288345 'end of statement')
+    unknown ubitsType[288359] "type variable"(288358 'typeof'(288357 call(288354 call binForRecord(288350 call A start_n) criterion startbit) 1))
+    unknown min_ubits[288367](288366 call max ubitsType) ubitsType
+    (288370 'end of statement')
+    unknown max_ubits[288373] 0 ubitsType
+    (288376 'end of statement')
+    unknown min_bin[288381](288379 call + radix 1)
     (288384 'end of statement')
-    unknown offsets[288395](288393 call chpl__buildArrayRuntimeType(288391 call chpl__ensureDomainExpr(288387 call chpl_build_bounded_range 0 radix)) int[13])
-    (288398 'end of statement')
-    unknown end_offsets[288409](288407 call chpl__buildArrayRuntimeType(288405 call chpl__ensureDomainExpr(288401 call chpl_build_bounded_range 0 radix)) int[13])
-    (288412 'end of statement')
-    unknown ubitsType[288426] "type variable"(288425 'typeof'(288424 call(288421 call binForRecord(288417 call A start_n) criterion startbit) 1))
-    unknown min_ubits[288434](288433 call max ubitsType) ubitsType
-    (288437 'end of statement')
-    unknown max_ubits[288440] 0 ubitsType
-    (288443 'end of statement')
-    unknown min_bin[288448](288446 call + radix 1)
-    (288451 'end of statement')
-    unknown max_bin[288453] 0
-    (288456 'end of statement')
-    unknown any_ending[288458] 0
-    (288461 'end of statement')
-    if(288723 call _cond_test(288469 call ==(288465 call . settings c"alwaysSerial") 0))
+    unknown max_bin[288386] 0
+    (288389 'end of statement')
+    unknown any_ending[288391] 0
+    (288394 'end of statement')
+    if(288656 call _cond_test(288402 call ==(288398 call . settings c"alwaysSerial") 0))
     {
       Forall {
         induction variables:
           
-          unknown i[288590] "index var" "insert auto destroy"
+          unknown i[288523] "index var" "insert auto destroy"
         iterated expressions:
-          (288474 call chpl_build_bounded_range start_n end_n)
+          (288407 call chpl_build_bounded_range start_n end_n)
         shadow variables:
-          offsets[288478] 'reduce' intent
+          offsets[288411] 'reduce' intent
             init block
             {
             }
             deinit block
             {
             }
-          min_ubits[288486] 'reduce' intent
+          min_ubits[288419] 'reduce' intent
             init block
             {
             }
             deinit block
             {
             }
-          max_ubits[288493] 'reduce' intent
+          max_ubits[288426] 'reduce' intent
             init block
             {
             }
             deinit block
             {
             }
-          any_ending[288500] 'reduce' intent
+          any_ending[288433] 'reduce' intent
             init block
             {
             }
@@ -103,428 +103,428 @@ Module use list:
         other variables
           forall body
         {
-          const tmp[288519] "const" "temp"(288518 call binForRecord(288514 call A i) criterion startbit)
-          (288526 call _check_tuple_var_decl tmp[288519] 2)
-          const bin[288505] "const"(288520 call tmp[288519] 0)
-          const ubits[288507] "const"(288523 call tmp[288519] 1)
-          (288531 'end of statement')
-          if(288542 call _cond_test(288535 call < ubits min_ubits))
+          const tmp[288452] "const" "temp"(288451 call binForRecord(288447 call A i) criterion startbit)
+          (288459 call _check_tuple_var_decl tmp[288452] 2)
+          const bin[288438] "const"(288453 call tmp[288452] 0)
+          const ubits[288440] "const"(288456 call tmp[288452] 1)
+          (288464 'end of statement')
+          if(288475 call _cond_test(288468 call < ubits min_ubits))
           {
-            (288539 call = min_ubits ubits)
+            (288472 call = min_ubits ubits)
           }
-          if(288556 call _cond_test(288549 call > ubits max_ubits))
+          if(288489 call _cond_test(288482 call > ubits max_ubits))
           {
-            (288553 call = max_ubits ubits)
+            (288486 call = max_ubits ubits)
           }
-          if(288576 call _cond_test(288569 call ||(288563 call == bin 0)(288567 call == bin radix)))
+          if(288509 call _cond_test(288502 call ||(288496 call == bin 0)(288500 call == bin radix)))
           {
-            (288573 call = any_ending 1)
+            (288506 call = any_ending 1)
           }
-          (288586 call +=(288584 call offsets bin) 1)
+          (288519 call +=(288517 call offsets bin) 1)
         }
       }
     }
     {
       {
-        unknown _indexOfInterest[288684] "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[288685] "expr temp" "temp"
-        (288694 'move' _iterator[288685](288692 call _getIterator(288699 call chpl_direct_range_iter start_n end_n 1)))
+        unknown _indexOfInterest[288617] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[288618] "expr temp" "temp"
+        (288627 'move' _iterator[288618](288625 call _getIterator(288632 call chpl_direct_range_iter start_n end_n 1)))
         Defer
         {
           {
-            (288715 call _freeIterator _iterator[288685])
+            (288648 call _freeIterator _iterator[288618])
           }
         }
         { scopeless type
-          (288704 'move' _indexOfInterest[288684](288701 call iteratorIndex _iterator[288685]))
+          (288637 'move' _indexOfInterest[288617](288634 call iteratorIndex _iterator[288618]))
         }
-        ForLoop[288686]
+        ForLoop[288619]
         {
-          unknown i[288708] "index var" "insert auto destroy"
-          (288710 'move' i[288708] _indexOfInterest[288684])
+          unknown i[288641] "index var" "insert auto destroy"
+          (288643 'move' i[288641] _indexOfInterest[288617])
           {
-            const tmp[288614] "const" "temp"(288613 call binForRecord(288609 call A i) criterion startbit)
-            (288621 call _check_tuple_var_decl tmp[288614] 2)
-            const bin[288600] "const"(288615 call tmp[288614] 0)
-            const ubits[288602] "const"(288618 call tmp[288614] 1)
-            (288626 'end of statement')
-            if(288637 call _cond_test(288630 call < ubits min_ubits))
+            const tmp[288547] "const" "temp"(288546 call binForRecord(288542 call A i) criterion startbit)
+            (288554 call _check_tuple_var_decl tmp[288547] 2)
+            const bin[288533] "const"(288548 call tmp[288547] 0)
+            const ubits[288535] "const"(288551 call tmp[288547] 1)
+            (288559 'end of statement')
+            if(288570 call _cond_test(288563 call < ubits min_ubits))
             {
-              (288634 call = min_ubits ubits)
+              (288567 call = min_ubits ubits)
             }
-            if(288651 call _cond_test(288644 call > ubits max_ubits))
+            if(288584 call _cond_test(288577 call > ubits max_ubits))
             {
-              (288648 call = max_ubits ubits)
+              (288581 call = max_ubits ubits)
             }
-            if(288671 call _cond_test(288664 call ||(288658 call == bin 0)(288662 call == bin radix)))
+            if(288604 call _cond_test(288597 call ||(288591 call == bin 0)(288595 call == bin radix)))
             {
-              (288668 call = any_ending 1)
+              (288601 call = any_ending 1)
             }
-            (288681 call +=(288679 call offsets bin) 1)
+            (288614 call +=(288612 call offsets bin) 1)
           }
-          label _continueLabel[288689]
-          _indexOfInterest[288684]
-          _iterator[288685]
+          label _continueLabel[288622]
+          _indexOfInterest[288617]
+          _iterator[288618]
         }
-        label _breakLabel[288690]
+        label _breakLabel[288623]
       }
     }
-    if(288764 call _cond_test(288729 call == any_ending 0))
+    if(288697 call _cond_test(288662 call == any_ending 0))
     {
-      unknown dataStartBit[288737](288736 call findDataStartBit startbit min_ubits max_ubits)
-      (288740 'end of statement')
-      if(288760 call _cond_test(288744 call > dataStartBit startbit))
+      unknown dataStartBit[288670](288669 call findDataStartBit startbit min_ubits max_ubits)
+      (288673 'end of statement')
+      if(288693 call _cond_test(288677 call > dataStartBit startbit))
       {
-        (288755 call msbRadixSort start_n end_n A criterion dataStartBit endbit settings)
-        (288758 return _void[55])
+        (288688 call msbRadixSort start_n end_n A criterion dataStartBit endbit settings)
+        (288691 return _void[55])
       }
     }
-    if(288791 call _cond_test(288769 call . settings c"progress"))
+    if(288724 call _cond_test(288702 call . settings c"progress"))
     {
-      (288789 call writeln "accumulate")
+      (288722 call writeln "accumulate")
     }
-    unknown sum[288797] 0
-    (288800 'end of statement')
+    unknown sum[288730] 0
+    (288733 'end of statement')
     {
-      unknown _indexOfInterest[288842] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[288843] "expr temp" "temp"
-      (288857 'move' _iterator[288843](288809 call _build_tuple(288852 call _getIterator offsets)(288855 call _getIterator end_offsets)))
+      unknown _indexOfInterest[288775] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[288776] "expr temp" "temp"
+      (288790 'move' _iterator[288776](288742 call _build_tuple(288785 call _getIterator offsets)(288788 call _getIterator end_offsets)))
       Defer
       {
         {
-          (288887 call _freeIterator _iterator[288843])
+          (288820 call _freeIterator _iterator[288776])
         }
       }
       { scopeless type
-        (288862 'move' _indexOfInterest[288842](288859 call iteratorIndex _iterator[288843]))
+        (288795 'move' _indexOfInterest[288775](288792 call iteratorIndex _iterator[288776]))
       }
-      ForLoop[288844]
+      ForLoop[288777]
       {
-        (288867 call _check_tuple_var_decl _indexOfInterest[288842] 2)
-        unknown off[288873] "index var" "insert auto destroy"
-        (288875 'move' off[288873](288871 call _indexOfInterest[288842] 0))
-        unknown end[288880] "index var" "insert auto destroy"
-        (288882 'move' end[288880](288878 call _indexOfInterest[288842] 1))
+        (288800 call _check_tuple_var_decl _indexOfInterest[288775] 2)
+        unknown off[288806] "index var" "insert auto destroy"
+        (288808 'move' off[288806](288804 call _indexOfInterest[288775] 0))
+        unknown end[288813] "index var" "insert auto destroy"
+        (288815 'move' end[288813](288811 call _indexOfInterest[288775] 1))
         {
-          unknown binstart[288811] sum
-          (288814 'end of statement')
-          (288818 call += sum off)
-          unknown binend[288822] sum
-          (288825 'end of statement')
-          (288831 call = off(288829 call + start_n binstart))
-          (288839 call = end(288837 call + start_n binend))
+          unknown binstart[288744] sum
+          (288747 'end of statement')
+          (288751 call += sum off)
+          unknown binend[288755] sum
+          (288758 'end of statement')
+          (288764 call = off(288762 call + start_n binstart))
+          (288772 call = end(288770 call + start_n binend))
         }
-        label _continueLabel[288847]
-        _indexOfInterest[288842]
-        _iterator[288843]
+        label _continueLabel[288780]
+        _indexOfInterest[288775]
+        _iterator[288776]
       }
-      label _breakLabel[288848]
+      label _breakLabel[288781]
     }
-    unknown curbin[288895] 0
-    (288898 'end of statement')
-    if(288924 call _cond_test(288900 call . settings c"progress"))
+    unknown curbin[288828] 0
+    (288831 'end of statement')
+    if(288857 call _cond_test(288833 call . settings c"progress"))
     {
-      (288922 call writeln "shuffle")
+      (288855 call writeln "shuffle")
     }
     {
-      unknown tmp[289454] "temp"
-      (289472 'move' tmp[289454](289470 call _cond_test 1))
-      WhileDo[289459]
+      unknown tmp[289387] "temp"
+      (289405 'move' tmp[289387](289403 call _cond_test 1))
+      WhileDo[289392]
       {
         {
           {
-            unknown tmp[288952] "temp"
-            (288996 'move' tmp[288952](288981 call _cond_test(288983 call &&(288985 call <= curbin radix)(288989 call ==(288991 call offsets curbin)(288994 call end_offsets curbin)))))
-            WhileDo[288957]
+            unknown tmp[288885] "temp"
+            (288929 'move' tmp[288885](288914 call _cond_test(288916 call &&(288918 call <= curbin radix)(288922 call ==(288924 call offsets curbin)(288927 call end_offsets curbin)))))
+            WhileDo[288890]
             {
               {
-                (288948 call += curbin 1)
+                (288881 call += curbin 1)
               }
-              label _continueLabel[288955]
-              (288976 'move' tmp[288952](288961 call _cond_test(288963 call &&(288965 call <= curbin radix)(288969 call ==(288971 call offsets curbin)(288974 call end_offsets curbin)))))
-              tmp[288952]
+              label _continueLabel[288888]
+              (288909 'move' tmp[288885](288894 call _cond_test(288896 call &&(288898 call <= curbin radix)(288902 call ==(288904 call offsets curbin)(288907 call end_offsets curbin)))))
+              tmp[288885]
             }
-            label _breakLabel[288956]
+            label _breakLabel[288889]
           }
-          if(289008 call _cond_test(289002 call > curbin radix))
+          if(288941 call _cond_test(288935 call > curbin radix))
           {
             break nil[44]
           }
-          unknown max_buf[289018] "param"(289015 call . settings c"DISTRIBUTE_BUFFER")
-          (289021 'end of statement')
-          unknown buf[289029](289027 call * max_buf(289024 call . A c"eltType"))
-          (289032 'end of statement')
-          unknown used_buf[289034] 0
-          (289037 'end of statement')
-          unknown end[289042](289041 call end_offsets curbin)
-          (289045 'end of statement')
-          unknown endfast[289063](289062 call max(289050 call offsets curbin)(289060 call -(289055 call end_offsets curbin)(289058 call * 2 max_buf)))
-          (289066 'end of statement')
-          unknown bufstart[289081](289080 call max(289071 call offsets curbin)(289078 call -(289076 call end_offsets curbin) max_buf))
-          (289084 'end of statement')
-          unknown i[289086] bufstart
-          (289089 'end of statement')
+          unknown max_buf[288951] "param"(288948 call . settings c"DISTRIBUTE_BUFFER")
+          (288954 'end of statement')
+          unknown buf[288962](288960 call * max_buf(288957 call . A c"eltType"))
+          (288965 'end of statement')
+          unknown used_buf[288967] 0
+          (288970 'end of statement')
+          unknown end[288975](288974 call end_offsets curbin)
+          (288978 'end of statement')
+          unknown endfast[288996](288995 call max(288983 call offsets curbin)(288993 call -(288988 call end_offsets curbin)(288991 call * 2 max_buf)))
+          (288999 'end of statement')
+          unknown bufstart[289014](289013 call max(289004 call offsets curbin)(289011 call -(289009 call end_offsets curbin) max_buf))
+          (289017 'end of statement')
+          unknown i[289019] bufstart
+          (289022 'end of statement')
           {
-            unknown tmp[289116] "temp"
-            (289140 'move' tmp[289116](289135 call _cond_test(289137 call < i end)))
-            WhileDo[289121]
+            unknown tmp[289049] "temp"
+            (289073 'move' tmp[289049](289068 call _cond_test(289070 call < i end)))
+            WhileDo[289054]
             {
               {
-                (289102 call <=>(289097 call buf used_buf)(289101 call A i))
-                (289108 call += used_buf 1)
-                (289113 call += i 1)
+                (289035 call <=>(289030 call buf used_buf)(289034 call A i))
+                (289041 call += used_buf 1)
+                (289046 call += i 1)
               }
-              label _continueLabel[289119]
-              (289130 'move' tmp[289116](289125 call _cond_test(289127 call < i end)))
-              tmp[289116]
+              label _continueLabel[289052]
+              (289063 'move' tmp[289049](289058 call _cond_test(289060 call < i end)))
+              tmp[289049]
             }
-            label _breakLabel[289120]
+            label _breakLabel[289053]
           }
           {
-            unknown tmp[289242] "temp"
-            (289270 'move' tmp[289242](289263 call _cond_test(289265 call <(289267 call offsets curbin) endfast)))
-            WhileDo[289247]
+            unknown tmp[289175] "temp"
+            (289203 'move' tmp[289175](289196 call _cond_test(289198 call <(289200 call offsets curbin) endfast)))
+            WhileDo[289180]
             {
               {
                 {
-                  unknown j[289204] 0
-                  unknown tmp[289205] "maybe param" "temp"
-                  (289217 'move' tmp[289205](289215 call chpl_compute_low_param_loop_bound 0(289153 call - max_buf 1)))
-                  unknown tmp[289206] "maybe param" "temp"
-                  (289227 'move' tmp[289206](289225 call chpl_compute_high_param_loop_bound 0(289222 call - max_buf 1)))
-                  unknown tmp[289207] "maybe param" "temp"
-                  (289230 'move' tmp[289207] 1)
-                  ParamForLoop[289232]
-                  { j[289204] tmp[289205] tmp[289206] tmp[289207]
+                  unknown j[289137] 0
+                  unknown tmp[289138] "maybe param" "temp"
+                  (289150 'move' tmp[289138](289148 call chpl_compute_low_param_loop_bound 0(289086 call - max_buf 1)))
+                  unknown tmp[289139] "maybe param" "temp"
+                  (289160 'move' tmp[289139](289158 call chpl_compute_high_param_loop_bound 0(289155 call - max_buf 1)))
+                  unknown tmp[289140] "maybe param" "temp"
+                  (289163 'move' tmp[289140] 1)
+                  ParamForLoop[289165]
+                  { j[289137] tmp[289138] tmp[289139] tmp[289140]
                     {
-                      const tmp[289171] "const" "temp"(289170 call binForRecord(289166 call buf j) criterion startbit)
-                      (289175 call _check_tuple_var_decl tmp[289171] 2)
-                      const bin[289157] "const"(289172 call tmp[289171] 0)
-                      (289180 'end of statement')
-                      (289193 call <=>(289188 call A(289186 call offsets bin))(289192 call buf j))
-                      (289201 call +=(289199 call offsets bin) 1)
+                      const tmp[289104] "const" "temp"(289103 call binForRecord(289099 call buf j) criterion startbit)
+                      (289108 call _check_tuple_var_decl tmp[289104] 2)
+                      const bin[289090] "const"(289105 call tmp[289104] 0)
+                      (289113 'end of statement')
+                      (289126 call <=>(289121 call A(289119 call offsets bin))(289125 call buf j))
+                      (289134 call +=(289132 call offsets bin) 1)
                     }
                   }
-                  label _unused_continueLabel[289209]
-                  label _breakLabel[289208]
+                  label _unused_continueLabel[289142]
+                  label _breakLabel[289141]
                 }
               }
-              label _continueLabel[289245]
-              (289258 'move' tmp[289242](289251 call _cond_test(289253 call <(289255 call offsets curbin) endfast)))
-              tmp[289242]
+              label _continueLabel[289178]
+              (289191 'move' tmp[289175](289184 call _cond_test(289186 call <(289188 call offsets curbin) endfast)))
+              tmp[289175]
             }
-            label _breakLabel[289246]
+            label _breakLabel[289179]
           }
           {
-            unknown tmp[289423] "temp"
-            (289451 'move' tmp[289423](289444 call _cond_test(289446 call <(289448 call offsets curbin) end)))
-            WhileDo[289428]
+            unknown tmp[289356] "temp"
+            (289384 'move' tmp[289356](289377 call _cond_test(289379 call <(289381 call offsets curbin) end)))
+            WhileDo[289361]
             {
               {
-                unknown j[289281] 0
-                (289284 'end of statement')
+                unknown j[289214] 0
+                (289217 'end of statement')
                 {
-                  unknown tmp[289384] "temp"
-                  (289420 'move' tmp[289384](289409 call _cond_test(289411 call &&(289413 call >= used_buf 0)(289417 call < j used_buf))))
-                  WhileDo[289389]
+                  unknown tmp[289317] "temp"
+                  (289353 'move' tmp[289317](289342 call _cond_test(289344 call &&(289346 call >= used_buf 0)(289350 call < j used_buf))))
+                  WhileDo[289322]
                   {
                     {
-                      const tmp[289310] "const" "temp"(289309 call binForRecord(289305 call buf j) criterion startbit)
-                      (289314 call _check_tuple_var_decl tmp[289310] 2)
-                      const bin[289296] "const"(289311 call tmp[289310] 0)
-                      (289319 'end of statement')
-                      unknown offset[289325](289324 call offsets bin)
-                      (289328 'end of statement')
-                      (289337 call <=>(289332 call A offset)(289336 call buf j))
-                      (289345 call +=(289343 call offsets bin) 1)
-                      if(289375 call _cond_test(289356 call &&(289350 call == bin curbin)(289354 call >= offset bufstart)))
+                      const tmp[289243] "const" "temp"(289242 call binForRecord(289238 call buf j) criterion startbit)
+                      (289247 call _check_tuple_var_decl tmp[289243] 2)
+                      const bin[289229] "const"(289244 call tmp[289243] 0)
+                      (289252 'end of statement')
+                      unknown offset[289258](289257 call offsets bin)
+                      (289261 'end of statement')
+                      (289270 call <=>(289265 call A offset)(289269 call buf j))
+                      (289278 call +=(289276 call offsets bin) 1)
+                      if(289308 call _cond_test(289289 call &&(289283 call == bin curbin)(289287 call >= offset bufstart)))
                       {
-                        (289360 call -= used_buf 1)
-                        (289372 call <=>(289367 call buf j)(289371 call buf used_buf))
+                        (289293 call -= used_buf 1)
+                        (289305 call <=>(289300 call buf j)(289304 call buf used_buf))
                       }
-                      (289381 call += j 1)
+                      (289314 call += j 1)
                     }
-                    label _continueLabel[289387]
-                    (289404 'move' tmp[289384](289393 call _cond_test(289395 call &&(289397 call >= used_buf 0)(289401 call < j used_buf))))
-                    tmp[289384]
+                    label _continueLabel[289320]
+                    (289337 'move' tmp[289317](289326 call _cond_test(289328 call &&(289330 call >= used_buf 0)(289334 call < j used_buf))))
+                    tmp[289317]
                   }
-                  label _breakLabel[289388]
+                  label _breakLabel[289321]
                 }
               }
-              label _continueLabel[289426]
-              (289439 'move' tmp[289423](289432 call _cond_test(289434 call <(289436 call offsets curbin) end)))
-              tmp[289423]
+              label _continueLabel[289359]
+              (289372 'move' tmp[289356](289365 call _cond_test(289367 call <(289369 call offsets curbin) end)))
+              tmp[289356]
             }
-            label _breakLabel[289427]
+            label _breakLabel[289360]
           }
         }
-        label _continueLabel[289457]
-        (289465 'move' tmp[289454](289463 call _cond_test 1))
-        tmp[289454]
+        label _continueLabel[289390]
+        (289398 'move' tmp[289387](289396 call _cond_test 1))
+        tmp[289387]
       }
-      label _breakLabel[289458]
+      label _breakLabel[289391]
     }
-    if(289500 call _cond_test(289476 call . settings c"progress"))
+    if(289433 call _cond_test(289409 call . settings c"progress"))
     {
-      (289498 call writeln "sort sub-problems")
+      (289431 call writeln "sort sub-problems")
     }
-    (289510 call =(289508 call offsets 0) start_n)
+    (289443 call =(289441 call offsets 0) start_n)
     {
-      unknown _indexOfInterest[289533] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[289534] "expr temp" "temp"
-      (289543 'move' _iterator[289534](289541 call _getIterator(289548 call chpl_direct_range_iter 1 radix 1)))
+      unknown _indexOfInterest[289466] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[289467] "expr temp" "temp"
+      (289476 'move' _iterator[289467](289474 call _getIterator(289481 call chpl_direct_range_iter 1 radix 1)))
       Defer
       {
         {
-          (289564 call _freeIterator _iterator[289534])
+          (289497 call _freeIterator _iterator[289467])
         }
       }
       { scopeless type
-        (289553 'move' _indexOfInterest[289533](289550 call iteratorIndex _iterator[289534]))
+        (289486 'move' _indexOfInterest[289466](289483 call iteratorIndex _iterator[289467]))
       }
-      ForLoop[289535]
+      ForLoop[289468]
       {
-        unknown i[289557] "index var" "insert auto destroy"
-        (289559 'move' i[289557] _indexOfInterest[289533])
+        unknown i[289490] "index var" "insert auto destroy"
+        (289492 'move' i[289490] _indexOfInterest[289466])
         {
-          (289529 call =(289521 call offsets i)(289528 call end_offsets(289525 call - i 1)))
+          (289462 call =(289454 call offsets i)(289461 call end_offsets(289458 call - i 1)))
         }
-        label _continueLabel[289538]
-        _indexOfInterest[289533]
-        _iterator[289534]
+        label _continueLabel[289471]
+        _indexOfInterest[289466]
+        _iterator[289467]
       }
-      label _breakLabel[289539]
+      label _breakLabel[289472]
     }
-    if(289966 call _cond_test(289576 call ==(289572 call . settings c"alwaysSerial") 0))
+    if(289899 call _cond_test(289509 call ==(289505 call . settings c"alwaysSerial") 0))
     {
-      const subbits[289582] "const"(289580 call + startbit radixbits)
-      (289585 'end of statement')
-      unknown nbigsubs[289588] 0
-      (289591 'end of statement')
-      unknown bigsubs[289606](289604 call chpl__buildArrayRuntimeType(289602 call chpl__ensureDomainExpr(289594 call chpl_build_bounded_range 0 radix))(289600 call _build_tuple int[13] int[13]))
-      (289609 'end of statement')
-      const runningNow[289616] "const"(289615 call(289611 call . here c"runningTasks"))
-      (289619 'end of statement')
+      const subbits[289515] "const"(289513 call + startbit radixbits)
+      (289518 'end of statement')
+      unknown nbigsubs[289521] 0
+      (289524 'end of statement')
+      unknown bigsubs[289539](289537 call chpl__buildArrayRuntimeType(289535 call chpl__ensureDomainExpr(289527 call chpl_build_bounded_range 0 radix))(289533 call _build_tuple int[13] int[13]))
+      (289542 'end of statement')
+      const runningNow[289549] "const"(289548 call(289544 call . here c"runningTasks"))
+      (289552 'end of statement')
       {
-        unknown _indexOfInterest[289743] "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[289744] "expr temp" "temp"
-        (289753 'move' _iterator[289744](289751 call _getIterator(289761 call chpl_direct_range_iter 1(289758 call - radix 1) 1)))
+        unknown _indexOfInterest[289676] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[289677] "expr temp" "temp"
+        (289686 'move' _iterator[289677](289684 call _getIterator(289694 call chpl_direct_range_iter 1(289691 call - radix 1) 1)))
         Defer
         {
           {
-            (289777 call _freeIterator _iterator[289744])
+            (289710 call _freeIterator _iterator[289677])
           }
         }
         { scopeless type
-          (289766 'move' _indexOfInterest[289743](289763 call iteratorIndex _iterator[289744]))
+          (289699 'move' _indexOfInterest[289676](289696 call iteratorIndex _iterator[289677]))
         }
-        ForLoop[289745]
+        ForLoop[289678]
         {
-          unknown bin[289770] "index var" "insert auto destroy"
-          (289772 'move' bin[289770] _indexOfInterest[289743])
+          unknown bin[289703] "index var" "insert auto destroy"
+          (289705 'move' bin[289703] _indexOfInterest[289676])
           {
-            const bin_start[289632] "const"(289631 call offsets bin)
-            (289635 'end of statement')
-            const bin_end[289658] "const"(289655 IfExpr (289642 call <=(289639 call + bin 1) radix) then
+            const bin_start[289565] "const"(289564 call offsets bin)
+            (289568 'end of statement')
+            const bin_end[289591] "const"(289588 IfExpr (289575 call <=(289572 call + bin 1) radix) then
             { scopeless
-              (289652 call -(289650 call offsets(289647 call + bin 1)) 1)
+              (289585 call -(289583 call offsets(289580 call + bin 1)) 1)
             } else
             { scopeless
               end_n
             } )
-            (289661 'end of statement')
-            const num[289669] "const"(289667 call -(289664 call + 1 bin_end) bin_start)
-            (289672 'end of statement')
-            if(289738 call _cond_test(289681 call ||(289675 call <= num 1)(289679 call >= startbit endbit)))
+            (289594 'end of statement')
+            const num[289602] "const"(289600 call -(289597 call + 1 bin_end) bin_start)
+            (289605 'end of statement')
+            if(289671 call _cond_test(289614 call ||(289608 call <= num 1)(289612 call >= startbit endbit)))
             {
             }
             {
-              if(289734 call _cond_test(289702 call ||(289691 call < num(289688 call . settings c"minForTask"))(289700 call >= runningNow(289697 call . settings c"maxTasks"))))
+              if(289667 call _cond_test(289635 call ||(289624 call < num(289621 call . settings c"minForTask"))(289633 call >= runningNow(289630 call . settings c"maxTasks"))))
               {
-                (289713 call msbRadixSort bin_start bin_end A criterion subbits endbit settings)
+                (289646 call msbRadixSort bin_start bin_end A criterion subbits endbit settings)
               }
               {
-                (289725 call =(289719 call bigsubs nbigsubs)(289723 call _build_tuple bin_start bin_end))
-                (289731 call += nbigsubs 1)
+                (289658 call =(289652 call bigsubs nbigsubs)(289656 call _build_tuple bin_start bin_end))
+                (289664 call += nbigsubs 1)
               }
             }
           }
-          label _continueLabel[289748]
-          _indexOfInterest[289743]
-          _iterator[289744]
+          label _continueLabel[289681]
+          _indexOfInterest[289676]
+          _iterator[289677]
         }
-        label _breakLabel[289749]
+        label _breakLabel[289682]
       }
       Forall {
         induction variables:
           
-          unknown bin[289815] "index var" "insert auto destroy"
+          unknown bin[289748] "index var" "insert auto destroy"
           
-          unknown chpl_idx_2[289817] "index var" "an _indexOfInterest or chpl__followIdx variable" "insert auto destroy" "temp"
+          unknown chpl_idx_2[289750] "index var" "an _indexOfInterest or chpl__followIdx variable" "insert auto destroy" "temp"
         iterated expressions:
-          (289797 call #(289794 call chpl_build_low_bounded_range 0) nbigsubs)
+          (289730 call #(289727 call chpl_build_low_bounded_range 0) nbigsubs)
           bigsubs
         shadow variables:
         other variables
           forall body
         {
-          (289822 call _check_tuple_var_decl chpl_idx_2[289817] 2)
-          unknown bin_start[289828] "index var" "insert auto destroy"
-          (289830 'move' bin_start[289828](289826 call chpl_idx_2[289817] 0))
-          unknown bin_end[289835] "index var" "insert auto destroy"
-          (289837 'move' bin_end[289835](289833 call chpl_idx_2[289817] 1))
-          (289811 call msbRadixSort bin_start bin_end A criterion subbits endbit settings)
+          (289755 call _check_tuple_var_decl chpl_idx_2[289750] 2)
+          unknown bin_start[289761] "index var" "insert auto destroy"
+          (289763 'move' bin_start[289761](289759 call chpl_idx_2[289750] 0))
+          unknown bin_end[289768] "index var" "insert auto destroy"
+          (289770 'move' bin_end[289768](289766 call chpl_idx_2[289750] 1))
+          (289744 call msbRadixSort bin_start bin_end A criterion subbits endbit settings)
         }
       }
     }
     {
       {
-        unknown _indexOfInterest[289924] "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[289925] "expr temp" "temp"
-        (289934 'move' _iterator[289925](289932 call _getIterator(289942 call chpl_direct_range_iter 1(289939 call - radix 1) 1)))
+        unknown _indexOfInterest[289857] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[289858] "expr temp" "temp"
+        (289867 'move' _iterator[289858](289865 call _getIterator(289875 call chpl_direct_range_iter 1(289872 call - radix 1) 1)))
         Defer
         {
           {
-            (289958 call _freeIterator _iterator[289925])
+            (289891 call _freeIterator _iterator[289858])
           }
         }
         { scopeless type
-          (289947 'move' _indexOfInterest[289924](289944 call iteratorIndex _iterator[289925]))
+          (289880 'move' _indexOfInterest[289857](289877 call iteratorIndex _iterator[289858]))
         }
-        ForLoop[289926]
+        ForLoop[289859]
         {
-          unknown bin[289951] "index var" "insert auto destroy"
-          (289953 'move' bin[289951] _indexOfInterest[289924])
+          unknown bin[289884] "index var" "insert auto destroy"
+          (289886 'move' bin[289884] _indexOfInterest[289857])
           {
-            const bin_start[289853] "const"(289852 call offsets bin)
-            (289856 'end of statement')
-            const bin_end[289879] "const"(289876 IfExpr (289863 call <=(289860 call + bin 1) radix) then
+            const bin_start[289786] "const"(289785 call offsets bin)
+            (289789 'end of statement')
+            const bin_end[289812] "const"(289809 IfExpr (289796 call <=(289793 call + bin 1) radix) then
             { scopeless
-              (289873 call -(289871 call offsets(289868 call + bin 1)) 1)
+              (289806 call -(289804 call offsets(289801 call + bin 1)) 1)
             } else
             { scopeless
               end_n
             } )
-            (289882 'end of statement')
-            const num[289890] "const"(289888 call -(289885 call + 1 bin_end) bin_start)
-            (289893 'end of statement')
-            if(289920 call _cond_test(289902 call ||(289896 call <= num 1)(289900 call >= startbit endbit)))
+            (289815 'end of statement')
+            const num[289823] "const"(289821 call -(289818 call + 1 bin_end) bin_start)
+            (289826 'end of statement')
+            if(289853 call _cond_test(289835 call ||(289829 call <= num 1)(289833 call >= startbit endbit)))
             {
             }
             {
-              (289917 call msbRadixSort bin_start bin_end A criterion(289913 call + startbit radixbits) endbit settings)
+              (289850 call msbRadixSort bin_start bin_end A criterion(289846 call + startbit radixbits) endbit settings)
             }
           }
-          label _continueLabel[289929]
-          _indexOfInterest[289924]
-          _iterator[289925]
+          label _continueLabel[289862]
+          _indexOfInterest[289857]
+          _iterator[289858]
         }
-        label _breakLabel[289930]
+        label _breakLabel[289863]
       }
     }
-    if(289982 call _cond_test(289971 call . settings c"CHECK_SORTS"))
+    if(289915 call _cond_test(289904 call . settings c"CHECK_SORTS"))
     {
-      (289980 call checkSorted start_n end_n A criterion)
+      (289913 call checkSorted start_n end_n A criterion)
     }
   }
 }

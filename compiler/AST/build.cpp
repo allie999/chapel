@@ -2210,19 +2210,16 @@ void replaceWithGPUExpression(BlockStmt* block){
       call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
     }
 
-    if (CallExpr* b = toCallExpr(call->baseExpr))
-    {
-       if (FnSymbol* fn = b->theFnSymbol()){
+  std::vector<DefExpr *> defVector;
+    collectDefExprs(block, defVector);
+    forv_Vec(DefExpr, def, defVector){
+      if (FnSymbol* fn = def -> getFunction())
+      {
        std::cout << "get fn" << std::endl;
-       std::cout << fn->hasFlag(FLAG_REDUCESCANOP) << std::endl;
-       std::cout << fn->hasFlag(FLAG_COMPILER_NESTED_FUNCTION) << std::endl;
-       std::cout << fn->hasFlag(FLAG_FN_RETURNS_ITERATOR) << std::endl;
-      if(fn->hasFlag(FLAG_REDUCESCANOP)){
-        std::cout << "find" << std::endl;
+
       }
-      }
+      
     }
-    
     if (FnSymbol* fn = call->theFnSymbol()){
        std::cout << "get fn" << std::endl;
        std::cout << fn->hasFlag(FLAG_REDUCESCANOP) << std::endl;

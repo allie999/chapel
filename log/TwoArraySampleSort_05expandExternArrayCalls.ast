@@ -2,49 +2,49 @@ AST dump for TwoArraySampleSort after pass expandExternArrayCalls.
 Module use list: 
 
 {
-  (353157 'use' ChapelStandard)
-  (287880 'import'(287877 call . Sort c"defaultComparator"))
-  (287887 'use'(287884 call . super c"TwoArrayPartitioning"))
-  (287895 'use'(287892 call . super c"SampleSortHelp"))
-  (287901 'use'(287898 call . super c"RadixSortHelp"))
-  function twoArraySampleSort[287911](arg Data[287908] :
-  (287905 call chpl__buildArrayRuntimeType nil[44]), arg comparator[287916] :
-  unknown rec[287913] =
+  (353090 'use' ChapelStandard)
+  (287813 'import'(287810 call . Sort c"defaultComparator"))
+  (287820 'use'(287817 call . super c"TwoArrayPartitioning"))
+  (287828 'use'(287825 call . super c"SampleSortHelp"))
+  (287834 'use'(287831 call . super c"RadixSortHelp"))
+  function twoArraySampleSort[287844](arg Data[287841] :
+  (287838 call chpl__buildArrayRuntimeType nil[44]), arg comparator[287849] :
+  unknown rec[287846] =
   defaultComparator) : _unknown[51]
   {
     { scopeless
-      unknown baseCaseSize[287921] 16
-      (287924 'end of statement')
+      unknown baseCaseSize[287854] 16
+      (287857 'end of statement')
     }
     { scopeless
-      unknown endbit[287927] int[13]
-      (287930 'end of statement')
+      unknown endbit[287860] int[13]
+      (287863 'end of statement')
     }
-    (287937 call = endbit(287936 call msbRadixSortParamLastStartBit Data comparator))
-    if(287952 call _cond_test(287942 call < endbit 0))
+    (287870 call = endbit(287869 call msbRadixSortParamLastStartBit Data comparator))
+    if(287885 call _cond_test(287875 call < endbit 0))
     {
       { scopeless
-        (287949 call = endbit(287948 call max int[13]))
+        (287882 call = endbit(287881 call max int[13]))
       }
     }
     { scopeless
-      unknown Scratch[287959](287958 'typeof' Data)
-      (287962 'end of statement')
+      unknown Scratch[287892](287891 'typeof' Data)
+      (287895 'end of statement')
     }
-    if(288071 call _cond_test(287971 call(287967 call .(287964 call . Data c"_instance") c"isDefaultRectangular")))
+    if(288004 call _cond_test(287904 call(287900 call .(287897 call . Data c"_instance") c"isDefaultRectangular")))
     {
       { scopeless
-        unknown state[287989](287972 'new'(287988 call TwoArrayBucketizerSharedState(bucketizer =(287974 'new'(287981 call SampleBucketizer(287977 call . Data c"eltType"))))(baseCaseSize = baseCaseSize)(endbit = endbit)))
-        (287992 'end of statement')
+        unknown state[287922](287905 'new'(287921 call TwoArrayBucketizerSharedState(bucketizer =(287907 'new'(287914 call SampleBucketizer(287910 call . Data c"eltType"))))(baseCaseSize = baseCaseSize)(endbit = endbit)))
+        (287925 'end of statement')
       }
-      (288015 call partitioningSortWithScratchSpace(287999 call .(287996 call . Data c"_dom") c"low")(288007 call .(288004 call . Data c"_dom") c"high") Data Scratch state comparator 0)
+      (287948 call partitioningSortWithScratchSpace(287932 call .(287929 call . Data c"_dom") c"low")(287940 call .(287937 call . Data c"_dom") c"high") Data Scratch state comparator 0)
     }
     {
       { scopeless
-        unknown state[288043](288017 'new'(288042 call TwoArrayDistributedBucketizerSharedState(bucketizerType =(288025 call SampleBucketizer(288021 call . Data c"eltType")))(numLocales =(288034 call .(288033 call(288029 call . Data c"targetLocales")) c"size"))(baseCaseSize = baseCaseSize)(endbit = endbit)))
-        (288046 'end of statement')
+        unknown state[287976](287950 'new'(287975 call TwoArrayDistributedBucketizerSharedState(bucketizerType =(287958 call SampleBucketizer(287954 call . Data c"eltType")))(numLocales =(287967 call .(287966 call(287962 call . Data c"targetLocales")) c"size"))(baseCaseSize = baseCaseSize)(endbit = endbit)))
+        (287979 'end of statement')
       }
-      (288069 call distributedPartitioningSortWithScratchSpace(288053 call .(288050 call . Data c"_dom") c"low")(288061 call .(288058 call . Data c"_dom") c"high") Data Scratch state comparator 0)
+      (288002 call distributedPartitioningSortWithScratchSpace(287986 call .(287983 call . Data c"_dom") c"low")(287994 call .(287991 call . Data c"_dom") c"high") Data Scratch state comparator 0)
     }
   }
 }
