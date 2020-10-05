@@ -32,6 +32,7 @@ enum TryTag {
 class CallExpr : public Expr {
 public:
   PrimitiveOp* primitive;        // primitive expression (baseExpr == NULL)
+  PrimitiveOp* secPrimitive;     // secondary primitive expression (baseExpr != NULL) use as a tag
   Expr*        baseExpr;         // function expression
 
   AList        argList;          // function actuals
@@ -49,7 +50,7 @@ public:
            BaseAST*     arg5 = NULL);
            
   CallExpr(BaseAST*     base,
-           PrimitiveTag prim,
+           PrimitiveTag secPrim,
            BaseAST*     arg1 = NULL,
            BaseAST*     arg2 = NULL,
            BaseAST*     arg3 = NULL,
@@ -107,6 +108,8 @@ public:
   bool            isPrimitive()                                          const;
   bool            isPrimitive(PrimitiveTag primitiveTag)                 const;
   bool            isPrimitive(const char*  primitiveName)                const;
+  bool            isSecPrimitive(PrimitiveTag primitiveTag)              const;
+  bool            isSecPrimitive(const char* primitiveName)              const;
 
   void            setUnresolvedFunction(const char* name);
 

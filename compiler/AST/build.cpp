@@ -2209,14 +2209,13 @@ void replaceWithGPUExpression(BlockStmt* block){
       call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
                     new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
     }
-    if (call -> isPrimitive(PRIM_SCAN))
+    if (call -> isSecPrimitive(PRIM_SCAN))
     {
-    std::cout << "get fn" << std::endl;
       // TODO: replace to GPU scan Call expression
       // Currently replaced with one value in a CallExpr. 
       // The required return type is iterator, we can return one value because Chapel allows scalar arguments promotion.
-      // call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
-                    // new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
+      call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
+                    new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
     }
     
   }

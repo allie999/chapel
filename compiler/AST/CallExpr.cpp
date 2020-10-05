@@ -62,13 +62,14 @@ CallExpr::CallExpr(BaseAST* base,
 }
 
 CallExpr::CallExpr(BaseAST* base,
-                   PrimitiveTag prim,
+                   PrimitiveTag secPrim,
                    BaseAST* arg1,
                    BaseAST* arg2,
                    BaseAST* arg3,
                    BaseAST* arg4,
                    BaseAST* arg5) : Expr(E_CallExpr) {
-  primitive  = primitives[prim];
+  primitive  = NULL;
+  secPrimitive = primitives[secPrim];
   baseExpr   = NULL;
   partialTag = false;
   methodTag  = false;
@@ -195,6 +196,14 @@ bool CallExpr::isPrimitive(PrimitiveTag primitiveTag) const {
 
 bool CallExpr::isPrimitive(const char* primitiveName) const {
   return primitive && !strcmp(primitive->name, primitiveName);
+}
+
+bool CallExpr::isSecPrimitive(PrimitiveTag primitiveTag) const {
+  return secPrimitive && secPrimitive->tag == primitiveTag;
+}
+
+bool CallExpr::isSecPrimitive(const char* primitiveName) const {
+  return secPrimitive && !strcmp(secPrimitive->name, primitiveName);
 }
 
 Expr* CallExpr::getFirstExpr() {

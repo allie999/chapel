@@ -2,634 +2,634 @@ AST dump for SampleSortHelp after pass readExternC.
 Module use list: 
 
 {
-  (352948 'use' ChapelStandard)
-  (273810 'use' Sort)
+  (353036 'use' ChapelStandard)
+  (273898 'use' Sort)
   { scopeless
-    unknown maxLogBuckets[273814] "param" 8
-    (273817 'end of statement')
+    unknown maxLogBuckets[273902] "param" 8
+    (273905 'end of statement')
   }
   { scopeless
-    unknown classifyUnrollFactor[273819] "param" 7
-    (273822 'end of statement')
+    unknown classifyUnrollFactor[273907] "param" 7
+    (273910 'end of statement')
   }
   { scopeless
-    const equalBucketThreshold[273824] "const" 5
-    (273827 'end of statement')
+    const equalBucketThreshold[273912] "const" 5
+    (273915 'end of statement')
   }
   { scopeless
-    const maxInline[273829] "const" 16
-    (273832 'end of statement')
+    const maxInline[273917] "const" 16
+    (273920 'end of statement')
   }
   { scopeless
-    const oversampleFactor[273836] "const" 0.2
-    (273839 'end of statement')
+    const oversampleFactor[273924] "const" 0.2
+    (273927 'end of statement')
   }
-  function log2int[273846](arg n[273843] :
+  function log2int[273934](arg n[273931] :
   int[13]) : _unknown[51]
   {
-    if(273855 call _cond_test(273850 call <= n 0))
+    if(273943 call _cond_test(273938 call <= n 0))
     {
       { scopeless
-        (273853 return 0)
+        (273941 return 0)
       }
     }
-    (273865 return(273864 call log2 n))
+    (273953 return(273952 call log2 n))
   }
-  function computeLogBucketSize[273875](arg n[273872] :
+  function computeLogBucketSize[273963](arg n[273960] :
   int[13]) : _unknown[51]
   {
     { scopeless
-      const LogBuckets[273878] "const" 8
-      (273881 'end of statement')
+      const LogBuckets[273966] "const" 8
+      (273969 'end of statement')
     }
     { scopeless
-      const BaseCaseSize[273884] "const" 16
-      (273887 'end of statement')
+      const BaseCaseSize[273972] "const" 16
+      (273975 'end of statement')
     }
     { scopeless
-      const BaseCaseMultiplier[273889] "const" 16
-      (273892 'end of statement')
+      const BaseCaseMultiplier[273977] "const" 16
+      (273980 'end of statement')
     }
     { scopeless
-      const SingleLevelThreshold[273897] "const"(273895 call * maxInline LogBuckets)
-      (273900 'end of statement')
+      const SingleLevelThreshold[273985] "const"(273983 call * maxInline LogBuckets)
+      (273988 'end of statement')
     }
     { scopeless
-      const TwoLevelThreshold[273905] "const"(273903 call * SingleLevelThreshold LogBuckets)
-      (273908 'end of statement')
+      const TwoLevelThreshold[273993] "const"(273991 call * SingleLevelThreshold LogBuckets)
+      (273996 'end of statement')
     }
     { scopeless
-      unknown ret[273910] 0
-      (273913 'end of statement')
+      unknown ret[273998] 0
+      (274001 'end of statement')
     }
-    if(273968 call _cond_test(273916 call <= n SingleLevelThreshold))
+    if(274056 call _cond_test(274004 call <= n SingleLevelThreshold))
     {
-      (273929 call = ret(273928 call log2int(273925 call /(273922 call / n maxInline) 2)))
+      (274017 call = ret(274016 call log2int(274013 call /(274010 call / n maxInline) 2)))
     }
     {
       { scopeless
-        if(273964 call _cond_test(273935 call <= n TwoLevelThreshold))
+        if(274052 call _cond_test(274023 call <= n TwoLevelThreshold))
         {
-          (273954 call = ret(273952 call /(273949 call +(273947 call log2int(273944 call /(273941 call / n maxInline) 2)) 1) 2))
+          (274042 call = ret(274040 call /(274037 call +(274035 call log2int(274032 call /(274029 call / n maxInline) 2)) 1) 2))
         }
         {
-          (273960 call = ret maxLogBuckets)
+          (274048 call = ret maxLogBuckets)
         }
       }
     }
-    (273979 call = ret(273978 call max 1 ret))
-    (273988 call = ret(273987 call min maxLogBuckets ret))
-    (273992 return ret)
+    (274067 call = ret(274066 call max 1 ret))
+    (274076 call = ret(274075 call min maxLogBuckets ret))
+    (274080 return ret)
   }
-  function chooseSampleStep[274002](arg n[273999] :
-  int[13], arg logNumBuckets[274005] :
+  function chooseSampleStep[274090](arg n[274087] :
+  int[13], arg logNumBuckets[274093] :
   int[13]) : _unknown[51]
   {
     { scopeless
-      unknown oversample[274019](274018 call min 1.0(274016 call * oversampleFactor(274015 call log2int n)))
-      (274022 'end of statement')
+      unknown oversample[274107](274106 call min 1.0(274104 call * oversampleFactor(274103 call log2int n)))
+      (274110 'end of statement')
     }
     { scopeless
-      unknown step[274032](274031 call max 1(274029 call _cast int[13] oversample))
-      (274035 'end of statement')
+      unknown step[274120](274119 call max 1(274117 call _cast int[13] oversample))
+      (274123 'end of statement')
     }
-    (274037 return step)
+    (274125 return step)
   }
-  type SampleBucketizer[275438](?) unknown eltType[274042] "type variable" unknown storage[274053](274052 call c_array eltType(274050 call << 1 maxLogBuckets)) unknown sortedStorage[274065](274064 call c_array eltType(274062 call << 1 maxLogBuckets)) unknown logBuckets[274070] int[13] unknown numBuckets[274075] int[13] unknown equalBuckets[274080] bool[10] function SampleBucketizer[275438](?).writeThis[274088](arg _mt[275442]:_MT[238], arg this[275440]:SampleBucketizer[275438](?), arg ch[274086]:_any[178](?)) : _unknown[51] throws "method" "primary method"
+  type SampleBucketizer[275526](?) unknown eltType[274130] "type variable" unknown storage[274141](274140 call c_array eltType(274138 call << 1 maxLogBuckets)) unknown sortedStorage[274153](274152 call c_array eltType(274150 call << 1 maxLogBuckets)) unknown logBuckets[274158] int[13] unknown numBuckets[274163] int[13] unknown equalBuckets[274168] bool[10] function SampleBucketizer[275526](?).writeThis[274176](arg _mt[275530]:_MT[238], arg this[275528]:SampleBucketizer[275526](?), arg ch[274174]:_any[178](?)) : _unknown[51] throws "method" "primary method"
   {
-    (274108 call <~> ch "SampleBucketizer(")
-    (274133 call <~>(274130 call <~> ch "\n logBuckets=") logBuckets)
-    (274157 call <~>(274154 call <~> ch "\n numBuckets=") numBuckets)
-    (274181 call <~>(274178 call <~> ch "\n equalBuckets=") equalBuckets)
-    (274202 call <~> ch "\n storage=")
+    (274196 call <~> ch "SampleBucketizer(")
+    (274221 call <~>(274218 call <~> ch "\n logBuckets=") logBuckets)
+    (274245 call <~>(274242 call <~> ch "\n numBuckets=") numBuckets)
+    (274269 call <~>(274266 call <~> ch "\n equalBuckets=") equalBuckets)
+    (274290 call <~> ch "\n storage=")
     {
-      unknown _indexOfInterest[274244] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[274245] "expr temp" "temp"
-      (274254 'move' _iterator[274245](274252 call _getIterator(274259 call chpl_direct_range_iter 0 numBuckets 1)))
+      unknown _indexOfInterest[274332] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[274333] "expr temp" "temp"
+      (274342 'move' _iterator[274333](274340 call _getIterator(274347 call chpl_direct_range_iter 0 numBuckets 1)))
       Defer
       {
         {
-          (274275 call _freeIterator _iterator[274245])
+          (274363 call _freeIterator _iterator[274333])
         }
       }
       { scopeless type
-        (274264 'move' _indexOfInterest[274244](274261 call iteratorIndex _iterator[274245]))
+        (274352 'move' _indexOfInterest[274332](274349 call iteratorIndex _iterator[274333]))
       }
-      ForLoop[274246]
+      ForLoop[274334]
       {
-        unknown i[274268] "index var" "insert auto destroy"
-        (274270 'move' i[274268] _indexOfInterest[274244])
+        unknown i[274356] "index var" "insert auto destroy"
+        (274358 'move' i[274356] _indexOfInterest[274332])
         {
-          (274240 call <~> ch(274239 'try!-expr'(274238 call(274230 call . " %xt" c"format")(274236 call storage i))))
+          (274328 call <~> ch(274327 'try!-expr'(274326 call(274318 call . " %xt" c"format")(274324 call storage i))))
         }
-        label _continueLabel[274249]
-        _indexOfInterest[274244]
-        _iterator[274245]
+        label _continueLabel[274337]
+        _indexOfInterest[274332]
+        _iterator[274333]
       }
-      label _breakLabel[274250]
+      label _breakLabel[274338]
     }
-    (274300 call <~> ch "\n sortedStorage=")
+    (274388 call <~> ch "\n sortedStorage=")
     {
-      unknown _indexOfInterest[274324] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[274325] "expr temp" "temp"
-      (274334 'move' _iterator[274325](274332 call _getIterator(274339 call chpl_direct_range_iter 0 numBuckets 1)))
+      unknown _indexOfInterest[274412] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[274413] "expr temp" "temp"
+      (274422 'move' _iterator[274413](274420 call _getIterator(274427 call chpl_direct_range_iter 0 numBuckets 1)))
       Defer
       {
         {
-          (274355 call _freeIterator _iterator[274325])
+          (274443 call _freeIterator _iterator[274413])
         }
       }
       { scopeless type
-        (274344 'move' _indexOfInterest[274324](274341 call iteratorIndex _iterator[274325]))
+        (274432 'move' _indexOfInterest[274412](274429 call iteratorIndex _iterator[274413]))
       }
-      ForLoop[274326]
+      ForLoop[274414]
       {
-        unknown i[274348] "index var" "insert auto destroy"
-        (274350 'move' i[274348] _indexOfInterest[274324])
+        unknown i[274436] "index var" "insert auto destroy"
+        (274438 'move' i[274436] _indexOfInterest[274412])
         {
-          (274320 call <~> ch(274319 'try!-expr'(274318 call(274310 call . " %xt" c"format")(274316 call sortedStorage i))))
+          (274408 call <~> ch(274407 'try!-expr'(274406 call(274398 call . " %xt" c"format")(274404 call sortedStorage i))))
         }
-        label _continueLabel[274329]
-        _indexOfInterest[274324]
-        _iterator[274325]
+        label _continueLabel[274417]
+        _indexOfInterest[274412]
+        _iterator[274413]
       }
-      label _breakLabel[274330]
+      label _breakLabel[274418]
     }
-    (274364 call <~> ch ")\n")
-  } function SampleBucketizer[275438](?).getNumBuckets[274371](arg _mt[275446]:_MT[238], arg this[275444]:SampleBucketizer[275438](?)) : _unknown[51] "method" "primary method"
+    (274452 call <~> ch ")\n")
+  } function SampleBucketizer[275526](?).getNumBuckets[274459](arg _mt[275534]:_MT[238], arg this[275532]:SampleBucketizer[275526](?)) : _unknown[51] "method" "primary method"
   {
-    (274383 return(274381 call * numBuckets(274379 call + 1(274377 call _cast int[13] equalBuckets))))
-  } function SampleBucketizer[275438](?).getBinsToRecursivelySort[274390](arg _mt[275450]:_MT[238], arg this[275448]:SampleBucketizer[275438](?)) : _unknown[51] "method" "primary method"
+    (274471 return(274469 call * numBuckets(274467 call + 1(274465 call _cast int[13] equalBuckets))))
+  } function SampleBucketizer[275526](?).getBinsToRecursivelySort[274478](arg _mt[275538]:_MT[238], arg this[275536]:SampleBucketizer[275526](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown r[274397](274396 call range(stridable = 1))
-      (274400 'end of statement')
+      unknown r[274485](274484 call range(stridable = 1))
+      (274488 'end of statement')
     }
-    if(274434 call _cond_test equalBuckets)
+    if(274522 call _cond_test equalBuckets)
     {
-      (274416 call = r(274414 call chpl_by(274411 call chpl_build_bounded_range 0(274409 call -(274407 call getNumBuckets) 1)) 2))
+      (274504 call = r(274502 call chpl_by(274499 call chpl_build_bounded_range 0(274497 call -(274495 call getNumBuckets) 1)) 2))
     }
     {
-      (274430 call = r(274428 call chpl_build_bounded_range 0(274426 call -(274424 call getNumBuckets) 1)))
+      (274518 call = r(274516 call chpl_build_bounded_range 0(274514 call -(274512 call getNumBuckets) 1)))
     }
-    (274439 return r)
-  } function SampleBucketizer[275438](?).getNextStartBit[274449](arg _mt[275454]:_MT[238], arg this[275452]:SampleBucketizer[275438](?), arg start_bit[274446] :
+    (274527 return r)
+  } function SampleBucketizer[275526](?).getNextStartBit[274537](arg _mt[275542]:_MT[238], arg this[275540]:SampleBucketizer[275526](?), arg start_bit[274534] :
   int[13]) : _unknown[51] "method" "primary method"
   {
-    (274452 return start_bit)
-  } function SampleBucketizer[275438](?).build[274463](arg _mt[275458]:_MT[238], arg this[275456]:SampleBucketizer[275438](?), arg logBuckets[274460] :
-  int[13], arg equalBuckets[274466] :
+    (274540 return start_bit)
+  } function SampleBucketizer[275526](?).build[274551](arg _mt[275546]:_MT[238], arg this[275544]:SampleBucketizer[275526](?), arg logBuckets[274548] :
+  int[13], arg equalBuckets[274554] :
   bool[10]) : _unknown[51] "method" "primary method"
   {
-    (274476 call =(274472 call . this c"logBuckets") logBuckets)
-    (274490 call =(274483 call . this c"numBuckets")(274488 call << 1 logBuckets))
-    (274500 call =(274496 call . this c"equalBuckets") equalBuckets)
+    (274564 call =(274560 call . this c"logBuckets") logBuckets)
+    (274578 call =(274571 call . this c"numBuckets")(274576 call << 1 logBuckets))
+    (274588 call =(274584 call . this c"equalBuckets") equalBuckets)
     { scopeless
-      unknown numSplitters[274510](274508 call -(274504 call . this c"numBuckets") 1)
-      (274513 'end of statement')
+      unknown numSplitters[274598](274596 call -(274592 call . this c"numBuckets") 1)
+      (274601 'end of statement')
     }
-    (274525 call =(274517 call sortedStorage numSplitters)(274524 call sortedStorage(274521 call - numSplitters 1)))
-    (274533 call build 0 numSplitters 1)
-  } function SampleBucketizer[275438](?).build[274543](arg _mt[275462]:_MT[238], arg this[275460]:SampleBucketizer[275438](?), arg left[274540] :
-  int[13], arg right[274546] :
-  int[13], arg pos[274550] :
+    (274613 call =(274605 call sortedStorage numSplitters)(274612 call sortedStorage(274609 call - numSplitters 1)))
+    (274621 call build 0 numSplitters 1)
+  } function SampleBucketizer[275526](?).build[274631](arg _mt[275550]:_MT[238], arg this[275548]:SampleBucketizer[275526](?), arg left[274628] :
+  int[13], arg right[274634] :
+  int[13], arg pos[274638] :
   int[13]) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown mid[274563](274561 call + left(274559 call /(274556 call - right left) 2))
-      (274566 'end of statement')
+      unknown mid[274651](274649 call + left(274647 call /(274644 call - right left) 2))
+      (274654 'end of statement')
     }
-    (274576 call =(274571 call storage pos)(274575 call sortedStorage mid))
-    if(274610 call _cond_test(274584 call <(274581 call * 2 pos) numBuckets))
+    (274664 call =(274659 call storage pos)(274663 call sortedStorage mid))
+    if(274698 call _cond_test(274672 call <(274669 call * 2 pos) numBuckets))
     {
-      (274594 call build left mid(274592 call * 2 pos))
-      (274608 call build mid right(274606 call +(274603 call * 2 pos) 1))
+      (274682 call build left mid(274680 call * 2 pos))
+      (274696 call build mid right(274694 call +(274691 call * 2 pos) 1))
     }
-  } function SampleBucketizer[275438](?).splitter[274622](arg _mt[275466]:_MT[238], arg this[275464]:SampleBucketizer[275438](?), arg i[274619] :
+  } function SampleBucketizer[275526](?).splitter[274710](arg _mt[275554]:_MT[238], arg this[275552]:SampleBucketizer[275526](?), arg i[274707] :
   int[13]) const ref : _unknown[51] "inline" "method" "primary method"
   {
-    (274629 return(274628 call storage i))
+    (274717 return(274716 call storage i))
   }
   { scopeless type
     eltType
-  } function SampleBucketizer[275438](?).sortedSplitter[274641](arg _mt[275470]:_MT[238], arg this[275468]:SampleBucketizer[275438](?), arg i[274638] :
+  } function SampleBucketizer[275526](?).sortedSplitter[274729](arg _mt[275558]:_MT[238], arg this[275556]:SampleBucketizer[275526](?), arg i[274726] :
   int[13]) const ref : _unknown[51] "inline" "method" "primary method"
   {
-    (274648 return(274647 call sortedStorage i))
+    (274736 return(274735 call sortedStorage i))
   }
   { scopeless type
     eltType
-  } function SampleBucketizer[275438](?).bucketForRecord[274658](arg _mt[275474]:_MT[238], arg this[275472]:SampleBucketizer[275438](?), arg a[274656]:_any[178](?), arg criterion[274660]:_any[178](?), arg startbit[274662]:_any[178](?)) : _unknown[51] "method" "primary method"
+  } function SampleBucketizer[275526](?).bucketForRecord[274746](arg _mt[275562]:_MT[238], arg this[275560]:SampleBucketizer[275526](?), arg a[274744]:_any[178](?), arg criterion[274748]:_any[178](?), arg startbit[274750]:_any[178](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown bk[274665] 1
-      (274668 'end of statement')
+      unknown bk[274753] 1
+      (274756 'end of statement')
     }
     {
-      unknown _indexOfInterest[274703] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[274704] "expr temp" "temp"
-      (274713 'move' _iterator[274704](274711 call _getIterator(274720 call chpl_direct_counted_range_iter 0 logBuckets)))
+      unknown _indexOfInterest[274791] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[274792] "expr temp" "temp"
+      (274801 'move' _iterator[274792](274799 call _getIterator(274808 call chpl_direct_counted_range_iter 0 logBuckets)))
       Defer
       {
         {
-          (274736 call _freeIterator _iterator[274704])
+          (274824 call _freeIterator _iterator[274792])
         }
       }
       { scopeless type
-        (274725 'move' _indexOfInterest[274703](274722 call iteratorIndex _iterator[274704]))
+        (274813 'move' _indexOfInterest[274791](274810 call iteratorIndex _iterator[274792]))
       }
-      ForLoop[274705]
+      ForLoop[274793]
       {
-        unknown lg[274729] "index var" "insert auto destroy"
-        (274731 'move' lg[274729] _indexOfInterest[274703])
+        unknown lg[274817] "index var" "insert auto destroy"
+        (274819 'move' lg[274817] _indexOfInterest[274791])
         {
-          (274699 call = bk(274697 call +(274680 call * 2 bk)(274695 call _cast int[13](274692 call <(274690 call chpl_compare(274686 call splitter bk) a criterion) 0))))
+          (274787 call = bk(274785 call +(274768 call * 2 bk)(274783 call _cast int[13](274780 call <(274778 call chpl_compare(274774 call splitter bk) a criterion) 0))))
         }
-        label _continueLabel[274708]
-        _indexOfInterest[274703]
-        _iterator[274704]
+        label _continueLabel[274796]
+        _indexOfInterest[274791]
+        _iterator[274792]
       }
-      label _breakLabel[274709]
+      label _breakLabel[274797]
     }
-    if(274773 call _cond_test equalBuckets)
+    if(274861 call _cond_test equalBuckets)
     {
-      (274769 call = bk(274767 call +(274747 call * 2 bk)(274765 call _cast int[13](274762 call ==(274760 call chpl_compare a(274758 call sortedSplitter(274755 call - bk numBuckets)) criterion) 0))))
+      (274857 call = bk(274855 call +(274835 call * 2 bk)(274853 call _cast int[13](274850 call ==(274848 call chpl_compare a(274846 call sortedSplitter(274843 call - bk numBuckets)) criterion) 0))))
     }
-    (274789 return(274787 call - bk(274784 IfExpr  equalBuckets then
+    (274877 return(274875 call - bk(274872 IfExpr  equalBuckets then
     { scopeless
-      (274781 call * 2 numBuckets)
+      (274869 call * 2 numBuckets)
     } else
     { scopeless
       numBuckets
     } )))
-  } function SampleBucketizer[275438](?).classify[274797](arg _mt[275478]:_MT[238], arg this[275476]:SampleBucketizer[275438](?), arg A[274795]:_any[178](?), arg start_n[274799]:_any[178](?), arg end_n[274801]:_any[178](?), arg criterion[274803]:_any[178](?), arg startbit[274805]:_any[178](?)) : _unknown[51] "iterator fn" "method" "primary method"
+  } function SampleBucketizer[275526](?).classify[274885](arg _mt[275566]:_MT[238], arg this[275564]:SampleBucketizer[275526](?), arg A[274883]:_any[178](?), arg start_n[274887]:_any[178](?), arg end_n[274889]:_any[178](?), arg criterion[274891]:_any[178](?), arg startbit[274893]:_any[178](?)) : _unknown[51] "iterator fn" "method" "primary method"
   {
     { scopeless
-      const paramEqualBuckets[274808] "const" equalBuckets
-      (274811 'end of statement')
+      const paramEqualBuckets[274896] "const" equalBuckets
+      (274899 'end of statement')
     }
     { scopeless
-      const paramLogBuckets[274814] "const" logBuckets
-      (274817 'end of statement')
+      const paramLogBuckets[274902] "const" logBuckets
+      (274905 'end of statement')
     }
     { scopeless
-      const paramNumBuckets[274828] "const"(274826 call << 1(274824 call + paramLogBuckets(274822 call _cast int[13] paramEqualBuckets)))
-      (274831 'end of statement')
+      const paramNumBuckets[274916] "const"(274914 call << 1(274912 call + paramLogBuckets(274910 call _cast int[13] paramEqualBuckets)))
+      (274919 'end of statement')
     }
     { scopeless
-      unknown b[274837](274836 call c_array int[13] classifyUnrollFactor)
-      (274840 'end of statement')
+      unknown b[274925](274924 call c_array int[13] classifyUnrollFactor)
+      (274928 'end of statement')
     }
     { scopeless
-      unknown cur[274842] start_n
-      (274845 'end of statement')
+      unknown cur[274930] start_n
+      (274933 'end of statement')
     }
     {
-      unknown tmp[275228] "temp"
-      (275264 'move' tmp[275228](275253 call _cond_test(275255 call <= cur(275258 call - end_n(275261 call - classifyUnrollFactor 1)))))
-      WhileDo[275233]
+      unknown tmp[275316] "temp"
+      (275352 'move' tmp[275316](275341 call _cond_test(275343 call <= cur(275346 call - end_n(275349 call - classifyUnrollFactor 1)))))
+      WhileDo[275321]
       {
         {
           {
-            unknown _indexOfInterest[274873] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[274874] "expr temp" "temp"
-            (274883 'move' _iterator[274874](274881 call _getIterator(274891 call chpl_direct_range_iter 0(274888 call - classifyUnrollFactor 1) 1)))
+            unknown _indexOfInterest[274961] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[274962] "expr temp" "temp"
+            (274971 'move' _iterator[274962](274969 call _getIterator(274979 call chpl_direct_range_iter 0(274976 call - classifyUnrollFactor 1) 1)))
             Defer
             {
               {
-                (274907 call _freeIterator _iterator[274874])
+                (274995 call _freeIterator _iterator[274962])
               }
             }
             { scopeless type
-              (274896 'move' _indexOfInterest[274873](274893 call iteratorIndex _iterator[274874]))
+              (274984 'move' _indexOfInterest[274961](274981 call iteratorIndex _iterator[274962]))
             }
-            ForLoop[274875]
+            ForLoop[274963]
             {
-              unknown i[274900] "index var" "insert auto destroy"
-              (274902 'move' i[274900] _indexOfInterest[274873])
+              unknown i[274988] "index var" "insert auto destroy"
+              (274990 'move' i[274988] _indexOfInterest[274961])
               {
-                (274869 call =(274867 call b i) 1)
+                (274957 call =(274955 call b i) 1)
               }
-              label _continueLabel[274878]
-              _indexOfInterest[274873]
-              _iterator[274874]
+              label _continueLabel[274966]
+              _indexOfInterest[274961]
+              _iterator[274962]
             }
-            label _breakLabel[274879]
+            label _breakLabel[274967]
           }
           {
-            unknown _indexOfInterest[275014] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[275015] "expr temp" "temp"
-            (275024 'move' _iterator[275015](275022 call _getIterator(275032 call chpl_direct_range_iter 0(275029 call - paramLogBuckets 1) 1)))
+            unknown _indexOfInterest[275102] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[275103] "expr temp" "temp"
+            (275112 'move' _iterator[275103](275110 call _getIterator(275120 call chpl_direct_range_iter 0(275117 call - paramLogBuckets 1) 1)))
             Defer
             {
               {
-                (275048 call _freeIterator _iterator[275015])
+                (275136 call _freeIterator _iterator[275103])
               }
             }
             { scopeless type
-              (275037 'move' _indexOfInterest[275014](275034 call iteratorIndex _iterator[275015]))
+              (275125 'move' _indexOfInterest[275102](275122 call iteratorIndex _iterator[275103]))
             }
-            ForLoop[275016]
+            ForLoop[275104]
             {
-              unknown lg[275041] "index var" "insert auto destroy"
-              (275043 'move' lg[275041] _indexOfInterest[275014])
+              unknown lg[275129] "index var" "insert auto destroy"
+              (275131 'move' lg[275129] _indexOfInterest[275102])
               {
                 {
-                  unknown _indexOfInterest[274972] "an _indexOfInterest or chpl__followIdx variable" "temp"
-                  unknown _iterator[274973] "expr temp" "temp"
-                  (274982 'move' _iterator[274973](274980 call _getIterator(274990 call chpl_direct_range_iter 0(274987 call - classifyUnrollFactor 1) 1)))
+                  unknown _indexOfInterest[275060] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                  unknown _iterator[275061] "expr temp" "temp"
+                  (275070 'move' _iterator[275061](275068 call _getIterator(275078 call chpl_direct_range_iter 0(275075 call - classifyUnrollFactor 1) 1)))
                   Defer
                   {
                     {
-                      (275006 call _freeIterator _iterator[274973])
+                      (275094 call _freeIterator _iterator[275061])
                     }
                   }
                   { scopeless type
-                    (274995 'move' _indexOfInterest[274972](274992 call iteratorIndex _iterator[274973]))
+                    (275083 'move' _indexOfInterest[275060](275080 call iteratorIndex _iterator[275061]))
                   }
-                  ForLoop[274974]
+                  ForLoop[275062]
                   {
-                    unknown i[274999] "index var" "insert auto destroy"
-                    (275001 'move' i[274999] _indexOfInterest[274972])
+                    unknown i[275087] "index var" "insert auto destroy"
+                    (275089 'move' i[275087] _indexOfInterest[275060])
                     {
-                      (274968 call =(274934 call b i)(274966 call +(274940 call * 2(274939 call b i))(274964 call _cast int[13](274961 call <(274959 call chpl_compare(274949 call splitter(274947 call b i))(274957 call A(274954 call + cur i)) criterion) 0))))
+                      (275056 call =(275022 call b i)(275054 call +(275028 call * 2(275027 call b i))(275052 call _cast int[13](275049 call <(275047 call chpl_compare(275037 call splitter(275035 call b i))(275045 call A(275042 call + cur i)) criterion) 0))))
                     }
-                    label _continueLabel[274977]
-                    _indexOfInterest[274972]
-                    _iterator[274973]
+                    label _continueLabel[275065]
+                    _indexOfInterest[275060]
+                    _iterator[275061]
                   }
-                  label _breakLabel[274978]
+                  label _breakLabel[275066]
                 }
               }
-              label _continueLabel[275019]
-              _indexOfInterest[275014]
-              _iterator[275015]
+              label _continueLabel[275107]
+              _indexOfInterest[275102]
+              _iterator[275103]
             }
-            label _breakLabel[275020]
+            label _breakLabel[275108]
           }
-          if(275153 call _cond_test paramEqualBuckets)
+          if(275241 call _cond_test paramEqualBuckets)
           {
             {
-              unknown _indexOfInterest[275111] "an _indexOfInterest or chpl__followIdx variable" "temp"
-              unknown _iterator[275112] "expr temp" "temp"
-              (275121 'move' _iterator[275112](275119 call _getIterator(275129 call chpl_direct_range_iter 0(275126 call - classifyUnrollFactor 1) 1)))
+              unknown _indexOfInterest[275199] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[275200] "expr temp" "temp"
+              (275209 'move' _iterator[275200](275207 call _getIterator(275217 call chpl_direct_range_iter 0(275214 call - classifyUnrollFactor 1) 1)))
               Defer
               {
                 {
-                  (275145 call _freeIterator _iterator[275112])
+                  (275233 call _freeIterator _iterator[275200])
                 }
               }
               { scopeless type
-                (275134 'move' _indexOfInterest[275111](275131 call iteratorIndex _iterator[275112]))
+                (275222 'move' _indexOfInterest[275199](275219 call iteratorIndex _iterator[275200]))
               }
-              ForLoop[275113]
+              ForLoop[275201]
               {
-                unknown i[275138] "index var" "insert auto destroy"
-                (275140 'move' i[275138] _indexOfInterest[275111])
+                unknown i[275226] "index var" "insert auto destroy"
+                (275228 'move' i[275226] _indexOfInterest[275199])
                 {
-                  (275107 call =(275067 call b i)(275105 call +(275073 call * 2(275072 call b i))(275103 call _cast int[13](275100 call ==(275098 call chpl_compare(275082 call A(275079 call + cur i))(275096 call sortedSplitter(275093 call -(275088 call b i)(275091 call / paramNumBuckets 2))) criterion) 0))))
+                  (275195 call =(275155 call b i)(275193 call +(275161 call * 2(275160 call b i))(275191 call _cast int[13](275188 call ==(275186 call chpl_compare(275170 call A(275167 call + cur i))(275184 call sortedSplitter(275181 call -(275176 call b i)(275179 call / paramNumBuckets 2))) criterion) 0))))
                 }
-                label _continueLabel[275116]
-                _indexOfInterest[275111]
-                _iterator[275112]
+                label _continueLabel[275204]
+                _indexOfInterest[275199]
+                _iterator[275200]
               }
-              label _breakLabel[275117]
+              label _breakLabel[275205]
             }
           }
           {
-            unknown _indexOfInterest[275182] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[275183] "expr temp" "temp"
-            (275192 'move' _iterator[275183](275190 call _getIterator(275200 call chpl_direct_range_iter 0(275197 call - classifyUnrollFactor 1) 1)))
+            unknown _indexOfInterest[275270] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[275271] "expr temp" "temp"
+            (275280 'move' _iterator[275271](275278 call _getIterator(275288 call chpl_direct_range_iter 0(275285 call - classifyUnrollFactor 1) 1)))
             Defer
             {
               {
-                (275216 call _freeIterator _iterator[275183])
+                (275304 call _freeIterator _iterator[275271])
               }
             }
             { scopeless type
-              (275205 'move' _indexOfInterest[275182](275202 call iteratorIndex _iterator[275183]))
+              (275293 'move' _indexOfInterest[275270](275290 call iteratorIndex _iterator[275271]))
             }
-            ForLoop[275184]
+            ForLoop[275272]
             {
-              unknown i[275209] "index var" "insert auto destroy"
-              (275211 'move' i[275209] _indexOfInterest[275182])
+              unknown i[275297] "index var" "insert auto destroy"
+              (275299 'move' i[275297] _indexOfInterest[275270])
               {
-                (275179 yield(275177 call _build_tuple(275167 call + cur i)(275174 call -(275172 call b i) paramNumBuckets)))
+                (275267 yield(275265 call _build_tuple(275255 call + cur i)(275262 call -(275260 call b i) paramNumBuckets)))
               }
-              label _continueLabel[275187]
-              _indexOfInterest[275182]
-              _iterator[275183]
+              label _continueLabel[275275]
+              _indexOfInterest[275270]
+              _iterator[275271]
             }
-            label _breakLabel[275188]
+            label _breakLabel[275276]
           }
-          (275225 call += cur classifyUnrollFactor)
+          (275313 call += cur classifyUnrollFactor)
         }
-        label _continueLabel[275231]
-        (275248 'move' tmp[275228](275237 call _cond_test(275239 call <= cur(275242 call - end_n(275245 call - classifyUnrollFactor 1)))))
-        tmp[275228]
+        label _continueLabel[275319]
+        (275336 'move' tmp[275316](275325 call _cond_test(275327 call <= cur(275330 call - end_n(275333 call - classifyUnrollFactor 1)))))
+        tmp[275316]
       }
-      label _breakLabel[275232]
+      label _breakLabel[275320]
     }
     {
-      unknown tmp[275408] "temp"
-      (275432 'move' tmp[275408](275427 call _cond_test(275429 call <= cur end_n)))
-      WhileDo[275413]
+      unknown tmp[275496] "temp"
+      (275520 'move' tmp[275496](275515 call _cond_test(275517 call <= cur end_n)))
+      WhileDo[275501]
       {
         {
           { scopeless
-            unknown bk[275272] 1
-            (275275 'end of statement')
+            unknown bk[275360] 1
+            (275363 'end of statement')
           }
           {
-            unknown _indexOfInterest[275313] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[275314] "expr temp" "temp"
-            (275323 'move' _iterator[275314](275321 call _getIterator(275330 call chpl_direct_counted_range_iter 0 paramLogBuckets)))
+            unknown _indexOfInterest[275401] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[275402] "expr temp" "temp"
+            (275411 'move' _iterator[275402](275409 call _getIterator(275418 call chpl_direct_counted_range_iter 0 paramLogBuckets)))
             Defer
             {
               {
-                (275346 call _freeIterator _iterator[275314])
+                (275434 call _freeIterator _iterator[275402])
               }
             }
             { scopeless type
-              (275335 'move' _indexOfInterest[275313](275332 call iteratorIndex _iterator[275314]))
+              (275423 'move' _indexOfInterest[275401](275420 call iteratorIndex _iterator[275402]))
             }
-            ForLoop[275315]
+            ForLoop[275403]
             {
-              unknown lg[275339] "index var" "insert auto destroy"
-              (275341 'move' lg[275339] _indexOfInterest[275313])
+              unknown lg[275427] "index var" "insert auto destroy"
+              (275429 'move' lg[275427] _indexOfInterest[275401])
               {
-                (275309 call = bk(275307 call +(275287 call * 2 bk)(275305 call _cast int[13](275302 call <(275300 call chpl_compare(275293 call splitter bk)(275298 call A cur) criterion) 0))))
+                (275397 call = bk(275395 call +(275375 call * 2 bk)(275393 call _cast int[13](275390 call <(275388 call chpl_compare(275381 call splitter bk)(275386 call A cur) criterion) 0))))
               }
-              label _continueLabel[275318]
-              _indexOfInterest[275313]
-              _iterator[275314]
+              label _continueLabel[275406]
+              _indexOfInterest[275401]
+              _iterator[275402]
             }
-            label _breakLabel[275319]
+            label _breakLabel[275407]
           }
-          if(275389 call _cond_test paramEqualBuckets)
+          if(275477 call _cond_test paramEqualBuckets)
           {
-            (275385 call = bk(275383 call +(275357 call * 2 bk)(275381 call _cast int[13](275378 call ==(275376 call chpl_compare(275363 call A cur)(275374 call sortedSplitter(275371 call - bk(275369 call / paramNumBuckets 2))) criterion) 0))))
+            (275473 call = bk(275471 call +(275445 call * 2 bk)(275469 call _cast int[13](275466 call ==(275464 call chpl_compare(275451 call A cur)(275462 call sortedSplitter(275459 call - bk(275457 call / paramNumBuckets 2))) criterion) 0))))
           }
-          (275401 yield(275399 call _build_tuple cur(275396 call - bk paramNumBuckets)))
-          (275405 call += cur 1)
+          (275489 yield(275487 call _build_tuple cur(275484 call - bk paramNumBuckets)))
+          (275493 call += cur 1)
         }
-        label _continueLabel[275411]
-        (275422 'move' tmp[275408](275417 call _cond_test(275419 call <= cur end_n)))
-        tmp[275408]
+        label _continueLabel[275499]
+        (275510 'move' tmp[275496](275505 call _cond_test(275507 call <= cur end_n)))
+        tmp[275496]
       }
-      label _breakLabel[275412]
+      label _breakLabel[275500]
     }
   }
-  function createSplittersFromSample[275485](arg A[275483]:_any[178](?), ref arg splitterBucketizer[275488] :
-  SampleBucketizer, arg criterion[275491]:_any[178](?), arg start_n[275494] :
-  int[13], arg sampleSize[275498] :
-  int[13], arg sampleStep[275502] :
-  int[13], in arg numBuckets[275506] :
-  int[13], arg forceEqualBuckets[275511] :
+  function createSplittersFromSample[275573](arg A[275571]:_any[178](?), ref arg splitterBucketizer[275576] :
+  SampleBucketizer, arg criterion[275579]:_any[178](?), arg start_n[275582] :
+  int[13], arg sampleSize[275586] :
+  int[13], arg sampleStep[275590] :
+  int[13], in arg numBuckets[275594] :
+  int[13], arg forceEqualBuckets[275599] :
   ?[260] =
   none[57]) : _unknown[51]
   {
     { scopeless
-      unknown splitters[275521] "ref var"(275518 call . splitterBucketizer c"sortedStorage")
-      (275524 'end of statement')
+      unknown splitters[275609] "ref var"(275606 call . splitterBucketizer c"sortedStorage")
+      (275612 'end of statement')
     }
     { scopeless
-      unknown arrayIndex[275533](275531 call -(275528 call + start_n sampleStep) 1)
-      (275536 'end of statement')
+      unknown arrayIndex[275621](275619 call -(275616 call + start_n sampleStep) 1)
+      (275624 'end of statement')
     }
     { scopeless
-      unknown splitterIndex[275538] 0
-      (275541 'end of statement')
+      unknown splitterIndex[275626] 0
+      (275629 'end of statement')
     }
-    (275550 call =(275545 call splitters splitterIndex)(275549 call A arrayIndex))
+    (275638 call =(275633 call splitters splitterIndex)(275637 call A arrayIndex))
     {
-      unknown _indexOfInterest[275603] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[275604] "expr temp" "temp"
-      (275613 'move' _iterator[275604](275611 call _getIterator(275621 call chpl_direct_range_iter 2(275618 call - numBuckets 1) 1)))
+      unknown _indexOfInterest[275691] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[275692] "expr temp" "temp"
+      (275701 'move' _iterator[275692](275699 call _getIterator(275709 call chpl_direct_range_iter 2(275706 call - numBuckets 1) 1)))
       Defer
       {
         {
-          (275637 call _freeIterator _iterator[275604])
+          (275725 call _freeIterator _iterator[275692])
         }
       }
       { scopeless type
-        (275626 'move' _indexOfInterest[275603](275623 call iteratorIndex _iterator[275604]))
+        (275714 'move' _indexOfInterest[275691](275711 call iteratorIndex _iterator[275692]))
       }
-      ForLoop[275605]
+      ForLoop[275693]
       {
-        unknown i[275630] "index var" "insert auto destroy"
-        (275632 'move' i[275630] _indexOfInterest[275603])
+        unknown i[275718] "index var" "insert auto destroy"
+        (275720 'move' i[275718] _indexOfInterest[275691])
         {
-          (275563 call += arrayIndex sampleStep)
-          if(275599 call _cond_test(275580 call !=(275578 call chpl_compare(275571 call splitters splitterIndex)(275576 call A arrayIndex) criterion) 0))
+          (275651 call += arrayIndex sampleStep)
+          if(275687 call _cond_test(275668 call !=(275666 call chpl_compare(275659 call splitters splitterIndex)(275664 call A arrayIndex) criterion) 0))
           {
-            (275584 call += splitterIndex 1)
-            (275596 call =(275591 call splitters splitterIndex)(275595 call A arrayIndex))
+            (275672 call += splitterIndex 1)
+            (275684 call =(275679 call splitters splitterIndex)(275683 call A arrayIndex))
           }
         }
-        label _continueLabel[275608]
-        _indexOfInterest[275603]
-        _iterator[275604]
+        label _continueLabel[275696]
+        _indexOfInterest[275691]
+        _iterator[275692]
       }
-      label _breakLabel[275609]
+      label _breakLabel[275697]
     }
     { scopeless
-      unknown uniqueSplitters[275648](275646 call + 1 splitterIndex)
-      (275651 'end of statement')
+      unknown uniqueSplitters[275736](275734 call + 1 splitterIndex)
+      (275739 'end of statement')
     }
     { scopeless
-      unknown myUseEqualBuckets[275662](275660 call >=(275657 call -(275654 call - numBuckets 1) uniqueSplitters) equalBucketThreshold)
-      (275665 'end of statement')
+      unknown myUseEqualBuckets[275750](275748 call >=(275745 call -(275742 call - numBuckets 1) uniqueSplitters) equalBucketThreshold)
+      (275753 'end of statement')
     }
-    if(275685 call _cond_test(275677 call <(275671 call + 1(275669 call * 2 uniqueSplitters))(275675 call << 1 maxLogBuckets)))
+    if(275773 call _cond_test(275765 call <(275759 call + 1(275757 call * 2 uniqueSplitters))(275763 call << 1 maxLogBuckets)))
     {
-      (275681 call = myUseEqualBuckets 1)
+      (275769 call = myUseEqualBuckets 1)
     }
-    if(275699 call _cond_test(275692 call !=(275690 'typeof' forceEqualBuckets) nothing[7]))
+    if(275787 call _cond_test(275780 call !=(275778 'typeof' forceEqualBuckets) nothing[7]))
     {
       { scopeless
-        (275696 call = myUseEqualBuckets forceEqualBuckets)
+        (275784 call = myUseEqualBuckets forceEqualBuckets)
       }
     }
     { scopeless
-      unknown logBuckets[275711](275709 call +(275707 call log2 uniqueSplitters) 1)
-      (275714 'end of statement')
+      unknown logBuckets[275799](275797 call +(275795 call log2 uniqueSplitters) 1)
+      (275802 'end of statement')
     }
-    (275720 call = numBuckets(275718 call << 1 logBuckets))
+    (275808 call = numBuckets(275806 call << 1 logBuckets))
     {
-      unknown _indexOfInterest[275751] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[275752] "expr temp" "temp"
-      (275761 'move' _iterator[275752](275759 call _getIterator(275772 call chpl_direct_range_iter(275765 call + uniqueSplitters 1)(275769 call - numBuckets 1) 1)))
+      unknown _indexOfInterest[275839] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[275840] "expr temp" "temp"
+      (275849 'move' _iterator[275840](275847 call _getIterator(275860 call chpl_direct_range_iter(275853 call + uniqueSplitters 1)(275857 call - numBuckets 1) 1)))
       Defer
       {
         {
-          (275788 call _freeIterator _iterator[275752])
+          (275876 call _freeIterator _iterator[275840])
         }
       }
       { scopeless type
-        (275777 'move' _indexOfInterest[275751](275774 call iteratorIndex _iterator[275752]))
+        (275865 'move' _indexOfInterest[275839](275862 call iteratorIndex _iterator[275840]))
       }
-      ForLoop[275753]
+      ForLoop[275841]
       {
-        unknown i[275781] "index var" "insert auto destroy"
-        (275783 'move' i[275781] _indexOfInterest[275751])
+        unknown i[275869] "index var" "insert auto destroy"
+        (275871 'move' i[275869] _indexOfInterest[275839])
         {
-          (275736 call += splitterIndex 1)
-          (275748 call =(275743 call splitters splitterIndex)(275747 call A arrayIndex))
+          (275824 call += splitterIndex 1)
+          (275836 call =(275831 call splitters splitterIndex)(275835 call A arrayIndex))
         }
-        label _continueLabel[275756]
-        _indexOfInterest[275751]
-        _iterator[275752]
+        label _continueLabel[275844]
+        _indexOfInterest[275839]
+        _iterator[275840]
       }
-      label _breakLabel[275757]
+      label _breakLabel[275845]
     }
-    (275804 call(275798 call . splitterBucketizer c"build") logBuckets myUseEqualBuckets)
+    (275892 call(275886 call . splitterBucketizer c"build") logBuckets myUseEqualBuckets)
   }
-  function putRandomSampleAtArrayStart[275814](in arg start_n[275811] :
-  int[13], arg end_n[275817] :
-  int[13], arg A[275823] :
-  (275820 call chpl__buildArrayRuntimeType nil[44]), in arg numSamples[275827] :
-  int[13], arg seed[275831] =
+  function putRandomSampleAtArrayStart[275902](in arg start_n[275899] :
+  int[13], arg end_n[275905] :
+  int[13], arg A[275911] :
+  (275908 call chpl__buildArrayRuntimeType nil[44]), in arg numSamples[275915] :
+  int[13], arg seed[275919] =
   1) : _unknown[51]
   {
-    (275835 'use' Random)
-    (275842 'import'(275839 call . Sort c"ShallowCopy"))
+    (275923 'use' Random)
+    (275930 'import'(275927 call . Sort c"ShallowCopy"))
     { scopeless
-      unknown Tmp[275857](275855 call chpl__buildArrayRuntimeType(275853 call chpl__ensureDomainExpr(275846 call chpl_build_bounded_range 1 1))(275850 call . A c"eltType"))
-      (275860 'end of statement')
+      unknown Tmp[275945](275943 call chpl__buildArrayRuntimeType(275941 call chpl__ensureDomainExpr(275934 call chpl_build_bounded_range 1 1))(275938 call . A c"eltType"))
+      (275948 'end of statement')
     }
     { scopeless
-      unknown randNums[275870](275869 call createRandomStream(seed = seed)(eltType = int[13])(parSafe = 0))
-      (275873 'end of statement')
+      unknown randNums[275958](275957 call createRandomStream(seed = seed)(eltType = int[13])(parSafe = 0))
+      (275961 'end of statement')
     }
     {
-      unknown tmp[275955] "temp"
-      (275979 'move' tmp[275955](275974 call _cond_test(275976 call > numSamples 0)))
-      WhileDo[275960]
+      unknown tmp[276043] "temp"
+      (276067 'move' tmp[276043](276062 call _cond_test(276064 call > numSamples 0)))
+      WhileDo[276048]
       {
         {
-          (275880 call -= numSamples 1)
+          (275968 call -= numSamples 1)
           { scopeless
-            unknown offset[275894](275893 call(275887 call . randNums c"getNext") start_n end_n)
-            (275897 'end of statement')
+            unknown offset[275982](275981 call(275975 call . randNums c"getNext") start_n end_n)
+            (275985 'end of statement')
           }
-          if(275946 call _cond_test(275900 call != offset start_n))
+          if(276034 call _cond_test(275988 call != offset start_n))
           {
             { scopeless
-              unknown tmp[275906](275903 call . A c"eltType")
-              (275909 'end of statement')
+              unknown tmp[275994](275991 call . A c"eltType")
+              (275997 'end of statement')
             }
-            (275921 call(275912 call . ShallowCopy c"shallowCopy") Tmp 1 A start_n 1)
-            (275932 call(275924 call . ShallowCopy c"shallowCopy") A start_n offset 1)
-            (275944 call(275935 call . ShallowCopy c"shallowCopy") A offset Tmp 1 1)
+            (276009 call(276000 call . ShallowCopy c"shallowCopy") Tmp 1 A start_n 1)
+            (276020 call(276012 call . ShallowCopy c"shallowCopy") A start_n offset 1)
+            (276032 call(276023 call . ShallowCopy c"shallowCopy") A offset Tmp 1 1)
           }
-          (275952 call += start_n 1)
+          (276040 call += start_n 1)
         }
-        label _continueLabel[275958]
-        (275969 'move' tmp[275955](275964 call _cond_test(275966 call > numSamples 0)))
-        tmp[275955]
+        label _continueLabel[276046]
+        (276057 'move' tmp[276043](276052 call _cond_test(276054 call > numSamples 0)))
+        tmp[276043]
       }
-      label _breakLabel[275959]
+      label _breakLabel[276047]
     }
   }
 }

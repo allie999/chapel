@@ -13,20 +13,20 @@ on GPU here do {
         //     b += b * 2;
         // }
     // }
-    // B = 2;
-    // B = + scan A;
-    // // B = [1..10] real = 2.0;
-    // writeln(B);
-    // writeln(+ scan A);
+    B = 2;
+    B = + scan A;
+    // B = [1..10] real = 2.0;
+    writeln(B);
+    writeln(+ scan A);
 }
 
 
 // on here do {
 //     // A[1] = 10.0;
-    C = + reduce [1];
+    // C = + reduce [1];
 //     // B = B + 1;
 //     // writeln(C);
 // }
 // writeln(C);
 // Array assignment
-B = A;
+// B = A;
