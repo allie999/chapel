@@ -13,14 +13,17 @@ on GPU here do {
         //     b += b * 2;
         // }
     // }
-    B = + scan A;
-    //    writeln(+ scan A);
+    // B = 2;
+    // B = + scan A;
+    // // B = [1..10] real = 2.0;
+    // writeln(B);
+    // writeln(+ scan A);
 }
 
-writeln("12345678");
+
 // on here do {
 //     // A[1] = 10.0;
-//     C = + reduce [1];
+    C = + reduce [1];
 //     // B = B + 1;
 //     // writeln(C);
 // }

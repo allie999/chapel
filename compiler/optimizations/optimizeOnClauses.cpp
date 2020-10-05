@@ -93,7 +93,6 @@ classifyPrimitive(CallExpr *call) {
       case PRIM_BLOCK_WHILEDO_LOOP:
       case PRIM_BLOCK_DOWHILE_LOOP:
       case PRIM_BLOCK_FOR_LOOP:
-      case PRIM_BLOCK_FORALL_LOOP:
       case PRIM_BLOCK_C_FOR_LOOP:
         return FAST_AND_LOCAL;
 

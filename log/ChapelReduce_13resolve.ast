@@ -2,164 +2,208 @@ AST dump for ChapelReduce after pass resolve.
 Module use list: ChapelStandard ChapelLocks Reflection 
 
 {
-  function chpl__init_ChapelReduce[415997]() : void[4] "insert line file info" "module init" "resolved"
+  function chpl__init_ChapelReduce[415865]() : void[4] "insert line file info" "module init" "resolved"
   {
-    (512710 return _void[55])
+    (512573 return _void[55])
   }
-  function chpl__scanIterator[1372784](arg op[1372786]:unmanaged SumReduceScanOp(real(64))[1372640], arg data[1372788]:[domain(1,int(64),false)] real(64)[1365901]) : [domain(1,int(64),false)] real(64)[1365901] "instantiated generic" "invisible fn" "resolved"
+  function chpl__reduceCombine[1387126](arg globalOp[1387128]:unmanaged SumReduceScanOp(int(64))[1386361], arg localOp[1387130]:unmanaged SumReduceScanOp(int(64))[1386361]) : void[4] "instantiated generic" "invisible fn" "resolved" "no return value for void"
   {
-    unknown ret[1372790]:[domain(1,int(64),false)] real(64)[1365901] "dead after last mention" "RVV" "temp"
-    (1373098 'end of statement')
-    (1372874 'end of statement')
+    const tmp[1387138]:chpl_localeID_t[209294] "dead after last mention" "const" "temp"
+    unknown call_tmp[1387140]:chpl_localeID_t[209294] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1387142 'move' call_tmp[1387140](1387144 '_wide_get_locale' globalOp[1387128]))
+    (1387146 'move' tmp[1387138] call_tmp[1387140])
+    (1387151 call on_fn[1387153] tmp[1387138])
+    function on_fn[1387153](const in arg dummy_locale_arg[1387155]:chpl_localeID_t[209294]) : void[4] "on" "resolved"
     {
-      unknown call_tmp[1372884]:[domain(1,int(64),false)] real(64)[1365901] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
-      (1372886 'move' call_tmp[1372884](1372892 call _scan[1373181] data[1372788] op[1372786]))
-      (1372894 'move' ret[1372790] call_tmp[1372884])
-      gotoReturn _end_chpl__scanIterator[1373033] _end_chpl__scanIterator[1373033]
+      {
+        ref call_tmp[1387159]:_ref(chpl_LocalSpinlock)[940982] "dead after last mention" "maybe param" "temp"
+        unknown coerce_tmp[1387201]:ReduceScanOp[82297] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1387206 'move' coerce_tmp[1387201](1387203 'cast' ReduceScanOp[82297] globalOp[1387128]))
+        (1387161 'move' call_tmp[1387159](1387164 call l[771343] coerce_tmp[1387201]))
+        (1387171 call lock[187277] call_tmp[1387159])
+        (1387172 'end of statement')
+        unknown coerce_tmp[1387246]:SumReduceScanOp(int(64))[1386295] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1387251 'move' coerce_tmp[1387246](1387248 'cast' SumReduceScanOp(int(64))[1386295] globalOp[1387128]))
+        (1387177 call combine[1387210] coerce_tmp[1387246] localOp[1387130])
+        (1387179 'end of statement')
+        ref call_tmp[1387180]:_ref(chpl_LocalSpinlock)[940982] "dead after last mention" "maybe param" "temp"
+        unknown coerce_tmp[1387270]:ReduceScanOp[82297] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+        (1387275 'move' coerce_tmp[1387270](1387272 'cast' ReduceScanOp[82297] globalOp[1387128]))
+        (1387182 'move' call_tmp[1387180](1387185 call l[771343] coerce_tmp[1387270]))
+        (1387192 call unlock[187369] call_tmp[1387180])
+      }
+      (1387193 return _void[55])
     }
-    label _end_chpl__scanIterator[1373033]
-    (1373035 return ret[1372790])
+    {
+    }
+    (1387197 return _void[55])
   }
-  function ReduceScanOp[82300].init[771519](arg this[771522]:ReduceScanOp[82300], in arg l[771533]:chpl_LocalSpinlock[187432]) : void[4] "compiler generated" "inline" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  function chpl__cleanupLocalOp[1387279](arg globalOp[1387281]:unmanaged SumReduceScanOp(int(64))[1386361], arg localOp[1387283]:unmanaged SumReduceScanOp(int(64))[1386361]) : void[4] "inline" "instantiated generic" "invisible fn" "resolved" "no return value for void"
   {
-    unknown _formal_tmp_l[1372530]:chpl_LocalSpinlock[187432] "dead at end of block" "no auto destroy" "no copy" "temp"
-    (1372533 'move' _formal_tmp_l[1372530] l[771533])
-    unknown super_tmp[771548]:object[22] "dead after last mention" "temporary of super field" "temp"
-    (771550 'move' super_tmp[771548](771547 '.v' this[771522] super[355649]))
-    (771532 call init[749424] super_tmp[771548])
-    (771574 'end of statement')
-    unknown tmp[771553]:object[22] "dead after last mention" "temp" "type variable"
-    unknown call_tmp[771594]:object[22] "dead at end of block" "maybe param" "temp"
-    (771597 'move' call_tmp[771594](771564 'cast' object[22] this[771522]))
-    unknown chpl__thisAsParent[771561]:object[22] "dead at end of block" "insert auto destroy" "temp"
-    (771585 'move' chpl__thisAsParent[771561](1372538 call chpl__initCopy[945332] call_tmp[771594]))
-    (771567 'setcid' chpl__thisAsParent[771561])
-    (771569 '.=' this[771522] l[82295] _formal_tmp_l[1372530])
-    (771575 'end of statement')
-    (771572 'setcid' this[771522])
-    (771583 return _void[55])
+    (1387292 call chpl__delete[1387297] localOp[1387283])
+    (1387294 return _void[55])
   }
-  function ReduceScanOp[82300].deinit[771599](arg this[771603]:ReduceScanOp[82300]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method" "resolved" "virtual"
+  function ReduceScanOp[82297].l[771343](arg this[771347]:ReduceScanOp[82297]) ref : _ref(chpl_LocalSpinlock)[940982] "field accessor" "inline" "method" "primary method" "no implicit copy" "no parens" "resolved"
   {
-    (771611 return _void[55])
+    ref ret[771357]:_ref(chpl_LocalSpinlock)[940982] "dead after last mention" "RVV" "temp"
+    ref call_tmp[771364]:_ref(chpl_LocalSpinlock)[940982] "dead after last mention" "maybe param" "temp"
+    (771367 'move' call_tmp[771364](771351 '.' this[771347] l[82292]))
+    (771362 'move' ret[771357] call_tmp[771364])
+    (771359 return ret[771357])
   }
-  type ReduceScanOp[82300] val super[355649]:object[22] "super class" val l[82295]:chpl_LocalSpinlock[187432]
-  type unmanaged ReduceScanOp?[1839510]
-  type unmanaged ReduceScanOp[1839507]
-  type borrowed ReduceScanOp?[1839504]
-  function SumReduceScanOp(real(64))[1372574].identity[1373624](arg this[1373628]:SumReduceScanOp(real(64))[1372574]) : real(64)[16] "inline" "instantiated generic" "invisible fn" "method" "primary method" "no parens" "resolved"
+  function ReduceScanOp[82297].init[771369](arg this[771372]:ReduceScanOp[82297], in arg l[771383]:chpl_LocalSpinlock[187386]) : void[4] "compiler generated" "inline" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
   {
-    unknown ret[1373630]:real(64)[16] "dead after last mention" "RVV" "temp"
-    unknown x[1373638]:real(64)[16] "dead at end of block" "insert auto destroy"
-    unknown call_tmp[1373640]:real(64)[16] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
-    unknown call_tmp[1373648]:real(64)[16] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
-    (1373968 'move' x[1373638] 0.0)
-    (1373658 'end of statement')
-    (1373659 'move' ret[1373630] x[1373638])
-    gotoReturn _end_identity[1373667] _end_identity[1373667]
-    label _end_identity[1373667]
-    (1373669 return ret[1373630])
+    unknown _formal_tmp_l[1386251]:chpl_LocalSpinlock[187386] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (1386254 'move' _formal_tmp_l[1386251] l[771383])
+    unknown super_tmp[771398]:object[22] "dead after last mention" "temporary of super field" "temp"
+    (771400 'move' super_tmp[771398](771397 '.v' this[771372] super[355518]))
+    (771382 call init[749274] super_tmp[771398])
+    (771424 'end of statement')
+    unknown tmp[771403]:object[22] "dead after last mention" "temp" "type variable"
+    unknown call_tmp[771444]:object[22] "dead at end of block" "maybe param" "temp"
+    (771447 'move' call_tmp[771444](771414 'cast' object[22] this[771372]))
+    unknown chpl__thisAsParent[771411]:object[22] "dead at end of block" "insert auto destroy" "temp"
+    (771435 'move' chpl__thisAsParent[771411](1386259 call chpl__initCopy[945182] call_tmp[771444]))
+    (771417 'setcid' chpl__thisAsParent[771411])
+    (771419 '.=' this[771372] l[82292] _formal_tmp_l[1386251])
+    (771425 'end of statement')
+    (771422 'setcid' this[771372])
+    (771433 return _void[55])
   }
-  function SumReduceScanOp(real(64))[1372574].accumulate[1504798](arg this[1504802]:SumReduceScanOp(real(64))[1372574], arg x[1504804]:real(64)[16]) : void[4] "inline" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  function ReduceScanOp[82297].deinit[771449](arg this[771453]:ReduceScanOp[82297]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method" "resolved" "virtual"
   {
-    ref call_tmp[1504812]:_ref(real(64))[936778] "dead after last mention" "maybe param" "temp"
-    (1504814 'move' call_tmp[1504812](1504817 call value[1373596] this[1504802]))
-    (1504821 call +=[451484] call_tmp[1504812] x[1504804])
-    (1504824 return _void[55])
+    (771461 return _void[55])
   }
-  function SumReduceScanOp(real(64))[1372574].accumulateOntoState[1508821](arg this[1508825]:SumReduceScanOp(real(64))[1372574], ref arg state[1508827]:_ref(real(64))[936778], arg x[1508829]:real(64)[16]) : void[4] "inline" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
+  type ReduceScanOp[82297] val super[355518]:object[22] "super class" val l[82292]:chpl_LocalSpinlock[187386]
+  type unmanaged ReduceScanOp?[1763908]
+  type unmanaged ReduceScanOp[1763905]
+  type borrowed ReduceScanOp?[1763902]
+  function SumReduceScanOp(int(64))[1386295].identity[1386571](arg this[1386575]:SumReduceScanOp(int(64))[1386295]) : int(64)[13] "inline" "instantiated generic" "invisible fn" "method" "primary method" "no parens" "resolved"
   {
-    (1508840 call +=[451484] state[1508827] x[1508829])
-    (1508843 return _void[55])
+    unknown ret[1386577]:int(64)[13] "dead after last mention" "RVV" "temp"
+    unknown x[1386585]:int(64)[13] "dead at end of block" "insert auto destroy"
+    unknown call_tmp[1386587]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    unknown call_tmp[1386595]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    (1386915 'move' x[1386585] 0)
+    (1386605 'end of statement')
+    (1386606 'move' ret[1386577] x[1386585])
+    gotoReturn _end_identity[1386614] _end_identity[1386614]
+    label _end_identity[1386614]
+    (1386616 return ret[1386577])
   }
-  function SumReduceScanOp(real(64))[1372574].generate[1373560](arg this[1373564]:SumReduceScanOp(real(64))[1372574]) : real(64)[16] "inline" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  function SumReduceScanOp(int(64))[1386295].accumulate[1387048](arg this[1387052]:SumReduceScanOp(int(64))[1386295], arg x[1387054]:int(64)[13]) : void[4] "inline" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
   {
-    unknown ret[1373566]:real(64)[16] "dead after last mention" "RVV" "temp"
-    ref call_tmp[1373574]:_ref(real(64))[936778] "dead after last mention" "maybe param" "temp"
-    (1373576 'move' call_tmp[1373574](1373579 call value[1373596] this[1373564]))
-    (1373582 'move' ret[1373566](1373584 'deref' call_tmp[1373574]))
-    (1373586 return ret[1373566])
+    ref call_tmp[1387062]:_ref(int(64))[936483] "dead after last mention" "maybe param" "temp"
+    (1387064 'move' call_tmp[1387062](1387067 call value[1387084] this[1387052]))
+    (1387071 call +=[451226] call_tmp[1387062] x[1387054])
+    (1387074 return _void[55])
   }
-  function SumReduceScanOp(real(64))[1372574].clone[1501173](arg this[1501177]:SumReduceScanOp(real(64))[1372574]) : unmanaged SumReduceScanOp(real(64))[1372640] "inline" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
+  function SumReduceScanOp(int(64))[1386295].accumulateOntoState[1388451](arg this[1388455]:SumReduceScanOp(int(64))[1386295], ref arg state[1388457]:_ref(int(64))[936483], arg x[1388459]:int(64)[13]) : void[4] "inline" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
   {
-    unknown ret[1501179]:unmanaged SumReduceScanOp(real(64))[1372640] "dead after last mention" "RVV" "temp"
-    unknown call_tmp[1501187]:real(64)[16] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
-    unknown call_tmp[1501195]:unmanaged SumReduceScanOp(real(64))[1372640] "dead after last mention" "insert auto destroy for explicit new" "maybe param" "temp"
-    unknown new_temp[1501239]:unmanaged SumReduceScanOp(real(64))[1372640] "dead after last mention" "temp"
-    unknown default_arg_l[1501249]:chpl_LocalSpinlock[187432] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
-    (1501253 'move' default_arg_l[1501249](1501251 call _new_default_l[1372679]))
-    (1501241 'move' new_temp[1501239](1501225 call _new[1372600] default_arg_l[1501249] 0.0))
-    (1501197 'move' call_tmp[1501195] new_temp[1501239])
-    (1501205 'move' ret[1501179] call_tmp[1501195])
-    (1501209 return ret[1501179])
+    (1388470 call +=[451226] state[1388457] x[1388459])
+    (1388473 return _void[55])
   }
-  function SumReduceScanOp(real(64))[1372574].value[1373596](arg this[1373600]:SumReduceScanOp(real(64))[1372574]) ref : _ref(real(64))[936778] "field accessor" "inline" "instantiated generic" "invisible fn" "method" "primary method" "no implicit copy" "no parens" "resolved"
+  function SumReduceScanOp(int(64))[1386295].combine[1387210](arg this[1387214]:SumReduceScanOp(int(64))[1386295], arg x[1387216]:unmanaged SumReduceScanOp(int(64))[1386361]) : void[4] "inline" "instantiated generic" "invisible fn" "method" "primary method" "resolved" "no return value for void"
   {
-    ref ret[1373602]:_ref(real(64))[936778] "dead after last mention" "RVV" "temp"
-    ref call_tmp[1373610]:_ref(real(64))[936778] "dead after last mention" "maybe param" "temp"
-    (1373612 'move' call_tmp[1373610](1373614 '.' this[1373600] value[1372569]))
-    (1373617 'move' ret[1373602] call_tmp[1373610])
-    (1373621 return ret[1373602])
+    ref call_tmp[1387224]:_ref(int(64))[936483] "dead after last mention" "maybe param" "temp"
+    (1387226 'move' call_tmp[1387224](1387229 call value[1387084] this[1387214]))
+    ref call_tmp[1387232]:_ref(int(64))[936483] "dead after last mention" "maybe param" "temp"
+    unknown coerce_tmp[1387255]:SumReduceScanOp(int(64))[1386295] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1387260 'move' coerce_tmp[1387255](1387257 'cast' SumReduceScanOp(int(64))[1386295] x[1387216]))
+    (1387234 'move' call_tmp[1387232](1387237 call value[1387084] coerce_tmp[1387255]))
+    unknown coerce_tmp[1387263]:int(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1387267 'move' coerce_tmp[1387263](1387265 'deref' call_tmp[1387232]))
+    (1387241 call +=[451226] call_tmp[1387224] coerce_tmp[1387263])
+    (1387244 return _void[55])
   }
-  function SumReduceScanOp(real(64))[1372574].init[1371583](arg this[1371587]:SumReduceScanOp(real(64))[1372574], in arg l[1371591]:chpl_LocalSpinlock[187432], in arg value[1371601]:real(64)[16]) : void[4] "compiler generated" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  function SumReduceScanOp(int(64))[1386295].generate[1388499](arg this[1388503]:SumReduceScanOp(int(64))[1386295]) : int(64)[13] "inline" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
   {
-    val _formal_type_tmp_[1839190]:real(64)[16] "temp"
-    unknown _formal_tmp_l[1372488]:chpl_LocalSpinlock[187432] "dead at end of block" "no auto destroy" "no copy" "temp"
-    (1372491 'move' _formal_tmp_l[1372488] l[1371591])
-    unknown super_tmp[1372425]:ReduceScanOp[82300] "dead after last mention" "temporary of super field" "temp"
-    (1372427 'move' super_tmp[1372425](1372429 '.v' this[1371587] super[1372565]))
-    (1372436 call init[771519] super_tmp[1372425] _formal_tmp_l[1372488])
-    (1372438 'end of statement')
-    unknown tmp[1372439]:ReduceScanOp[82300] "dead after last mention" "temp" "type variable"
-    unknown call_tmp[1372458]:ReduceScanOp[82300] "dead at end of block" "maybe param" "temp"
-    (1372460 'move' call_tmp[1372458](1372462 'cast' ReduceScanOp[82300] this[1371587]))
-    unknown chpl__thisAsParent[1372465]:ReduceScanOp[82300] "dead at end of block" "insert auto destroy" "temp"
-    (1372467 'move' chpl__thisAsParent[1372465](1372543 call chpl__initCopy[1372545] call_tmp[1372458]))
-    (1372471 'setcid' chpl__thisAsParent[1372465])
-    (1372477 'end of statement')
-    (1372478 '.=' this[1371587] value[1372569] value[1371601])
-    (1372482 'end of statement')
-    (1372483 'setcid' this[1371587])
-    (1372485 return _void[55])
+    unknown ret[1388505]:int(64)[13] "dead after last mention" "RVV" "temp"
+    ref call_tmp[1388513]:_ref(int(64))[936483] "dead after last mention" "maybe param" "temp"
+    (1388515 'move' call_tmp[1388513](1388518 call value[1387084] this[1388503]))
+    (1388521 'move' ret[1388505](1388523 'deref' call_tmp[1388513]))
+    (1388525 return ret[1388505])
   }
-  function SumReduceScanOp(real(64))[1372574].deinit[1508583](arg this[1508587]:SumReduceScanOp(real(64))[1372574]) : void[4] "compiler generated" "destructor" "inline" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "virtual"
+  function SumReduceScanOp(int(64))[1386295].clone[1386926](arg this[1386930]:SumReduceScanOp(int(64))[1386295]) : unmanaged SumReduceScanOp(int(64))[1386361] "inline" "instantiated generic" "invisible fn" "method" "primary method" "resolved"
   {
-    (1508593 return _void[55])
+    unknown ret[1386932]:unmanaged SumReduceScanOp(int(64))[1386361] "dead after last mention" "RVV" "temp"
+    unknown call_tmp[1386940]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp" "type variable"
+    unknown call_tmp[1386948]:unmanaged SumReduceScanOp(int(64))[1386361] "dead after last mention" "insert auto destroy for explicit new" "maybe param" "temp"
+    unknown new_temp[1386992]:unmanaged SumReduceScanOp(int(64))[1386361] "dead after last mention" "temp"
+    unknown default_arg_l[1387002]:chpl_LocalSpinlock[187386] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    (1387006 'move' default_arg_l[1387002](1387004 call _new_default_l[1386400]))
+    (1386994 'move' new_temp[1386992](1386978 call _new[1386321] default_arg_l[1387002] 0))
+    (1386950 'move' call_tmp[1386948] new_temp[1386992])
+    (1386958 'move' ret[1386932] call_tmp[1386948])
+    (1386962 return ret[1386932])
   }
-  function _new[1372600](in arg l[1372611]:chpl_LocalSpinlock[187432], in arg value[1372623]:real(64)[16]) : unmanaged SumReduceScanOp(real(64))[1372640] "always propagate line file info" "compiler generated" "insert line file info" "last resort" "llvm return noalias" "_new wrapper" "resolved" "suppress lvalue error"
+  function SumReduceScanOp(int(64))[1386295].value[1387084](arg this[1387088]:SumReduceScanOp(int(64))[1386295]) ref : _ref(int(64))[936483] "field accessor" "inline" "instantiated generic" "invisible fn" "method" "primary method" "no implicit copy" "no parens" "resolved"
   {
-    val _formal_type_tmp_[1839194]:real(64)[16] "temp"
-    val _formal_type_tmp_[1839192]:SumReduceScanOp(real(64))[1372574] "temp"
-    unknown _formal_tmp_l[1372756]:chpl_LocalSpinlock[187432] "dead at end of block" "no auto destroy" "no copy" "temp"
-    (1372759 'move' _formal_tmp_l[1372756] l[1372611])
-    unknown ret[1372656]:unmanaged SumReduceScanOp(real(64))[1372640] "dead after last mention" "RVV" "temp"
-    val initTemp[1372602]:SumReduceScanOp(real(64))[1372574] "dead after last mention" "temp"
-    unknown call_tmp[1372663]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
-    (1372666 'move' call_tmp[1372663](1372762 'sizeof_bundle' SumReduceScanOp(real(64))[1372574]))
-    val cast_tmp[1372765]:c_void_ptr[149] "dead after last mention" "temp"
-    (1372767 'move' cast_tmp[1372765](1372631 call chpl_here_alloc[187788] call_tmp[1372663] 69))
-    (1372634 'move' initTemp[1372602](1372769 'cast' SumReduceScanOp(real(64))[1372574] cast_tmp[1372765]))
-    (1372636 'setcid' initTemp[1372602])
-    (1372651 'end of statement')
-    (1372603 call init[1371583] initTemp[1372602] _formal_tmp_l[1372756] value[1372623])
-    (1372652 'end of statement')
-    unknown tmp[1372638]:unmanaged SumReduceScanOp(real(64))[1372640] "dead after last mention" "temp"
-    (1372645 'move' tmp[1372638](1372642 'cast' unmanaged SumReduceScanOp(real(64))[1372640] initTemp[1372602]))
-    (1372661 'move' ret[1372656] tmp[1372638])
-    (1372658 return ret[1372656])
+    ref ret[1387090]:_ref(int(64))[936483] "dead after last mention" "RVV" "temp"
+    ref call_tmp[1387098]:_ref(int(64))[936483] "dead after last mention" "maybe param" "temp"
+    (1387100 'move' call_tmp[1387098](1387102 '.' this[1387088] value[1386290]))
+    (1387105 'move' ret[1387090] call_tmp[1387098])
+    (1387109 return ret[1387090])
   }
-  function _new_default_l[1372679]() : chpl_LocalSpinlock[187432] "compiler generated" "default actual function" "inline" "invisible fn" "last resort" "lineno ok" "maybe param" "maybe type" "resolved" "was compiler generated"
+  function SumReduceScanOp(int(64))[1386295].init[1385304](arg this[1385308]:SumReduceScanOp(int(64))[1386295], in arg l[1385312]:chpl_LocalSpinlock[187386], in arg value[1385322]:int(64)[13]) : void[4] "compiler generated" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
   {
-    unknown ret[1372681]:chpl_LocalSpinlock[187432] "dead after last mention" "RVV" "maybe param" "temp"
-    unknown l[1372686]:chpl_LocalSpinlock[187432] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
-    unknown default_arg_l[1372705]:AtomicBool[45877] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
-    (1372709 'move' default_arg_l[1372705](1372707 call init_default_l[944889]))
-    (1372697 call init[820382] l[1372686] default_arg_l[1372705])
-    (1372693 'move' ret[1372681] l[1372686])
-    (1372684 return ret[1372681])
+    val _formal_type_tmp_[1763695]:int(64)[13] "temp"
+    unknown _formal_tmp_l[1386209]:chpl_LocalSpinlock[187386] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (1386212 'move' _formal_tmp_l[1386209] l[1385312])
+    unknown super_tmp[1386146]:ReduceScanOp[82297] "dead after last mention" "temporary of super field" "temp"
+    (1386148 'move' super_tmp[1386146](1386150 '.v' this[1385308] super[1386286]))
+    (1386157 call init[771369] super_tmp[1386146] _formal_tmp_l[1386209])
+    (1386159 'end of statement')
+    unknown tmp[1386160]:ReduceScanOp[82297] "dead after last mention" "temp" "type variable"
+    unknown call_tmp[1386179]:ReduceScanOp[82297] "dead at end of block" "maybe param" "temp"
+    (1386181 'move' call_tmp[1386179](1386183 'cast' ReduceScanOp[82297] this[1385308]))
+    unknown chpl__thisAsParent[1386186]:ReduceScanOp[82297] "dead at end of block" "insert auto destroy" "temp"
+    (1386188 'move' chpl__thisAsParent[1386186](1386264 call chpl__initCopy[1386266] call_tmp[1386179]))
+    (1386192 'setcid' chpl__thisAsParent[1386186])
+    (1386198 'end of statement')
+    (1386199 '.=' this[1385308] value[1386290] value[1385322])
+    (1386203 'end of statement')
+    (1386204 'setcid' this[1385308])
+    (1386206 return _void[55])
   }
-  type SumReduceScanOp(real(64))[1372574] val super[1372565]:ReduceScanOp[82300] "super class" unknown value[1372569]:real(64)[16]
-  type unmanaged SumReduceScanOp(real(64))?[1508472]
-  type borrowed SumReduceScanOp(real(64))?[1508464]
-  type unmanaged SumReduceScanOp(real(64))[1372640]
+  function SumReduceScanOp(int(64))[1386295].deinit[1388370](arg this[1388374]:SumReduceScanOp(int(64))[1386295]) : void[4] "compiler generated" "destructor" "inline" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "virtual"
+  {
+    (1388380 return _void[55])
+  }
+  function _new[1386321](in arg l[1386332]:chpl_LocalSpinlock[187386], in arg value[1386344]:int(64)[13]) : unmanaged SumReduceScanOp(int(64))[1386361] "always propagate line file info" "compiler generated" "insert line file info" "last resort" "llvm return noalias" "_new wrapper" "resolved" "suppress lvalue error"
+  {
+    val _formal_type_tmp_[1763699]:int(64)[13] "temp"
+    val _formal_type_tmp_[1763697]:SumReduceScanOp(int(64))[1386295] "temp"
+    unknown _formal_tmp_l[1386477]:chpl_LocalSpinlock[187386] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (1386480 'move' _formal_tmp_l[1386477] l[1386332])
+    unknown ret[1386377]:unmanaged SumReduceScanOp(int(64))[1386361] "dead after last mention" "RVV" "temp"
+    val initTemp[1386323]:SumReduceScanOp(int(64))[1386295] "dead after last mention" "temp"
+    unknown call_tmp[1386384]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1386387 'move' call_tmp[1386384](1386483 'sizeof_bundle' SumReduceScanOp(int(64))[1386295]))
+    val cast_tmp[1386486]:c_void_ptr[149] "dead after last mention" "temp"
+    (1386488 'move' cast_tmp[1386486](1386352 call chpl_here_alloc[187742] call_tmp[1386384] 72))
+    (1386355 'move' initTemp[1386323](1386490 'cast' SumReduceScanOp(int(64))[1386295] cast_tmp[1386486]))
+    (1386357 'setcid' initTemp[1386323])
+    (1386372 'end of statement')
+    (1386324 call init[1385304] initTemp[1386323] _formal_tmp_l[1386477] value[1386344])
+    (1386373 'end of statement')
+    unknown tmp[1386359]:unmanaged SumReduceScanOp(int(64))[1386361] "dead after last mention" "temp"
+    (1386366 'move' tmp[1386359](1386363 'cast' unmanaged SumReduceScanOp(int(64))[1386361] initTemp[1386323]))
+    (1386382 'move' ret[1386377] tmp[1386359])
+    (1386379 return ret[1386377])
+  }
+  function _new_default_l[1386400]() : chpl_LocalSpinlock[187386] "compiler generated" "default actual function" "inline" "invisible fn" "last resort" "lineno ok" "maybe param" "maybe type" "resolved" "was compiler generated"
+  {
+    unknown ret[1386402]:chpl_LocalSpinlock[187386] "dead after last mention" "RVV" "maybe param" "temp"
+    unknown l[1386407]:chpl_LocalSpinlock[187386] "dead after last mention" "expr temp" "maybe param" "suppress lvalue error" "temp" "user variable name"
+    unknown default_arg_l[1386426]:AtomicBool[45874] "dead after last mention" "default actual temp" "expr temp" "insert auto destroy" "maybe param" "no auto destroy" "suppress lvalue error" "temp"
+    (1386430 'move' default_arg_l[1386426](1386428 call init_default_l[944739]))
+    (1386418 call init[820232] l[1386407] default_arg_l[1386426])
+    (1386414 'move' ret[1386402] l[1386407])
+    (1386405 return ret[1386402])
+  }
+  type SumReduceScanOp(int(64))[1386295] val super[1386286]:ReduceScanOp[82297] "super class" unknown value[1386290]:int(64)[13]
+  type unmanaged SumReduceScanOp(int(64))?[1388259]
+  type borrowed SumReduceScanOp(int(64))?[1388251]
+  type unmanaged SumReduceScanOp(int(64))[1386361]
 }

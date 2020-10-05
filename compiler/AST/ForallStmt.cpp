@@ -585,9 +585,8 @@ BlockStmt* ForallStmt::build(Expr* indices, Expr* iterator, CallExpr* intents,
   ForallStmt* fs = ForallStmt::buildHelper(indices, iterator, intents, body,
                                            zippered, false);
   fs->fAllowSerialIterator = serialOK;
-  BlockStmt* block = new BlockStmt(fs, BLOCK_SCOPELESS);
-  block -> blockInfoSet(new CallExpr(PRIM_BLOCK_FORALL_LOOP));
-  return block;
+  
+  return buildChapelStmt(fs);
 }
 
 /////////////////////////////////////////////////////////////////////////////

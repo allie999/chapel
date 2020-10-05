@@ -270,7 +270,6 @@ void checkPrimitives()
      case PRIM_BLOCK_WHILEDO_LOOP:      // BlockStmt::blockInfo - while do loop
      case PRIM_BLOCK_DOWHILE_LOOP:      // BlockStmt::blockInfo - do while loop
      case PRIM_BLOCK_FOR_LOOP:          // BlockStmt::blockInfo - for loop
-     case PRIM_BLOCK_FORALL_LOOP:       // BlockStmt::blockInfo - forall loop
      case PRIM_BLOCK_BEGIN:             // BlockStmt::blockInfo - begin block
      case PRIM_BLOCK_COBEGIN:           // BlockStmt::blockInfo - cobegin block
      case PRIM_BLOCK_COFORALL:          // BlockStmt::blockInfo - coforall block

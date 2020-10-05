@@ -2,1322 +2,1322 @@ AST dump for ChapelHashtable after pass cleanup.
 Module use list: 
 
 {
-  (200449 'use' ChapelBase)
-  (200451 'use' DSIUtil)
-  type chpl__hash_status[200461] def empty[200455]:chpl__hash_status[200461] 0 def full[200457]:chpl__hash_status[200461] def deleted[200459]:chpl__hash_status[200461]
+  (200396 'use' ChapelBase)
+  (200398 'use' DSIUtil)
+  type chpl__hash_status[200408] def empty[200402]:chpl__hash_status[200408] 0 def full[200404]:chpl__hash_status[200408] def deleted[200406]:chpl__hash_status[200408]
   {
   }
-  function chpl_TableEntry[200504](?).isFull[200486](arg _mt[200508]:_MT[238], arg this[200506]:chpl_TableEntry[200504](?)) : _unknown[51] "inline" "method" "primary method"
+  function chpl_TableEntry[200451](?).isFull[200433](arg _mt[200455]:_MT[238], arg this[200453]:chpl_TableEntry[200451](?)) : _unknown[51] "inline" "method" "primary method"
   {
-    (200498 return(200496 call ==(200489 call . this c"status")(200493 call . chpl__hash_status c"full")))
+    (200445 return(200443 call ==(200436 call . this c"status")(200440 call . chpl__hash_status c"full")))
   }
-  type chpl_TableEntry[200504](?) unknown status[200472](200469 call . chpl__hash_status c"empty") chpl__hash_status unknown key[200476] unknown val[200480]
-  function chpl__primes[200513]() : _unknown[51] "inline" "no parens" "private"
+  type chpl_TableEntry[200451](?) unknown status[200419](200416 call . chpl__hash_status c"empty") chpl__hash_status unknown key[200423] unknown val[200427]
+  function chpl__primes[200460]() : _unknown[51] "inline" "no parens" "private"
   {
-    (200681 return(200679 call _build_tuple 0 23 53 89 191 383 761 1531 3067 6143 12281 24571 49139 98299 196597 393209 786431 1572853 3145721 6291449 12582893 25165813 50331599 100663291 201326557 402653171 805306357 1610612711 3221225461 6442450939 12884901877 25769803751 51539607551 103079215087 206158430183 412316860387 824633720831 1649267441651 3298534883309 6597069766631 13194139533299 26388279066623 52776558133177 105553116266489 211106232532969 422212465065953 844424930131963 1688849860263901 3377699720527861 6755399441055731 13510798882111483 27021597764222939 54043195528445869 108086391056891903 216172782113783773 432345564227567561 864691128455135207))
+    (200628 return(200626 call _build_tuple 0 23 53 89 191 383 761 1531 3067 6143 12281 24571 49139 98299 196597 393209 786431 1572853 3145721 6291449 12582893 25165813 50331599 100663291 201326557 402653171 805306357 1610612711 3221225461 6442450939 12884901877 25769803751 51539607551 103079215087 206158430183 412316860387 824633720831 1649267441651 3298534883309 6597069766631 13194139533299 26388279066623 52776558133177 105553116266489 211106232532969 422212465065953 844424930131963 1688849860263901 3377699720527861 6755399441055731 13510798882111483 27021597764222939 54043195528445869 108086391056891903 216172782113783773 432345564227567561 864691128455135207))
   }
-  function _moveToReturn[200690](const  ref arg arg[200688]:_any[178](?)) : _unknown[51] "private"
+  function _moveToReturn[200637](const  ref arg arg[200635]:_any[178](?)) : _unknown[51] "private"
   {
-    if(200717 call _cond_test(200695 call ==(200693 'typeof' arg) nothing[7]))
+    if(200664 call _cond_test(200642 call ==(200640 'typeof' arg) nothing[7]))
     {
-      (200698 return none[57])
+      (200645 return none[57])
     }
     {
-      unknown moved[200703] "no auto destroy" "no copy" "no init"(200702 'typeof' arg)
-      (200706 'end of statement')
-      (200712 '=' moved arg)
-      (200715 return moved)
-    }
-  }
-  function _moveInit[200728](ref arg lhs[200726]:_any[178](?), in arg rhs[200730]:_any[178](?)) : _unknown[51] "private" "no return value for void"
-  {
-    if(200760 call _cond_test(200736 call !=(200733 'typeof' lhs)(200735 'typeof' rhs)))
-    {
-      (200757 call compilerError "type mismatch in _moveInit")
-    }
-    if(200778 call _cond_test(200768 call ==(200766 'typeof' lhs) nothing[7]))
-    {
-    }
-    {
-      (200775 '=' lhs rhs)
+      unknown moved[200650] "no auto destroy" "no copy" "no init"(200649 'typeof' arg)
+      (200653 'end of statement')
+      (200659 '=' moved arg)
+      (200662 return moved)
     }
   }
-  function _allocateData[200790](arg size[200787] :
-  int[13], arg tableEltType[200792]:_any[178](?)) : _unknown[51] "private"
+  function _moveInit[200675](ref arg lhs[200673]:_any[178](?), in arg rhs[200677]:_any[178](?)) : _unknown[51] "private" "no return value for void"
   {
-    if(200819 call _cond_test(200796 call == size 0))
+    if(200707 call _cond_test(200683 call !=(200680 'typeof' lhs)(200682 'typeof' rhs)))
     {
-      (200817 call halt "attempt to allocate hashtable with size 0")
+      (200704 call compilerError "type mismatch in _moveInit")
     }
-    unknown callPostAlloc[200826] bool[10]
-    (200829 'end of statement')
-    unknown ret[200836](200835 call _ddata_allocate_noinit tableEltType size callPostAlloc)
-    (200839 'end of statement')
-    unknown initMethod[200845](200844 call init_elts_method size tableEltType)
-    (200848 'end of statement')
-    const sizeofElement[200853] "const"(200852 call _ddata_sizeof_element ret)
-    (200856 'end of statement')
-    function ptrTo[200861](ref arg x[200859]:_any[178](?)) : _unknown[51] "inline"
+    if(200725 call _cond_test(200715 call ==(200713 'typeof' lhs) nothing[7]))
     {
-      (200867 return(200866 call c_pointer_return x))
     }
     {
-      unknown tmp[200996] "expr temp" "maybe param" "maybe type" "temp"
-      (200998 'move' tmp[200996] initMethod)
-      if(201003 call _cond_test(201000 call == tmp[200996](200875 call . ArrayInit c"noInit")))
+      (200722 '=' lhs rhs)
+    }
+  }
+  function _allocateData[200737](arg size[200734] :
+  int[13], arg tableEltType[200739]:_any[178](?)) : _unknown[51] "private"
+  {
+    if(200766 call _cond_test(200743 call == size 0))
+    {
+      (200764 call halt "attempt to allocate hashtable with size 0")
+    }
+    unknown callPostAlloc[200773] bool[10]
+    (200776 'end of statement')
+    unknown ret[200783](200782 call _ddata_allocate_noinit tableEltType size callPostAlloc)
+    (200786 'end of statement')
+    unknown initMethod[200792](200791 call init_elts_method size tableEltType)
+    (200795 'end of statement')
+    const sizeofElement[200800] "const"(200799 call _ddata_sizeof_element ret)
+    (200803 'end of statement')
+    function ptrTo[200808](ref arg x[200806]:_any[178](?)) : _unknown[51] "inline"
+    {
+      (200814 return(200813 call c_pointer_return x))
+    }
+    {
+      unknown tmp[200942] "expr temp" "maybe param" "maybe type" "temp"
+      (200944 'move' tmp[200942] initMethod)
+      if(200949 call _cond_test(200946 call == tmp[200942](200822 call . ArrayInit c"noInit")))
       {
       }
       {
-        if(201009 call _cond_test(201006 call == tmp[200996](200883 call . ArrayInit c"serialInit")))
+        if(200955 call _cond_test(200952 call == tmp[200942](200830 call . ArrayInit c"serialInit")))
         {
           {
-            unknown _indexOfInterest[200912] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[200913] "expr temp" "temp"
-            (200922 'move' _iterator[200913](200920 call _getIterator(200891 call _allSlots size)))
+            unknown _indexOfInterest[200859] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[200860] "expr temp" "temp"
+            (200869 'move' _iterator[200860](200867 call _getIterator(200838 call _allSlots size)))
             Defer
             {
               {
-                (200939 call _freeIterator _iterator[200913])
+                (200886 call _freeIterator _iterator[200860])
               }
             }
             { scopeless type
-              (200928 'move' _indexOfInterest[200912](200925 call iteratorIndex _iterator[200913]))
+              (200875 'move' _indexOfInterest[200859](200872 call iteratorIndex _iterator[200860]))
             }
-            ForLoop[200914]
+            ForLoop[200861]
             {
-              unknown slot[200932] "index var" "insert auto destroy"
-              (200934 'move' slot[200932] _indexOfInterest[200912])
+              unknown slot[200879] "index var" "insert auto destroy"
+              (200881 'move' slot[200879] _indexOfInterest[200859])
               {
-                (200909 call c_memset(200899 call ptrTo(200897 call ret slot))(200906 call _cast(200905 call uint[115] 8) 0) sizeofElement)
+                (200856 call c_memset(200846 call ptrTo(200844 call ret slot))(200853 call _cast(200852 call uint[115] 8) 0) sizeofElement)
               }
-              label _continueLabel[200917]
-              _indexOfInterest[200912]
-              _iterator[200913]
+              label _continueLabel[200864]
+              _indexOfInterest[200859]
+              _iterator[200860]
             }
-            label _breakLabel[200918]
+            label _breakLabel[200865]
           }
         }
         {
-          if(201016 call _cond_test(201013 call == tmp[200996](200950 call . ArrayInit c"parallelInit")))
+          if(200962 call _cond_test(200959 call == tmp[200942](200897 call . ArrayInit c"parallelInit")))
           {
             Forall {
               induction variables:
                 
-                unknown slot[200980] "index var" "insert auto destroy"
+                unknown slot[200927] "index var" "insert auto destroy"
               iterated expressions:
-                (200958 call _allSlots size)
+                (200905 call _allSlots size)
               shadow variables:
               other variables
                 forall body
               {
-                (200976 call c_memset(200966 call ptrTo(200964 call ret slot))(200973 call _cast(200972 call uint[115] 8) 0) sizeofElement)
+                (200923 call c_memset(200913 call ptrTo(200911 call ret slot))(200920 call _cast(200919 call uint[115] 8) 0) sizeofElement)
               }
             }
           }
           {
-            (200990 call halt "ArrayInit.heuristicInit should have been made concrete")
+            (200936 call halt "ArrayInit.heuristicInit should have been made concrete")
           }
         }
       }
     }
-    if(201029 call _cond_test callPostAlloc)
+    if(200975 call _cond_test callPostAlloc)
     {
-      (201026 call _ddata_allocate_postalloc ret size)
+      (200972 call _ddata_allocate_postalloc ret size)
     }
-    (201034 return ret)
+    (200980 return ret)
   }
-  function _freeData[201042](arg data[201040]:_any[178](?), arg size[201045] :
+  function _freeData[200988](arg data[200986]:_any[178](?), arg size[200991] :
   int[13]) : _unknown[51] "private" "no return value for void"
   {
-    if(201059 call _cond_test(201050 call != data nil[44]))
+    if(201005 call _cond_test(200996 call != data nil[44]))
     {
-      (201056 call _ddata_free data size)
+      (201002 call _ddata_free data size)
     }
   }
-  function _typeNeedsDeinit[201070](arg t[201068]:_any[178](?)) param : _unknown[51] "private"
+  function _typeNeedsDeinit[201016](arg t[201014]:_any[178](?)) param : _unknown[51] "private"
   {
-    (201076 return(201075 'needs auto destroy' t))
+    (201022 return(201021 'needs auto destroy' t))
   }
-  function _deinitSlot[201087](ref arg aSlot[201084] :
+  function _deinitSlot[201033](ref arg aSlot[201030] :
   chpl_TableEntry) : _unknown[51] "private" "no return value for void"
   {
-    if(201106 call _cond_test(201096 call _typeNeedsDeinit(201094 'typeof'(201091 call . aSlot c"key"))))
+    if(201052 call _cond_test(201042 call _typeNeedsDeinit(201040 'typeof'(201037 call . aSlot c"key"))))
     {
-      (201103 call chpl__autoDestroy(201099 call . aSlot c"key"))
+      (201049 call chpl__autoDestroy(201045 call . aSlot c"key"))
     }
-    if(201130 call _cond_test(201120 call _typeNeedsDeinit(201118 'typeof'(201115 call . aSlot c"val"))))
+    if(201076 call _cond_test(201066 call _typeNeedsDeinit(201064 'typeof'(201061 call . aSlot c"val"))))
     {
-      (201127 call chpl__autoDestroy(201123 call . aSlot c"val"))
+      (201073 call chpl__autoDestroy(201069 call . aSlot c"val"))
     }
   }
-  function _isSlotFull[201142](const  ref arg aSlot[201139] :
+  function _isSlotFull[201088](const  ref arg aSlot[201085] :
   chpl_TableEntry) : _unknown[51] "inline" "private"
   {
-    (201155 return(201153 call ==(201146 call . aSlot c"status")(201150 call . chpl__hash_status c"full")))
+    (201101 return(201099 call ==(201092 call . aSlot c"status")(201096 call . chpl__hash_status c"full")))
   }
   { scopeless type
     bool[10]
   }
-  function _allSlotsNumChunks[201167](arg size[201164] :
+  function _allSlotsNumChunks[201113](arg size[201110] :
   int[13]) : _unknown[51] "private"
   {
-    const numTasks[201181] "const"(201178 IfExpr (201171 call == dataParTasksPerLocale 0) then
+    const numTasks[201127] "const"(201124 IfExpr (201117 call == dataParTasksPerLocale 0) then
     { scopeless
-      (201174 call . here c"maxTaskPar")
+      (201120 call . here c"maxTaskPar")
     } else
     { scopeless
       dataParTasksPerLocale
     } )
-    (201184 'end of statement')
-    const ignoreRunning[201187] "const" dataParIgnoreRunningTasks
-    (201190 'end of statement')
-    const minSizePerTask[201192] "const" dataParMinGranularity
-    (201195 'end of statement')
-    if(201248 call _cond_test debugAssocDataPar)
+    (201130 'end of statement')
+    const ignoreRunning[201133] "const" dataParIgnoreRunningTasks
+    (201136 'end of statement')
+    const minSizePerTask[201138] "const" dataParMinGranularity
+    (201141 'end of statement')
+    if(201194 call _cond_test debugAssocDataPar)
     {
-      (201217 call writeln "### numTasks = " numTasks)
-      (201224 call writeln "### ignoreRunning = " ignoreRunning)
-      (201246 call writeln "### minSizePerTask = " minSizePerTask)
+      (201163 call writeln "### numTasks = " numTasks)
+      (201170 call writeln "### ignoreRunning = " ignoreRunning)
+      (201192 call writeln "### minSizePerTask = " minSizePerTask)
     }
-    unknown numChunks[201259](201258 call _computeNumChunks numTasks ignoreRunning minSizePerTask size)
-    (201262 'end of statement')
-    if(201305 call _cond_test debugAssocDataPar)
+    unknown numChunks[201205](201204 call _computeNumChunks numTasks ignoreRunning minSizePerTask size)
+    (201208 'end of statement')
+    if(201251 call _cond_test debugAssocDataPar)
     {
-      (201302 call writeln "### numChunks=" numChunks ", size=" size)
+      (201248 call writeln "### numChunks=" numChunks ", size=" size)
     }
-    (201310 return numChunks)
+    (201256 return numChunks)
   }
-  function _allSlots[201320](arg size[201317] :
+  function _allSlots[201266](arg size[201263] :
   int[13]) : _unknown[51] "iterator fn" "no return value for void"
   {
     {
-      unknown _indexOfInterest[201333] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[201334] "expr temp" "temp"
-      (201343 'move' _iterator[201334](201341 call _getIterator(201350 call chpl_direct_counted_range_iter 0 size)))
+      unknown _indexOfInterest[201279] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[201280] "expr temp" "temp"
+      (201289 'move' _iterator[201280](201287 call _getIterator(201296 call chpl_direct_counted_range_iter 0 size)))
       Defer
       {
         {
-          (201366 call _freeIterator _iterator[201334])
+          (201312 call _freeIterator _iterator[201280])
         }
       }
       { scopeless type
-        (201355 'move' _indexOfInterest[201333](201352 call iteratorIndex _iterator[201334]))
+        (201301 'move' _indexOfInterest[201279](201298 call iteratorIndex _iterator[201280]))
       }
-      ForLoop[201335]
+      ForLoop[201281]
       {
-        unknown slot[201359] "index var" "insert auto destroy"
-        (201361 'move' slot[201359] _indexOfInterest[201333])
+        unknown slot[201305] "index var" "insert auto destroy"
+        (201307 'move' slot[201305] _indexOfInterest[201279])
         {
-          (201330 yield slot)
+          (201276 yield slot)
         }
-        label _continueLabel[201338]
-        _indexOfInterest[201333]
-        _iterator[201334]
+        label _continueLabel[201284]
+        _indexOfInterest[201279]
+        _iterator[201280]
       }
-      label _breakLabel[201339]
+      label _breakLabel[201285]
     }
   }
-  function _allSlots[201382](arg size[201379] :
-  int[13], param arg tag[201385] :
+  function _allSlots[201328](arg size[201325] :
+  int[13], param arg tag[201331] :
   iterKind) : _unknown[51] "iterator fn" "private" "no return value for void"
   {
-    if(201418 call _cond_test debugDefaultAssoc)
+    if(201364 call _cond_test debugDefaultAssoc)
     {
-      (201415 call writeln "*** In associative domain _allSlots standalone iterator")
+      (201361 call writeln "*** In associative domain _allSlots standalone iterator")
     }
-    const numChunks[201427] "const"(201426 call _allSlotsNumChunks size)
-    (201430 'end of statement')
-    if(201861 call _cond_test(201433 call == numChunks 1))
+    const numChunks[201373] "const"(201372 call _allSlotsNumChunks size)
+    (201376 'end of statement')
+    if(201807 call _cond_test(201379 call == numChunks 1))
     {
       {
-        unknown _indexOfInterest[201446] "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[201447] "expr temp" "temp"
-        (201456 'move' _iterator[201447](201454 call _getIterator(201463 call chpl_direct_counted_range_iter 0 size)))
+        unknown _indexOfInterest[201392] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[201393] "expr temp" "temp"
+        (201402 'move' _iterator[201393](201400 call _getIterator(201409 call chpl_direct_counted_range_iter 0 size)))
         Defer
         {
           {
-            (201479 call _freeIterator _iterator[201447])
+            (201425 call _freeIterator _iterator[201393])
           }
         }
         { scopeless type
-          (201468 'move' _indexOfInterest[201446](201465 call iteratorIndex _iterator[201447]))
+          (201414 'move' _indexOfInterest[201392](201411 call iteratorIndex _iterator[201393]))
         }
-        ForLoop[201448]
+        ForLoop[201394]
         {
-          unknown slot[201472] "index var" "insert auto destroy"
-          (201474 'move' slot[201472] _indexOfInterest[201446])
+          unknown slot[201418] "index var" "insert auto destroy"
+          (201420 'move' slot[201418] _indexOfInterest[201392])
           {
-            (201443 yield slot)
+            (201389 yield slot)
           }
-          label _continueLabel[201451]
-          _indexOfInterest[201446]
-          _iterator[201447]
+          label _continueLabel[201397]
+          _indexOfInterest[201392]
+          _iterator[201393]
         }
-        label _breakLabel[201452]
+        label _breakLabel[201398]
       }
     }
     {
       {
-        unknown tmpIter[201619] "expr temp" "maybe ref" "no copy" "temp"
-        (201622 'move' tmpIter[201619](201492 call #(201489 call chpl_build_low_bounded_range 0) numChunks))
-        unknown isRngDomArr[201841] "maybe param" "temp"
-        (201856 'move' isRngDomArr[201841](201854 call ||(201843 call isBoundedRange tmpIter[201619])(201852 call ||(201846 call isDomain tmpIter[201619])(201849 call isArray tmpIter[201619]))))
-        if isRngDomArr[201841]
+        unknown tmpIter[201565] "expr temp" "maybe ref" "no copy" "temp"
+        (201568 'move' tmpIter[201565](201438 call #(201435 call chpl_build_low_bounded_range 0) numChunks))
+        unknown isRngDomArr[201787] "maybe param" "temp"
+        (201802 'move' isRngDomArr[201787](201800 call ||(201789 call isBoundedRange tmpIter[201565])(201798 call ||(201792 call isDomain tmpIter[201565])(201795 call isArray tmpIter[201565]))))
+        if isRngDomArr[201787]
         {
-          const _coforallCount[201708] "const" "end count" "temp"
-          (201777 'move' _coforallCount[201708](201774 call _endCountAlloc 1))
-          unknown numTasks[201709] "temp"
-          (201761 'move' numTasks[201709](201757 call . tmpIter[201619] c"size"))
-          (201752 call _upEndCount _coforallCount[201708] 1 numTasks[201709])
-          (201749 call chpl_resetTaskSpawn numTasks[201709])
-          unknown _indexOfInterest[201716] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[201717] "expr temp" "temp"
-          (201726 'move' _iterator[201717](201724 call _getIterator tmpIter[201619]))
+          const _coforallCount[201654] "const" "end count" "temp"
+          (201723 'move' _coforallCount[201654](201720 call _endCountAlloc 1))
+          unknown numTasks[201655] "temp"
+          (201707 'move' numTasks[201655](201703 call . tmpIter[201565] c"size"))
+          (201698 call _upEndCount _coforallCount[201654] 1 numTasks[201655])
+          (201695 call chpl_resetTaskSpawn numTasks[201655])
+          unknown _indexOfInterest[201662] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[201663] "expr temp" "temp"
+          (201672 'move' _iterator[201663](201670 call _getIterator tmpIter[201565]))
           Defer
           {
             {
-              (201742 call _freeIterator _iterator[201717])
+              (201688 call _freeIterator _iterator[201663])
             }
           }
           { scopeless type
-            (201731 'move' _indexOfInterest[201716](201728 call iteratorIndex _iterator[201717]))
+            (201677 'move' _indexOfInterest[201662](201674 call iteratorIndex _iterator[201663]))
           }
-          ForLoop[201718]
+          ForLoop[201664]
           {
-            unknown chunk[201735] "coforall index var" "index var" "insert auto destroy"
-            (201737 'move' chunk[201735] _indexOfInterest[201716])
+            unknown chunk[201681] "coforall index var" "index var" "insert auto destroy"
+            (201683 'move' chunk[201681] _indexOfInterest[201662])
             {
               {
-                const tmp[201626] "const" "temp"(201628 call _computeBlock size numChunks chunk(201633 call - size 1))
-                (201638 call _check_tuple_var_decl tmp[201626] 2)
-                const lo[201641] "const"(201643 call tmp[201626] 0)
-                const hi[201646] "const"(201648 call tmp[201626] 1)
-                (201651 'end of statement')
-                if(201653 call _cond_test debugAssocDataPar)
+                const tmp[201572] "const" "temp"(201574 call _computeBlock size numChunks chunk(201579 call - size 1))
+                (201584 call _check_tuple_var_decl tmp[201572] 2)
+                const lo[201587] "const"(201589 call tmp[201572] 0)
+                const hi[201592] "const"(201594 call tmp[201572] 1)
+                (201597 'end of statement')
+                if(201599 call _cond_test debugAssocDataPar)
                 {
-                  (201658 call writeln "*** chunk: " chunk " owns "(201663 call chpl_build_bounded_range lo hi))
+                  (201604 call writeln "*** chunk: " chunk " owns "(201609 call chpl_build_bounded_range lo hi))
                 }
                 {
-                  unknown _indexOfInterest[201668] "an _indexOfInterest or chpl__followIdx variable" "temp"
-                  unknown _iterator[201670] "expr temp" "temp"
-                  (201672 'move' _iterator[201670](201675 call _getIterator(201677 call chpl_direct_range_iter lo hi 1)))
+                  unknown _indexOfInterest[201614] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                  unknown _iterator[201616] "expr temp" "temp"
+                  (201618 'move' _iterator[201616](201621 call _getIterator(201623 call chpl_direct_range_iter lo hi 1)))
                   Defer
                   {
                     {
-                      (201683 call _freeIterator _iterator[201670])
+                      (201629 call _freeIterator _iterator[201616])
                     }
                   }
                   { scopeless type
-                    (201687 'move' _indexOfInterest[201668](201690 call iteratorIndex _iterator[201670]))
+                    (201633 'move' _indexOfInterest[201614](201636 call iteratorIndex _iterator[201616]))
                   }
-                  ForLoop[201692]
+                  ForLoop[201638]
                   {
-                    unknown slot[201695] "index var" "insert auto destroy"
-                    (201697 'move' slot[201695] _indexOfInterest[201668])
+                    unknown slot[201641] "index var" "insert auto destroy"
+                    (201643 'move' slot[201641] _indexOfInterest[201614])
                     {
-                      (201701 yield slot)
+                      (201647 yield slot)
                     }
-                    label _continueLabel[201703]
-                    _indexOfInterest[201668]
-                    _iterator[201670]
+                    label _continueLabel[201649]
+                    _indexOfInterest[201614]
+                    _iterator[201616]
                   }
-                  label _breakLabel[201705]
+                  label _breakLabel[201651]
                 }
               }
-              (201711 call _downEndCount _coforallCount[201708] nil[44])
-              (201710 'coforall loop')
+              (201657 call _downEndCount _coforallCount[201654] nil[44])
+              (201656 'coforall loop')
             }
-            label _continueLabel[201721]
-            _indexOfInterest[201716]
-            _iterator[201717]
+            label _continueLabel[201667]
+            _indexOfInterest[201662]
+            _iterator[201663]
           }
-          label _breakLabel[201722]
+          label _breakLabel[201668]
           Defer
           {
             {
-              (201764 call _endCountFree _coforallCount[201708])
+              (201710 call _endCountFree _coforallCount[201654])
             }
           }
-          (201769 call _waitEndCount _coforallCount[201708] 1 numTasks[201709])
+          (201715 call _waitEndCount _coforallCount[201654] 1 numTasks[201655])
         }
         {
-          const _coforallCount[201781] "const" "end count" "temp"
-          (201838 'move' _coforallCount[201781](201835 call _endCountAlloc 1))
-          unknown _indexOfInterest[201789] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[201790] "expr temp" "temp"
-          (201799 'move' _iterator[201790](201797 call _getIterator tmpIter[201619]))
+          const _coforallCount[201727] "const" "end count" "temp"
+          (201784 'move' _coforallCount[201727](201781 call _endCountAlloc 1))
+          unknown _indexOfInterest[201735] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[201736] "expr temp" "temp"
+          (201745 'move' _iterator[201736](201743 call _getIterator tmpIter[201565]))
           Defer
           {
             {
-              (201815 call _freeIterator _iterator[201790])
+              (201761 call _freeIterator _iterator[201736])
             }
           }
           { scopeless type
-            (201804 'move' _indexOfInterest[201789](201801 call iteratorIndex _iterator[201790]))
+            (201750 'move' _indexOfInterest[201735](201747 call iteratorIndex _iterator[201736]))
           }
-          ForLoop[201791]
+          ForLoop[201737]
           {
-            unknown chunk[201808] "coforall index var" "index var" "insert auto destroy"
-            (201810 'move' chunk[201808] _indexOfInterest[201789])
-            (201822 call _upEndCount _coforallCount[201781] 1)
+            unknown chunk[201754] "coforall index var" "index var" "insert auto destroy"
+            (201756 'move' chunk[201754] _indexOfInterest[201735])
+            (201768 call _upEndCount _coforallCount[201727] 1)
             {
               {
-                const tmp[201509] "const" "temp"(201508 call _computeBlock size numChunks chunk(201506 call - size 1))
-                (201516 call _check_tuple_var_decl tmp[201509] 2)
-                const lo[201494] "const"(201510 call tmp[201509] 0)
-                const hi[201496] "const"(201513 call tmp[201509] 1)
-                (201521 'end of statement')
-                if(201567 call _cond_test debugAssocDataPar)
+                const tmp[201455] "const" "temp"(201454 call _computeBlock size numChunks chunk(201452 call - size 1))
+                (201462 call _check_tuple_var_decl tmp[201455] 2)
+                const lo[201440] "const"(201456 call tmp[201455] 0)
+                const hi[201442] "const"(201459 call tmp[201455] 1)
+                (201467 'end of statement')
+                if(201513 call _cond_test debugAssocDataPar)
                 {
-                  (201565 call writeln "*** chunk: " chunk " owns "(201563 call chpl_build_bounded_range lo hi))
+                  (201511 call writeln "*** chunk: " chunk " owns "(201509 call chpl_build_bounded_range lo hi))
                 }
                 {
-                  unknown _indexOfInterest[201581] "an _indexOfInterest or chpl__followIdx variable" "temp"
-                  unknown _iterator[201582] "expr temp" "temp"
-                  (201591 'move' _iterator[201582](201589 call _getIterator(201596 call chpl_direct_range_iter lo hi 1)))
+                  unknown _indexOfInterest[201527] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                  unknown _iterator[201528] "expr temp" "temp"
+                  (201537 'move' _iterator[201528](201535 call _getIterator(201542 call chpl_direct_range_iter lo hi 1)))
                   Defer
                   {
                     {
-                      (201612 call _freeIterator _iterator[201582])
+                      (201558 call _freeIterator _iterator[201528])
                     }
                   }
                   { scopeless type
-                    (201601 'move' _indexOfInterest[201581](201598 call iteratorIndex _iterator[201582]))
+                    (201547 'move' _indexOfInterest[201527](201544 call iteratorIndex _iterator[201528]))
                   }
-                  ForLoop[201583]
+                  ForLoop[201529]
                   {
-                    unknown slot[201605] "index var" "insert auto destroy"
-                    (201607 'move' slot[201605] _indexOfInterest[201581])
+                    unknown slot[201551] "index var" "insert auto destroy"
+                    (201553 'move' slot[201551] _indexOfInterest[201527])
                     {
-                      (201578 yield slot)
+                      (201524 yield slot)
                     }
-                    label _continueLabel[201586]
-                    _indexOfInterest[201581]
-                    _iterator[201582]
+                    label _continueLabel[201532]
+                    _indexOfInterest[201527]
+                    _iterator[201528]
                   }
-                  label _breakLabel[201587]
+                  label _breakLabel[201533]
                 }
               }
-              (201784 call _downEndCount _coforallCount[201781] nil[44])
-              (201783 'coforall loop')
+              (201730 call _downEndCount _coforallCount[201727] nil[44])
+              (201729 'coforall loop')
             }
-            label _continueLabel[201794]
-            _indexOfInterest[201789]
-            _iterator[201790]
+            label _continueLabel[201740]
+            _indexOfInterest[201735]
+            _iterator[201736]
           }
-          label _breakLabel[201795]
+          label _breakLabel[201741]
           Defer
           {
             {
-              (201826 call _endCountFree _coforallCount[201781])
+              (201772 call _endCountFree _coforallCount[201727])
             }
           }
-          (201831 call _waitEndCount _coforallCount[201781] 1)
+          (201777 call _waitEndCount _coforallCount[201727] 1)
         }
       }
     }
   }
   where {
-    (201393 call == tag(201390 call . iterKind c"standalone"))
+    (201339 call == tag(201336 call . iterKind c"standalone"))
   }
-  function _allSlots[201874](arg size[201871] :
-  int[13], param arg tag[201877] :
+  function _allSlots[201820](arg size[201817] :
+  int[13], param arg tag[201823] :
   iterKind) : _unknown[51] "iterator fn" "private" "no return value for void"
   {
-    if(201909 call _cond_test debugDefaultAssoc)
+    if(201855 call _cond_test debugDefaultAssoc)
     {
-      (201907 call writeln "*** In associative domain _allSlots leader iterator:")
+      (201853 call writeln "*** In associative domain _allSlots leader iterator:")
     }
-    const numChunks[201919] "const"(201918 call _allSlotsNumChunks size)
-    (201922 'end of statement')
-    if(202222 call _cond_test(201925 call == numChunks 1))
+    const numChunks[201865] "const"(201864 call _allSlotsNumChunks size)
+    (201868 'end of statement')
+    if(202168 call _cond_test(201871 call == numChunks 1))
     {
-      (201933 yield(201931 call #(201928 call chpl_build_low_bounded_range 0) size))
+      (201879 yield(201877 call #(201874 call chpl_build_low_bounded_range 0) size))
     }
     {
       {
-        unknown tmpIter[202013] "expr temp" "maybe ref" "no copy" "temp"
-        (202016 'move' tmpIter[202013](201941 call #(201938 call chpl_build_low_bounded_range 0) numChunks))
-        unknown isRngDomArr[202202] "maybe param" "temp"
-        (202217 'move' isRngDomArr[202202](202215 call ||(202204 call isBoundedRange tmpIter[202013])(202213 call ||(202207 call isDomain tmpIter[202013])(202210 call isArray tmpIter[202013]))))
-        if isRngDomArr[202202]
+        unknown tmpIter[201959] "expr temp" "maybe ref" "no copy" "temp"
+        (201962 'move' tmpIter[201959](201887 call #(201884 call chpl_build_low_bounded_range 0) numChunks))
+        unknown isRngDomArr[202148] "maybe param" "temp"
+        (202163 'move' isRngDomArr[202148](202161 call ||(202150 call isBoundedRange tmpIter[201959])(202159 call ||(202153 call isDomain tmpIter[201959])(202156 call isArray tmpIter[201959]))))
+        if isRngDomArr[202148]
         {
-          const _coforallCount[202069] "const" "end count" "temp"
-          (202138 'move' _coforallCount[202069](202135 call _endCountAlloc 1))
-          unknown numTasks[202070] "temp"
-          (202122 'move' numTasks[202070](202118 call . tmpIter[202013] c"size"))
-          (202113 call _upEndCount _coforallCount[202069] 1 numTasks[202070])
-          (202110 call chpl_resetTaskSpawn numTasks[202070])
-          unknown _indexOfInterest[202077] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[202078] "expr temp" "temp"
-          (202087 'move' _iterator[202078](202085 call _getIterator tmpIter[202013]))
+          const _coforallCount[202015] "const" "end count" "temp"
+          (202084 'move' _coforallCount[202015](202081 call _endCountAlloc 1))
+          unknown numTasks[202016] "temp"
+          (202068 'move' numTasks[202016](202064 call . tmpIter[201959] c"size"))
+          (202059 call _upEndCount _coforallCount[202015] 1 numTasks[202016])
+          (202056 call chpl_resetTaskSpawn numTasks[202016])
+          unknown _indexOfInterest[202023] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[202024] "expr temp" "temp"
+          (202033 'move' _iterator[202024](202031 call _getIterator tmpIter[201959]))
           Defer
           {
             {
-              (202103 call _freeIterator _iterator[202078])
+              (202049 call _freeIterator _iterator[202024])
             }
           }
           { scopeless type
-            (202092 'move' _indexOfInterest[202077](202089 call iteratorIndex _iterator[202078]))
+            (202038 'move' _indexOfInterest[202023](202035 call iteratorIndex _iterator[202024]))
           }
-          ForLoop[202079]
+          ForLoop[202025]
           {
-            unknown chunk[202096] "coforall index var" "index var" "insert auto destroy"
-            (202098 'move' chunk[202096] _indexOfInterest[202077])
+            unknown chunk[202042] "coforall index var" "index var" "insert auto destroy"
+            (202044 'move' chunk[202042] _indexOfInterest[202023])
             {
               {
-                const tmp[202020] "const" "temp"(202022 call _computeBlock size numChunks chunk(202027 call - size 1))
-                (202032 call _check_tuple_var_decl tmp[202020] 2)
-                const lo[202035] "const"(202037 call tmp[202020] 0)
-                const hi[202040] "const"(202042 call tmp[202020] 1)
-                (202045 'end of statement')
-                if(202047 call _cond_test debugDefaultAssoc)
+                const tmp[201966] "const" "temp"(201968 call _computeBlock size numChunks chunk(201973 call - size 1))
+                (201978 call _check_tuple_var_decl tmp[201966] 2)
+                const lo[201981] "const"(201983 call tmp[201966] 0)
+                const hi[201986] "const"(201988 call tmp[201966] 1)
+                (201991 'end of statement')
+                if(201993 call _cond_test debugDefaultAssoc)
                 {
-                  (202052 call writeln "*** DI[" chunk "]: tuple = "(202057 call _build_tuple(202059 call chpl_build_bounded_range lo hi)))
+                  (201998 call writeln "*** DI[" chunk "]: tuple = "(202003 call _build_tuple(202005 call chpl_build_bounded_range lo hi)))
                 }
-                (202063 yield(202065 call chpl_build_bounded_range lo hi))
+                (202009 yield(202011 call chpl_build_bounded_range lo hi))
               }
-              (202072 call _downEndCount _coforallCount[202069] nil[44])
-              (202071 'coforall loop')
+              (202018 call _downEndCount _coforallCount[202015] nil[44])
+              (202017 'coforall loop')
             }
-            label _continueLabel[202082]
-            _indexOfInterest[202077]
-            _iterator[202078]
+            label _continueLabel[202028]
+            _indexOfInterest[202023]
+            _iterator[202024]
           }
-          label _breakLabel[202083]
+          label _breakLabel[202029]
           Defer
           {
             {
-              (202125 call _endCountFree _coforallCount[202069])
+              (202071 call _endCountFree _coforallCount[202015])
             }
           }
-          (202130 call _waitEndCount _coforallCount[202069] 1 numTasks[202070])
+          (202076 call _waitEndCount _coforallCount[202015] 1 numTasks[202016])
         }
         {
-          const _coforallCount[202142] "const" "end count" "temp"
-          (202199 'move' _coforallCount[202142](202196 call _endCountAlloc 1))
-          unknown _indexOfInterest[202150] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[202151] "expr temp" "temp"
-          (202160 'move' _iterator[202151](202158 call _getIterator tmpIter[202013]))
+          const _coforallCount[202088] "const" "end count" "temp"
+          (202145 'move' _coforallCount[202088](202142 call _endCountAlloc 1))
+          unknown _indexOfInterest[202096] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[202097] "expr temp" "temp"
+          (202106 'move' _iterator[202097](202104 call _getIterator tmpIter[201959]))
           Defer
           {
             {
-              (202176 call _freeIterator _iterator[202151])
+              (202122 call _freeIterator _iterator[202097])
             }
           }
           { scopeless type
-            (202165 'move' _indexOfInterest[202150](202162 call iteratorIndex _iterator[202151]))
+            (202111 'move' _indexOfInterest[202096](202108 call iteratorIndex _iterator[202097]))
           }
-          ForLoop[202152]
+          ForLoop[202098]
           {
-            unknown chunk[202169] "coforall index var" "index var" "insert auto destroy"
-            (202171 'move' chunk[202169] _indexOfInterest[202150])
-            (202183 call _upEndCount _coforallCount[202142] 1)
+            unknown chunk[202115] "coforall index var" "index var" "insert auto destroy"
+            (202117 'move' chunk[202115] _indexOfInterest[202096])
+            (202129 call _upEndCount _coforallCount[202088] 1)
             {
               {
-                const tmp[201958] "const" "temp"(201957 call _computeBlock size numChunks chunk(201955 call - size 1))
-                (201965 call _check_tuple_var_decl tmp[201958] 2)
-                const lo[201943] "const"(201959 call tmp[201958] 0)
-                const hi[201945] "const"(201962 call tmp[201958] 1)
-                (201970 'end of statement')
-                if(202002 call _cond_test debugDefaultAssoc)
+                const tmp[201904] "const" "temp"(201903 call _computeBlock size numChunks chunk(201901 call - size 1))
+                (201911 call _check_tuple_var_decl tmp[201904] 2)
+                const lo[201889] "const"(201905 call tmp[201904] 0)
+                const hi[201891] "const"(201908 call tmp[201904] 1)
+                (201916 'end of statement')
+                if(201948 call _cond_test debugDefaultAssoc)
                 {
-                  (202000 call writeln "*** DI[" chunk "]: tuple = "(201998 call _build_tuple(201996 call chpl_build_bounded_range lo hi)))
+                  (201946 call writeln "*** DI[" chunk "]: tuple = "(201944 call _build_tuple(201942 call chpl_build_bounded_range lo hi)))
                 }
-                (202011 yield(202009 call chpl_build_bounded_range lo hi))
+                (201957 yield(201955 call chpl_build_bounded_range lo hi))
               }
-              (202145 call _downEndCount _coforallCount[202142] nil[44])
-              (202144 'coforall loop')
+              (202091 call _downEndCount _coforallCount[202088] nil[44])
+              (202090 'coforall loop')
             }
-            label _continueLabel[202155]
-            _indexOfInterest[202150]
-            _iterator[202151]
+            label _continueLabel[202101]
+            _indexOfInterest[202096]
+            _iterator[202097]
           }
-          label _breakLabel[202156]
+          label _breakLabel[202102]
           Defer
           {
             {
-              (202187 call _endCountFree _coforallCount[202142])
+              (202133 call _endCountFree _coforallCount[202088])
             }
           }
-          (202192 call _waitEndCount _coforallCount[202142] 1)
+          (202138 call _waitEndCount _coforallCount[202088] 1)
         }
       }
     }
   }
   where {
-    (201885 call == tag(201882 call . iterKind c"leader"))
+    (201831 call == tag(201828 call . iterKind c"leader"))
   }
-  function _allSlots[202235](arg size[202232] :
-  int[13], arg followThis[202237]:_any[178](?), param arg tag[202240] :
+  function _allSlots[202181](arg size[202178] :
+  int[13], arg followThis[202183]:_any[178](?), param arg tag[202186] :
   iterKind) : _unknown[51] "iterator fn" "private" "no return value for void"
   {
-    unknown tmp[202256] "temp" followThis
-    (202263 call _check_tuple_var_decl tmp[202256] 2)
-    unknown chunk[202250](202257 call tmp[202256] 0)
-    unknown followThisDom[202252](202260 call tmp[202256] 1)
-    (202268 'end of statement')
-    if(202310 call _cond_test debugDefaultAssoc)
+    unknown tmp[202202] "temp" followThis
+    (202209 call _check_tuple_var_decl tmp[202202] 2)
+    unknown chunk[202196](202203 call tmp[202202] 0)
+    unknown followThisDom[202198](202206 call tmp[202202] 1)
+    (202214 'end of statement')
+    if(202256 call _cond_test debugDefaultAssoc)
     {
-      (202308 call writeln "In associative domain _allSlots follower iterator: " "Following " chunk)
+      (202254 call writeln "In associative domain _allSlots follower iterator: " "Following " chunk)
     }
     {
-      unknown _indexOfInterest[202321] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[202322] "expr temp" "temp"
-      (202331 'move' _iterator[202322](202329 call _getIterator chunk))
+      unknown _indexOfInterest[202267] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[202268] "expr temp" "temp"
+      (202277 'move' _iterator[202268](202275 call _getIterator chunk))
       Defer
       {
         {
-          (202347 call _freeIterator _iterator[202322])
+          (202293 call _freeIterator _iterator[202268])
         }
       }
       { scopeless type
-        (202336 'move' _indexOfInterest[202321](202333 call iteratorIndex _iterator[202322]))
+        (202282 'move' _indexOfInterest[202267](202279 call iteratorIndex _iterator[202268]))
       }
-      ForLoop[202323]
+      ForLoop[202269]
       {
-        unknown slot[202340] "index var" "insert auto destroy"
-        (202342 'move' slot[202340] _indexOfInterest[202321])
+        unknown slot[202286] "index var" "insert auto destroy"
+        (202288 'move' slot[202286] _indexOfInterest[202267])
         {
-          (202318 yield slot)
+          (202264 yield slot)
         }
-        label _continueLabel[202326]
-        _indexOfInterest[202321]
-        _iterator[202322]
+        label _continueLabel[202272]
+        _indexOfInterest[202267]
+        _iterator[202268]
       }
-      label _breakLabel[202327]
+      label _breakLabel[202273]
     }
   }
   where {
-    (202248 call == tag(202245 call . iterKind c"follower"))
+    (202194 call == tag(202191 call . iterKind c"follower"))
   }
-  function chpl__rehashHelpers[202396].startRehash[202364](arg _mt[202400]:_MT[238], arg this[202398]:chpl__rehashHelpers[202396], arg newSize[202361] :
+  function chpl__rehashHelpers[202342].startRehash[202310](arg _mt[202346]:_MT[238], arg this[202344]:chpl__rehashHelpers[202342], arg newSize[202307] :
   int[13]) : _unknown[51] "method" "primary method" "no return value for void"
   {
   }
-  function chpl__rehashHelpers[202396].moveElementDuringRehash[202375](arg _mt[202404]:_MT[238], arg this[202402]:chpl__rehashHelpers[202396], arg oldSlot[202372] :
-  int[13], arg newSlot[202378] :
+  function chpl__rehashHelpers[202342].moveElementDuringRehash[202321](arg _mt[202350]:_MT[238], arg this[202348]:chpl__rehashHelpers[202342], arg oldSlot[202318] :
+  int[13], arg newSlot[202324] :
   int[13]) : _unknown[51] "method" "primary method" "no return value for void"
   {
   }
-  function chpl__rehashHelpers[202396].finishRehash[202390](arg _mt[202408]:_MT[238], arg this[202406]:chpl__rehashHelpers[202396], arg oldSize[202387] :
+  function chpl__rehashHelpers[202342].finishRehash[202336](arg _mt[202354]:_MT[238], arg this[202352]:chpl__rehashHelpers[202342], arg oldSize[202333] :
   int[13]) : _unknown[51] "method" "primary method" "no return value for void"
   {
   }
-  type chpl__rehashHelpers[202396]
-  function chpl__hashtable[204564](?).init[202467](arg _mt[204568]:_MT[238], arg this[204566]:chpl__hashtable[204564](?), arg keyType[202465]:_any[178](?), arg valType[202469]:_any[178](?), in arg rehashHelpers[202476] :
-  (202473 call _owned(202472 'to nilable class from type' chpl__rehashHelpers)) =
+  type chpl__rehashHelpers[202342]
+  function chpl__hashtable[204509](?).init[202413](arg _mt[204513]:_MT[238], arg this[204511]:chpl__hashtable[204509](?), arg keyType[202411]:_any[178](?), arg valType[202415]:_any[178](?), in arg rehashHelpers[202422] :
+  (202419 call _owned(202418 'to nilable class from type' chpl__rehashHelpers)) =
   nil[44]) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (202487 call =(202483 call . this c"keyType") keyType)
-    (202496 call =(202492 call . this c"valType") valType)
-    (202506 call =(202502 call . this c"tableNumFullSlots") 0)
-    (202516 call =(202512 call . this c"tableNumDeletedSlots") 0)
-    (202526 call =(202522 call . this c"tableSizeNum") 0)
-    (202537 call =(202530 call . this c"tableSize")(202536 call chpl__primes tableSizeNum))
-    (202545 call =(202541 call . this c"rehashHelpers") rehashHelpers)
-    (202553 call =(202549 call . this c"postponeResize") 0)
-    (202561 call(202557 call . this c"complete"))
-    (202574 call =(202564 call . this c"table")(202573 call allocateTable(202569 call . this c"tableSize")))
+    (202433 call =(202429 call . this c"keyType") keyType)
+    (202442 call =(202438 call . this c"valType") valType)
+    (202452 call =(202448 call . this c"tableNumFullSlots") 0)
+    (202462 call =(202458 call . this c"tableNumDeletedSlots") 0)
+    (202472 call =(202468 call . this c"tableSizeNum") 0)
+    (202483 call =(202476 call . this c"tableSize")(202482 call chpl__primes tableSizeNum))
+    (202491 call =(202487 call . this c"rehashHelpers") rehashHelpers)
+    (202499 call =(202495 call . this c"postponeResize") 0)
+    (202507 call(202503 call . this c"complete"))
+    (202520 call =(202510 call . this c"table")(202519 call allocateTable(202515 call . this c"tableSize")))
   }
-  function chpl__hashtable[204564](?).deinit[202581](arg _mt[204572]:_MT[238], arg this[204570]:chpl__hashtable[204564](?)) : _unknown[51] "destructor" "method" "primary method" "no return value for void"
+  function chpl__hashtable[204509](?).deinit[202527](arg _mt[204517]:_MT[238], arg this[204515]:chpl__hashtable[204509](?)) : _unknown[51] "destructor" "method" "primary method" "no return value for void"
   {
-    if(202705 call _cond_test(202591 call ||(202586 call _typeNeedsDeinit keyType)(202590 call _typeNeedsDeinit valType)))
+    if(202650 call _cond_test(202537 call ||(202532 call _typeNeedsDeinit keyType)(202536 call _typeNeedsDeinit valType)))
     {
-      if(202700 call _cond_test(202601 call &&(202596 call _deinitElementsIsParallel keyType)(202600 call _deinitElementsIsParallel valType)))
+      if(202645 call _cond_test(202547 call &&(202542 call _deinitElementsIsParallel keyType)(202546 call _deinitElementsIsParallel valType)))
       {
         Forall {
           induction variables:
             
-            unknown slot[202632] "index var" "insert auto destroy"
+            unknown slot[202578] "index var" "insert auto destroy"
           iterated expressions:
-            (202607 call _allSlots tableSize)
+            (202553 call _allSlots tableSize)
           shadow variables:
           other variables
             forall body
           {
-            unknown aSlot[202612] "ref var"(202611 call table slot)
-            (202615 'end of statement')
-            if(202627 call _cond_test(202620 call _isSlotFull aSlot))
+            unknown aSlot[202558] "ref var"(202557 call table slot)
+            (202561 'end of statement')
+            if(202573 call _cond_test(202566 call _isSlotFull aSlot))
             {
-              (202624 call _deinitSlot aSlot)
+              (202570 call _deinitSlot aSlot)
             }
           }
         }
       }
       {
         {
-          unknown _indexOfInterest[202665] "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[202666] "expr temp" "temp"
-          (202675 'move' _iterator[202666](202673 call _getIterator(202641 call _allSlots tableSize)))
+          unknown _indexOfInterest[202610] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[202611] "expr temp" "temp"
+          (202620 'move' _iterator[202611](202618 call _getIterator(202586 call _allSlots tableSize)))
           Defer
           {
             {
-              (202692 call _freeIterator _iterator[202666])
+              (202637 call _freeIterator _iterator[202611])
             }
           }
           { scopeless type
-            (202681 'move' _indexOfInterest[202665](202678 call iteratorIndex _iterator[202666]))
+            (202626 'move' _indexOfInterest[202610](202623 call iteratorIndex _iterator[202611]))
           }
-          ForLoop[202667]
+          ForLoop[202612]
           {
-            unknown slot[202685] "index var" "insert auto destroy"
-            (202687 'move' slot[202685] _indexOfInterest[202665])
+            unknown slot[202630] "index var" "insert auto destroy"
+            (202632 'move' slot[202630] _indexOfInterest[202610])
             {
-              unknown aSlot[202646] "ref var"(202645 call table slot)
-              (202649 'end of statement')
-              if(202661 call _cond_test(202654 call _isSlotFull aSlot))
+              unknown aSlot[202591] "ref var"(202590 call table slot)
+              (202594 'end of statement')
+              if(202606 call _cond_test(202599 call _isSlotFull aSlot))
               {
-                (202658 call _deinitSlot aSlot)
+                (202603 call _deinitSlot aSlot)
               }
             }
-            label _continueLabel[202670]
-            _indexOfInterest[202665]
-            _iterator[202666]
+            label _continueLabel[202615]
+            _indexOfInterest[202610]
+            _iterator[202611]
           }
-          label _breakLabel[202671]
+          label _breakLabel[202616]
         }
       }
     }
-    (202714 call _freeData table tableSize)
+    (202659 call _freeData table tableSize)
   }
-  function chpl__hashtable[204564](?).isSlotFull[202724](arg _mt[204576]:_MT[238], arg this[204574]:chpl__hashtable[204564](?), arg slot[202721] :
+  function chpl__hashtable[204509](?).isSlotFull[202669](arg _mt[204521]:_MT[238], arg this[204519]:chpl__hashtable[204509](?), arg slot[202666] :
   int[13]) : _unknown[51] "inline" "method" "primary method"
   {
-    (202740 return(202738 call ==(202731 call .(202730 call table slot) c"status")(202735 call . chpl__hash_status c"full")))
+    (202685 return(202683 call ==(202676 call .(202675 call table slot) c"status")(202680 call . chpl__hash_status c"full")))
   }
   { scopeless type
     bool[10]
   }
-  function chpl__hashtable[204564](?).allSlots[202748](arg _mt[204580]:_MT[238], arg this[204578]:chpl__hashtable[204564](?)) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
+  function chpl__hashtable[204509](?).allSlots[202693](arg _mt[204525]:_MT[238], arg this[204523]:chpl__hashtable[204509](?)) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
   {
     {
-      unknown _indexOfInterest[202759] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[202760] "expr temp" "temp"
-      (202769 'move' _iterator[202760](202767 call _getIterator(202754 call _allSlots tableSize)))
+      unknown _indexOfInterest[202704] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[202705] "expr temp" "temp"
+      (202714 'move' _iterator[202705](202712 call _getIterator(202699 call _allSlots tableSize)))
       Defer
       {
         {
-          (202786 call _freeIterator _iterator[202760])
+          (202731 call _freeIterator _iterator[202705])
         }
       }
       { scopeless type
-        (202775 'move' _indexOfInterest[202759](202772 call iteratorIndex _iterator[202760]))
+        (202720 'move' _indexOfInterest[202704](202717 call iteratorIndex _iterator[202705]))
       }
-      ForLoop[202761]
+      ForLoop[202706]
       {
-        unknown slot[202779] "index var" "insert auto destroy"
-        (202781 'move' slot[202779] _indexOfInterest[202759])
+        unknown slot[202724] "index var" "insert auto destroy"
+        (202726 'move' slot[202724] _indexOfInterest[202704])
         {
-          (202756 yield slot)
+          (202701 yield slot)
         }
-        label _continueLabel[202764]
-        _indexOfInterest[202759]
-        _iterator[202760]
+        label _continueLabel[202709]
+        _indexOfInterest[202704]
+        _iterator[202705]
       }
-      label _breakLabel[202765]
+      label _breakLabel[202710]
     }
   }
-  function chpl__hashtable[204564](?).allSlots[202802](arg _mt[204584]:_MT[238], arg this[204582]:chpl__hashtable[204564](?), param arg tag[202799] :
+  function chpl__hashtable[204509](?).allSlots[202747](arg _mt[204529]:_MT[238], arg this[204527]:chpl__hashtable[204509](?), param arg tag[202744] :
   iterKind) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
   {
     {
-      unknown _indexOfInterest[202822] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[202823] "expr temp" "temp"
-      (202832 'move' _iterator[202823](202830 call _getIterator(202817 call _allSlots tableSize(tag = tag))))
+      unknown _indexOfInterest[202767] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[202768] "expr temp" "temp"
+      (202777 'move' _iterator[202768](202775 call _getIterator(202762 call _allSlots tableSize(tag = tag))))
       Defer
       {
         {
-          (202849 call _freeIterator _iterator[202823])
+          (202794 call _freeIterator _iterator[202768])
         }
       }
       { scopeless type
-        (202838 'move' _indexOfInterest[202822](202835 call iteratorIndex _iterator[202823]))
+        (202783 'move' _indexOfInterest[202767](202780 call iteratorIndex _iterator[202768]))
       }
-      ForLoop[202824]
+      ForLoop[202769]
       {
-        unknown slot[202842] "index var" "insert auto destroy"
-        (202844 'move' slot[202842] _indexOfInterest[202822])
+        unknown slot[202787] "index var" "insert auto destroy"
+        (202789 'move' slot[202787] _indexOfInterest[202767])
         {
-          (202819 yield slot)
+          (202764 yield slot)
         }
-        label _continueLabel[202827]
-        _indexOfInterest[202822]
-        _iterator[202823]
+        label _continueLabel[202772]
+        _indexOfInterest[202767]
+        _iterator[202768]
       }
-      label _breakLabel[202828]
+      label _breakLabel[202773]
     }
   }
   where {
-    (202809 call == tag(202806 call . iterKind c"standalone"))
+    (202754 call == tag(202751 call . iterKind c"standalone"))
   }
-  function chpl__hashtable[204564](?).allSlots[202866](arg _mt[204588]:_MT[238], arg this[204586]:chpl__hashtable[204564](?), param arg tag[202863] :
+  function chpl__hashtable[204509](?).allSlots[202811](arg _mt[204533]:_MT[238], arg this[204531]:chpl__hashtable[204509](?), param arg tag[202808] :
   iterKind) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
   {
     {
-      unknown _indexOfInterest[202886] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[202887] "expr temp" "temp"
-      (202896 'move' _iterator[202887](202894 call _getIterator(202881 call _allSlots tableSize(tag = tag))))
+      unknown _indexOfInterest[202831] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[202832] "expr temp" "temp"
+      (202841 'move' _iterator[202832](202839 call _getIterator(202826 call _allSlots tableSize(tag = tag))))
       Defer
       {
         {
-          (202913 call _freeIterator _iterator[202887])
+          (202858 call _freeIterator _iterator[202832])
         }
       }
       { scopeless type
-        (202902 'move' _indexOfInterest[202886](202899 call iteratorIndex _iterator[202887]))
+        (202847 'move' _indexOfInterest[202831](202844 call iteratorIndex _iterator[202832]))
       }
-      ForLoop[202888]
+      ForLoop[202833]
       {
-        unknown followThis[202906] "index var" "insert auto destroy"
-        (202908 'move' followThis[202906] _indexOfInterest[202886])
+        unknown followThis[202851] "index var" "insert auto destroy"
+        (202853 'move' followThis[202851] _indexOfInterest[202831])
         {
-          (202883 yield followThis)
+          (202828 yield followThis)
         }
-        label _continueLabel[202891]
-        _indexOfInterest[202886]
-        _iterator[202887]
+        label _continueLabel[202836]
+        _indexOfInterest[202831]
+        _iterator[202832]
       }
-      label _breakLabel[202892]
+      label _breakLabel[202837]
     }
   }
   where {
-    (202873 call == tag(202870 call . iterKind c"leader"))
+    (202818 call == tag(202815 call . iterKind c"leader"))
   }
-  function chpl__hashtable[204564](?).allSlots[202928](arg _mt[204592]:_MT[238], arg this[204590]:chpl__hashtable[204564](?), arg followThis[202926]:_any[178](?), param arg tag[202931] :
+  function chpl__hashtable[204509](?).allSlots[202873](arg _mt[204537]:_MT[238], arg this[204535]:chpl__hashtable[204509](?), arg followThis[202871]:_any[178](?), param arg tag[202876] :
   iterKind) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
   {
     {
-      unknown _indexOfInterest[202953] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[202954] "expr temp" "temp"
-      (202963 'move' _iterator[202954](202961 call _getIterator(202948 call _allSlots tableSize followThis(tag = tag))))
+      unknown _indexOfInterest[202898] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[202899] "expr temp" "temp"
+      (202908 'move' _iterator[202899](202906 call _getIterator(202893 call _allSlots tableSize followThis(tag = tag))))
       Defer
       {
         {
-          (202980 call _freeIterator _iterator[202954])
+          (202925 call _freeIterator _iterator[202899])
         }
       }
       { scopeless type
-        (202969 'move' _indexOfInterest[202953](202966 call iteratorIndex _iterator[202954]))
+        (202914 'move' _indexOfInterest[202898](202911 call iteratorIndex _iterator[202899]))
       }
-      ForLoop[202955]
+      ForLoop[202900]
       {
-        unknown i[202973] "index var" "insert auto destroy"
-        (202975 'move' i[202973] _indexOfInterest[202953])
+        unknown i[202918] "index var" "insert auto destroy"
+        (202920 'move' i[202918] _indexOfInterest[202898])
         {
-          (202950 yield i)
+          (202895 yield i)
         }
-        label _continueLabel[202958]
-        _indexOfInterest[202953]
-        _iterator[202954]
+        label _continueLabel[202903]
+        _indexOfInterest[202898]
+        _iterator[202899]
       }
-      label _breakLabel[202959]
+      label _breakLabel[202904]
     }
   }
   where {
-    (202939 call == tag(202936 call . iterKind c"follower"))
+    (202884 call == tag(202881 call . iterKind c"follower"))
   }
-  function chpl__hashtable[204564](?)._findSlot[202997](arg _mt[204596]:_MT[238], arg this[204594]:chpl__hashtable[204564](?), arg key[202994] :
+  function chpl__hashtable[204509](?)._findSlot[202942](arg _mt[204541]:_MT[238], arg this[204539]:chpl__hashtable[204509](?), arg key[202939] :
   keyType) : _unknown[51] "method" "primary method"
   {
-    unknown firstOpen[203007](203005 call - 1)
-    (203010 'end of statement')
+    unknown firstOpen[202952](202950 call - 1)
+    (202955 'end of statement')
     {
-      unknown _indexOfInterest[203116] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[203117] "expr temp" "temp"
-      (203126 'move' _iterator[203117](203124 call _getIterator(203016 call _lookForSlots key)))
+      unknown _indexOfInterest[203061] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[203062] "expr temp" "temp"
+      (203071 'move' _iterator[203062](203069 call _getIterator(202961 call _lookForSlots key)))
       Defer
       {
         {
-          (203143 call _freeIterator _iterator[203117])
+          (203088 call _freeIterator _iterator[203062])
         }
       }
       { scopeless type
-        (203132 'move' _indexOfInterest[203116](203129 call iteratorIndex _iterator[203117]))
+        (203077 'move' _indexOfInterest[203061](203074 call iteratorIndex _iterator[203062]))
       }
-      ForLoop[203118]
+      ForLoop[203063]
       {
-        unknown slotNum[203136] "index var" "insert auto destroy"
-        (203138 'move' slotNum[203136] _indexOfInterest[203116])
+        unknown slotNum[203081] "index var" "insert auto destroy"
+        (203083 'move' slotNum[203081] _indexOfInterest[203061])
         {
-          const slotStatus[203024] "const"(203021 call .(203020 call table slotNum) c"status")
-          (203027 'end of statement')
-          if(203111 call _cond_test(203034 call == slotStatus(203031 call . chpl__hash_status c"empty")))
+          const slotStatus[202969] "const"(202966 call .(202965 call table slotNum) c"status")
+          (202972 'end of statement')
+          if(203056 call _cond_test(202979 call == slotStatus(202976 call . chpl__hash_status c"empty")))
           {
-            if(203047 call _cond_test(203040 call == firstOpen(203038 call - 1)))
+            if(202992 call _cond_test(202985 call == firstOpen(202983 call - 1)))
             {
-              (203044 call = firstOpen slotNum)
+              (202989 call = firstOpen slotNum)
             }
-            (203058 return(203056 call _build_tuple 0 firstOpen))
+            (203003 return(203001 call _build_tuple 0 firstOpen))
           }
           {
-            if(203107 call _cond_test(203065 call == slotStatus(203062 call . chpl__hash_status c"full")))
+            if(203052 call _cond_test(203010 call == slotStatus(203007 call . chpl__hash_status c"full")))
             {
-              if(203085 call _cond_test(203075 call ==(203071 call .(203070 call table slotNum) c"key") key))
+              if(203030 call _cond_test(203020 call ==(203016 call .(203015 call table slotNum) c"key") key))
               {
-                (203082 return(203080 call _build_tuple 1 slotNum))
+                (203027 return(203025 call _build_tuple 1 slotNum))
               }
             }
             {
-              if(203101 call _cond_test(203094 call == firstOpen(203092 call - 1)))
+              if(203046 call _cond_test(203039 call == firstOpen(203037 call - 1)))
               {
-                (203098 call = firstOpen slotNum)
+                (203043 call = firstOpen slotNum)
               }
             }
           }
         }
-        label _continueLabel[203121]
-        _indexOfInterest[203116]
-        _iterator[203117]
+        label _continueLabel[203066]
+        _indexOfInterest[203061]
+        _iterator[203062]
       }
-      label _breakLabel[203122]
+      label _breakLabel[203067]
     }
-    (203157 return(203155 call _build_tuple 0(203152 call - 1)))
+    (203102 return(203100 call _build_tuple 0(203097 call - 1)))
   }
   { scopeless type
-    (203002 call _build_tuple bool[10] int[13])
+    (202947 call _build_tuple bool[10] int[13])
   }
-  function chpl__hashtable[204564](?)._lookForSlots[203168](arg _mt[204600]:_MT[238], arg this[204598]:chpl__hashtable[204564](?), arg key[203165] :
-  keyType, arg numSlots[203171] =
+  function chpl__hashtable[204509](?)._lookForSlots[203113](arg _mt[204545]:_MT[238], arg this[204543]:chpl__hashtable[204509](?), arg key[203110] :
+  keyType, arg numSlots[203116] =
   tableSize) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
   {
-    const baseSlot[203181] "const"(203179 call _cast uint[115](203177 call chpl__defaultHashWrapper key))
-    (203184 'end of statement')
-    if(203192 call _cond_test(203188 call == numSlots 0))
+    const baseSlot[203126] "const"(203124 call _cast uint[115](203122 call chpl__defaultHashWrapper key))
+    (203129 'end of statement')
+    if(203137 call _cond_test(203133 call == numSlots 0))
     {
-      (203190 return _void[55])
+      (203135 return _void[55])
     }
     {
-      unknown _indexOfInterest[203237] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[203238] "expr temp" "temp"
-      (203247 'move' _iterator[203238](203245 call _getIterator(203255 call chpl_direct_range_iter 0(203252 call / numSlots 2) 1)))
+      unknown _indexOfInterest[203182] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[203183] "expr temp" "temp"
+      (203192 'move' _iterator[203183](203190 call _getIterator(203200 call chpl_direct_range_iter 0(203197 call / numSlots 2) 1)))
       Defer
       {
         {
-          (203271 call _freeIterator _iterator[203238])
+          (203216 call _freeIterator _iterator[203183])
         }
       }
       { scopeless type
-        (203260 'move' _indexOfInterest[203237](203257 call iteratorIndex _iterator[203238]))
+        (203205 'move' _indexOfInterest[203182](203202 call iteratorIndex _iterator[203183]))
       }
-      ForLoop[203239]
+      ForLoop[203184]
       {
-        unknown probe[203264] "index var" "insert auto destroy"
-        (203266 'move' probe[203264] _indexOfInterest[203237])
+        unknown probe[203209] "index var" "insert auto destroy"
+        (203211 'move' probe[203209] _indexOfInterest[203182])
         {
-          unknown uprobe[203209](203207 call _cast uint[115] probe)
-          (203212 'end of statement')
-          unknown n[203218](203216 call _cast uint[115] numSlots)
-          (203221 'end of statement')
-          (203235 yield(203233 call _cast int[13](203230 call %(203227 call + baseSlot(203225 call ** uprobe 2)) n)))
+          unknown uprobe[203154](203152 call _cast uint[115] probe)
+          (203157 'end of statement')
+          unknown n[203163](203161 call _cast uint[115] numSlots)
+          (203166 'end of statement')
+          (203180 yield(203178 call _cast int[13](203175 call %(203172 call + baseSlot(203170 call ** uprobe 2)) n)))
         }
-        label _continueLabel[203242]
-        _indexOfInterest[203237]
-        _iterator[203238]
+        label _continueLabel[203187]
+        _indexOfInterest[203182]
+        _iterator[203183]
       }
-      label _breakLabel[203243]
+      label _breakLabel[203188]
     }
   }
-  function chpl__hashtable[204564](?).findAvailableSlot[203286](arg _mt[204604]:_MT[238], arg this[204602]:chpl__hashtable[204564](?), arg key[203283] :
+  function chpl__hashtable[204509](?).findAvailableSlot[203231](arg _mt[204549]:_MT[238], arg this[204547]:chpl__hashtable[204509](?), arg key[203228] :
   keyType) : _unknown[51] "method" "primary method"
   {
-    unknown slotNum[203296](203294 call - 1)
-    (203299 'end of statement')
-    unknown foundSlot[203302] 0
-    (203305 'end of statement')
-    if(203326 call _cond_test(203317 call >(203314 call *(203311 call +(203308 call + tableNumFullSlots tableNumDeletedSlots) 1) 2) tableSize))
+    unknown slotNum[203241](203239 call - 1)
+    (203244 'end of statement')
+    unknown foundSlot[203247] 0
+    (203250 'end of statement')
+    if(203271 call _cond_test(203262 call >(203259 call *(203256 call +(203253 call + tableNumFullSlots tableNumDeletedSlots) 1) 2) tableSize))
     {
-      (203323 call resize(grow = 1))
+      (203268 call resize(grow = 1))
     }
-    (203339 call =(203333 call _build_tuple foundSlot slotNum)(203338 call _findSlot key))
-    if(203455 call _cond_test(203344 call >= slotNum 0))
+    (203284 call =(203278 call _build_tuple foundSlot slotNum)(203283 call _findSlot key))
+    if(203400 call _cond_test(203289 call >= slotNum 0))
     {
-      (203351 return(203349 call _build_tuple foundSlot slotNum))
+      (203296 return(203294 call _build_tuple foundSlot slotNum))
     }
     {
-      (203358 call rehash tableSizeNum tableSize)
-      (203370 call =(203364 call _build_tuple foundSlot slotNum)(203369 call _findSlot key))
-      if(203444 call _cond_test(203375 call < slotNum 0))
+      (203303 call rehash tableSizeNum tableSize)
+      (203315 call =(203309 call _build_tuple foundSlot slotNum)(203314 call _findSlot key))
+      if(203389 call _cond_test(203320 call < slotNum 0))
       {
-        (203432 call halt "couldn't add key -- " tableNumFullSlots " / " tableSize " taken")
-        (203442 return(203440 call _build_tuple 0(203437 call - 1)))
+        (203377 call halt "couldn't add key -- " tableNumFullSlots " / " tableSize " taken")
+        (203387 return(203385 call _build_tuple 0(203382 call - 1)))
       }
-      (203453 return(203451 call _build_tuple foundSlot slotNum))
+      (203398 return(203396 call _build_tuple foundSlot slotNum))
     }
   }
   { scopeless type
-    (203291 call _build_tuple bool[10] int[13])
+    (203236 call _build_tuple bool[10] int[13])
   }
-  function chpl__hashtable[204564](?).fillSlot[203472](arg _mt[204608]:_MT[238], arg this[204606]:chpl__hashtable[204564](?), ref arg tableEntry[203469] :
-  (203468 call chpl_TableEntry keyType valType), in arg key[203475] :
-  keyType, in arg val[203479] :
+  function chpl__hashtable[204509](?).fillSlot[203417](arg _mt[204553]:_MT[238], arg this[204551]:chpl__hashtable[204509](?), ref arg tableEntry[203414] :
+  (203413 call chpl_TableEntry keyType valType), in arg key[203420] :
+  keyType, in arg val[203424] :
   valType) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    if(203526 call _cond_test(203490 call ==(203483 call . tableEntry c"status")(203487 call . chpl__hash_status c"full")))
+    if(203471 call _cond_test(203435 call ==(203428 call . tableEntry c"status")(203432 call . chpl__hash_status c"full")))
     {
-      (203495 call _deinitSlot tableEntry)
+      (203440 call _deinitSlot tableEntry)
     }
     {
-      if(203516 call _cond_test(203508 call ==(203499 call . tableEntry c"status")(203505 call . chpl__hash_status c"deleted")))
+      if(203461 call _cond_test(203453 call ==(203444 call . tableEntry c"status")(203450 call . chpl__hash_status c"deleted")))
       {
-        (203512 call -= tableNumDeletedSlots 1)
+        (203457 call -= tableNumDeletedSlots 1)
       }
-      (203523 call += tableNumFullSlots 1)
+      (203468 call += tableNumFullSlots 1)
     }
-    (203539 call =(203532 call . tableEntry c"status")(203536 call . chpl__hash_status c"full"))
-    (203549 call _moveInit(203544 call . tableEntry c"key") key)
-    (203558 call _moveInit(203553 call . tableEntry c"val") val)
+    (203484 call =(203477 call . tableEntry c"status")(203481 call . chpl__hash_status c"full"))
+    (203494 call _moveInit(203489 call . tableEntry c"key") key)
+    (203503 call _moveInit(203498 call . tableEntry c"val") val)
   }
-  function chpl__hashtable[204564](?).fillSlot[203568](arg _mt[204612]:_MT[238], arg this[204610]:chpl__hashtable[204564](?), arg slotNum[203565] :
-  int[13], in arg key[203571] :
-  keyType, in arg val[203575] :
+  function chpl__hashtable[204509](?).fillSlot[203513](arg _mt[204557]:_MT[238], arg this[204555]:chpl__hashtable[204509](?), arg slotNum[203510] :
+  int[13], in arg key[203516] :
+  keyType, in arg val[203520] :
   valType) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    unknown tableEntry[203582] "ref var"(203581 call table slotNum)
-    (203585 'end of statement')
-    (203592 call fillSlot tableEntry key val)
+    unknown tableEntry[203527] "ref var"(203526 call table slotNum)
+    (203530 'end of statement')
+    (203537 call fillSlot tableEntry key val)
   }
-  function chpl__hashtable[204564](?).findFullSlot[203602](arg _mt[204616]:_MT[238], arg this[204614]:chpl__hashtable[204564](?), arg key[203599] :
+  function chpl__hashtable[204509](?).findFullSlot[203547](arg _mt[204561]:_MT[238], arg this[204559]:chpl__hashtable[204509](?), arg key[203544] :
   keyType) : _unknown[51] "method" "primary method"
   {
-    unknown slotNum[203612](203610 call - 1)
-    (203615 'end of statement')
-    unknown foundSlot[203618] 0
-    (203621 'end of statement')
-    (203631 call =(203625 call _build_tuple foundSlot slotNum)(203630 call _findSlot key))
-    (203639 return(203637 call _build_tuple foundSlot slotNum))
+    unknown slotNum[203557](203555 call - 1)
+    (203560 'end of statement')
+    unknown foundSlot[203563] 0
+    (203566 'end of statement')
+    (203576 call =(203570 call _build_tuple foundSlot slotNum)(203575 call _findSlot key))
+    (203584 return(203582 call _build_tuple foundSlot slotNum))
   }
   { scopeless type
-    (203607 call _build_tuple bool[10] int[13])
+    (203552 call _build_tuple bool[10] int[13])
   }
-  function chpl__hashtable[204564](?).clearSlot[203654](arg _mt[204620]:_MT[238], arg this[204618]:chpl__hashtable[204564](?), ref arg tableEntry[203651] :
-  (203650 call chpl_TableEntry keyType valType), out arg key[203657] :
-  keyType, out arg val[203661] :
+  function chpl__hashtable[204509](?).clearSlot[203599](arg _mt[204565]:_MT[238], arg this[204563]:chpl__hashtable[204509](?), ref arg tableEntry[203596] :
+  (203595 call chpl_TableEntry keyType valType), out arg key[203602] :
+  keyType, out arg val[203606] :
   valType) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (203672 call = key(203671 call _moveToReturn(203667 call . tableEntry c"key")))
-    (203684 call = val(203683 call _moveToReturn(203679 call . tableEntry c"val")))
-    (203695 call =(203688 call . tableEntry c"status")(203692 call . chpl__hash_status c"deleted"))
-    (203700 call -= tableNumFullSlots 1)
-    (203705 call += tableNumDeletedSlots 1)
+    (203617 call = key(203616 call _moveToReturn(203612 call . tableEntry c"key")))
+    (203629 call = val(203628 call _moveToReturn(203624 call . tableEntry c"val")))
+    (203640 call =(203633 call . tableEntry c"status")(203637 call . chpl__hash_status c"deleted"))
+    (203645 call -= tableNumFullSlots 1)
+    (203650 call += tableNumDeletedSlots 1)
   }
-  function chpl__hashtable[204564](?).clearSlot[203716](arg _mt[204624]:_MT[238], arg this[204622]:chpl__hashtable[204564](?), arg slotNum[203713] :
-  int[13], out arg key[203719] :
-  keyType, out arg val[203723] :
+  function chpl__hashtable[204509](?).clearSlot[203661](arg _mt[204569]:_MT[238], arg this[204567]:chpl__hashtable[204509](?), arg slotNum[203658] :
+  int[13], out arg key[203664] :
+  keyType, out arg val[203668] :
   valType) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    unknown tableEntry[203730] "ref var"(203729 call table slotNum)
-    (203733 'end of statement')
-    (203740 call clearSlot tableEntry key val)
+    unknown tableEntry[203675] "ref var"(203674 call table slotNum)
+    (203678 'end of statement')
+    (203685 call clearSlot tableEntry key val)
   }
-  function chpl__hashtable[204564](?).maybeShrinkAfterRemove[203746](arg _mt[204628]:_MT[238], arg this[204626]:chpl__hashtable[204564](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function chpl__hashtable[204509](?).maybeShrinkAfterRemove[203691](arg _mt[204573]:_MT[238], arg this[204571]:chpl__hashtable[204509](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    if(203768 call _cond_test(203759 call &&(203753 call <(203750 call * tableNumFullSlots 8) tableSize)(203757 call > tableSizeNum 0)))
+    if(203713 call _cond_test(203704 call &&(203698 call <(203695 call * tableNumFullSlots 8) tableSize)(203702 call > tableSizeNum 0)))
     {
-      (203765 call resize(grow = 0))
+      (203710 call resize(grow = 0))
     }
   }
-  function chpl__hashtable[204564](?)._findPrimeSizeIndex[203781](arg _mt[204632]:_MT[238], arg this[204630]:chpl__hashtable[204564](?), arg numKeys[203778] :
+  function chpl__hashtable[204509](?)._findPrimeSizeIndex[203726](arg _mt[204577]:_MT[238], arg this[204575]:chpl__hashtable[204509](?), arg numKeys[203723] :
   int[13]) : _unknown[51] "method" "primary method"
   {
-    unknown threshold[203790](203788 call *(203785 call + numKeys 1) 2)
-    (203793 'end of statement')
-    unknown prime[203796] 0
-    (203799 'end of statement')
-    unknown primeLoc[203801] 0
-    (203804 'end of statement')
+    unknown threshold[203735](203733 call *(203730 call + numKeys 1) 2)
+    (203738 'end of statement')
+    unknown prime[203741] 0
+    (203744 'end of statement')
+    unknown primeLoc[203746] 0
+    (203749 'end of statement')
     {
-      unknown _indexOfInterest[203844] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[203845] "expr temp" "temp"
-      (203854 'move' _iterator[203845](203852 call _getIterator(203864 call chpl_direct_counted_range_iter 0(203860 call . chpl__primes c"size"))))
+      unknown _indexOfInterest[203789] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[203790] "expr temp" "temp"
+      (203799 'move' _iterator[203790](203797 call _getIterator(203809 call chpl_direct_counted_range_iter 0(203805 call . chpl__primes c"size"))))
       Defer
       {
         {
-          (203880 call _freeIterator _iterator[203845])
+          (203825 call _freeIterator _iterator[203790])
         }
       }
       { scopeless type
-        (203869 'move' _indexOfInterest[203844](203866 call iteratorIndex _iterator[203845]))
+        (203814 'move' _indexOfInterest[203789](203811 call iteratorIndex _iterator[203790]))
       }
-      ForLoop[203846]
+      ForLoop[203791]
       {
-        unknown i[203873] "index var" "insert auto destroy"
-        (203875 'move' i[203873] _indexOfInterest[203844])
+        unknown i[203818] "index var" "insert auto destroy"
+        (203820 'move' i[203818] _indexOfInterest[203789])
         {
-          if(203839 call _cond_test(203820 call >(203818 call chpl__primes i) threshold))
+          if(203784 call _cond_test(203765 call >(203763 call chpl__primes i) threshold))
           {
-            (203827 call = prime(203826 call chpl__primes i))
-            (203833 call = primeLoc i)
+            (203772 call = prime(203771 call chpl__primes i))
+            (203778 call = primeLoc i)
             break nil[44]
           }
         }
-        label _continueLabel[203849]
-        _indexOfInterest[203844]
-        _iterator[203845]
+        label _continueLabel[203794]
+        _indexOfInterest[203789]
+        _iterator[203790]
       }
-      label _breakLabel[203850]
+      label _breakLabel[203795]
     }
-    if(203915 call _cond_test(203889 call == prime 0))
+    if(203860 call _cond_test(203834 call == prime 0))
     {
-      (203912 call halt "Requested capacity (" numKeys ") exceeds maximum size")
+      (203857 call halt "Requested capacity (" numKeys ") exceeds maximum size")
     }
-    (203920 return primeLoc)
+    (203865 return primeLoc)
   }
-  function chpl__hashtable[204564](?).allocateData[203930](arg _mt[204636]:_MT[238], arg this[204634]:chpl__hashtable[204564](?), arg size[203927] :
-  int[13], arg tableEltType[203932]:_any[178](?)) : _unknown[51] "method" "primary method"
+  function chpl__hashtable[204509](?).allocateData[203875](arg _mt[204581]:_MT[238], arg this[204579]:chpl__hashtable[204509](?), arg size[203872] :
+  int[13], arg tableEltType[203877]:_any[178](?)) : _unknown[51] "method" "primary method"
   {
-    if(203950 call _cond_test(203936 call == size 0))
+    if(203895 call _cond_test(203881 call == size 0))
     {
-      (203939 return nil[44])
+      (203884 return nil[44])
     }
     {
-      (203947 return(203946 call _allocateData size tableEltType))
+      (203892 return(203891 call _allocateData size tableEltType))
     }
   }
-  function chpl__hashtable[204564](?).allocateTable[203963](arg _mt[204640]:_MT[238], arg this[204638]:chpl__hashtable[204564](?), arg size[203960] :
+  function chpl__hashtable[204509](?).allocateTable[203908](arg _mt[204585]:_MT[238], arg this[204583]:chpl__hashtable[204509](?), arg size[203905] :
   int[13]) : _unknown[51] "method" "primary method"
   {
-    if(203985 call _cond_test(203967 call == size 0))
+    if(203930 call _cond_test(203912 call == size 0))
     {
-      (203970 return nil[44])
+      (203915 return nil[44])
     }
     {
-      (203982 return(203981 call _allocateData size(203980 call chpl_TableEntry keyType valType)))
+      (203927 return(203926 call _allocateData size(203925 call chpl_TableEntry keyType valType)))
     }
   }
-  function chpl__hashtable[204564](?).rehash[203998](arg _mt[204644]:_MT[238], arg this[204642]:chpl__hashtable[204564](?), arg newSizeNum[203995] :
-  int[13], arg newSize[204001] :
+  function chpl__hashtable[204509](?).rehash[203943](arg _mt[204589]:_MT[238], arg this[204587]:chpl__hashtable[204509](?), arg newSizeNum[203940] :
+  int[13], arg newSize[203946] :
   int[13]) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    unknown oldSize[204005] tableSize
-    (204008 'end of statement')
-    unknown oldTable[204011] table
-    (204014 'end of statement')
-    (204017 call = tableSizeNum newSizeNum)
-    (204022 call = tableSize newSize)
-    unknown entries[204026] tableNumFullSlots
-    (204029 'end of statement')
-    if(204412 call _cond_test(204032 call > entries 0))
+    unknown oldSize[203950] tableSize
+    (203953 'end of statement')
+    unknown oldTable[203956] table
+    (203959 'end of statement')
+    (203962 call = tableSizeNum newSizeNum)
+    (203967 call = tableSize newSize)
+    unknown entries[203971] tableNumFullSlots
+    (203974 'end of statement')
+    if(204357 call _cond_test(203977 call > entries 0))
     {
-      if(204060 call _cond_test(204036 call == newSize 0))
+      if(204005 call _cond_test(203981 call == newSize 0))
       {
-        (204057 call halt "attempt to resize to 0 a table that is not empty")
+        (204002 call halt "attempt to resize to 0 a table that is not empty")
       }
-      (204070 call = table(204069 call allocateTable tableSize))
-      if(204089 call _cond_test(204075 call != rehashHelpers nil[44]))
+      (204015 call = table(204014 call allocateTable tableSize))
+      if(204034 call _cond_test(204020 call != rehashHelpers nil[44]))
       {
-        (204087 call(204082 call .(204078 call postfix! rehashHelpers) c"startRehash") tableSize)
+        (204032 call(204027 call .(204023 call postfix! rehashHelpers) c"startRehash") tableSize)
       }
-      (204096 call = tableNumDeletedSlots 0)
+      (204041 call = tableNumDeletedSlots 0)
       {
-        unknown _indexOfInterest[204302] "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[204303] "expr temp" "temp"
-        (204312 'move' _iterator[204303](204310 call _getIterator(204103 call _allSlots oldSize)))
+        unknown _indexOfInterest[204247] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[204248] "expr temp" "temp"
+        (204257 'move' _iterator[204248](204255 call _getIterator(204048 call _allSlots oldSize)))
         Defer
         {
           {
-            (204329 call _freeIterator _iterator[204303])
+            (204274 call _freeIterator _iterator[204248])
           }
         }
         { scopeless type
-          (204318 'move' _indexOfInterest[204302](204315 call iteratorIndex _iterator[204303]))
+          (204263 'move' _indexOfInterest[204247](204260 call iteratorIndex _iterator[204248]))
         }
-        ForLoop[204304]
+        ForLoop[204249]
         {
-          unknown oldslot[204322] "index var" "insert auto destroy"
-          (204324 'move' oldslot[204322] _indexOfInterest[204302])
+          unknown oldslot[204267] "index var" "insert auto destroy"
+          (204269 'move' oldslot[204267] _indexOfInterest[204247])
           {
-            if(204297 call _cond_test(204115 call ==(204108 call .(204107 call oldTable oldslot) c"status")(204112 call . chpl__hash_status c"full")))
+            if(204242 call _cond_test(204060 call ==(204053 call .(204052 call oldTable oldslot) c"status")(204057 call . chpl__hash_status c"full")))
             {
-              unknown oldEntry[204121] "ref var"(204120 call oldTable oldslot)
-              (204124 'end of statement')
-              unknown tmp[204138] "temp"(204137 call _findSlot(204133 call . oldEntry c"key"))
-              (204145 call _check_tuple_var_decl tmp[204138] 2)
-              unknown foundSlot[204126](204139 call tmp[204138] 0)
-              unknown newslot[204128](204142 call tmp[204138] 1)
-              (204150 'end of statement')
-              if(204174 call _cond_test foundSlot)
+              unknown oldEntry[204066] "ref var"(204065 call oldTable oldslot)
+              (204069 'end of statement')
+              unknown tmp[204083] "temp"(204082 call _findSlot(204078 call . oldEntry c"key"))
+              (204090 call _check_tuple_var_decl tmp[204083] 2)
+              unknown foundSlot[204071](204084 call tmp[204083] 0)
+              unknown newslot[204073](204087 call tmp[204083] 1)
+              (204095 'end of statement')
+              if(204119 call _cond_test foundSlot)
               {
-                (204171 call halt "duplicate element found while resizing for key")
+                (204116 call halt "duplicate element found while resizing for key")
               }
-              if(204222 call _cond_test(204180 call < newslot 0))
+              if(204167 call _cond_test(204125 call < newslot 0))
               {
-                (204219 call halt "couldn't add element during resize - got slot " newslot " for key")
+                (204164 call halt "couldn't add element during resize - got slot " newslot " for key")
               }
-              unknown dstSlot[204230] "ref var"(204229 call table newslot)
-              (204233 'end of statement')
-              (204242 call =(204235 call . dstSlot c"status")(204239 call . chpl__hash_status c"full"))
-              (204258 call _moveInit(204247 call . dstSlot c"key")(204257 call _moveToReturn(204253 call . oldEntry c"key")))
-              (204273 call _moveInit(204262 call . dstSlot c"val")(204272 call _moveToReturn(204268 call . oldEntry c"val")))
-              if(204292 call _cond_test(204277 call != rehashHelpers nil[44]))
+              unknown dstSlot[204175] "ref var"(204174 call table newslot)
+              (204178 'end of statement')
+              (204187 call =(204180 call . dstSlot c"status")(204184 call . chpl__hash_status c"full"))
+              (204203 call _moveInit(204192 call . dstSlot c"key")(204202 call _moveToReturn(204198 call . oldEntry c"key")))
+              (204218 call _moveInit(204207 call . dstSlot c"val")(204217 call _moveToReturn(204213 call . oldEntry c"val")))
+              if(204237 call _cond_test(204222 call != rehashHelpers nil[44]))
               {
-                (204290 call(204284 call .(204280 call postfix! rehashHelpers) c"moveElementDuringRehash") oldslot newslot)
+                (204235 call(204229 call .(204225 call postfix! rehashHelpers) c"moveElementDuringRehash") oldslot newslot)
               }
             }
           }
-          label _continueLabel[204307]
-          _indexOfInterest[204302]
-          _iterator[204303]
+          label _continueLabel[204252]
+          _indexOfInterest[204247]
+          _iterator[204248]
         }
-        label _breakLabel[204308]
+        label _breakLabel[204253]
       }
-      if(204352 call _cond_test(204338 call != rehashHelpers nil[44]))
+      if(204297 call _cond_test(204283 call != rehashHelpers nil[44]))
       {
-        (204350 call(204345 call .(204341 call postfix! rehashHelpers) c"finishRehash") oldSize)
+        (204295 call(204290 call .(204286 call postfix! rehashHelpers) c"finishRehash") oldSize)
       }
-      (204361 call _freeData oldTable oldSize)
+      (204306 call _freeData oldTable oldSize)
     }
     {
-      if(204388 call _cond_test(204365 call != rehashHelpers nil[44]))
+      if(204333 call _cond_test(204310 call != rehashHelpers nil[44]))
       {
-        (204375 call(204370 call .(204368 call postfix! rehashHelpers) c"startRehash") tableSize)
-        (204386 call(204381 call .(204379 call postfix! rehashHelpers) c"finishRehash") oldSize)
+        (204320 call(204315 call .(204313 call postfix! rehashHelpers) c"startRehash") tableSize)
+        (204331 call(204326 call .(204324 call postfix! rehashHelpers) c"finishRehash") oldSize)
       }
-      (204397 call _freeData oldTable oldSize)
-      (204404 call = table(204403 call allocateTable tableSize))
-      (204409 call = tableNumDeletedSlots 0)
+      (204342 call _freeData oldTable oldSize)
+      (204349 call = table(204348 call allocateTable tableSize))
+      (204354 call = tableNumDeletedSlots 0)
     }
   }
-  function chpl__hashtable[204564](?).requestCapacity[204424](arg _mt[204648]:_MT[238], arg this[204646]:chpl__hashtable[204564](?), arg numKeys[204421] :
+  function chpl__hashtable[204509](?).requestCapacity[204369](arg _mt[204593]:_MT[238], arg this[204591]:chpl__hashtable[204509](?), arg numKeys[204366] :
   int[13]) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    if(204453 call _cond_test(204428 call < tableNumFullSlots numKeys))
+    if(204398 call _cond_test(204373 call < tableNumFullSlots numKeys))
     {
-      unknown primeLoc[204434](204433 call _findPrimeSizeIndex numKeys)
-      (204437 'end of statement')
-      unknown prime[204443](204442 call chpl__primes primeLoc)
-      (204446 'end of statement')
-      (204451 call rehash primeLoc prime)
+      unknown primeLoc[204379](204378 call _findPrimeSizeIndex numKeys)
+      (204382 'end of statement')
+      unknown prime[204388](204387 call chpl__primes primeLoc)
+      (204391 'end of statement')
+      (204396 call rehash primeLoc prime)
     }
   }
-  function chpl__hashtable[204564](?).resize[204466](arg _mt[204652]:_MT[238], arg this[204650]:chpl__hashtable[204564](?), arg grow[204463] :
+  function chpl__hashtable[204509](?).resize[204411](arg _mt[204597]:_MT[238], arg this[204595]:chpl__hashtable[204509](?), arg grow[204408] :
   bool[10]) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    if(204471 call _cond_test postponeResize)
+    if(204416 call _cond_test postponeResize)
     {
-      (204469 return _void[55])
+      (204414 return _void[55])
     }
-    unknown newSizeNum[204478] tableSizeNum
-    (204481 'end of statement')
-    (204491 call += newSizeNum(204488 IfExpr  grow then
+    unknown newSizeNum[204423] tableSizeNum
+    (204426 'end of statement')
+    (204436 call += newSizeNum(204433 IfExpr  grow then
     { scopeless
       1
     } else
     { scopeless
-      (204486 call - 1)
+      (204431 call - 1)
     } ))
-    if(204522 call _cond_test(204499 call > newSizeNum(204496 call . chpl__primes c"size")))
+    if(204467 call _cond_test(204444 call > newSizeNum(204441 call . chpl__primes c"size")))
     {
-      (204520 call halt "associative array exceeds maximum size")
+      (204465 call halt "associative array exceeds maximum size")
     }
-    unknown newSize[204531](204530 call chpl__primes newSizeNum)
-    (204534 'end of statement')
-    if(204551 call _cond_test(204546 call &&(204537 call == grow 0)(204544 call >(204541 call * 2 tableNumFullSlots) newSize)))
+    unknown newSize[204476](204475 call chpl__primes newSizeNum)
+    (204479 'end of statement')
+    if(204496 call _cond_test(204491 call &&(204482 call == grow 0)(204489 call >(204486 call * 2 tableNumFullSlots) newSize)))
     {
-      (204548 return _void[55])
+      (204493 return _void[55])
     }
-    (204559 call rehash newSizeNum newSize)
+    (204504 call rehash newSizeNum newSize)
   }
-  type chpl__hashtable[204564](?) unknown keyType[202412] "type variable" unknown valType[202415] "type variable" unknown tableNumFullSlots[202419] int[13] unknown tableNumDeletedSlots[202424] int[13] unknown tableSizeNum[202429] int[13] unknown tableSize[202434] int[13] unknown table[202446](202445 call _ddata(202443 call chpl_TableEntry keyType valType)) unknown rehashHelpers[202454](202452 call _owned(202451 'to nilable class from type' chpl__rehashHelpers)) unknown postponeResize[202459] bool[10]
-  function chpl__simpleSet[204962](?).size[204670](arg _mt[204966]:_MT[238], arg this[204964]:chpl__simpleSet[204962](?)) : _unknown[51] "inline" "method" "primary method" "no parens"
+  type chpl__hashtable[204509](?) unknown keyType[202358] "type variable" unknown valType[202361] "type variable" unknown tableNumFullSlots[202365] int[13] unknown tableNumDeletedSlots[202370] int[13] unknown tableSizeNum[202375] int[13] unknown tableSize[202380] int[13] unknown table[202392](202391 call _ddata(202389 call chpl_TableEntry keyType valType)) unknown rehashHelpers[202400](202398 call _owned(202397 'to nilable class from type' chpl__rehashHelpers)) unknown postponeResize[202405] bool[10]
+  function chpl__simpleSet[204907](?).size[204615](arg _mt[204911]:_MT[238], arg this[204909]:chpl__simpleSet[204907](?)) : _unknown[51] "inline" "method" "primary method" "no parens"
   {
-    (204676 return(204673 call . table c"tableNumFullSlots"))
+    (204621 return(204618 call . table c"tableNumFullSlots"))
   }
-  function chpl__simpleSet[204962](?).add[204685](arg _mt[204970]:_MT[238], arg this[204968]:chpl__simpleSet[204962](?), arg elem[204683]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function chpl__simpleSet[204907](?).add[204630](arg _mt[204915]:_MT[238], arg this[204913]:chpl__simpleSet[204907](?), arg elem[204628]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    unknown tmp[204699] "temp"(204698 call(204693 call . table c"findAvailableSlot") elem)
-    (204706 call _check_tuple_var_decl tmp[204699] 2)
-    unknown isFullSlot[204687](204700 call tmp[204699] 0)
-    unknown idx[204689](204703 call tmp[204699] 1)
-    (204711 'end of statement')
-    (204718 call assert(204715 call ! isFullSlot))
-    (204728 call(204721 call . table c"fillSlot") idx elem none[57])
+    unknown tmp[204644] "temp"(204643 call(204638 call . table c"findAvailableSlot") elem)
+    (204651 call _check_tuple_var_decl tmp[204644] 2)
+    unknown isFullSlot[204632](204645 call tmp[204644] 0)
+    unknown idx[204634](204648 call tmp[204644] 1)
+    (204656 'end of statement')
+    (204663 call assert(204660 call ! isFullSlot))
+    (204673 call(204666 call . table c"fillSlot") idx elem none[57])
   }
-  function chpl__simpleSet[204962](?).remove[204736](arg _mt[204974]:_MT[238], arg this[204972]:chpl__simpleSet[204962](?), arg elem[204734]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function chpl__simpleSet[204907](?).remove[204681](arg _mt[204919]:_MT[238], arg this[204917]:chpl__simpleSet[204907](?), arg elem[204679]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    unknown tmp[204750] "temp"(204749 call(204744 call . table c"findFullSlot") elem)
-    (204757 call _check_tuple_var_decl tmp[204750] 2)
-    unknown hasFoundSlot[204738](204751 call tmp[204750] 0)
-    unknown idx[204740](204754 call tmp[204750] 1)
-    (204762 'end of statement')
-    if(204792 call _cond_test hasFoundSlot)
+    unknown tmp[204695] "temp"(204694 call(204689 call . table c"findFullSlot") elem)
+    (204702 call _check_tuple_var_decl tmp[204695] 2)
+    unknown hasFoundSlot[204683](204696 call tmp[204695] 0)
+    unknown idx[204685](204699 call tmp[204695] 1)
+    (204707 'end of statement')
+    if(204737 call _cond_test hasFoundSlot)
     {
-      unknown key[204766] eltType
-      unknown val[204770] nothing[7]
-      (204773 'end of statement')
-      (204783 call(204776 call . table c"clearSlot") idx key val)
-      (204790 call(204786 call . table c"maybeShrinkAfterRemove"))
+      unknown key[204711] eltType
+      unknown val[204715] nothing[7]
+      (204718 'end of statement')
+      (204728 call(204721 call . table c"clearSlot") idx key val)
+      (204735 call(204731 call . table c"maybeShrinkAfterRemove"))
     }
   }
-  function chpl__simpleSet[204962](?).these[204800](arg _mt[204978]:_MT[238], arg this[204976]:chpl__simpleSet[204962](?)) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
+  function chpl__simpleSet[204907](?).these[204745](arg _mt[204923]:_MT[238], arg this[204921]:chpl__simpleSet[204907](?)) : _unknown[51] "iterator fn" "method" "primary method" "no return value for void"
   {
     {
-      unknown _indexOfInterest[204833] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[204834] "expr temp" "temp"
-      (204843 'move' _iterator[204834](204841 call _getIterator(204808 call(204804 call . table c"allSlots"))))
+      unknown _indexOfInterest[204778] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[204779] "expr temp" "temp"
+      (204788 'move' _iterator[204779](204786 call _getIterator(204753 call(204749 call . table c"allSlots"))))
       Defer
       {
         {
-          (204860 call _freeIterator _iterator[204834])
+          (204805 call _freeIterator _iterator[204779])
         }
       }
       { scopeless type
-        (204849 'move' _indexOfInterest[204833](204846 call iteratorIndex _iterator[204834]))
+        (204794 'move' _indexOfInterest[204778](204791 call iteratorIndex _iterator[204779]))
       }
-      ForLoop[204835]
+      ForLoop[204780]
       {
-        unknown slot[204853] "index var" "insert auto destroy"
-        (204855 'move' slot[204853] _indexOfInterest[204833])
-        if(204828 call _cond_test(204815 call(204810 call . table c"isSlotFull") slot))
+        unknown slot[204798] "index var" "insert auto destroy"
+        (204800 'move' slot[204798] _indexOfInterest[204778])
+        if(204773 call _cond_test(204760 call(204755 call . table c"isSlotFull") slot))
         {
-          (204826 yield(204823 call .(204822 call(204817 call . table c"table") slot) c"key"))
+          (204771 yield(204768 call .(204767 call(204762 call . table c"table") slot) c"key"))
         }
-        label _continueLabel[204838]
-        _indexOfInterest[204833]
-        _iterator[204834]
+        label _continueLabel[204783]
+        _indexOfInterest[204778]
+        _iterator[204779]
       }
-      label _breakLabel[204839]
+      label _breakLabel[204784]
     }
   }
-  function chpl__simpleSet[204962](?).writeThis[204874](arg _mt[204982]:_MT[238], arg this[204980]:chpl__simpleSet[204962](?), arg f[204872]:_any[178](?)) : _unknown[51] throws "method" "primary method" "no return value for void"
+  function chpl__simpleSet[204907](?).writeThis[204819](arg _mt[204927]:_MT[238], arg this[204925]:chpl__simpleSet[204907](?), arg f[204817]:_any[178](?)) : _unknown[51] throws "method" "primary method" "no return value for void"
   {
-    unknown count[204877] 1
-    (204880 'end of statement')
-    (204884 call <~> f "{")
+    unknown count[204822] 1
+    (204825 'end of statement')
+    (204829 call <~> f "{")
     {
-      unknown _indexOfInterest[204921] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[204922] "expr temp" "temp"
-      (204931 'move' _iterator[204922](204929 call _getIterator this))
+      unknown _indexOfInterest[204866] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[204867] "expr temp" "temp"
+      (204876 'move' _iterator[204867](204874 call _getIterator this))
       Defer
       {
         {
-          (204947 call _freeIterator _iterator[204922])
+          (204892 call _freeIterator _iterator[204867])
         }
       }
       { scopeless type
-        (204936 'move' _indexOfInterest[204921](204933 call iteratorIndex _iterator[204922]))
+        (204881 'move' _indexOfInterest[204866](204878 call iteratorIndex _iterator[204867]))
       }
-      ForLoop[204923]
+      ForLoop[204868]
       {
-        unknown e[204940] "index var" "insert auto destroy"
-        (204942 'move' e[204940] _indexOfInterest[204921])
+        unknown e[204885] "index var" "insert auto destroy"
+        (204887 'move' e[204885] _indexOfInterest[204866])
         {
-          if(204916 call _cond_test(204894 call <= count(204892 call - size 1)))
+          if(204861 call _cond_test(204839 call <= count(204837 call - size 1)))
           {
-            (204898 call += count 1)
-            (204907 call <~>(204904 call <~> f e) ", ")
+            (204843 call += count 1)
+            (204852 call <~>(204849 call <~> f e) ", ")
           }
           {
-            (204912 call <~> f e)
+            (204857 call <~> f e)
           }
         }
-        label _continueLabel[204926]
-        _indexOfInterest[204921]
-        _iterator[204922]
+        label _continueLabel[204871]
+        _indexOfInterest[204866]
+        _iterator[204867]
       }
-      label _breakLabel[204927]
+      label _breakLabel[204872]
     }
-    (204956 call <~> f "}")
+    (204901 call <~> f "}")
   }
-  type chpl__simpleSet[204962](?) unknown eltType[204656] "type variable" unknown table[204664](204663 call chpl__hashtable eltType nothing[7])
+  type chpl__simpleSet[204907](?) unknown eltType[204601] "type variable" unknown table[204609](204608 call chpl__hashtable eltType nothing[7])
 }

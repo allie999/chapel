@@ -2,914 +2,914 @@ AST dump for ChapelSyncvar after pass expandExternArrayCalls.
 Module use list: 
 
 {
-  (84293 'use' ChapelStandard)
-  (84297 'use' AlignedTSupport)
-  (84300 'use' MemConsistency)
-  (84303 'use' SyncVarRuntimeSupport)
-  function isSupported[84309](arg t[84307]:_any[178](?)) param : _unknown[51] "private"
+  (84290 'use' ChapelStandard)
+  (84294 'use' AlignedTSupport)
+  (84297 'use' MemConsistency)
+  (84300 'use' SyncVarRuntimeSupport)
+  function isSupported[84306](arg t[84304]:_any[178](?)) param : _unknown[51] "private"
   {
     { scopeless
-      (84363 return(84361 call ||(84355 call ||(84349 call ||(84343 call ||(84337 call ||(84331 call ||(84325 call ||(84319 call ||(84314 call isNothingType t)(84318 call isBoolType t))(84324 call isIntegralType t))(84330 call isRealType t))(84336 call isImagType t))(84342 call isEnumType t))(84348 call isClassType t))(84354 call isStringType t))(84359 call == t chpl_taskID_t)))
+      (84360 return(84358 call ||(84352 call ||(84346 call ||(84340 call ||(84334 call ||(84328 call ||(84322 call ||(84316 call ||(84311 call isNothingType t)(84315 call isBoolType t))(84321 call isIntegralType t))(84327 call isRealType t))(84333 call isImagType t))(84339 call isEnumType t))(84345 call isClassType t))(84351 call isStringType t))(84356 call == t chpl_taskID_t)))
     }
   }
-  function ensureFEType[84372](arg t[84370]:_any[178](?)) : _unknown[51] "private"
+  function ensureFEType[84369](arg t[84367]:_any[178](?)) : _unknown[51] "private"
   {
-    if(84423 call _cond_test(84379 call ==(84377 call isSupported t) 0))
+    if(84420 call _cond_test(84376 call ==(84374 call isSupported t) 0))
     {
       { scopeless
-        (84421 call compilerError "sync/single types cannot contain type '"(84402 call _cast string[26] t) "'")
+        (84418 call compilerError "sync/single types cannot contain type '"(84399 call _cast string[26] t) "'")
       }
     }
-    if(84454 call _cond_test(84432 call isNonNilableClass t))
+    if(84451 call _cond_test(84429 call isNonNilableClass t))
     {
       { scopeless
-        (84452 call compilerError "sync/single types cannot contain non-nilable classes")
+        (84449 call compilerError "sync/single types cannot contain non-nilable classes")
       }
     }
-    if(84484 call _cond_test(84462 call isGenericType t))
+    if(84481 call _cond_test(84459 call isGenericType t))
     {
       { scopeless
-        (84482 call compilerError "sync/single types cannot contain generic types")
+        (84479 call compilerError "sync/single types cannot contain generic types")
       }
     }
   }
   { scopeless
-    unknown useNativeSyncVar[84492] "config" "no doc" "param" 1
-    (84495 'end of statement')
+    unknown useNativeSyncVar[84489] "config" "no doc" "param" 1
+    (84492 'end of statement')
   }
-  function getSyncClassType[84500](arg valType[84498]:_any[178](?)) type : _unknown[51] "private"
+  function getSyncClassType[84497](arg valType[84495]:_any[178](?)) type : _unknown[51] "private"
   {
-    if(84525 call _cond_test(84507 call && useNativeSyncVar(84506 call supportsNativeSyncVar valType)))
+    if(84522 call _cond_test(84504 call && useNativeSyncVar(84503 call supportsNativeSyncVar valType)))
     {
-      (84514 return(84513 'to unmanaged class from unknown'(84512 call _qthreads_synccls valType)))
+      (84511 return(84510 'to unmanaged class from unknown'(84509 call _qthreads_synccls valType)))
     }
     {
-      (84522 return(84521 'to unmanaged class from unknown'(84520 call _synccls valType)))
+      (84519 return(84518 'to unmanaged class from unknown'(84517 call _synccls valType)))
     }
   }
-  function chpl__readXX[84536](arg x[84534]:_any[178](?)) : _unknown[51] "no doc"
+  function chpl__readXX[84533](arg x[84531]:_any[178](?)) : _unknown[51] "no doc"
   {
     { scopeless
-      (84539 return x)
+      (84536 return x)
     }
   }
-  sync type _syncvar[84947](?) unknown valType[84545] "type variable" unknown wrapped[84552](84551 call getSyncClassType valType) unknown isOwned[84558] 1 bool[10] function _syncvar[84947](?).init[84566](arg _mt[84951]:_MT[238], arg this[84949]:_syncvar[84947](?), arg valType[84564]:_any[178](?)) : _unknown[51] "dont disable remote value forwarding" "method" "primary method"
+  sync type _syncvar[84944](?) unknown valType[84542] "type variable" unknown wrapped[84549](84548 call getSyncClassType valType) unknown isOwned[84555] 1 bool[10] function _syncvar[84944](?).init[84563](arg _mt[84948]:_MT[238], arg this[84946]:_syncvar[84944](?), arg valType[84561]:_any[178](?)) : _unknown[51] "dont disable remote value forwarding" "method" "primary method"
   {
-    (84571 call ensureFEType valType)
-    (84581 call =(84577 call . this c"valType") valType)
-    (84597 call =(84587 call . this c"wrapped")(84590 'new'(84596 call(84594 call getSyncClassType valType))))
-  } function _syncvar[84947](?).init[84608](arg _mt[84955]:_MT[238], arg this[84953]:_syncvar[84947](?), const arg other[84605] :
+    (84568 call ensureFEType valType)
+    (84578 call =(84574 call . this c"valType") valType)
+    (84594 call =(84584 call . this c"wrapped")(84587 'new'(84593 call(84591 call getSyncClassType valType))))
+  } function _syncvar[84944](?).init[84605](arg _mt[84952]:_MT[238], arg this[84950]:_syncvar[84944](?), const arg other[84602] :
   _syncvar) : _unknown[51] "dont disable remote value forwarding" "method" "primary method"
   {
-    (84618 call =(84611 call . this c"valType")(84615 call . other c"valType"))
-    (84630 call =(84623 call . this c"wrapped")(84627 call . other c"wrapped"))
-    (84640 call =(84636 call . this c"isOwned") 0)
-  } function _syncvar[84947](?).init=[84651](arg _mt[84959]:_MT[238], arg this[84957]:_syncvar[84947](?), const arg other[84648] :
+    (84615 call =(84608 call . this c"valType")(84612 call . other c"valType"))
+    (84627 call =(84620 call . this c"wrapped")(84624 call . other c"wrapped"))
+    (84637 call =(84633 call . this c"isOwned") 0)
+  } function _syncvar[84944](?).init=[84648](arg _mt[84956]:_MT[238], arg this[84954]:_syncvar[84944](?), const arg other[84645] :
   _syncvar) : _unknown[51] "method" "primary method"
   {
-    if(84796 call _cond_test(84666 call ==(84664 call isCoercible(84655 call . other c"valType")(84661 call .(84660 'typeof' this) c"valType")) 0))
+    if(84793 call _cond_test(84663 call ==(84661 call isCoercible(84652 call . other c"valType")(84658 call .(84657 'typeof' this) c"valType")) 0))
     {
       { scopeless
-        unknown theseTypes[84705] "param"(84703 call +(84700 call +(84693 call +(84674 call + "'"(84672 call _cast string[26](84670 'typeof' this))) "' from '")(84698 call _cast string[26](84696 'typeof' other))) "'")
-        (84708 'end of statement')
+        unknown theseTypes[84702] "param"(84700 call +(84697 call +(84690 call +(84671 call + "'"(84669 call _cast string[26](84667 'typeof' this))) "' from '")(84695 call _cast string[26](84693 'typeof' other))) "'")
+        (84705 'end of statement')
       }
       { scopeless
-        unknown because[84768] "param"(84766 call +(84763 call +(84753 call +(84734 call + "because '"(84732 call _cast string[26](84728 call . other c"valType"))) "' is not coercible to '")(84761 call _cast string[26](84757 call .(84756 'typeof' this) c"valType"))) "'")
-        (84771 'end of statement')
+        unknown because[84765] "param"(84763 call +(84760 call +(84750 call +(84731 call + "because '"(84729 call _cast string[26](84725 call . other c"valType"))) "' is not coercible to '")(84758 call _cast string[26](84754 call .(84753 'typeof' this) c"valType"))) "'")
+        (84768 'end of statement')
       }
-      (84794 call compilerError "cannot initialize " theseTypes " " because)
+      (84791 call compilerError "cannot initialize " theseTypes " " because)
     }
-    (84811 call(84802 call . this c"init")(84807 call .(84806 'typeof' this) c"valType"))
-    (84826 call(84816 call . this c"writeEF")(84824 call(84820 call . other c"readFE")))
-  } function _syncvar[84947](?).init=[84839](arg _mt[84963]:_MT[238], arg this[84961]:_syncvar[84947](?), const arg other[84836] :
-  (84833 call . this c"valType")) : _unknown[51] "dont disable remote value forwarding" "method" "primary method"
+    (84808 call(84799 call . this c"init")(84804 call .(84803 'typeof' this) c"valType"))
+    (84823 call(84813 call . this c"writeEF")(84821 call(84817 call . other c"readFE")))
+  } function _syncvar[84944](?).init=[84836](arg _mt[84960]:_MT[238], arg this[84958]:_syncvar[84944](?), const arg other[84833] :
+  (84830 call . this c"valType")) : _unknown[51] "dont disable remote value forwarding" "method" "primary method"
   {
-    (84848 call(84842 call . this c"init")(84846 'typeof' other))
-    (84857 call(84852 call . this c"writeEF") other)
-  } function _syncvar[84947](?).deinit[84863](arg _mt[84967]:_MT[238], arg this[84965]:_syncvar[84947](?)) : _unknown[51] "destructor" "dont disable remote value forwarding" "method" "primary method"
+    (84845 call(84839 call . this c"init")(84843 'typeof' other))
+    (84854 call(84849 call . this c"writeEF") other)
+  } function _syncvar[84944](?).deinit[84860](arg _mt[84964]:_MT[238], arg this[84962]:_syncvar[84944](?)) : _unknown[51] "destructor" "dont disable remote value forwarding" "method" "primary method"
   {
-    if(84874 call _cond_test(84867 call == isOwned 1))
+    if(84871 call _cond_test(84864 call == isOwned 1))
     {
       { scopeless
-        (84871 call chpl__delete wrapped)
+        (84868 call chpl__delete wrapped)
       }
     }
-  } function _syncvar[84947](?).readThis[84886](arg _mt[84971]:_MT[238], arg this[84969]:_syncvar[84947](?), arg x[84884]:_any[178](?)) : _unknown[51] throws "method" "primary method"
+  } function _syncvar[84944](?).readThis[84883](arg _mt[84968]:_MT[238], arg this[84966]:_syncvar[84944](?), arg x[84881]:_any[178](?)) : _unknown[51] throws "method" "primary method"
   {
-    (84909 call compilerError "sync variables cannot currently be read - use writeEF/writeFF instead")
-  } function _syncvar[84947](?).writeThis[84918](arg _mt[84975]:_MT[238], arg this[84973]:_syncvar[84947](?), arg x[84916]:_any[178](?)) : _unknown[51] throws "method" "primary method"
+    (84906 call compilerError "sync variables cannot currently be read - use writeEF/writeFF instead")
+  } function _syncvar[84944](?).writeThis[84915](arg _mt[84972]:_MT[238], arg this[84970]:_syncvar[84944](?), arg x[84913]:_any[178](?)) : _unknown[51] throws "method" "primary method"
   {
-    (84941 call compilerError "sync variables cannot currently be written - apply readFE/readFF() to those variables first")
+    (84938 call compilerError "sync variables cannot currently be written - apply readFE/readFF() to those variables first")
   }
-  function isSyncType[84984](arg t[84981] :
+  function isSyncType[84981](arg t[84978] :
   _syncvar) param : _unknown[51] "no doc"
   {
-    (84987 return 1)
+    (84984 return 1)
   }
-  function isSyncType[84996](arg t[84994]:_any[178](?)) param : _unknown[51]
+  function isSyncType[84993](arg t[84991]:_any[178](?)) param : _unknown[51]
   {
-    (84999 return 0)
+    (84996 return 0)
   }
-  function _unknown[51].readFE[85007](arg _mt[85012]:_MT[238], arg this[85009] :
+  function _unknown[51].readFE[85004](arg _mt[85009]:_MT[238], arg this[85006] :
   _syncvar) : _unknown[51] "method"
   {
-    (85020 return(85019 call(85015 call . wrapped c"readFE")))
+    (85017 return(85016 call(85012 call . wrapped c"readFE")))
   }
-  function _unknown[51].readFF[85028](arg _mt[85033]:_MT[238], arg this[85030] :
+  function _unknown[51].readFF[85025](arg _mt[85030]:_MT[238], arg this[85027] :
   _syncvar) : _unknown[51] "method"
   {
-    (85041 return(85040 call(85036 call . wrapped c"readFF")))
+    (85038 return(85037 call(85033 call . wrapped c"readFF")))
   }
-  function _unknown[51].readXX[85049](arg _mt[85054]:_MT[238], arg this[85051] :
+  function _unknown[51].readXX[85046](arg _mt[85051]:_MT[238], arg this[85048] :
   _syncvar) : _unknown[51] "method"
   {
-    (85058 call chpl_task_yield)
-    (85069 return(85068 call(85064 call . wrapped c"readXX")))
+    (85055 call chpl_task_yield)
+    (85066 return(85065 call(85061 call . wrapped c"readXX")))
   }
-  function _unknown[51].writeEF[85080](arg _mt[85085]:_MT[238], arg this[85082] :
-  _syncvar, arg x[85077] :
+  function _unknown[51].writeEF[85077](arg _mt[85082]:_MT[238], arg this[85079] :
+  _syncvar, arg x[85074] :
   valType) : _unknown[51] "method"
   {
-    (85093 call(85088 call . wrapped c"writeEF") x)
+    (85090 call(85085 call . wrapped c"writeEF") x)
   }
-  function _unknown[51].writeFF[85105](arg _mt[85110]:_MT[238], arg this[85107] :
-  _syncvar, arg x[85102] :
+  function _unknown[51].writeFF[85102](arg _mt[85107]:_MT[238], arg this[85104] :
+  _syncvar, arg x[85099] :
   valType) : _unknown[51] "method"
   {
-    (85120 call(85115 call . wrapped c"writeFF") x)
+    (85117 call(85112 call . wrapped c"writeFF") x)
   }
-  function _unknown[51].writeXF[85132](arg _mt[85137]:_MT[238], arg this[85134] :
-  _syncvar, arg x[85129] :
+  function _unknown[51].writeXF[85129](arg _mt[85134]:_MT[238], arg this[85131] :
+  _syncvar, arg x[85126] :
   valType) : _unknown[51] "method"
   {
-    (85147 call(85142 call . wrapped c"writeXF") x)
+    (85144 call(85139 call . wrapped c"writeXF") x)
   }
-  function _unknown[51].reset[85155](arg _mt[85160]:_MT[238], arg this[85157] :
+  function _unknown[51].reset[85152](arg _mt[85157]:_MT[238], arg this[85154] :
   _syncvar) : _unknown[51] "method"
   {
-    (85169 call(85165 call . wrapped c"reset"))
+    (85166 call(85162 call . wrapped c"reset"))
   }
-  function _unknown[51].isFull[85177](arg _mt[85182]:_MT[238], arg this[85179] :
+  function _unknown[51].isFull[85174](arg _mt[85179]:_MT[238], arg this[85176] :
   _syncvar) : _unknown[51] "method" "no parens"
   {
-    (85190 return(85187 call . wrapped c"isFull"))
+    (85187 return(85184 call . wrapped c"isFull"))
   }
-  function =[85205](ref arg lhs[85202] :
-  (85201 call _syncvar unknown t[85198]), arg rhs[85208] :
+  function =[85202](ref arg lhs[85199] :
+  (85198 call _syncvar unknown t[85195]), arg rhs[85205] :
   t) : _unknown[51] "assignop"
   {
-    (85220 call(85215 call .(85212 call . lhs c"wrapped") c"writeEF") rhs)
+    (85217 call(85212 call .(85209 call . lhs c"wrapped") c"writeEF") rhs)
   }
-  function +=[85235](ref arg lhs[85232] :
-  (85231 call _syncvar unknown t[85228]), arg rhs[85238] :
+  function +=[85232](ref arg lhs[85229] :
+  (85228 call _syncvar unknown t[85225]), arg rhs[85235] :
   t) : _unknown[51] "assignop"
   {
-    (85261 call(85245 call .(85242 call . lhs c"wrapped") c"writeEF")(85258 call +(85256 call(85252 call .(85249 call . lhs c"wrapped") c"readFE")) rhs))
+    (85258 call(85242 call .(85239 call . lhs c"wrapped") c"writeEF")(85255 call +(85253 call(85249 call .(85246 call . lhs c"wrapped") c"readFE")) rhs))
   }
-  function -=[85276](ref arg lhs[85273] :
-  (85272 call _syncvar unknown t[85269]), arg rhs[85279] :
+  function -=[85273](ref arg lhs[85270] :
+  (85269 call _syncvar unknown t[85266]), arg rhs[85276] :
   t) : _unknown[51] "assignop"
   {
-    (85302 call(85286 call .(85283 call . lhs c"wrapped") c"writeEF")(85299 call -(85297 call(85293 call .(85290 call . lhs c"wrapped") c"readFE")) rhs))
+    (85299 call(85283 call .(85280 call . lhs c"wrapped") c"writeEF")(85296 call -(85294 call(85290 call .(85287 call . lhs c"wrapped") c"readFE")) rhs))
   }
-  function *=[85317](ref arg lhs[85314] :
-  (85313 call _syncvar unknown t[85310]), arg rhs[85320] :
+  function *=[85314](ref arg lhs[85311] :
+  (85310 call _syncvar unknown t[85307]), arg rhs[85317] :
   t) : _unknown[51] "assignop"
   {
-    (85343 call(85327 call .(85324 call . lhs c"wrapped") c"writeEF")(85340 call *(85338 call(85334 call .(85331 call . lhs c"wrapped") c"readFE")) rhs))
+    (85340 call(85324 call .(85321 call . lhs c"wrapped") c"writeEF")(85337 call *(85335 call(85331 call .(85328 call . lhs c"wrapped") c"readFE")) rhs))
   }
-  function /=[85358](ref arg lhs[85355] :
-  (85354 call _syncvar unknown t[85351]), arg rhs[85361] :
+  function /=[85355](ref arg lhs[85352] :
+  (85351 call _syncvar unknown t[85348]), arg rhs[85358] :
   t) : _unknown[51] "assignop"
   {
-    (85384 call(85368 call .(85365 call . lhs c"wrapped") c"writeEF")(85381 call /(85379 call(85375 call .(85372 call . lhs c"wrapped") c"readFE")) rhs))
+    (85381 call(85365 call .(85362 call . lhs c"wrapped") c"writeEF")(85378 call /(85376 call(85372 call .(85369 call . lhs c"wrapped") c"readFE")) rhs))
   }
-  function %=[85399](ref arg lhs[85396] :
-  (85395 call _syncvar unknown t[85392]), arg rhs[85402] :
+  function %=[85396](ref arg lhs[85393] :
+  (85392 call _syncvar unknown t[85389]), arg rhs[85399] :
   t) : _unknown[51] "assignop"
   {
-    (85425 call(85409 call .(85406 call . lhs c"wrapped") c"writeEF")(85422 call %(85420 call(85416 call .(85413 call . lhs c"wrapped") c"readFE")) rhs))
+    (85422 call(85406 call .(85403 call . lhs c"wrapped") c"writeEF")(85419 call %(85417 call(85413 call .(85410 call . lhs c"wrapped") c"readFE")) rhs))
   }
-  function **=[85440](ref arg lhs[85437] :
-  (85436 call _syncvar unknown t[85433]), arg rhs[85443] :
+  function **=[85437](ref arg lhs[85434] :
+  (85433 call _syncvar unknown t[85430]), arg rhs[85440] :
   t) : _unknown[51] "assignop"
   {
-    (85466 call(85450 call .(85447 call . lhs c"wrapped") c"writeEF")(85463 call **(85461 call(85457 call .(85454 call . lhs c"wrapped") c"readFE")) rhs))
+    (85463 call(85447 call .(85444 call . lhs c"wrapped") c"writeEF")(85460 call **(85458 call(85454 call .(85451 call . lhs c"wrapped") c"readFE")) rhs))
   }
-  function &=[85481](ref arg lhs[85478] :
-  (85477 call _syncvar unknown t[85474]), arg rhs[85484] :
+  function &=[85478](ref arg lhs[85475] :
+  (85474 call _syncvar unknown t[85471]), arg rhs[85481] :
   t) : _unknown[51] "assignop"
   {
-    (85507 call(85491 call .(85488 call . lhs c"wrapped") c"writeEF")(85504 call &(85502 call(85498 call .(85495 call . lhs c"wrapped") c"readFE")) rhs))
+    (85504 call(85488 call .(85485 call . lhs c"wrapped") c"writeEF")(85501 call &(85499 call(85495 call .(85492 call . lhs c"wrapped") c"readFE")) rhs))
   }
-  function |=[85522](ref arg lhs[85519] :
-  (85518 call _syncvar unknown t[85515]), arg rhs[85525] :
+  function |=[85519](ref arg lhs[85516] :
+  (85515 call _syncvar unknown t[85512]), arg rhs[85522] :
   t) : _unknown[51] "assignop"
   {
-    (85548 call(85532 call .(85529 call . lhs c"wrapped") c"writeEF")(85545 call |(85543 call(85539 call .(85536 call . lhs c"wrapped") c"readFE")) rhs))
+    (85545 call(85529 call .(85526 call . lhs c"wrapped") c"writeEF")(85542 call |(85540 call(85536 call .(85533 call . lhs c"wrapped") c"readFE")) rhs))
   }
-  function ^=[85563](ref arg lhs[85560] :
-  (85559 call _syncvar unknown t[85556]), arg rhs[85566] :
+  function ^=[85560](ref arg lhs[85557] :
+  (85556 call _syncvar unknown t[85553]), arg rhs[85563] :
   t) : _unknown[51] "assignop"
   {
-    (85589 call(85573 call .(85570 call . lhs c"wrapped") c"writeEF")(85586 call ^(85584 call(85580 call .(85577 call . lhs c"wrapped") c"readFE")) rhs))
+    (85586 call(85570 call .(85567 call . lhs c"wrapped") c"writeEF")(85583 call ^(85581 call(85577 call .(85574 call . lhs c"wrapped") c"readFE")) rhs))
   }
-  function >>=[85604](ref arg lhs[85601] :
-  (85600 call _syncvar unknown t[85597]), arg rhs[85607] :
+  function >>=[85601](ref arg lhs[85598] :
+  (85597 call _syncvar unknown t[85594]), arg rhs[85604] :
   t) : _unknown[51] "assignop"
   {
-    (85630 call(85614 call .(85611 call . lhs c"wrapped") c"writeEF")(85627 call >>(85625 call(85621 call .(85618 call . lhs c"wrapped") c"readFE")) rhs))
+    (85627 call(85611 call .(85608 call . lhs c"wrapped") c"writeEF")(85624 call >>(85622 call(85618 call .(85615 call . lhs c"wrapped") c"readFE")) rhs))
   }
-  function <<=[85645](ref arg lhs[85642] :
-  (85641 call _syncvar unknown t[85638]), arg rhs[85648] :
+  function <<=[85642](ref arg lhs[85639] :
+  (85638 call _syncvar unknown t[85635]), arg rhs[85645] :
   t) : _unknown[51] "assignop"
   {
-    (85671 call(85655 call .(85652 call . lhs c"wrapped") c"writeEF")(85668 call <<(85666 call(85662 call .(85659 call . lhs c"wrapped") c"readFE")) rhs))
+    (85668 call(85652 call .(85649 call . lhs c"wrapped") c"writeEF")(85665 call <<(85663 call(85659 call .(85656 call . lhs c"wrapped") c"readFE")) rhs))
   }
-  function chpl__initCopy[85686](ref arg sv[85683] :
-  (85682 call _syncvar unknown t[85679])) : _unknown[51] "init copy fn"
+  function chpl__initCopy[85683](ref arg sv[85680] :
+  (85679 call _syncvar unknown t[85676])) : _unknown[51] "init copy fn"
   {
-    (85694 return(85693 call(85689 call . sv c"readFE")))
+    (85691 return(85690 call(85686 call . sv c"readFE")))
   }
-  function chpl__autoCopy[85705](const  ref arg rhs[85702] :
+  function chpl__autoCopy[85702](const  ref arg rhs[85699] :
   _syncvar) : _unknown[51] "auto copy fn" "no doc"
   {
-    (85712 return(85707 'new'(85711 call _syncvar rhs)))
+    (85709 return(85704 'new'(85708 call _syncvar rhs)))
   }
-  function chpl__maybeAutoDestroyed[85727](arg x[85724] :
-  (85723 call _syncvar unknown t[85720])) param : _unknown[51] "inline"
+  function chpl__maybeAutoDestroyed[85724](arg x[85721] :
+  (85720 call _syncvar unknown t[85717])) param : _unknown[51] "inline"
   {
     { scopeless
-      (85730 return 1)
+      (85727 return 1)
     }
   }
-  function chpl__autoDestroy[85744](arg x[85741] :
-  (85740 call _syncvar ?[260])) : _unknown[51] "inline"
+  function chpl__autoDestroy[85741](arg x[85738] :
+  (85737 call _syncvar ?[260])) : _unknown[51] "inline"
   {
-    if(85761 call _cond_test(85751 call ==(85747 call . x c"isOwned") 1))
+    if(85758 call _cond_test(85748 call ==(85744 call . x c"isOwned") 1))
     {
       { scopeless
-        (85758 call chpl__delete(85754 call . x c"wrapped"))
+        (85755 call chpl__delete(85751 call . x c"wrapped"))
       }
     }
   }
-  function chpl__readXX[85778](const  ref arg x[85775] :
-  (85774 call _syncvar ?[260])) : _unknown[51] "no doc"
+  function chpl__readXX[85775](const  ref arg x[85772] :
+  (85771 call _syncvar ?[260])) : _unknown[51] "no doc"
   {
     { scopeless
-      (85786 return(85785 call(85781 call . x c"readXX")))
+      (85783 return(85782 call(85778 call . x c"readXX")))
     }
   }
-  function <=>[85797](arg lhs[85794] :
-  _syncvar, ref arg rhs[85799]:_any[178](?)) : _unknown[51]
+  function <=>[85794](arg lhs[85791] :
+  _syncvar, ref arg rhs[85796]:_any[178](?)) : _unknown[51]
   {
     { scopeless
-      const tmp[85802] "const" lhs
-      (85805 'end of statement')
+      const tmp[85799] "const" lhs
+      (85802 'end of statement')
     }
-    (85809 call = lhs rhs)
-    (85814 call = rhs tmp)
+    (85806 call = lhs rhs)
+    (85811 call = rhs tmp)
   }
-  function <=>[85823](ref arg lhs[85821]:_any[178](?), arg rhs[85826] :
+  function <=>[85820](ref arg lhs[85818]:_any[178](?), arg rhs[85823] :
   _syncvar) : _unknown[51]
   {
     { scopeless
-      const tmp[85830] "const" lhs
-      (85833 'end of statement')
+      const tmp[85827] "const" lhs
+      (85830 'end of statement')
     }
-    (85837 call = lhs rhs)
-    (85842 call = rhs tmp)
+    (85834 call = lhs rhs)
+    (85839 call = rhs tmp)
   }
-  function <=>[85853](arg lhs[85850] :
-  _syncvar, arg rhs[85856] :
+  function <=>[85850](arg lhs[85847] :
+  _syncvar, arg rhs[85853] :
   _syncvar) : _unknown[51]
   {
     { scopeless
-      const tmp[85860] "const" lhs
-      (85863 'end of statement')
+      const tmp[85857] "const" lhs
+      (85860 'end of statement')
     }
-    (85867 call = lhs rhs)
-    (85872 call = rhs tmp)
+    (85864 call = lhs rhs)
+    (85869 call = rhs tmp)
   }
-  type _synccls[86374](?) unknown valType[85878] "type variable" unknown value[85882] valType unknown syncAux[85887] chpl_sync_aux_t function _synccls[86374](?).init[85895](arg _mt[86378]:_MT[238], arg this[86376]:_synccls[86374](?), arg valType[85893]:_any[178](?)) : _unknown[51] "dont disable remote value forwarding" "method" "primary method"
+  type _synccls[86371](?) unknown valType[85875] "type variable" unknown value[85879] valType unknown syncAux[85884] chpl_sync_aux_t function _synccls[86371](?).init[85892](arg _mt[86375]:_MT[238], arg this[86373]:_synccls[86371](?), arg valType[85890]:_any[178](?)) : _unknown[51] "dont disable remote value forwarding" "method" "primary method"
   {
-    (85902 call =(85898 call . this c"valType") valType)
-    (85911 call(85907 call . this c"complete"))
-    (85916 call chpl_sync_initAux syncAux)
-  } function _synccls[86374](?).deinit[85922](arg _mt[86382]:_MT[238], arg this[86380]:_synccls[86374](?)) : _unknown[51] "destructor" "dont disable remote value forwarding" "method" "primary method"
+    (85899 call =(85895 call . this c"valType") valType)
+    (85908 call(85904 call . this c"complete"))
+    (85913 call chpl_sync_initAux syncAux)
+  } function _synccls[86371](?).deinit[85919](arg _mt[86379]:_MT[238], arg this[86377]:_synccls[86371](?)) : _unknown[51] "destructor" "dont disable remote value forwarding" "method" "primary method"
   {
-    (85927 call chpl_sync_destroyAux syncAux)
-  } function _synccls[86374](?).readFE[85934](arg _mt[86386]:_MT[238], arg this[86384]:_synccls[86374](?)) : _unknown[51] "method" "primary method"
+    (85924 call chpl_sync_destroyAux syncAux)
+  } function _synccls[86371](?).readFE[85931](arg _mt[86383]:_MT[238], arg this[86381]:_synccls[86371](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown ret[85937] valType
-      (85940 'end of statement')
+      unknown ret[85934] valType
+      (85937 'end of statement')
     }
     { scopeless
-      const tmp[85980] "const" "temp"
-      (85982 'move' tmp[85980](85978 'deref'(85977 '_wide_get_locale' this)))
+      const tmp[85977] "const" "temp"
+      (85979 'move' tmp[85977](85975 'deref'(85974 '_wide_get_locale' this)))
       {
         {
           { scopeless
-            unknown localRet[85944] valType
-            (85947 'end of statement')
+            unknown localRet[85941] valType
+            (85944 'end of statement')
           }
-          (85951 call chpl_rmem_consist_release)
-          (85956 call chpl_sync_waitFullAndLock syncAux)
-          (85960 call = localRet value)
-          (85966 call chpl_sync_markAndSignalEmpty syncAux)
-          (85970 call chpl_rmem_consist_acquire)
-          (85974 call = ret localRet)
+          (85948 call chpl_rmem_consist_release)
+          (85953 call chpl_sync_waitFullAndLock syncAux)
+          (85957 call = localRet value)
+          (85963 call chpl_sync_markAndSignalEmpty syncAux)
+          (85967 call chpl_rmem_consist_acquire)
+          (85971 call = ret localRet)
         }
-        (85985 'on block' 0 tmp[85980])
+        (85982 'on block' 0 tmp[85977])
       }
     }
-    (85989 return ret)
-  } function _synccls[86374](?).readFF[85995](arg _mt[86390]:_MT[238], arg this[86388]:_synccls[86374](?)) : _unknown[51] "method" "primary method"
+    (85986 return ret)
+  } function _synccls[86371](?).readFF[85992](arg _mt[86387]:_MT[238], arg this[86385]:_synccls[86371](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown ret[85998] valType
-      (86001 'end of statement')
+      unknown ret[85995] valType
+      (85998 'end of statement')
     }
     { scopeless
-      const tmp[86041] "const" "temp"
-      (86043 'move' tmp[86041](86039 'deref'(86038 '_wide_get_locale' this)))
+      const tmp[86038] "const" "temp"
+      (86040 'move' tmp[86038](86036 'deref'(86035 '_wide_get_locale' this)))
       {
         {
           { scopeless
-            unknown localRet[86005] valType
-            (86008 'end of statement')
+            unknown localRet[86002] valType
+            (86005 'end of statement')
           }
-          (86012 call chpl_rmem_consist_release)
-          (86017 call chpl_sync_waitFullAndLock syncAux)
-          (86021 call = localRet value)
-          (86027 call chpl_sync_markAndSignalFull syncAux)
-          (86031 call chpl_rmem_consist_acquire)
-          (86035 call = ret localRet)
+          (86009 call chpl_rmem_consist_release)
+          (86014 call chpl_sync_waitFullAndLock syncAux)
+          (86018 call = localRet value)
+          (86024 call chpl_sync_markAndSignalFull syncAux)
+          (86028 call chpl_rmem_consist_acquire)
+          (86032 call = ret localRet)
         }
-        (86046 'on block' 0 tmp[86041])
+        (86043 'on block' 0 tmp[86038])
       }
     }
-    (86050 return ret)
-  } function _synccls[86374](?).readXX[86056](arg _mt[86394]:_MT[238], arg this[86392]:_synccls[86374](?)) : _unknown[51] "method" "primary method"
+    (86047 return ret)
+  } function _synccls[86371](?).readXX[86053](arg _mt[86391]:_MT[238], arg this[86389]:_synccls[86371](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown ret[86059] valType
-      (86062 'end of statement')
+      unknown ret[86056] valType
+      (86059 'end of statement')
     }
     { scopeless
-      const tmp[86102] "const" "temp"
-      (86104 'move' tmp[86102](86100 'deref'(86099 '_wide_get_locale' this)))
+      const tmp[86099] "const" "temp"
+      (86101 'move' tmp[86099](86097 'deref'(86096 '_wide_get_locale' this)))
       {
         {
           { scopeless
-            unknown localRet[86066] valType
-            (86069 'end of statement')
+            unknown localRet[86063] valType
+            (86066 'end of statement')
           }
-          (86073 call chpl_rmem_consist_release)
-          (86078 call chpl_sync_lock syncAux)
-          (86082 call = localRet value)
-          (86088 call chpl_sync_unlock syncAux)
-          (86092 call chpl_rmem_consist_acquire)
-          (86096 call = ret localRet)
+          (86070 call chpl_rmem_consist_release)
+          (86075 call chpl_sync_lock syncAux)
+          (86079 call = localRet value)
+          (86085 call chpl_sync_unlock syncAux)
+          (86089 call chpl_rmem_consist_acquire)
+          (86093 call = ret localRet)
         }
-        (86107 'on block' 0 tmp[86102])
+        (86104 'on block' 0 tmp[86099])
       }
     }
-    (86111 return ret)
-  } function _synccls[86374](?).writeEF[86121](arg _mt[86398]:_MT[238], arg this[86396]:_synccls[86374](?), arg val[86118] :
+    (86108 return ret)
+  } function _synccls[86371](?).writeEF[86118](arg _mt[86395]:_MT[238], arg this[86393]:_synccls[86371](?), arg val[86115] :
   valType) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[86157] "const" "temp"
-      (86159 'move' tmp[86157](86155 'deref'(86154 '_wide_get_locale' this)))
+      const tmp[86154] "const" "temp"
+      (86156 'move' tmp[86154](86152 'deref'(86151 '_wide_get_locale' this)))
       {
         {
-          (86132 call chpl_rmem_consist_release)
-          (86138 call chpl_sync_waitEmptyAndLock syncAux)
-          (86142 call = value val)
-          (86148 call chpl_sync_markAndSignalFull syncAux)
-          (86152 call chpl_rmem_consist_acquire)
+          (86129 call chpl_rmem_consist_release)
+          (86135 call chpl_sync_waitEmptyAndLock syncAux)
+          (86139 call = value val)
+          (86145 call chpl_sync_markAndSignalFull syncAux)
+          (86149 call chpl_rmem_consist_acquire)
         }
-        (86162 'on block' 0 tmp[86157])
+        (86159 'on block' 0 tmp[86154])
       }
     }
   }
   {
-    (86127 call <(86124 'lifetime_of' this)(86126 'lifetime_of' val))
-  } function _synccls[86374](?).writeFF[86175](arg _mt[86402]:_MT[238], arg this[86400]:_synccls[86374](?), arg val[86172] :
+    (86124 call <(86121 'lifetime_of' this)(86123 'lifetime_of' val))
+  } function _synccls[86371](?).writeFF[86172](arg _mt[86399]:_MT[238], arg this[86397]:_synccls[86371](?), arg val[86169] :
   valType) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[86211] "const" "temp"
-      (86213 'move' tmp[86211](86209 'deref'(86208 '_wide_get_locale' this)))
+      const tmp[86208] "const" "temp"
+      (86210 'move' tmp[86208](86206 'deref'(86205 '_wide_get_locale' this)))
       {
         {
-          (86186 call chpl_rmem_consist_release)
-          (86192 call chpl_sync_waitFullAndLock syncAux)
-          (86196 call = value val)
-          (86202 call chpl_sync_markAndSignalFull syncAux)
-          (86206 call chpl_rmem_consist_acquire)
+          (86183 call chpl_rmem_consist_release)
+          (86189 call chpl_sync_waitFullAndLock syncAux)
+          (86193 call = value val)
+          (86199 call chpl_sync_markAndSignalFull syncAux)
+          (86203 call chpl_rmem_consist_acquire)
         }
-        (86216 'on block' 0 tmp[86211])
+        (86213 'on block' 0 tmp[86208])
       }
     }
   }
   {
-    (86181 call <(86178 'lifetime_of' this)(86180 'lifetime_of' val))
-  } function _synccls[86374](?).writeXF[86229](arg _mt[86406]:_MT[238], arg this[86404]:_synccls[86374](?), arg val[86226] :
+    (86178 call <(86175 'lifetime_of' this)(86177 'lifetime_of' val))
+  } function _synccls[86371](?).writeXF[86226](arg _mt[86403]:_MT[238], arg this[86401]:_synccls[86371](?), arg val[86223] :
   valType) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[86265] "const" "temp"
-      (86267 'move' tmp[86265](86263 'deref'(86262 '_wide_get_locale' this)))
+      const tmp[86262] "const" "temp"
+      (86264 'move' tmp[86262](86260 'deref'(86259 '_wide_get_locale' this)))
       {
         {
-          (86240 call chpl_rmem_consist_release)
-          (86246 call chpl_sync_lock syncAux)
-          (86250 call = value val)
-          (86256 call chpl_sync_markAndSignalFull syncAux)
-          (86260 call chpl_rmem_consist_acquire)
+          (86237 call chpl_rmem_consist_release)
+          (86243 call chpl_sync_lock syncAux)
+          (86247 call = value val)
+          (86253 call chpl_sync_markAndSignalFull syncAux)
+          (86257 call chpl_rmem_consist_acquire)
         }
-        (86270 'on block' 0 tmp[86265])
+        (86267 'on block' 0 tmp[86262])
       }
     }
   }
   {
-    (86235 call <(86232 'lifetime_of' this)(86234 'lifetime_of' val))
-  } function _synccls[86374](?).reset[86279](arg _mt[86410]:_MT[238], arg this[86408]:_synccls[86374](?)) : _unknown[51] "method" "primary method"
+    (86232 call <(86229 'lifetime_of' this)(86231 'lifetime_of' val))
+  } function _synccls[86371](?).reset[86276](arg _mt[86407]:_MT[238], arg this[86405]:_synccls[86371](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[86314] "const" "temp"
-      (86316 'move' tmp[86314](86312 'deref'(86311 '_wide_get_locale' this)))
+      const tmp[86311] "const" "temp"
+      (86313 'move' tmp[86311](86309 'deref'(86308 '_wide_get_locale' this)))
       {
         {
           { scopeless
-            const defaultValue[86283] "const" valType
-            (86286 'end of statement')
+            const defaultValue[86280] "const" valType
+            (86283 'end of statement')
           }
-          (86290 call chpl_rmem_consist_release)
-          (86295 call chpl_sync_lock syncAux)
-          (86299 call = value defaultValue)
-          (86305 call chpl_sync_markAndSignalEmpty syncAux)
-          (86309 call chpl_rmem_consist_acquire)
+          (86287 call chpl_rmem_consist_release)
+          (86292 call chpl_sync_lock syncAux)
+          (86296 call = value defaultValue)
+          (86302 call chpl_sync_markAndSignalEmpty syncAux)
+          (86306 call chpl_rmem_consist_acquire)
         }
-        (86319 'on block' 0 tmp[86314])
+        (86316 'on block' 0 tmp[86311])
       }
     }
-  } function _synccls[86374](?).isFull[86327](arg _mt[86414]:_MT[238], arg this[86412]:_synccls[86374](?)) : _unknown[51] "method" "primary method" "no parens"
+  } function _synccls[86371](?).isFull[86324](arg _mt[86411]:_MT[238], arg this[86409]:_synccls[86371](?)) : _unknown[51] "method" "primary method" "no parens"
   {
     { scopeless
-      unknown b[86330] bool[10]
-      (86333 'end of statement')
+      unknown b[86327] bool[10]
+      (86330 'end of statement')
     }
     { scopeless
-      const tmp[86360] "const" "temp"
-      (86362 'move' tmp[86360](86358 'deref'(86357 '_wide_get_locale' this)))
+      const tmp[86357] "const" "temp"
+      (86359 'move' tmp[86357](86355 'deref'(86354 '_wide_get_locale' this)))
       {
         {
-          (86338 call chpl_rmem_consist_release)
-          (86350 call = b(86349 call chpl_sync_isFull(86346 call c_ptrTo value) syncAux))
-          (86355 call chpl_rmem_consist_acquire)
+          (86335 call chpl_rmem_consist_release)
+          (86347 call = b(86346 call chpl_sync_isFull(86343 call c_ptrTo value) syncAux))
+          (86352 call chpl_rmem_consist_acquire)
         }
-        (86365 'on block' 0 tmp[86360])
+        (86362 'on block' 0 tmp[86357])
       }
     }
-    (86369 return b)
+    (86366 return b)
   }
-  type _qthreads_synccls[86865](?) unknown valType[86418] "type variable" unknown alignedValue[86422] aligned_t function _qthreads_synccls[86865](?).init[86430](arg _mt[86869]:_MT[238], arg this[86867]:_qthreads_synccls[86865](?), arg valType[86428]:_any[178](?)) : _unknown[51] "dont disable remote value forwarding" "method" "primary method"
+  type _qthreads_synccls[86862](?) unknown valType[86415] "type variable" unknown alignedValue[86419] aligned_t function _qthreads_synccls[86862](?).init[86427](arg _mt[86866]:_MT[238], arg this[86864]:_qthreads_synccls[86862](?), arg valType[86425]:_any[178](?)) : _unknown[51] "dont disable remote value forwarding" "method" "primary method"
   {
-    (86437 call =(86433 call . this c"valType") valType)
-    (86446 call(86442 call . this c"complete"))
-    (86455 call qthread_purge_to alignedValue(86454 call defaultOfAlignedT valType))
-  } function _qthreads_synccls[86865](?).deinit[86461](arg _mt[86873]:_MT[238], arg this[86871]:_qthreads_synccls[86865](?)) : _unknown[51] "destructor" "dont disable remote value forwarding" "method" "primary method"
+    (86434 call =(86430 call . this c"valType") valType)
+    (86443 call(86439 call . this c"complete"))
+    (86452 call qthread_purge_to alignedValue(86451 call defaultOfAlignedT valType))
+  } function _qthreads_synccls[86862](?).deinit[86458](arg _mt[86870]:_MT[238], arg this[86868]:_qthreads_synccls[86862](?)) : _unknown[51] "destructor" "dont disable remote value forwarding" "method" "primary method"
   {
-    (86466 call qthread_fill alignedValue)
-  } function _qthreads_synccls[86865](?).readFE[86473](arg _mt[86877]:_MT[238], arg this[86875]:_qthreads_synccls[86865](?)) : _unknown[51] "method" "primary method"
+    (86463 call qthread_fill alignedValue)
+  } function _qthreads_synccls[86862](?).readFE[86470](arg _mt[86874]:_MT[238], arg this[86872]:_qthreads_synccls[86862](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown ret[86476] valType
-      (86479 'end of statement')
+      unknown ret[86473] valType
+      (86476 'end of statement')
     }
     { scopeless
-      const tmp[86513] "const" "temp"
-      (86515 'move' tmp[86513](86511 'deref'(86510 '_wide_get_locale' this)))
+      const tmp[86510] "const" "temp"
+      (86512 'move' tmp[86510](86508 'deref'(86507 '_wide_get_locale' this)))
       {
         {
           { scopeless
-            unknown alignedLocalRet[86483] aligned_t
-            (86486 'end of statement')
+            unknown alignedLocalRet[86480] aligned_t
+            (86483 'end of statement')
           }
-          (86490 call chpl_rmem_consist_release)
-          (86496 call qthread_readFE alignedLocalRet alignedValue)
-          (86500 call chpl_rmem_consist_acquire)
-          (86507 call = ret(86505 call _cast valType alignedLocalRet))
+          (86487 call chpl_rmem_consist_release)
+          (86493 call qthread_readFE alignedLocalRet alignedValue)
+          (86497 call chpl_rmem_consist_acquire)
+          (86504 call = ret(86502 call _cast valType alignedLocalRet))
         }
-        (86518 'on block' 0 tmp[86513])
+        (86515 'on block' 0 tmp[86510])
       }
     }
-    (86522 return ret)
-  } function _qthreads_synccls[86865](?).readFF[86528](arg _mt[86881]:_MT[238], arg this[86879]:_qthreads_synccls[86865](?)) : _unknown[51] "method" "primary method"
+    (86519 return ret)
+  } function _qthreads_synccls[86862](?).readFF[86525](arg _mt[86878]:_MT[238], arg this[86876]:_qthreads_synccls[86862](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown ret[86531] valType
-      (86534 'end of statement')
+      unknown ret[86528] valType
+      (86531 'end of statement')
     }
     { scopeless
-      const tmp[86568] "const" "temp"
-      (86570 'move' tmp[86568](86566 'deref'(86565 '_wide_get_locale' this)))
+      const tmp[86565] "const" "temp"
+      (86567 'move' tmp[86565](86563 'deref'(86562 '_wide_get_locale' this)))
       {
         {
           { scopeless
-            unknown alignedLocalRet[86538] aligned_t
-            (86541 'end of statement')
+            unknown alignedLocalRet[86535] aligned_t
+            (86538 'end of statement')
           }
-          (86545 call chpl_rmem_consist_release)
-          (86551 call qthread_readFF alignedLocalRet alignedValue)
-          (86555 call chpl_rmem_consist_acquire)
-          (86562 call = ret(86560 call _cast valType alignedLocalRet))
+          (86542 call chpl_rmem_consist_release)
+          (86548 call qthread_readFF alignedLocalRet alignedValue)
+          (86552 call chpl_rmem_consist_acquire)
+          (86559 call = ret(86557 call _cast valType alignedLocalRet))
         }
-        (86573 'on block' 0 tmp[86568])
+        (86570 'on block' 0 tmp[86565])
       }
     }
-    (86577 return ret)
-  } function _qthreads_synccls[86865](?).readXX[86583](arg _mt[86885]:_MT[238], arg this[86883]:_qthreads_synccls[86865](?)) : _unknown[51] "method" "primary method"
+    (86574 return ret)
+  } function _qthreads_synccls[86862](?).readXX[86580](arg _mt[86882]:_MT[238], arg this[86880]:_qthreads_synccls[86862](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown ret[86586] valType
-      (86589 'end of statement')
+      unknown ret[86583] valType
+      (86586 'end of statement')
     }
     { scopeless
-      const tmp[86623] "const" "temp"
-      (86625 'move' tmp[86623](86621 'deref'(86620 '_wide_get_locale' this)))
+      const tmp[86620] "const" "temp"
+      (86622 'move' tmp[86620](86618 'deref'(86617 '_wide_get_locale' this)))
       {
         {
           { scopeless
-            unknown alignedLocalRet[86593] aligned_t
-            (86596 'end of statement')
+            unknown alignedLocalRet[86590] aligned_t
+            (86593 'end of statement')
           }
-          (86600 call chpl_rmem_consist_release)
-          (86606 call qthread_readXX alignedLocalRet alignedValue)
-          (86610 call chpl_rmem_consist_acquire)
-          (86617 call = ret(86615 call _cast valType alignedLocalRet))
+          (86597 call chpl_rmem_consist_release)
+          (86603 call qthread_readXX alignedLocalRet alignedValue)
+          (86607 call chpl_rmem_consist_acquire)
+          (86614 call = ret(86612 call _cast valType alignedLocalRet))
         }
-        (86628 'on block' 0 tmp[86623])
+        (86625 'on block' 0 tmp[86620])
       }
     }
-    (86632 return ret)
-  } function _qthreads_synccls[86865](?).writeEF[86642](arg _mt[86889]:_MT[238], arg this[86887]:_qthreads_synccls[86865](?), arg val[86639] :
+    (86629 return ret)
+  } function _qthreads_synccls[86862](?).writeEF[86639](arg _mt[86886]:_MT[238], arg this[86884]:_qthreads_synccls[86862](?), arg val[86636] :
   valType) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[86672] "const" "temp"
-      (86674 'move' tmp[86672](86670 'deref'(86669 '_wide_get_locale' this)))
+      const tmp[86669] "const" "temp"
+      (86671 'move' tmp[86669](86667 'deref'(86666 '_wide_get_locale' this)))
       {
         {
-          (86653 call chpl_rmem_consist_release)
-          (86663 call qthread_writeEF alignedValue(86661 call _cast aligned_t val))
-          (86667 call chpl_rmem_consist_acquire)
+          (86650 call chpl_rmem_consist_release)
+          (86660 call qthread_writeEF alignedValue(86658 call _cast aligned_t val))
+          (86664 call chpl_rmem_consist_acquire)
         }
-        (86677 'on block' 0 tmp[86672])
+        (86674 'on block' 0 tmp[86669])
       }
     }
   }
   {
-    (86648 call <(86645 'lifetime_of' this)(86647 'lifetime_of' val))
-  } function _qthreads_synccls[86865](?).writeFF[86690](arg _mt[86893]:_MT[238], arg this[86891]:_qthreads_synccls[86865](?), arg val[86687] :
+    (86645 call <(86642 'lifetime_of' this)(86644 'lifetime_of' val))
+  } function _qthreads_synccls[86862](?).writeFF[86687](arg _mt[86890]:_MT[238], arg this[86888]:_qthreads_synccls[86862](?), arg val[86684] :
   valType) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[86720] "const" "temp"
-      (86722 'move' tmp[86720](86718 'deref'(86717 '_wide_get_locale' this)))
+      const tmp[86717] "const" "temp"
+      (86719 'move' tmp[86717](86715 'deref'(86714 '_wide_get_locale' this)))
       {
         {
-          (86701 call chpl_rmem_consist_release)
-          (86711 call qthread_writeFF alignedValue(86709 call _cast aligned_t val))
-          (86715 call chpl_rmem_consist_acquire)
+          (86698 call chpl_rmem_consist_release)
+          (86708 call qthread_writeFF alignedValue(86706 call _cast aligned_t val))
+          (86712 call chpl_rmem_consist_acquire)
         }
-        (86725 'on block' 0 tmp[86720])
+        (86722 'on block' 0 tmp[86717])
       }
     }
   }
   {
-    (86696 call <(86693 'lifetime_of' this)(86695 'lifetime_of' val))
-  } function _qthreads_synccls[86865](?).writeXF[86738](arg _mt[86897]:_MT[238], arg this[86895]:_qthreads_synccls[86865](?), arg val[86735] :
+    (86693 call <(86690 'lifetime_of' this)(86692 'lifetime_of' val))
+  } function _qthreads_synccls[86862](?).writeXF[86735](arg _mt[86894]:_MT[238], arg this[86892]:_qthreads_synccls[86862](?), arg val[86732] :
   valType) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[86768] "const" "temp"
-      (86770 'move' tmp[86768](86766 'deref'(86765 '_wide_get_locale' this)))
+      const tmp[86765] "const" "temp"
+      (86767 'move' tmp[86765](86763 'deref'(86762 '_wide_get_locale' this)))
       {
         {
-          (86749 call chpl_rmem_consist_release)
-          (86759 call qthread_writeF alignedValue(86757 call _cast aligned_t val))
-          (86763 call chpl_rmem_consist_acquire)
+          (86746 call chpl_rmem_consist_release)
+          (86756 call qthread_writeF alignedValue(86754 call _cast aligned_t val))
+          (86760 call chpl_rmem_consist_acquire)
         }
-        (86773 'on block' 0 tmp[86768])
+        (86770 'on block' 0 tmp[86765])
       }
     }
   }
   {
-    (86744 call <(86741 'lifetime_of' this)(86743 'lifetime_of' val))
-  } function _qthreads_synccls[86865](?).reset[86782](arg _mt[86901]:_MT[238], arg this[86899]:_qthreads_synccls[86865](?)) : _unknown[51] "method" "primary method"
+    (86741 call <(86738 'lifetime_of' this)(86740 'lifetime_of' val))
+  } function _qthreads_synccls[86862](?).reset[86779](arg _mt[86898]:_MT[238], arg this[86896]:_qthreads_synccls[86862](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[86806] "const" "temp"
-      (86808 'move' tmp[86806](86804 'deref'(86803 '_wide_get_locale' this)))
+      const tmp[86803] "const" "temp"
+      (86805 'move' tmp[86803](86801 'deref'(86800 '_wide_get_locale' this)))
       {
         {
-          (86787 call chpl_rmem_consist_release)
-          (86797 call qthread_purge_to alignedValue(86796 call defaultOfAlignedT valType))
-          (86801 call chpl_rmem_consist_acquire)
+          (86784 call chpl_rmem_consist_release)
+          (86794 call qthread_purge_to alignedValue(86793 call defaultOfAlignedT valType))
+          (86798 call chpl_rmem_consist_acquire)
         }
-        (86811 'on block' 0 tmp[86806])
+        (86808 'on block' 0 tmp[86803])
       }
     }
-  } function _qthreads_synccls[86865](?).isFull[86819](arg _mt[86905]:_MT[238], arg this[86903]:_qthreads_synccls[86865](?)) : _unknown[51] "method" "primary method" "no parens"
+  } function _qthreads_synccls[86862](?).isFull[86816](arg _mt[86902]:_MT[238], arg this[86900]:_qthreads_synccls[86862](?)) : _unknown[51] "method" "primary method" "no parens"
   {
     { scopeless
-      unknown b[86822] bool[10]
-      (86825 'end of statement')
+      unknown b[86819] bool[10]
+      (86822 'end of statement')
     }
     { scopeless
-      const tmp[86851] "const" "temp"
-      (86853 'move' tmp[86851](86849 'deref'(86848 '_wide_get_locale' this)))
+      const tmp[86848] "const" "temp"
+      (86850 'move' tmp[86848](86846 'deref'(86845 '_wide_get_locale' this)))
       {
         {
-          (86830 call chpl_rmem_consist_release)
-          (86841 call = b(86839 call _cast bool[10](86837 call qthread_feb_status alignedValue)))
-          (86846 call chpl_rmem_consist_acquire)
+          (86827 call chpl_rmem_consist_release)
+          (86838 call = b(86836 call _cast bool[10](86834 call qthread_feb_status alignedValue)))
+          (86843 call chpl_rmem_consist_acquire)
         }
-        (86856 'on block' 0 tmp[86851])
+        (86853 'on block' 0 tmp[86848])
       }
     }
-    (86860 return b)
+    (86857 return b)
   }
-  function isSyncValue[86914](arg x[86911] :
+  function isSyncValue[86911](arg x[86908] :
   _syncvar) param : _unknown[51] "no doc"
   {
     { scopeless
-      (86917 return 1)
+      (86914 return 1)
     }
   }
-  function isSyncValue[86926](arg x[86924]:_any[178](?)) param : _unknown[51] "no doc"
+  function isSyncValue[86923](arg x[86921]:_any[178](?)) param : _unknown[51] "no doc"
   {
     { scopeless
-      (86929 return 0)
+      (86926 return 0)
     }
   }
-  single type _singlevar[87256](?) unknown valType[86935] "type variable" unknown wrapped[86943](86942 'to unmanaged class from unknown'(86941 call _singlecls valType)) unknown isOwned[86949] 1 bool[10] function _singlevar[87256](?).init[86957](arg _mt[87260]:_MT[238], arg this[87258]:_singlevar[87256](?), arg valType[86955]:_any[178](?)) : _unknown[51] "method" "primary method"
+  single type _singlevar[87253](?) unknown valType[86932] "type variable" unknown wrapped[86940](86939 'to unmanaged class from unknown'(86938 call _singlecls valType)) unknown isOwned[86946] 1 bool[10] function _singlevar[87253](?).init[86954](arg _mt[87257]:_MT[238], arg this[87255]:_singlevar[87253](?), arg valType[86952]:_any[178](?)) : _unknown[51] "method" "primary method"
   {
-    (86962 call ensureFEType valType)
-    (86970 call =(86966 call . this c"valType") valType)
-    (86981 call = wrapped(86976 'new'(_chpl_manager = unmanaged[220](?))(86980 call _singlecls valType)))
-  } function _singlevar[87256](?).init[86992](arg _mt[87264]:_MT[238], arg this[87262]:_singlevar[87256](?), const arg other[86989] :
+    (86959 call ensureFEType valType)
+    (86967 call =(86963 call . this c"valType") valType)
+    (86978 call = wrapped(86973 'new'(_chpl_manager = unmanaged[220](?))(86977 call _singlecls valType)))
+  } function _singlevar[87253](?).init[86989](arg _mt[87261]:_MT[238], arg this[87259]:_singlevar[87253](?), const arg other[86986] :
   _singlevar) : _unknown[51] "dont disable remote value forwarding" "method" "primary method"
   {
-    (87002 call =(86995 call . this c"valType")(86999 call . other c"valType"))
-    (87011 call = wrapped(87008 call . other c"wrapped"))
-    (87016 call = isOwned 0)
-  } function _singlevar[87256](?).init=[87027](arg _mt[87268]:_MT[238], arg this[87266]:_singlevar[87256](?), const arg other[87024] :
+    (86999 call =(86992 call . this c"valType")(86996 call . other c"valType"))
+    (87008 call = wrapped(87005 call . other c"wrapped"))
+    (87013 call = isOwned 0)
+  } function _singlevar[87253](?).init=[87024](arg _mt[87265]:_MT[238], arg this[87263]:_singlevar[87253](?), const arg other[87021] :
   _singlevar) : _unknown[51] "method" "primary method"
   {
-    if(87108 call _cond_test(87042 call ==(87040 call isCoercible(87031 call . other c"valType")(87037 call .(87036 'typeof' this) c"valType")) 0))
+    if(87105 call _cond_test(87039 call ==(87037 call isCoercible(87028 call . other c"valType")(87034 call .(87033 'typeof' this) c"valType")) 0))
     {
       { scopeless
-        unknown theseTypes[87065] "param"(87063 call +(87060 call +(87053 call +(87050 call + "'"(87048 call _cast string[26](87046 'typeof' this))) "' from '")(87058 call _cast string[26](87056 'typeof' other))) "'")
-        (87068 'end of statement')
+        unknown theseTypes[87062] "param"(87060 call +(87057 call +(87050 call +(87047 call + "'"(87045 call _cast string[26](87043 'typeof' this))) "' from '")(87055 call _cast string[26](87053 'typeof' other))) "'")
+        (87065 'end of statement')
       }
       { scopeless
-        unknown because[87096] "param"(87094 call +(87091 call +(87081 call +(87078 call + "because '"(87076 call _cast string[26](87072 call . other c"valType"))) "' is not coercible to '")(87089 call _cast string[26](87085 call .(87084 'typeof' this) c"valType"))) "'")
-        (87099 'end of statement')
+        unknown because[87093] "param"(87091 call +(87088 call +(87078 call +(87075 call + "because '"(87073 call _cast string[26](87069 call . other c"valType"))) "' is not coercible to '")(87086 call _cast string[26](87082 call .(87081 'typeof' this) c"valType"))) "'")
+        (87096 'end of statement')
       }
-      (87106 call compilerError "cannot initialize " theseTypes " " because)
+      (87103 call compilerError "cannot initialize " theseTypes " " because)
     }
-    (87123 call(87114 call . this c"init")(87119 call .(87118 'typeof' this) c"valType"))
-    (87136 call(87126 call . this c"writeEF")(87134 call(87130 call . other c"readFF")))
-  } function _singlevar[87256](?).init=[87150](arg _mt[87272]:_MT[238], arg this[87270]:_singlevar[87256](?), const arg other[87147] :
-  (87144 call .(87143 'typeof' this) c"valType")) : _unknown[51] "dont disable remote value forwarding" "method" "primary method"
+    (87120 call(87111 call . this c"init")(87116 call .(87115 'typeof' this) c"valType"))
+    (87133 call(87123 call . this c"writeEF")(87131 call(87127 call . other c"readFF")))
+  } function _singlevar[87253](?).init=[87147](arg _mt[87269]:_MT[238], arg this[87267]:_singlevar[87253](?), const arg other[87144] :
+  (87141 call .(87140 'typeof' this) c"valType")) : _unknown[51] "dont disable remote value forwarding" "method" "primary method"
   {
-    (87159 call(87153 call . this c"init")(87157 'typeof' other))
-    (87168 call(87163 call . this c"writeEF") other)
-  } function _singlevar[87256](?).deinit[87174](arg _mt[87276]:_MT[238], arg this[87274]:_singlevar[87256](?)) : _unknown[51] "destructor" "dont disable remote value forwarding" "method" "primary method"
+    (87156 call(87150 call . this c"init")(87154 'typeof' other))
+    (87165 call(87160 call . this c"writeEF") other)
+  } function _singlevar[87253](?).deinit[87171](arg _mt[87273]:_MT[238], arg this[87271]:_singlevar[87253](?)) : _unknown[51] "destructor" "dont disable remote value forwarding" "method" "primary method"
   {
-    if(87185 call _cond_test(87178 call == isOwned 1))
+    if(87182 call _cond_test(87175 call == isOwned 1))
     {
       { scopeless
-        (87182 call chpl__delete wrapped)
+        (87179 call chpl__delete wrapped)
       }
     }
-  } function _singlevar[87256](?).readThis[87197](arg _mt[87280]:_MT[238], arg this[87278]:_singlevar[87256](?), arg x[87195]:_any[178](?)) : _unknown[51] throws "method" "primary method"
+  } function _singlevar[87253](?).readThis[87194](arg _mt[87277]:_MT[238], arg this[87275]:_singlevar[87253](?), arg x[87192]:_any[178](?)) : _unknown[51] throws "method" "primary method"
   {
-    (87218 call compilerError "single variables cannot currently be read - use writeEF instead")
-  } function _singlevar[87256](?).writeThis[87227](arg _mt[87284]:_MT[238], arg this[87282]:_singlevar[87256](?), arg x[87225]:_any[178](?)) : _unknown[51] throws "method" "primary method"
+    (87215 call compilerError "single variables cannot currently be read - use writeEF instead")
+  } function _singlevar[87253](?).writeThis[87224](arg _mt[87281]:_MT[238], arg this[87279]:_singlevar[87253](?), arg x[87222]:_any[178](?)) : _unknown[51] throws "method" "primary method"
   {
-    (87250 call compilerError "single variables cannot currently be written - apply readFF() to those variables first")
+    (87247 call compilerError "single variables cannot currently be written - apply readFF() to those variables first")
   }
-  function isSingleType[87293](arg t[87290] :
+  function isSingleType[87290](arg t[87287] :
   _singlevar) param : _unknown[51] "no doc"
   {
-    (87296 return 1)
+    (87293 return 1)
   }
-  function isSingleType[87305](arg t[87303]:_any[178](?)) param : _unknown[51]
+  function isSingleType[87302](arg t[87300]:_any[178](?)) param : _unknown[51]
   {
-    (87308 return 0)
+    (87305 return 0)
   }
-  function _unknown[51].readFF[87316](arg _mt[87321]:_MT[238], arg this[87318] :
+  function _unknown[51].readFF[87313](arg _mt[87318]:_MT[238], arg this[87315] :
   _singlevar) : _unknown[51] "method"
   {
-    (87329 return(87328 call(87324 call . wrapped c"readFF")))
+    (87326 return(87325 call(87321 call . wrapped c"readFF")))
   }
-  function _unknown[51].readXX[87337](arg _mt[87342]:_MT[238], arg this[87339] :
+  function _unknown[51].readXX[87334](arg _mt[87339]:_MT[238], arg this[87336] :
   _singlevar) : _unknown[51] "method"
   {
-    (87346 call chpl_task_yield)
-    (87355 return(87354 call(87350 call . wrapped c"readXX")))
+    (87343 call chpl_task_yield)
+    (87352 return(87351 call(87347 call . wrapped c"readXX")))
   }
-  function _unknown[51].writeEF[87366](arg _mt[87371]:_MT[238], arg this[87368] :
-  _singlevar, arg x[87363] :
+  function _unknown[51].writeEF[87363](arg _mt[87368]:_MT[238], arg this[87365] :
+  _singlevar, arg x[87360] :
   valType) : _unknown[51] "method"
   {
-    (87379 call(87374 call . wrapped c"writeEF") x)
+    (87376 call(87371 call . wrapped c"writeEF") x)
   }
-  function _unknown[51].isFull[87387](arg _mt[87392]:_MT[238], arg this[87389] :
+  function _unknown[51].isFull[87384](arg _mt[87389]:_MT[238], arg this[87386] :
   _singlevar) : _unknown[51] "method" "no parens"
   {
-    (87398 return(87395 call . wrapped c"isFull"))
+    (87395 return(87392 call . wrapped c"isFull"))
   }
-  function =[87413](ref arg lhs[87410] :
-  (87409 call _singlevar unknown t[87406]), arg rhs[87416] :
+  function =[87410](ref arg lhs[87407] :
+  (87406 call _singlevar unknown t[87403]), arg rhs[87413] :
   t) : _unknown[51] "assignop"
   {
-    (87428 call(87423 call .(87420 call . lhs c"wrapped") c"writeEF") rhs)
+    (87425 call(87420 call .(87417 call . lhs c"wrapped") c"writeEF") rhs)
   }
-  function chpl__initCopy[87443](ref arg sv[87440] :
-  (87439 call _singlevar unknown t[87436])) : _unknown[51] "init copy fn"
+  function chpl__initCopy[87440](ref arg sv[87437] :
+  (87436 call _singlevar unknown t[87433])) : _unknown[51] "init copy fn"
   {
-    (87451 return(87450 call(87446 call . sv c"readFF")))
+    (87448 return(87447 call(87443 call . sv c"readFF")))
   }
-  function chpl__autoCopy[87462](const  ref arg rhs[87459] :
+  function chpl__autoCopy[87459](const  ref arg rhs[87456] :
   _singlevar) : _unknown[51] "auto copy fn" "no doc"
   {
-    (87469 return(87464 'new'(87468 call _singlevar rhs)))
+    (87466 return(87461 'new'(87465 call _singlevar rhs)))
   }
-  function chpl__maybeAutoDestroyed[87484](arg x[87481] :
-  (87480 call _singlevar unknown t[87477])) param : _unknown[51] "inline"
+  function chpl__maybeAutoDestroyed[87481](arg x[87478] :
+  (87477 call _singlevar unknown t[87474])) param : _unknown[51] "inline"
   {
     { scopeless
-      (87487 return 1)
+      (87484 return 1)
     }
   }
-  function chpl__autoDestroy[87501](arg x[87498] :
-  (87497 call _singlevar ?[260])) : _unknown[51] "inline"
+  function chpl__autoDestroy[87498](arg x[87495] :
+  (87494 call _singlevar ?[260])) : _unknown[51] "inline"
   {
-    if(87518 call _cond_test(87508 call ==(87504 call . x c"isOwned") 1))
+    if(87515 call _cond_test(87505 call ==(87501 call . x c"isOwned") 1))
     {
       { scopeless
-        (87515 call chpl__delete(87511 call . x c"wrapped"))
+        (87512 call chpl__delete(87508 call . x c"wrapped"))
       }
     }
   }
-  function chpl__readXX[87535](const  ref arg x[87532] :
-  (87531 call _singlevar ?[260])) : _unknown[51] "no doc"
+  function chpl__readXX[87532](const  ref arg x[87529] :
+  (87528 call _singlevar ?[260])) : _unknown[51] "no doc"
   {
     { scopeless
-      (87543 return(87542 call(87538 call . x c"readXX")))
+      (87540 return(87539 call(87535 call . x c"readXX")))
     }
   }
-  type _singlecls[87888](?) unknown valType[87549] "type variable" unknown value[87553] valType unknown singleAux[87558] chpl_single_aux_t function _singlecls[87888](?).init[87566](arg _mt[87892]:_MT[238], arg this[87890]:_singlecls[87888](?), arg valType[87564]:_any[178](?)) : _unknown[51] "method" "primary method"
+  type _singlecls[87885](?) unknown valType[87546] "type variable" unknown value[87550] valType unknown singleAux[87555] chpl_single_aux_t function _singlecls[87885](?).init[87563](arg _mt[87889]:_MT[238], arg this[87887]:_singlecls[87885](?), arg valType[87561]:_any[178](?)) : _unknown[51] "method" "primary method"
   {
-    (87573 call =(87569 call . this c"valType") valType)
-    (87582 call(87578 call . this c"complete"))
-    (87587 call chpl_single_initAux singleAux)
-  } function _singlecls[87888](?).deinit[87593](arg _mt[87896]:_MT[238], arg this[87894]:_singlecls[87888](?)) : _unknown[51] "destructor" "method" "primary method"
+    (87570 call =(87566 call . this c"valType") valType)
+    (87579 call(87575 call . this c"complete"))
+    (87584 call chpl_single_initAux singleAux)
+  } function _singlecls[87885](?).deinit[87590](arg _mt[87893]:_MT[238], arg this[87891]:_singlecls[87885](?)) : _unknown[51] "destructor" "method" "primary method"
   {
-    (87598 call chpl_single_destroyAux singleAux)
-  } function _singlecls[87888](?).readFF[87605](arg _mt[87900]:_MT[238], arg this[87898]:_singlecls[87888](?)) : _unknown[51] "method" "primary method"
+    (87595 call chpl_single_destroyAux singleAux)
+  } function _singlecls[87885](?).readFF[87602](arg _mt[87897]:_MT[238], arg this[87895]:_singlecls[87885](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown ret[87608] valType
-      (87611 'end of statement')
+      unknown ret[87605] valType
+      (87608 'end of statement')
     }
     { scopeless
-      const tmp[87666] "const" "temp"
-      (87668 'move' tmp[87666](87664 'deref'(87663 '_wide_get_locale' this)))
+      const tmp[87663] "const" "temp"
+      (87665 'move' tmp[87663](87661 'deref'(87660 '_wide_get_locale' this)))
       {
         {
           { scopeless
-            unknown localRet[87615] valType
-            (87618 'end of statement')
+            unknown localRet[87612] valType
+            (87615 'end of statement')
           }
-          (87622 call chpl_rmem_consist_release)
-          if(87649 call _cond_test(87625 call . this c"isFull"))
+          (87619 call chpl_rmem_consist_release)
+          if(87646 call _cond_test(87622 call . this c"isFull"))
           {
             { scopeless
-              (87630 call = localRet value)
+              (87627 call = localRet value)
             }
           }
           {
-            (87636 call chpl_single_waitFullAndLock singleAux)
-            (87641 call = localRet value)
-            (87647 call chpl_single_markAndSignalFull singleAux)
+            (87633 call chpl_single_waitFullAndLock singleAux)
+            (87638 call = localRet value)
+            (87644 call chpl_single_markAndSignalFull singleAux)
           }
-          (87656 call chpl_rmem_consist_acquire)
-          (87660 call = ret localRet)
+          (87653 call chpl_rmem_consist_acquire)
+          (87657 call = ret localRet)
         }
-        (87671 'on block' 0 tmp[87666])
+        (87668 'on block' 0 tmp[87663])
       }
     }
-    (87675 return ret)
-  } function _singlecls[87888](?).readXX[87681](arg _mt[87904]:_MT[238], arg this[87902]:_singlecls[87888](?)) : _unknown[51] "method" "primary method"
+    (87672 return ret)
+  } function _singlecls[87885](?).readXX[87678](arg _mt[87901]:_MT[238], arg this[87899]:_singlecls[87885](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown ret[87684] valType
-      (87687 'end of statement')
+      unknown ret[87681] valType
+      (87684 'end of statement')
     }
     { scopeless
-      const tmp[87742] "const" "temp"
-      (87744 'move' tmp[87742](87740 'deref'(87739 '_wide_get_locale' this)))
+      const tmp[87739] "const" "temp"
+      (87741 'move' tmp[87739](87737 'deref'(87736 '_wide_get_locale' this)))
       {
         {
           { scopeless
-            unknown localRet[87691] valType
-            (87694 'end of statement')
+            unknown localRet[87688] valType
+            (87691 'end of statement')
           }
-          (87698 call chpl_rmem_consist_release)
-          if(87725 call _cond_test(87701 call . this c"isFull"))
+          (87695 call chpl_rmem_consist_release)
+          if(87722 call _cond_test(87698 call . this c"isFull"))
           {
             { scopeless
-              (87706 call = localRet value)
+              (87703 call = localRet value)
             }
           }
           {
-            (87712 call chpl_single_lock singleAux)
-            (87717 call = localRet value)
-            (87723 call chpl_single_unlock singleAux)
+            (87709 call chpl_single_lock singleAux)
+            (87714 call = localRet value)
+            (87720 call chpl_single_unlock singleAux)
           }
-          (87732 call chpl_rmem_consist_acquire)
-          (87736 call = ret localRet)
+          (87729 call chpl_rmem_consist_acquire)
+          (87733 call = ret localRet)
         }
-        (87747 'on block' 0 tmp[87742])
+        (87744 'on block' 0 tmp[87739])
       }
     }
-    (87751 return ret)
-  } function _singlecls[87888](?).writeEF[87761](arg _mt[87908]:_MT[238], arg this[87906]:_singlecls[87888](?), arg val[87758] :
+    (87748 return ret)
+  } function _singlecls[87885](?).writeEF[87758](arg _mt[87905]:_MT[238], arg this[87903]:_singlecls[87885](?), arg val[87755] :
   valType) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[87827] "const" "temp"
-      (87829 'move' tmp[87827](87825 'deref'(87824 '_wide_get_locale' this)))
+      const tmp[87824] "const" "temp"
+      (87826 'move' tmp[87824](87822 'deref'(87821 '_wide_get_locale' this)))
       {
         {
-          (87772 call chpl_rmem_consist_release)
-          (87778 call chpl_single_lock singleAux)
-          if(87805 call _cond_test(87781 call . this c"isFull"))
+          (87769 call chpl_rmem_consist_release)
+          (87775 call chpl_single_lock singleAux)
+          if(87802 call _cond_test(87778 call . this c"isFull"))
           {
             { scopeless
-              (87803 call halt "single var already defined")
+              (87800 call halt "single var already defined")
             }
           }
-          (87812 call = value val)
-          (87818 call chpl_single_markAndSignalFull singleAux)
-          (87822 call chpl_rmem_consist_acquire)
+          (87809 call = value val)
+          (87815 call chpl_single_markAndSignalFull singleAux)
+          (87819 call chpl_rmem_consist_acquire)
         }
-        (87832 'on block' 0 tmp[87827])
+        (87829 'on block' 0 tmp[87824])
       }
     }
   }
   {
-    (87767 call <(87764 'lifetime_of' this)(87766 'lifetime_of' val))
-  } function _singlecls[87888](?).isFull[87841](arg _mt[87912]:_MT[238], arg this[87910]:_singlecls[87888](?)) : _unknown[51] "method" "primary method" "no parens"
+    (87764 call <(87761 'lifetime_of' this)(87763 'lifetime_of' val))
+  } function _singlecls[87885](?).isFull[87838](arg _mt[87909]:_MT[238], arg this[87907]:_singlecls[87885](?)) : _unknown[51] "method" "primary method" "no parens"
   {
     { scopeless
-      unknown b[87844] bool[10]
-      (87847 'end of statement')
+      unknown b[87841] bool[10]
+      (87844 'end of statement')
     }
     { scopeless
-      const tmp[87874] "const" "temp"
-      (87876 'move' tmp[87874](87872 'deref'(87871 '_wide_get_locale' this)))
+      const tmp[87871] "const" "temp"
+      (87873 'move' tmp[87871](87869 'deref'(87868 '_wide_get_locale' this)))
       {
         {
-          (87852 call chpl_rmem_consist_release)
-          (87864 call = b(87863 call chpl_single_isFull(87860 call c_ptrTo value) singleAux))
-          (87869 call chpl_rmem_consist_acquire)
+          (87849 call chpl_rmem_consist_release)
+          (87861 call = b(87860 call chpl_single_isFull(87857 call c_ptrTo value) singleAux))
+          (87866 call chpl_rmem_consist_acquire)
         }
-        (87879 'on block' 0 tmp[87874])
+        (87876 'on block' 0 tmp[87871])
       }
     }
-    (87883 return b)
+    (87880 return b)
   }
-  function isSingleValue[87921](arg x[87918] :
+  function isSingleValue[87918](arg x[87915] :
   _singlevar) param : _unknown[51] "no doc"
   {
     { scopeless
-      (87924 return 1)
+      (87921 return 1)
     }
   }
-  function isSingleValue[87933](arg x[87931]:_any[178](?)) param : _unknown[51] "no doc"
+  function isSingleValue[87930](arg x[87928]:_any[178](?)) param : _unknown[51] "no doc"
   {
     { scopeless
-      (87936 return 0)
+      (87933 return 0)
     }
   }
 }

@@ -2,79 +2,169 @@ AST dump for ChapelReduce after pass localizeGlobals.
 Module use list: ChapelStandard ChapelLocks 
 
 {
-  function chpl__init_ChapelReduce[415997]() : void[4] "insert line file info" "module init" "resolved"
+  type _class_localson_fn[2042422] val _runtime_hdr[2042423]:chpl_comm_on_bundle_t[209301] val _0_tmp[2042425]:chpl_localeID_t[209294] val _1_globalOp[2042427]:SumReduceScanOp(int(64))[1386295] val _2_localOp[2042429]:SumReduceScanOp(int(64))[1386295]
+  function chpl__init_ChapelReduce[415865]() : void[4] "insert line file info" "module init" "resolved"
   {
-    (512710 return _void[55])
+    (512573 return _void[55])
   }
-  function chpl__scanIterator[1372784](const in arg op[1372786]:SumReduceScanOp(real(64))[1372574], const  ref arg data[1372788]:[domain(1,int(64),false)] real(64)[1365901], ref arg _retArg[1872113]:[domain(1,int(64),false)] real(64)[1365901]) : void[4] "fn returns via _retArg" "instantiated generic" "invisible fn" "resolved"
+  function chpl__reduceCombine[1387126](const in arg globalOp[1387128]:SumReduceScanOp(int(64))[1386295], const in arg localOp[1387130]:SumReduceScanOp(int(64))[1386295]) : void[4] "instantiated generic" "invisible fn" "resolved" "no return value for void"
   {
-    const-val call_tmp[1372884]:[domain(1,int(64),false)] real(64)[1365901] "dead after last mention" "expr temp" "insert auto destroy" "maybe param" "temp"
-    const-val ret_tmp[1872119]:[domain(1,int(64),false)] real(64)[1365901] "temp"
-    (1372892 call _scan[1373181] data[1372788] op[1372786] ret_tmp[1872119])
-    (1872122 'move' call_tmp[1372884] ret_tmp[1872119])
-    label _end_chpl__scanIterator[1373033]
-    (1872115 '=' _retArg[1872113] call_tmp[1372884])
-    (1872117 return _void[55])
+    const-val call_tmp[1387140]:chpl_localeID_t[209294] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1387142 'move' call_tmp[1387140](1387144 '_wide_get_locale' globalOp[1387128]))
+    val isdirect[2042405]:bool[10] "temp"
+    (2042410 'move' isdirect[2042405](2042407 call chpl_doDirectExecuteOn[187423] call_tmp[1387140]))
+    if isdirect[2042405]
+    {
+      (2042414 call on_fn[1387153] globalOp[1387128] localOp[1387130])
+    }
+    {
+      val _args_foron_fn[2042432]:_class_localson_fn[2042422] "temp"
+      (2042436 'move' _args_foron_fn[2042432](2042434 'stack allocate class' _class_localson_fn[2042422]))
+      (2042438 '.=' _args_foron_fn[2042432] _0_tmp[2042425] call_tmp[1387140])
+      (2042442 '.=' _args_foron_fn[2042432] _1_globalOp[2042427] globalOp[1387128])
+      (2042446 '.=' _args_foron_fn[2042432] _2_localOp[2042429] localOp[1387130])
+      val _args_vforon_fn[2042450]:c_void_ptr[149] "temp"
+      (2042454 'move' _args_vforon_fn[2042450](2042452 'cast_to_void_star' _args_foron_fn[2042432]))
+      val _args_sizeon_fn[2042456]:int(64)[13] "temp"
+      (2042460 'move' _args_sizeon_fn[2042456](2042458 'sizeof_bundle' _class_localson_fn[2042422]))
+      on(2042500 call wrapon_fn[2042462] call_tmp[1387140] _args_vforon_fn[2042450] _args_sizeon_fn[2042456] _args_foron_fn[2042432])
+    }
+    (1387197 return _void[55])
   }
-  function ReduceScanOp[82300].deinit[771599](const in arg this[771603]:ReduceScanOp[82300]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method" "resolved" "virtual"
+  function ReduceScanOp[82297].deinit[771449](const in arg this[771453]:ReduceScanOp[82297]) : void[4] "compiler generated" "destructor" "inline" "last resort" "method" "primary method" "resolved" "virtual"
   {
-    label _enddeinit[1848120]
-    const-ref _field_destructor_tmp_[1848118]:chpl_LocalSpinlock[187432] "temp"
-    (1848125 'move' _field_destructor_tmp_[1848118](1848122 '.' this[771603] l[82295]))
-    ref _field_destructor_tmp_[2280744]:AtomicBool[45877] "temp"
-    (2280746 'move' _field_destructor_tmp_[2280744](2280748 '.' _field_destructor_tmp_[1848118] l[187317]))
-    (2280752 call deinit[44863] _field_destructor_tmp_[2280744])
-    (771611 return _void[55])
+    label _enddeinit[1771657]
+    const-ref _field_destructor_tmp_[1771655]:chpl_LocalSpinlock[187386] "temp"
+    (1771662 'move' _field_destructor_tmp_[1771655](1771659 '.' this[771453] l[82292]))
+    ref _field_destructor_tmp_[2159324]:AtomicBool[45874] "temp"
+    (2159326 'move' _field_destructor_tmp_[2159324](2159328 '.' _field_destructor_tmp_[1771655] l[187271]))
+    (2159332 call deinit[44860] _field_destructor_tmp_[2159324])
+    (771461 return _void[55])
   }
-  type ReduceScanOp[82300] val super[355649]:object[22] "super class" val l[82295]:chpl_LocalSpinlock[187432]
-  function SumReduceScanOp(real(64))[1372574].init[1371583](const in arg this[1371587]:SumReduceScanOp(real(64))[1372574], const  ref arg l[1371591]:chpl_LocalSpinlock[187432], in arg value[1371601]:real(64)[16]) : void[4] "compiler generated" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
+  type ReduceScanOp[82297] val super[355518]:object[22] "super class" val l[82292]:chpl_LocalSpinlock[187386]
+  function SumReduceScanOp(int(64))[1386295].init[1385304](const in arg this[1385308]:SumReduceScanOp(int(64))[1386295], const  ref arg l[1385312]:chpl_LocalSpinlock[187386], in arg value[1385322]:int(64)[13]) : void[4] "compiler generated" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "suppress lvalue error"
   {
-    const-val _formal_tmp_l[1372488]:chpl_LocalSpinlock[187432] "dead at end of block" "no auto destroy" "no copy" "temp"
-    (1372491 'move' _formal_tmp_l[1372488] l[1371591])
-    val super_tmp[1372425]:ReduceScanOp[82300] "dead after last mention" "temporary of super field" "temp"
-    (1372427 'move' super_tmp[1372425](1372429 '.v' this[1371587] super[1372565]))
-    val super_tmp[2281351]:object[22] "dead after last mention" "temporary of super field" "temp"
-    (2281353 'move' super_tmp[2281351](2281355 '.v' super_tmp[1372425] super[355649]))
-    (2281358 'setcid' super_tmp[2281351])
-    val call_tmp[2281360]:object[22] "dead at end of block" "maybe param" "temp"
-    (2281362 'move' call_tmp[2281360](2281364 'cast' object[22] super_tmp[1372425]))
-    (2281367 'setcid' call_tmp[2281360])
-    (2281369 '.=' super_tmp[1372425] l[82295] _formal_tmp_l[1372488])
-    (2281373 'setcid' super_tmp[1372425])
-    val call_tmp[1372458]:ReduceScanOp[82300] "dead at end of block" "maybe param" "temp"
-    (1372460 'move' call_tmp[1372458](1372462 'cast' ReduceScanOp[82300] this[1371587]))
-    (1372471 'setcid' call_tmp[1372458])
-    (1372478 '.=' this[1371587] value[1372569] value[1371601])
-    (1372483 'setcid' this[1371587])
-    (1372485 return _void[55])
+    const-val _formal_tmp_l[1386209]:chpl_LocalSpinlock[187386] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (1386212 'move' _formal_tmp_l[1386209] l[1385312])
+    val super_tmp[1386146]:ReduceScanOp[82297] "dead after last mention" "temporary of super field" "temp"
+    (1386148 'move' super_tmp[1386146](1386150 '.v' this[1385308] super[1386286]))
+    val super_tmp[2159955]:object[22] "dead after last mention" "temporary of super field" "temp"
+    (2159957 'move' super_tmp[2159955](2159959 '.v' super_tmp[1386146] super[355518]))
+    (2159962 'setcid' super_tmp[2159955])
+    val call_tmp[2159964]:object[22] "dead at end of block" "maybe param" "temp"
+    (2159966 'move' call_tmp[2159964](2159968 'cast' object[22] super_tmp[1386146]))
+    (2159971 'setcid' call_tmp[2159964])
+    (2159973 '.=' super_tmp[1386146] l[82292] _formal_tmp_l[1386209])
+    (2159977 'setcid' super_tmp[1386146])
+    val call_tmp[1386179]:ReduceScanOp[82297] "dead at end of block" "maybe param" "temp"
+    (1386181 'move' call_tmp[1386179](1386183 'cast' ReduceScanOp[82297] this[1385308]))
+    (1386192 'setcid' call_tmp[1386179])
+    (1386199 '.=' this[1385308] value[1386290] value[1385322])
+    (1386204 'setcid' this[1385308])
+    (1386206 return _void[55])
   }
-  function SumReduceScanOp(real(64))[1372574].deinit[1508583](const in arg this[1508587]:SumReduceScanOp(real(64))[1372574]) : void[4] "compiler generated" "destructor" "inline" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "virtual"
+  function SumReduceScanOp(int(64))[1386295].deinit[1388370](const in arg this[1388374]:SumReduceScanOp(int(64))[1386295]) : void[4] "compiler generated" "destructor" "inline" "instantiated generic" "invisible fn" "last resort" "method" "primary method" "resolved" "virtual"
   {
-    label _enddeinit[1849423]
-    val _parent_destructor_tmp_[1849418]:ReduceScanOp[82300] "temp"
-    (1849425 'move' _parent_destructor_tmp_[1849418](1849419 'cast' ReduceScanOp[82300] this[1508587]))
-    const-ref _field_destructor_tmp_[2281380]:chpl_LocalSpinlock[187432] "temp"
-    (2281382 'move' _field_destructor_tmp_[2281380](2281384 '.' _parent_destructor_tmp_[1849418] l[82295]))
-    ref _field_destructor_tmp_[2281387]:AtomicBool[45877] "temp"
-    (2281389 'move' _field_destructor_tmp_[2281387](2281391 '.' _field_destructor_tmp_[2281380] l[187317]))
-    (2281395 call deinit[44863] _field_destructor_tmp_[2281387])
-    (1508593 return _void[55])
+    label _enddeinit[1772838]
+    val _parent_destructor_tmp_[1772833]:ReduceScanOp[82297] "temp"
+    (1772840 'move' _parent_destructor_tmp_[1772833](1772834 'cast' ReduceScanOp[82297] this[1388374]))
+    const-ref _field_destructor_tmp_[2159984]:chpl_LocalSpinlock[187386] "temp"
+    (2159986 'move' _field_destructor_tmp_[2159984](2159988 '.' _parent_destructor_tmp_[1772833] l[82292]))
+    ref _field_destructor_tmp_[2159991]:AtomicBool[45874] "temp"
+    (2159993 'move' _field_destructor_tmp_[2159991](2159995 '.' _field_destructor_tmp_[2159984] l[187271]))
+    (2159999 call deinit[44860] _field_destructor_tmp_[2159991])
+    (1388380 return _void[55])
   }
-  function _new[1372600](const  ref arg l[1372611]:chpl_LocalSpinlock[187432], const in arg value[1372623]:real(64)[16]) : SumReduceScanOp(real(64))[1372574] "always propagate line file info" "compiler generated" "insert line file info" "last resort" "llvm return noalias" "_new wrapper" "resolved" "suppress lvalue error"
+  function _new[1386321](const  ref arg l[1386332]:chpl_LocalSpinlock[187386], const in arg value[1386344]:int(64)[13]) : SumReduceScanOp(int(64))[1386295] "always propagate line file info" "compiler generated" "insert line file info" "last resort" "llvm return noalias" "_new wrapper" "resolved" "suppress lvalue error"
   {
-    const-val _formal_tmp_l[1372756]:chpl_LocalSpinlock[187432] "dead at end of block" "no auto destroy" "no copy" "temp"
-    (1372759 'move' _formal_tmp_l[1372756] l[1372611])
-    val initTemp[1372602]:SumReduceScanOp(real(64))[1372574] "dead after last mention" "temp"
-    const-val call_tmp[1372663]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
-    (1372666 'move' call_tmp[1372663](1372762 'sizeof_bundle' SumReduceScanOp(real(64))[1372574]))
-    const-val cast_tmp[1372765]:c_void_ptr[149] "dead after last mention" "temp"
-    (1372767 'move' cast_tmp[1372765](1372631 call chpl_here_alloc[187788] call_tmp[1372663] 69))
-    (1372634 'move' initTemp[1372602](1372769 'cast' SumReduceScanOp(real(64))[1372574] cast_tmp[1372765]))
-    (1372636 'setcid' initTemp[1372602])
-    (1372603 call init[1371583] initTemp[1372602] _formal_tmp_l[1372756] value[1372623])
-    val tmp[1372638]:SumReduceScanOp(real(64))[1372574] "dead after last mention" "temp"
-    (1372645 'move' tmp[1372638] initTemp[1372602])
-    (1372658 return tmp[1372638])
+    const-val _formal_tmp_l[1386477]:chpl_LocalSpinlock[187386] "dead at end of block" "no auto destroy" "no copy" "temp"
+    (1386480 'move' _formal_tmp_l[1386477] l[1386332])
+    val initTemp[1386323]:SumReduceScanOp(int(64))[1386295] "dead after last mention" "temp"
+    const-val call_tmp[1386384]:int(64)[13] "dead after last mention" "expr temp" "maybe param" "temp"
+    (1386387 'move' call_tmp[1386384](1386483 'sizeof_bundle' SumReduceScanOp(int(64))[1386295]))
+    const-val cast_tmp[1386486]:c_void_ptr[149] "dead after last mention" "temp"
+    (1386488 'move' cast_tmp[1386486](1386352 call chpl_here_alloc[187742] call_tmp[1386384] 72))
+    (1386355 'move' initTemp[1386323](1386490 'cast' SumReduceScanOp(int(64))[1386295] cast_tmp[1386486]))
+    (1386357 'setcid' initTemp[1386323])
+    (1386324 call init[1385304] initTemp[1386323] _formal_tmp_l[1386477] value[1386344])
+    val tmp[1386359]:SumReduceScanOp(int(64))[1386295] "dead after last mention" "temp"
+    (1386366 'move' tmp[1386359] initTemp[1386323])
+    (1386379 return tmp[1386359])
   }
-  type SumReduceScanOp(real(64))[1372574] val super[1372565]:ReduceScanOp[82300] "super class" val value[1372569]:real(64)[16]
+  type SumReduceScanOp(int(64))[1386295] val super[1386286]:ReduceScanOp[82297] "super class" val value[1386290]:int(64)[13]
+  function on_fn[1387153](const in arg globalOp[1765834]:SumReduceScanOp(int(64))[1386295], const in arg localOp[1765836]:SumReduceScanOp(int(64))[1386295]) : void[4] "on" "resolved"
+  {
+    val coerce_tmp[1387201]:ReduceScanOp[82297] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1387206 'move' coerce_tmp[1387201](1387203 'cast' ReduceScanOp[82297] globalOp[1765834]))
+    ref call_tmp[2159924]:chpl_LocalSpinlock[187386] "dead after last mention" "maybe param" "temp"
+    (2159926 'move' call_tmp[2159924](2159928 '.' coerce_tmp[1387201] l[82292]))
+    const-val call_tmp[2146679]:chpl_localeID_t[209294] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2146681 'move' call_tmp[2146679](2146683 '_wide_get_locale' call_tmp[2159924]))
+    val isdirect[2146688]:bool[10] "temp"
+    (2146690 'move' isdirect[2146688](2146693 call chpl_doDirectExecuteOn[187423] call_tmp[2146679]))
+    if isdirect[2146688]
+    {
+      (2146698 call on_fn[935384] call_tmp[2159924])
+    }
+    {
+      val _args_foron_fn[2146701]:_class_localson_fn[2035137] "temp"
+      (2146703 'move' _args_foron_fn[2146701](2146705 'stack allocate class' _class_localson_fn[2035137]))
+      (2146707 '.=' _args_foron_fn[2146701] _0_tmp[2035140] call_tmp[2146679])
+      ref tmp[2146711]:chpl_LocalSpinlock[187386] "temp"
+      (2146713 'move' tmp[2146711](2146715 'set reference' call_tmp[2159924]))
+      (2146717 '.=' _args_foron_fn[2146701] _1_this[2035142] tmp[2146711])
+      val _args_vforon_fn[2146721]:c_void_ptr[149] "temp"
+      (2146723 'move' _args_vforon_fn[2146721](2146725 'cast_to_void_star' _args_foron_fn[2146701]))
+      val _args_sizeon_fn[2146727]:int(64)[13] "temp"
+      (2146729 'move' _args_sizeon_fn[2146727](2146731 'sizeof_bundle' _class_localson_fn[2035137]))
+      on(2146734 call wrapon_fn[2035177] call_tmp[2146679] _args_vforon_fn[2146721] _args_sizeon_fn[2146727] _args_foron_fn[2146701])
+    }
+    val coerce_tmp[1387246]:SumReduceScanOp(int(64))[1386295] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1387251 'move' coerce_tmp[1387246] globalOp[1765834])
+    ref call_tmp[2260949]:int(64)[13] "dead after last mention" "maybe param" "temp"
+    (2260951 'move' call_tmp[2260949](2260953 '.' coerce_tmp[1387246] value[1386290]))
+    val coerce_tmp[2260956]:SumReduceScanOp(int(64))[1386295] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (2260958 'move' coerce_tmp[2260956] localOp[1765836])
+    const-val coerce_tmp[2260961]:int(64)[13] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (2260963 'move' coerce_tmp[2260961](2260965 '.v' coerce_tmp[2260956] value[1386290]))
+    (2260968 '+=' call_tmp[2260949] coerce_tmp[2260961])
+    val coerce_tmp[1387270]:ReduceScanOp[82297] "dead after last mention" "coerce temp" "insert auto destroy" "temp"
+    (1387275 'move' coerce_tmp[1387270](1387272 'cast' ReduceScanOp[82297] globalOp[1765834]))
+    ref call_tmp[2159934]:chpl_LocalSpinlock[187386] "dead after last mention" "maybe param" "temp"
+    (2159936 'move' call_tmp[2159934](2159938 '.' coerce_tmp[1387270] l[82292]))
+    ref call_tmp[2147440]:AtomicBool[45874] "dead after last mention" "maybe param" "temp"
+    (2147442 'move' call_tmp[2147440](2147444 '.' call_tmp[2159934] l[187271]))
+    const-val call_tmp[2147454]:chpl_localeID_t[209294] "dead after last mention" "expr temp" "maybe param" "temp"
+    (2147456 'move' call_tmp[2147454](2147458 '_wide_get_locale' call_tmp[2147440]))
+    val isdirect[2147463]:bool[10] "temp"
+    (2147465 'move' isdirect[2147463](2147468 call chpl_doDirectExecuteOn[187423] call_tmp[2147454]))
+    if isdirect[2147463]
+    {
+      (2147473 call on_fn[1232993] call_tmp[2147440] 0)
+    }
+    {
+      val _args_foron_fn[2147477]:_class_localson_fn[2040774] "temp"
+      (2147479 'move' _args_foron_fn[2147477](2147481 'stack allocate class' _class_localson_fn[2040774]))
+      (2147483 '.=' _args_foron_fn[2147477] _0_tmp[2040777] call_tmp[2147454])
+      ref tmp[2147487]:AtomicBool[45874] "temp"
+      (2147489 'move' tmp[2147487](2147491 'set reference' call_tmp[2147440]))
+      (2147493 '.=' _args_foron_fn[2147477] _1_this[2040779] tmp[2147487])
+      (2147497 '.=' _args_foron_fn[2147477] _2_value[2040781] 0)
+      val _args_vforon_fn[2147501]:c_void_ptr[149] "temp"
+      (2147503 'move' _args_vforon_fn[2147501](2147505 'cast_to_void_star' _args_foron_fn[2147477]))
+      val _args_sizeon_fn[2147507]:int(64)[13] "temp"
+      (2147509 'move' _args_sizeon_fn[2147507](2147511 'sizeof_bundle' _class_localson_fn[2040774]))
+      on(2147514 call wrapon_fn[2040820] call_tmp[2147454] _args_vforon_fn[2147501] _args_sizeon_fn[2147507] _args_foron_fn[2147477])
+    }
+    (1387193 return _void[55])
+  }
+  function wrapon_fn[2042462](const in arg dummy_locale_arg[2042464]:chpl_localeID_t[209294], in arg buf[2042466]:c_void_ptr[149], in arg buf_size[2042468]:int(64)[13], in arg c[2042470]:_class_localson_fn[2042422]) : void[4] "on block"
+  {
+    val _1_globalOp[2042482]:SumReduceScanOp(int(64))[1386295] "temp"
+    (2042487 'move' _1_globalOp[2042482](2042484 '.v' c[2042470] _1_globalOp[2042427]))
+    val _2_localOp[2042490]:SumReduceScanOp(int(64))[1386295] "temp"
+    (2042495 'move' _2_localOp[2042490](2042492 '.v' c[2042470] _2_localOp[2042429]))
+    (2042473 call on_fn[1387153] _1_globalOp[2042482] _2_localOp[2042490])
+    (2042498 return _void[55])
+  }
 }

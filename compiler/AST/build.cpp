@@ -1422,7 +1422,6 @@ CallExpr* buildScanExpr(Expr* opExpr, Expr* dataExpr, bool zippered) {
   FnSymbol* fn = new FnSymbol(astr("chpl__scan", istr(uid++)));
   fn->addFlag(FLAG_COMPILER_NESTED_FUNCTION);
   fn->addFlag(FLAG_FN_RETURNS_ITERATOR);
-  fn->addFlag(FLAG_REDUCESCANOP);
 
   // data will hold the reduce-d expression as an argument
   // we'll store dataExpr in the call to the chpl__scan function.
@@ -1442,7 +1441,7 @@ CallExpr* buildScanExpr(Expr* opExpr, Expr* dataExpr, bool zippered) {
     fn->insertAtTail("'return'(chpl__scanIteratorZip(%S, %S))", globalOp, data);
   }
 
-  return new CallExpr(new DefExpr(fn), dataExpr);
+  return new CallExpr(new DefExpr(fn),PRIM_SCAN ,dataExpr);
 }
 
 
@@ -2207,28 +2206,19 @@ void replaceWithGPUExpression(BlockStmt* block){
     if (call->isPrimitive(PRIM_REDUCE))
     {
       // TODO: replace to GPU reduce Call expression
-      call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
+      call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
+                    new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
     }
-
-  std::vector<DefExpr *> defVector;
-    collectDefExprs(block, defVector);
-    forv_Vec(DefExpr, def, defVector){
-      if (FnSymbol* fn = def -> getFunction())
-      {
-       std::cout << "get fn" << std::endl;
-
-      }
-      
+    if (call -> isPrimitive(PRIM_SCAN))
+    {
+    std::cout << "get fn" << std::endl;
+      // TODO: replace to GPU scan Call expression
+      // Currently replaced with one value in a CallExpr. 
+      // The required return type is iterator, we can return one value because Chapel allows scalar arguments promotion.
+      // call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
+                    // new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
     }
-    if (FnSymbol* fn = call->theFnSymbol()){
-       std::cout << "get fn" << std::endl;
-       std::cout << fn->hasFlag(FLAG_REDUCESCANOP) << std::endl;
-       std::cout << fn->hasFlag(FLAG_COMPILER_NESTED_FUNCTION) << std::endl;
-       std::cout << fn->hasFlag(FLAG_FN_RETURNS_ITERATOR) << std::endl;
-      if(fn->hasFlag(FLAG_REDUCESCANOP)){
-        std::cout << "find" << std::endl;
-      }
-    }
+    
   }
   // find forall expression
   std::vector<ForallStmt*> forallVector;

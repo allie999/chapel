@@ -2,494 +2,494 @@ AST dump for ChapelReduce after pass cleanup.
 Module use list: 
 
 {
-  (81780 'use' ChapelStandard)
-  (81784 'use' ChapelLocks)
-  function chpl__scanStateResTypesMatch[81790](arg op[81788]:_any[178](?)) param : _unknown[51]
+  (81777 'use' ChapelStandard)
+  (81781 'use' ChapelLocks)
+  function chpl__scanStateResTypesMatch[81787](arg op[81785]:_any[178](?)) param : _unknown[51]
   {
-    unknown resType[81801] "type variable"(81800 'typeof'(81799 call(81795 call . op c"generate")))
-    unknown stateType[81812] "type variable"(81811 'typeof'(81808 call . op c"identity"))
-    (81819 return(81817 call == resType stateType))
+    unknown resType[81798] "type variable"(81797 'typeof'(81796 call(81792 call . op c"generate")))
+    unknown stateType[81809] "type variable"(81808 'typeof'(81805 call . op c"identity"))
+    (81816 return(81814 call == resType stateType))
   }
-  function chpl__scanIteratorZip[81827](arg op[81825]:_any[178](?), arg data[81829]:_any[178](?)) : _unknown[51]
+  function chpl__scanIteratorZip[81824](arg op[81822]:_any[178](?), arg data[81826]:_any[178](?)) : _unknown[51]
   {
-    (81850 call compilerWarning "scan has been serialized (see issue #12482)")
-    unknown arr[81868](81864 for  d  in  zip(81857 call _build_tuple(81855 'expand_tuple' data)) do
+    (81847 call compilerWarning "scan has been serialized (see issue #12482)")
+    unknown arr[81865](81861 for  d  in  zip(81854 call _build_tuple(81852 'expand_tuple' data)) do
     {
-      (81862 call chpl__accumgen op d)
+      (81859 call chpl__accumgen op d)
     } )
-    (81871 'end of statement')
-    (81874 call chpl__delete op)
-    (81878 return arr)
+    (81868 'end of statement')
+    (81871 call chpl__delete op)
+    (81875 return arr)
   }
-  function chpl__scanIterator[81886](arg op[81884]:_any[178](?), arg data[81888]:_any[178](?)) : _unknown[51]
+  function chpl__scanIterator[81883](arg op[81881]:_any[178](?), arg data[81885]:_any[178](?)) : _unknown[51]
   {
-    (81891 'use' Reflection)
-    unknown supportsPar[81922] "param"(81920 call &&(81897 call isArray data)(81919 call canResolveMethod data "_scan" op))
-    (81925 'end of statement')
-    if(81966 call _cond_test supportsPar)
+    (81888 'use' Reflection)
+    unknown supportsPar[81919] "param"(81917 call &&(81894 call isArray data)(81916 call canResolveMethod data "_scan" op))
+    (81922 'end of statement')
+    if(81963 call _cond_test supportsPar)
     {
-      (81934 return(81933 call(81928 call . data c"_scan") op))
+      (81931 return(81930 call(81925 call . data c"_scan") op))
     }
     {
-      (81940 call compilerWarning "scan has been serialized (see issue #12482)")
-      unknown arr[81954](81950 for  d  in  data do
+      (81937 call compilerWarning "scan has been serialized (see issue #12482)")
+      unknown arr[81951](81947 for  d  in  data do
       {
-        (81949 call chpl__accumgen op d)
+        (81946 call chpl__accumgen op d)
       } )
-      (81957 'end of statement')
-      (81960 call chpl__delete op)
-      (81964 return arr)
+      (81954 'end of statement')
+      (81957 call chpl__delete op)
+      (81961 return arr)
     }
   }
-  function chpl__accumgen[81976](arg op[81974]:_any[178](?), arg d[81978]:_any[178](?)) : _unknown[51]
+  function chpl__accumgen[81973](arg op[81971]:_any[178](?), arg d[81975]:_any[178](?)) : _unknown[51]
   {
-    (81988 call(81983 call . op c"accumulate") d)
-    (81997 return(81996 call(81992 call . op c"generate")))
+    (81985 call(81980 call . op c"accumulate") d)
+    (81994 return(81993 call(81989 call . op c"generate")))
   }
-  function chpl__reduceCombine[82005](arg globalOp[82003]:_any[178](?), arg localOp[82007]:_any[178](?)) : _unknown[51] "no return value for void"
+  function chpl__reduceCombine[82002](arg globalOp[82000]:_any[178](?), arg localOp[82004]:_any[178](?)) : _unknown[51] "no return value for void"
   {
-    const tmp[82050] "const" "temp"
-    (82052 'move' tmp[82050](82048 'deref'(82047 '_wide_get_locale' globalOp)))
+    const tmp[82047] "const" "temp"
+    (82049 'move' tmp[82047](82045 'deref'(82044 '_wide_get_locale' globalOp)))
     {
       {
-        (82022 call(82018 call .(82013 call . globalOp c"l") c"lock"))
-        (82033 call(82028 call . globalOp c"combine") localOp)
-        (82045 call(82041 call .(82036 call . globalOp c"l") c"unlock"))
+        (82019 call(82015 call .(82010 call . globalOp c"l") c"lock"))
+        (82030 call(82025 call . globalOp c"combine") localOp)
+        (82042 call(82038 call .(82033 call . globalOp c"l") c"unlock"))
       }
-      (82055 'on block' 0 tmp[82050])
+      (82052 'on block' 0 tmp[82047])
     }
   }
-  function chpl__cleanupLocalOp[82065](arg globalOp[82063]:_any[178](?), arg localOp[82067]:_any[178](?)) : _unknown[51] "inline" "no return value for void"
+  function chpl__cleanupLocalOp[82062](arg globalOp[82060]:_any[178](?), arg localOp[82064]:_any[178](?)) : _unknown[51] "inline" "no return value for void"
   {
-    (82071 call chpl__delete localOp)
+    (82068 call chpl__delete localOp)
   }
-  function chpl_sumTypeIsSame[82081](arg eltType[82079]:_any[178](?)) param : _unknown[51]
+  function chpl_sumTypeIsSame[82078](arg eltType[82076]:_any[178](?)) param : _unknown[51]
   {
-    if(82163 call _cond_test(82091 call ||(82086 call isNumeric eltType)(82090 call isString eltType)))
+    if(82160 call _cond_test(82088 call ||(82083 call isNumeric eltType)(82087 call isString eltType)))
     {
-      (82094 return 1)
+      (82091 return 1)
     }
     {
-      if(82158 call _cond_test(82100 call isDomain eltType))
+      if(82155 call _cond_test(82097 call isDomain eltType))
       {
-        unknown d[82102] eltType
-        (82105 'end of statement')
-        (82111 return(82110 call isAssociativeDom d))
+        unknown d[82099] eltType
+        (82102 'end of statement')
+        (82108 return(82107 call isAssociativeDom d))
       }
       {
-        if(82154 call _cond_test(82116 call isArray eltType))
+        if(82151 call _cond_test(82113 call isArray eltType))
         {
-          unknown arrInstType[82122] "type variable"(82121 'static field type' eltType "_instance")
-          unknown instanceObj[82128](82127 'to nilable class from type' arrInstType)
-          (82131 'end of statement')
-          unknown instanceEltType[82141] "type variable"(82140 'static typeof'(82137 call .(82135 call postfix! instanceObj) c"eltType"))
-          (82148 return(82147 call chpl_sumTypeIsSame instanceEltType))
+          unknown arrInstType[82119] "type variable"(82118 'static field type' eltType "_instance")
+          unknown instanceObj[82125](82124 'to nilable class from type' arrInstType)
+          (82128 'end of statement')
+          unknown instanceEltType[82138] "type variable"(82137 'static typeof'(82134 call .(82132 call postfix! instanceObj) c"eltType"))
+          (82145 return(82144 call chpl_sumTypeIsSame instanceEltType))
         }
         {
-          (82151 return 0)
+          (82148 return 0)
         }
       }
     }
   }
-  function chpl__sumType[82175](arg eltType[82173]:_any[178](?)) type : _unknown[51]
+  function chpl__sumType[82172](arg eltType[82170]:_any[178](?)) type : _unknown[51]
   {
-    if(82286 call _cond_test(82180 call chpl_sumTypeIsSame eltType))
+    if(82283 call _cond_test(82177 call chpl_sumTypeIsSame eltType))
     {
-      (82182 return eltType)
+      (82179 return eltType)
     }
     {
-      unknown x[82186] eltType
-      (82189 'end of statement')
-      if(82282 call _cond_test(82194 call isArray x))
+      unknown x[82183] eltType
+      (82186 'end of statement')
+      if(82279 call _cond_test(82191 call isArray x))
       {
-        unknown xET[82199] "type variable"(82196 call . x c"eltType")
-        unknown xST[82207] "type variable"(82206 call chpl__sumType xET)
-        if(82227 call _cond_test(82212 call == xET xST))
+        unknown xET[82196] "type variable"(82193 call . x c"eltType")
+        unknown xST[82204] "type variable"(82203 call chpl__sumType xET)
+        if(82224 call _cond_test(82209 call == xET xST))
         {
-          (82215 return eltType)
+          (82212 return eltType)
         }
         {
-          (82225 return(82223 [ (82218 call . x c"_dom") ]
+          (82222 return(82220 [ (82215 call . x c"_dom") ]
           {
             xST
           } ))
         }
       }
       {
-        (82234 'use' Reflection)
-        if(82270 call _cond_test(82243 call !(82242 call canResolve "+" x x)))
+        (82231 'use' Reflection)
+        if(82267 call _cond_test(82240 call !(82239 call canResolve "+" x x)))
         {
-          (82268 call compilerError "+ reduce cannot be used on values of the type "(82266 call _cast string[26] eltType))
+          (82265 call compilerError "+ reduce cannot be used on values of the type "(82263 call _cast string[26] eltType))
         }
-        (82280 return(82279 'typeof'(82277 call + x x)))
+        (82277 return(82276 'typeof'(82274 call + x x)))
       }
     }
   }
-  type ReduceScanOp[82300] unknown l[82295] chpl_LocalSpinlock
-  function SumReduceScanOp[82412](?).identity[82319](arg _mt[82416]:_MT[238], arg this[82414]:SumReduceScanOp[82412](?)) : _unknown[51] "inline" "method" "primary method" "no parens"
+  type ReduceScanOp[82297] unknown l[82292] chpl_LocalSpinlock
+  function SumReduceScanOp[82409](?).identity[82316](arg _mt[82413]:_MT[238], arg this[82411]:SumReduceScanOp[82409](?)) : _unknown[51] "inline" "method" "primary method" "no parens"
   {
-    unknown x[82325](82324 call chpl__sumType eltType)
-    (82328 'end of statement')
-    (82331 return x)
+    unknown x[82322](82321 call chpl__sumType eltType)
+    (82325 'end of statement')
+    (82328 return x)
   }
-  function SumReduceScanOp[82412](?).accumulate[82339](arg _mt[82420]:_MT[238], arg this[82418]:SumReduceScanOp[82412](?), arg x[82337]:_any[178](?)) : _unknown[51] "inline" "method" "primary method" "no return value for void"
+  function SumReduceScanOp[82409](?).accumulate[82336](arg _mt[82417]:_MT[238], arg this[82415]:SumReduceScanOp[82409](?), arg x[82334]:_any[178](?)) : _unknown[51] "inline" "method" "primary method" "no return value for void"
   {
-    (82343 call += value x)
+    (82340 call += value x)
   }
-  function SumReduceScanOp[82412](?).accumulateOntoState[82353](arg _mt[82424]:_MT[238], arg this[82422]:SumReduceScanOp[82412](?), ref arg state[82351]:_any[178](?), arg x[82355]:_any[178](?)) : _unknown[51] "inline" "method" "primary method" "no return value for void"
+  function SumReduceScanOp[82409](?).accumulateOntoState[82350](arg _mt[82421]:_MT[238], arg this[82419]:SumReduceScanOp[82409](?), ref arg state[82348]:_any[178](?), arg x[82352]:_any[178](?)) : _unknown[51] "inline" "method" "primary method" "no return value for void"
   {
-    (82359 call += state x)
+    (82356 call += state x)
   }
-  function SumReduceScanOp[82412](?).combine[82369](arg _mt[82428]:_MT[238], arg this[82426]:SumReduceScanOp[82412](?), arg x[82367]:_any[178](?)) : _unknown[51] "inline" "method" "primary method" "no return value for void"
+  function SumReduceScanOp[82409](?).combine[82366](arg _mt[82425]:_MT[238], arg this[82423]:SumReduceScanOp[82409](?), arg x[82364]:_any[178](?)) : _unknown[51] "inline" "method" "primary method" "no return value for void"
   {
-    (82378 call += value(82375 call . x c"value"))
+    (82375 call += value(82372 call . x c"value"))
   }
-  function SumReduceScanOp[82412](?).generate[82386](arg _mt[82432]:_MT[238], arg this[82430]:SumReduceScanOp[82412](?)) : _unknown[51] "inline" "method" "primary method"
+  function SumReduceScanOp[82409](?).generate[82383](arg _mt[82429]:_MT[238], arg this[82427]:SumReduceScanOp[82409](?)) : _unknown[51] "inline" "method" "primary method"
   {
-    (82389 return value)
+    (82386 return value)
   }
-  function SumReduceScanOp[82412](?).clone[82396](arg _mt[82436]:_MT[238], arg this[82434]:SumReduceScanOp[82412](?)) : _unknown[51] "inline" "method" "primary method"
+  function SumReduceScanOp[82409](?).clone[82393](arg _mt[82433]:_MT[238], arg this[82431]:SumReduceScanOp[82409](?)) : _unknown[51] "inline" "method" "primary method"
   {
-    (82406 return(82400 'new'(_chpl_manager = unmanaged[220](?))(82405 call SumReduceScanOp(eltType = eltType))))
+    (82403 return(82397 'new'(_chpl_manager = unmanaged[220](?))(82402 call SumReduceScanOp(eltType = eltType))))
   }
-  type SumReduceScanOp[82412](?) unknown eltType[82306] "type variable" unknown value[82313](82312 call chpl__sumType eltType) ReduceScanOp
-  function ProductReduceScanOp[82541](?).identity[82455](arg _mt[82545]:_MT[238], arg this[82543]:ProductReduceScanOp[82541](?)) : _unknown[51] "method" "primary method" "no parens"
+  type SumReduceScanOp[82409](?) unknown eltType[82303] "type variable" unknown value[82310](82309 call chpl__sumType eltType) ReduceScanOp
+  function ProductReduceScanOp[82538](?).identity[82452](arg _mt[82542]:_MT[238], arg this[82540]:ProductReduceScanOp[82538](?)) : _unknown[51] "method" "primary method" "no parens"
   {
-    (82461 return(82460 call _prod_id eltType))
+    (82458 return(82457 call _prod_id eltType))
   }
-  function ProductReduceScanOp[82541](?).accumulate[82470](arg _mt[82549]:_MT[238], arg this[82547]:ProductReduceScanOp[82541](?), arg x[82468]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function ProductReduceScanOp[82538](?).accumulate[82467](arg _mt[82546]:_MT[238], arg this[82544]:ProductReduceScanOp[82538](?), arg x[82465]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (82474 call *= value x)
+    (82471 call *= value x)
   }
-  function ProductReduceScanOp[82541](?).accumulateOntoState[82484](arg _mt[82553]:_MT[238], arg this[82551]:ProductReduceScanOp[82541](?), ref arg state[82482]:_any[178](?), arg x[82486]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function ProductReduceScanOp[82538](?).accumulateOntoState[82481](arg _mt[82550]:_MT[238], arg this[82548]:ProductReduceScanOp[82538](?), ref arg state[82479]:_any[178](?), arg x[82483]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (82490 call *= state x)
+    (82487 call *= state x)
   }
-  function ProductReduceScanOp[82541](?).combine[82500](arg _mt[82557]:_MT[238], arg this[82555]:ProductReduceScanOp[82541](?), arg x[82498]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function ProductReduceScanOp[82538](?).combine[82497](arg _mt[82554]:_MT[238], arg this[82552]:ProductReduceScanOp[82538](?), arg x[82495]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (82507 call *= value(82504 call . x c"value"))
+    (82504 call *= value(82501 call . x c"value"))
   }
-  function ProductReduceScanOp[82541](?).generate[82515](arg _mt[82561]:_MT[238], arg this[82559]:ProductReduceScanOp[82541](?)) : _unknown[51] "method" "primary method"
+  function ProductReduceScanOp[82538](?).generate[82512](arg _mt[82558]:_MT[238], arg this[82556]:ProductReduceScanOp[82538](?)) : _unknown[51] "method" "primary method"
   {
-    (82518 return value)
+    (82515 return value)
   }
-  function ProductReduceScanOp[82541](?).clone[82525](arg _mt[82565]:_MT[238], arg this[82563]:ProductReduceScanOp[82541](?)) : _unknown[51] "method" "primary method"
+  function ProductReduceScanOp[82538](?).clone[82522](arg _mt[82562]:_MT[238], arg this[82560]:ProductReduceScanOp[82538](?)) : _unknown[51] "method" "primary method"
   {
-    (82535 return(82529 'new'(_chpl_manager = unmanaged[220](?))(82534 call ProductReduceScanOp(eltType = eltType))))
+    (82532 return(82526 'new'(_chpl_manager = unmanaged[220](?))(82531 call ProductReduceScanOp(eltType = eltType))))
   }
-  type ProductReduceScanOp[82541](?) unknown eltType[82442] "type variable" unknown value[82449](82448 call _prod_id eltType) ReduceScanOp
-  function MaxReduceScanOp[82682](?).identity[82584](arg _mt[82686]:_MT[238], arg this[82684]:MaxReduceScanOp[82682](?)) : _unknown[51] "method" "primary method" "no parens"
+  type ProductReduceScanOp[82538](?) unknown eltType[82439] "type variable" unknown value[82446](82445 call _prod_id eltType) ReduceScanOp
+  function MaxReduceScanOp[82679](?).identity[82581](arg _mt[82683]:_MT[238], arg this[82681]:MaxReduceScanOp[82679](?)) : _unknown[51] "method" "primary method" "no parens"
   {
-    (82590 return(82589 call min eltType))
+    (82587 return(82586 call min eltType))
   }
-  function MaxReduceScanOp[82682](?).accumulate[82599](arg _mt[82690]:_MT[238], arg this[82688]:MaxReduceScanOp[82682](?), arg x[82597]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function MaxReduceScanOp[82679](?).accumulate[82596](arg _mt[82687]:_MT[238], arg this[82685]:MaxReduceScanOp[82679](?), arg x[82594]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (82607 call = value(82606 call max x value))
+    (82604 call = value(82603 call max x value))
   }
-  function MaxReduceScanOp[82682](?).accumulateOntoState[82617](arg _mt[82694]:_MT[238], arg this[82692]:MaxReduceScanOp[82682](?), ref arg state[82615]:_any[178](?), arg x[82619]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function MaxReduceScanOp[82679](?).accumulateOntoState[82614](arg _mt[82691]:_MT[238], arg this[82689]:MaxReduceScanOp[82679](?), ref arg state[82612]:_any[178](?), arg x[82616]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (82627 call = state(82626 call max state x))
+    (82624 call = state(82623 call max state x))
   }
-  function MaxReduceScanOp[82682](?).combine[82637](arg _mt[82698]:_MT[238], arg this[82696]:MaxReduceScanOp[82682](?), arg x[82635]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function MaxReduceScanOp[82679](?).combine[82634](arg _mt[82695]:_MT[238], arg this[82693]:MaxReduceScanOp[82679](?), arg x[82632]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (82648 call = value(82647 call max value(82644 call . x c"value")))
+    (82645 call = value(82644 call max value(82641 call . x c"value")))
   }
-  function MaxReduceScanOp[82682](?).generate[82656](arg _mt[82702]:_MT[238], arg this[82700]:MaxReduceScanOp[82682](?)) : _unknown[51] "method" "primary method"
+  function MaxReduceScanOp[82679](?).generate[82653](arg _mt[82699]:_MT[238], arg this[82697]:MaxReduceScanOp[82679](?)) : _unknown[51] "method" "primary method"
   {
-    (82659 return value)
+    (82656 return value)
   }
-  function MaxReduceScanOp[82682](?).clone[82666](arg _mt[82706]:_MT[238], arg this[82704]:MaxReduceScanOp[82682](?)) : _unknown[51] "method" "primary method"
+  function MaxReduceScanOp[82679](?).clone[82663](arg _mt[82703]:_MT[238], arg this[82701]:MaxReduceScanOp[82679](?)) : _unknown[51] "method" "primary method"
   {
-    (82676 return(82670 'new'(_chpl_manager = unmanaged[220](?))(82675 call MaxReduceScanOp(eltType = eltType))))
+    (82673 return(82667 'new'(_chpl_manager = unmanaged[220](?))(82672 call MaxReduceScanOp(eltType = eltType))))
   }
-  type MaxReduceScanOp[82682](?) unknown eltType[82571] "type variable" unknown value[82578](82577 call min eltType) ReduceScanOp
-  function MinReduceScanOp[82823](?).identity[82725](arg _mt[82827]:_MT[238], arg this[82825]:MinReduceScanOp[82823](?)) : _unknown[51] "method" "primary method" "no parens"
+  type MaxReduceScanOp[82679](?) unknown eltType[82568] "type variable" unknown value[82575](82574 call min eltType) ReduceScanOp
+  function MinReduceScanOp[82820](?).identity[82722](arg _mt[82824]:_MT[238], arg this[82822]:MinReduceScanOp[82820](?)) : _unknown[51] "method" "primary method" "no parens"
   {
-    (82731 return(82730 call max eltType))
+    (82728 return(82727 call max eltType))
   }
-  function MinReduceScanOp[82823](?).accumulate[82740](arg _mt[82831]:_MT[238], arg this[82829]:MinReduceScanOp[82823](?), arg x[82738]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function MinReduceScanOp[82820](?).accumulate[82737](arg _mt[82828]:_MT[238], arg this[82826]:MinReduceScanOp[82820](?), arg x[82735]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (82748 call = value(82747 call min x value))
+    (82745 call = value(82744 call min x value))
   }
-  function MinReduceScanOp[82823](?).accumulateOntoState[82758](arg _mt[82835]:_MT[238], arg this[82833]:MinReduceScanOp[82823](?), ref arg state[82756]:_any[178](?), arg x[82760]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function MinReduceScanOp[82820](?).accumulateOntoState[82755](arg _mt[82832]:_MT[238], arg this[82830]:MinReduceScanOp[82820](?), ref arg state[82753]:_any[178](?), arg x[82757]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (82768 call = state(82767 call min state x))
+    (82765 call = state(82764 call min state x))
   }
-  function MinReduceScanOp[82823](?).combine[82778](arg _mt[82839]:_MT[238], arg this[82837]:MinReduceScanOp[82823](?), arg x[82776]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function MinReduceScanOp[82820](?).combine[82775](arg _mt[82836]:_MT[238], arg this[82834]:MinReduceScanOp[82820](?), arg x[82773]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (82789 call = value(82788 call min value(82785 call . x c"value")))
+    (82786 call = value(82785 call min value(82782 call . x c"value")))
   }
-  function MinReduceScanOp[82823](?).generate[82797](arg _mt[82843]:_MT[238], arg this[82841]:MinReduceScanOp[82823](?)) : _unknown[51] "method" "primary method"
+  function MinReduceScanOp[82820](?).generate[82794](arg _mt[82840]:_MT[238], arg this[82838]:MinReduceScanOp[82820](?)) : _unknown[51] "method" "primary method"
   {
-    (82800 return value)
+    (82797 return value)
   }
-  function MinReduceScanOp[82823](?).clone[82807](arg _mt[82847]:_MT[238], arg this[82845]:MinReduceScanOp[82823](?)) : _unknown[51] "method" "primary method"
+  function MinReduceScanOp[82820](?).clone[82804](arg _mt[82844]:_MT[238], arg this[82842]:MinReduceScanOp[82820](?)) : _unknown[51] "method" "primary method"
   {
-    (82817 return(82811 'new'(_chpl_manager = unmanaged[220](?))(82816 call MinReduceScanOp(eltType = eltType))))
+    (82814 return(82808 'new'(_chpl_manager = unmanaged[220](?))(82813 call MinReduceScanOp(eltType = eltType))))
   }
-  type MinReduceScanOp[82823](?) unknown eltType[82712] "type variable" unknown value[82719](82718 call max eltType) ReduceScanOp
-  function minmax[83074](?).identity[82873](arg _mt[83078]:_MT[238], arg this[83076]:minmax[83074](?)) : _unknown[51] "method" "primary method" "no parens"
+  type MinReduceScanOp[82820](?) unknown eltType[82709] "type variable" unknown value[82716](82715 call max eltType) ReduceScanOp
+  function minmax[83071](?).identity[82870](arg _mt[83075]:_MT[238], arg this[83073]:minmax[83071](?)) : _unknown[51] "method" "primary method" "no parens"
   {
-    (82886 return(82884 call _build_tuple(82878 call max eltType)(82882 call min eltType)))
+    (82883 return(82881 call _build_tuple(82875 call max eltType)(82879 call min eltType)))
   }
-  function minmax[83074](?).accumulateOntoState[82895](arg _mt[83082]:_MT[238], arg this[83080]:minmax[83074](?), ref arg state[82893]:_any[178](?), arg x[82898] :
+  function minmax[83071](?).accumulateOntoState[82892](arg _mt[83079]:_MT[238], arg this[83077]:minmax[83071](?), ref arg state[82890]:_any[178](?), arg x[82895] :
   eltType) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (82913 call =(82904 call state 0)(82912 call min(82909 call state 0) x))
-    (82929 call =(82920 call state 1)(82928 call max(82925 call state 1) x))
+    (82910 call =(82901 call state 0)(82909 call min(82906 call state 0) x))
+    (82926 call =(82917 call state 1)(82925 call max(82922 call state 1) x))
   }
-  function minmax[83074](?).accumulateOntoState[82938](arg _mt[83086]:_MT[238], arg this[83084]:minmax[83074](?), ref arg state[82936]:_any[178](?), arg other[82944] :
-  (82942 call * 2 eltType)) : _unknown[51] "method" "primary method" "no return value for void"
+  function minmax[83071](?).accumulateOntoState[82935](arg _mt[83083]:_MT[238], arg this[83081]:minmax[83071](?), ref arg state[82933]:_any[178](?), arg other[82941] :
+  (82939 call * 2 eltType)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (82962 call =(82950 call state 0)(82961 call min(82955 call state 0)(82960 call other 0)))
-    (82981 call =(82969 call state 1)(82980 call max(82974 call state 1)(82979 call other 1)))
+    (82959 call =(82947 call state 0)(82958 call min(82952 call state 0)(82957 call other 0)))
+    (82978 call =(82966 call state 1)(82977 call max(82971 call state 1)(82976 call other 1)))
   }
-  function minmax[83074](?).accumulate[82992](arg _mt[83090]:_MT[238], arg this[83088]:minmax[83074](?), arg x[82989] :
+  function minmax[83071](?).accumulate[82989](arg _mt[83087]:_MT[238], arg this[83085]:minmax[83071](?), arg x[82986] :
   eltType) : _unknown[51] "inline" "method" "primary method" "no return value for void"
   {
-    (82998 call accumulateOntoState value x)
+    (82995 call accumulateOntoState value x)
   }
-  function minmax[83074](?).accumulate[83012](arg _mt[83094]:_MT[238], arg this[83092]:minmax[83074](?), arg state[83009] :
-  (83007 call * 2 eltType)) : _unknown[51] "inline" "method" "primary method" "no return value for void"
+  function minmax[83071](?).accumulate[83009](arg _mt[83091]:_MT[238], arg this[83089]:minmax[83071](?), arg state[83006] :
+  (83004 call * 2 eltType)) : _unknown[51] "inline" "method" "primary method" "no return value for void"
   {
-    (83018 call accumulateOntoState value state)
+    (83015 call accumulateOntoState value state)
   }
-  function minmax[83074](?).combine[83032](arg _mt[83098]:_MT[238], arg this[83096]:minmax[83074](?), arg other[83029] :
-  (83028 call minmax eltType)) : _unknown[51] "inline" "method" "primary method" "no return value for void"
+  function minmax[83071](?).combine[83029](arg _mt[83095]:_MT[238], arg this[83093]:minmax[83071](?), arg other[83026] :
+  (83025 call minmax eltType)) : _unknown[51] "inline" "method" "primary method" "no return value for void"
   {
-    (83041 call accumulateOntoState value(83038 call . other c"value"))
+    (83038 call accumulateOntoState value(83035 call . other c"value"))
   }
-  function minmax[83074](?).generate[83048](arg _mt[83102]:_MT[238], arg this[83100]:minmax[83074](?)) : _unknown[51] "method" "primary method"
+  function minmax[83071](?).generate[83045](arg _mt[83099]:_MT[238], arg this[83097]:minmax[83071](?)) : _unknown[51] "method" "primary method"
   {
-    (83051 return value)
+    (83048 return value)
   }
-  function minmax[83074](?).clone[83058](arg _mt[83106]:_MT[238], arg this[83104]:minmax[83074](?)) : _unknown[51] "method" "primary method"
+  function minmax[83071](?).clone[83055](arg _mt[83103]:_MT[238], arg this[83101]:minmax[83071](?)) : _unknown[51] "method" "primary method"
   {
-    (83068 return(83062 'new'(_chpl_manager = unmanaged[220](?))(83067 call minmax(eltType = eltType))))
+    (83065 return(83059 'new'(_chpl_manager = unmanaged[220](?))(83064 call minmax(eltType = eltType))))
   }
-  type minmax[83074](?) unknown eltType[82853] "type variable" unknown value[82867](82865 call _build_tuple(82859 call max eltType)(82863 call min eltType)) ReduceScanOp
-  function LogicalAndReduceScanOp[83238](?).identity[83125](arg _mt[83242]:_MT[238], arg this[83240]:LogicalAndReduceScanOp[83238](?)) : _unknown[51] "method" "primary method" "no parens"
+  type minmax[83071](?) unknown eltType[82850] "type variable" unknown value[82864](82862 call _build_tuple(82856 call max eltType)(82860 call min eltType)) ReduceScanOp
+  function LogicalAndReduceScanOp[83235](?).identity[83122](arg _mt[83239]:_MT[238], arg this[83237]:LogicalAndReduceScanOp[83235](?)) : _unknown[51] "method" "primary method" "no parens"
   {
-    (83131 return(83130 call _land_id eltType))
+    (83128 return(83127 call _land_id eltType))
   }
-  function LogicalAndReduceScanOp[83238](?).accumulate[83140](arg _mt[83246]:_MT[238], arg this[83244]:LogicalAndReduceScanOp[83238](?), arg x[83138]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
-  {
-    {
-      unknown tmp[83145] "temp"
-      (83148 'move' tmp[83145](83147 'addr of' value))
-      (83153 call = tmp[83145](83150 call && tmp[83145] x))
-    }
-  }
-  function LogicalAndReduceScanOp[83238](?).accumulateOntoState[83163](arg _mt[83250]:_MT[238], arg this[83248]:LogicalAndReduceScanOp[83238](?), ref arg state[83161]:_any[178](?), arg x[83165]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function LogicalAndReduceScanOp[83235](?).accumulate[83137](arg _mt[83243]:_MT[238], arg this[83241]:LogicalAndReduceScanOp[83235](?), arg x[83135]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
     {
-      unknown tmp[83170] "temp"
-      (83173 'move' tmp[83170](83172 'addr of' state))
-      (83178 call = tmp[83170](83175 call && tmp[83170] x))
+      unknown tmp[83142] "temp"
+      (83145 'move' tmp[83142](83144 'addr of' value))
+      (83150 call = tmp[83142](83147 call && tmp[83142] x))
     }
   }
-  function LogicalAndReduceScanOp[83238](?).combine[83188](arg _mt[83254]:_MT[238], arg this[83252]:LogicalAndReduceScanOp[83238](?), arg x[83186]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function LogicalAndReduceScanOp[83235](?).accumulateOntoState[83160](arg _mt[83247]:_MT[238], arg this[83245]:LogicalAndReduceScanOp[83235](?), ref arg state[83158]:_any[178](?), arg x[83162]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
     {
-      unknown tmp[83196] "temp"
-      (83199 'move' tmp[83196](83198 'addr of' value))
-      (83204 call = tmp[83196](83201 call && tmp[83196](83192 call . x c"value")))
+      unknown tmp[83167] "temp"
+      (83170 'move' tmp[83167](83169 'addr of' state))
+      (83175 call = tmp[83167](83172 call && tmp[83167] x))
     }
   }
-  function LogicalAndReduceScanOp[83238](?).generate[83212](arg _mt[83258]:_MT[238], arg this[83256]:LogicalAndReduceScanOp[83238](?)) : _unknown[51] "method" "primary method"
-  {
-    (83215 return value)
-  }
-  function LogicalAndReduceScanOp[83238](?).clone[83222](arg _mt[83262]:_MT[238], arg this[83260]:LogicalAndReduceScanOp[83238](?)) : _unknown[51] "method" "primary method"
-  {
-    (83232 return(83226 'new'(_chpl_manager = unmanaged[220](?))(83231 call LogicalAndReduceScanOp(eltType = eltType))))
-  }
-  type LogicalAndReduceScanOp[83238](?) unknown eltType[83112] "type variable" unknown value[83119](83118 call _land_id eltType) ReduceScanOp
-  function LogicalOrReduceScanOp[83394](?).identity[83281](arg _mt[83398]:_MT[238], arg this[83396]:LogicalOrReduceScanOp[83394](?)) : _unknown[51] "method" "primary method" "no parens"
-  {
-    (83287 return(83286 call _lor_id eltType))
-  }
-  function LogicalOrReduceScanOp[83394](?).accumulate[83296](arg _mt[83402]:_MT[238], arg this[83400]:LogicalOrReduceScanOp[83394](?), arg x[83294]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function LogicalAndReduceScanOp[83235](?).combine[83185](arg _mt[83251]:_MT[238], arg this[83249]:LogicalAndReduceScanOp[83235](?), arg x[83183]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
     {
-      unknown tmp[83301] "temp"
-      (83304 'move' tmp[83301](83303 'addr of' value))
-      (83309 call = tmp[83301](83306 call || tmp[83301] x))
+      unknown tmp[83193] "temp"
+      (83196 'move' tmp[83193](83195 'addr of' value))
+      (83201 call = tmp[83193](83198 call && tmp[83193](83189 call . x c"value")))
     }
   }
-  function LogicalOrReduceScanOp[83394](?).accumulateOntoState[83319](arg _mt[83406]:_MT[238], arg this[83404]:LogicalOrReduceScanOp[83394](?), ref arg state[83317]:_any[178](?), arg x[83321]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function LogicalAndReduceScanOp[83235](?).generate[83209](arg _mt[83255]:_MT[238], arg this[83253]:LogicalAndReduceScanOp[83235](?)) : _unknown[51] "method" "primary method"
+  {
+    (83212 return value)
+  }
+  function LogicalAndReduceScanOp[83235](?).clone[83219](arg _mt[83259]:_MT[238], arg this[83257]:LogicalAndReduceScanOp[83235](?)) : _unknown[51] "method" "primary method"
+  {
+    (83229 return(83223 'new'(_chpl_manager = unmanaged[220](?))(83228 call LogicalAndReduceScanOp(eltType = eltType))))
+  }
+  type LogicalAndReduceScanOp[83235](?) unknown eltType[83109] "type variable" unknown value[83116](83115 call _land_id eltType) ReduceScanOp
+  function LogicalOrReduceScanOp[83391](?).identity[83278](arg _mt[83395]:_MT[238], arg this[83393]:LogicalOrReduceScanOp[83391](?)) : _unknown[51] "method" "primary method" "no parens"
+  {
+    (83284 return(83283 call _lor_id eltType))
+  }
+  function LogicalOrReduceScanOp[83391](?).accumulate[83293](arg _mt[83399]:_MT[238], arg this[83397]:LogicalOrReduceScanOp[83391](?), arg x[83291]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
     {
-      unknown tmp[83326] "temp"
-      (83329 'move' tmp[83326](83328 'addr of' state))
-      (83334 call = tmp[83326](83331 call || tmp[83326] x))
+      unknown tmp[83298] "temp"
+      (83301 'move' tmp[83298](83300 'addr of' value))
+      (83306 call = tmp[83298](83303 call || tmp[83298] x))
     }
   }
-  function LogicalOrReduceScanOp[83394](?).combine[83344](arg _mt[83410]:_MT[238], arg this[83408]:LogicalOrReduceScanOp[83394](?), arg x[83342]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function LogicalOrReduceScanOp[83391](?).accumulateOntoState[83316](arg _mt[83403]:_MT[238], arg this[83401]:LogicalOrReduceScanOp[83391](?), ref arg state[83314]:_any[178](?), arg x[83318]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
     {
-      unknown tmp[83352] "temp"
-      (83355 'move' tmp[83352](83354 'addr of' value))
-      (83360 call = tmp[83352](83357 call || tmp[83352](83348 call . x c"value")))
+      unknown tmp[83323] "temp"
+      (83326 'move' tmp[83323](83325 'addr of' state))
+      (83331 call = tmp[83323](83328 call || tmp[83323] x))
     }
   }
-  function LogicalOrReduceScanOp[83394](?).generate[83368](arg _mt[83414]:_MT[238], arg this[83412]:LogicalOrReduceScanOp[83394](?)) : _unknown[51] "method" "primary method"
+  function LogicalOrReduceScanOp[83391](?).combine[83341](arg _mt[83407]:_MT[238], arg this[83405]:LogicalOrReduceScanOp[83391](?), arg x[83339]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (83371 return value)
-  }
-  function LogicalOrReduceScanOp[83394](?).clone[83378](arg _mt[83418]:_MT[238], arg this[83416]:LogicalOrReduceScanOp[83394](?)) : _unknown[51] "method" "primary method"
-  {
-    (83388 return(83382 'new'(_chpl_manager = unmanaged[220](?))(83387 call LogicalOrReduceScanOp(eltType = eltType))))
-  }
-  type LogicalOrReduceScanOp[83394](?) unknown eltType[83268] "type variable" unknown value[83275](83274 call _lor_id eltType) ReduceScanOp
-  function BitwiseAndReduceScanOp[83523](?).identity[83437](arg _mt[83527]:_MT[238], arg this[83525]:BitwiseAndReduceScanOp[83523](?)) : _unknown[51] "method" "primary method" "no parens"
-  {
-    (83443 return(83442 call _band_id eltType))
-  }
-  function BitwiseAndReduceScanOp[83523](?).accumulate[83452](arg _mt[83531]:_MT[238], arg this[83529]:BitwiseAndReduceScanOp[83523](?), arg x[83450]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
-  {
-    (83456 call &= value x)
-  }
-  function BitwiseAndReduceScanOp[83523](?).accumulateOntoState[83466](arg _mt[83535]:_MT[238], arg this[83533]:BitwiseAndReduceScanOp[83523](?), ref arg state[83464]:_any[178](?), arg x[83468]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
-  {
-    (83472 call &= state x)
-  }
-  function BitwiseAndReduceScanOp[83523](?).combine[83482](arg _mt[83539]:_MT[238], arg this[83537]:BitwiseAndReduceScanOp[83523](?), arg x[83480]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
-  {
-    (83489 call &= value(83486 call . x c"value"))
-  }
-  function BitwiseAndReduceScanOp[83523](?).generate[83497](arg _mt[83543]:_MT[238], arg this[83541]:BitwiseAndReduceScanOp[83523](?)) : _unknown[51] "method" "primary method"
-  {
-    (83500 return value)
-  }
-  function BitwiseAndReduceScanOp[83523](?).clone[83507](arg _mt[83547]:_MT[238], arg this[83545]:BitwiseAndReduceScanOp[83523](?)) : _unknown[51] "method" "primary method"
-  {
-    (83517 return(83511 'new'(_chpl_manager = unmanaged[220](?))(83516 call BitwiseAndReduceScanOp(eltType = eltType))))
-  }
-  type BitwiseAndReduceScanOp[83523](?) unknown eltType[83424] "type variable" unknown value[83431](83430 call _band_id eltType) ReduceScanOp
-  function BitwiseOrReduceScanOp[83652](?).identity[83566](arg _mt[83656]:_MT[238], arg this[83654]:BitwiseOrReduceScanOp[83652](?)) : _unknown[51] "method" "primary method" "no parens"
-  {
-    (83572 return(83571 call _bor_id eltType))
-  }
-  function BitwiseOrReduceScanOp[83652](?).accumulate[83581](arg _mt[83660]:_MT[238], arg this[83658]:BitwiseOrReduceScanOp[83652](?), arg x[83579]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
-  {
-    (83585 call |= value x)
-  }
-  function BitwiseOrReduceScanOp[83652](?).accumulateOntoState[83595](arg _mt[83664]:_MT[238], arg this[83662]:BitwiseOrReduceScanOp[83652](?), ref arg state[83593]:_any[178](?), arg x[83597]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
-  {
-    (83601 call |= state x)
-  }
-  function BitwiseOrReduceScanOp[83652](?).combine[83611](arg _mt[83668]:_MT[238], arg this[83666]:BitwiseOrReduceScanOp[83652](?), arg x[83609]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
-  {
-    (83618 call |= value(83615 call . x c"value"))
-  }
-  function BitwiseOrReduceScanOp[83652](?).generate[83626](arg _mt[83672]:_MT[238], arg this[83670]:BitwiseOrReduceScanOp[83652](?)) : _unknown[51] "method" "primary method"
-  {
-    (83629 return value)
-  }
-  function BitwiseOrReduceScanOp[83652](?).clone[83636](arg _mt[83676]:_MT[238], arg this[83674]:BitwiseOrReduceScanOp[83652](?)) : _unknown[51] "method" "primary method"
-  {
-    (83646 return(83640 'new'(_chpl_manager = unmanaged[220](?))(83645 call BitwiseOrReduceScanOp(eltType = eltType))))
-  }
-  type BitwiseOrReduceScanOp[83652](?) unknown eltType[83553] "type variable" unknown value[83560](83559 call _bor_id eltType) ReduceScanOp
-  function BitwiseXorReduceScanOp[83781](?).identity[83695](arg _mt[83785]:_MT[238], arg this[83783]:BitwiseXorReduceScanOp[83781](?)) : _unknown[51] "method" "primary method" "no parens"
-  {
-    (83701 return(83700 call _bxor_id eltType))
-  }
-  function BitwiseXorReduceScanOp[83781](?).accumulate[83710](arg _mt[83789]:_MT[238], arg this[83787]:BitwiseXorReduceScanOp[83781](?), arg x[83708]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
-  {
-    (83714 call ^= value x)
-  }
-  function BitwiseXorReduceScanOp[83781](?).accumulateOntoState[83724](arg _mt[83793]:_MT[238], arg this[83791]:BitwiseXorReduceScanOp[83781](?), ref arg state[83722]:_any[178](?), arg x[83726]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
-  {
-    (83730 call ^= state x)
-  }
-  function BitwiseXorReduceScanOp[83781](?).combine[83740](arg _mt[83797]:_MT[238], arg this[83795]:BitwiseXorReduceScanOp[83781](?), arg x[83738]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
-  {
-    (83747 call ^= value(83744 call . x c"value"))
-  }
-  function BitwiseXorReduceScanOp[83781](?).generate[83755](arg _mt[83801]:_MT[238], arg this[83799]:BitwiseXorReduceScanOp[83781](?)) : _unknown[51] "method" "primary method"
-  {
-    (83758 return value)
-  }
-  function BitwiseXorReduceScanOp[83781](?).clone[83765](arg _mt[83805]:_MT[238], arg this[83803]:BitwiseXorReduceScanOp[83781](?)) : _unknown[51] "method" "primary method"
-  {
-    (83775 return(83769 'new'(_chpl_manager = unmanaged[220](?))(83774 call BitwiseXorReduceScanOp(eltType = eltType))))
-  }
-  type BitwiseXorReduceScanOp[83781](?) unknown eltType[83682] "type variable" unknown value[83689](83688 call _bxor_id eltType) ReduceScanOp
-  function _maxloc_id[83812](arg eltType[83810]:_any[178](?)) : _unknown[51]
-  {
-    (83831 return(83829 call _build_tuple(83820 call min(83818 call eltType 0))(83827 call max(83825 call eltType 1))))
-  }
-  function _minloc_id[83840](arg eltType[83838]:_any[178](?)) : _unknown[51]
-  {
-    (83846 return(83845 call max eltType))
-  }
-  function maxloc[84026](?).identity[83867](arg _mt[84030]:_MT[238], arg this[84028]:maxloc[84026](?)) : _unknown[51] "method" "primary method" "no parens"
-  {
-    (83873 return(83872 call _maxloc_id eltType))
-  }
-  function maxloc[84026](?).accumulate[83882](arg _mt[84034]:_MT[238], arg this[84032]:maxloc[84026](?), arg x[83880]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
-  {
-    (83888 call accumulateOntoState value x)
-  }
-  function maxloc[84026](?).accumulateOntoState[83897](arg _mt[84038]:_MT[238], arg this[84036]:maxloc[84026](?), ref arg state[83895]:_any[178](?), arg x[83899]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
-  {
-    if(83972 call _cond_test(83965 call ||(83933 call ||(83909 call >(83904 call x 0)(83908 call state 0))(83931 call &&(83919 call ==(83914 call x 0)(83918 call state 0))(83929 call <(83924 call x 1)(83928 call state 1))))(83963 call &&(83941 call gotNaN(83939 call x 0))(83961 call ||(83949 call !(83948 call gotNaN(83946 call state 0)))(83959 call <(83954 call x 1)(83958 call state 1))))))
     {
-      (83969 call = state x)
+      unknown tmp[83349] "temp"
+      (83352 'move' tmp[83349](83351 'addr of' value))
+      (83357 call = tmp[83349](83354 call || tmp[83349](83345 call . x c"value")))
     }
   }
-  function maxloc[84026](?).combine[83984](arg _mt[84042]:_MT[238], arg this[84040]:maxloc[84026](?), arg x[83982]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function LogicalOrReduceScanOp[83391](?).generate[83365](arg _mt[83411]:_MT[238], arg this[83409]:LogicalOrReduceScanOp[83391](?)) : _unknown[51] "method" "primary method"
   {
-    (83993 call accumulateOntoState value(83990 call . x c"value"))
+    (83368 return value)
   }
-  function maxloc[84026](?).generate[84000](arg _mt[84046]:_MT[238], arg this[84044]:maxloc[84026](?)) : _unknown[51] "method" "primary method"
+  function LogicalOrReduceScanOp[83391](?).clone[83375](arg _mt[83415]:_MT[238], arg this[83413]:LogicalOrReduceScanOp[83391](?)) : _unknown[51] "method" "primary method"
   {
-    (84003 return value)
+    (83385 return(83379 'new'(_chpl_manager = unmanaged[220](?))(83384 call LogicalOrReduceScanOp(eltType = eltType))))
   }
-  function maxloc[84026](?).clone[84010](arg _mt[84050]:_MT[238], arg this[84048]:maxloc[84026](?)) : _unknown[51] "method" "primary method"
+  type LogicalOrReduceScanOp[83391](?) unknown eltType[83265] "type variable" unknown value[83272](83271 call _lor_id eltType) ReduceScanOp
+  function BitwiseAndReduceScanOp[83520](?).identity[83434](arg _mt[83524]:_MT[238], arg this[83522]:BitwiseAndReduceScanOp[83520](?)) : _unknown[51] "method" "primary method" "no parens"
   {
-    (84020 return(84014 'new'(_chpl_manager = unmanaged[220](?))(84019 call maxloc(eltType = eltType))))
+    (83440 return(83439 call _band_id eltType))
   }
-  type maxloc[84026](?) unknown eltType[83854] "type variable" unknown value[83861](83860 call _maxloc_id eltType) ReduceScanOp
-  function minloc[84228](?).identity[84069](arg _mt[84232]:_MT[238], arg this[84230]:minloc[84228](?)) : _unknown[51] "method" "primary method" "no parens"
+  function BitwiseAndReduceScanOp[83520](?).accumulate[83449](arg _mt[83528]:_MT[238], arg this[83526]:BitwiseAndReduceScanOp[83520](?), arg x[83447]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (84075 return(84074 call _minloc_id eltType))
+    (83453 call &= value x)
   }
-  function minloc[84228](?).accumulate[84084](arg _mt[84236]:_MT[238], arg this[84234]:minloc[84228](?), arg x[84082]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function BitwiseAndReduceScanOp[83520](?).accumulateOntoState[83463](arg _mt[83532]:_MT[238], arg this[83530]:BitwiseAndReduceScanOp[83520](?), ref arg state[83461]:_any[178](?), arg x[83465]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (84090 call accumulateOntoState value x)
+    (83469 call &= state x)
   }
-  function minloc[84228](?).accumulateOntoState[84099](arg _mt[84240]:_MT[238], arg this[84238]:minloc[84228](?), ref arg state[84097]:_any[178](?), arg x[84101]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function BitwiseAndReduceScanOp[83520](?).combine[83479](arg _mt[83536]:_MT[238], arg this[83534]:BitwiseAndReduceScanOp[83520](?), arg x[83477]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    if(84174 call _cond_test(84167 call ||(84135 call ||(84111 call <(84106 call x 0)(84110 call state 0))(84133 call &&(84121 call ==(84116 call x 0)(84120 call state 0))(84131 call <(84126 call x 1)(84130 call state 1))))(84165 call &&(84143 call gotNaN(84141 call x 0))(84163 call ||(84151 call !(84150 call gotNaN(84148 call state 0)))(84161 call <(84156 call x 1)(84160 call state 1))))))
+    (83486 call &= value(83483 call . x c"value"))
+  }
+  function BitwiseAndReduceScanOp[83520](?).generate[83494](arg _mt[83540]:_MT[238], arg this[83538]:BitwiseAndReduceScanOp[83520](?)) : _unknown[51] "method" "primary method"
+  {
+    (83497 return value)
+  }
+  function BitwiseAndReduceScanOp[83520](?).clone[83504](arg _mt[83544]:_MT[238], arg this[83542]:BitwiseAndReduceScanOp[83520](?)) : _unknown[51] "method" "primary method"
+  {
+    (83514 return(83508 'new'(_chpl_manager = unmanaged[220](?))(83513 call BitwiseAndReduceScanOp(eltType = eltType))))
+  }
+  type BitwiseAndReduceScanOp[83520](?) unknown eltType[83421] "type variable" unknown value[83428](83427 call _band_id eltType) ReduceScanOp
+  function BitwiseOrReduceScanOp[83649](?).identity[83563](arg _mt[83653]:_MT[238], arg this[83651]:BitwiseOrReduceScanOp[83649](?)) : _unknown[51] "method" "primary method" "no parens"
+  {
+    (83569 return(83568 call _bor_id eltType))
+  }
+  function BitwiseOrReduceScanOp[83649](?).accumulate[83578](arg _mt[83657]:_MT[238], arg this[83655]:BitwiseOrReduceScanOp[83649](?), arg x[83576]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (83582 call |= value x)
+  }
+  function BitwiseOrReduceScanOp[83649](?).accumulateOntoState[83592](arg _mt[83661]:_MT[238], arg this[83659]:BitwiseOrReduceScanOp[83649](?), ref arg state[83590]:_any[178](?), arg x[83594]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (83598 call |= state x)
+  }
+  function BitwiseOrReduceScanOp[83649](?).combine[83608](arg _mt[83665]:_MT[238], arg this[83663]:BitwiseOrReduceScanOp[83649](?), arg x[83606]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (83615 call |= value(83612 call . x c"value"))
+  }
+  function BitwiseOrReduceScanOp[83649](?).generate[83623](arg _mt[83669]:_MT[238], arg this[83667]:BitwiseOrReduceScanOp[83649](?)) : _unknown[51] "method" "primary method"
+  {
+    (83626 return value)
+  }
+  function BitwiseOrReduceScanOp[83649](?).clone[83633](arg _mt[83673]:_MT[238], arg this[83671]:BitwiseOrReduceScanOp[83649](?)) : _unknown[51] "method" "primary method"
+  {
+    (83643 return(83637 'new'(_chpl_manager = unmanaged[220](?))(83642 call BitwiseOrReduceScanOp(eltType = eltType))))
+  }
+  type BitwiseOrReduceScanOp[83649](?) unknown eltType[83550] "type variable" unknown value[83557](83556 call _bor_id eltType) ReduceScanOp
+  function BitwiseXorReduceScanOp[83778](?).identity[83692](arg _mt[83782]:_MT[238], arg this[83780]:BitwiseXorReduceScanOp[83778](?)) : _unknown[51] "method" "primary method" "no parens"
+  {
+    (83698 return(83697 call _bxor_id eltType))
+  }
+  function BitwiseXorReduceScanOp[83778](?).accumulate[83707](arg _mt[83786]:_MT[238], arg this[83784]:BitwiseXorReduceScanOp[83778](?), arg x[83705]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (83711 call ^= value x)
+  }
+  function BitwiseXorReduceScanOp[83778](?).accumulateOntoState[83721](arg _mt[83790]:_MT[238], arg this[83788]:BitwiseXorReduceScanOp[83778](?), ref arg state[83719]:_any[178](?), arg x[83723]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (83727 call ^= state x)
+  }
+  function BitwiseXorReduceScanOp[83778](?).combine[83737](arg _mt[83794]:_MT[238], arg this[83792]:BitwiseXorReduceScanOp[83778](?), arg x[83735]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (83744 call ^= value(83741 call . x c"value"))
+  }
+  function BitwiseXorReduceScanOp[83778](?).generate[83752](arg _mt[83798]:_MT[238], arg this[83796]:BitwiseXorReduceScanOp[83778](?)) : _unknown[51] "method" "primary method"
+  {
+    (83755 return value)
+  }
+  function BitwiseXorReduceScanOp[83778](?).clone[83762](arg _mt[83802]:_MT[238], arg this[83800]:BitwiseXorReduceScanOp[83778](?)) : _unknown[51] "method" "primary method"
+  {
+    (83772 return(83766 'new'(_chpl_manager = unmanaged[220](?))(83771 call BitwiseXorReduceScanOp(eltType = eltType))))
+  }
+  type BitwiseXorReduceScanOp[83778](?) unknown eltType[83679] "type variable" unknown value[83686](83685 call _bxor_id eltType) ReduceScanOp
+  function _maxloc_id[83809](arg eltType[83807]:_any[178](?)) : _unknown[51]
+  {
+    (83828 return(83826 call _build_tuple(83817 call min(83815 call eltType 0))(83824 call max(83822 call eltType 1))))
+  }
+  function _minloc_id[83837](arg eltType[83835]:_any[178](?)) : _unknown[51]
+  {
+    (83843 return(83842 call max eltType))
+  }
+  function maxloc[84023](?).identity[83864](arg _mt[84027]:_MT[238], arg this[84025]:maxloc[84023](?)) : _unknown[51] "method" "primary method" "no parens"
+  {
+    (83870 return(83869 call _maxloc_id eltType))
+  }
+  function maxloc[84023](?).accumulate[83879](arg _mt[84031]:_MT[238], arg this[84029]:maxloc[84023](?), arg x[83877]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (83885 call accumulateOntoState value x)
+  }
+  function maxloc[84023](?).accumulateOntoState[83894](arg _mt[84035]:_MT[238], arg this[84033]:maxloc[84023](?), ref arg state[83892]:_any[178](?), arg x[83896]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    if(83969 call _cond_test(83962 call ||(83930 call ||(83906 call >(83901 call x 0)(83905 call state 0))(83928 call &&(83916 call ==(83911 call x 0)(83915 call state 0))(83926 call <(83921 call x 1)(83925 call state 1))))(83960 call &&(83938 call gotNaN(83936 call x 0))(83958 call ||(83946 call !(83945 call gotNaN(83943 call state 0)))(83956 call <(83951 call x 1)(83955 call state 1))))))
     {
-      (84171 call = state x)
+      (83966 call = state x)
     }
   }
-  function minloc[84228](?).combine[84186](arg _mt[84244]:_MT[238], arg this[84242]:minloc[84228](?), arg x[84184]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  function maxloc[84023](?).combine[83981](arg _mt[84039]:_MT[238], arg this[84037]:maxloc[84023](?), arg x[83979]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
   {
-    (84195 call accumulateOntoState value(84192 call . x c"value"))
+    (83990 call accumulateOntoState value(83987 call . x c"value"))
   }
-  function minloc[84228](?).generate[84202](arg _mt[84248]:_MT[238], arg this[84246]:minloc[84228](?)) : _unknown[51] "method" "primary method"
+  function maxloc[84023](?).generate[83997](arg _mt[84043]:_MT[238], arg this[84041]:maxloc[84023](?)) : _unknown[51] "method" "primary method"
   {
-    (84205 return value)
+    (84000 return value)
   }
-  function minloc[84228](?).clone[84212](arg _mt[84252]:_MT[238], arg this[84250]:minloc[84228](?)) : _unknown[51] "method" "primary method"
+  function maxloc[84023](?).clone[84007](arg _mt[84047]:_MT[238], arg this[84045]:maxloc[84023](?)) : _unknown[51] "method" "primary method"
   {
-    (84222 return(84216 'new'(_chpl_manager = unmanaged[220](?))(84221 call minloc(eltType = eltType))))
+    (84017 return(84011 'new'(_chpl_manager = unmanaged[220](?))(84016 call maxloc(eltType = eltType))))
   }
-  type minloc[84228](?) unknown eltType[84056] "type variable" unknown value[84063](84062 call _minloc_id eltType) ReduceScanOp
-  function gotNaN[84259](arg value[84257]:_any[178](?)) : _unknown[51] "inline" "private"
+  type maxloc[84023](?) unknown eltType[83851] "type variable" unknown value[83858](83857 call _maxloc_id eltType) ReduceScanOp
+  function minloc[84225](?).identity[84066](arg _mt[84229]:_MT[238], arg this[84227]:minloc[84225](?)) : _unknown[51] "method" "primary method" "no parens"
   {
-    (84269 return(84268 call isnan value))
+    (84072 return(84071 call _minloc_id eltType))
+  }
+  function minloc[84225](?).accumulate[84081](arg _mt[84233]:_MT[238], arg this[84231]:minloc[84225](?), arg x[84079]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (84087 call accumulateOntoState value x)
+  }
+  function minloc[84225](?).accumulateOntoState[84096](arg _mt[84237]:_MT[238], arg this[84235]:minloc[84225](?), ref arg state[84094]:_any[178](?), arg x[84098]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    if(84171 call _cond_test(84164 call ||(84132 call ||(84108 call <(84103 call x 0)(84107 call state 0))(84130 call &&(84118 call ==(84113 call x 0)(84117 call state 0))(84128 call <(84123 call x 1)(84127 call state 1))))(84162 call &&(84140 call gotNaN(84138 call x 0))(84160 call ||(84148 call !(84147 call gotNaN(84145 call state 0)))(84158 call <(84153 call x 1)(84157 call state 1))))))
+    {
+      (84168 call = state x)
+    }
+  }
+  function minloc[84225](?).combine[84183](arg _mt[84241]:_MT[238], arg this[84239]:minloc[84225](?), arg x[84181]:_any[178](?)) : _unknown[51] "method" "primary method" "no return value for void"
+  {
+    (84192 call accumulateOntoState value(84189 call . x c"value"))
+  }
+  function minloc[84225](?).generate[84199](arg _mt[84245]:_MT[238], arg this[84243]:minloc[84225](?)) : _unknown[51] "method" "primary method"
+  {
+    (84202 return value)
+  }
+  function minloc[84225](?).clone[84209](arg _mt[84249]:_MT[238], arg this[84247]:minloc[84225](?)) : _unknown[51] "method" "primary method"
+  {
+    (84219 return(84213 'new'(_chpl_manager = unmanaged[220](?))(84218 call minloc(eltType = eltType))))
+  }
+  type minloc[84225](?) unknown eltType[84053] "type variable" unknown value[84060](84059 call _minloc_id eltType) ReduceScanOp
+  function gotNaN[84256](arg value[84254]:_any[178](?)) : _unknown[51] "inline" "private"
+  {
+    (84266 return(84265 call isnan value))
   }
   where {
-    (84264 call isReal value)
+    (84261 call isReal value)
   }
-  function gotNaN[84279](arg value[84277]:_any[178](?)) param : _unknown[51] "private"
+  function gotNaN[84276](arg value[84274]:_any[178](?)) param : _unknown[51] "private"
   {
-    (84282 return 0)
+    (84279 return 0)
   }
 }

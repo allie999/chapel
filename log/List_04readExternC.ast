@@ -2,2166 +2,2166 @@ AST dump for List after pass readExternC.
 Module use list: 
 
 {
-  (353102 'use' ChapelStandard)
-  (298247 'import' ChapelLocks)
-  (298251 'use' HaltWrappers)
-  (298254 'use' Sort)
+  (352972 'use' ChapelStandard)
+  (298130 'import' ChapelLocks)
+  (298134 'use' HaltWrappers)
+  (298137 'use' Sort)
   { scopeless
-    const _initialCapacity[298257] "const" "no doc" "private" 8
-    (298260 'end of statement')
+    const _initialCapacity[298140] "const" "no doc" "private" 8
+    (298143 'end of statement')
   }
   { scopeless
-    const _initialArrayCapacity[298262] "const" "no doc" "private" 16
-    (298265 'end of statement')
+    const _initialArrayCapacity[298145] "const" "no doc" "private" 16
+    (298148 'end of statement')
   }
   { scopeless
-    unknown _sanityChecks[298267] "no doc" "param" "private" 0
-    (298270 'end of statement')
+    unknown _sanityChecks[298150] "no doc" "param" "private" 0
+    (298153 'end of statement')
   }
-  function _sanity[298277](arg expr[298274] :
+  function _sanity[298160](arg expr[298157] :
   bool[10]) : _unknown[51] "inline" "private"
   {
-    if(298285 call _cond_test _sanityChecks)
+    if(298168 call _cond_test _sanityChecks)
     {
       { scopeless
-        (298283 call assert expr)
+        (298166 call assert expr)
       }
     }
   }
-  unknown _lockType[298299] "no doc" "type variable"(298296 call . ChapelLocks c"chpl_LocalSpinlock")
-  type _LockWrapper[298340] unknown lock$[298307](298303 'new'(298306 call _lockType)) function _LockWrapper[298340].lock[298313](arg _mt[298344]:_MT[238], arg this[298342]:_LockWrapper[298340]) : _unknown[51] "inline" "method" "primary method"
+  unknown _lockType[298182] "no doc" "type variable"(298179 call . ChapelLocks c"chpl_LocalSpinlock")
+  type _LockWrapper[298223] unknown lock$[298190](298186 'new'(298189 call _lockType)) function _LockWrapper[298223].lock[298196](arg _mt[298227]:_MT[238], arg this[298225]:_LockWrapper[298223]) : _unknown[51] "inline" "method" "primary method"
   {
-    (298320 call(298316 call . lock$ c"lock"))
-  } function _LockWrapper[298340].unlock[298327](arg _mt[298348]:_MT[238], arg this[298346]:_LockWrapper[298340]) : _unknown[51] "inline" "method" "primary method"
+    (298203 call(298199 call . lock$ c"lock"))
+  } function _LockWrapper[298223].unlock[298210](arg _mt[298231]:_MT[238], arg this[298229]:_LockWrapper[298223]) : _unknown[51] "inline" "method" "primary method"
   {
-    (298334 call(298330 call . lock$ c"unlock"))
+    (298217 call(298213 call . lock$ c"unlock"))
   }
-  function _checkType[298355](arg eltType[298353]:_any[178](?)) : _unknown[51] "no doc"
+  function _checkType[298238](arg eltType[298236]:_any[178](?)) : _unknown[51] "no doc"
   {
-    if(298433 call _cond_test(298360 call isGenericType eltType))
+    if(298316 call _cond_test(298243 call isGenericType eltType))
     {
-      (298386 call compilerWarning(298383 call + "creating a list with element type "(298381 call _cast string[26] eltType)))
-      if(298408 call _cond_test(298400 call &&(298392 call isClassType eltType)(298398 call !(298397 call isGenericType(298395 'to borrowed class from unknown' eltType)))))
+      (298269 call compilerWarning(298266 call + "creating a list with element type "(298264 call _cast string[26] eltType)))
+      if(298291 call _cond_test(298283 call &&(298275 call isClassType eltType)(298281 call !(298280 call isGenericType(298278 'to borrowed class from unknown' eltType)))))
       {
-        (298405 call compilerWarning "which now means class type with generic management")
+        (298288 call compilerWarning "which now means class type with generic management")
       }
-      (298431 call compilerError "list element type cannot currently be generic")
+      (298314 call compilerError "list element type cannot currently be generic")
     }
   }
-  function _dummyFieldType[298444](arg t[298442]:_any[178](?)) type : _unknown[51] "no doc"
+  function _dummyFieldType[298327](arg t[298325]:_any[178](?)) type : _unknown[51] "no doc"
   {
-    if(298459 call _cond_test(298449 call isBorrowedClass t))
+    if(298342 call _cond_test(298332 call isBorrowedClass t))
     {
-      (298452 return(298451 'to nilable class from type' t))
+      (298335 return(298334 'to nilable class from type' t))
     }
     {
-      (298456 return nothing[7])
+      (298339 return nothing[7])
     }
   }
-  (298467 'use' IO)
-  type list[304222](?) unknown eltType[298470] "type variable" unknown parSafe[298474] "param" 0 unknown _size[298479] "no doc" 0 unknown _lock$[298492] "no doc"(298489 IfExpr  parSafe then
+  (298350 'use' IO)
+  type list[304105](?) unknown eltType[298353] "type variable" unknown parSafe[298357] "param" 0 unknown _size[298362] "no doc" 0 unknown _lock$[298375] "no doc"(298372 IfExpr  parSafe then
   { scopeless
-    (298484 'new'(298487 call _LockWrapper))
+    (298367 'new'(298370 call _LockWrapper))
   } else
   { scopeless
     none[57]
-  } ) unknown _arrays[298504] "no doc" nil[44](298502 call _ddata(298500 call _ddata eltType)) unknown _arrayCapacity[298509] "no doc" 0 unknown _totalCapacity[298514] "no doc" 0 unknown _dummyFieldToForceBorrowChecking[298522] "no doc"(298521 call _dummyFieldType eltType) function list[304222](?).init[298530](arg _mt[304226]:_MT[238], arg this[304224]:list[304222](?), arg eltType[298528]:_any[178](?), param arg parSafe[298533] =
+  } ) unknown _arrays[298387] "no doc" nil[44](298385 call _ddata(298383 call _ddata eltType)) unknown _arrayCapacity[298392] "no doc" 0 unknown _totalCapacity[298397] "no doc" 0 unknown _dummyFieldToForceBorrowChecking[298405] "no doc"(298404 call _dummyFieldType eltType) function list[304105](?).init[298413](arg _mt[304109]:_MT[238], arg this[304107]:list[304105](?), arg eltType[298411]:_any[178](?), param arg parSafe[298416] =
   0) : _unknown[51] "method" "primary method"
   {
-    (298539 call _checkType eltType)
-    (298547 call =(298543 call . this c"eltType") eltType)
-    (298555 call =(298551 call . this c"parSafe") parSafe)
-    (298563 call(298559 call . this c"complete"))
-    (298572 call(298568 call . this c"_firstTimeInitializeArrays"))
-  } function list[304222](?).init[298586](arg _mt[304230]:_MT[238], arg this[304228]:list[304222](?), arg other[298583] :
-  (298582 call list unknown t[298579]), param arg parSafe[298589] =
+    (298422 call _checkType eltType)
+    (298430 call =(298426 call . this c"eltType") eltType)
+    (298438 call =(298434 call . this c"parSafe") parSafe)
+    (298446 call(298442 call . this c"complete"))
+    (298455 call(298451 call . this c"_firstTimeInitializeArrays"))
+  } function list[304105](?).init[298469](arg _mt[304113]:_MT[238], arg this[304111]:list[304105](?), arg other[298466] :
+  (298465 call list unknown t[298462]), param arg parSafe[298472] =
   0) : _unknown[51] "method" "primary method"
   {
-    if(298642 call _cond_test(298600 call !(298599 call isCopyableType(298595 call .(298594 'typeof' this) c"eltType"))))
+    if(298525 call _cond_test(298483 call !(298482 call isCopyableType(298478 call .(298477 'typeof' this) c"eltType"))))
     {
       { scopeless
-        (298640 call compilerError(298637 call + "Cannot copy list with element type that " "cannot be copied"))
+        (298523 call compilerError(298520 call + "Cannot copy list with element type that " "cannot be copied"))
       }
     }
-    (298653 call =(298649 call . this c"eltType") t)
-    (298661 call =(298657 call . this c"parSafe") parSafe)
-    (298669 call(298665 call . this c"complete"))
-    (298674 call _commonInitFromIterable other)
-  } function list[304222](?).init[298690](arg _mt[304234]:_MT[238], arg this[304232]:list[304222](?), arg other[298687] :
-  (298685 call chpl__buildArrayRuntimeType unknown d[298680] unknown t[298683]), param arg parSafe[298693] =
+    (298536 call =(298532 call . this c"eltType") t)
+    (298544 call =(298540 call . this c"parSafe") parSafe)
+    (298552 call(298548 call . this c"complete"))
+    (298557 call _commonInitFromIterable other)
+  } function list[304105](?).init[298573](arg _mt[304117]:_MT[238], arg this[304115]:list[304105](?), arg other[298570] :
+  (298568 call chpl__buildArrayRuntimeType unknown d[298563] unknown t[298566]), param arg parSafe[298576] =
   0) : _unknown[51] "method" "primary method"
   {
-    (298699 call _checkType t)
-    if(298748 call _cond_test(298706 call !(298705 call isCopyableType t)))
+    (298582 call _checkType t)
+    if(298631 call _cond_test(298589 call !(298588 call isCopyableType t)))
     {
       { scopeless
-        (298746 call compilerError(298743 call + "Cannot construct list from array with element " "type that cannot be copied"))
+        (298629 call compilerError(298626 call + "Cannot construct list from array with element " "type that cannot be copied"))
       }
     }
-    (298758 call =(298754 call . this c"eltType") t)
-    (298766 call =(298762 call . this c"parSafe") parSafe)
-    (298774 call(298770 call . this c"complete"))
-    (298779 call _commonInitFromIterable other)
-  } function list[304222](?).init[298793](arg _mt[304238]:_MT[238], arg this[304236]:list[304222](?), arg other[298790] :
-  (298789 call range unknown t[298786]), param arg parSafe[298796] =
+    (298641 call =(298637 call . this c"eltType") t)
+    (298649 call =(298645 call . this c"parSafe") parSafe)
+    (298657 call(298653 call . this c"complete"))
+    (298662 call _commonInitFromIterable other)
+  } function list[304105](?).init[298676](arg _mt[304121]:_MT[238], arg this[304119]:list[304105](?), arg other[298673] :
+  (298672 call range unknown t[298669]), param arg parSafe[298679] =
   0) : _unknown[51] "method" "primary method"
   {
-    (298802 call _checkType t)
-    (298810 call =(298806 call . this c"eltType") t)
-    (298818 call =(298814 call . this c"parSafe") parSafe)
-    if(298897 call _cond_test(298825 call !(298824 call isBoundedRange other)))
+    (298685 call _checkType t)
+    (298693 call =(298689 call . this c"eltType") t)
+    (298701 call =(298697 call . this c"parSafe") parSafe)
+    if(298780 call _cond_test(298708 call !(298707 call isBoundedRange other)))
     {
       { scopeless
-        unknown e[298832] "param"(298830 call _cast string[26](298828 'typeof' this))
-        (298835 'end of statement')
+        unknown e[298715] "param"(298713 call _cast string[26](298711 'typeof' this))
+        (298718 'end of statement')
       }
       { scopeless
-        unknown f[298842] "param"(298840 call _cast string[26](298838 'typeof' other))
-        (298845 'end of statement')
+        unknown f[298725] "param"(298723 call _cast string[26](298721 'typeof' other))
+        (298728 'end of statement')
       }
       { scopeless
-        unknown msg[298888] "param"(298886 call +(298883 call +(298864 call + "Cannot init " e) " from unbounded ") f)
-        (298891 'end of statement')
+        unknown msg[298771] "param"(298769 call +(298766 call +(298747 call + "Cannot init " e) " from unbounded ") f)
+        (298774 'end of statement')
       }
-      (298895 call compilerError msg)
+      (298778 call compilerError msg)
     }
-    (298906 call(298902 call . this c"complete"))
-    (298911 call _commonInitFromIterable other)
-  } function list[304222](?).init=[298930](arg _mt[304242]:_MT[238], arg this[304240]:list[304222](?), arg other[298927] :
-  (298926 call list(298920 call .(298919 'typeof' this) c"eltType") unknown p[298924])) : _unknown[51] "method" "primary method"
+    (298789 call(298785 call . this c"complete"))
+    (298794 call _commonInitFromIterable other)
+  } function list[304105](?).init=[298813](arg _mt[304125]:_MT[238], arg this[304123]:list[304105](?), arg other[298810] :
+  (298809 call list(298803 call .(298802 'typeof' this) c"eltType") unknown p[298807])) : _unknown[51] "method" "primary method"
   {
-    if(298950 call _cond_test(298940 call !(298939 call isCopyableType(298935 call .(298934 'typeof' this) c"eltType"))))
+    if(298833 call _cond_test(298823 call !(298822 call isCopyableType(298818 call .(298817 'typeof' this) c"eltType"))))
     {
       { scopeless
-        (298948 call compilerError(298945 call + "Cannot copy list with element type that " "cannot be copied"))
-      }
-    }
-    (298965 call =(298957 call . this c"eltType")(298962 call .(298961 'typeof' this) c"eltType"))
-    (298977 call =(298969 call . this c"parSafe")(298974 call .(298973 'typeof' this) c"parSafe"))
-    (298985 call(298981 call . this c"complete"))
-    (298990 call _commonInitFromIterable other)
-  } function list[304222](?).init=[299009](arg _mt[304246]:_MT[238], arg this[304244]:list[304222](?), arg other[299006] :
-  (299004 call chpl__buildArrayRuntimeType unknown d[298996](299001 call .(299000 'typeof' this) c"eltType"))) : _unknown[51] "method" "primary method"
-  {
-    if(299061 call _cond_test(299019 call !(299018 call isCopyableType(299014 call .(299013 'typeof' this) c"eltType"))))
-    {
-      { scopeless
-        (299059 call compilerError(299056 call + "Cannot copy list from array with element type " "that cannot be copied"))
+        (298831 call compilerError(298828 call + "Cannot copy list with element type that " "cannot be copied"))
       }
     }
-    (299076 call =(299068 call . this c"eltType")(299073 call .(299072 'typeof' this) c"eltType"))
-    (299088 call =(299080 call . this c"parSafe")(299085 call .(299084 'typeof' this) c"parSafe"))
-    (299096 call(299092 call . this c"complete"))
-    (299101 call _commonInitFromIterable other)
-  } function list[304222](?).init=[299122](arg _mt[304250]:_MT[238], arg this[304248]:list[304222](?), arg other[299119] :
-  (299118 call range(299110 call .(299109 'typeof' this) c"eltType") unknown b[299114] unknown d[299116])) : _unknown[51] "method" "primary method"
+    (298848 call =(298840 call . this c"eltType")(298845 call .(298844 'typeof' this) c"eltType"))
+    (298860 call =(298852 call . this c"parSafe")(298857 call .(298856 'typeof' this) c"parSafe"))
+    (298868 call(298864 call . this c"complete"))
+    (298873 call _commonInitFromIterable other)
+  } function list[304105](?).init=[298892](arg _mt[304129]:_MT[238], arg this[304127]:list[304105](?), arg other[298889] :
+  (298887 call chpl__buildArrayRuntimeType unknown d[298879](298884 call .(298883 'typeof' this) c"eltType"))) : _unknown[51] "method" "primary method"
   {
-    (299133 call =(299125 call . this c"eltType")(299130 call .(299129 'typeof' this) c"eltType"))
-    (299146 call =(299138 call . this c"parSafe")(299143 call .(299142 'typeof' this) c"parSafe"))
-    if(299193 call _cond_test(299153 call !(299152 call isBoundedRange other)))
+    if(298944 call _cond_test(298902 call !(298901 call isCopyableType(298897 call .(298896 'typeof' this) c"eltType"))))
     {
       { scopeless
-        unknown e[299160] "param"(299158 call _cast string[26](299156 'typeof' this))
-        (299163 'end of statement')
+        (298942 call compilerError(298939 call + "Cannot copy list from array with element type " "that cannot be copied"))
       }
-      { scopeless
-        unknown f[299170] "param"(299168 call _cast string[26](299166 'typeof' other))
-        (299173 'end of statement')
-      }
-      { scopeless
-        unknown msg[299184] "param"(299182 call +(299179 call +(299176 call + "Cannot init " e) " from unbounded ") f)
-        (299187 'end of statement')
-      }
-      (299191 call compilerError msg)
     }
-    (299202 call(299198 call . this c"complete"))
-    (299207 call _commonInitFromIterable other)
-  } function list[304222](?)._commonInitFromIterable[299215](arg _mt[304254]:_MT[238], arg this[304252]:list[304222](?), arg iterable[299213]:_any[178](?)) : _unknown[51] "method" "primary method" "no doc"
+    (298959 call =(298951 call . this c"eltType")(298956 call .(298955 'typeof' this) c"eltType"))
+    (298971 call =(298963 call . this c"parSafe")(298968 call .(298967 'typeof' this) c"parSafe"))
+    (298979 call(298975 call . this c"complete"))
+    (298984 call _commonInitFromIterable other)
+  } function list[304105](?).init=[299005](arg _mt[304133]:_MT[238], arg this[304131]:list[304105](?), arg other[299002] :
+  (299001 call range(298993 call .(298992 'typeof' this) c"eltType") unknown b[298997] unknown d[298999])) : _unknown[51] "method" "primary method"
   {
-    (299228 call(299224 call . this c"_firstTimeInitializeArrays"))
+    (299016 call =(299008 call . this c"eltType")(299013 call .(299012 'typeof' this) c"eltType"))
+    (299029 call =(299021 call . this c"parSafe")(299026 call .(299025 'typeof' this) c"parSafe"))
+    if(299076 call _cond_test(299036 call !(299035 call isBoundedRange other)))
     {
-      unknown _indexOfInterest[299238] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[299239] "expr temp" "temp"
-      (299248 'move' _iterator[299239](299246 call _getIterator iterable))
+      { scopeless
+        unknown e[299043] "param"(299041 call _cast string[26](299039 'typeof' this))
+        (299046 'end of statement')
+      }
+      { scopeless
+        unknown f[299053] "param"(299051 call _cast string[26](299049 'typeof' other))
+        (299056 'end of statement')
+      }
+      { scopeless
+        unknown msg[299067] "param"(299065 call +(299062 call +(299059 call + "Cannot init " e) " from unbounded ") f)
+        (299070 'end of statement')
+      }
+      (299074 call compilerError msg)
+    }
+    (299085 call(299081 call . this c"complete"))
+    (299090 call _commonInitFromIterable other)
+  } function list[304105](?)._commonInitFromIterable[299098](arg _mt[304137]:_MT[238], arg this[304135]:list[304105](?), arg iterable[299096]:_any[178](?)) : _unknown[51] "method" "primary method" "no doc"
+  {
+    (299111 call(299107 call . this c"_firstTimeInitializeArrays"))
+    {
+      unknown _indexOfInterest[299121] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[299122] "expr temp" "temp"
+      (299131 'move' _iterator[299122](299129 call _getIterator iterable))
       Defer
       {
         {
-          (299264 call _freeIterator _iterator[299239])
+          (299147 call _freeIterator _iterator[299122])
         }
       }
       { scopeless type
-        (299253 'move' _indexOfInterest[299238](299250 call iteratorIndex _iterator[299239]))
+        (299136 'move' _indexOfInterest[299121](299133 call iteratorIndex _iterator[299122]))
       }
-      ForLoop[299240]
+      ForLoop[299123]
       {
-        unknown x[299257] "index var" "insert auto destroy"
-        (299259 'move' x[299257] _indexOfInterest[299238])
+        unknown x[299140] "index var" "insert auto destroy"
+        (299142 'move' x[299140] _indexOfInterest[299121])
         { scopeless
-          (299236 call append x)
+          (299119 call append x)
         }
-        label _continueLabel[299243]
-        _indexOfInterest[299238]
-        _iterator[299239]
+        label _continueLabel[299126]
+        _indexOfInterest[299121]
+        _iterator[299122]
       }
-      label _breakLabel[299244]
+      label _breakLabel[299127]
     }
   }
   {
-    (299221 call <(299218 'lifetime_of' this)(299220 'lifetime_of' iterable))
-  } function list[304222](?)._firstTimeInitializeArrays[299276](arg _mt[304258]:_MT[238], arg this[304256]:list[304222](?)) : _unknown[51] "method" "primary method" "no doc"
+    (299104 call <(299101 'lifetime_of' this)(299103 'lifetime_of' iterable))
+  } function list[304105](?)._firstTimeInitializeArrays[299159](arg _mt[304141]:_MT[238], arg this[304139]:list[304105](?)) : _unknown[51] "method" "primary method" "no doc"
   {
-    (299284 call _sanity(299281 call == _arrays nil[44]))
-    (299293 call _sanity(299290 call == _totalCapacity 0))
-    (299301 call _sanity(299298 call == _size 0))
-    (299308 call = _arrays(299307 call _makeBlockArray _initialArrayCapacity))
-    (299313 call = _arrayCapacity _initialArrayCapacity)
-    (299324 call =(299319 call _arrays 0)(299323 call _makeArray _initialCapacity))
-    (299329 call = _totalCapacity _initialCapacity)
-  } function list[304222](?).deinit[299336](arg _mt[304262]:_MT[238], arg this[304260]:list[304222](?)) : _unknown[51] "destructor" "inline" "method" "primary method" "no doc"
+    (299167 call _sanity(299164 call == _arrays nil[44]))
+    (299176 call _sanity(299173 call == _totalCapacity 0))
+    (299184 call _sanity(299181 call == _size 0))
+    (299191 call = _arrays(299190 call _makeBlockArray _initialArrayCapacity))
+    (299196 call = _arrayCapacity _initialArrayCapacity)
+    (299207 call =(299202 call _arrays 0)(299206 call _makeArray _initialCapacity))
+    (299212 call = _totalCapacity _initialCapacity)
+  } function list[304105](?).deinit[299219](arg _mt[304145]:_MT[238], arg this[304143]:list[304105](?)) : _unknown[51] "destructor" "inline" "method" "primary method" "no doc"
   {
-    (299340 call _fireAllDestructors)
-    (299345 call _freeAllArrays)
-    (299353 call _sanity(299350 call == _totalCapacity 0))
-    (299361 call _sanity(299358 call == _size 0))
-    (299369 call _sanity(299366 call == _arrays nil[44]))
-  } function list[304222](?)._destroy[299379](arg _mt[304266]:_MT[238], arg this[304264]:list[304222](?), ref arg item[299376] :
+    (299223 call _fireAllDestructors)
+    (299228 call _freeAllArrays)
+    (299236 call _sanity(299233 call == _totalCapacity 0))
+    (299244 call _sanity(299241 call == _size 0))
+    (299252 call _sanity(299249 call == _arrays nil[44]))
+  } function list[304105](?)._destroy[299262](arg _mt[304149]:_MT[238], arg this[304147]:list[304105](?), ref arg item[299259] :
   eltType) : _unknown[51] "inline" "method" "primary method" "no doc"
   {
-    (299384 call chpl__autoDestroy item)
-  } function list[304222](?)._move[299396](arg _mt[304270]:_MT[238], arg this[304268]:list[304222](?), ref arg src[299393] :
-  unknown t[299391], ref arg dst[299399] :
+    (299267 call chpl__autoDestroy item)
+  } function list[304105](?)._move[299279](arg _mt[304153]:_MT[238], arg this[304151]:list[304105](?), ref arg src[299276] :
+  unknown t[299274], ref arg dst[299282] :
   t) : _unknown[51] "inline" "method" "primary method" "no doc" "unsafe"
   {
-    (299412 '=' dst src)
+    (299295 '=' dst src)
   }
   {
-    (299406 call ==(299403 'lifetime_of' src)(299405 'lifetime_of' dst))
-  } function list[304222](?)._getArrayCapacity[299424](arg _mt[304274]:_MT[238], arg this[304272]:list[304222](?), arg array[299421] :
+    (299289 call ==(299286 'lifetime_of' src)(299288 'lifetime_of' dst))
+  } function list[304105](?)._getArrayCapacity[299307](arg _mt[304157]:_MT[238], arg this[304155]:list[304105](?), arg array[299304] :
   int[13]) : _unknown[51] "inline" "method" "primary method" "no doc"
   {
     { scopeless
-      const exp[299434] "const"(299432 call + array(299431 call log2 _initialCapacity))
-      (299437 'end of statement')
+      const exp[299317] "const"(299315 call + array(299314 call log2 _initialCapacity))
+      (299320 'end of statement')
     }
     { scopeless
-      const result[299443] "const"(299441 call ** 2 exp)
-      (299446 'end of statement')
+      const result[299326] "const"(299324 call ** 2 exp)
+      (299329 'end of statement')
     }
-    (299448 return result)
+    (299331 return result)
   }
   { scopeless type
     int[13]
-  } function list[304222](?)._getArrayIdx[299459](arg _mt[304278]:_MT[238], arg this[304276]:list[304222](?), arg zpos[299456] :
+  } function list[304105](?)._getArrayIdx[299342](arg _mt[304161]:_MT[238], arg this[304159]:list[304105](?), arg zpos[299339] :
   int[13]) : _unknown[51] "inline" "method" "primary method" "no doc"
   {
     { scopeless
-      const adj[299466] "const"(299464 call + zpos _initialCapacity)
-      (299469 'end of statement')
+      const adj[299349] "const"(299347 call + zpos _initialCapacity)
+      (299352 'end of statement')
     }
     { scopeless
-      const result[299481] "const"(299479 call -(299474 call log2 adj)(299478 call log2 _initialCapacity))
-      (299484 'end of statement')
+      const result[299364] "const"(299362 call -(299357 call log2 adj)(299361 call log2 _initialCapacity))
+      (299367 'end of statement')
     }
-    (299486 return result)
+    (299369 return result)
   }
   { scopeless type
     int[13]
-  } function list[304222](?)._getLastArrayIdx[299493](arg _mt[304282]:_MT[238], arg this[304280]:list[304222](?)) : _unknown[51] "inline" "method" "primary method" "no doc"
+  } function list[304105](?)._getLastArrayIdx[299376](arg _mt[304165]:_MT[238], arg this[304163]:list[304105](?)) : _unknown[51] "inline" "method" "primary method" "no doc"
   {
     { scopeless
-      const result[299503] "const"(299502 call _getArrayIdx(299499 call - _size 1))
-      (299506 'end of statement')
+      const result[299386] "const"(299385 call _getArrayIdx(299382 call - _size 1))
+      (299389 'end of statement')
     }
-    (299514 call _sanity(299511 call >= result 0))
-    (299517 return result)
+    (299397 call _sanity(299394 call >= result 0))
+    (299400 return result)
   }
   { scopeless type
     int[13]
-  } function list[304222](?)._getItemIdx[299528](arg _mt[304286]:_MT[238], arg this[304284]:list[304222](?), arg zpos[299525] :
+  } function list[304105](?)._getItemIdx[299411](arg _mt[304169]:_MT[238], arg this[304167]:list[304105](?), arg zpos[299408] :
   int[13]) : _unknown[51] "inline" "method" "primary method" "no doc"
   {
     { scopeless
-      const adj[299535] "const"(299533 call + zpos _initialCapacity)
-      (299538 'end of statement')
+      const adj[299418] "const"(299416 call + zpos _initialCapacity)
+      (299421 'end of statement')
     }
     { scopeless
-      const result[299550] "const"(299548 call ^ adj(299546 call << 1(299545 call log2 adj)))
-      (299553 'end of statement')
+      const result[299433] "const"(299431 call ^ adj(299429 call << 1(299428 call log2 adj)))
+      (299436 'end of statement')
     }
-    (299555 return result)
+    (299438 return result)
   }
   { scopeless type
     int[13]
-  } function list[304222](?)._getRef[299566](arg _mt[304290]:_MT[238], const  ref arg this[304288]:list[304222](?), arg idx[299563] :
+  } function list[304105](?)._getRef[299449](arg _mt[304173]:_MT[238], const  ref arg this[304171]:list[304105](?), arg idx[299446] :
   int[13]) ref : _unknown[51] "inline" "method" "primary method" "no doc"
   {
-    (299580 call _sanity(299577 call &&(299571 call >= idx 0)(299575 call < idx _totalCapacity)))
+    (299463 call _sanity(299460 call &&(299454 call >= idx 0)(299458 call < idx _totalCapacity)))
     { scopeless
-      const arrayIdx[299587] "const"(299586 call _getArrayIdx idx)
-      (299590 'end of statement')
+      const arrayIdx[299470] "const"(299469 call _getArrayIdx idx)
+      (299473 'end of statement')
     }
     { scopeless
-      const itemIdx[299595] "const"(299594 call _getItemIdx idx)
-      (299598 'end of statement')
+      const itemIdx[299478] "const"(299477 call _getItemIdx idx)
+      (299481 'end of statement')
     }
     { scopeless
-      const array[299603] "const"(299602 call _arrays arrayIdx)
-      (299606 'end of statement')
+      const array[299486] "const"(299485 call _arrays arrayIdx)
+      (299489 'end of statement')
     }
-    (299613 call _sanity(299610 call != array nil[44]))
+    (299496 call _sanity(299493 call != array nil[44]))
     { scopeless
-      unknown result[299619] "ref var"(299618 call array itemIdx)
-      (299622 'end of statement')
+      unknown result[299502] "ref var"(299501 call array itemIdx)
+      (299505 'end of statement')
     }
-    (299624 return result)
-  } function list[304222](?)._enter[299630](arg _mt[304294]:_MT[238], arg this[304292]:list[304222](?)) : _unknown[51] "inline" "method" "primary method" "no doc"
+    (299507 return result)
+  } function list[304105](?)._enter[299513](arg _mt[304177]:_MT[238], arg this[304175]:list[304105](?)) : _unknown[51] "inline" "method" "primary method" "no doc"
   {
-    if(299640 call _cond_test parSafe)
+    if(299523 call _cond_test parSafe)
     {
       { scopeless
-        (299638 call(299634 call . _lock$ c"lock"))
+        (299521 call(299517 call . _lock$ c"lock"))
       }
     }
-  } function list[304222](?)._leave[299650](arg _mt[304298]:_MT[238], arg this[304296]:list[304222](?)) : _unknown[51] "inline" "method" "primary method" "no doc"
+  } function list[304105](?)._leave[299533](arg _mt[304181]:_MT[238], arg this[304179]:list[304105](?)) : _unknown[51] "inline" "method" "primary method" "no doc"
   {
-    if(299660 call _cond_test parSafe)
+    if(299543 call _cond_test parSafe)
     {
       { scopeless
-        (299658 call(299654 call . _lock$ c"unlock"))
+        (299541 call(299537 call . _lock$ c"unlock"))
       }
     }
-  } function list[304222](?)._withinBounds[299674](arg _mt[304302]:_MT[238], const arg this[304300]:list[304222](?), arg idx[299671] :
+  } function list[304105](?)._withinBounds[299557](arg _mt[304185]:_MT[238], const arg this[304183]:list[304105](?), arg idx[299554] :
   int[13]) : _unknown[51] "inline" "method" "primary method" "no doc"
   {
-    (299687 return(299685 call &&(299679 call >= idx 0)(299683 call < idx _size)))
+    (299570 return(299568 call &&(299562 call >= idx 0)(299566 call < idx _size)))
   }
   { scopeless type
     bool[10]
-  } function list[304222](?)._boundsCheckLeaveOnThrow[299699](arg _mt[304306]:_MT[238], const arg this[304304]:list[304222](?), arg i[299696] :
-  int[13], arg umsg[299719] :
+  } function list[304105](?)._boundsCheckLeaveOnThrow[299582](arg _mt[304189]:_MT[238], const arg this[304187]:list[304105](?), arg i[299579] :
+  int[13], arg umsg[299602] :
   string[26] =
   "") : _unknown[51] throws "inline" "method" "primary method" "no doc"
   {
-    if(299794 call _cond_test(299727 call !(299726 call _withinBounds i)))
+    if(299677 call _cond_test(299610 call !(299609 call _withinBounds i)))
     {
-      (299731 call _leave)
+      (299614 call _leave)
       { scopeless
-        const msg[299781] "const"(299778 IfExpr (299752 call != umsg "") then
+        const msg[299664] "const"(299661 IfExpr (299635 call != umsg "") then
         { scopeless
           umsg
         } else
         { scopeless
-          (299776 call + "Index out of bounds: "(299774 call _cast string[26] i))
+          (299659 call + "Index out of bounds: "(299657 call _cast string[26] i))
         } )
-        (299784 'end of statement')
+        (299667 'end of statement')
       }
-      (299792 'throw'(299787 'new'(_chpl_manager = _owned[30](?))(299791 call IllegalArgumentError msg)))
+      (299675 'throw'(299670 'new'(_chpl_manager = _owned[30](?))(299674 call IllegalArgumentError msg)))
     }
-  } function list[304222](?)._makeBlockArray[299807](arg _mt[304310]:_MT[238], arg this[304308]:list[304222](?), arg size[299804] :
+  } function list[304105](?)._makeBlockArray[299690](arg _mt[304193]:_MT[238], arg this[304191]:list[304105](?), arg size[299687] :
   int[13]) : _unknown[51] "method" "primary method" "no doc"
   {
-    (299817 return(299816 call _ddata_allocate(299813 call _ddata eltType) size))
-  } function list[304222](?)._freeBlockArray[299834](arg _mt[304314]:_MT[238], arg this[304312]:list[304222](?), arg data[299831] :
-  (299830 call _ddata(299828 call _ddata eltType)), arg size[299837] :
+    (299700 return(299699 call _ddata_allocate(299696 call _ddata eltType) size))
+  } function list[304105](?)._freeBlockArray[299717](arg _mt[304197]:_MT[238], arg this[304195]:list[304105](?), arg data[299714] :
+  (299713 call _ddata(299711 call _ddata eltType)), arg size[299720] :
   int[13]) : _unknown[51] "method" "primary method" "no doc"
   {
-    (299844 call _ddata_free data size)
-  } function list[304222](?)._makeArray[299855](arg _mt[304318]:_MT[238], arg this[304316]:list[304222](?), arg size[299852] :
+    (299727 call _ddata_free data size)
+  } function list[304105](?)._makeArray[299738](arg _mt[304201]:_MT[238], arg this[304199]:list[304105](?), arg size[299735] :
   int[13]) : _unknown[51] "method" "primary method" "no doc"
   {
-    (299864 return(299863 call _ddata_allocate eltType size(initElts = 0)))
-  } function list[304222](?)._freeArray[299878](arg _mt[304322]:_MT[238], arg this[304320]:list[304222](?), arg data[299875] :
-  (299874 call _ddata eltType), arg size[299881] :
+    (299747 return(299746 call _ddata_allocate eltType size(initElts = 0)))
+  } function list[304105](?)._freeArray[299761](arg _mt[304205]:_MT[238], arg this[304203]:list[304105](?), arg data[299758] :
+  (299757 call _ddata eltType), arg size[299764] :
   int[13]) : _unknown[51] "method" "primary method" "no doc"
   {
-    (299888 call _ddata_free data size)
-  } function list[304222](?)._maybeAcquireMem[299899](arg _mt[304326]:_MT[238], arg this[304324]:list[304222](?), arg amount[299896] :
+    (299771 call _ddata_free data size)
+  } function list[304105](?)._maybeAcquireMem[299782](arg _mt[304209]:_MT[238], arg this[304207]:list[304105](?), arg amount[299779] :
   int[13]) : _unknown[51] "method" "primary method" "no doc"
   {
     { scopeless
-      const remaining[299905] "const"(299903 call - _totalCapacity _size)
-      (299908 'end of statement')
+      const remaining[299788] "const"(299786 call - _totalCapacity _size)
+      (299791 'end of statement')
     }
-    (299916 call _sanity(299913 call >= remaining 0))
-    if(299924 call _cond_test(299920 call >= remaining amount))
+    (299799 call _sanity(299796 call >= remaining 0))
+    if(299807 call _cond_test(299803 call >= remaining amount))
     {
       { scopeless
-        (299922 return)
+        (299805 return)
       }
     }
     { scopeless
-      unknown lastArrayIdx[299940](299937 IfExpr (299931 call == _size 0) then
+      unknown lastArrayIdx[299823](299820 IfExpr (299814 call == _size 0) then
       { scopeless
         0
       } else
       { scopeless
-        (299936 call _getLastArrayIdx)
+        (299819 call _getLastArrayIdx)
       } )
-      (299943 'end of statement')
+      (299826 'end of statement')
     }
     { scopeless
-      unknown req[299948](299946 call - amount remaining)
-      (299951 'end of statement')
+      unknown req[299831](299829 call - amount remaining)
+      (299834 'end of statement')
     }
     {
-      unknown tmp[300151] "temp"
-      (300175 'move' tmp[300151](300170 call _cond_test(300172 call > req 0)))
-      WhileDo[300156]
+      unknown tmp[300034] "temp"
+      (300058 'move' tmp[300034](300053 call _cond_test(300055 call > req 0)))
+      WhileDo[300039]
       {
         {
-          if(300061 call _cond_test(299961 call >= lastArrayIdx(299959 call - _arrayCapacity 1)))
+          if(299944 call _cond_test(299844 call >= lastArrayIdx(299842 call - _arrayCapacity 1)))
           {
             { scopeless
-              const tmp[300053] "const" "temp"
-              (300055 'move' tmp[300053](300051 'deref'(300050 '_wide_get_locale' this)))
+              const tmp[299936] "const" "temp"
+              (299938 'move' tmp[299936](299934 'deref'(299933 '_wide_get_locale' this)))
               {
                 {
                   { scopeless
-                    unknown _narrays[299971](299970 call _makeBlockArray(299967 call * _arrayCapacity 2))
-                    (299974 'end of statement')
+                    unknown _narrays[299854](299853 call _makeBlockArray(299850 call * _arrayCapacity 2))
+                    (299857 'end of statement')
                   }
                   {
-                    unknown _indexOfInterest[299994] "an _indexOfInterest or chpl__followIdx variable" "temp"
-                    unknown _iterator[299995] "expr temp" "temp"
-                    (300004 'move' _iterator[299995](300002 call _getIterator(300011 call chpl_direct_counted_range_iter 0 _arrayCapacity)))
+                    unknown _indexOfInterest[299877] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                    unknown _iterator[299878] "expr temp" "temp"
+                    (299887 'move' _iterator[299878](299885 call _getIterator(299894 call chpl_direct_counted_range_iter 0 _arrayCapacity)))
                     Defer
                     {
                       {
-                        (300027 call _freeIterator _iterator[299995])
+                        (299910 call _freeIterator _iterator[299878])
                       }
                     }
                     { scopeless type
-                      (300016 'move' _indexOfInterest[299994](300013 call iteratorIndex _iterator[299995]))
+                      (299899 'move' _indexOfInterest[299877](299896 call iteratorIndex _iterator[299878]))
                     }
-                    ForLoop[299996]
+                    ForLoop[299879]
                     {
-                      unknown i[300020] "index var" "insert auto destroy"
-                      (300022 'move' i[300020] _indexOfInterest[299994])
+                      unknown i[299903] "index var" "insert auto destroy"
+                      (299905 'move' i[299903] _indexOfInterest[299877])
                       { scopeless
-                        (299991 call =(299986 call _narrays i)(299990 call _arrays i))
+                        (299874 call =(299869 call _narrays i)(299873 call _arrays i))
                       }
-                      label _continueLabel[299999]
-                      _indexOfInterest[299994]
-                      _iterator[299995]
+                      label _continueLabel[299882]
+                      _indexOfInterest[299877]
+                      _iterator[299878]
                     }
-                    label _breakLabel[300000]
+                    label _breakLabel[299883]
                   }
-                  (300038 call _freeBlockArray _arrays _arrayCapacity)
-                  (300042 call = _arrays _narrays)
-                  (300047 call *= _arrayCapacity 2)
+                  (299921 call _freeBlockArray _arrays _arrayCapacity)
+                  (299925 call = _arrays _narrays)
+                  (299930 call *= _arrayCapacity 2)
                 }
-                (300058 'on block' 0 tmp[300053])
+                (299941 'on block' 0 tmp[299936])
               }
             }
           }
           { scopeless
-            const tmp[300143] "const" "temp"
-            (300145 'move' tmp[300143](300141 'deref'(300140 '_wide_get_locale' this)))
+            const tmp[300026] "const" "temp"
+            (300028 'move' tmp[300026](300024 'deref'(300023 '_wide_get_locale' this)))
             {
               {
                 { scopeless
-                  const oldLast[300072] "const"(300071 call _arrays lastArrayIdx)
-                  (300075 'end of statement')
+                  const oldLast[299955] "const"(299954 call _arrays lastArrayIdx)
+                  (299958 'end of statement')
                 }
                 { scopeless
-                  const oldLastCapacity[300081] "const"(300080 call _getArrayCapacity lastArrayIdx)
-                  (300084 'end of statement')
+                  const oldLastCapacity[299964] "const"(299963 call _getArrayCapacity lastArrayIdx)
+                  (299967 'end of statement')
                 }
-                (300087 call += lastArrayIdx 1)
+                (299970 call += lastArrayIdx 1)
                 { scopeless
-                  unknown newLast[300094] "ref var"(300093 call _arrays lastArrayIdx)
-                  (300097 'end of statement')
+                  unknown newLast[299977] "ref var"(299976 call _arrays lastArrayIdx)
+                  (299980 'end of statement')
                 }
                 { scopeless
-                  const newLastCapacity[300102] "const"(300100 call * oldLastCapacity 2)
-                  (300105 'end of statement')
+                  const newLastCapacity[299985] "const"(299983 call * oldLastCapacity 2)
+                  (299988 'end of statement')
                 }
-                (300112 call _sanity(300109 call != oldLast nil[44]))
-                (300120 call _sanity(300117 call == newLast nil[44]))
-                (300127 call = newLast(300126 call _makeArray newLastCapacity))
-                (300132 call += _totalCapacity newLastCapacity)
-                (300137 call -= req newLastCapacity)
+                (299995 call _sanity(299992 call != oldLast nil[44]))
+                (300003 call _sanity(300000 call == newLast nil[44]))
+                (300010 call = newLast(300009 call _makeArray newLastCapacity))
+                (300015 call += _totalCapacity newLastCapacity)
+                (300020 call -= req newLastCapacity)
               }
-              (300148 'on block' 0 tmp[300143])
+              (300031 'on block' 0 tmp[300026])
             }
           }
         }
-        label _continueLabel[300154]
-        (300165 'move' tmp[300151](300160 call _cond_test(300162 call > req 0)))
-        tmp[300151]
+        label _continueLabel[300037]
+        (300048 'move' tmp[300034](300043 call _cond_test(300045 call > req 0)))
+        tmp[300034]
       }
-      label _breakLabel[300155]
+      label _breakLabel[300038]
     }
-    (300178 return)
-  } function list[304222](?)._maybeReleaseMem[300188](arg _mt[304330]:_MT[238], arg this[304328]:list[304222](?), arg amount[300185] :
+    (300061 return)
+  } function list[304105](?)._maybeReleaseMem[300071](arg _mt[304213]:_MT[238], arg this[304211]:list[304105](?), arg amount[300068] :
   int[13]) : _unknown[51] "method" "primary method" "no doc"
   {
-    if(300196 call _cond_test(300192 call <= _totalCapacity _initialCapacity))
+    if(300079 call _cond_test(300075 call <= _totalCapacity _initialCapacity))
     {
       { scopeless
-        (300194 return)
+        (300077 return)
       }
     }
     { scopeless
-      const lastArrayIdx[300205] "const"(300204 call _getLastArrayIdx)
-      (300208 'end of statement')
+      const lastArrayIdx[300088] "const"(300087 call _getLastArrayIdx)
+      (300091 'end of statement')
     }
-    (300215 call _sanity(300212 call != lastArrayIdx 0))
+    (300098 call _sanity(300095 call != lastArrayIdx 0))
     { scopeless
-      const lastArrayCapacity[300221] "const"(300220 call _getArrayCapacity lastArrayIdx)
-      (300224 'end of statement')
-    }
-    { scopeless
-      const threshold[300229] "const"(300227 call - _totalCapacity lastArrayCapacity)
-      (300232 'end of statement')
+      const lastArrayCapacity[300104] "const"(300103 call _getArrayCapacity lastArrayIdx)
+      (300107 'end of statement')
     }
     { scopeless
-      const nsize[300237] "const"(300235 call - _size amount)
-      (300240 'end of statement')
+      const threshold[300112] "const"(300110 call - _totalCapacity lastArrayCapacity)
+      (300115 'end of statement')
     }
-    if(300247 call _cond_test(300243 call > nsize threshold))
+    { scopeless
+      const nsize[300120] "const"(300118 call - _size amount)
+      (300123 'end of statement')
+    }
+    if(300130 call _cond_test(300126 call > nsize threshold))
     {
       { scopeless
-        (300245 return)
+        (300128 return)
       }
     }
     { scopeless
-      unknown array[300256] "ref var"(300255 call _arrays lastArrayIdx)
-      (300259 'end of statement')
+      unknown array[300139] "ref var"(300138 call _arrays lastArrayIdx)
+      (300142 'end of statement')
     }
-    (300266 call _sanity(300263 call != array nil[44]))
-    (300272 call _freeArray array lastArrayCapacity)
-    (300276 call -= _totalCapacity lastArrayCapacity)
-    (300281 call = array nil[44])
-  } function list[304222](?)._expand[300292](arg _mt[304334]:_MT[238], ref arg this[304332]:list[304222](?), arg idx[300289] :
-  int[13], arg shift[300296] :
+    (300149 call _sanity(300146 call != array nil[44]))
+    (300155 call _freeArray array lastArrayCapacity)
+    (300159 call -= _totalCapacity lastArrayCapacity)
+    (300164 call = array nil[44])
+  } function list[304105](?)._expand[300175](arg _mt[304217]:_MT[238], ref arg this[304215]:list[304105](?), arg idx[300172] :
+  int[13], arg shift[300179] :
   int[13] =
   1) : _unknown[51] "method" "primary method" "no doc"
   {
-    (300306 call _sanity(300304 call _withinBounds idx))
-    if(300315 call _cond_test(300311 call <= shift 0))
+    (300189 call _sanity(300187 call _withinBounds idx))
+    if(300198 call _cond_test(300194 call <= shift 0))
     {
       { scopeless
-        (300313 return)
+        (300196 return)
       }
     }
     { scopeless
-      const tmp[300419] "const" "temp"
-      (300421 'move' tmp[300419](300417 'deref'(300416 '_wide_get_locale' this)))
+      const tmp[300302] "const" "temp"
+      (300304 'move' tmp[300302](300300 'deref'(300299 '_wide_get_locale' this)))
       {
         {
-          (300324 call _maybeAcquireMem shift)
+          (300207 call _maybeAcquireMem shift)
           {
-            unknown _indexOfInterest[300366] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[300367] "expr temp" "temp"
-            (300376 'move' _iterator[300367](300374 call _getIterator(300393 call chpl_direct_range_iter idx(300390 call - _size 1)(300386 call - 1))))
+            unknown _indexOfInterest[300249] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[300250] "expr temp" "temp"
+            (300259 'move' _iterator[300250](300257 call _getIterator(300276 call chpl_direct_range_iter idx(300273 call - _size 1)(300269 call - 1))))
             Defer
             {
               {
-                (300409 call _freeIterator _iterator[300367])
+                (300292 call _freeIterator _iterator[300250])
               }
             }
             { scopeless type
-              (300398 'move' _indexOfInterest[300366](300395 call iteratorIndex _iterator[300367]))
+              (300281 'move' _indexOfInterest[300249](300278 call iteratorIndex _iterator[300250]))
             }
-            ForLoop[300368]
+            ForLoop[300251]
             {
-              unknown i[300402] "index var" "insert auto destroy"
-              (300404 'move' i[300402] _indexOfInterest[300366])
+              unknown i[300285] "index var" "insert auto destroy"
+              (300287 'move' i[300285] _indexOfInterest[300249])
               {
                 { scopeless
-                  unknown src[300344] "ref var"(300343 call _getRef i)
-                  (300347 'end of statement')
+                  unknown src[300227] "ref var"(300226 call _getRef i)
+                  (300230 'end of statement')
                 }
                 { scopeless
-                  unknown dst[300356] "ref var"(300355 call _getRef(300352 call + i shift))
-                  (300359 'end of statement')
+                  unknown dst[300239] "ref var"(300238 call _getRef(300235 call + i shift))
+                  (300242 'end of statement')
                 }
-                (300364 call _move src dst)
+                (300247 call _move src dst)
               }
-              label _continueLabel[300371]
-              _indexOfInterest[300366]
-              _iterator[300367]
+              label _continueLabel[300254]
+              _indexOfInterest[300249]
+              _iterator[300250]
             }
-            label _breakLabel[300372]
+            label _breakLabel[300255]
           }
         }
-        (300424 'on block' 0 tmp[300419])
+        (300307 'on block' 0 tmp[300302])
       }
     }
-    (300427 return)
-  } function list[304222](?)._collapse[300437](arg _mt[304338]:_MT[238], ref arg this[304336]:list[304222](?), arg idx[300434] :
+    (300310 return)
+  } function list[304105](?)._collapse[300320](arg _mt[304221]:_MT[238], ref arg this[304219]:list[304105](?), arg idx[300317] :
   int[13]) : _unknown[51] "method" "primary method" "no doc"
   {
-    (300445 call _sanity(300443 call _withinBounds idx))
-    if(300475 call _cond_test(300453 call == idx(300451 call - _size 1)))
+    (300328 call _sanity(300326 call _withinBounds idx))
+    if(300358 call _cond_test(300336 call == idx(300334 call - _size 1)))
     {
       { scopeless
-        const tmp[300464] "const" "temp"
-        (300466 'move' tmp[300464](300462 'deref'(300461 '_wide_get_locale' this)))
+        const tmp[300347] "const" "temp"
+        (300349 'move' tmp[300347](300345 'deref'(300344 '_wide_get_locale' this)))
         {
           { scopeless
-            (300459 call _maybeReleaseMem 1)
+            (300342 call _maybeReleaseMem 1)
           }
-          (300469 'on block' 0 tmp[300464])
+          (300352 'on block' 0 tmp[300347])
         }
       }
-      (300473 return)
+      (300356 return)
     }
     { scopeless
-      const tmp[300564] "const" "temp"
-      (300566 'move' tmp[300564](300562 'deref'(300561 '_wide_get_locale' this)))
+      const tmp[300447] "const" "temp"
+      (300449 'move' tmp[300447](300445 'deref'(300444 '_wide_get_locale' this)))
       {
         {
           {
-            unknown _indexOfInterest[300514] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[300515] "expr temp" "temp"
-            (300524 'move' _iterator[300515](300522 call _getIterator(300532 call chpl_direct_range_iter idx(300529 call - _size 2) 1)))
+            unknown _indexOfInterest[300397] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[300398] "expr temp" "temp"
+            (300407 'move' _iterator[300398](300405 call _getIterator(300415 call chpl_direct_range_iter idx(300412 call - _size 2) 1)))
             Defer
             {
               {
-                (300548 call _freeIterator _iterator[300515])
+                (300431 call _freeIterator _iterator[300398])
               }
             }
             { scopeless type
-              (300537 'move' _indexOfInterest[300514](300534 call iteratorIndex _iterator[300515]))
+              (300420 'move' _indexOfInterest[300397](300417 call iteratorIndex _iterator[300398]))
             }
-            ForLoop[300516]
+            ForLoop[300399]
             {
-              unknown i[300541] "index var" "insert auto destroy"
-              (300543 'move' i[300541] _indexOfInterest[300514])
+              unknown i[300424] "index var" "insert auto destroy"
+              (300426 'move' i[300424] _indexOfInterest[300397])
               {
                 { scopeless
-                  unknown src[300495] "ref var"(300494 call _getRef(300491 call + i 1))
-                  (300498 'end of statement')
+                  unknown src[300378] "ref var"(300377 call _getRef(300374 call + i 1))
+                  (300381 'end of statement')
                 }
                 { scopeless
-                  unknown dst[300504] "ref var"(300503 call _getRef i)
-                  (300507 'end of statement')
+                  unknown dst[300387] "ref var"(300386 call _getRef i)
+                  (300390 'end of statement')
                 }
-                (300512 call _move src dst)
+                (300395 call _move src dst)
               }
-              label _continueLabel[300519]
-              _indexOfInterest[300514]
-              _iterator[300515]
+              label _continueLabel[300402]
+              _indexOfInterest[300397]
+              _iterator[300398]
             }
-            label _breakLabel[300520]
+            label _breakLabel[300403]
           }
-          (300559 call _maybeReleaseMem 1)
+          (300442 call _maybeReleaseMem 1)
         }
-        (300569 'on block' 0 tmp[300564])
+        (300452 'on block' 0 tmp[300447])
       }
     }
-    (300572 return)
-  } function list[304222](?)._appendByRef[300582](arg _mt[304342]:_MT[238], ref arg this[304340]:list[304222](?), ref arg x[300579] :
+    (300455 return)
+  } function list[304105](?)._appendByRef[300465](arg _mt[304225]:_MT[238], ref arg this[304223]:list[304105](?), ref arg x[300462] :
   eltType) : _unknown[51] "method" "primary method" "no doc"
   {
-    (300587 call _maybeAcquireMem 1)
+    (300470 call _maybeAcquireMem 1)
     { scopeless
-      unknown src[300591] "ref var" x
-      (300594 'end of statement')
+      unknown src[300474] "ref var" x
+      (300477 'end of statement')
     }
     { scopeless
-      unknown dst[300599] "ref var"(300598 call _getRef _size)
-      (300602 'end of statement')
+      unknown dst[300482] "ref var"(300481 call _getRef _size)
+      (300485 'end of statement')
     }
-    (300607 call _move src dst)
-    (300611 call += _size 1)
-  } function list[304222](?).append[300625](arg _mt[304346]:_MT[238], ref arg this[304344]:list[304222](?), in arg x[300622] :
-  (300619 call . this c"eltType")) : _unknown[51] "method" "primary method"
+    (300490 call _move src dst)
+    (300494 call += _size 1)
+  } function list[304105](?).append[300508](arg _mt[304229]:_MT[238], ref arg this[304227]:list[304105](?), in arg x[300505] :
+  (300502 call . this c"eltType")) : _unknown[51] "method" "primary method"
   {
-    (300635 call _enter)
-    (300641 call _appendByRef x)
-    (300645 call _leave)
+    (300518 call _enter)
+    (300524 call _appendByRef x)
+    (300528 call _leave)
   }
   {
-    (300631 call <(300628 'lifetime_of' this)(300630 'lifetime_of' x))
-  } function list[304222](?).contains[300656](arg _mt[304350]:_MT[238], const arg this[304348]:list[304222](?), arg x[300653] :
+    (300514 call <(300511 'lifetime_of' this)(300513 'lifetime_of' x))
+  } function list[304105](?).contains[300539](arg _mt[304233]:_MT[238], const arg this[304231]:list[304105](?), arg x[300536] :
   eltType) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown result[300660] 0
-      (300663 'end of statement')
+      unknown result[300543] 0
+      (300546 'end of statement')
     }
     { scopeless
-      const tmp[300730] "const" "temp"
-      (300732 'move' tmp[300730](300728 'deref'(300727 '_wide_get_locale' this)))
+      const tmp[300613] "const" "temp"
+      (300615 'move' tmp[300613](300611 'deref'(300610 '_wide_get_locale' this)))
       {
         {
-          (300668 call _enter)
+          (300551 call _enter)
           {
-            unknown _indexOfInterest[300690] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[300691] "expr temp" "temp"
-            (300700 'move' _iterator[300691](300698 call _getIterator this))
+            unknown _indexOfInterest[300573] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[300574] "expr temp" "temp"
+            (300583 'move' _iterator[300574](300581 call _getIterator this))
             Defer
             {
               {
-                (300716 call _freeIterator _iterator[300691])
+                (300599 call _freeIterator _iterator[300574])
               }
             }
             { scopeless type
-              (300705 'move' _indexOfInterest[300690](300702 call iteratorIndex _iterator[300691]))
+              (300588 'move' _indexOfInterest[300573](300585 call iteratorIndex _iterator[300574]))
             }
-            ForLoop[300692]
+            ForLoop[300575]
             {
-              unknown item[300709] "index var" "insert auto destroy"
-              (300711 'move' item[300709] _indexOfInterest[300690])
+              unknown item[300592] "index var" "insert auto destroy"
+              (300594 'move' item[300592] _indexOfInterest[300573])
               { scopeless
-                if(300686 call _cond_test(300675 call == item x))
+                if(300569 call _cond_test(300558 call == item x))
                 {
-                  (300679 call = result 1)
+                  (300562 call = result 1)
                   break nil[44]
                 }
               }
-              label _continueLabel[300695]
-              _indexOfInterest[300690]
-              _iterator[300691]
+              label _continueLabel[300578]
+              _indexOfInterest[300573]
+              _iterator[300574]
             }
-            label _breakLabel[300696]
+            label _breakLabel[300579]
           }
-          (300725 call _leave)
+          (300608 call _leave)
         }
-        (300735 'on block' 0 tmp[300730])
+        (300618 'on block' 0 tmp[300613])
       }
     }
-    (300739 return result)
+    (300622 return result)
   }
   { scopeless type
     bool[10]
-  } function list[304222](?).first[300746](arg _mt[304354]:_MT[238], ref arg this[304352]:list[304222](?)) ref : _unknown[51] "method" "primary method"
+  } function list[304105](?).first[300629](arg _mt[304237]:_MT[238], ref arg this[304235]:list[304105](?)) ref : _unknown[51] "method" "primary method"
   {
-    (300750 call _enter)
-    if(300786 call _cond_test(300758 call && boundsChecking(300756 call == _size 0)))
+    (300633 call _enter)
+    if(300669 call _cond_test(300641 call && boundsChecking(300639 call == _size 0)))
     {
-      (300762 call _leave)
-      (300784 call boundsCheckHalt "Called \"list.first\" on an empty list.")
+      (300645 call _leave)
+      (300667 call boundsCheckHalt "Called \"list.first\" on an empty list.")
     }
     { scopeless
-      unknown result[300794] "ref var"(300793 call _getRef 0)
-      (300797 'end of statement')
+      unknown result[300677] "ref var"(300676 call _getRef 0)
+      (300680 'end of statement')
     }
-    (300800 call _leave)
-    (300803 return result)
-  } function list[304222](?).last[300809](arg _mt[304358]:_MT[238], ref arg this[304356]:list[304222](?)) ref : _unknown[51] "method" "primary method"
+    (300683 call _leave)
+    (300686 return result)
+  } function list[304105](?).last[300692](arg _mt[304241]:_MT[238], ref arg this[304239]:list[304105](?)) ref : _unknown[51] "method" "primary method"
   {
-    (300813 call _enter)
-    if(300849 call _cond_test(300821 call && boundsChecking(300819 call == _size 0)))
+    (300696 call _enter)
+    if(300732 call _cond_test(300704 call && boundsChecking(300702 call == _size 0)))
     {
-      (300825 call _leave)
-      (300847 call boundsCheckHalt "Called \"list.last\" on an empty list.")
+      (300708 call _leave)
+      (300730 call boundsCheckHalt "Called \"list.last\" on an empty list.")
     }
     { scopeless
-      unknown result[300860] "ref var"(300859 call _getRef(300856 call - _size 1))
-      (300863 'end of statement')
+      unknown result[300743] "ref var"(300742 call _getRef(300739 call - _size 1))
+      (300746 'end of statement')
     }
-    (300866 call _leave)
-    (300869 return result)
-  } function list[304222](?)._extendGeneric[300877](arg _mt[304362]:_MT[238], ref arg this[304360]:list[304222](?), arg collection[300875]:_any[178](?)) : _unknown[51] "inline" "method" "primary method" "no doc"
+    (300749 call _leave)
+    (300752 return result)
+  } function list[304105](?)._extendGeneric[300760](arg _mt[304245]:_MT[238], ref arg this[304243]:list[304105](?), arg collection[300758]:_any[178](?)) : _unknown[51] "inline" "method" "primary method" "no doc"
   {
     { scopeless
-      const tmp[300930] "const" "temp"
-      (300932 'move' tmp[300930](300928 'deref'(300927 '_wide_get_locale' this)))
+      const tmp[300813] "const" "temp"
+      (300815 'move' tmp[300813](300811 'deref'(300810 '_wide_get_locale' this)))
       {
         {
           {
-            unknown _indexOfInterest[300893] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[300894] "expr temp" "temp"
-            (300903 'move' _iterator[300894](300901 call _getIterator collection))
+            unknown _indexOfInterest[300776] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[300777] "expr temp" "temp"
+            (300786 'move' _iterator[300777](300784 call _getIterator collection))
             Defer
             {
               {
-                (300919 call _freeIterator _iterator[300894])
+                (300802 call _freeIterator _iterator[300777])
               }
             }
             { scopeless type
-              (300908 'move' _indexOfInterest[300893](300905 call iteratorIndex _iterator[300894]))
+              (300791 'move' _indexOfInterest[300776](300788 call iteratorIndex _iterator[300777]))
             }
-            ForLoop[300895]
+            ForLoop[300778]
             {
-              unknown item[300912] "index var" "insert auto destroy"
-              (300914 'move' item[300912] _indexOfInterest[300893])
+              unknown item[300795] "index var" "insert auto destroy"
+              (300797 'move' item[300795] _indexOfInterest[300776])
               {
                 { scopeless
-                  unknown cpy[300883] "no auto destroy" item
-                  (300886 'end of statement')
+                  unknown cpy[300766] "no auto destroy" item
+                  (300769 'end of statement')
                 }
-                (300891 call _appendByRef cpy)
+                (300774 call _appendByRef cpy)
               }
-              label _continueLabel[300898]
-              _indexOfInterest[300893]
-              _iterator[300894]
+              label _continueLabel[300781]
+              _indexOfInterest[300776]
+              _iterator[300777]
             }
-            label _breakLabel[300899]
+            label _breakLabel[300782]
           }
         }
-        (300935 'on block' 0 tmp[300930])
+        (300818 'on block' 0 tmp[300813])
       }
     }
-  } function list[304222](?).extend[300952](arg _mt[304366]:_MT[238], ref arg this[304364]:list[304222](?), arg other[300949] :
-  (300948 call list eltType unknown p[300946])) : _unknown[51] "method" "primary method"
+  } function list[304105](?).extend[300835](arg _mt[304249]:_MT[238], ref arg this[304247]:list[304105](?), arg other[300832] :
+  (300831 call list eltType unknown p[300829])) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[300978] "const" "temp"
-      (300980 'move' tmp[300978](300976 'deref'(300975 '_wide_get_locale' this)))
+      const tmp[300861] "const" "temp"
+      (300863 'move' tmp[300861](300859 'deref'(300858 '_wide_get_locale' this)))
       {
         {
-          (300963 call _enter)
-          (300969 call _extendGeneric other)
-          (300973 call _leave)
+          (300846 call _enter)
+          (300852 call _extendGeneric other)
+          (300856 call _leave)
         }
-        (300983 'on block' 0 tmp[300978])
+        (300866 'on block' 0 tmp[300861])
       }
     }
   }
   {
-    (300958 call <(300955 'lifetime_of' this)(300957 'lifetime_of' other))
-  } function list[304222](?).extend[301001](arg _mt[304370]:_MT[238], ref arg this[304368]:list[304222](?), arg other[300998] :
-  (300996 call chpl__buildArrayRuntimeType unknown d[300992] eltType)) : _unknown[51] "method" "primary method"
+    (300841 call <(300838 'lifetime_of' this)(300840 'lifetime_of' other))
+  } function list[304105](?).extend[300884](arg _mt[304253]:_MT[238], ref arg this[304251]:list[304105](?), arg other[300881] :
+  (300879 call chpl__buildArrayRuntimeType unknown d[300875] eltType)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[301027] "const" "temp"
-      (301029 'move' tmp[301027](301025 'deref'(301024 '_wide_get_locale' this)))
+      const tmp[300910] "const" "temp"
+      (300912 'move' tmp[300910](300908 'deref'(300907 '_wide_get_locale' this)))
       {
         {
-          (301012 call _enter)
-          (301018 call _extendGeneric other)
-          (301022 call _leave)
+          (300895 call _enter)
+          (300901 call _extendGeneric other)
+          (300905 call _leave)
         }
-        (301032 'on block' 0 tmp[301027])
+        (300915 'on block' 0 tmp[300910])
       }
     }
   }
   {
-    (301007 call <(301004 'lifetime_of' this)(301006 'lifetime_of' other))
-  } function list[304222](?).extend[301052](arg _mt[304374]:_MT[238], ref arg this[304372]:list[304222](?), arg other[301049] :
-  (301048 call range eltType unknown b[301044] unknown d[301046])) : _unknown[51] "method" "primary method"
+    (300890 call <(300887 'lifetime_of' this)(300889 'lifetime_of' other))
+  } function list[304105](?).extend[300935](arg _mt[304257]:_MT[238], ref arg this[304255]:list[304105](?), arg other[300932] :
+  (300931 call range eltType unknown b[300927] unknown d[300929])) : _unknown[51] "method" "primary method"
   {
-    if(301136 call _cond_test(301064 call !(301063 call isBoundedRange other)))
+    if(301019 call _cond_test(300947 call !(300946 call isBoundedRange other)))
     {
       { scopeless
-        unknown e[301071] "param"(301069 call _cast string[26](301067 'typeof' this))
-        (301074 'end of statement')
+        unknown e[300954] "param"(300952 call _cast string[26](300950 'typeof' this))
+        (300957 'end of statement')
       }
       { scopeless
-        unknown f[301081] "param"(301079 call _cast string[26](301077 'typeof' other))
-        (301084 'end of statement')
+        unknown f[300964] "param"(300962 call _cast string[26](300960 'typeof' other))
+        (300967 'end of statement')
       }
       { scopeless
-        unknown msg[301127] "param"(301125 call +(301122 call +(301103 call + "Cannot extend " e) " with unbounded ") f)
-        (301130 'end of statement')
+        unknown msg[301010] "param"(301008 call +(301005 call +(300986 call + "Cannot extend " e) " with unbounded ") f)
+        (301013 'end of statement')
       }
-      (301134 call compilerError msg)
+      (301017 call compilerError msg)
     }
     { scopeless
-      const tmp[301159] "const" "temp"
-      (301161 'move' tmp[301159](301157 'deref'(301156 '_wide_get_locale' this)))
+      const tmp[301042] "const" "temp"
+      (301044 'move' tmp[301042](301040 'deref'(301039 '_wide_get_locale' this)))
       {
         {
-          (301144 call _enter)
-          (301150 call _extendGeneric other)
-          (301154 call _leave)
+          (301027 call _enter)
+          (301033 call _extendGeneric other)
+          (301037 call _leave)
         }
-        (301164 'on block' 0 tmp[301159])
+        (301047 'on block' 0 tmp[301042])
       }
     }
   }
   {
-    (301058 call <(301055 'lifetime_of' this)(301057 'lifetime_of' other))
-  } function list[304222](?).insert[301176](arg _mt[304378]:_MT[238], ref arg this[304376]:list[304222](?), arg idx[301173] :
-  int[13], in arg x[301179] :
+    (300941 call <(300938 'lifetime_of' this)(300940 'lifetime_of' other))
+  } function list[304105](?).insert[301059](arg _mt[304261]:_MT[238], ref arg this[304259]:list[304105](?), arg idx[301056] :
+  int[13], in arg x[301062] :
   eltType) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown result[301190] 0
-      (301193 'end of statement')
+      unknown result[301073] 0
+      (301076 'end of statement')
     }
     { scopeless
-      const tmp[301271] "const" "temp"
-      (301273 'move' tmp[301271](301269 'deref'(301268 '_wide_get_locale' this)))
+      const tmp[301154] "const" "temp"
+      (301156 'move' tmp[301154](301152 'deref'(301151 '_wide_get_locale' this)))
       {
         {
-          (301198 call _enter)
-          if(301259 call _cond_test(301203 call == idx _size))
+          (301081 call _enter)
+          if(301142 call _cond_test(301086 call == idx _size))
           {
-            (301208 call _appendByRef x)
-            (301213 call = result 1)
+            (301091 call _appendByRef x)
+            (301096 call = result 1)
           }
           {
             { scopeless
-              if(301255 call _cond_test(301219 call _withinBounds idx))
+              if(301138 call _cond_test(301102 call _withinBounds idx))
               {
-                (301223 call _expand idx)
+                (301106 call _expand idx)
                 { scopeless
-                  unknown src[301227] "ref var" x
-                  (301230 'end of statement')
+                  unknown src[301110] "ref var" x
+                  (301113 'end of statement')
                 }
                 { scopeless
-                  unknown dst[301235] "ref var"(301234 call _getRef idx)
-                  (301238 'end of statement')
+                  unknown dst[301118] "ref var"(301117 call _getRef idx)
+                  (301121 'end of statement')
                 }
-                (301243 call _move src dst)
-                (301247 call += _size 1)
-                (301252 call = result 1)
+                (301126 call _move src dst)
+                (301130 call += _size 1)
+                (301135 call = result 1)
               }
             }
           }
-          (301266 call _leave)
+          (301149 call _leave)
         }
-        (301276 'on block' 0 tmp[301271])
+        (301159 'on block' 0 tmp[301154])
       }
     }
-    if(301287 call _cond_test(301280 call ! result))
+    if(301170 call _cond_test(301163 call ! result))
     {
       { scopeless
-        (301285 call _destroy x)
+        (301168 call _destroy x)
       }
     }
-    (301293 return result)
+    (301176 return result)
   }
   {
-    (301187 call <(301184 'lifetime_of' this)(301186 'lifetime_of' x))
+    (301070 call <(301067 'lifetime_of' this)(301069 'lifetime_of' x))
   }
   { scopeless type
     bool[10]
-  } function list[304222](?)._insertGenericKnownSize[301305](arg _mt[304382]:_MT[238], ref arg this[304380]:list[304222](?), arg idx[301302] :
-  int[13], arg items[301307]:_any[178](?), arg size[301310] :
+  } function list[304105](?)._insertGenericKnownSize[301188](arg _mt[304265]:_MT[238], ref arg this[304263]:list[304105](?), arg idx[301185] :
+  int[13], arg items[301190]:_any[178](?), arg size[301193] :
   int[13]) : _unknown[51] "method" "primary method" "no doc"
   {
     { scopeless
-      unknown result[301315] 0
-      (301318 'end of statement')
+      unknown result[301198] 0
+      (301201 'end of statement')
     }
-    (301326 call _sanity(301323 call >= size 0))
-    if(301335 call _cond_test(301330 call == size 0))
+    (301209 call _sanity(301206 call >= size 0))
+    if(301218 call _cond_test(301213 call == size 0))
     {
       { scopeless
-        (301333 return 1)
+        (301216 return 1)
       }
     }
     { scopeless
-      const tmp[301460] "const" "temp"
-      (301462 'move' tmp[301460](301458 'deref'(301457 '_wide_get_locale' this)))
+      const tmp[301343] "const" "temp"
+      (301345 'move' tmp[301343](301341 'deref'(301340 '_wide_get_locale' this)))
       {
         {
-          if(301451 call _cond_test(301343 call == idx _size))
+          if(301334 call _cond_test(301226 call == idx _size))
           {
-            (301348 call _extendGeneric items)
-            (301353 call = result 1)
+            (301231 call _extendGeneric items)
+            (301236 call = result 1)
           }
           {
             { scopeless
-              if(301447 call _cond_test(301359 call _withinBounds idx))
+              if(301330 call _cond_test(301242 call _withinBounds idx))
               {
-                (301364 call _expand idx size)
+                (301247 call _expand idx size)
                 { scopeless
-                  unknown i[301368] idx
-                  (301371 'end of statement')
+                  unknown i[301251] idx
+                  (301254 'end of statement')
                 }
                 {
-                  unknown _indexOfInterest[301409] "an _indexOfInterest or chpl__followIdx variable" "temp"
-                  unknown _iterator[301410] "expr temp" "temp"
-                  (301419 'move' _iterator[301410](301417 call _getIterator items))
+                  unknown _indexOfInterest[301292] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                  unknown _iterator[301293] "expr temp" "temp"
+                  (301302 'move' _iterator[301293](301300 call _getIterator items))
                   Defer
                   {
                     {
-                      (301435 call _freeIterator _iterator[301410])
+                      (301318 call _freeIterator _iterator[301293])
                     }
                   }
                   { scopeless type
-                    (301424 'move' _indexOfInterest[301409](301421 call iteratorIndex _iterator[301410]))
+                    (301307 'move' _indexOfInterest[301292](301304 call iteratorIndex _iterator[301293]))
                   }
-                  ForLoop[301411]
+                  ForLoop[301294]
                   {
-                    unknown x[301428] "index var" "insert auto destroy"
-                    (301430 'move' x[301428] _indexOfInterest[301409])
+                    unknown x[301311] "index var" "insert auto destroy"
+                    (301313 'move' x[301311] _indexOfInterest[301292])
                     {
                       { scopeless
-                        unknown cpy[301375] "no auto destroy" x
-                        (301378 'end of statement')
+                        unknown cpy[301258] "no auto destroy" x
+                        (301261 'end of statement')
                       }
                       { scopeless
-                        unknown src[301381] "ref var" cpy
-                        (301384 'end of statement')
+                        unknown src[301264] "ref var" cpy
+                        (301267 'end of statement')
                       }
                       { scopeless
-                        unknown dst[301389] "ref var"(301388 call _getRef i)
-                        (301392 'end of statement')
+                        unknown dst[301272] "ref var"(301271 call _getRef i)
+                        (301275 'end of statement')
                       }
-                      (301397 call _move src dst)
-                      (301401 call += _size 1)
-                      (301406 call += i 1)
+                      (301280 call _move src dst)
+                      (301284 call += _size 1)
+                      (301289 call += i 1)
                     }
-                    label _continueLabel[301414]
-                    _indexOfInterest[301409]
-                    _iterator[301410]
+                    label _continueLabel[301297]
+                    _indexOfInterest[301292]
+                    _iterator[301293]
                   }
-                  label _breakLabel[301415]
+                  label _breakLabel[301298]
                 }
-                (301444 call = result 1)
+                (301327 call = result 1)
               }
             }
           }
         }
-        (301465 'on block' 0 tmp[301460])
+        (301348 'on block' 0 tmp[301343])
       }
     }
-    (301469 return result)
+    (301352 return result)
   }
   { scopeless type
     bool[10]
-  } function list[304222](?).insert[301480](arg _mt[304386]:_MT[238], ref arg this[304384]:list[304222](?), arg idx[301477] :
-  int[13], arg arr[301488] :
-  (301486 call chpl__buildArrayRuntimeType unknown d[301482] eltType)) : _unknown[51] "method" "primary method"
+  } function list[304105](?).insert[301363](arg _mt[304269]:_MT[238], ref arg this[304267]:list[304105](?), arg idx[301360] :
+  int[13], arg arr[301371] :
+  (301369 call chpl__buildArrayRuntimeType unknown d[301365] eltType)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown result[301499] 0
-      (301502 'end of statement')
+      unknown result[301382] 0
+      (301385 'end of statement')
     }
     { scopeless
-      const tmp[301530] "const" "temp"
-      (301532 'move' tmp[301530](301528 'deref'(301527 '_wide_get_locale' this)))
+      const tmp[301413] "const" "temp"
+      (301415 'move' tmp[301413](301411 'deref'(301410 '_wide_get_locale' this)))
       {
         {
-          (301507 call _enter)
-          (301520 call = result(301519 call _insertGenericKnownSize idx arr(301516 call . arr c"size")))
-          (301525 call _leave)
+          (301390 call _enter)
+          (301403 call = result(301402 call _insertGenericKnownSize idx arr(301399 call . arr c"size")))
+          (301408 call _leave)
         }
-        (301535 'on block' 0 tmp[301530])
+        (301418 'on block' 0 tmp[301413])
       }
     }
-    (301539 return result)
+    (301422 return result)
   }
   {
-    (301496 call <(301493 'lifetime_of' this)(301495 'lifetime_of' arr))
+    (301379 call <(301376 'lifetime_of' this)(301378 'lifetime_of' arr))
   }
   { scopeless type
     bool[10]
-  } function list[304222](?).insert[301551](arg _mt[304390]:_MT[238], ref arg this[304388]:list[304222](?), arg idx[301548] :
-  int[13], arg lst[301557] :
-  (301556 call list eltType)) : _unknown[51] "method" "primary method"
+  } function list[304105](?).insert[301434](arg _mt[304273]:_MT[238], ref arg this[304271]:list[304105](?), arg idx[301431] :
+  int[13], arg lst[301440] :
+  (301439 call list eltType)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown result[301568] 0
-      (301571 'end of statement')
+      unknown result[301451] 0
+      (301454 'end of statement')
     }
     { scopeless
-      const size[301577] "const"(301574 call . lst c"size")
-      (301580 'end of statement')
+      const size[301460] "const"(301457 call . lst c"size")
+      (301463 'end of statement')
     }
     { scopeless
-      const tmp[301604] "const" "temp"
-      (301606 'move' tmp[301604](301602 'deref'(301601 '_wide_get_locale' this)))
+      const tmp[301487] "const" "temp"
+      (301489 'move' tmp[301487](301485 'deref'(301484 '_wide_get_locale' this)))
       {
         {
-          (301584 call _enter)
-          (301594 call = result(301593 call _insertGenericKnownSize idx lst size))
-          (301599 call _leave)
+          (301467 call _enter)
+          (301477 call = result(301476 call _insertGenericKnownSize idx lst size))
+          (301482 call _leave)
         }
-        (301609 'on block' 0 tmp[301604])
+        (301492 'on block' 0 tmp[301487])
       }
     }
-    (301613 return result)
+    (301496 return result)
   }
   {
-    (301565 call <(301562 'lifetime_of' this)(301564 'lifetime_of' lst))
+    (301448 call <(301445 'lifetime_of' this)(301447 'lifetime_of' lst))
   }
   { scopeless type
     bool[10]
-  } function list[304222](?).remove[301625](arg _mt[304394]:_MT[238], ref arg this[304392]:list[304222](?), arg x[301622] :
-  eltType, arg count[301629] :
+  } function list[304105](?).remove[301508](arg _mt[304277]:_MT[238], ref arg this[304275]:list[304105](?), arg x[301505] :
+  eltType, arg count[301512] :
   int[13] =
   1) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown result[301635] 0
-      (301638 'end of statement')
+      unknown result[301518] 0
+      (301521 'end of statement')
     }
     { scopeless
-      const tmp[301875] "const" "temp"
-      (301877 'move' tmp[301875](301873 'deref'(301872 '_wide_get_locale' this)))
+      const tmp[301758] "const" "temp"
+      (301760 'move' tmp[301758](301756 'deref'(301755 '_wide_get_locale' this)))
       {
         {
           { scopeless
-            unknown src_i[301641] int[13]
-            unknown dst_i[301645](301649 'typeof' src_i)
-            (301650 'end of statement')
+            unknown src_i[301524] int[13]
+            unknown dst_i[301528](301532 'typeof' src_i)
+            (301533 'end of statement')
           }
           { scopeless
-            unknown removed[301653] 0
-            (301656 'end of statement')
+            unknown removed[301536] 0
+            (301539 'end of statement')
           }
-          (301659 call = src_i 0)
-          (301664 call _enter)
+          (301542 call = src_i 0)
+          (301547 call _enter)
           {
-            unknown tmp[301706] "temp"
-            (301730 'move' tmp[301706](301725 call _cond_test(301727 call < dst_i _size)))
-            WhileDo[301711]
+            unknown tmp[301589] "temp"
+            (301613 'move' tmp[301589](301608 call _cond_test(301610 call < dst_i _size)))
+            WhileDo[301594]
             {
               {
                 { scopeless
-                  unknown dst[301674] "ref var"(301673 call _getRef dst_i)
-                  (301677 'end of statement')
+                  unknown dst[301557] "ref var"(301556 call _getRef dst_i)
+                  (301560 'end of statement')
                 }
-                if(301697 call _cond_test(301681 call == dst x))
+                if(301580 call _cond_test(301564 call == dst x))
                 {
-                  (301686 call _destroy dst)
-                  (301691 call += removed 1)
+                  (301569 call _destroy dst)
+                  (301574 call += removed 1)
                   break nil[44]
                 }
-                (301703 call += dst_i 1)
+                (301586 call += dst_i 1)
               }
-              label _continueLabel[301709]
-              (301720 'move' tmp[301706](301715 call _cond_test(301717 call < dst_i _size)))
-              tmp[301706]
+              label _continueLabel[301592]
+              (301603 'move' tmp[301589](301598 call _cond_test(301600 call < dst_i _size)))
+              tmp[301589]
             }
-            label _breakLabel[301710]
+            label _breakLabel[301593]
           }
-          (301738 call = src_i(301736 call + dst_i 1))
+          (301621 call = src_i(301619 call + dst_i 1))
           {
-            unknown tmp[301817] "temp"
-            (301841 'move' tmp[301817](301836 call _cond_test(301838 call < src_i _size)))
-            WhileDo[301822]
+            unknown tmp[301700] "temp"
+            (301724 'move' tmp[301700](301719 call _cond_test(301721 call < src_i _size)))
+            WhileDo[301705]
             {
               {
                 { scopeless
-                  unknown src[301749] "ref var"(301748 call _getRef src_i)
-                  (301752 'end of statement')
+                  unknown src[301632] "ref var"(301631 call _getRef src_i)
+                  (301635 'end of statement')
                 }
-                if(301789 call _cond_test(301768 call &&(301762 call ||(301756 call == count 0)(301760 call < removed count))(301766 call == src x)))
+                if(301672 call _cond_test(301651 call &&(301645 call ||(301639 call == count 0)(301643 call < removed count))(301649 call == src x)))
                 {
-                  (301773 call _destroy src)
-                  (301778 call += src_i 1)
-                  (301783 call += removed 1)
+                  (301656 call _destroy src)
+                  (301661 call += src_i 1)
+                  (301666 call += removed 1)
                   continue nil[44]
                 }
                 { scopeless
-                  unknown dst[301797] "ref var"(301796 call _getRef dst_i)
-                  (301800 'end of statement')
+                  unknown dst[301680] "ref var"(301679 call _getRef dst_i)
+                  (301683 'end of statement')
                 }
-                (301805 call _move src dst)
-                (301809 call += src_i 1)
-                (301814 call += dst_i 1)
+                (301688 call _move src dst)
+                (301692 call += src_i 1)
+                (301697 call += dst_i 1)
               }
-              label _continueLabel[301820]
-              (301831 'move' tmp[301817](301826 call _cond_test(301828 call < src_i _size)))
-              tmp[301817]
+              label _continueLabel[301703]
+              (301714 'move' tmp[301700](301709 call _cond_test(301711 call < src_i _size)))
+              tmp[301700]
             }
-            label _breakLabel[301821]
+            label _breakLabel[301704]
           }
-          if(301859 call _cond_test removed)
+          if(301742 call _cond_test removed)
           {
-            (301848 call _maybeReleaseMem removed)
-            (301856 call = _size(301854 call - _size removed))
+            (301731 call _maybeReleaseMem removed)
+            (301739 call = _size(301737 call - _size removed))
           }
-          (301865 call _leave)
-          (301869 call = result removed)
+          (301748 call _leave)
+          (301752 call = result removed)
         }
-        (301880 'on block' 0 tmp[301875])
+        (301763 'on block' 0 tmp[301758])
       }
     }
-    (301884 return result)
+    (301767 return result)
   }
   { scopeless type
     int[13]
-  } function list[304222](?)._popAtIndex[301895](arg _mt[304398]:_MT[238], ref arg this[304396]:list[304222](?), arg idx[301892] :
-  int[13], arg unlockBeforeHalt[301898] =
+  } function list[304105](?)._popAtIndex[301778](arg _mt[304281]:_MT[238], ref arg this[304279]:list[304105](?), arg idx[301775] :
+  int[13], arg unlockBeforeHalt[301781] =
   1) : _unknown[51] "method" "primary method" "no doc"
   {
-    if(301941 call _cond_test(301907 call && boundsChecking(301905 call <= _size 0)))
+    if(301824 call _cond_test(301790 call && boundsChecking(301788 call <= _size 0)))
     {
-      if(301914 call _cond_test unlockBeforeHalt)
+      if(301797 call _cond_test unlockBeforeHalt)
       {
         { scopeless
-          (301912 call _leave)
+          (301795 call _leave)
         }
       }
-      (301939 call boundsCheckHalt "Called \"list.pop\" on an empty list.")
+      (301822 call boundsCheckHalt "Called \"list.pop\" on an empty list.")
     }
-    if(301998 call _cond_test(301953 call && boundsChecking(301951 call !(301950 call _withinBounds idx))))
+    if(301881 call _cond_test(301836 call && boundsChecking(301834 call !(301833 call _withinBounds idx))))
     {
-      if(301960 call _cond_test unlockBeforeHalt)
+      if(301843 call _cond_test unlockBeforeHalt)
       {
         { scopeless
-          (301958 call _leave)
+          (301841 call _leave)
         }
       }
       { scopeless
-        const msg[301989] "const"(301987 call + "Index for \"list.pop\" out of bounds: "(301985 call _cast string[26] idx))
-        (301992 'end of statement')
+        const msg[301872] "const"(301870 call + "Index for \"list.pop\" out of bounds: "(301868 call _cast string[26] idx))
+        (301875 'end of statement')
       }
-      (301996 call boundsCheckHalt msg)
+      (301879 call boundsCheckHalt msg)
     }
     { scopeless
-      unknown item[302006] "ref var"(302005 call _getRef idx)
-      (302009 'end of statement')
+      unknown item[301889] "ref var"(301888 call _getRef idx)
+      (301892 'end of statement')
     }
     { scopeless
-      unknown result[302011] "no init" eltType
-      (302014 'end of statement')
+      unknown result[301894] "no init" eltType
+      (301897 'end of statement')
     }
-    (302019 call _move item result)
-    (302024 call _collapse idx)
-    (302028 call -= _size 1)
-    (302032 return result)
+    (301902 call _move item result)
+    (301907 call _collapse idx)
+    (301911 call -= _size 1)
+    (301915 return result)
   }
   { scopeless type
     eltType
-  } function list[304222](?).pop[302039](arg _mt[304402]:_MT[238], ref arg this[304400]:list[304222](?)) : _unknown[51] "method" "primary method"
+  } function list[304105](?).pop[301922](arg _mt[304285]:_MT[238], ref arg this[304283]:list[304105](?)) : _unknown[51] "method" "primary method"
   {
-    (302044 call _enter)
+    (301927 call _enter)
     { scopeless
-      unknown result[302054](302053 call _popAtIndex(302050 call - _size 1))
-      (302057 'end of statement')
+      unknown result[301937](301936 call _popAtIndex(301933 call - _size 1))
+      (301940 'end of statement')
     }
-    (302060 call _leave)
-    (302063 return result)
+    (301943 call _leave)
+    (301946 return result)
   }
   { scopeless type
     eltType
-  } function list[304222](?).pop[302074](arg _mt[304406]:_MT[238], ref arg this[304404]:list[304222](?), arg idx[302071] :
+  } function list[304105](?).pop[301957](arg _mt[304289]:_MT[238], ref arg this[304287]:list[304105](?), arg idx[301954] :
   int[13]) : _unknown[51] "method" "primary method"
   {
-    (302079 call _enter)
+    (301962 call _enter)
     { scopeless
-      unknown result[302086](302085 call _popAtIndex idx)
-      (302089 'end of statement')
+      unknown result[301969](301968 call _popAtIndex idx)
+      (301972 'end of statement')
     }
-    (302092 call _leave)
-    (302095 return result)
+    (301975 call _leave)
+    (301978 return result)
   }
   { scopeless type
     eltType
-  } function list[304222](?)._fireAllDestructors[302102](arg _mt[304410]:_MT[238], arg this[304408]:list[304222](?)) : _unknown[51] "method" "primary method" "no doc"
+  } function list[304105](?)._fireAllDestructors[301985](arg _mt[304293]:_MT[238], arg this[304291]:list[304105](?)) : _unknown[51] "method" "primary method" "no doc"
   {
     { scopeless
-      const tmp[302175] "const" "temp"
-      (302177 'move' tmp[302175](302173 'deref'(302172 '_wide_get_locale' this)))
+      const tmp[302058] "const" "temp"
+      (302060 'move' tmp[302058](302056 'deref'(302055 '_wide_get_locale' this)))
       {
         {
           {
-            unknown _indexOfInterest[302126] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[302127] "expr temp" "temp"
-            (302136 'move' _iterator[302127](302134 call _getIterator(302143 call chpl_direct_counted_range_iter 0 _size)))
+            unknown _indexOfInterest[302009] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[302010] "expr temp" "temp"
+            (302019 'move' _iterator[302010](302017 call _getIterator(302026 call chpl_direct_counted_range_iter 0 _size)))
             Defer
             {
               {
-                (302159 call _freeIterator _iterator[302127])
+                (302042 call _freeIterator _iterator[302010])
               }
             }
             { scopeless type
-              (302148 'move' _indexOfInterest[302126](302145 call iteratorIndex _iterator[302127]))
+              (302031 'move' _indexOfInterest[302009](302028 call iteratorIndex _iterator[302010]))
             }
-            ForLoop[302128]
+            ForLoop[302011]
             {
-              unknown i[302152] "index var" "insert auto destroy"
-              (302154 'move' i[302152] _indexOfInterest[302126])
+              unknown i[302035] "index var" "insert auto destroy"
+              (302037 'move' i[302035] _indexOfInterest[302009])
               {
                 { scopeless
-                  unknown item[302116] "ref var"(302115 call _getRef i)
-                  (302119 'end of statement')
+                  unknown item[301999] "ref var"(301998 call _getRef i)
+                  (302002 'end of statement')
                 }
-                (302124 call _destroy item)
+                (302007 call _destroy item)
               }
-              label _continueLabel[302131]
-              _indexOfInterest[302126]
-              _iterator[302127]
+              label _continueLabel[302014]
+              _indexOfInterest[302009]
+              _iterator[302010]
             }
-            label _breakLabel[302132]
+            label _breakLabel[302015]
           }
-          (302169 call = _size 0)
+          (302052 call = _size 0)
         }
-        (302180 'on block' 0 tmp[302175])
+        (302063 'on block' 0 tmp[302058])
       }
     }
-    (302184 return)
-  } function list[304222](?)._freeAllArrays[302190](arg _mt[304414]:_MT[238], arg this[304412]:list[304222](?)) : _unknown[51] "method" "primary method" "no doc"
+    (302067 return)
+  } function list[304105](?)._freeAllArrays[302073](arg _mt[304297]:_MT[238], arg this[304295]:list[304105](?)) : _unknown[51] "method" "primary method" "no doc"
   {
-    if(302198 call _cond_test(302194 call == _arrays nil[44]))
+    if(302081 call _cond_test(302077 call == _arrays nil[44]))
     {
       { scopeless
-        (302196 return)
+        (302079 return)
       }
     }
-    (302210 call _sanity(302207 call != _totalCapacity 0))
-    (302218 call _sanity(302215 call != _arrayCapacity 0))
+    (302093 call _sanity(302090 call != _totalCapacity 0))
+    (302101 call _sanity(302098 call != _arrayCapacity 0))
     { scopeless
-      const tmp[302341] "const" "temp"
-      (302343 'move' tmp[302341](302339 'deref'(302338 '_wide_get_locale' this)))
+      const tmp[302224] "const" "temp"
+      (302226 'move' tmp[302224](302222 'deref'(302221 '_wide_get_locale' this)))
       {
         {
           {
-            unknown _indexOfInterest[302273] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[302274] "expr temp" "temp"
-            (302283 'move' _iterator[302274](302281 call _getIterator(302290 call chpl_direct_counted_range_iter 0 _arrayCapacity)))
+            unknown _indexOfInterest[302156] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[302157] "expr temp" "temp"
+            (302166 'move' _iterator[302157](302164 call _getIterator(302173 call chpl_direct_counted_range_iter 0 _arrayCapacity)))
             Defer
             {
               {
-                (302306 call _freeIterator _iterator[302274])
+                (302189 call _freeIterator _iterator[302157])
               }
             }
             { scopeless type
-              (302295 'move' _indexOfInterest[302273](302292 call iteratorIndex _iterator[302274]))
+              (302178 'move' _indexOfInterest[302156](302175 call iteratorIndex _iterator[302157]))
             }
-            ForLoop[302275]
+            ForLoop[302158]
             {
-              unknown i[302299] "index var" "insert auto destroy"
-              (302301 'move' i[302299] _indexOfInterest[302273])
+              unknown i[302182] "index var" "insert auto destroy"
+              (302184 'move' i[302182] _indexOfInterest[302156])
               {
                 { scopeless
-                  unknown array[302232] "ref var"(302231 call _arrays i)
-                  (302235 'end of statement')
+                  unknown array[302115] "ref var"(302114 call _arrays i)
+                  (302118 'end of statement')
                 }
-                if(302244 call _cond_test(302239 call == array nil[44]))
+                if(302127 call _cond_test(302122 call == array nil[44]))
                 {
                   { scopeless
                     continue nil[44]
                   }
                 }
                 { scopeless
-                  const capacity[302253] "const"(302252 call _getArrayCapacity i)
-                  (302256 'end of statement')
+                  const capacity[302136] "const"(302135 call _getArrayCapacity i)
+                  (302139 'end of statement')
                 }
-                (302259 call -= _totalCapacity capacity)
-                (302266 call _freeArray array capacity)
-                (302270 call = array nil[44])
+                (302142 call -= _totalCapacity capacity)
+                (302149 call _freeArray array capacity)
+                (302153 call = array nil[44])
               }
-              label _continueLabel[302278]
-              _indexOfInterest[302273]
-              _iterator[302274]
+              label _continueLabel[302161]
+              _indexOfInterest[302156]
+              _iterator[302157]
             }
-            label _breakLabel[302279]
+            label _breakLabel[302162]
           }
-          (302320 call _sanity(302317 call == _totalCapacity 0))
-          (302326 call _freeBlockArray _arrays _arrayCapacity)
-          (302330 call = _arrays nil[44])
-          (302335 call = _size 0)
+          (302203 call _sanity(302200 call == _totalCapacity 0))
+          (302209 call _freeBlockArray _arrays _arrayCapacity)
+          (302213 call = _arrays nil[44])
+          (302218 call = _size 0)
         }
-        (302346 'on block' 0 tmp[302341])
+        (302229 'on block' 0 tmp[302224])
       }
     }
-    (302349 return)
-  } function list[304222](?).clear[302355](arg _mt[304418]:_MT[238], ref arg this[304416]:list[304222](?)) : _unknown[51] "method" "primary method"
+    (302232 return)
+  } function list[304105](?).clear[302238](arg _mt[304301]:_MT[238], ref arg this[304299]:list[304105](?)) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[302406] "const" "temp"
-      (302408 'move' tmp[302406](302404 'deref'(302403 '_wide_get_locale' this)))
+      const tmp[302289] "const" "temp"
+      (302291 'move' tmp[302289](302287 'deref'(302286 '_wide_get_locale' this)))
       {
         {
-          (302360 call _enter)
-          (302365 call _fireAllDestructors)
-          (302369 call _freeAllArrays)
-          (302377 call _sanity(302374 call == _totalCapacity 0))
-          (302385 call _sanity(302382 call == _size 0))
-          (302393 call _sanity(302390 call == _arrays nil[44]))
-          (302397 call _firstTimeInitializeArrays)
-          (302401 call _leave)
+          (302243 call _enter)
+          (302248 call _fireAllDestructors)
+          (302252 call _freeAllArrays)
+          (302260 call _sanity(302257 call == _totalCapacity 0))
+          (302268 call _sanity(302265 call == _size 0))
+          (302276 call _sanity(302273 call == _arrays nil[44]))
+          (302280 call _firstTimeInitializeArrays)
+          (302284 call _leave)
         }
-        (302411 'on block' 0 tmp[302406])
+        (302294 'on block' 0 tmp[302289])
       }
     }
-  } function list[304222](?).indexOf[302423](arg _mt[304422]:_MT[238], const arg this[304420]:list[304222](?), arg x[302420] :
-  eltType, arg start[302427] :
+  } function list[304105](?).indexOf[302306](arg _mt[304305]:_MT[238], const arg this[304303]:list[304105](?), arg x[302303] :
+  eltType, arg start[302310] :
   int[13] =
-  0, arg end[302435] :
+  0, arg end[302318] :
   int[13] =
-  (302433 call - 1)) : _unknown[51] "method" "primary method"
+  (302316 call - 1)) : _unknown[51] "method" "primary method"
   {
-    if(302551 call _cond_test boundsChecking)
+    if(302434 call _cond_test boundsChecking)
     {
       { scopeless
-        const msg[302458] "const" " index for \"list.indexOf\" out of bounds: "
-        (302461 'end of statement')
+        const msg[302341] "const" " index for \"list.indexOf\" out of bounds: "
+        (302344 'end of statement')
       }
-      if(302505 call _cond_test(302473 call &&(302465 call >= end 0)(302471 call !(302470 call _withinBounds end))))
+      if(302388 call _cond_test(302356 call &&(302348 call >= end 0)(302354 call !(302353 call _withinBounds end))))
       {
         { scopeless
-          (302503 call boundsCheckHalt(302500 call +(302494 call + "End" msg)(302498 call _cast string[26] end)))
+          (302386 call boundsCheckHalt(302383 call +(302377 call + "End" msg)(302381 call _cast string[26] end)))
         }
       }
-      if(302546 call _cond_test(302514 call !(302513 call _withinBounds start)))
+      if(302429 call _cond_test(302397 call !(302396 call _withinBounds start)))
       {
         { scopeless
-          (302544 call boundsCheckHalt(302541 call +(302535 call + "Start" msg)(302539 call _cast string[26] start)))
+          (302427 call boundsCheckHalt(302424 call +(302418 call + "Start" msg)(302422 call _cast string[26] start)))
         }
       }
     }
     { scopeless
-      unknown error[302559] "param"(302557 call - 1)
-      (302562 'end of statement')
+      unknown error[302442] "param"(302440 call - 1)
+      (302445 'end of statement')
     }
-    if(302576 call _cond_test(302571 call &&(302565 call >= end 0)(302569 call < end start)))
+    if(302459 call _cond_test(302454 call &&(302448 call >= end 0)(302452 call < end start)))
     {
       { scopeless
-        (302574 return error)
+        (302457 return error)
       }
     }
     { scopeless
-      unknown result[302582] error
-      (302585 'end of statement')
+      unknown result[302465] error
+      (302468 'end of statement')
     }
     { scopeless
-      const tmp[302678] "const" "temp"
-      (302680 'move' tmp[302678](302676 'deref'(302675 '_wide_get_locale' this)))
+      const tmp[302561] "const" "temp"
+      (302563 'move' tmp[302561](302559 'deref'(302558 '_wide_get_locale' this)))
       {
         {
-          (302589 call _enter)
+          (302472 call _enter)
           { scopeless
-            const stop[302604] "const"(302601 IfExpr (302594 call < end 0) then
+            const stop[302487] "const"(302484 IfExpr (302477 call < end 0) then
             { scopeless
-              (302598 call - _size 1)
+              (302481 call - _size 1)
             } else
             { scopeless
               end
             } )
-            (302607 'end of statement')
+            (302490 'end of statement')
           }
           {
-            unknown _indexOfInterest[302633] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[302634] "expr temp" "temp"
-            (302643 'move' _iterator[302634](302641 call _getIterator(302648 call chpl_direct_range_iter start stop 1)))
+            unknown _indexOfInterest[302516] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[302517] "expr temp" "temp"
+            (302526 'move' _iterator[302517](302524 call _getIterator(302531 call chpl_direct_range_iter start stop 1)))
             Defer
             {
               {
-                (302664 call _freeIterator _iterator[302634])
+                (302547 call _freeIterator _iterator[302517])
               }
             }
             { scopeless type
-              (302653 'move' _indexOfInterest[302633](302650 call iteratorIndex _iterator[302634]))
+              (302536 'move' _indexOfInterest[302516](302533 call iteratorIndex _iterator[302517]))
             }
-            ForLoop[302635]
+            ForLoop[302518]
             {
-              unknown i[302657] "index var" "insert auto destroy"
-              (302659 'move' i[302657] _indexOfInterest[302633])
+              unknown i[302540] "index var" "insert auto destroy"
+              (302542 'move' i[302540] _indexOfInterest[302516])
               { scopeless
-                if(302629 call _cond_test(302618 call == x(302617 call _getRef i)))
+                if(302512 call _cond_test(302501 call == x(302500 call _getRef i)))
                 {
-                  (302622 call = result i)
+                  (302505 call = result i)
                   break nil[44]
                 }
               }
-              label _continueLabel[302638]
-              _indexOfInterest[302633]
-              _iterator[302634]
+              label _continueLabel[302521]
+              _indexOfInterest[302516]
+              _iterator[302517]
             }
-            label _breakLabel[302639]
+            label _breakLabel[302522]
           }
-          (302673 call _leave)
+          (302556 call _leave)
         }
-        (302683 'on block' 0 tmp[302678])
+        (302566 'on block' 0 tmp[302561])
       }
     }
-    (302687 return result)
+    (302570 return result)
   }
   { scopeless type
     int[13]
-  } function list[304222](?).count[302698](arg _mt[304426]:_MT[238], const arg this[304424]:list[304222](?), arg x[302695] :
+  } function list[304105](?).count[302581](arg _mt[304309]:_MT[238], const arg this[304307]:list[304105](?), arg x[302578] :
   eltType) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      unknown result[302702] 0
-      (302705 'end of statement')
+      unknown result[302585] 0
+      (302588 'end of statement')
     }
     { scopeless
-      const tmp[302779] "const" "temp"
-      (302781 'move' tmp[302779](302777 'deref'(302776 '_wide_get_locale' this)))
+      const tmp[302662] "const" "temp"
+      (302664 'move' tmp[302662](302660 'deref'(302659 '_wide_get_locale' this)))
       {
         {
-          (302710 call _enter)
+          (302593 call _enter)
           { scopeless
-            unknown count[302714] 0
-            (302717 'end of statement')
+            unknown count[302597] 0
+            (302600 'end of statement')
           }
           {
-            unknown _indexOfInterest[302734] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[302735] "expr temp" "temp"
-            (302744 'move' _iterator[302735](302742 call _getIterator this))
+            unknown _indexOfInterest[302617] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[302618] "expr temp" "temp"
+            (302627 'move' _iterator[302618](302625 call _getIterator this))
             Defer
             {
               {
-                (302760 call _freeIterator _iterator[302735])
+                (302643 call _freeIterator _iterator[302618])
               }
             }
             { scopeless type
-              (302749 'move' _indexOfInterest[302734](302746 call iteratorIndex _iterator[302735]))
+              (302632 'move' _indexOfInterest[302617](302629 call iteratorIndex _iterator[302618]))
             }
-            ForLoop[302736]
+            ForLoop[302619]
             {
-              unknown item[302753] "index var" "insert auto destroy"
-              (302755 'move' item[302753] _indexOfInterest[302734])
+              unknown item[302636] "index var" "insert auto destroy"
+              (302638 'move' item[302636] _indexOfInterest[302617])
               { scopeless
-                if(302729 call _cond_test(302722 call == x item))
+                if(302612 call _cond_test(302605 call == x item))
                 {
                   { scopeless
-                    (302726 call += count 1)
+                    (302609 call += count 1)
                   }
                 }
               }
-              label _continueLabel[302739]
-              _indexOfInterest[302734]
-              _iterator[302735]
+              label _continueLabel[302622]
+              _indexOfInterest[302617]
+              _iterator[302618]
             }
-            label _breakLabel[302740]
+            label _breakLabel[302623]
           }
-          (302769 call = result count)
-          (302774 call _leave)
+          (302652 call = result count)
+          (302657 call _leave)
         }
-        (302784 'on block' 0 tmp[302779])
+        (302667 'on block' 0 tmp[302662])
       }
     }
-    (302788 return result)
+    (302671 return result)
   }
   { scopeless type
     int[13]
-  } function list[304222](?).sort[302805](arg _mt[304430]:_MT[238], ref arg this[304428]:list[304222](?), arg comparator[302801] :
-  unknown rec[302795] =
-  (302798 call . Sort c"defaultComparator")) : _unknown[51] "method" "primary method"
+  } function list[304105](?).sort[302688](arg _mt[304313]:_MT[238], ref arg this[304311]:list[304105](?), arg comparator[302684] :
+  unknown rec[302678] =
+  (302681 call . Sort c"defaultComparator")) : _unknown[51] "method" "primary method"
   {
     { scopeless
-      const tmp[302931] "const" "temp"
-      (302933 'move' tmp[302931](302929 'deref'(302928 '_wide_get_locale' this)))
+      const tmp[302814] "const" "temp"
+      (302816 'move' tmp[302814](302812 'deref'(302811 '_wide_get_locale' this)))
       {
         {
-          (302810 call _enter)
-          if(302920 call _cond_test(302815 call > _size 1))
+          (302693 call _enter)
+          if(302803 call _cond_test(302698 call > _size 1))
           {
             { scopeless
-              unknown arr[302829](302827 call chpl__buildArrayRuntimeType(302825 call chpl__ensureDomainExpr(302821 call #(302818 call chpl_build_low_bounded_range 0) _size)) eltType)
-              (302832 'end of statement')
+              unknown arr[302712](302710 call chpl__buildArrayRuntimeType(302708 call chpl__ensureDomainExpr(302704 call #(302701 call chpl_build_low_bounded_range 0) _size)) eltType)
+              (302715 'end of statement')
             }
             {
-              unknown _indexOfInterest[302852] "an _indexOfInterest or chpl__followIdx variable" "temp"
-              unknown _iterator[302853] "expr temp" "temp"
-              (302862 'move' _iterator[302853](302860 call _getIterator(302869 call chpl_direct_counted_range_iter 0 _size)))
+              unknown _indexOfInterest[302735] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[302736] "expr temp" "temp"
+              (302745 'move' _iterator[302736](302743 call _getIterator(302752 call chpl_direct_counted_range_iter 0 _size)))
               Defer
               {
                 {
-                  (302885 call _freeIterator _iterator[302853])
+                  (302768 call _freeIterator _iterator[302736])
                 }
               }
               { scopeless type
-                (302874 'move' _indexOfInterest[302852](302871 call iteratorIndex _iterator[302853]))
+                (302757 'move' _indexOfInterest[302735](302754 call iteratorIndex _iterator[302736]))
               }
-              ForLoop[302854]
+              ForLoop[302737]
               {
-                unknown i[302878] "index var" "insert auto destroy"
-                (302880 'move' i[302878] _indexOfInterest[302852])
+                unknown i[302761] "index var" "insert auto destroy"
+                (302763 'move' i[302761] _indexOfInterest[302735])
                 { scopeless
-                  (302849 call =(302844 call arr i)(302848 call this i))
+                  (302732 call =(302727 call arr i)(302731 call this i))
                 }
-                label _continueLabel[302857]
-                _indexOfInterest[302852]
-                _iterator[302853]
+                label _continueLabel[302740]
+                _indexOfInterest[302735]
+                _iterator[302736]
               }
-              label _breakLabel[302858]
+              label _breakLabel[302741]
             }
-            (302901 call(302895 call . Sort c"sort") arr comparator)
-            (302905 call _fireAllDestructors)
-            (302909 call _freeAllArrays)
-            (302913 call _firstTimeInitializeArrays)
-            (302918 call _extendGeneric arr)
+            (302784 call(302778 call . Sort c"sort") arr comparator)
+            (302788 call _fireAllDestructors)
+            (302792 call _freeAllArrays)
+            (302796 call _firstTimeInitializeArrays)
+            (302801 call _extendGeneric arr)
           }
-          (302926 call _leave)
+          (302809 call _leave)
         }
-        (302936 'on block' 0 tmp[302931])
+        (302819 'on block' 0 tmp[302814])
       }
     }
-    (302940 return)
-  } function list[304222](?).this[302950](arg _mt[304434]:_MT[238], ref arg this[304432]:list[304222](?), arg i[302947] :
+    (302823 return)
+  } function list[304105](?).this[302833](arg _mt[304317]:_MT[238], ref arg this[304315]:list[304105](?), arg i[302830] :
   int[13]) ref : _unknown[51] "method" "primary method"
   {
-    if(302994 call _cond_test(302959 call && boundsChecking(302957 call !(302956 call _withinBounds i))))
+    if(302877 call _cond_test(302842 call && boundsChecking(302840 call !(302839 call _withinBounds i))))
     {
       { scopeless
-        const msg[302984] "const"(302982 call + "Invalid list index: "(302980 call _cast string[26] i))
-        (302987 'end of statement')
+        const msg[302867] "const"(302865 call + "Invalid list index: "(302863 call _cast string[26] i))
+        (302870 'end of statement')
       }
-      (302992 call boundsCheckHalt msg)
+      (302875 call boundsCheckHalt msg)
     }
     { scopeless
-      unknown result[303003] "ref var"(303002 call _getRef i)
-      (303006 'end of statement')
+      unknown result[302886] "ref var"(302885 call _getRef i)
+      (302889 'end of statement')
     }
-    (303008 return result)
-  } function list[304222](?).this[303018](arg _mt[304438]:_MT[238], const  ref arg this[304436]:list[304222](?), arg i[303015] :
+    (302891 return result)
+  } function list[304105](?).this[302901](arg _mt[304321]:_MT[238], const  ref arg this[304319]:list[304105](?), arg i[302898] :
   int[13]) const ref : _unknown[51] "method" "primary method"
   {
-    if(303046 call _cond_test(303027 call && boundsChecking(303025 call !(303024 call _withinBounds i))))
+    if(302929 call _cond_test(302910 call && boundsChecking(302908 call !(302907 call _withinBounds i))))
     {
       { scopeless
-        const msg[303036] "const"(303034 call + "Invalid list index: "(303032 call _cast string[26] i))
-        (303039 'end of statement')
+        const msg[302919] "const"(302917 call + "Invalid list index: "(302915 call _cast string[26] i))
+        (302922 'end of statement')
       }
-      (303044 call halt msg)
+      (302927 call halt msg)
     }
     { scopeless
-      const result[303055] "const" "ref var"(303054 call _getRef i)
-      (303058 'end of statement')
+      const result[302938] "const" "ref var"(302937 call _getRef i)
+      (302941 'end of statement')
     }
-    (303060 return result)
-  } function list[304222](?).these[303066](arg _mt[304442]:_MT[238], arg this[304440]:list[304222](?)) ref : _unknown[51] "iterator fn" "method" "primary method"
+    (302943 return result)
+  } function list[304105](?).these[302949](arg _mt[304325]:_MT[238], arg this[304323]:list[304105](?)) ref : _unknown[51] "iterator fn" "method" "primary method"
   {
     {
-      unknown _indexOfInterest[303087] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[303088] "expr temp" "temp"
-      (303097 'move' _iterator[303088](303095 call _getIterator(303104 call chpl_direct_counted_range_iter 0 _size)))
+      unknown _indexOfInterest[302970] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[302971] "expr temp" "temp"
+      (302980 'move' _iterator[302971](302978 call _getIterator(302987 call chpl_direct_counted_range_iter 0 _size)))
       Defer
       {
         {
-          (303120 call _freeIterator _iterator[303088])
+          (303003 call _freeIterator _iterator[302971])
         }
       }
       { scopeless type
-        (303109 'move' _indexOfInterest[303087](303106 call iteratorIndex _iterator[303088]))
+        (302992 'move' _indexOfInterest[302970](302989 call iteratorIndex _iterator[302971]))
       }
-      ForLoop[303089]
+      ForLoop[302972]
       {
-        unknown i[303113] "index var" "insert auto destroy"
-        (303115 'move' i[303113] _indexOfInterest[303087])
+        unknown i[302996] "index var" "insert auto destroy"
+        (302998 'move' i[302996] _indexOfInterest[302970])
         {
           { scopeless
-            unknown result[303079] "ref var"(303078 call _getRef i)
-            (303082 'end of statement')
+            unknown result[302962] "ref var"(302961 call _getRef i)
+            (302965 'end of statement')
           }
-          (303085 yield result)
+          (302968 yield result)
         }
-        label _continueLabel[303092]
-        _indexOfInterest[303087]
-        _iterator[303088]
+        label _continueLabel[302975]
+        _indexOfInterest[302970]
+        _iterator[302971]
       }
-      label _breakLabel[303093]
+      label _breakLabel[302976]
     }
-  } function list[304222](?).these[303136](arg _mt[304446]:_MT[238], arg this[304444]:list[304222](?), param arg tag[303133] :
+  } function list[304105](?).these[303019](arg _mt[304329]:_MT[238], arg this[304327]:list[304105](?), param arg tag[303016] :
   iterKind) ref : _unknown[51] "iterator fn" "method" "primary method" "no doc"
   {
     { scopeless
-      const osz[303146] "const" _size
-      (303149 'end of statement')
+      const osz[303029] "const" _size
+      (303032 'end of statement')
     }
     { scopeless
-      const minChunkSize[303152] "const" 64
-      (303155 'end of statement')
+      const minChunkSize[303035] "const" 64
+      (303038 'end of statement')
     }
     { scopeless
-      const hasOneChunk[303160] "const"(303158 call <= osz minChunkSize)
-      (303163 'end of statement')
+      const hasOneChunk[303043] "const"(303041 call <= osz minChunkSize)
+      (303046 'end of statement')
     }
     { scopeless
-      const numTasks[303173] "const"(303170 IfExpr  hasOneChunk then
+      const numTasks[303056] "const"(303053 IfExpr  hasOneChunk then
       { scopeless
         1
       } else
       { scopeless
-        (303167 call . here c"maxTaskPar")
+        (303050 call . here c"maxTaskPar")
       } )
-      (303176 'end of statement')
+      (303059 'end of statement')
     }
     { scopeless
-      const chunkSize[303187] "const"(303185 call _cast int[13](303183 call floor(303180 call / osz numTasks)))
-      (303190 'end of statement')
+      const chunkSize[303070] "const"(303068 call _cast int[13](303066 call floor(303063 call / osz numTasks)))
+      (303073 'end of statement')
     }
     { scopeless
-      const trailing[303198] "const"(303196 call - osz(303194 call * chunkSize numTasks))
-      (303201 'end of statement')
+      const trailing[303081] "const"(303079 call - osz(303077 call * chunkSize numTasks))
+      (303084 'end of statement')
     }
     {
-      unknown tmpIter[303265] "expr temp" "maybe ref" "no copy" "temp"
-      (303268 'move' tmpIter[303265](303207 call #(303204 call chpl_build_low_bounded_range 0) numTasks))
-      unknown isRngDomArr[303454] "maybe param" "temp"
-      (303469 'move' isRngDomArr[303454](303467 call ||(303456 call isBoundedRange tmpIter[303265])(303465 call ||(303459 call isDomain tmpIter[303265])(303462 call isArray tmpIter[303265]))))
-      if isRngDomArr[303454]
+      unknown tmpIter[303148] "expr temp" "maybe ref" "no copy" "temp"
+      (303151 'move' tmpIter[303148](303090 call #(303087 call chpl_build_low_bounded_range 0) numTasks))
+      unknown isRngDomArr[303337] "maybe param" "temp"
+      (303352 'move' isRngDomArr[303337](303350 call ||(303339 call isBoundedRange tmpIter[303148])(303348 call ||(303342 call isDomain tmpIter[303148])(303345 call isArray tmpIter[303148]))))
+      if isRngDomArr[303337]
       {
-        const _coforallCount[303321] "const" "end count" "temp"
-        (303390 'move' _coforallCount[303321](303387 call _endCountAlloc 1))
-        unknown numTasks[303322] "temp"
-        (303374 'move' numTasks[303322](303370 call . tmpIter[303265] c"size"))
-        (303365 call _upEndCount _coforallCount[303321] 1 numTasks[303322])
-        (303362 call chpl_resetTaskSpawn numTasks[303322])
-        unknown _indexOfInterest[303329] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[303330] "expr temp" "temp"
-        (303339 'move' _iterator[303330](303337 call _getIterator tmpIter[303265]))
+        const _coforallCount[303204] "const" "end count" "temp"
+        (303273 'move' _coforallCount[303204](303270 call _endCountAlloc 1))
+        unknown numTasks[303205] "temp"
+        (303257 'move' numTasks[303205](303253 call . tmpIter[303148] c"size"))
+        (303248 call _upEndCount _coforallCount[303204] 1 numTasks[303205])
+        (303245 call chpl_resetTaskSpawn numTasks[303205])
+        unknown _indexOfInterest[303212] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[303213] "expr temp" "temp"
+        (303222 'move' _iterator[303213](303220 call _getIterator tmpIter[303148]))
         Defer
         {
           {
-            (303355 call _freeIterator _iterator[303330])
+            (303238 call _freeIterator _iterator[303213])
           }
         }
         { scopeless type
-          (303344 'move' _indexOfInterest[303329](303341 call iteratorIndex _iterator[303330]))
+          (303227 'move' _indexOfInterest[303212](303224 call iteratorIndex _iterator[303213]))
         }
-        ForLoop[303331]
+        ForLoop[303214]
         {
-          unknown tid[303348] "coforall index var" "index var" "insert auto destroy"
-          (303350 'move' tid[303348] _indexOfInterest[303329])
+          unknown tid[303231] "coforall index var" "index var" "insert auto destroy"
+          (303233 'move' tid[303231] _indexOfInterest[303212])
           {
             {
               { scopeless
-                unknown chunk[303272](303274 call _computeChunk tid chunkSize trailing)
-                (303279 'end of statement')
+                unknown chunk[303155](303157 call _computeChunk tid chunkSize trailing)
+                (303162 'end of statement')
               }
               {
-                unknown _indexOfInterest[303281] "an _indexOfInterest or chpl__followIdx variable" "temp"
-                unknown _iterator[303283] "expr temp" "temp"
-                (303285 'move' _iterator[303283](303288 call _getIterator(303290 call chunk 0)))
+                unknown _indexOfInterest[303164] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                unknown _iterator[303166] "expr temp" "temp"
+                (303168 'move' _iterator[303166](303171 call _getIterator(303173 call chunk 0)))
                 Defer
                 {
                   {
-                    (303294 call _freeIterator _iterator[303283])
+                    (303177 call _freeIterator _iterator[303166])
                   }
                 }
                 { scopeless type
-                  (303298 'move' _indexOfInterest[303281](303301 call iteratorIndex _iterator[303283]))
+                  (303181 'move' _indexOfInterest[303164](303184 call iteratorIndex _iterator[303166]))
                 }
-                ForLoop[303303]
+                ForLoop[303186]
                 {
-                  unknown i[303306] "index var" "insert auto destroy"
-                  (303308 'move' i[303306] _indexOfInterest[303281])
+                  unknown i[303189] "index var" "insert auto destroy"
+                  (303191 'move' i[303189] _indexOfInterest[303164])
                   { scopeless
-                    (303312 yield(303314 call this i))
+                    (303195 yield(303197 call this i))
                   }
-                  label _continueLabel[303316]
-                  _indexOfInterest[303281]
-                  _iterator[303283]
+                  label _continueLabel[303199]
+                  _indexOfInterest[303164]
+                  _iterator[303166]
                 }
-                label _breakLabel[303318]
+                label _breakLabel[303201]
               }
             }
-            (303324 call _downEndCount _coforallCount[303321] nil[44])
-            (303323 'coforall loop')
+            (303207 call _downEndCount _coforallCount[303204] nil[44])
+            (303206 'coforall loop')
           }
-          label _continueLabel[303334]
-          _indexOfInterest[303329]
-          _iterator[303330]
+          label _continueLabel[303217]
+          _indexOfInterest[303212]
+          _iterator[303213]
         }
-        label _breakLabel[303335]
+        label _breakLabel[303218]
         Defer
         {
           {
-            (303377 call _endCountFree _coforallCount[303321])
+            (303260 call _endCountFree _coforallCount[303204])
           }
         }
-        (303382 call _waitEndCount _coforallCount[303321] 1 numTasks[303322])
+        (303265 call _waitEndCount _coforallCount[303204] 1 numTasks[303205])
       }
       {
-        const _coforallCount[303394] "const" "end count" "temp"
-        (303451 'move' _coforallCount[303394](303448 call _endCountAlloc 1))
-        unknown _indexOfInterest[303402] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[303403] "expr temp" "temp"
-        (303412 'move' _iterator[303403](303410 call _getIterator tmpIter[303265]))
+        const _coforallCount[303277] "const" "end count" "temp"
+        (303334 'move' _coforallCount[303277](303331 call _endCountAlloc 1))
+        unknown _indexOfInterest[303285] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[303286] "expr temp" "temp"
+        (303295 'move' _iterator[303286](303293 call _getIterator tmpIter[303148]))
         Defer
         {
           {
-            (303428 call _freeIterator _iterator[303403])
+            (303311 call _freeIterator _iterator[303286])
           }
         }
         { scopeless type
-          (303417 'move' _indexOfInterest[303402](303414 call iteratorIndex _iterator[303403]))
+          (303300 'move' _indexOfInterest[303285](303297 call iteratorIndex _iterator[303286]))
         }
-        ForLoop[303404]
+        ForLoop[303287]
         {
-          unknown tid[303421] "coforall index var" "index var" "insert auto destroy"
-          (303423 'move' tid[303421] _indexOfInterest[303402])
-          (303435 call _upEndCount _coforallCount[303394] 1)
+          unknown tid[303304] "coforall index var" "index var" "insert auto destroy"
+          (303306 'move' tid[303304] _indexOfInterest[303285])
+          (303318 call _upEndCount _coforallCount[303277] 1)
           {
             {
               { scopeless
-                unknown chunk[303215](303214 call _computeChunk tid chunkSize trailing)
-                (303218 'end of statement')
+                unknown chunk[303098](303097 call _computeChunk tid chunkSize trailing)
+                (303101 'end of statement')
               }
               {
-                unknown _indexOfInterest[303231] "an _indexOfInterest or chpl__followIdx variable" "temp"
-                unknown _iterator[303232] "expr temp" "temp"
-                (303241 'move' _iterator[303232](303239 call _getIterator(303224 call chunk 0)))
+                unknown _indexOfInterest[303114] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                unknown _iterator[303115] "expr temp" "temp"
+                (303124 'move' _iterator[303115](303122 call _getIterator(303107 call chunk 0)))
                 Defer
                 {
                   {
-                    (303258 call _freeIterator _iterator[303232])
+                    (303141 call _freeIterator _iterator[303115])
                   }
                 }
                 { scopeless type
-                  (303247 'move' _indexOfInterest[303231](303244 call iteratorIndex _iterator[303232]))
+                  (303130 'move' _indexOfInterest[303114](303127 call iteratorIndex _iterator[303115]))
                 }
-                ForLoop[303233]
+                ForLoop[303116]
                 {
-                  unknown i[303251] "index var" "insert auto destroy"
-                  (303253 'move' i[303251] _indexOfInterest[303231])
+                  unknown i[303134] "index var" "insert auto destroy"
+                  (303136 'move' i[303134] _indexOfInterest[303114])
                   { scopeless
-                    (303229 yield(303228 call this i))
+                    (303112 yield(303111 call this i))
                   }
-                  label _continueLabel[303236]
-                  _indexOfInterest[303231]
-                  _iterator[303232]
+                  label _continueLabel[303119]
+                  _indexOfInterest[303114]
+                  _iterator[303115]
                 }
-                label _breakLabel[303237]
+                label _breakLabel[303120]
               }
             }
-            (303397 call _downEndCount _coforallCount[303394] nil[44])
-            (303396 'coforall loop')
+            (303280 call _downEndCount _coforallCount[303277] nil[44])
+            (303279 'coforall loop')
           }
-          label _continueLabel[303407]
-          _indexOfInterest[303402]
-          _iterator[303403]
+          label _continueLabel[303290]
+          _indexOfInterest[303285]
+          _iterator[303286]
         }
-        label _breakLabel[303408]
+        label _breakLabel[303291]
         Defer
         {
           {
-            (303439 call _endCountFree _coforallCount[303394])
+            (303322 call _endCountFree _coforallCount[303277])
           }
         }
-        (303444 call _waitEndCount _coforallCount[303394] 1)
+        (303327 call _waitEndCount _coforallCount[303277] 1)
       }
     }
   }
   where {
-    (303143 call == tag(303140 call . iterKind c"standalone"))
-  } function list[304222](?)._computeChunk[303480](arg _mt[304450]:_MT[238], arg this[304448]:list[304222](?), arg tid[303478]:_any[178](?), arg chunkSize[303482]:_any[178](?), arg trailing[303484]:_any[178](?)) : _unknown[51] "method" "primary method" "no doc"
+    (303026 call == tag(303023 call . iterKind c"standalone"))
+  } function list[304105](?)._computeChunk[303363](arg _mt[304333]:_MT[238], arg this[304331]:list[304105](?), arg tid[303361]:_any[178](?), arg chunkSize[303365]:_any[178](?), arg trailing[303367]:_any[178](?)) : _unknown[51] "method" "primary method" "no doc"
   {
     { scopeless
-      unknown lo[303486] 0
-      unknown hi[303490] lo
-      (303494 'end of statement')
+      unknown lo[303369] 0
+      unknown hi[303373] lo
+      (303377 'end of statement')
     }
-    if(303540 call _cond_test(303498 call <= tid 0))
+    if(303423 call _cond_test(303381 call <= tid 0))
     {
-      (303502 call = lo 0)
-      (303514 call = hi(303512 call -(303509 call + chunkSize trailing) 1))
+      (303385 call = lo 0)
+      (303397 call = hi(303395 call -(303392 call + chunkSize trailing) 1))
     }
     {
-      (303525 call = lo(303523 call +(303520 call * chunkSize tid) trailing))
-      (303537 call = hi(303535 call -(303532 call + lo chunkSize) 1))
+      (303408 call = lo(303406 call +(303403 call * chunkSize tid) trailing))
+      (303420 call = hi(303418 call -(303415 call + lo chunkSize) 1))
     }
-    (303550 return(303548 call _build_tuple(303546 call chpl_build_bounded_range lo hi)))
-  } function list[304222](?).these[303558](arg _mt[304454]:_MT[238], arg this[304452]:list[304222](?), param arg tag[303556]:_any[178](?)) ref : _unknown[51] "iterator fn" "method" "primary method" "no doc"
+    (303433 return(303431 call _build_tuple(303429 call chpl_build_bounded_range lo hi)))
+  } function list[304105](?).these[303441](arg _mt[304337]:_MT[238], arg this[304335]:list[304105](?), param arg tag[303439]:_any[178](?)) ref : _unknown[51] "iterator fn" "method" "primary method" "no doc"
   {
     { scopeless
-      const osz[303568] "const" _size
-      (303571 'end of statement')
+      const osz[303451] "const" _size
+      (303454 'end of statement')
     }
     { scopeless
-      const minChunkSize[303574] "const" 32
-      (303577 'end of statement')
+      const minChunkSize[303457] "const" 32
+      (303460 'end of statement')
     }
     { scopeless
-      const hasOneChunk[303582] "const"(303580 call <= osz minChunkSize)
-      (303585 'end of statement')
+      const hasOneChunk[303465] "const"(303463 call <= osz minChunkSize)
+      (303468 'end of statement')
     }
     { scopeless
-      const numTasks[303592] "const"(303589 IfExpr  hasOneChunk then
+      const numTasks[303475] "const"(303472 IfExpr  hasOneChunk then
       { scopeless
         1
       } else
       { scopeless
         dataParTasksPerLocale
       } )
-      (303595 'end of statement')
+      (303478 'end of statement')
     }
     { scopeless
-      const chunkSize[303606] "const"(303604 call _cast int[13](303602 call floor(303599 call / osz numTasks)))
-      (303609 'end of statement')
+      const chunkSize[303489] "const"(303487 call _cast int[13](303485 call floor(303482 call / osz numTasks)))
+      (303492 'end of statement')
     }
     { scopeless
-      const trailing[303617] "const"(303615 call - osz(303613 call * chunkSize numTasks))
-      (303620 'end of statement')
+      const trailing[303500] "const"(303498 call - osz(303496 call * chunkSize numTasks))
+      (303503 'end of statement')
     }
     {
-      unknown tmpIter[303642] "expr temp" "maybe ref" "no copy" "temp"
-      (303645 'move' tmpIter[303642](303626 call #(303623 call chpl_build_low_bounded_range 0) numTasks))
-      unknown isRngDomArr[303793] "maybe param" "temp"
-      (303808 'move' isRngDomArr[303793](303806 call ||(303795 call isBoundedRange tmpIter[303642])(303804 call ||(303798 call isDomain tmpIter[303642])(303801 call isArray tmpIter[303642]))))
-      if isRngDomArr[303793]
+      unknown tmpIter[303525] "expr temp" "maybe ref" "no copy" "temp"
+      (303528 'move' tmpIter[303525](303509 call #(303506 call chpl_build_low_bounded_range 0) numTasks))
+      unknown isRngDomArr[303676] "maybe param" "temp"
+      (303691 'move' isRngDomArr[303676](303689 call ||(303678 call isBoundedRange tmpIter[303525])(303687 call ||(303681 call isDomain tmpIter[303525])(303684 call isArray tmpIter[303525]))))
+      if isRngDomArr[303676]
       {
-        const _coforallCount[303660] "const" "end count" "temp"
-        (303729 'move' _coforallCount[303660](303726 call _endCountAlloc 1))
-        unknown numTasks[303661] "temp"
-        (303713 'move' numTasks[303661](303709 call . tmpIter[303642] c"size"))
-        (303704 call _upEndCount _coforallCount[303660] 1 numTasks[303661])
-        (303701 call chpl_resetTaskSpawn numTasks[303661])
-        unknown _indexOfInterest[303668] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[303669] "expr temp" "temp"
-        (303678 'move' _iterator[303669](303676 call _getIterator tmpIter[303642]))
+        const _coforallCount[303543] "const" "end count" "temp"
+        (303612 'move' _coforallCount[303543](303609 call _endCountAlloc 1))
+        unknown numTasks[303544] "temp"
+        (303596 'move' numTasks[303544](303592 call . tmpIter[303525] c"size"))
+        (303587 call _upEndCount _coforallCount[303543] 1 numTasks[303544])
+        (303584 call chpl_resetTaskSpawn numTasks[303544])
+        unknown _indexOfInterest[303551] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[303552] "expr temp" "temp"
+        (303561 'move' _iterator[303552](303559 call _getIterator tmpIter[303525]))
         Defer
         {
           {
-            (303694 call _freeIterator _iterator[303669])
+            (303577 call _freeIterator _iterator[303552])
           }
         }
         { scopeless type
-          (303683 'move' _indexOfInterest[303668](303680 call iteratorIndex _iterator[303669]))
+          (303566 'move' _indexOfInterest[303551](303563 call iteratorIndex _iterator[303552]))
         }
-        ForLoop[303670]
+        ForLoop[303553]
         {
-          unknown tid[303687] "coforall index var" "index var" "insert auto destroy"
-          (303689 'move' tid[303687] _indexOfInterest[303668])
+          unknown tid[303570] "coforall index var" "index var" "insert auto destroy"
+          (303572 'move' tid[303570] _indexOfInterest[303551])
           {
             {
               { scopeless
-                unknown chunk[303649](303651 call _computeChunk tid chunkSize trailing)
-                (303656 'end of statement')
+                unknown chunk[303532](303534 call _computeChunk tid chunkSize trailing)
+                (303539 'end of statement')
               }
-              (303657 yield chunk)
+              (303540 yield chunk)
             }
-            (303663 call _downEndCount _coforallCount[303660] nil[44])
-            (303662 'coforall loop')
+            (303546 call _downEndCount _coforallCount[303543] nil[44])
+            (303545 'coforall loop')
           }
-          label _continueLabel[303673]
-          _indexOfInterest[303668]
-          _iterator[303669]
+          label _continueLabel[303556]
+          _indexOfInterest[303551]
+          _iterator[303552]
         }
-        label _breakLabel[303674]
+        label _breakLabel[303557]
         Defer
         {
           {
-            (303716 call _endCountFree _coforallCount[303660])
+            (303599 call _endCountFree _coforallCount[303543])
           }
         }
-        (303721 call _waitEndCount _coforallCount[303660] 1 numTasks[303661])
+        (303604 call _waitEndCount _coforallCount[303543] 1 numTasks[303544])
       }
       {
-        const _coforallCount[303733] "const" "end count" "temp"
-        (303790 'move' _coforallCount[303733](303787 call _endCountAlloc 1))
-        unknown _indexOfInterest[303741] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[303742] "expr temp" "temp"
-        (303751 'move' _iterator[303742](303749 call _getIterator tmpIter[303642]))
+        const _coforallCount[303616] "const" "end count" "temp"
+        (303673 'move' _coforallCount[303616](303670 call _endCountAlloc 1))
+        unknown _indexOfInterest[303624] "coforall index var" "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[303625] "expr temp" "temp"
+        (303634 'move' _iterator[303625](303632 call _getIterator tmpIter[303525]))
         Defer
         {
           {
-            (303767 call _freeIterator _iterator[303742])
+            (303650 call _freeIterator _iterator[303625])
           }
         }
         { scopeless type
-          (303756 'move' _indexOfInterest[303741](303753 call iteratorIndex _iterator[303742]))
+          (303639 'move' _indexOfInterest[303624](303636 call iteratorIndex _iterator[303625]))
         }
-        ForLoop[303743]
+        ForLoop[303626]
         {
-          unknown tid[303760] "coforall index var" "index var" "insert auto destroy"
-          (303762 'move' tid[303760] _indexOfInterest[303741])
-          (303774 call _upEndCount _coforallCount[303733] 1)
+          unknown tid[303643] "coforall index var" "index var" "insert auto destroy"
+          (303645 'move' tid[303643] _indexOfInterest[303624])
+          (303657 call _upEndCount _coforallCount[303616] 1)
           {
             {
               { scopeless
-                unknown chunk[303634](303633 call _computeChunk tid chunkSize trailing)
-                (303637 'end of statement')
+                unknown chunk[303517](303516 call _computeChunk tid chunkSize trailing)
+                (303520 'end of statement')
               }
-              (303640 yield chunk)
+              (303523 yield chunk)
             }
-            (303736 call _downEndCount _coforallCount[303733] nil[44])
-            (303735 'coforall loop')
+            (303619 call _downEndCount _coforallCount[303616] nil[44])
+            (303618 'coforall loop')
           }
-          label _continueLabel[303746]
-          _indexOfInterest[303741]
-          _iterator[303742]
+          label _continueLabel[303629]
+          _indexOfInterest[303624]
+          _iterator[303625]
         }
-        label _breakLabel[303747]
+        label _breakLabel[303630]
         Defer
         {
           {
-            (303778 call _endCountFree _coforallCount[303733])
+            (303661 call _endCountFree _coforallCount[303616])
           }
         }
-        (303783 call _waitEndCount _coforallCount[303733] 1)
+        (303666 call _waitEndCount _coforallCount[303616] 1)
       }
     }
   }
   where {
-    (303565 call == tag(303562 call . iterKind c"leader"))
-  } function list[304222](?).these[303819](arg _mt[304458]:_MT[238], arg this[304456]:list[304222](?), param arg tag[303817]:_any[178](?), arg followThis[303821]:_any[178](?)) ref : _unknown[51] "iterator fn" "method" "primary method" "no doc"
+    (303448 call == tag(303445 call . iterKind c"leader"))
+  } function list[304105](?).these[303702](arg _mt[304341]:_MT[238], arg this[304339]:list[304105](?), param arg tag[303700]:_any[178](?), arg followThis[303704]:_any[178](?)) ref : _unknown[51] "iterator fn" "method" "primary method" "no doc"
   {
     {
-      unknown _indexOfInterest[303841] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[303842] "expr temp" "temp"
-      (303851 'move' _iterator[303842](303849 call _getIterator(303834 call followThis 0)))
+      unknown _indexOfInterest[303724] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[303725] "expr temp" "temp"
+      (303734 'move' _iterator[303725](303732 call _getIterator(303717 call followThis 0)))
       Defer
       {
         {
-          (303868 call _freeIterator _iterator[303842])
+          (303751 call _freeIterator _iterator[303725])
         }
       }
       { scopeless type
-        (303857 'move' _indexOfInterest[303841](303854 call iteratorIndex _iterator[303842]))
+        (303740 'move' _indexOfInterest[303724](303737 call iteratorIndex _iterator[303725]))
       }
-      ForLoop[303843]
+      ForLoop[303726]
       {
-        unknown i[303861] "index var" "insert auto destroy"
-        (303863 'move' i[303861] _indexOfInterest[303841])
+        unknown i[303744] "index var" "insert auto destroy"
+        (303746 'move' i[303744] _indexOfInterest[303724])
         { scopeless
-          (303839 yield(303838 call this i))
+          (303722 yield(303721 call this i))
         }
-        label _continueLabel[303846]
-        _indexOfInterest[303841]
-        _iterator[303842]
+        label _continueLabel[303729]
+        _indexOfInterest[303724]
+        _iterator[303725]
       }
-      label _breakLabel[303847]
+      label _breakLabel[303730]
     }
   }
   where {
-    (303828 call == tag(303825 call . iterKind c"follower"))
-  } function list[304222](?).readWriteThis[303885](arg _mt[304462]:_MT[238], arg this[304460]:list[304222](?), arg ch[303882] :
+    (303711 call == tag(303708 call . iterKind c"follower"))
+  } function list[304105](?).readWriteThis[303768](arg _mt[304345]:_MT[238], arg this[304343]:list[304105](?), arg ch[303765] :
   channel) : _unknown[51] throws "method" "primary method"
   {
-    (303889 call _enter)
-    (303894 call <~> ch "[")
+    (303772 call _enter)
+    (303777 call <~> ch "[")
     {
-      unknown _indexOfInterest[303916] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[303917] "expr temp" "temp"
-      (303926 'move' _iterator[303917](303924 call _getIterator(303934 call chpl_direct_range_iter 0(303931 call - _size 2) 1)))
+      unknown _indexOfInterest[303799] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[303800] "expr temp" "temp"
+      (303809 'move' _iterator[303800](303807 call _getIterator(303817 call chpl_direct_range_iter 0(303814 call - _size 2) 1)))
       Defer
       {
         {
-          (303950 call _freeIterator _iterator[303917])
+          (303833 call _freeIterator _iterator[303800])
         }
       }
       { scopeless type
-        (303939 'move' _indexOfInterest[303916](303936 call iteratorIndex _iterator[303917]))
+        (303822 'move' _indexOfInterest[303799](303819 call iteratorIndex _iterator[303800]))
       }
-      ForLoop[303918]
+      ForLoop[303801]
       {
-        unknown i[303943] "index var" "insert auto destroy"
-        (303945 'move' i[303943] _indexOfInterest[303916])
+        unknown i[303826] "index var" "insert auto destroy"
+        (303828 'move' i[303826] _indexOfInterest[303799])
         { scopeless
-          (303913 call <~>(303910 call <~> ch(303909 call _getRef i)) ", ")
+          (303796 call <~>(303793 call <~> ch(303792 call _getRef i)) ", ")
         }
-        label _continueLabel[303921]
-        _indexOfInterest[303916]
-        _iterator[303917]
+        label _continueLabel[303804]
+        _indexOfInterest[303799]
+        _iterator[303800]
       }
-      label _breakLabel[303922]
+      label _breakLabel[303805]
     }
-    if(303972 call _cond_test(303959 call > _size 0))
+    if(303855 call _cond_test(303842 call > _size 0))
     {
       { scopeless
-        (303969 call <~> ch(303968 call _getRef(303965 call - _size 1)))
+        (303852 call <~> ch(303851 call _getRef(303848 call - _size 1)))
       }
     }
-    (303979 call <~> ch "]")
-    (303984 call _leave)
-  } function list[304222](?).isEmpty[303990](arg _mt[304466]:_MT[238], const arg this[304464]:list[304222](?)) : _unknown[51] "method" "primary method"
+    (303862 call <~> ch "]")
+    (303867 call _leave)
+  } function list[304105](?).isEmpty[303873](arg _mt[304349]:_MT[238], const arg this[304347]:list[304105](?)) : _unknown[51] "method" "primary method"
   {
-    (303995 call _enter)
+    (303878 call _enter)
     { scopeless
-      unknown result[304002](304000 call == _size 0)
-      (304005 'end of statement')
+      unknown result[303885](303883 call == _size 0)
+      (303888 'end of statement')
     }
-    (304008 call _leave)
-    (304011 return result)
+    (303891 call _leave)
+    (303894 return result)
   }
   { scopeless type
     bool[10]
-  } function list[304222](?).size[304018](arg _mt[304470]:_MT[238], const arg this[304468]:list[304222](?)) : _unknown[51] "inline" "method" "primary method" "no parens"
+  } function list[304105](?).size[303901](arg _mt[304353]:_MT[238], const arg this[304351]:list[304105](?)) : _unknown[51] "inline" "method" "primary method" "no parens"
   {
     { scopeless
-      unknown result[304021] 0
-      (304024 'end of statement')
+      unknown result[303904] 0
+      (303907 'end of statement')
     }
     { scopeless
-      const tmp[304044] "const" "temp"
-      (304046 'move' tmp[304044](304042 'deref'(304041 '_wide_get_locale' this)))
+      const tmp[303927] "const" "temp"
+      (303929 'move' tmp[303927](303925 'deref'(303924 '_wide_get_locale' this)))
       {
         {
-          (304029 call _enter)
-          (304034 call = result _size)
-          (304039 call _leave)
+          (303912 call _enter)
+          (303917 call = result _size)
+          (303922 call _leave)
         }
-        (304049 'on block' 0 tmp[304044])
+        (303932 'on block' 0 tmp[303927])
       }
     }
-    (304053 return result)
-  } function list[304222](?).indices[304059](arg _mt[304474]:_MT[238], arg this[304472]:list[304222](?)) : _unknown[51] "method" "primary method" "no parens"
+    (303936 return result)
+  } function list[304105](?).indices[303942](arg _mt[304357]:_MT[238], arg this[304355]:list[304105](?)) : _unknown[51] "method" "primary method" "no parens"
   {
-    (304071 return(304069 call chpl_build_bounded_range 0(304067 call -(304063 call . this c"size") 1)))
-  } function list[304222](?).toArray[304078](arg _mt[304478]:_MT[238], const arg this[304476]:list[304222](?)) : _unknown[51] "method" "primary method"
+    (303954 return(303952 call chpl_build_bounded_range 0(303950 call -(303946 call . this c"size") 1)))
+  } function list[304105](?).toArray[303961](arg _mt[304361]:_MT[238], const arg this[304359]:list[304105](?)) : _unknown[51] "method" "primary method"
   {
-    if(304136 call _cond_test(304092 call &&(304087 call isNonNilableClass eltType)(304091 call isOwnedClass eltType)))
+    if(304019 call _cond_test(303975 call &&(303970 call isNonNilableClass eltType)(303974 call isOwnedClass eltType)))
     {
       { scopeless
-        (304134 call compilerError "toArray() method is not available on a 'list'" " with elements of a non-nilable owned type, here: "(304132 call _cast string[26] eltType))
+        (304017 call compilerError "toArray() method is not available on a 'list'" " with elements of a non-nilable owned type, here: "(304015 call _cast string[26] eltType))
       }
     }
     { scopeless
-      unknown result[304154] "unsafe"(304152 call chpl__buildArrayRuntimeType(304150 call chpl__ensureDomainExpr(304146 call #(304143 call chpl_build_low_bounded_range 0) _size)) eltType)
-      (304157 'end of statement')
+      unknown result[304037] "unsafe"(304035 call chpl__buildArrayRuntimeType(304033 call chpl__ensureDomainExpr(304029 call #(304026 call chpl_build_low_bounded_range 0) _size)) eltType)
+      (304040 'end of statement')
     }
     { scopeless
-      const tmp[304207] "const" "temp"
-      (304209 'move' tmp[304207](304205 'deref'(304204 '_wide_get_locale' this)))
+      const tmp[304090] "const" "temp"
+      (304092 'move' tmp[304090](304088 'deref'(304087 '_wide_get_locale' this)))
       {
         {
-          (304161 call _enter)
+          (304044 call _enter)
           { scopeless
-            unknown tmp[304191](304187 forall  i  in (304181 call #(304178 call chpl_build_low_bounded_range 0) _size) do
+            unknown tmp[304074](304070 forall  i  in (304064 call #(304061 call chpl_build_low_bounded_range 0) _size) do
             {
-              (304186 call _getRef i)
-            } )(304174 call chpl__buildArrayRuntimeType(304172 call chpl__ensureDomainExpr(304168 call #(304165 call chpl_build_low_bounded_range 0) _size)) eltType)
-            (304194 'end of statement')
+              (304069 call _getRef i)
+            } )(304057 call chpl__buildArrayRuntimeType(304055 call chpl__ensureDomainExpr(304051 call #(304048 call chpl_build_low_bounded_range 0) _size)) eltType)
+            (304077 'end of statement')
           }
-          (304197 call = result tmp)
-          (304202 call _leave)
+          (304080 call = result tmp)
+          (304085 call _leave)
         }
-        (304212 'on block' 0 tmp[304207])
+        (304095 'on block' 0 tmp[304090])
       }
     }
-    (304216 return result)
+    (304099 return result)
   }
   { scopeless type
-    (304081 call chpl__buildArrayRuntimeType nil[44] eltType)
+    (303964 call chpl__buildArrayRuntimeType nil[44] eltType)
   }
-  function =[304492](ref arg lhs[304489] :
-  (304488 call list unknown t[304484] ?[260]), arg rhs[304499] :
-  (304498 call list t ?[260])) : _unknown[51] "assignop"
+  function =[304375](ref arg lhs[304372] :
+  (304371 call list unknown t[304367] ?[260]), arg rhs[304382] :
+  (304381 call list t ?[260])) : _unknown[51] "assignop"
   {
-    (304507 call(304503 call . lhs c"clear"))
-    (304518 call(304513 call . lhs c"extend") rhs)
+    (304390 call(304386 call . lhs c"clear"))
+    (304401 call(304396 call . lhs c"extend") rhs)
   }
-  function ==[304533](arg a[304530] :
-  (304529 call list unknown t[304525] ?[260]), arg b[304540] :
-  (304539 call list t ?[260])) : _unknown[51]
+  function ==[304416](arg a[304413] :
+  (304412 call list unknown t[304408] ?[260]), arg b[304423] :
+  (304422 call list t ?[260])) : _unknown[51]
   {
-    if(304557 call _cond_test(304552 call !=(304545 call . a c"size")(304549 call . b c"size")))
+    if(304440 call _cond_test(304435 call !=(304428 call . a c"size")(304432 call . b c"size")))
     {
       { scopeless
-        (304555 return 0)
+        (304438 return 0)
       }
     }
     {
-      unknown _indexOfInterest[304591] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[304592] "expr temp" "temp"
-      (304601 'move' _iterator[304592](304599 call _getIterator(304611 call chpl_direct_counted_range_iter 0(304607 call . a c"size"))))
+      unknown _indexOfInterest[304474] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[304475] "expr temp" "temp"
+      (304484 'move' _iterator[304475](304482 call _getIterator(304494 call chpl_direct_counted_range_iter 0(304490 call . a c"size"))))
       Defer
       {
         {
-          (304627 call _freeIterator _iterator[304592])
+          (304510 call _freeIterator _iterator[304475])
         }
       }
       { scopeless type
-        (304616 'move' _indexOfInterest[304591](304613 call iteratorIndex _iterator[304592]))
+        (304499 'move' _indexOfInterest[304474](304496 call iteratorIndex _iterator[304475]))
       }
-      ForLoop[304593]
+      ForLoop[304476]
       {
-        unknown i[304620] "index var" "insert auto destroy"
-        (304622 'move' i[304620] _indexOfInterest[304591])
+        unknown i[304503] "index var" "insert auto destroy"
+        (304505 'move' i[304503] _indexOfInterest[304474])
         { scopeless
-          if(304586 call _cond_test(304581 call !=(304576 call a i)(304580 call b i)))
+          if(304469 call _cond_test(304464 call !=(304459 call a i)(304463 call b i)))
           {
             { scopeless
-              (304584 return 0)
+              (304467 return 0)
             }
           }
         }
-        label _continueLabel[304596]
-        _indexOfInterest[304591]
-        _iterator[304592]
+        label _continueLabel[304479]
+        _indexOfInterest[304474]
+        _iterator[304475]
       }
-      label _breakLabel[304597]
+      label _breakLabel[304480]
     }
-    (304635 return 1)
+    (304518 return 1)
   }
   { scopeless type
     bool[10]
   }
-  function !=[304651](arg a[304648] :
-  (304647 call list unknown t[304643] ?[260]), arg b[304658] :
-  (304657 call list t ?[260])) : _unknown[51]
+  function !=[304534](arg a[304531] :
+  (304530 call list unknown t[304526] ?[260]), arg b[304541] :
+  (304540 call list t ?[260])) : _unknown[51]
   {
-    (304668 return(304666 call !(304664 call == a b)))
+    (304551 return(304549 call !(304547 call == a b)))
   }
   { scopeless type
     bool[10]

@@ -2,1578 +2,1578 @@ AST dump for BytesStringCommon after pass scopeResolve.
 Module use list: ChapelStandard SysCTypes ByteBufferHelpers NVStringFactory SysBasic Bytes String 
 
 {
-  type decodePolicy[173702] def strict[173692]:decodePolicy[173702] def replace[173694]:decodePolicy[173702] def drop[173696]:decodePolicy[173702] def escape[173698]:decodePolicy[173702] def ignore[173700]:decodePolicy[173702]
-  type encodePolicy[173710] def unescape[173706]:encodePolicy[173710] def pass[173708]:encodePolicy[173710]
+  type decodePolicy[173656] def strict[173646]:decodePolicy[173656] def replace[173648]:decodePolicy[173656] def drop[173650]:decodePolicy[173656] def escape[173652]:decodePolicy[173656] def ignore[173654]:decodePolicy[173656]
+  type encodePolicy[173664] def unescape[173660]:encodePolicy[173664] def pass[173662]:encodePolicy[173664]
   {
   }
-  unknown showStringBytesInitDeprWarnings[173716] "config" "no doc" "param" 1
-  (173719 'end of statement')
-  unknown surrogateEscape[173726] "no doc" "param"(173724 call _cast byteType[172517] 220)
-  (173729 'end of statement')
-  function isBytesOrStringType[173734](arg t[173732]:_any[178](?)) param : _unknown[51] "private"
+  unknown showStringBytesInitDeprWarnings[173670] "config" "no doc" "param" 1
+  (173673 'end of statement')
+  unknown surrogateEscape[173680] "no doc" "param"(173678 call _cast byteType[172471] 220)
+  (173683 'end of statement')
+  function isBytesOrStringType[173688](arg t[173686]:_any[178](?)) param : _unknown[51] "private"
   {
-    (173747 return(173745 call ||(173739 call == t[173732] bytes[24])(173743 call == t[173732] string[26])))
+    (173701 return(173699 call ||(173693 call == t[173686] bytes[24])(173697 call == t[173686] string[26])))
   }
   { scopeless type
     bool[10]
   }
-  function assertArgType[173757](arg t[173755]:_any[178](?), param arg methodName[173760] :
+  function assertArgType[173711](arg t[173709]:_any[178](?), param arg methodName[173714] :
   string[26]) param : _unknown[51] "private" "no return value for void"
   {
-    if(173813 call _cond_test(173767 call !(173766 call isBytesOrStringType t[173755])))
+    if(173767 call _cond_test(173721 call !(173720 call isBytesOrStringType t[173709])))
     {
-      (173810 call compilerError(173807 call +(173788 call + "BytesStringCommon." methodName[173760]) " can only be called with bytes or string argument(s)"))
+      (173764 call compilerError(173761 call +(173742 call + "BytesStringCommon." methodName[173714]) " can only be called with bytes or string argument(s)"))
     }
   }
-  function getCStr[173827](const  ref arg x[173824] :
-  unknown t[173822]) : _unknown[51] "inline"
+  function getCStr[173781](const  ref arg x[173778] :
+  unknown t[173776]) : _unknown[51] "inline"
   {
-    (173850 call assertArgType t[173822] "getCStr")
-    function _cast[173859](arg t[173856] :
-    c_string[19], arg b[173862] :
-    bufferType[172527]) : _unknown[51] "inline"
+    (173804 call assertArgType t[173776] "getCStr")
+    function _cast[173813](arg t[173810] :
+    c_string[19], arg b[173816] :
+    bufferType[172481]) : _unknown[51] "inline"
     {
-      (173870 return(173869 'cast' t[173856] b[173862]))
+      (173824 return(173823 'cast' t[173810] b[173816]))
     }
-    if(173915 call _cond_test(173886 call &&(173877 call == 0 0)(173884 call !=(173880 call . x[173824] c"locale_id") chpl_nodeID[208207])))
+    if(173869 call _cond_test(173840 call &&(173831 call == 0 0)(173838 call !=(173834 call . x[173778] c"locale_id") chpl_nodeID[208152])))
     {
-      (173913 call halt(173910 call + "Cannot call .c_str() on a remote "(173908 call _cast string[26] t[173822])))
+      (173867 call halt(173864 call + "Cannot call .c_str() on a remote "(173862 call _cast string[26] t[173776])))
     }
-    (173927 return(173925 call _cast c_string[19](173921 call . x[173824] c"buff")))
+    (173881 return(173879 call _cast c_string[19](173875 call . x[173778] c"buff")))
   }
   { scopeless type
     c_string[19]
   }
-  function decodeByteBuffer[173938](arg buff[173935] :
-  bufferType[172527], arg length[173941] :
-  int(64)[13], arg policy[173945] :
-  decodePolicy[173702]) : _unknown[51] throws
+  function decodeByteBuffer[173892](arg buff[173889] :
+  bufferType[172481], arg length[173895] :
+  int(64)[13], arg policy[173899] :
+  decodePolicy[173656]) : _unknown[51] throws
   {
-    function qio_encode_char_buf[173958](arg dst[173955] :
-    c_void_ptr[149], arg chr[173964] :
-    (173963 call int(64)[13] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function qio_encode_char_buf[173912](arg dst[173909] :
+    c_void_ptr[149], arg chr[173918] :
+    (173917 call int(64)[13] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      syserr[223605]
+      syserr[223496]
     }
-    function qio_nbytes_char[173980](arg chr[173977] :
-    (173976 call int(64)[13] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function qio_nbytes_char[173934](arg chr[173931] :
+    (173930 call int(64)[13] 32)) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      c_int[20552]
+      c_int[20549]
     }
-    if(174009 call _cond_test(173988 call == length[173941] 0))
+    if(173963 call _cond_test(173942 call == length[173895] 0))
     {
-      (174007 return "")
+      (173961 return "")
     }
-    unknown tmp[174026] "temp"(174025 call bufferAlloc(174022 call + length[173941] 1))
-    (174033 call _check_tuple_var_decl tmp[174026] 2)
-    unknown newBuff[174014](174027 call tmp[174026] 0)
-    unknown allocSize[174016](174030 call tmp[174026] 1)
-    (174038 'end of statement')
-    unknown hasEscapes[174040] 0
-    (174043 'end of statement')
-    unknown numCodepoints[174045] 0
-    (174048 'end of statement')
-    unknown expectedSize[174050] allocSize[174016]
-    (174053 'end of statement')
-    unknown thisIdx[174055] 0
-    (174058 'end of statement')
-    unknown decodedIdx[174060] 0
-    (174063 'end of statement')
+    unknown tmp[173980] "temp"(173979 call bufferAlloc(173976 call + length[173895] 1))
+    (173987 call _check_tuple_var_decl tmp[173980] 2)
+    unknown newBuff[173968](173981 call tmp[173980] 0)
+    unknown allocSize[173970](173984 call tmp[173980] 1)
+    (173992 'end of statement')
+    unknown hasEscapes[173994] 0
+    (173997 'end of statement')
+    unknown numCodepoints[173999] 0
+    (174002 'end of statement')
+    unknown expectedSize[174004] allocSize[173970]
+    (174007 'end of statement')
+    unknown thisIdx[174009] 0
+    (174012 'end of statement')
+    unknown decodedIdx[174014] 0
+    (174017 'end of statement')
     {
-      unknown tmp[174375] "temp"
-      (174399 'move' tmp[174375](174394 call _cond_test(174396 call < thisIdx[174055] length[173941])))
-      WhileDo[174380]
+      unknown tmp[174329] "temp"
+      (174353 'move' tmp[174329](174348 call _cond_test(174350 call < thisIdx[174009] length[173895])))
+      WhileDo[174334]
       {
         {
-          const tmp[174083] "const" "temp"(174082 call decodeHelp buff[173935] length[173941] thisIdx[174055](allowEsc = 0))
-          (174093 call _check_tuple_var_decl tmp[174083] 3)
-          const decodeRet[174068] "const"(174084 call tmp[174083] 0)
-          const cp[174070] "const"(174087 call tmp[174083] 1)
-          const nBytes[174072] "const"(174090 call tmp[174083] 2)
-          (174098 'end of statement')
-          unknown buffToDecode[174104](174102 call + buff[173935] thisIdx[174055])
-          (174107 'end of statement')
-          (174110 call += numCodepoints[174045] 1)
-          if(174371 call _cond_test(174115 call != decodeRet[174068] 0))
+          const tmp[174037] "const" "temp"(174036 call decodeHelp buff[173889] length[173895] thisIdx[174009](allowEsc = 0))
+          (174047 call _check_tuple_var_decl tmp[174037] 3)
+          const decodeRet[174022] "const"(174038 call tmp[174037] 0)
+          const cp[174024] "const"(174041 call tmp[174037] 1)
+          const nBytes[174026] "const"(174044 call tmp[174037] 2)
+          (174052 'end of statement')
+          unknown buffToDecode[174058](174056 call + buff[173889] thisIdx[174009])
+          (174061 'end of statement')
+          (174064 call += numCodepoints[173999] 1)
+          if(174325 call _cond_test(174069 call != decodeRet[174022] 0))
           {
-            if(174343 call _cond_test(174122 call == policy[173945] strict[173692]))
+            if(174297 call _cond_test(174076 call == policy[173899] strict[173646]))
             {
-              (174127 call bufferFree newBuff[174014])
-              (174136 'throw'(174132 'new'(_chpl_manager = _owned[30](?))(174135 call DecodeError[368790](?))))
+              (174081 call bufferFree newBuff[173968])
+              (174090 'throw'(174086 'new'(_chpl_manager = _owned[30](?))(174089 call DecodeError[368659](?))))
             }
             {
-              const nInvalidBytes[174150] "const"(174147 IfExpr (174140 call == nBytes[174072] 1) then
+              const nInvalidBytes[174104] "const"(174101 IfExpr (174094 call == nBytes[174026] 1) then
               { scopeless
-                nBytes[174072]
+                nBytes[174026]
               } else
               { scopeless
-                (174145 call - nBytes[174072] 1)
+                (174099 call - nBytes[174026] 1)
               } )
-              (174153 'end of statement')
-              (174157 call += thisIdx[174055] nInvalidBytes[174150])
-              if(174338 call _cond_test(174165 call == policy[173945] replace[173694]))
+              (174107 'end of statement')
+              (174111 call += thisIdx[174009] nInvalidBytes[174104])
+              if(174292 call _cond_test(174119 call == policy[173899] replace[173648]))
               {
-                unknown replChar[174174] "param" 65533(174170 call int(64)[13] 32)
-                (174177 'end of statement')
-                (174184 call += expectedSize[174050](174182 call - 3 nInvalidBytes[174150]))
-                (174198 call =(174190 call _build_tuple newBuff[174014] allocSize[174016])(174197 call bufferEnsureSize newBuff[174014] allocSize[174016] expectedSize[174050]))
-                (174208 call qio_encode_char_buf(174204 call + newBuff[174014] decodedIdx[174060]) replChar[174174])
-                (174212 call += decodedIdx[174060] 3)
+                unknown replChar[174128] "param" 65533(174124 call int(64)[13] 32)
+                (174131 'end of statement')
+                (174138 call += expectedSize[174004](174136 call - 3 nInvalidBytes[174104]))
+                (174152 call =(174144 call _build_tuple newBuff[173968] allocSize[173970])(174151 call bufferEnsureSize newBuff[173968] allocSize[173970] expectedSize[174004]))
+                (174162 call qio_encode_char_buf(174158 call + newBuff[173968] decodedIdx[174014]) replChar[174128])
+                (174166 call += decodedIdx[174014] 3)
               }
               {
-                if(174334 call _cond_test(174222 call == policy[173945] escape[173698]))
+                if(174288 call _cond_test(174176 call == policy[173899] escape[173652]))
                 {
-                  (174226 call = hasEscapes[174040] 1)
-                  (174235 call += expectedSize[174050](174233 call * 2 nInvalidBytes[174150]))
-                  (174249 call =(174241 call _build_tuple newBuff[174014] allocSize[174016])(174248 call bufferEnsureSize newBuff[174014] allocSize[174016] expectedSize[174050]))
+                  (174180 call = hasEscapes[173994] 1)
+                  (174189 call += expectedSize[174004](174187 call * 2 nInvalidBytes[174104]))
+                  (174203 call =(174195 call _build_tuple newBuff[173968] allocSize[173970])(174202 call bufferEnsureSize newBuff[173968] allocSize[173970] expectedSize[174004]))
                   {
-                    unknown _indexOfInterest[174286] "an _indexOfInterest or chpl__followIdx variable" "temp"
-                    unknown _iterator[174287] "expr temp" "temp"
-                    (174296 'move' _iterator[174287](174294 call _getIterator(174303 call chpl_direct_counted_range_iter 0 nInvalidBytes[174150])))
+                    unknown _indexOfInterest[174240] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                    unknown _iterator[174241] "expr temp" "temp"
+                    (174250 'move' _iterator[174241](174248 call _getIterator(174257 call chpl_direct_counted_range_iter 0 nInvalidBytes[174104])))
                     Defer
                     {
                       {
-                        (174319 call _freeIterator _iterator[174287])
+                        (174273 call _freeIterator _iterator[174241])
                       }
                     }
                     { scopeless type
-                      (174308 'move' _indexOfInterest[174286](174305 call iteratorIndex _iterator[174287]))
+                      (174262 'move' _indexOfInterest[174240](174259 call iteratorIndex _iterator[174241]))
                     }
-                    ForLoop[174288]
+                    ForLoop[174242]
                     {
-                      unknown i[174312] "index var" "insert auto destroy"
-                      (174314 'move' i[174312] _indexOfInterest[174286])
+                      unknown i[174266] "index var" "insert auto destroy"
+                      (174268 'move' i[174266] _indexOfInterest[174240])
                       {
-                        (174278 call qio_encode_char_buf(174262 call + newBuff[174014] decodedIdx[174060])(174276 call + 56320(174275 call buff[173935](174272 call +(174269 call - thisIdx[174055] nInvalidBytes[174150]) i[174312]))))
-                        (174283 call += decodedIdx[174060] 3)
+                        (174232 call qio_encode_char_buf(174216 call + newBuff[173968] decodedIdx[174014])(174230 call + 56320(174229 call buff[173889](174226 call +(174223 call - thisIdx[174009] nInvalidBytes[174104]) i[174266]))))
+                        (174237 call += decodedIdx[174014] 3)
                       }
-                      label _continueLabel[174291]
-                      _indexOfInterest[174286]
-                      _iterator[174287]
+                      label _continueLabel[174245]
+                      _indexOfInterest[174240]
+                      _iterator[174241]
                     }
-                    label _breakLabel[174292]
+                    label _breakLabel[174246]
                   }
-                  (174331 call += numCodepoints[174045](174329 call - nInvalidBytes[174150] 1))
+                  (174285 call += numCodepoints[173999](174283 call - nInvalidBytes[174104] 1))
                 }
               }
             }
           }
           {
-            (174358 call bufferMemcpyLocal(dst = newBuff[174014])(src = buffToDecode[174104])(len = nBytes[174072])(dst_off = decodedIdx[174060]))
-            (174363 call += thisIdx[174055] nBytes[174072])
-            (174368 call += decodedIdx[174060] nBytes[174072])
+            (174312 call bufferMemcpyLocal(dst = newBuff[173968])(src = buffToDecode[174058])(len = nBytes[174026])(dst_off = decodedIdx[174014]))
+            (174317 call += thisIdx[174009] nBytes[174026])
+            (174322 call += decodedIdx[174014] nBytes[174026])
           }
         }
-        label _continueLabel[174378]
-        (174389 'move' tmp[174375](174384 call _cond_test(174386 call < thisIdx[174055] length[173941])))
-        tmp[174375]
+        label _continueLabel[174332]
+        (174343 'move' tmp[174329](174338 call _cond_test(174340 call < thisIdx[174009] length[173895])))
+        tmp[174329]
       }
-      label _breakLabel[174379]
+      label _breakLabel[174333]
     }
-    (174407 call =(174405 call newBuff[174014] decodedIdx[174060]) 0)
-    unknown ret[174421](174420 call chpl_createStringWithOwnedBufferNV(x = newBuff[174014])(length = decodedIdx[174060])(size = allocSize[174016])(numCodepoints = numCodepoints[174045]))
-    (174424 'end of statement')
-    (174432 call =(174428 call . ret[174421] c"hasEscapes") hasEscapes[174040])
-    (174436 return ret[174421])
-    (355247 'used modules list'(173949 'use' SysBasic[223537]))
+    (174361 call =(174359 call newBuff[173968] decodedIdx[174014]) 0)
+    unknown ret[174375](174374 call chpl_createStringWithOwnedBufferNV(x = newBuff[173968])(length = decodedIdx[174014])(size = allocSize[173970])(numCodepoints = numCodepoints[173999]))
+    (174378 'end of statement')
+    (174386 call =(174382 call . ret[174375] c"hasEscapes") hasEscapes[173994])
+    (174390 return ret[174375])
+    (355116 'used modules list'(173903 'use' SysBasic[223428]))
   }
-  function decodeHelp[174452](arg buff[174449] :
-  (174448 call c_ptr[205100](?)(174446 call uint(64)[115] 8)), arg buffLen[174455] :
-  int(64)[13], arg offset[174459] :
-  int(64)[13], arg allowEsc[174463] :
+  function decodeHelp[174406](arg buff[174403] :
+  (174402 call c_ptr[205045](?)(174400 call uint(64)[115] 8)), arg buffLen[174409] :
+  int(64)[13], arg offset[174413] :
+  int(64)[13], arg allowEsc[174417] :
   bool[10]) : _unknown[51]
   {
-    function qio_decode_char_buf[174479](ref arg chr[174476] :
-    (174475 call int(64)[13] 32), ref arg nBytes[174482] :
-    c_int[20552], arg buf[174486] :
-    c_string[19], arg buflen[174490] :
-    ssize_t[20650]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function qio_decode_char_buf[174433](ref arg chr[174430] :
+    (174429 call int(64)[13] 32), ref arg nBytes[174436] :
+    c_int[20549], arg buf[174440] :
+    c_string[19], arg buflen[174444] :
+    ssize_t[20647]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      syserr[223605]
+      syserr[223496]
     }
-    function qio_decode_char_buf_esc[174506](ref arg chr[174503] :
-    (174502 call int(64)[13] 32), ref arg nBytes[174509] :
-    c_int[20552], arg buf[174513] :
-    c_string[19], arg buffLen[174517] :
-    ssize_t[20650]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function qio_decode_char_buf_esc[174460](ref arg chr[174457] :
+    (174456 call int(64)[13] 32), ref arg nBytes[174463] :
+    c_int[20549], arg buf[174467] :
+    c_string[19], arg buffLen[174471] :
+    ssize_t[20647]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      syserr[223605]
+      syserr[223496]
     }
-    unknown chr[174528](174527 call int(64)[13] 32)
-    (174531 'end of statement')
-    unknown nBytes[174533] c_int[20552]
-    (174536 'end of statement')
-    unknown start[174541](174539 call _cast c_int[20552] offset[174459])
-    (174544 'end of statement')
-    unknown multibytes[174552](174550 call _cast c_string[19](174547 call + buff[174449] start[174541]))
-    (174555 'end of statement')
-    unknown maxbytes[174563](174561 call _cast ssize_t[20650](174558 call - buffLen[174455] start[174541]))
-    (174566 'end of statement')
-    unknown decodeRet[174568] syserr[223605]
-    (174571 'end of statement')
-    if(174595 call _cond_test allowEsc[174463])
+    unknown chr[174482](174481 call int(64)[13] 32)
+    (174485 'end of statement')
+    unknown nBytes[174487] c_int[20549]
+    (174490 'end of statement')
+    unknown start[174495](174493 call _cast c_int[20549] offset[174413])
+    (174498 'end of statement')
+    unknown multibytes[174506](174504 call _cast c_string[19](174501 call + buff[174403] start[174495]))
+    (174509 'end of statement')
+    unknown maxbytes[174517](174515 call _cast ssize_t[20647](174512 call - buffLen[174409] start[174495]))
+    (174520 'end of statement')
+    unknown decodeRet[174522] syserr[223496]
+    (174525 'end of statement')
+    if(174549 call _cond_test allowEsc[174417])
     {
-      (174581 call = decodeRet[174568](174580 call qio_decode_char_buf_esc chr[174528] nBytes[174533] multibytes[174552] maxbytes[174563]))
+      (174535 call = decodeRet[174522](174534 call qio_decode_char_buf_esc chr[174482] nBytes[174487] multibytes[174506] maxbytes[174517]))
     }
     {
-      (174592 call = decodeRet[174568](174591 call qio_decode_char_buf chr[174528] nBytes[174533] multibytes[174552] maxbytes[174563]))
+      (174546 call = decodeRet[174522](174545 call qio_decode_char_buf chr[174482] nBytes[174487] multibytes[174506] maxbytes[174517]))
     }
-    (174607 return(174605 call _build_tuple decodeRet[174568] chr[174528] nBytes[174533]))
-    (355253 'used modules list'(174467 'use' SysBasic[223537]))
+    (174561 return(174559 call _build_tuple decodeRet[174522] chr[174482] nBytes[174487]))
+    (355122 'used modules list'(174421 'use' SysBasic[223428]))
   }
-  function initWithBorrowedBuffer[174618](ref arg x[174615] :
-  unknown t[174613], arg other[174621] :
-  t[174613]) : _unknown[51] "no return value for void"
+  function initWithBorrowedBuffer[174572](ref arg x[174569] :
+  unknown t[174567], arg other[174575] :
+  t[174567]) : _unknown[51] "no return value for void"
   {
-    (174644 call assertArgType t[174613] "initWithBorrowedBuffer")
-    (174652 call =(174648 call . x[174615] c"isOwned") 0)
-    if(174670 call _cond_test(174657 call == t[174613] string[26]))
+    (174598 call assertArgType t[174567] "initWithBorrowedBuffer")
+    (174606 call =(174602 call . x[174569] c"isOwned") 0)
+    if(174624 call _cond_test(174611 call == t[174567] string[26]))
     {
-      (174667 call =(174660 call . x[174615] c"hasEscapes")(174664 call . other[174621] c"hasEscapes"))
+      (174621 call =(174614 call . x[174569] c"hasEscapes")(174618 call . other[174575] c"hasEscapes"))
     }
-    const otherRemote[174682] "const"(174680 call !=(174676 call . other[174621] c"locale_id") chpl_nodeID[208207])
-    (174685 'end of statement')
-    const otherLen[174690] "const"(174687 call . other[174621] c"numBytes")
-    (174693 'end of statement')
-    if(174816 call _cond_test(174696 call > otherLen[174690] 0))
+    const otherRemote[174636] "const"(174634 call !=(174630 call . other[174575] c"locale_id") chpl_nodeID[208152])
+    (174639 'end of statement')
+    const otherLen[174644] "const"(174641 call . other[174575] c"numBytes")
+    (174647 'end of statement')
+    if(174770 call _cond_test(174650 call > otherLen[174644] 0))
     {
-      (174703 call =(174699 call . x[174615] c"buffLen") otherLen[174690])
-      if(174812 call _cond_test otherRemote[174682])
+      (174657 call =(174653 call . x[174569] c"buffLen") otherLen[174644])
+      if(174766 call _cond_test otherRemote[174636])
       {
-        (174713 call =(174709 call . x[174615] c"isOwned") 1)
-        (174733 call =(174718 call . x[174615] c"buff")(174732 call bufferCopyRemote(174723 call . other[174621] c"locale_id")(174728 call . other[174621] c"buff") otherLen[174690]))
-        (174744 call =(174737 call . x[174615] c"buffLen")(174742 call + otherLen[174690] 1))
-        if(174762 call _cond_test(174749 call == t[174613] string[26]))
+        (174667 call =(174663 call . x[174569] c"isOwned") 1)
+        (174687 call =(174672 call . x[174569] c"buff")(174686 call bufferCopyRemote(174677 call . other[174575] c"locale_id")(174682 call . other[174575] c"buff") otherLen[174644]))
+        (174698 call =(174691 call . x[174569] c"buffLen")(174696 call + otherLen[174644] 1))
+        if(174716 call _cond_test(174703 call == t[174567] string[26]))
         {
-          (174759 call =(174752 call . x[174615] c"cachedNumCodepoints")(174756 call . other[174621] c"cachedNumCodepoints"))
+          (174713 call =(174706 call . x[174569] c"cachedNumCodepoints")(174710 call . other[174575] c"cachedNumCodepoints"))
         }
       }
       {
-        (174775 call =(174768 call . x[174615] c"buff")(174772 call . other[174621] c"buff"))
-        (174789 call =(174782 call . x[174615] c"buffSize")(174786 call . other[174621] c"buffSize"))
-        if(174807 call _cond_test(174794 call == t[174613] string[26]))
+        (174729 call =(174722 call . x[174569] c"buff")(174726 call . other[174575] c"buff"))
+        (174743 call =(174736 call . x[174569] c"buffSize")(174740 call . other[174575] c"buffSize"))
+        if(174761 call _cond_test(174748 call == t[174567] string[26]))
         {
-          (174804 call =(174797 call . x[174615] c"cachedNumCodepoints")(174801 call . other[174621] c"cachedNumCodepoints"))
+          (174758 call =(174751 call . x[174569] c"cachedNumCodepoints")(174755 call . other[174575] c"cachedNumCodepoints"))
         }
       }
     }
   }
-  function initWithBorrowedBuffer[174829](ref arg x[174826] :
-  unknown t[174824], arg other[174832] :
-  bufferType[172527], arg length[174836] :
-  int(64)[13], arg size[174840] :
+  function initWithBorrowedBuffer[174783](ref arg x[174780] :
+  unknown t[174778], arg other[174786] :
+  bufferType[172481], arg length[174790] :
+  int(64)[13], arg size[174794] :
   int(64)[13]) : _unknown[51] "no return value for void"
   {
-    (174847 call assertArgType t[174824] "initWithBorrowedBuffer")
-    (174855 call =(174851 call . x[174826] c"isOwned") 0)
-    (174863 call =(174859 call . x[174826] c"buff") other[174832])
-    (174871 call =(174867 call . x[174826] c"buffSize") size[174840])
-    (174879 call =(174875 call . x[174826] c"buffLen") length[174836])
+    (174801 call assertArgType t[174778] "initWithBorrowedBuffer")
+    (174809 call =(174805 call . x[174780] c"isOwned") 0)
+    (174817 call =(174813 call . x[174780] c"buff") other[174786])
+    (174825 call =(174821 call . x[174780] c"buffSize") size[174794])
+    (174833 call =(174829 call . x[174780] c"buffLen") length[174790])
   }
-  function initWithOwnedBuffer[174891](ref arg x[174888] :
-  unknown t[174886], arg other[174894] :
-  bufferType[172527], arg length[174898] :
-  int(64)[13], arg size[174902] :
+  function initWithOwnedBuffer[174845](ref arg x[174842] :
+  unknown t[174840], arg other[174848] :
+  bufferType[172481], arg length[174852] :
+  int(64)[13], arg size[174856] :
   int(64)[13]) : _unknown[51] "inline" "no return value for void"
   {
-    (174925 call assertArgType t[174886] "initWithOwnedBuffer")
-    (174933 call =(174929 call . x[174888] c"isOwned") 1)
-    (174941 call =(174937 call . x[174888] c"buff") other[174894])
-    (174949 call =(174945 call . x[174888] c"buffSize") size[174902])
-    (174957 call =(174953 call . x[174888] c"buffLen") length[174898])
+    (174879 call assertArgType t[174840] "initWithOwnedBuffer")
+    (174887 call =(174883 call . x[174842] c"isOwned") 1)
+    (174895 call =(174891 call . x[174842] c"buff") other[174848])
+    (174903 call =(174899 call . x[174842] c"buffSize") size[174856])
+    (174911 call =(174907 call . x[174842] c"buffLen") length[174852])
   }
-  function initWithNewBuffer[174969](ref arg x[174966] :
-  unknown t[174964], arg other[174972] :
-  t[174964]) : _unknown[51] "inline" "no return value for void"
+  function initWithNewBuffer[174923](ref arg x[174920] :
+  unknown t[174918], arg other[174926] :
+  t[174918]) : _unknown[51] "inline" "no return value for void"
   {
-    (174995 call assertArgType t[174964] "initWithNewBuffer")
-    const otherRemote[175005] "const"(175003 call !=(174999 call . other[174972] c"locale_id") chpl_nodeID[208207])
-    (175008 'end of statement')
-    const otherLen[175013] "const"(175010 call . other[174972] c"numBytes")
-    (175016 'end of statement')
-    (175022 call =(175018 call . x[174966] c"isOwned") 1)
-    if(175040 call _cond_test(175027 call == t[174964] string[26]))
+    (174949 call assertArgType t[174918] "initWithNewBuffer")
+    const otherRemote[174959] "const"(174957 call !=(174953 call . other[174926] c"locale_id") chpl_nodeID[208152])
+    (174962 'end of statement')
+    const otherLen[174967] "const"(174964 call . other[174926] c"numBytes")
+    (174970 'end of statement')
+    (174976 call =(174972 call . x[174920] c"isOwned") 1)
+    if(174994 call _cond_test(174981 call == t[174918] string[26]))
     {
-      (175037 call =(175030 call . x[174966] c"hasEscapes")(175034 call . other[174972] c"hasEscapes"))
+      (174991 call =(174984 call . x[174920] c"hasEscapes")(174988 call . other[174926] c"hasEscapes"))
     }
-    if(175060 call _cond_test(175047 call == t[174964] string[26]))
+    if(175014 call _cond_test(175001 call == t[174918] string[26]))
     {
-      (175057 call =(175050 call . x[174966] c"cachedNumCodepoints")(175054 call . other[174972] c"cachedNumCodepoints"))
+      (175011 call =(175004 call . x[174920] c"cachedNumCodepoints")(175008 call . other[174926] c"cachedNumCodepoints"))
     }
-    if(175176 call _cond_test(175067 call > otherLen[175013] 0))
+    if(175130 call _cond_test(175021 call > otherLen[174967] 0))
     {
-      (175074 call =(175070 call . x[174966] c"buffLen") otherLen[175013])
-      if(175172 call _cond_test(175082 call &&(175079 call ! 0) otherRemote[175005]))
+      (175028 call =(175024 call . x[174920] c"buffLen") otherLen[174967])
+      if(175126 call _cond_test(175036 call &&(175033 call ! 0) otherRemote[174959]))
       {
-        (175100 call =(175085 call . x[174966] c"buff")(175099 call bufferCopyRemote(175090 call . other[174972] c"locale_id")(175095 call . other[174972] c"buff") otherLen[175013]))
-        (175112 call =(175105 call . x[174966] c"buffSize")(175110 call + otherLen[175013] 1))
+        (175054 call =(175039 call . x[174920] c"buff")(175053 call bufferCopyRemote(175044 call . other[174926] c"locale_id")(175049 call . other[174926] c"buff") otherLen[174967]))
+        (175066 call =(175059 call . x[174920] c"buffSize")(175064 call + otherLen[174967] 1))
       }
       {
-        const tmp[175128] "const" "temp"(175127 call bufferCopyLocal(175122 call . other[174972] c"buff") otherLen[175013])
-        (175135 call _check_tuple_var_decl tmp[175128] 2)
-        const buff[175115] "const"(175129 call tmp[175128] 0)
-        const allocSize[175117] "const"(175132 call tmp[175128] 1)
-        (175140 'end of statement')
-        (175147 call =(175143 call . x[174966] c"buff") buff[175115])
-        (175161 call =(175159 call(175151 call . x[174966] c"buff")(175155 call . x[174966] c"buffLen")) 0)
-        (175169 call =(175165 call . x[174966] c"buffSize") allocSize[175117])
+        const tmp[175082] "const" "temp"(175081 call bufferCopyLocal(175076 call . other[174926] c"buff") otherLen[174967])
+        (175089 call _check_tuple_var_decl tmp[175082] 2)
+        const buff[175069] "const"(175083 call tmp[175082] 0)
+        const allocSize[175071] "const"(175086 call tmp[175082] 1)
+        (175094 'end of statement')
+        (175101 call =(175097 call . x[174920] c"buff") buff[175069])
+        (175115 call =(175113 call(175105 call . x[174920] c"buff")(175109 call . x[174920] c"buffLen")) 0)
+        (175123 call =(175119 call . x[174920] c"buffSize") allocSize[175071])
       }
     }
   }
-  function initWithNewBuffer[175189](ref arg x[175186] :
-  unknown t[175184], arg other[175192] :
-  bufferType[172527], arg length[175196] :
-  int(64)[13], arg size[175200] :
+  function initWithNewBuffer[175143](ref arg x[175140] :
+  unknown t[175138], arg other[175146] :
+  bufferType[172481], arg length[175150] :
+  int(64)[13], arg size[175154] :
   int(64)[13]) : _unknown[51] "no return value for void"
   {
-    (175207 call assertArgType t[175184] "initWithNewBuffer")
-    const otherLen[175211] "const" length[175196]
-    (175214 'end of statement')
-    (175220 call =(175216 call . x[175186] c"isOwned") 1)
-    if(175292 call _cond_test(175225 call > otherLen[175211] 0))
+    (175161 call assertArgType t[175138] "initWithNewBuffer")
+    const otherLen[175165] "const" length[175150]
+    (175168 'end of statement')
+    (175174 call =(175170 call . x[175140] c"isOwned") 1)
+    if(175246 call _cond_test(175179 call > otherLen[175165] 0))
     {
-      const tmp[175240] "const" "temp"(175239 call bufferCopyLocal(175235 call _cast bufferType[172527] other[175192]) otherLen[175211])
-      (175247 call _check_tuple_var_decl tmp[175240] 2)
-      const buff[175227] "const"(175241 call tmp[175240] 0)
-      const allocSize[175229] "const"(175244 call tmp[175240] 1)
-      (175252 'end of statement')
-      (175259 call =(175255 call . x[175186] c"buff") buff[175227])
-      (175267 call =(175263 call . x[175186] c"buffLen") otherLen[175211])
-      (175281 call =(175279 call(175271 call . x[175186] c"buff")(175275 call . x[175186] c"buffLen")) 0)
-      (175289 call =(175285 call . x[175186] c"buffSize") allocSize[175229])
+      const tmp[175194] "const" "temp"(175193 call bufferCopyLocal(175189 call _cast bufferType[172481] other[175146]) otherLen[175165])
+      (175201 call _check_tuple_var_decl tmp[175194] 2)
+      const buff[175181] "const"(175195 call tmp[175194] 0)
+      const allocSize[175183] "const"(175198 call tmp[175194] 1)
+      (175206 'end of statement')
+      (175213 call =(175209 call . x[175140] c"buff") buff[175181])
+      (175221 call =(175217 call . x[175140] c"buffLen") otherLen[175165])
+      (175235 call =(175233 call(175225 call . x[175140] c"buff")(175229 call . x[175140] c"buffLen")) 0)
+      (175243 call =(175239 call . x[175140] c"buffSize") allocSize[175183])
     }
   }
-  function getView[175305](const  ref arg x[175302] :
-  unknown t[175300], arg r[175311] :
-  (175310 call range[64319](?) ?[260])) : _unknown[51]
+  function getView[175259](const  ref arg x[175256] :
+  unknown t[175254], arg r[175265] :
+  (175264 call range[64316](?) ?[260])) : _unknown[51]
   {
-    (175334 call assertArgType t[175300] "getView")
-    if(175372 call _cond_test(175348 call &&(175339 call == t[175300] bytes[24])(175346 call ==(175342 call . r[175311] c"idxType") codepointIndex[28277])))
+    (175288 call assertArgType t[175254] "getView")
+    if(175326 call _cond_test(175302 call &&(175293 call == t[175254] bytes[24])(175300 call ==(175296 call . r[175265] c"idxType") codepointIndex[28274])))
     {
-      (175369 call compilerError "codepointIndex ranges cannot be used with bytes in getView")
+      (175323 call compilerError "codepointIndex ranges cannot be used with bytes in getView")
     }
-    function simpleCaseHelper[175378]() : _unknown[51]
+    function simpleCaseHelper[175332]() : _unknown[51]
     {
-      const intR[175395] "const"(175393 call _cast(175392 call range[64319](?) int(64)[13](175385 call . r[175311] c"boundedType")(175389 call . r[175311] c"stridable")) r[175311])
-      (175398 'end of statement')
-      if(175487 call _cond_test 1)
+      const intR[175349] "const"(175347 call _cast(175346 call range[64316](?) int(64)[13](175339 call . r[175265] c"boundedType")(175343 call . r[175265] c"stridable")) r[175265])
+      (175352 'end of statement')
+      if(175441 call _cond_test 1)
       {
-        if(175482 call _cond_test(175411 call !(175410 call(175405 call .(175402 call . x[175302] c"byteIndices") c"boundsCheck") intR[175395])))
+        if(175436 call _cond_test(175365 call !(175364 call(175359 call .(175356 call . x[175256] c"byteIndices") c"boundsCheck") intR[175349])))
         {
-          (175479 call halt "range " r[175311](175473 call +(175454 call + " out of bounds for "(175452 call _cast string[26] t[175300])) " with length ")(175476 call . x[175302] c"numBytes"))
+          (175433 call halt "range " r[175265](175427 call +(175408 call + " out of bounds for "(175406 call _cast string[26] t[175254])) " with length ")(175430 call . x[175256] c"numBytes"))
         }
       }
-      if(175536 call _cond_test(175496 call ==(175492 call . r[175311] c"idxType") byteIndex[28173]))
+      if(175490 call _cond_test(175450 call ==(175446 call . r[175265] c"idxType") byteIndex[28170]))
       {
-        (175511 return(175509 call _build_tuple(175504 call intR[175395](175500 call . x[175302] c"byteIndices"))(175506 call - 1)))
+        (175465 return(175463 call _build_tuple(175458 call intR[175349](175454 call . x[175256] c"byteIndices"))(175460 call - 1)))
       }
       {
-        const retRange[175521] "const"(175520 call intR[175395](175516 call . x[175302] c"byteIndices"))
-        (175524 'end of statement')
-        (175534 return(175532 call _build_tuple retRange[175521](175528 call . retRange[175521] c"size")))
+        const retRange[175475] "const"(175474 call intR[175349](175470 call . x[175256] c"byteIndices"))
+        (175478 'end of statement')
+        (175488 return(175486 call _build_tuple retRange[175475](175482 call . retRange[175475] c"size")))
       }
     }
-    if(175927 call _cond_test(175553 call ||(175544 call == t[175300] bytes[24])(175551 call ==(175547 call . r[175311] c"idxType") byteIndex[28173])))
+    if(175881 call _cond_test(175507 call ||(175498 call == t[175254] bytes[24])(175505 call ==(175501 call . r[175265] c"idxType") byteIndex[28170])))
     {
-      (175558 return(175557 call simpleCaseHelper))
+      (175512 return(175511 call simpleCaseHelper))
     }
     {
-      if(175923 call _cond_test(175571 call &&(175563 call == t[175300] string[26])(175570 call(175566 call . x[175302] c"isASCII"))))
+      if(175877 call _cond_test(175525 call &&(175517 call == t[175254] string[26])(175524 call(175520 call . x[175256] c"isASCII"))))
       {
-        (175576 return(175575 call simpleCaseHelper))
+        (175530 return(175529 call simpleCaseHelper))
       }
       {
-        if(175605 call _cond_test(175580 call . r[175311] c"stridable"))
+        if(175559 call _cond_test(175534 call . r[175265] c"stridable"))
         {
-          (175602 call compilerError "string slicing doesn't support stridable codepoint ranges")
+          (175556 call compilerError "string slicing doesn't support stridable codepoint ranges")
         }
-        if(175630 call _cond_test(175615 call == r[175311](175612 call . x[175302] c"indices")))
+        if(175584 call _cond_test(175569 call == r[175265](175566 call . x[175256] c"indices")))
         {
-          (175628 return(175626 call _build_tuple(175618 call . x[175302] c"byteIndices")(175622 call . x[175302] c"cachedNumCodepoints")))
+          (175582 return(175580 call _build_tuple(175572 call . x[175256] c"byteIndices")(175576 call . x[175256] c"cachedNumCodepoints")))
         }
-        const intR[175650] "const"(175648 call _cast(175647 call range[64319](?) int(64)[13](175640 call . r[175311] c"boundedType")(175644 call . r[175311] c"stridable")) r[175311])
-        (175653 'end of statement')
-        if(175684 call _cond_test 1)
+        const intR[175604] "const"(175602 call _cast(175601 call range[64316](?) int(64)[13](175594 call . r[175265] c"boundedType")(175598 call . r[175265] c"stridable")) r[175265])
+        (175607 'end of statement')
+        if(175638 call _cond_test 1)
         {
-          if(175679 call _cond_test(175665 call !(175664 call(175659 call .(175656 call . x[175302] c"indices") c"boundsCheck") intR[175650])))
+          if(175633 call _cond_test(175619 call !(175618 call(175613 call .(175610 call . x[175256] c"indices") c"boundsCheck") intR[175604])))
           {
-            (175676 call halt "range " r[175311] " out of bounds for string with length "(175673 call . x[175302] c"size"))
+            (175630 call halt "range " r[175265] " out of bounds for string with length "(175627 call . x[175256] c"size"))
           }
         }
-        unknown cpCount[175689] 0
-        (175692 'end of statement')
-        const cpIdxLow[175722] "const"(175719 IfExpr (175709 call &&(175698 call(175694 call . intR[175650] c"hasLowBound"))(175707 call >=(175704 call _cast int(64)[13](175700 call . intR[175650] c"alignedLow")) 0)) then
+        unknown cpCount[175643] 0
+        (175646 'end of statement')
+        const cpIdxLow[175676] "const"(175673 IfExpr (175663 call &&(175652 call(175648 call . intR[175604] c"hasLowBound"))(175661 call >=(175658 call _cast int(64)[13](175654 call . intR[175604] c"alignedLow")) 0)) then
         { scopeless
-          (175716 call _cast int(64)[13](175712 call . intR[175650] c"alignedLow"))
+          (175670 call _cast int(64)[13](175666 call . intR[175604] c"alignedLow"))
         } else
         { scopeless
           0
         } )
-        (175725 'end of statement')
-        const cpIdxHigh[175749] "const"(175746 IfExpr (175731 call(175727 call . intR[175650] c"hasHighBound")) then
+        (175679 'end of statement')
+        const cpIdxHigh[175703] "const"(175700 IfExpr (175685 call(175681 call . intR[175604] c"hasHighBound")) then
         { scopeless
-          (175737 call _cast int(64)[13](175733 call . intR[175650] c"alignedHigh"))
+          (175691 call _cast int(64)[13](175687 call . intR[175604] c"alignedHigh"))
         } else
         { scopeless
-          (175744 call -(175740 call . x[175302] c"buffLen") 1)
+          (175698 call -(175694 call . x[175256] c"buffLen") 1)
         } )
-        (175752 'end of statement')
-        unknown byteLow[175757](175754 call . x[175302] c"buffLen")
-        (175760 'end of statement')
-        unknown byteHigh[175768](175766 call -(175762 call . x[175302] c"buffLen") 1)
-        (175771 'end of statement')
-        if(175903 call _cond_test(175774 call >= cpIdxHigh[175749] 0))
+        (175706 'end of statement')
+        unknown byteLow[175711](175708 call . x[175256] c"buffLen")
+        (175714 'end of statement')
+        unknown byteHigh[175722](175720 call -(175716 call . x[175256] c"buffLen") 1)
+        (175725 'end of statement')
+        if(175857 call _cond_test(175728 call >= cpIdxHigh[175703] 0))
         {
           {
-            unknown _indexOfInterest[175854] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[175855] "expr temp" "temp"
-            (175864 'move' _iterator[175855](175862 call _getIterator(175788 call(175784 call . x[175302] c"_indexLen"))))
+            unknown _indexOfInterest[175808] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[175809] "expr temp" "temp"
+            (175818 'move' _iterator[175809](175816 call _getIterator(175742 call(175738 call . x[175256] c"_indexLen"))))
             Defer
             {
               {
-                (175895 call _freeIterator _iterator[175855])
+                (175849 call _freeIterator _iterator[175809])
               }
             }
             { scopeless type
-              (175870 'move' _indexOfInterest[175854](175867 call iteratorIndex _iterator[175855]))
+              (175824 'move' _indexOfInterest[175808](175821 call iteratorIndex _iterator[175809]))
             }
-            ForLoop[175856]
+            ForLoop[175810]
             {
-              (175875 call _check_tuple_var_decl _indexOfInterest[175854] 2)
-              unknown i[175881] "index var" "insert auto destroy"
-              (175883 'move' i[175881](175879 call _indexOfInterest[175854] 0))
-              unknown nBytes[175888] "index var" "insert auto destroy"
-              (175890 'move' nBytes[175888](175886 call _indexOfInterest[175854] 1))
+              (175829 call _check_tuple_var_decl _indexOfInterest[175808] 2)
+              unknown i[175835] "index var" "insert auto destroy"
+              (175837 'move' i[175835](175833 call _indexOfInterest[175808] 0))
+              unknown nBytes[175842] "index var" "insert auto destroy"
+              (175844 'move' nBytes[175842](175840 call _indexOfInterest[175808] 1))
               {
-                if(175818 call _cond_test(175791 call == cpCount[175689] cpIdxLow[175722]))
+                if(175772 call _cond_test(175745 call == cpCount[175643] cpIdxLow[175676]))
                 {
-                  (175798 call = byteLow[175757](175796 call _cast int(64)[13] i[175881]))
-                  if(175813 call _cond_test(175808 call !(175807 call(175803 call . r[175311] c"hasHighBound"))))
+                  (175752 call = byteLow[175711](175750 call _cast int(64)[13] i[175835]))
+                  if(175767 call _cond_test(175762 call !(175761 call(175757 call . r[175265] c"hasHighBound"))))
                   {
-                    break _breakLabel[175860] _breakLabel[175860]
+                    break _breakLabel[175814] _breakLabel[175814]
                   }
                 }
-                if(175845 call _cond_test(175825 call == cpCount[175689] cpIdxHigh[175749]))
+                if(175799 call _cond_test(175779 call == cpCount[175643] cpIdxHigh[175703]))
                 {
-                  (175838 call = byteHigh[175768](175836 call -(175833 call +(175830 call _cast int(64)[13] i[175881]) nBytes[175888]) 1))
-                  break _breakLabel[175860] _breakLabel[175860]
+                  (175792 call = byteHigh[175722](175790 call -(175787 call +(175784 call _cast int(64)[13] i[175835]) nBytes[175842]) 1))
+                  break _breakLabel[175814] _breakLabel[175814]
                 }
-                (175851 call += cpCount[175689] 1)
+                (175805 call += cpCount[175643] 1)
               }
-              label _continueLabel[175859]
-              _indexOfInterest[175854]
-              _iterator[175855]
+              label _continueLabel[175813]
+              _indexOfInterest[175808]
+              _iterator[175809]
             }
-            label _breakLabel[175860]
+            label _breakLabel[175814]
           }
         }
-        (175921 return(175919 call _build_tuple(175909 call chpl_build_bounded_range byteLow[175757] byteHigh[175768])(175916 call +(175913 call - cpIdxHigh[175749] cpIdxLow[175722]) 1)))
+        (175875 return(175873 call _build_tuple(175863 call chpl_build_bounded_range byteLow[175711] byteHigh[175722])(175870 call +(175867 call - cpIdxHigh[175703] cpIdxLow[175676]) 1)))
       }
     }
   }
-  function getSlice[175941](const  ref arg x[175938] :
-  unknown t[175936], arg r[175947] :
-  (175946 call range[64319](?) ?[260])) : _unknown[51]
+  function getSlice[175895](const  ref arg x[175892] :
+  unknown t[175890], arg r[175901] :
+  (175900 call range[64316](?) ?[260])) : _unknown[51]
   {
-    (175970 call assertArgType t[175936] "getSlice")
-    if(175988 call _cond_test(175978 call(175974 call . x[175938] c"isEmpty")))
+    (175924 call assertArgType t[175890] "getSlice")
+    if(175942 call _cond_test(175932 call(175928 call . x[175892] c"isEmpty")))
     {
-      unknown ret[175980] t[175936]
-      (175983 'end of statement')
-      (175986 return ret[175980])
+      unknown ret[175934] t[175890]
+      (175937 'end of statement')
+      (175940 return ret[175934])
     }
-    const tmp[176002] "const" "temp"(176001 call getView x[175938] r[175947])
-    (176009 call _check_tuple_var_decl tmp[176002] 2)
-    const r2[175992] "const"(176003 call tmp[176002] 0)
-    const numChars[175994] "const"(176006 call tmp[176002] 1)
-    (176014 'end of statement')
-    if(176031 call _cond_test(176020 call <=(176016 call . r2[175992] c"size") 0))
+    const tmp[175956] "const" "temp"(175955 call getView x[175892] r[175901])
+    (175963 call _check_tuple_var_decl tmp[175956] 2)
+    const r2[175946] "const"(175957 call tmp[175956] 0)
+    const numChars[175948] "const"(175960 call tmp[175956] 1)
+    (175968 'end of statement')
+    if(175985 call _cond_test(175974 call <=(175970 call . r2[175946] c"size") 0))
     {
-      unknown ret[176023] t[175936]
-      (176026 'end of statement')
-      (176029 return ret[176023])
+      unknown ret[175977] t[175890]
+      (175980 'end of statement')
+      (175983 return ret[175977])
     }
-    unknown buff[176036] bufferType[172527]
-    (176039 'end of statement')
-    unknown buffSize[176041] int(64)[13]
-    (176044 'end of statement')
-    const copyLen[176058] "const"(176056 call +(176053 call -(176046 call . r2[175992] c"high")(176050 call . r2[175992] c"low")) 1)
-    (176061 'end of statement')
-    unknown tmp[176087] "temp"(176086 call bufferCopy(buf =(176069 call . x[175938] c"buff"))(off =(176075 call . r2[175992] c"low"))(len = copyLen[176058])(loc =(176082 call . x[175938] c"locale_id")))
-    (176094 call _check_tuple_var_decl tmp[176087] 2)
-    unknown copyBuf[176062](176088 call tmp[176087] 0)
-    unknown copySize[176064](176091 call tmp[176087] 1)
-    (176099 'end of statement')
-    if(176246 call _cond_test(176105 call ==(176101 call . r2[175992] c"stride") 1))
+    unknown buff[175990] bufferType[172481]
+    (175993 'end of statement')
+    unknown buffSize[175995] int(64)[13]
+    (175998 'end of statement')
+    const copyLen[176012] "const"(176010 call +(176007 call -(176000 call . r2[175946] c"high")(176004 call . r2[175946] c"low")) 1)
+    (176015 'end of statement')
+    unknown tmp[176041] "temp"(176040 call bufferCopy(buf =(176023 call . x[175892] c"buff"))(off =(176029 call . r2[175946] c"low"))(len = copyLen[176012])(loc =(176036 call . x[175892] c"locale_id")))
+    (176048 call _check_tuple_var_decl tmp[176041] 2)
+    unknown copyBuf[176016](176042 call tmp[176041] 0)
+    unknown copySize[176018](176045 call tmp[176041] 1)
+    (176053 'end of statement')
+    if(176200 call _cond_test(176059 call ==(176055 call . r2[175946] c"stride") 1))
     {
-      (176109 call = buff[176036] copyBuf[176062])
-      (176115 call = buffSize[176041] copySize[176064])
+      (176063 call = buff[175990] copyBuf[176016])
+      (176069 call = buffSize[175995] copySize[176018])
     }
     {
-      unknown tmp[176133] "temp"(176132 call bufferAlloc(176129 call +(176125 call . r2[175992] c"size") 1))
-      (176140 call _check_tuple_var_decl tmp[176133] 2)
-      unknown newBuff[176118](176134 call tmp[176133] 0)
-      unknown allocSize[176120](176137 call tmp[176133] 1)
-      (176145 'end of statement')
+      unknown tmp[176087] "temp"(176086 call bufferAlloc(176083 call +(176079 call . r2[175946] c"size") 1))
+      (176094 call _check_tuple_var_decl tmp[176087] 2)
+      unknown newBuff[176072](176088 call tmp[176087] 0)
+      unknown allocSize[176074](176091 call tmp[176087] 1)
+      (176099 'end of statement')
       {
-        unknown _indexOfInterest[176176] "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[176177] "expr temp" "temp"
-        (176194 'move' _iterator[176177](176157 call _build_tuple(176186 call _getIterator r2[175992])(176191 call _getIterator(176189 call chpl_build_low_bounded_range 0))))
+        unknown _indexOfInterest[176130] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[176131] "expr temp" "temp"
+        (176148 'move' _iterator[176131](176111 call _build_tuple(176140 call _getIterator r2[175946])(176145 call _getIterator(176143 call chpl_build_low_bounded_range 0))))
         Defer
         {
           {
-            (176224 call _freeIterator _iterator[176177])
+            (176178 call _freeIterator _iterator[176131])
           }
         }
         { scopeless type
-          (176199 'move' _indexOfInterest[176176](176196 call iteratorIndex _iterator[176177]))
+          (176153 'move' _indexOfInterest[176130](176150 call iteratorIndex _iterator[176131]))
         }
-        ForLoop[176178]
+        ForLoop[176132]
         {
-          (176204 call _check_tuple_var_decl _indexOfInterest[176176] 2)
-          unknown r2_i[176210] "index var" "insert auto destroy"
-          (176212 'move' r2_i[176210](176208 call _indexOfInterest[176176] 0))
-          unknown i[176217] "index var" "insert auto destroy"
-          (176219 'move' i[176217](176215 call _indexOfInterest[176176] 1))
+          (176158 call _check_tuple_var_decl _indexOfInterest[176130] 2)
+          unknown r2_i[176164] "index var" "insert auto destroy"
+          (176166 'move' r2_i[176164](176162 call _indexOfInterest[176130] 0))
+          unknown i[176171] "index var" "insert auto destroy"
+          (176173 'move' i[176171](176169 call _indexOfInterest[176130] 1))
           {
-            (176172 call =(176161 call newBuff[176118] i[176217])(176171 call copyBuf[176062](176168 call - r2_i[176210](176165 call . r2[175992] c"low"))))
+            (176126 call =(176115 call newBuff[176072] i[176171])(176125 call copyBuf[176016](176122 call - r2_i[176164](176119 call . r2[175946] c"low"))))
           }
-          label _continueLabel[176181]
-          _indexOfInterest[176176]
-          _iterator[176177]
+          label _continueLabel[176135]
+          _indexOfInterest[176130]
+          _iterator[176131]
         }
-        label _breakLabel[176182]
+        label _breakLabel[176136]
       }
-      (176233 call = buff[176036] newBuff[176118])
-      (176238 call = buffSize[176041] allocSize[176120])
-      (176244 call bufferFree copyBuf[176062])
+      (176187 call = buff[175990] newBuff[176072])
+      (176192 call = buffSize[175995] allocSize[176074])
+      (176198 call bufferFree copyBuf[176016])
     }
-    const buffLen[176254] "const"(176251 call . r2[175992] c"size")
-    (176257 'end of statement')
-    (176263 call =(176261 call buff[176036] buffLen[176254]) 0)
-    if(176321 call _cond_test(176268 call == t[175936] string[26]))
+    const buffLen[176208] "const"(176205 call . r2[175946] c"size")
+    (176211 'end of statement')
+    (176217 call =(176215 call buff[175990] buffLen[176208]) 0)
+    if(176275 call _cond_test(176222 call == t[175890] string[26]))
     {
-      unknown numCodepoints[176271] numChars[175994]
-      (176274 'end of statement')
-      if(176292 call _cond_test(176280 call == numCodepoints[176271](176278 call - 1)))
+      unknown numCodepoints[176225] numChars[175948]
+      (176228 'end of statement')
+      if(176246 call _cond_test(176234 call == numCodepoints[176225](176232 call - 1)))
       {
-        (176288 call = numCodepoints[176271](176287 call countNumCodepoints buff[176036] buffLen[176254]))
+        (176242 call = numCodepoints[176225](176241 call countNumCodepoints buff[175990] buffLen[176208]))
       }
-      (176307 return(176306 call chpl_createStringWithOwnedBufferNV(x = buff[176036])(length = buffLen[176254])(size = buffSize[176041])(numCodepoints = numCodepoints[176271])))
+      (176261 return(176260 call chpl_createStringWithOwnedBufferNV(x = buff[175990])(length = buffLen[176208])(size = buffSize[175995])(numCodepoints = numCodepoints[176225])))
     }
     {
-      (176318 return(176317 call createBytesWithOwnedBuffer(x = buff[176036])(length = buffLen[176254])(size = buffSize[176041])))
+      (176272 return(176271 call createBytesWithOwnedBuffer(x = buff[175990])(length = buffLen[176208])(size = buffSize[175995])))
     }
   }
-  function getIndexType[176331](arg t[176329]:_any[178](?)) type : _unknown[51]
+  function getIndexType[176285](arg t[176283]:_any[178](?)) type : _unknown[51]
   {
-    if(176382 call _cond_test(176335 call == t[176329] bytes[24]))
+    if(176336 call _cond_test(176289 call == t[176283] bytes[24]))
     {
-      (176341 return idxType[22841])
-      (361601 'referenced modules list' Bytes[22819])
+      (176295 return idxType[22838])
+      (361470 'referenced modules list' Bytes[22816])
     }
     {
-      if(176376 call _cond_test(176345 call == t[176329] string[26]))
+      if(176330 call _cond_test(176299 call == t[176283] string[26]))
       {
-        (176353 return byteIndex[28173])
-        (361605 'referenced modules list' String[27897])
+        (176307 return byteIndex[28170])
+        (361474 'referenced modules list' String[27894])
       }
       {
-        (176374 call compilerError "This function should only be used by bytes or string")
+        (176328 call compilerError "This function should only be used by bytes or string")
       }
     }
   }
-  function doReplace[176398](const  ref arg x[176395] :
-  unknown t[176393], arg needle[176401] :
-  t[176393], arg replacement[176405] :
-  t[176393], arg count[176412] :
+  function doReplace[176352](const  ref arg x[176349] :
+  unknown t[176347], arg needle[176355] :
+  t[176347], arg replacement[176359] :
+  t[176347], arg count[176366] :
   int(64)[13] =
-  (176410 call - 1)) : _unknown[51]
+  (176364 call - 1)) : _unknown[51]
   {
-    (176437 call assertArgType t[176393] "doReplace")
-    unknown _idxt[176444] "type variable"(176443 call getIndexType t[176393])
-    unknown result[176449] x[176395] t[176393]
-    (176452 'end of statement')
-    unknown found[176455] 0 int(64)[13]
-    (176458 'end of statement')
-    unknown startIdx[176461] 0 _idxt[176444]
-    (176464 'end of statement')
-    const localNeedle[176472] "const"(176471 call(176467 call . needle[176401] c"localize")) t[176393]
-    (176475 'end of statement')
-    const localReplacement[176483] "const"(176482 call(176478 call . replacement[176405] c"localize")) t[176393]
-    (176486 'end of statement')
+    (176391 call assertArgType t[176347] "doReplace")
+    unknown _idxt[176398] "type variable"(176397 call getIndexType t[176347])
+    unknown result[176403] x[176349] t[176347]
+    (176406 'end of statement')
+    unknown found[176409] 0 int(64)[13]
+    (176412 'end of statement')
+    unknown startIdx[176415] 0 _idxt[176398]
+    (176418 'end of statement')
+    const localNeedle[176426] "const"(176425 call(176421 call . needle[176355] c"localize")) t[176347]
+    (176429 'end of statement')
+    const localReplacement[176437] "const"(176436 call(176432 call . replacement[176359] c"localize")) t[176347]
+    (176440 'end of statement')
     {
-      unknown tmp[176572] "temp"
-      (176608 'move' tmp[176572](176597 call _cond_test(176599 call ||(176601 call < count[176412] 0)(176605 call < found[176455] count[176412]))))
-      WhileDo[176577]
+      unknown tmp[176526] "temp"
+      (176562 'move' tmp[176526](176551 call _cond_test(176553 call ||(176555 call < count[176366] 0)(176559 call < found[176409] count[176366]))))
+      WhileDo[176531]
       {
         {
-          const idx[176507] "const"(176506 call(176498 call . result[176449] c"find") localNeedle[176472](176504 call chpl_build_low_bounded_range startIdx[176461]))
-          (176510 'end of statement')
-          if(176521 call _cond_test(176516 call == idx[176507](176514 call - 1)))
+          const idx[176461] "const"(176460 call(176452 call . result[176403] c"find") localNeedle[176426](176458 call chpl_build_low_bounded_range startIdx[176415]))
+          (176464 'end of statement')
+          if(176475 call _cond_test(176470 call == idx[176461](176468 call - 1)))
           {
-            break _breakLabel[176576] _breakLabel[176576]
+            break _breakLabel[176530] _breakLabel[176530]
           }
-          (176528 call += found[176455] 1)
-          (176558 call = result[176449](176556 call +(176542 call +(176540 call result[176449](176537 call chpl_build_high_bounded_range(176535 call - idx[176507] 1))) localReplacement[176483])(176555 call result[176449](176552 call chpl_build_low_bounded_range(176550 call + idx[176507](176547 call . localNeedle[176472] c"numBytes"))))))
-          (176569 call = startIdx[176461](176567 call + idx[176507](176564 call . localReplacement[176483] c"numBytes")))
+          (176482 call += found[176409] 1)
+          (176512 call = result[176403](176510 call +(176496 call +(176494 call result[176403](176491 call chpl_build_high_bounded_range(176489 call - idx[176461] 1))) localReplacement[176437])(176509 call result[176403](176506 call chpl_build_low_bounded_range(176504 call + idx[176461](176501 call . localNeedle[176426] c"numBytes"))))))
+          (176523 call = startIdx[176415](176521 call + idx[176461](176518 call . localReplacement[176437] c"numBytes")))
         }
-        label _continueLabel[176575]
-        (176592 'move' tmp[176572](176581 call _cond_test(176583 call ||(176585 call < count[176412] 0)(176589 call < found[176455] count[176412]))))
-        tmp[176572]
+        label _continueLabel[176529]
+        (176546 'move' tmp[176526](176535 call _cond_test(176537 call ||(176539 call < count[176366] 0)(176543 call < found[176409] count[176366]))))
+        tmp[176526]
       }
-      label _breakLabel[176576]
+      label _breakLabel[176530]
     }
-    (176612 return result[176449])
+    (176566 return result[176403])
   }
   { scopeless type
-    t[176393]
+    t[176347]
   }
-  function doSplit[176624](const  ref arg x[176621] :
-  unknown t[176619], arg sep[176627] :
-  t[176619], arg maxsplit[176634] :
+  function doSplit[176578](const  ref arg x[176575] :
+  unknown t[176573], arg sep[176581] :
+  t[176573], arg maxsplit[176588] :
   int(64)[13] =
-  (176632 call - 1), arg ignoreEmpty[176640] :
+  (176586 call - 1), arg ignoreEmpty[176594] :
   bool[10] =
   0) : _unknown[51] "iterator fn" "no return value for void"
   {
-    (176665 call assertArgType t[176619] "doSplit")
-    unknown _idxt[176672] "type variable"(176671 call getIndexType t[176619])
-    if(176906 call _cond_test(176690 call !(176688 call &&(176680 call &&(176677 call == maxsplit[176634] 0) ignoreEmpty[176640])(176687 call(176683 call . x[176621] c"isEmpty")))))
+    (176619 call assertArgType t[176573] "doSplit")
+    unknown _idxt[176626] "type variable"(176625 call getIndexType t[176573])
+    if(176860 call _cond_test(176644 call !(176642 call &&(176634 call &&(176631 call == maxsplit[176588] 0) ignoreEmpty[176594])(176641 call(176637 call . x[176575] c"isEmpty")))))
     {
-      const localThis[176699] "const"(176698 call(176694 call . x[176621] c"localize")) t[176619]
-      (176702 'end of statement')
-      const localSep[176711] "const"(176710 call(176706 call . sep[176627] c"localize")) t[176619]
-      (176714 'end of statement')
-      unknown splitAll[176720](176718 call <= maxsplit[176634] 0) bool[10]
-      (176723 'end of statement')
-      unknown splitCount[176726] 0 int(64)[13]
-      (176729 'end of statement')
-      unknown start[176732] 0 _idxt[176672]
-      (176735 'end of statement')
-      unknown done[176738] 0 bool[10]
-      (176741 'end of statement')
+      const localThis[176653] "const"(176652 call(176648 call . x[176575] c"localize")) t[176573]
+      (176656 'end of statement')
+      const localSep[176665] "const"(176664 call(176660 call . sep[176581] c"localize")) t[176573]
+      (176668 'end of statement')
+      unknown splitAll[176674](176672 call <= maxsplit[176588] 0) bool[10]
+      (176677 'end of statement')
+      unknown splitCount[176680] 0 int(64)[13]
+      (176683 'end of statement')
+      unknown start[176686] 0 _idxt[176626]
+      (176689 'end of statement')
+      unknown done[176692] 0 bool[10]
+      (176695 'end of statement')
       {
-        unknown tmp[176881] "temp"
-        (176903 'move' tmp[176881](176899 call _cond_test(176901 call ! done[176738])))
-        WhileDo[176886]
+        unknown tmp[176835] "temp"
+        (176857 'move' tmp[176835](176853 call _cond_test(176855 call ! done[176692])))
+        WhileDo[176840]
         {
           {
-            unknown chunk[176746] t[176619]
-            (176749 'end of statement')
-            unknown end[176755](176753 call - 1) _idxt[176672]
-            (176758 'end of statement')
-            if(176842 call _cond_test(176761 call == maxsplit[176634] 0))
+            unknown chunk[176700] t[176573]
+            (176703 'end of statement')
+            unknown end[176709](176707 call - 1) _idxt[176626]
+            (176712 'end of statement')
+            if(176796 call _cond_test(176715 call == maxsplit[176588] 0))
             {
-              (176765 call = chunk[176746] localThis[176699])
-              (176771 call = done[176738] 1)
+              (176719 call = chunk[176700] localThis[176653])
+              (176725 call = done[176692] 1)
             }
             {
-              if(176795 call _cond_test(176779 call || splitAll[176720](176777 call < splitCount[176726] maxsplit[176634])))
+              if(176749 call _cond_test(176733 call || splitAll[176674](176731 call < splitCount[176680] maxsplit[176588])))
               {
-                (176792 call = end[176755](176791 call(176783 call . localThis[176699] c"find") localSep[176711](176789 call chpl_build_low_bounded_range start[176732])))
+                (176746 call = end[176709](176745 call(176737 call . localThis[176653] c"find") localSep[176665](176743 call chpl_build_low_bounded_range start[176686])))
               }
-              if(176838 call _cond_test(176805 call == end[176755](176803 call - 1)))
+              if(176792 call _cond_test(176759 call == end[176709](176757 call - 1)))
               {
-                (176814 call = chunk[176746](176813 call localThis[176699](176810 call chpl_build_low_bounded_range start[176732])))
-                (176820 call = done[176738] 1)
+                (176768 call = chunk[176700](176767 call localThis[176653](176764 call chpl_build_low_bounded_range start[176686])))
+                (176774 call = done[176692] 1)
               }
               {
-                (176834 call = chunk[176746](176833 call localThis[176699](176830 call chpl_build_bounded_range start[176732](176828 call - end[176755] 1))))
+                (176788 call = chunk[176700](176787 call localThis[176653](176784 call chpl_build_bounded_range start[176686](176782 call - end[176709] 1))))
               }
             }
-            if(176866 call _cond_test(176855 call !(176853 call && ignoreEmpty[176640](176852 call(176848 call . chunk[176746] c"isEmpty")))))
+            if(176820 call _cond_test(176809 call !(176807 call && ignoreEmpty[176594](176806 call(176802 call . chunk[176700] c"isEmpty")))))
             {
-              (176858 yield chunk[176746])
-              (176863 call += splitCount[176726] 1)
+              (176812 yield chunk[176700])
+              (176817 call += splitCount[176680] 1)
             }
-            (176878 call = start[176732](176876 call + end[176755](176873 call . localSep[176711] c"numBytes")))
+            (176832 call = start[176686](176830 call + end[176709](176827 call . localSep[176665] c"numBytes")))
           }
-          label _continueLabel[176884]
-          (176894 'move' tmp[176881](176890 call _cond_test(176892 call ! done[176738])))
-          tmp[176881]
+          label _continueLabel[176838]
+          (176848 'move' tmp[176835](176844 call _cond_test(176846 call ! done[176692])))
+          tmp[176835]
         }
-        label _breakLabel[176885]
+        label _breakLabel[176839]
       }
     }
   }
   { scopeless type
-    t[176619]
+    t[176573]
   }
-  function doSplitWSNoEnc[176920](const  ref arg x[176917] :
-  unknown t[176915], arg maxsplit[176926] :
+  function doSplitWSNoEnc[176874](const  ref arg x[176871] :
+  unknown t[176869], arg maxsplit[176880] :
   int(64)[13] =
-  (176924 call - 1)) : _unknown[51] "iterator fn" "no return value for void"
+  (176878 call - 1)) : _unknown[51] "iterator fn" "no return value for void"
   {
-    (176951 call assertArgType t[176915] "doSplitWSNoEnc")
-    if(177337 call _cond_test(176960 call !(176959 call(176955 call . x[176917] c"isEmpty"))))
+    (176905 call assertArgType t[176869] "doSplitWSNoEnc")
+    if(177291 call _cond_test(176914 call !(176913 call(176909 call . x[176871] c"isEmpty"))))
     {
-      const localx[176969] "const"(176968 call(176964 call . x[176917] c"localize")) t[176915]
-      (176972 'end of statement')
-      unknown done[176976] 0 bool[10]
-      (176979 'end of statement')
-      unknown yieldChunk[176982] 0 bool[10]
-      (176985 'end of statement')
-      unknown chunk[176987] t[176915]
-      (176990 'end of statement')
-      const noSplits[176996] "const"(176994 call == maxsplit[176926] 0) bool[10]
-      (176999 'end of statement')
-      const limitSplits[177005] "const"(177003 call > maxsplit[176926] 0) bool[10]
-      (177008 'end of statement')
-      unknown splitCount[177011] 0 int(64)[13]
-      (177014 'end of statement')
-      const iEnd[177023] "const"(177021 call -(177017 call . localx[176969] c"buffLen") 2) idxType[22841]
-      (177026 'end of statement')
-      unknown inChunk[177029] 0 bool[10]
-      (177032 'end of statement')
-      unknown chunkStart[177034] idxType[22841]
-      (177037 'end of statement')
+      const localx[176923] "const"(176922 call(176918 call . x[176871] c"localize")) t[176869]
+      (176926 'end of statement')
+      unknown done[176930] 0 bool[10]
+      (176933 'end of statement')
+      unknown yieldChunk[176936] 0 bool[10]
+      (176939 'end of statement')
+      unknown chunk[176941] t[176869]
+      (176944 'end of statement')
+      const noSplits[176950] "const"(176948 call == maxsplit[176880] 0) bool[10]
+      (176953 'end of statement')
+      const limitSplits[176959] "const"(176957 call > maxsplit[176880] 0) bool[10]
+      (176962 'end of statement')
+      unknown splitCount[176965] 0 int(64)[13]
+      (176968 'end of statement')
+      const iEnd[176977] "const"(176975 call -(176971 call . localx[176923] c"buffLen") 2) idxType[22838]
+      (176980 'end of statement')
+      unknown inChunk[176983] 0 bool[10]
+      (176986 'end of statement')
+      unknown chunkStart[176988] idxType[22838]
+      (176991 'end of statement')
       {
-        unknown _indexOfInterest[177276] "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[177277] "expr temp" "temp"
-        (177300 'move' _iterator[177277](177053 call _build_tuple(177289 call _getIterator(177286 call . x[176917] c"indices"))(177297 call _getIterator(177296 call(177293 call . localx[176969] c"chpl_bytes")))))
+        unknown _indexOfInterest[177230] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[177231] "expr temp" "temp"
+        (177254 'move' _iterator[177231](177007 call _build_tuple(177243 call _getIterator(177240 call . x[176871] c"indices"))(177251 call _getIterator(177250 call(177247 call . localx[176923] c"chpl_bytes")))))
         Defer
         {
           {
-            (177330 call _freeIterator _iterator[177277])
+            (177284 call _freeIterator _iterator[177231])
           }
         }
         { scopeless type
-          (177305 'move' _indexOfInterest[177276](177302 call iteratorIndex _iterator[177277]))
+          (177259 'move' _indexOfInterest[177230](177256 call iteratorIndex _iterator[177231]))
         }
-        ForLoop[177278]
+        ForLoop[177232]
         {
-          (177310 call _check_tuple_var_decl _indexOfInterest[177276] 2)
-          unknown i[177316] "index var" "insert auto destroy"
-          (177318 'move' i[177316](177314 call _indexOfInterest[177276] 0))
-          unknown c[177323] "index var" "insert auto destroy"
-          (177325 'move' c[177323](177321 call _indexOfInterest[177276] 1))
+          (177264 call _check_tuple_var_decl _indexOfInterest[177230] 2)
+          unknown i[177270] "index var" "insert auto destroy"
+          (177272 'move' i[177270](177268 call _indexOfInterest[177230] 0))
+          unknown c[177277] "index var" "insert auto destroy"
+          (177279 'move' c[177277](177275 call _indexOfInterest[177230] 1))
           {
-            if(177248 call _cond_test noSplits[176996])
+            if(177202 call _cond_test noSplits[176950])
             {
-              (177057 call = done[176976] 1)
-              if(177080 call _cond_test(177067 call !(177066 call(177062 call . localx[176969] c"isSpace"))))
+              (177011 call = done[176930] 1)
+              if(177034 call _cond_test(177021 call !(177020 call(177016 call . localx[176923] c"isSpace"))))
               {
-                (177071 call = chunk[176987] localx[176969])
-                (177077 call = yieldChunk[176982] 1)
+                (177025 call = chunk[176941] localx[176923])
+                (177031 call = yieldChunk[176936] 1)
               }
             }
             {
-              unknown cSpace[177088](177087 call byte_isWhitespace c[177323])
-              (177091 'end of statement')
-              if(177243 call _cond_test(177097 call !(177095 call || inChunk[177029] cSpace[177088])))
+              unknown cSpace[177042](177041 call byte_isWhitespace c[177277])
+              (177045 'end of statement')
+              if(177197 call _cond_test(177051 call !(177049 call || inChunk[176983] cSpace[177042])))
               {
-                (177101 call = chunkStart[177034] i[177316])
-                (177107 call = inChunk[177029] 1)
-                if(177135 call _cond_test(177112 call > i[177316] iEnd[177023]))
+                (177055 call = chunkStart[176988] i[177270])
+                (177061 call = inChunk[176983] 1)
+                if(177089 call _cond_test(177066 call > i[177270] iEnd[176977]))
                 {
-                  (177121 call = chunk[176987](177120 call localx[176969](177117 call chpl_build_low_bounded_range chunkStart[177034])))
-                  (177127 call = yieldChunk[176982] 1)
-                  (177132 call = done[176976] 1)
+                  (177075 call = chunk[176941](177074 call localx[176923](177071 call chpl_build_low_bounded_range chunkStart[176988])))
+                  (177081 call = yieldChunk[176936] 1)
+                  (177086 call = done[176930] 1)
                 }
               }
               {
-                if(177239 call _cond_test inChunk[177029])
+                if(177193 call _cond_test inChunk[176983])
                 {
-                  if(177233 call _cond_test cSpace[177088])
+                  if(177187 call _cond_test cSpace[177042])
                   {
-                    (177143 call += splitCount[177011] 1)
-                    if(177200 call _cond_test(177152 call && limitSplits[177005](177150 call > splitCount[177011] maxsplit[176926])))
+                    (177097 call += splitCount[176965] 1)
+                    if(177154 call _cond_test(177106 call && limitSplits[176959](177104 call > splitCount[176965] maxsplit[176880])))
                     {
-                      (177161 call = chunk[176987](177160 call localx[176969](177157 call chpl_build_low_bounded_range chunkStart[177034])))
-                      (177167 call = yieldChunk[176982] 1)
-                      (177172 call = done[176976] 1)
+                      (177115 call = chunk[176941](177114 call localx[176923](177111 call chpl_build_low_bounded_range chunkStart[176988])))
+                      (177121 call = yieldChunk[176936] 1)
+                      (177126 call = done[176930] 1)
                     }
                     {
-                      (177186 call = chunk[176987](177185 call localx[176969](177182 call chpl_build_bounded_range chunkStart[177034](177180 call - i[177316] 1))))
-                      (177192 call = yieldChunk[176982] 1)
-                      (177197 call = inChunk[177029] 0)
+                      (177140 call = chunk[176941](177139 call localx[176923](177136 call chpl_build_bounded_range chunkStart[176988](177134 call - i[177270] 1))))
+                      (177146 call = yieldChunk[176936] 1)
+                      (177151 call = inChunk[176983] 0)
                     }
                   }
                   {
-                    if(177229 call _cond_test(177206 call > i[177316] iEnd[177023]))
+                    if(177183 call _cond_test(177160 call > i[177270] iEnd[176977]))
                     {
-                      (177215 call = chunk[176987](177214 call localx[176969](177211 call chpl_build_low_bounded_range chunkStart[177034])))
-                      (177221 call = yieldChunk[176982] 1)
-                      (177226 call = done[176976] 1)
+                      (177169 call = chunk[176941](177168 call localx[176923](177165 call chpl_build_low_bounded_range chunkStart[176988])))
+                      (177175 call = yieldChunk[176936] 1)
+                      (177180 call = done[176930] 1)
                     }
                   }
                 }
               }
             }
-            if(177263 call _cond_test yieldChunk[176982])
+            if(177217 call _cond_test yieldChunk[176936])
             {
-              (177255 yield chunk[176987])
-              (177260 call = yieldChunk[176982] 0)
+              (177209 yield chunk[176941])
+              (177214 call = yieldChunk[176936] 0)
             }
-            if(177271 call _cond_test done[176976])
+            if(177225 call _cond_test done[176930])
             {
-              break _breakLabel[177282] _breakLabel[177282]
+              break _breakLabel[177236] _breakLabel[177236]
             }
           }
-          label _continueLabel[177281]
-          _indexOfInterest[177276]
-          _iterator[177277]
+          label _continueLabel[177235]
+          _indexOfInterest[177230]
+          _iterator[177231]
         }
-        label _breakLabel[177282]
+        label _breakLabel[177236]
       }
     }
   }
   { scopeless type
-    t[176915]
+    t[176869]
   }
-  function doSearchNoEnc[177351](const  ref arg x[177348] :
-  unknown t[177346], arg needle[177354] :
-  t[177346], arg region[177361] :
-  (177360 call range[64319](?) ?[260]), param arg count[177365] :
-  bool[10], param arg fromLeft[177370] :
+  function doSearchNoEnc[177305](const  ref arg x[177302] :
+  unknown t[177300], arg needle[177308] :
+  t[177300], arg region[177315] :
+  (177314 call range[64316](?) ?[260]), param arg count[177319] :
+  bool[10], param arg fromLeft[177324] :
   bool[10] =
   1) : _unknown[51]
   {
-    (177394 call assertArgType t[177346] "doSearch")
-    unknown ret[177401](177399 call - 1) int(64)[13]
-    (177404 'end of statement')
-    const tmp[177805] "const" "temp"
-    (177807 'move' tmp[177805](177803 'deref'(177415 'chpl_on_locale_num'(177414 call chpl_buildLocaleID(177409 call . x[177348] c"locale_id") c_sublocid_any[89878]))))
+    (177348 call assertArgType t[177300] "doSearch")
+    unknown ret[177355](177353 call - 1) int(64)[13]
+    (177358 'end of statement')
+    const tmp[177759] "const" "temp"
+    (177761 'move' tmp[177759](177757 'deref'(177369 'chpl_on_locale_num'(177368 call chpl_buildLocaleID(177363 call . x[177302] c"locale_id") c_sublocid_any[89875]))))
     {
       {
-        unknown localRet[177420](177418 call - 2) int(64)[13]
-        (177423 'end of statement')
-        const nLen[177429] "const"(177426 call . needle[177354] c"buffLen")
-        (177432 'end of statement')
-        const tmp[177443] "const" "temp"(177442 call getView x[177348] region[177361])
-        (177447 call _check_tuple_var_decl tmp[177443] 2)
-        const view[177433] "const"(177444 call tmp[177443] 0)
-        (177452 'end of statement')
-        const xLen[177457] "const"(177454 call . view[177433] c"size")
-        (177460 'end of statement')
-        if(177519 call _cond_test count[177365])
+        unknown localRet[177374](177372 call - 2) int(64)[13]
+        (177377 'end of statement')
+        const nLen[177383] "const"(177380 call . needle[177308] c"buffLen")
+        (177386 'end of statement')
+        const tmp[177397] "const" "temp"(177396 call getView x[177302] region[177315])
+        (177401 call _check_tuple_var_decl tmp[177397] 2)
+        const view[177387] "const"(177398 call tmp[177397] 0)
+        (177406 'end of statement')
+        const xLen[177411] "const"(177408 call . view[177387] c"size")
+        (177414 'end of statement')
+        if(177473 call _cond_test count[177319])
         {
-          if(177475 call _cond_test(177464 call == nLen[177429] 0))
+          if(177429 call _cond_test(177418 call == nLen[177383] 0))
           {
-            (177471 call = localRet[177420](177468 call . view[177433] c"size"))
+            (177425 call = localRet[177374](177422 call . view[177387] c"size"))
           }
         }
         {
-          if(177514 call _cond_test(177482 call == nLen[177429] 0))
+          if(177468 call _cond_test(177436 call == nLen[177383] 0))
           {
-            if(177509 call _cond_test fromLeft[177370])
+            if(177463 call _cond_test fromLeft[177324])
             {
-              (177489 call = localRet[177420](177487 call - 1))
+              (177443 call = localRet[177374](177441 call - 1))
             }
             {
-              (177505 call = localRet[177420](177502 IfExpr (177496 call == xLen[177457] 0) then
+              (177459 call = localRet[177374](177456 IfExpr (177450 call == xLen[177411] 0) then
               { scopeless
-                (177499 call - 1)
+                (177453 call - 1)
               } else
               { scopeless
-                xLen[177457]
+                xLen[177411]
               } ))
             }
           }
         }
-        if(177535 call _cond_test(177525 call > nLen[177429] xLen[177457]))
+        if(177489 call _cond_test(177479 call > nLen[177383] xLen[177411]))
         {
-          (177531 call = localRet[177420](177529 call - 1))
+          (177485 call = localRet[177374](177483 call - 1))
         }
-        if(177783 call _cond_test(177543 call == localRet[177420](177541 call - 2)))
+        if(177737 call _cond_test(177497 call == localRet[177374](177495 call - 2)))
         {
-          (177549 call = localRet[177420](177547 call - 1))
-          const localNeedle[177559] "const"(177558 call(177554 call . needle[177354] c"localize"))
-          (177562 'end of statement')
-          const needleLen[177567] "const"(177564 call . localNeedle[177559] c"buffLen")
-          (177570 'end of statement')
-          const numPossible[177578] "const"(177576 call +(177573 call - xLen[177457] nLen[177429]) 1)
-          (177581 'end of statement')
-          const searchSpace[177603] "const"(177600 IfExpr  fromLeft[177370] then
+          (177503 call = localRet[177374](177501 call - 1))
+          const localNeedle[177513] "const"(177512 call(177508 call . needle[177308] c"localize"))
+          (177516 'end of statement')
+          const needleLen[177521] "const"(177518 call . localNeedle[177513] c"buffLen")
+          (177524 'end of statement')
+          const numPossible[177532] "const"(177530 call +(177527 call - xLen[177411] nLen[177383]) 1)
+          (177535 'end of statement')
+          const searchSpace[177557] "const"(177554 IfExpr  fromLeft[177324] then
           { scopeless
-            (177587 call #(177584 call chpl_build_low_bounded_range 0) numPossible[177578])
+            (177541 call #(177538 call chpl_build_low_bounded_range 0) numPossible[177532])
           } else
           { scopeless
-            (177598 call chpl_by(177593 call #(177590 call chpl_build_low_bounded_range 0) numPossible[177578])(177596 call - 1))
+            (177552 call chpl_by(177547 call #(177544 call chpl_build_low_bounded_range 0) numPossible[177532])(177550 call - 1))
           } )
-          (177606 'end of statement')
+          (177560 'end of statement')
           {
-            unknown _indexOfInterest[177750] "an _indexOfInterest or chpl__followIdx variable" "temp"
-            unknown _iterator[177751] "expr temp" "temp"
-            (177760 'move' _iterator[177751](177758 call _getIterator searchSpace[177603]))
+            unknown _indexOfInterest[177704] "an _indexOfInterest or chpl__followIdx variable" "temp"
+            unknown _iterator[177705] "expr temp" "temp"
+            (177714 'move' _iterator[177705](177712 call _getIterator searchSpace[177557]))
             Defer
             {
               {
-                (177776 call _freeIterator _iterator[177751])
+                (177730 call _freeIterator _iterator[177705])
               }
             }
             { scopeless type
-              (177765 'move' _indexOfInterest[177750](177762 call iteratorIndex _iterator[177751]))
+              (177719 'move' _indexOfInterest[177704](177716 call iteratorIndex _iterator[177705]))
             }
-            ForLoop[177752]
+            ForLoop[177706]
             {
-              unknown i[177769] "index var" "insert auto destroy"
-              (177771 'move' i[177769] _indexOfInterest[177750])
+              unknown i[177723] "index var" "insert auto destroy"
+              (177725 'move' i[177723] _indexOfInterest[177704])
               {
                 {
-                  unknown _indexOfInterest[177690] "an _indexOfInterest or chpl__followIdx variable" "temp"
-                  unknown _iterator[177691] "expr temp" "temp"
-                  (177700 'move' _iterator[177691](177698 call _getIterator(177707 call chpl_direct_counted_range_iter 0 nLen[177429])))
+                  unknown _indexOfInterest[177644] "an _indexOfInterest or chpl__followIdx variable" "temp"
+                  unknown _iterator[177645] "expr temp" "temp"
+                  (177654 'move' _iterator[177645](177652 call _getIterator(177661 call chpl_direct_counted_range_iter 0 nLen[177383])))
                   Defer
                   {
                     {
-                      (177723 call _freeIterator _iterator[177691])
+                      (177677 call _freeIterator _iterator[177645])
                     }
                   }
                   { scopeless type
-                    (177712 'move' _indexOfInterest[177690](177709 call iteratorIndex _iterator[177691]))
+                    (177666 'move' _indexOfInterest[177644](177663 call iteratorIndex _iterator[177645]))
                   }
-                  ForLoop[177692]
+                  ForLoop[177646]
                   {
-                    unknown j[177716] "index var" "insert auto destroy"
-                    (177718 'move' j[177716] _indexOfInterest[177690])
+                    unknown j[177670] "index var" "insert auto destroy"
+                    (177672 'move' j[177670] _indexOfInterest[177644])
                     {
-                      const idx[177626] "const"(177625 call(177617 call . view[177433] c"orderToIndex")(177622 call + i[177769] j[177716]))
-                      (177629 'end of statement')
-                      if(177650 call _cond_test(177645 call !=(177637 call(177632 call . x[177348] c"buff") idx[177626])(177644 call(177639 call . localNeedle[177559] c"buff") j[177716])))
+                      const idx[177580] "const"(177579 call(177571 call . view[177387] c"orderToIndex")(177576 call + i[177723] j[177670]))
+                      (177583 'end of statement')
+                      if(177604 call _cond_test(177599 call !=(177591 call(177586 call . x[177302] c"buff") idx[177580])(177598 call(177593 call . localNeedle[177513] c"buff") j[177670])))
                       {
-                        break _breakLabel[177696] _breakLabel[177696]
+                        break _breakLabel[177650] _breakLabel[177650]
                       }
-                      if(177686 call _cond_test(177660 call == j[177716](177658 call - nLen[177429] 1)))
+                      if(177640 call _cond_test(177614 call == j[177670](177612 call - nLen[177383] 1)))
                       {
-                        if(177681 call _cond_test count[177365])
+                        if(177635 call _cond_test count[177319])
                         {
-                          (177665 call += localRet[177420] 1)
+                          (177619 call += localRet[177374] 1)
                         }
                         {
-                          (177677 call = localRet[177420](177676 call(177671 call . view[177433] c"orderToIndex") i[177769]))
+                          (177631 call = localRet[177374](177630 call(177625 call . view[177387] c"orderToIndex") i[177723]))
                         }
                       }
                     }
-                    label _continueLabel[177695]
-                    _indexOfInterest[177690]
-                    _iterator[177691]
+                    label _continueLabel[177649]
+                    _indexOfInterest[177644]
+                    _iterator[177645]
                   }
-                  label _breakLabel[177696]
+                  label _breakLabel[177650]
                 }
-                if(177745 call _cond_test(177740 call &&(177732 call ! count[177365])(177738 call != localRet[177420](177736 call - 1))))
+                if(177699 call _cond_test(177694 call &&(177686 call ! count[177319])(177692 call != localRet[177374](177690 call - 1))))
                 {
-                  break _breakLabel[177756] _breakLabel[177756]
+                  break _breakLabel[177710] _breakLabel[177710]
                 }
               }
-              label _continueLabel[177755]
-              _indexOfInterest[177750]
-              _iterator[177751]
+              label _continueLabel[177709]
+              _indexOfInterest[177704]
+              _iterator[177705]
             }
-            label _breakLabel[177756]
+            label _breakLabel[177710]
           }
         }
-        if(177793 call _cond_test count[177365])
+        if(177747 call _cond_test count[177319])
         {
-          (177790 call += localRet[177420] 1)
+          (177744 call += localRet[177374] 1)
         }
-        (177800 call = ret[177401] localRet[177420])
+        (177754 call = ret[177355] localRet[177374])
       }
-      (177810 'on block' 0 tmp[177805])
+      (177764 'on block' 0 tmp[177759])
     }
-    (177814 return ret[177401])
+    (177768 return ret[177355])
   }
-  function startsEndsWith[177825](const  ref arg x[177822] :
-  unknown t[177820], arg needles[177827]:_any[178](?), param arg fromLeft[177830] :
+  function startsEndsWith[177779](const  ref arg x[177776] :
+  unknown t[177774], arg needles[177781]:_any[178](?), param arg fromLeft[177784] :
   bool[10]) : _unknown[51] "inline" "no doc"
   {
-    (177868 call assertArgType t[177820] "startsEndsWith")
-    unknown ret[177873] 0 bool[10]
-    (177876 'end of statement')
-    const tmp[178053] "const" "temp"
-    (178055 'move' tmp[178053](178051 'deref'(177887 'chpl_on_locale_num'(177886 call chpl_buildLocaleID(177881 call . x[177822] c"locale_id") c_sublocid_any[89878]))))
+    (177822 call assertArgType t[177774] "startsEndsWith")
+    unknown ret[177827] 0 bool[10]
+    (177830 'end of statement')
+    const tmp[178007] "const" "temp"
+    (178009 'move' tmp[178007](178005 'deref'(177841 'chpl_on_locale_num'(177840 call chpl_buildLocaleID(177835 call . x[177776] c"locale_id") c_sublocid_any[89875]))))
     {
       {
         {
-          unknown _indexOfInterest[178017] "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[178018] "expr temp" "temp"
-          (178027 'move' _iterator[178018](178025 call _getIterator needles[177827]))
+          unknown _indexOfInterest[177971] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[177972] "expr temp" "temp"
+          (177981 'move' _iterator[177972](177979 call _getIterator needles[177781]))
           Defer
           {
             {
-              (178043 call _freeIterator _iterator[178018])
+              (177997 call _freeIterator _iterator[177972])
             }
           }
           { scopeless type
-            (178032 'move' _indexOfInterest[178017](178029 call iteratorIndex _iterator[178018]))
+            (177986 'move' _indexOfInterest[177971](177983 call iteratorIndex _iterator[177972]))
           }
-          ForLoop[178019]
+          ForLoop[177973]
           {
-            unknown needle[178036] "index var" "insert auto destroy"
-            (178038 'move' needle[178036] _indexOfInterest[178017])
+            unknown needle[177990] "index var" "insert auto destroy"
+            (177992 'move' needle[177990] _indexOfInterest[177971])
             {
-              const needleLen[177894] "const"(177891 call . needle[178036] c"buffLen")
-              (177897 'end of statement')
-              if(177912 call _cond_test(177901 call == needleLen[177894] 0))
+              const needleLen[177848] "const"(177845 call . needle[177990] c"buffLen")
+              (177851 'end of statement')
+              if(177866 call _cond_test(177855 call == needleLen[177848] 0))
               {
-                (177905 call = ret[177873] 1)
-                break _breakLabel[178023] _breakLabel[178023]
+                (177859 call = ret[177827] 1)
+                break _breakLabel[177977] _breakLabel[177977]
               }
-              if(177926 call _cond_test(177921 call > needleLen[177894](177918 call . x[177822] c"buffLen")))
+              if(177880 call _cond_test(177875 call > needleLen[177848](177872 call . x[177776] c"buffLen")))
               {
-                continue _continueLabel[178022] _continueLabel[178022]
+                continue _continueLabel[177976] _continueLabel[177976]
               }
-              const localNeedle[177937] "const"(177936 call(177932 call . needle[178036] c"localize"))
-              (177940 'end of statement')
-              if(178001 call _cond_test fromLeft[177830])
+              const localNeedle[177891] "const"(177890 call(177886 call . needle[177990] c"localize"))
+              (177894 'end of statement')
+              if(177955 call _cond_test fromLeft[177784])
               {
-                (177962 call = ret[177873](177961 call bufferEqualsLocal(buf1 =(177945 call . x[177822] c"buff"))(off1 = 0)(buf2 =(177953 call . localNeedle[177937] c"buff"))(off2 = 0)(len = needleLen[177894])))
+                (177916 call = ret[177827](177915 call bufferEqualsLocal(buf1 =(177899 call . x[177776] c"buff"))(off1 = 0)(buf2 =(177907 call . localNeedle[177891] c"buff"))(off2 = 0)(len = needleLen[177848])))
               }
               {
-                unknown offset[177973](177971 call -(177967 call . x[177822] c"buffLen") needleLen[177894])
-                (177976 'end of statement')
-                (177998 call = ret[177873](177997 call bufferEqualsLocal(buf1 =(177981 call . x[177822] c"buff"))(off1 = offset[177973])(buf2 =(177989 call . localNeedle[177937] c"buff"))(off2 = 0)(len = needleLen[177894])))
+                unknown offset[177927](177925 call -(177921 call . x[177776] c"buffLen") needleLen[177848])
+                (177930 'end of statement')
+                (177952 call = ret[177827](177951 call bufferEqualsLocal(buf1 =(177935 call . x[177776] c"buff"))(off1 = offset[177927])(buf2 =(177943 call . localNeedle[177891] c"buff"))(off2 = 0)(len = needleLen[177848])))
               }
-              if(178012 call _cond_test(178007 call == ret[177873] 1))
+              if(177966 call _cond_test(177961 call == ret[177827] 1))
               {
-                break _breakLabel[178023] _breakLabel[178023]
+                break _breakLabel[177977] _breakLabel[177977]
               }
             }
-            label _continueLabel[178022]
-            _indexOfInterest[178017]
-            _iterator[178018]
+            label _continueLabel[177976]
+            _indexOfInterest[177971]
+            _iterator[177972]
           }
-          label _breakLabel[178023]
+          label _breakLabel[177977]
         }
       }
-      (178058 'on block' 0 tmp[178053])
+      (178012 'on block' 0 tmp[178007])
     }
-    (178062 return ret[177873])
+    (178016 return ret[177827])
   }
   where {
-    (177846 call &&(177837 call isHomogeneousTuple needles[177827])(177844 call ==(177842 'typeof'(177841 call needles[177827] 0)) t[177820]))
+    (177800 call &&(177791 call isHomogeneousTuple needles[177781])(177798 call ==(177796 'typeof'(177795 call needles[177781] 0)) t[177774]))
   }
   { scopeless type
     bool[10]
   }
-  function doJoinIterator[178075](const  ref arg x[178072] :
-  unknown t[178070], arg ir[178078] :
+  function doJoinIterator[178029](const  ref arg x[178026] :
+  unknown t[178024], arg ir[178032] :
   _iteratorRecord[205](?)) : _unknown[51]
   {
-    (178102 call assertArgType t[178070] "doJoinIterator")
-    unknown s[178106] t[178070]
-    (178109 'end of statement')
-    unknown first[178112] 1 bool[10]
-    (178115 'end of statement')
+    (178056 call assertArgType t[178024] "doJoinIterator")
+    unknown s[178060] t[178024]
+    (178063 'end of statement')
+    unknown first[178066] 1 bool[10]
+    (178069 'end of statement')
     {
-      unknown _indexOfInterest[178141] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[178142] "expr temp" "temp"
-      (178151 'move' _iterator[178142](178149 call _getIterator ir[178078]))
+      unknown _indexOfInterest[178095] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[178096] "expr temp" "temp"
+      (178105 'move' _iterator[178096](178103 call _getIterator ir[178032]))
       Defer
       {
         {
-          (178167 call _freeIterator _iterator[178142])
+          (178121 call _freeIterator _iterator[178096])
         }
       }
       { scopeless type
-        (178156 'move' _indexOfInterest[178141](178153 call iteratorIndex _iterator[178142]))
+        (178110 'move' _indexOfInterest[178095](178107 call iteratorIndex _iterator[178096]))
       }
-      ForLoop[178143]
+      ForLoop[178097]
       {
-        unknown i[178160] "index var" "insert auto destroy"
-        (178162 'move' i[178160] _indexOfInterest[178141])
+        unknown i[178114] "index var" "insert auto destroy"
+        (178116 'move' i[178114] _indexOfInterest[178095])
         {
-          if(178129 call _cond_test first[178112])
+          if(178083 call _cond_test first[178066])
           {
-            (178121 call = first[178112] 0)
+            (178075 call = first[178066] 0)
           }
           {
-            (178126 call += s[178106] x[178072])
+            (178080 call += s[178060] x[178026])
           }
-          (178138 call += s[178106] i[178160])
+          (178092 call += s[178060] i[178114])
         }
-        label _continueLabel[178146]
-        _indexOfInterest[178141]
-        _iterator[178142]
+        label _continueLabel[178100]
+        _indexOfInterest[178095]
+        _iterator[178096]
       }
-      label _breakLabel[178147]
+      label _breakLabel[178101]
     }
-    (178175 return s[178106])
+    (178129 return s[178060])
   }
   { scopeless type
-    t[178070]
+    t[178024]
   }
-  function doJoin[178187](const  ref arg x[178184] :
-  unknown t[178182], const  ref arg S[178189]:_any[178](?)) : _unknown[51]
+  function doJoin[178141](const  ref arg x[178138] :
+  unknown t[178136], const  ref arg S[178143]:_any[178](?)) : _unknown[51]
   {
-    (178222 call assertArgType t[178182] "doJoin")
-    if(178644 call _cond_test(178230 call ==(178226 call . S[178189] c"size") 0))
+    (178176 call assertArgType t[178136] "doJoin")
+    if(178598 call _cond_test(178184 call ==(178180 call . S[178143] c"size") 0))
     {
-      (178252 return(178250 call _cast t[178182] ""))
+      (178206 return(178204 call _cast t[178136] ""))
     }
     {
-      if(178640 call _cond_test(178260 call ==(178256 call . S[178189] c"size") 1))
+      if(178594 call _cond_test(178214 call ==(178210 call . S[178143] c"size") 1))
       {
-        unknown ret[178263] t[178182]
-        (178266 'end of statement')
-        if(178296 call _cond_test(178271 call isArray S[178189]))
+        unknown ret[178217] t[178136]
+        (178220 'end of statement')
+        if(178250 call _cond_test(178225 call isArray S[178143]))
         {
-          (178283 call = ret[178263](178282 call S[178189](178278 call .(178275 call . S[178189] c"_dom") c"first")))
+          (178237 call = ret[178217](178236 call S[178143](178232 call .(178229 call . S[178143] c"_dom") c"first")))
         }
         {
-          (178292 call = ret[178263](178291 call S[178189] 0))
+          (178246 call = ret[178217](178245 call S[178143] 0))
         }
-        (178301 return ret[178263])
+        (178255 return ret[178217])
       }
       {
-        unknown joinedSize[178317](178315 call *(178305 call . x[178184] c"buffLen")(178313 call -(178309 call . S[178189] c"size") 1)) int(64)[13]
-        (178320 'end of statement')
+        unknown joinedSize[178271](178269 call *(178259 call . x[178138] c"buffLen")(178267 call -(178263 call . S[178143] c"size") 1)) int(64)[13]
+        (178274 'end of statement')
         {
-          unknown _indexOfInterest[178332] "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[178333] "expr temp" "temp"
-          (178342 'move' _iterator[178333](178340 call _getIterator S[178189]))
+          unknown _indexOfInterest[178286] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[178287] "expr temp" "temp"
+          (178296 'move' _iterator[178287](178294 call _getIterator S[178143]))
           Defer
           {
             {
-              (178358 call _freeIterator _iterator[178333])
+              (178312 call _freeIterator _iterator[178287])
             }
           }
           { scopeless type
-            (178347 'move' _indexOfInterest[178332](178344 call iteratorIndex _iterator[178333]))
+            (178301 'move' _indexOfInterest[178286](178298 call iteratorIndex _iterator[178287]))
           }
-          ForLoop[178334]
+          ForLoop[178288]
           {
-            unknown s[178351] "index var" "insert auto destroy"
-            (178353 'move' s[178351] _indexOfInterest[178332])
-            (178329 call += joinedSize[178317](178326 call . s[178351] c"numBytes"))
-            label _continueLabel[178337]
-            _indexOfInterest[178332]
-            _iterator[178333]
+            unknown s[178305] "index var" "insert auto destroy"
+            (178307 'move' s[178305] _indexOfInterest[178286])
+            (178283 call += joinedSize[178271](178280 call . s[178305] c"numBytes"))
+            label _continueLabel[178291]
+            _indexOfInterest[178286]
+            _iterator[178287]
           }
-          label _breakLabel[178338]
+          label _breakLabel[178292]
         }
-        unknown numCodepoints[178366] 0
-        (178369 'end of statement')
-        if(178396 call _cond_test(178372 call == joinedSize[178317] 0))
+        unknown numCodepoints[178320] 0
+        (178323 'end of statement')
+        if(178350 call _cond_test(178326 call == joinedSize[178271] 0))
         {
-          (178394 return(178392 call _cast t[178182] ""))
+          (178348 return(178346 call _cast t[178136] ""))
         }
-        unknown tmp[178413] "temp"(178412 call bufferAlloc(178409 call + joinedSize[178317] 1))
-        (178420 call _check_tuple_var_decl tmp[178413] 2)
-        unknown newBuff[178401](178414 call tmp[178413] 0)
-        unknown allocSize[178403](178417 call tmp[178413] 1)
-        (178425 'end of statement')
-        unknown first[178427] 1
-        (178430 'end of statement')
-        unknown offset[178432] 0
-        (178435 'end of statement')
+        unknown tmp[178367] "temp"(178366 call bufferAlloc(178363 call + joinedSize[178271] 1))
+        (178374 call _check_tuple_var_decl tmp[178367] 2)
+        unknown newBuff[178355](178368 call tmp[178367] 0)
+        unknown allocSize[178357](178371 call tmp[178367] 1)
+        (178379 'end of statement')
+        unknown first[178381] 1
+        (178384 'end of statement')
+        unknown offset[178386] 0
+        (178389 'end of statement')
         {
-          unknown _indexOfInterest[178565] "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[178566] "expr temp" "temp"
-          (178575 'move' _iterator[178566](178573 call _getIterator S[178189]))
+          unknown _indexOfInterest[178519] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[178520] "expr temp" "temp"
+          (178529 'move' _iterator[178520](178527 call _getIterator S[178143]))
           Defer
           {
             {
-              (178591 call _freeIterator _iterator[178566])
+              (178545 call _freeIterator _iterator[178520])
             }
           }
           { scopeless type
-            (178580 'move' _indexOfInterest[178565](178577 call iteratorIndex _iterator[178566]))
+            (178534 'move' _indexOfInterest[178519](178531 call iteratorIndex _iterator[178520]))
           }
-          ForLoop[178567]
+          ForLoop[178521]
           {
-            unknown s[178584] "index var" "insert auto destroy"
-            (178586 'move' s[178584] _indexOfInterest[178565])
+            unknown s[178538] "index var" "insert auto destroy"
+            (178540 'move' s[178538] _indexOfInterest[178519])
             {
-              const sLen[178442] "const"(178439 call . s[178584] c"buffLen")
-              (178445 'end of statement')
-              if(178509 call _cond_test first[178427])
+              const sLen[178396] "const"(178393 call . s[178538] c"buffLen")
+              (178399 'end of statement')
+              if(178463 call _cond_test first[178381])
               {
-                (178450 call = first[178427] 0)
+                (178404 call = first[178381] 0)
               }
               {
-                if(178505 call _cond_test(178459 call !=(178455 call . x[178184] c"buffLen") 0))
+                if(178459 call _cond_test(178413 call !=(178409 call . x[178138] c"buffLen") 0))
                 {
-                  (178477 call bufferMemcpyLocal(dst = newBuff[178401])(src =(178466 call . x[178184] c"buff"))(len =(178471 call . x[178184] c"buffLen"))(dst_off = offset[178432]))
-                  (178485 call += offset[178432](178482 call . x[178184] c"buffLen"))
-                  if(178500 call _cond_test(178490 call == t[178182] string[26]))
+                  (178431 call bufferMemcpyLocal(dst = newBuff[178355])(src =(178420 call . x[178138] c"buff"))(len =(178425 call . x[178138] c"buffLen"))(dst_off = offset[178386]))
+                  (178439 call += offset[178386](178436 call . x[178138] c"buffLen"))
+                  if(178454 call _cond_test(178444 call == t[178136] string[26]))
                   {
-                    (178497 call += numCodepoints[178366](178494 call . x[178184] c"numCodepoints"))
+                    (178451 call += numCodepoints[178320](178448 call . x[178138] c"numCodepoints"))
                   }
                 }
               }
-              if(178561 call _cond_test(178516 call != sLen[178442] 0))
+              if(178515 call _cond_test(178470 call != sLen[178396] 0))
               {
-                (178536 call bufferMemcpy(dst = newBuff[178401])(dst_off = offset[178432])(src_loc =(178525 call . s[178584] c"locale_id"))(src =(178530 call . s[178584] c"buff"))(len = sLen[178442]))
-                (178541 call += offset[178432] sLen[178442])
-                if(178556 call _cond_test(178546 call == t[178182] string[26]))
+                (178490 call bufferMemcpy(dst = newBuff[178355])(dst_off = offset[178386])(src_loc =(178479 call . s[178538] c"locale_id"))(src =(178484 call . s[178538] c"buff"))(len = sLen[178396]))
+                (178495 call += offset[178386] sLen[178396])
+                if(178510 call _cond_test(178500 call == t[178136] string[26]))
                 {
-                  (178553 call += numCodepoints[178366](178550 call . s[178584] c"numCodepoints"))
+                  (178507 call += numCodepoints[178320](178504 call . s[178538] c"numCodepoints"))
                 }
               }
             }
-            label _continueLabel[178570]
-            _indexOfInterest[178565]
-            _iterator[178566]
+            label _continueLabel[178524]
+            _indexOfInterest[178519]
+            _iterator[178520]
           }
-          label _breakLabel[178571]
+          label _breakLabel[178525]
         }
-        (178603 call =(178601 call newBuff[178401] joinedSize[178317]) 0)
-        if(178636 call _cond_test(178608 call == t[178182] string[26]))
+        (178557 call =(178555 call newBuff[178355] joinedSize[178271]) 0)
+        if(178590 call _cond_test(178562 call == t[178136] string[26]))
         {
-          (178621 return(178620 call chpl_createStringWithOwnedBufferNV(x = newBuff[178401])(length = joinedSize[178317])(size = allocSize[178403])(numCodepoints = numCodepoints[178366])))
+          (178575 return(178574 call chpl_createStringWithOwnedBufferNV(x = newBuff[178355])(length = joinedSize[178271])(size = allocSize[178357])(numCodepoints = numCodepoints[178320])))
         }
         {
-          (178633 return(178632 call createBytesWithOwnedBuffer(x = newBuff[178401])(length = joinedSize[178317])(size = allocSize[178403])))
+          (178587 return(178586 call createBytesWithOwnedBuffer(x = newBuff[178355])(length = joinedSize[178271])(size = allocSize[178357])))
         }
       }
     }
   }
   where {
-    (178200 call ||(178195 call isTuple S[178189])(178199 call isArray S[178189]))
+    (178154 call ||(178149 call isTuple S[178143])(178153 call isArray S[178143]))
   }
   { scopeless type
-    t[178182]
+    t[178136]
   }
-  function doPartition[178660](const  ref arg x[178657] :
-  unknown t[178655], arg sep[178663] :
-  t[178655]) : _unknown[51]
+  function doPartition[178614](const  ref arg x[178611] :
+  unknown t[178609], arg sep[178617] :
+  t[178609]) : _unknown[51]
   {
-    (178690 call assertArgType t[178655] "doPartition")
-    const idx[178700] "const"(178699 call(178694 call . x[178657] c"find") sep[178663])
-    (178703 'end of statement')
-    if(178785 call _cond_test(178708 call != idx[178700](178706 call - 1)))
+    (178644 call assertArgType t[178609] "doPartition")
+    const idx[178654] "const"(178653 call(178648 call . x[178611] c"find") sep[178617])
+    (178657 'end of statement')
+    if(178739 call _cond_test(178662 call != idx[178654](178660 call - 1)))
     {
-      (178735 return(178733 call _build_tuple(178718 call x[178657](178715 call chpl_build_high_bounded_range(178713 call - idx[178700] 1))) sep[178663](178732 call x[178657](178729 call chpl_build_low_bounded_range(178727 call + idx[178700](178724 call . sep[178663] c"numBytes"))))))
+      (178689 return(178687 call _build_tuple(178672 call x[178611](178669 call chpl_build_high_bounded_range(178667 call - idx[178654] 1))) sep[178617](178686 call x[178611](178683 call chpl_build_low_bounded_range(178681 call + idx[178654](178678 call . sep[178617] c"numBytes"))))))
     }
     {
-      (178782 return(178780 call _build_tuple x[178657](178757 call _cast t[178655] "")(178778 call _cast t[178655] "")))
+      (178736 return(178734 call _build_tuple x[178611](178711 call _cast t[178609] "")(178732 call _cast t[178609] "")))
     }
   }
   { scopeless type
-    (178668 call * 3 t[178655])
+    (178622 call * 3 t[178609])
   }
-  function doAppend[178799](ref arg lhs[178796] :
-  unknown t[178794], const  ref arg rhs[178802] :
-  t[178794]) : _unknown[51] "no return value for void"
+  function doAppend[178753](ref arg lhs[178750] :
+  unknown t[178748], const  ref arg rhs[178756] :
+  t[178748]) : _unknown[51] "no return value for void"
   {
-    (178825 call assertArgType t[178794] "doAppend")
-    if(178837 call _cond_test(178833 call ==(178829 call . rhs[178802] c"buffLen") 0))
+    (178779 call assertArgType t[178748] "doAppend")
+    if(178791 call _cond_test(178787 call ==(178783 call . rhs[178756] c"buffLen") 0))
     {
-      (178835 return _void[55])
+      (178789 return _void[55])
     }
-    const tmp[179121] "const" "temp"
-    (179123 'move' tmp[179121](179119 'deref'(178852 'chpl_on_locale_num'(178851 call chpl_buildLocaleID(178846 call . lhs[178796] c"locale_id") c_sublocid_any[89878]))))
+    const tmp[179075] "const" "temp"
+    (179077 'move' tmp[179075](179073 'deref'(178806 'chpl_on_locale_num'(178805 call chpl_buildLocaleID(178800 call . lhs[178750] c"locale_id") c_sublocid_any[89875]))))
     {
       {
-        if(178887 call _cond_test(178864 call !(178863 call safeAdd(178855 call . lhs[178796] c"buffLen")(178860 call . rhs[178802] c"buffLen"))))
+        if(178841 call _cond_test(178818 call !(178817 call safeAdd(178809 call . lhs[178750] c"buffLen")(178814 call . rhs[178756] c"buffLen"))))
         {
-          (178885 call halt "Buffer overflow allocating string copy data")
+          (178839 call halt "Buffer overflow allocating string copy data")
         }
-        const newLength[178903] "const"(178901 call +(178894 call . lhs[178796] c"buffLen")(178898 call . rhs[178802] c"buffLen"))
-        (178906 'end of statement')
-        if(179049 call _cond_test(178912 call <=(178908 call . lhs[178796] c"buffSize") newLength[178903]))
+        const newLength[178857] "const"(178855 call +(178848 call . lhs[178750] c"buffLen")(178852 call . rhs[178756] c"buffLen"))
+        (178860 'end of statement')
+        if(179003 call _cond_test(178866 call <=(178862 call . lhs[178750] c"buffSize") newLength[178857]))
         {
-          const requestedSize[178931] "const"(178930 call max(178917 call + newLength[178903] 1)(178928 call _cast int(64)[13](178925 call *(178921 call . lhs[178796] c"buffLen") chpl_stringGrowthFactor[172536])))
-          (178934 'end of statement')
-          if(179045 call _cond_test(178937 call . lhs[178796] c"isOwned"))
+          const requestedSize[178885] "const"(178884 call max(178871 call + newLength[178857] 1)(178882 call _cast int(64)[13](178879 call *(178875 call . lhs[178750] c"buffLen") chpl_stringGrowthFactor[172490])))
+          (178888 'end of statement')
+          if(178999 call _cond_test(178891 call . lhs[178750] c"isOwned"))
           {
-            unknown tmp[178953] "temp"(178952 call bufferRealloc(178947 call . lhs[178796] c"buff") requestedSize[178931])
-            (178960 call _check_tuple_var_decl tmp[178953] 2)
-            unknown newBuff[178940](178954 call tmp[178953] 0)
-            unknown allocSize[178942](178957 call tmp[178953] 1)
-            (178965 'end of statement')
-            (178972 call =(178968 call . lhs[178796] c"buff") newBuff[178940])
-            (178980 call =(178976 call . lhs[178796] c"buffSize") allocSize[178942])
+            unknown tmp[178907] "temp"(178906 call bufferRealloc(178901 call . lhs[178750] c"buff") requestedSize[178885])
+            (178914 call _check_tuple_var_decl tmp[178907] 2)
+            unknown newBuff[178894](178908 call tmp[178907] 0)
+            unknown allocSize[178896](178911 call tmp[178907] 1)
+            (178919 'end of statement')
+            (178926 call =(178922 call . lhs[178750] c"buff") newBuff[178894])
+            (178934 call =(178930 call . lhs[178750] c"buffSize") allocSize[178896])
           }
           {
-            unknown tmp[178992] "temp"(178991 call bufferAlloc requestedSize[178931])
-            (178999 call _check_tuple_var_decl tmp[178992] 2)
-            unknown newBuff[178983](178993 call tmp[178992] 0)
-            unknown allocSize[178985](178996 call tmp[178992] 1)
-            (179004 'end of statement')
-            (179019 call bufferMemcpyLocal(dst = newBuff[178983])(src =(179011 call . lhs[178796] c"buff"))(179016 call . lhs[178796] c"buffLen"))
-            (179026 call =(179022 call . lhs[178796] c"buff") newBuff[178983])
-            (179034 call =(179030 call . lhs[178796] c"buffSize") allocSize[178985])
-            (179042 call =(179038 call . lhs[178796] c"isOwned") 1)
+            unknown tmp[178946] "temp"(178945 call bufferAlloc requestedSize[178885])
+            (178953 call _check_tuple_var_decl tmp[178946] 2)
+            unknown newBuff[178937](178947 call tmp[178946] 0)
+            unknown allocSize[178939](178950 call tmp[178946] 1)
+            (178958 'end of statement')
+            (178973 call bufferMemcpyLocal(dst = newBuff[178937])(src =(178965 call . lhs[178750] c"buff"))(178970 call . lhs[178750] c"buffLen"))
+            (178980 call =(178976 call . lhs[178750] c"buff") newBuff[178937])
+            (178988 call =(178984 call . lhs[178750] c"buffSize") allocSize[178939])
+            (178996 call =(178992 call . lhs[178750] c"isOwned") 1)
           }
         }
-        (179078 call bufferMemcpy(dst =(179055 call . lhs[178796] c"buff"))(src_loc =(179061 call . rhs[178802] c"locale_id"))(179066 call . rhs[178802] c"buff")(179070 call . rhs[178802] c"buffLen")(dst_off =(179074 call . lhs[178796] c"buffLen")))
-        (179085 call =(179081 call . lhs[178796] c"buffLen") newLength[178903])
-        (179096 call =(179094 call(179089 call . lhs[178796] c"buff") newLength[178903]) 0)
-        if(179114 call _cond_test(179101 call == t[178794] string[26]))
+        (179032 call bufferMemcpy(dst =(179009 call . lhs[178750] c"buff"))(src_loc =(179015 call . rhs[178756] c"locale_id"))(179020 call . rhs[178756] c"buff")(179024 call . rhs[178756] c"buffLen")(dst_off =(179028 call . lhs[178750] c"buffLen")))
+        (179039 call =(179035 call . lhs[178750] c"buffLen") newLength[178857])
+        (179050 call =(179048 call(179043 call . lhs[178750] c"buff") newLength[178857]) 0)
+        if(179068 call _cond_test(179055 call == t[178748] string[26]))
         {
-          (179111 call +=(179104 call . lhs[178796] c"cachedNumCodepoints")(179108 call . rhs[178802] c"cachedNumCodepoints"))
+          (179065 call +=(179058 call . lhs[178750] c"cachedNumCodepoints")(179062 call . rhs[178756] c"cachedNumCodepoints"))
         }
       }
-      (179126 'on block' 0 tmp[179121])
+      (179080 'on block' 0 tmp[179075])
     }
   }
-  function reinitWithNewBuffer[179138](ref arg lhs[179135] :
-  unknown t[179133], arg buff[179141] :
-  bufferType[172527], arg buffLen[179145] :
-  int(64)[13], arg buffSize[179149] :
-  int(64)[13], arg numCodepoints[179154] :
+  function reinitWithNewBuffer[179092](ref arg lhs[179089] :
+  unknown t[179087], arg buff[179095] :
+  bufferType[172481], arg buffLen[179099] :
+  int(64)[13], arg buffSize[179103] :
+  int(64)[13], arg numCodepoints[179108] :
   int(64)[13] =
   0) : _unknown[51] "no return value for void"
   {
-    if(179172 call _cond_test(179168 call &&(179163 call(179159 call . lhs[179135] c"isEmpty"))(179166 call == buff[179141] nil[44])))
+    if(179126 call _cond_test(179122 call &&(179117 call(179113 call . lhs[179089] c"isEmpty"))(179120 call == buff[179095] nil[44])))
     {
-      (179170 return _void[55])
+      (179124 return _void[55])
     }
-    if(179347 call _cond_test(179180 call != buffLen[179145] 0))
+    if(179301 call _cond_test(179134 call != buffLen[179099] 0))
     {
-      if(179277 call _cond_test(179198 call ||(179186 call !(179183 call . lhs[179135] c"isOwned"))(179196 call >(179190 call + buffLen[179145] 1)(179193 call . lhs[179135] c"buffSize"))))
+      if(179231 call _cond_test(179152 call ||(179140 call !(179137 call . lhs[179089] c"isOwned"))(179150 call >(179144 call + buffLen[179099] 1)(179147 call . lhs[179089] c"buffSize"))))
       {
-        if(179222 call _cond_test(179212 call &&(179201 call . lhs[179135] c"isOwned")(179210 call !(179209 call(179205 call . lhs[179135] c"isEmpty")))))
+        if(179176 call _cond_test(179166 call &&(179155 call . lhs[179089] c"isOwned")(179164 call !(179163 call(179159 call . lhs[179089] c"isEmpty")))))
         {
-          (179220 call bufferFree(179216 call . lhs[179135] c"buff"))
+          (179174 call bufferFree(179170 call . lhs[179089] c"buff"))
         }
-        const tmp[179240] "const" "temp"(179239 call bufferAlloc(179236 call + buffLen[179145] 1))
-        (179247 call _check_tuple_var_decl tmp[179240] 2)
-        const buff[179228] "const"(179241 call tmp[179240] 0)
-        const allocSize[179230] "const"(179244 call tmp[179240] 1)
-        (179252 'end of statement')
-        (179258 call =(179254 call . lhs[179135] c"buff") buff[179228])
-        (179266 call =(179262 call . lhs[179135] c"buffSize") allocSize[179230])
-        (179274 call =(179270 call . lhs[179135] c"isOwned") 1)
+        const tmp[179194] "const" "temp"(179193 call bufferAlloc(179190 call + buffLen[179099] 1))
+        (179201 call _check_tuple_var_decl tmp[179194] 2)
+        const buff[179182] "const"(179195 call tmp[179194] 0)
+        const allocSize[179184] "const"(179198 call tmp[179194] 1)
+        (179206 'end of statement')
+        (179212 call =(179208 call . lhs[179089] c"buff") buff[179182])
+        (179220 call =(179216 call . lhs[179089] c"buffSize") allocSize[179184])
+        (179228 call =(179224 call . lhs[179089] c"isOwned") 1)
       }
-      (179290 call bufferMemmoveLocal(179284 call . lhs[179135] c"buff") buff[179141] buffLen[179145])
-      (179300 call =(179298 call(179293 call . lhs[179135] c"buff") buffLen[179145]) 0)
+      (179244 call bufferMemmoveLocal(179238 call . lhs[179089] c"buff") buff[179095] buffLen[179099])
+      (179254 call =(179252 call(179247 call . lhs[179089] c"buff") buffLen[179099]) 0)
     }
     {
-      if(179325 call _cond_test(179315 call &&(179304 call . lhs[179135] c"isOwned")(179313 call !(179312 call(179308 call . lhs[179135] c"isEmpty")))))
+      if(179279 call _cond_test(179269 call &&(179258 call . lhs[179089] c"isOwned")(179267 call !(179266 call(179262 call . lhs[179089] c"isEmpty")))))
       {
-        (179323 call bufferFree(179319 call . lhs[179135] c"buff"))
+        (179277 call bufferFree(179273 call . lhs[179089] c"buff"))
       }
-      (179336 call =(179332 call . lhs[179135] c"buffSize") 0)
-      (179344 call =(179340 call . lhs[179135] c"buff") nil[44])
+      (179290 call =(179286 call . lhs[179089] c"buffSize") 0)
+      (179298 call =(179294 call . lhs[179089] c"buff") nil[44])
     }
-    (179356 call =(179352 call . lhs[179135] c"buffLen") buffLen[179145])
-    if(179371 call _cond_test(179361 call == t[179133] string[26]))
+    (179310 call =(179306 call . lhs[179089] c"buffLen") buffLen[179099])
+    if(179325 call _cond_test(179315 call == t[179087] string[26]))
     {
-      (179368 call =(179364 call . lhs[179135] c"cachedNumCodepoints") numCodepoints[179154])
+      (179322 call =(179318 call . lhs[179089] c"cachedNumCodepoints") numCodepoints[179108])
     }
   }
-  function reinitWithOwnedBuffer[179385](ref arg lhs[179382] :
-  unknown t[179380], arg buff[179388] :
-  bufferType[172527], arg buffLen[179392] :
-  int(64)[13], arg buffSize[179396] :
-  int(64)[13], arg numCodepoints[179401] :
+  function reinitWithOwnedBuffer[179339](ref arg lhs[179336] :
+  unknown t[179334], arg buff[179342] :
+  bufferType[172481], arg buffLen[179346] :
+  int(64)[13], arg buffSize[179350] :
+  int(64)[13], arg numCodepoints[179355] :
   int(64)[13] =
   0) : _unknown[51] "no return value for void"
   {
-    if(179419 call _cond_test(179415 call &&(179410 call(179406 call . lhs[179382] c"isEmpty"))(179413 call == buff[179388] nil[44])))
+    if(179373 call _cond_test(179369 call &&(179364 call(179360 call . lhs[179336] c"isEmpty"))(179367 call == buff[179342] nil[44])))
     {
-      (179417 return _void[55])
+      (179371 return _void[55])
     }
-    if(179517 call _cond_test(179427 call != buffLen[179392] 0))
+    if(179471 call _cond_test(179381 call != buffLen[179346] 0))
     {
-      if(179451 call _cond_test(179441 call &&(179430 call . lhs[179382] c"isOwned")(179439 call !(179438 call(179434 call . lhs[179382] c"isEmpty")))))
+      if(179405 call _cond_test(179395 call &&(179384 call . lhs[179336] c"isOwned")(179393 call !(179392 call(179388 call . lhs[179336] c"isEmpty")))))
       {
-        (179449 call bufferFree(179445 call . lhs[179382] c"buff"))
+        (179403 call bufferFree(179399 call . lhs[179336] c"buff"))
       }
-      (179462 call =(179458 call . lhs[179382] c"buff") buff[179388])
-      (179470 call =(179466 call . lhs[179382] c"buffSize") buffSize[179396])
+      (179416 call =(179412 call . lhs[179336] c"buff") buff[179342])
+      (179424 call =(179420 call . lhs[179336] c"buffSize") buffSize[179350])
     }
     {
-      if(179495 call _cond_test(179485 call &&(179474 call . lhs[179382] c"isOwned")(179483 call !(179482 call(179478 call . lhs[179382] c"isEmpty")))))
+      if(179449 call _cond_test(179439 call &&(179428 call . lhs[179336] c"isOwned")(179437 call !(179436 call(179432 call . lhs[179336] c"isEmpty")))))
       {
-        (179493 call bufferFree(179489 call . lhs[179382] c"buff"))
+        (179447 call bufferFree(179443 call . lhs[179336] c"buff"))
       }
-      (179506 call =(179502 call . lhs[179382] c"buff") buff[179388])
-      (179514 call =(179510 call . lhs[179382] c"buffSize") 0)
+      (179460 call =(179456 call . lhs[179336] c"buff") buff[179342])
+      (179468 call =(179464 call . lhs[179336] c"buffSize") 0)
     }
-    (179526 call =(179522 call . lhs[179382] c"isOwned") 1)
-    (179534 call =(179530 call . lhs[179382] c"buffLen") buffLen[179392])
-    if(179549 call _cond_test(179539 call == t[179380] string[26]))
+    (179480 call =(179476 call . lhs[179336] c"isOwned") 1)
+    (179488 call =(179484 call . lhs[179336] c"buffLen") buffLen[179346])
+    if(179503 call _cond_test(179493 call == t[179334] string[26]))
     {
-      (179546 call =(179542 call . lhs[179382] c"cachedNumCodepoints") numCodepoints[179401])
+      (179500 call =(179496 call . lhs[179336] c"cachedNumCodepoints") numCodepoints[179355])
     }
   }
-  function doAssign[179563](ref arg lhs[179560] :
-  unknown t[179558], arg rhs[179566] :
-  t[179558]) : _unknown[51] "no return value for void"
+  function doAssign[179517](ref arg lhs[179514] :
+  unknown t[179512], arg rhs[179520] :
+  t[179512]) : _unknown[51] "no return value for void"
   {
-    (179589 call assertArgType t[179558] "doAssign")
-    function helpMe[179598](ref arg lhs[179595] :
-    t[179558], arg rhs[179601] :
-    t[179558]) : _unknown[51] "inline" "no return value for void"
+    (179543 call assertArgType t[179512] "doAssign")
+    function helpMe[179552](ref arg lhs[179549] :
+    t[179512], arg rhs[179555] :
+    t[179512]) : _unknown[51] "inline" "no return value for void"
     {
-      if(179739 call _cond_test(179612 call || 0(179610 call ==(179606 call . rhs[179601] c"locale_id") chpl_nodeID[208207])))
+      if(179693 call _cond_test(179566 call || 0(179564 call ==(179560 call . rhs[179555] c"locale_id") chpl_nodeID[208152])))
       {
-        if(179658 call _cond_test(179616 call == t[179558] string[26]))
+        if(179612 call _cond_test(179570 call == t[179512] string[26]))
         {
-          (179637 call reinitWithNewBuffer lhs[179595](179622 call . rhs[179601] c"buff")(179626 call . rhs[179601] c"buffLen")(179630 call . rhs[179601] c"buffSize")(179634 call . rhs[179601] c"numCodepoints"))
+          (179591 call reinitWithNewBuffer lhs[179549](179576 call . rhs[179555] c"buff")(179580 call . rhs[179555] c"buffLen")(179584 call . rhs[179555] c"buffSize")(179588 call . rhs[179555] c"numCodepoints"))
         }
         {
-          (179655 call reinitWithNewBuffer lhs[179595](179644 call . rhs[179601] c"buff")(179648 call . rhs[179601] c"buffLen")(179652 call . rhs[179601] c"buffSize"))
+          (179609 call reinitWithNewBuffer lhs[179549](179598 call . rhs[179555] c"buff")(179602 call . rhs[179555] c"buffLen")(179606 call . rhs[179555] c"buffSize"))
         }
       }
       {
-        const len[179667] "const"(179664 call . rhs[179601] c"buffLen")
-        (179670 'end of statement')
-        unknown remote_buf[179674] nil[44] bufferType[172527]
-        (179677 'end of statement')
-        if(179698 call _cond_test(179680 call != len[179667] 0))
+        const len[179621] "const"(179618 call . rhs[179555] c"buffLen")
+        (179624 'end of statement')
+        unknown remote_buf[179628] nil[44] bufferType[172481]
+        (179631 'end of statement')
+        if(179652 call _cond_test(179634 call != len[179621] 0))
         {
-          (179695 call = remote_buf[179674](179694 call bufferCopyRemote(179685 call . rhs[179601] c"locale_id")(179690 call . rhs[179601] c"buff") len[179667]))
+          (179649 call = remote_buf[179628](179648 call bufferCopyRemote(179639 call . rhs[179555] c"locale_id")(179644 call . rhs[179555] c"buff") len[179621]))
         }
-        if(179735 call _cond_test(179705 call == t[179558] string[26]))
+        if(179689 call _cond_test(179659 call == t[179512] string[26]))
         {
-          (179720 call reinitWithOwnedBuffer lhs[179595] remote_buf[179674] len[179667](179714 call + len[179667] 1)(179717 call . rhs[179601] c"cachedNumCodepoints"))
+          (179674 call reinitWithOwnedBuffer lhs[179549] remote_buf[179628] len[179621](179668 call + len[179621] 1)(179671 call . rhs[179555] c"cachedNumCodepoints"))
         }
         {
-          (179732 call reinitWithOwnedBuffer lhs[179595] remote_buf[179674] len[179667](179730 call + len[179667] 1))
+          (179686 call reinitWithOwnedBuffer lhs[179549] remote_buf[179628] len[179621](179684 call + len[179621] 1))
         }
       }
     }
-    if(179792 call _cond_test(179754 call || 0(179752 call ==(179748 call . lhs[179560] c"locale_id") chpl_nodeID[208207])))
+    if(179746 call _cond_test(179708 call || 0(179706 call ==(179702 call . lhs[179514] c"locale_id") chpl_nodeID[208152])))
     {
-      (179760 call helpMe lhs[179560] rhs[179566])
+      (179714 call helpMe lhs[179514] rhs[179520])
     }
     {
-      const tmp[179783] "const" "temp"
-      (179785 'move' tmp[179783](179781 'deref'(179773 'chpl_on_locale_num'(179772 call chpl_buildLocaleID(179767 call . lhs[179560] c"locale_id") c_sublocid_any[89878]))))
+      const tmp[179737] "const" "temp"
+      (179739 'move' tmp[179737](179735 'deref'(179727 'chpl_on_locale_num'(179726 call chpl_buildLocaleID(179721 call . lhs[179514] c"locale_id") c_sublocid_any[89875]))))
       {
         {
-          (179778 call helpMe lhs[179560] rhs[179566])
+          (179732 call helpMe lhs[179514] rhs[179520])
         }
-        (179788 'on block' 0 tmp[179783])
+        (179742 'on block' 0 tmp[179737])
       }
     }
   }
-  function doMultiply[179805](const  ref arg x[179802] :
-  unknown t[179800], arg n[179808] :
+  function doMultiply[179759](const  ref arg x[179756] :
+  unknown t[179754], arg n[179762] :
   integral[199](?)) : _unknown[51]
   {
-    (179831 call assertArgType t[179800] "doMultiply")
-    const sLen[179838] "const"(179835 call . x[179802] c"numBytes")
-    (179841 'end of statement')
-    if(179988 call _cond_test(179845 call isBytesType t[179800]))
+    (179785 call assertArgType t[179754] "doMultiply")
+    const sLen[179792] "const"(179789 call . x[179756] c"numBytes")
+    (179795 'end of statement')
+    if(179942 call _cond_test(179799 call isBytesType t[179754]))
     {
-      if(179868 call _cond_test(179848 call <= n[179808] 0))
+      if(179822 call _cond_test(179802 call <= n[179762] 0))
       {
-        (179866 return b"")
+        (179820 return b"")
       }
-      if(179896 call _cond_test(179876 call == sLen[179838] 0))
+      if(179850 call _cond_test(179830 call == sLen[179792] 0))
       {
-        (179894 return b"")
+        (179848 return b"")
       }
     }
     {
-      if(179984 call _cond_test(179904 call isStringType t[179800]))
+      if(179938 call _cond_test(179858 call isStringType t[179754]))
       {
-        if(179928 call _cond_test(179907 call <= n[179808] 0))
+        if(179882 call _cond_test(179861 call <= n[179762] 0))
         {
-          (179926 return "")
+          (179880 return "")
         }
-        if(179957 call _cond_test(179936 call == sLen[179838] 0))
+        if(179911 call _cond_test(179890 call == sLen[179792] 0))
         {
-          (179955 return "")
+          (179909 return "")
         }
       }
       {
-        (179981 call compilerError "Unexpected type")
+        (179935 call compilerError "Unexpected type")
       }
     }
-    if(180005 call _cond_test(179998 call !(179997 call safeMul sLen[179838] n[179808])))
+    if(179959 call _cond_test(179952 call !(179951 call safeMul sLen[179792] n[179762])))
     {
-      (180003 call halt "Buffer overflow allocating string copy data")
+      (179957 call halt "Buffer overflow allocating string copy data")
     }
-    const buffLen[180014] "const"(180012 call * sLen[179838] n[179808])
-    (180017 'end of statement')
-    unknown tmp[180030] "temp"(180029 call bufferAlloc(180026 call + buffLen[180014] 1))
-    (180037 call _check_tuple_var_decl tmp[180030] 2)
-    unknown buff[180018](180031 call tmp[180030] 0)
-    unknown allocSize[180020](180034 call tmp[180030] 1)
-    (180042 'end of statement')
-    (180062 call bufferMemcpy(dst = buff[180018])(src_loc =(180048 call . x[179802] c"locale_id"))(src =(180053 call . x[179802] c"buff"))(len =(180058 call . x[179802] c"buffLen")))
-    unknown offset[180065] sLen[179838]
-    (180068 'end of statement')
+    const buffLen[179968] "const"(179966 call * sLen[179792] n[179762])
+    (179971 'end of statement')
+    unknown tmp[179984] "temp"(179983 call bufferAlloc(179980 call + buffLen[179968] 1))
+    (179991 call _check_tuple_var_decl tmp[179984] 2)
+    unknown buff[179972](179985 call tmp[179984] 0)
+    unknown allocSize[179974](179988 call tmp[179984] 1)
+    (179996 'end of statement')
+    (180016 call bufferMemcpy(dst = buff[179972])(src_loc =(180002 call . x[179756] c"locale_id"))(src =(180007 call . x[179756] c"buff"))(len =(180012 call . x[179756] c"buffLen")))
+    unknown offset[180019] sLen[179792]
+    (180022 'end of statement')
     {
-      unknown _indexOfInterest[180098] "an _indexOfInterest or chpl__followIdx variable" "temp"
-      unknown _iterator[180099] "expr temp" "temp"
-      (180108 'move' _iterator[180099](180106 call _getIterator(180116 call chpl_direct_range_iter 1(180113 call - n[179808] 1) 1)))
+      unknown _indexOfInterest[180052] "an _indexOfInterest or chpl__followIdx variable" "temp"
+      unknown _iterator[180053] "expr temp" "temp"
+      (180062 'move' _iterator[180053](180060 call _getIterator(180070 call chpl_direct_range_iter 1(180067 call - n[179762] 1) 1)))
       Defer
       {
         {
-          (180132 call _freeIterator _iterator[180099])
+          (180086 call _freeIterator _iterator[180053])
         }
       }
       { scopeless type
-        (180121 'move' _indexOfInterest[180098](180118 call iteratorIndex _iterator[180099]))
+        (180075 'move' _indexOfInterest[180052](180072 call iteratorIndex _iterator[180053]))
       }
-      ForLoop[180100]
+      ForLoop[180054]
       {
-        unknown i[180125] "index var" "insert auto destroy"
-        (180127 'move' i[180125] _indexOfInterest[180098])
+        unknown i[180079] "index var" "insert auto destroy"
+        (180081 'move' i[180079] _indexOfInterest[180052])
         {
-          (180090 call bufferMemcpyLocal(dst = buff[180018])(src = buff[180018])(len =(180084 call . x[179802] c"buffLen"))(dst_off = offset[180065]))
-          (180095 call += offset[180065] sLen[179838])
+          (180044 call bufferMemcpyLocal(dst = buff[179972])(src = buff[179972])(len =(180038 call . x[179756] c"buffLen"))(dst_off = offset[180019]))
+          (180049 call += offset[180019] sLen[179792])
         }
-        label _continueLabel[180103]
-        _indexOfInterest[180098]
-        _iterator[180099]
+        label _continueLabel[180057]
+        _indexOfInterest[180052]
+        _iterator[180053]
       }
-      label _breakLabel[180104]
+      label _breakLabel[180058]
     }
-    (180144 call =(180142 call buff[180018] buffLen[180014]) 0)
-    if(180176 call _cond_test(180149 call == t[179800] string[26]))
+    (180098 call =(180096 call buff[179972] buffLen[179968]) 0)
+    if(180130 call _cond_test(180103 call == t[179754] string[26]))
     {
-      (180164 return(180163 call chpl_createStringWithOwnedBufferNV buff[180018] buffLen[180014] allocSize[180020](180161 call *(180157 call . x[179802] c"cachedNumCodepoints") n[179808])))
+      (180118 return(180117 call chpl_createStringWithOwnedBufferNV buff[179972] buffLen[179968] allocSize[179974](180115 call *(180111 call . x[179756] c"cachedNumCodepoints") n[179762])))
     }
     {
-      (180173 return(180172 call createBytesWithOwnedBuffer buff[180018] buffLen[180014] allocSize[180020]))
+      (180127 return(180126 call createBytesWithOwnedBuffer buff[179972] buffLen[179968] allocSize[179974]))
     }
   }
-  function doConcat[180189](arg s0[180186] :
-  unknown t[180184], arg s1[180192] :
-  t[180184]) : _unknown[51]
+  function doConcat[180143](arg s0[180140] :
+  unknown t[180138], arg s1[180146] :
+  t[180138]) : _unknown[51]
   {
-    (180216 call assertArgType t[180184] "doConcat")
-    const s0len[180223] "const"(180220 call . s0[180186] c"buffLen")
-    (180226 'end of statement')
-    if(180237 call _cond_test(180229 call == s0len[180223] 0))
+    (180170 call assertArgType t[180138] "doConcat")
+    const s0len[180177] "const"(180174 call . s0[180140] c"buffLen")
+    (180180 'end of statement')
+    if(180191 call _cond_test(180183 call == s0len[180177] 0))
     {
-      (180235 return(180233 call _cast t[180184] s1[180192]))
+      (180189 return(180187 call _cast t[180138] s1[180146]))
     }
-    const s1len[180246] "const"(180243 call . s1[180192] c"buffLen")
-    (180249 'end of statement')
-    if(180257 call _cond_test(180252 call == s1len[180246] 0))
+    const s1len[180200] "const"(180197 call . s1[180146] c"buffLen")
+    (180203 'end of statement')
+    if(180211 call _cond_test(180206 call == s1len[180200] 0))
     {
-      (180255 return s0[180186])
+      (180209 return s0[180140])
     }
-    const buffLen[180266] "const"(180264 call + s0len[180223] s1len[180246])
-    (180269 'end of statement')
-    unknown tmp[180282] "temp"(180281 call bufferAlloc(180278 call + buffLen[180266] 1))
-    (180289 call _check_tuple_var_decl tmp[180282] 2)
-    unknown buff[180270](180283 call tmp[180282] 0)
-    unknown buffSize[180272](180286 call tmp[180282] 1)
-    (180294 'end of statement')
-    (180311 call bufferMemcpy(dst = buff[180270])(src_loc =(180300 call . s0[180186] c"locale_id"))(src =(180305 call . s0[180186] c"buff"))(len = s0len[180223]))
-    (180331 call bufferMemcpy(dst = buff[180270])(src_loc =(180318 call . s1[180192] c"locale_id"))(src =(180323 call . s1[180192] c"buff"))(len = s1len[180246])(dst_off = s0len[180223]))
-    (180338 call =(180336 call buff[180270] buffLen[180266]) 0)
-    unknown ret[180342] t[180184]
-    (180345 'end of statement')
-    if(180368 call _cond_test(180348 call == t[180184] string[26]))
+    const buffLen[180220] "const"(180218 call + s0len[180177] s1len[180200])
+    (180223 'end of statement')
+    unknown tmp[180236] "temp"(180235 call bufferAlloc(180232 call + buffLen[180220] 1))
+    (180243 call _check_tuple_var_decl tmp[180236] 2)
+    unknown buff[180224](180237 call tmp[180236] 0)
+    unknown buffSize[180226](180240 call tmp[180236] 1)
+    (180248 'end of statement')
+    (180265 call bufferMemcpy(dst = buff[180224])(src_loc =(180254 call . s0[180140] c"locale_id"))(src =(180259 call . s0[180140] c"buff"))(len = s0len[180177]))
+    (180285 call bufferMemcpy(dst = buff[180224])(src_loc =(180272 call . s1[180146] c"locale_id"))(src =(180277 call . s1[180146] c"buff"))(len = s1len[180200])(dst_off = s0len[180177]))
+    (180292 call =(180290 call buff[180224] buffLen[180220]) 0)
+    unknown ret[180296] t[180138]
+    (180299 'end of statement')
+    if(180322 call _cond_test(180302 call == t[180138] string[26]))
     {
-      (180364 call =(180351 call . ret[180342] c"cachedNumCodepoints")(180362 call +(180355 call . s0[180186] c"cachedNumCodepoints")(180359 call . s1[180192] c"cachedNumCodepoints")))
+      (180318 call =(180305 call . ret[180296] c"cachedNumCodepoints")(180316 call +(180309 call . s0[180140] c"cachedNumCodepoints")(180313 call . s1[180146] c"cachedNumCodepoints")))
     }
-    (180378 call initWithOwnedBuffer ret[180342] buff[180270] buffLen[180266] buffSize[180272])
-    (180381 return ret[180342])
+    (180332 call initWithOwnedBuffer ret[180296] buff[180224] buffLen[180220] buffSize[180226])
+    (180335 return ret[180296])
   }
   { scopeless type
-    t[180184]
+    t[180138]
   }
-  function doStripNoEnc[180393](const  ref arg x[180390] :
-  unknown t[180388], arg chars[180396] :
-  t[180388], arg leading[180400] :
-  bool[10], arg trailing[180404] :
+  function doStripNoEnc[180347](const  ref arg x[180344] :
+  unknown t[180342], arg chars[180350] :
+  t[180342], arg leading[180354] :
+  bool[10], arg trailing[180358] :
   bool[10]) : _unknown[51]
   {
-    if(180456 call _cond_test(180413 call(180409 call . x[180390] c"isEmpty")))
+    if(180410 call _cond_test(180367 call(180363 call . x[180344] c"isEmpty")))
     {
-      (180454 return(180451 IfExpr (180416 call == t[180388] string[26]) then
+      (180408 return(180405 IfExpr (180370 call == t[180342] string[26]) then
       { scopeless
         ""
       } else
@@ -1581,453 +1581,453 @@ Module use list: ChapelStandard SysCTypes ByteBufferHelpers NVStringFactory SysB
         b""
       } ))
     }
-    if(180471 call _cond_test(180467 call(180463 call . chars[180396] c"isEmpty")))
+    if(180425 call _cond_test(180421 call(180417 call . chars[180350] c"isEmpty")))
     {
-      (180469 return x[180390])
+      (180423 return x[180344])
     }
-    const localX[180483] "const"(180482 call(180478 call . x[180390] c"localize")) t[180388]
-    (180486 'end of statement')
-    const localChars[180494] "const"(180493 call(180489 call . chars[180396] c"localize")) t[180388]
-    (180497 'end of statement')
-    unknown start[180500] 0 idxType[22841]
-    (180503 'end of statement')
-    unknown end[180512](180510 call -(180506 call . localX[180483] c"buffLen") 1) idxType[22841]
-    (180515 'end of statement')
-    if(180660 call _cond_test leading[180400])
+    const localX[180437] "const"(180436 call(180432 call . x[180344] c"localize")) t[180342]
+    (180440 'end of statement')
+    const localChars[180448] "const"(180447 call(180443 call . chars[180350] c"localize")) t[180342]
+    (180451 'end of statement')
+    unknown start[180454] 0 idxType[22838]
+    (180457 'end of statement')
+    unknown end[180466](180464 call -(180460 call . localX[180437] c"buffLen") 1) idxType[22838]
+    (180469 'end of statement')
+    if(180614 call _cond_test leading[180354])
     {
       {
-        unknown _indexOfInterest[180598] "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[180599] "expr temp" "temp"
-        (180622 'move' _iterator[180599](180532 call _build_tuple(180611 call _getIterator(180608 call . x[180390] c"indices"))(180619 call _getIterator(180618 call(180615 call . localX[180483] c"chpl_bytes")))))
+        unknown _indexOfInterest[180552] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[180553] "expr temp" "temp"
+        (180576 'move' _iterator[180553](180486 call _build_tuple(180565 call _getIterator(180562 call . x[180344] c"indices"))(180573 call _getIterator(180572 call(180569 call . localX[180437] c"chpl_bytes")))))
         Defer
         {
           {
-            (180652 call _freeIterator _iterator[180599])
+            (180606 call _freeIterator _iterator[180553])
           }
         }
         { scopeless type
-          (180627 'move' _indexOfInterest[180598](180624 call iteratorIndex _iterator[180599]))
+          (180581 'move' _indexOfInterest[180552](180578 call iteratorIndex _iterator[180553]))
         }
-        ForLoop[180600]
+        ForLoop[180554]
         {
-          (180632 call _check_tuple_var_decl _indexOfInterest[180598] 2)
-          unknown i[180638] "index var" "insert auto destroy"
-          (180640 'move' i[180638](180636 call _indexOfInterest[180598] 0))
-          unknown xChar[180645] "index var" "insert auto destroy"
-          (180647 'move' xChar[180645](180643 call _indexOfInterest[180598] 1))
+          (180586 call _check_tuple_var_decl _indexOfInterest[180552] 2)
+          unknown i[180592] "index var" "insert auto destroy"
+          (180594 'move' i[180592](180590 call _indexOfInterest[180552] 0))
+          unknown xChar[180599] "index var" "insert auto destroy"
+          (180601 'move' xChar[180599](180597 call _indexOfInterest[180552] 1))
           {
             {
-              unknown _indexOfInterest[180560] "an _indexOfInterest or chpl__followIdx variable" "temp"
-              unknown _iterator[180561] "expr temp" "temp"
-              (180570 'move' _iterator[180561](180568 call _getIterator(180538 call(180535 call . localChars[180494] c"chpl_bytes"))))
+              unknown _indexOfInterest[180514] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[180515] "expr temp" "temp"
+              (180524 'move' _iterator[180515](180522 call _getIterator(180492 call(180489 call . localChars[180448] c"chpl_bytes"))))
               Defer
               {
                 {
-                  (180587 call _freeIterator _iterator[180561])
+                  (180541 call _freeIterator _iterator[180515])
                 }
               }
               { scopeless type
-                (180576 'move' _indexOfInterest[180560](180573 call iteratorIndex _iterator[180561]))
+                (180530 'move' _indexOfInterest[180514](180527 call iteratorIndex _iterator[180515]))
               }
-              ForLoop[180562]
+              ForLoop[180516]
               {
-                unknown removeChar[180580] "index var" "insert auto destroy"
-                (180582 'move' removeChar[180580] _indexOfInterest[180560])
+                unknown removeChar[180534] "index var" "insert auto destroy"
+                (180536 'move' removeChar[180534] _indexOfInterest[180514])
                 {
-                  if(180555 call _cond_test(180541 call == xChar[180645] removeChar[180580]))
+                  if(180509 call _cond_test(180495 call == xChar[180599] removeChar[180534]))
                   {
-                    (180548 call = start[180500](180546 call + i[180638] 1))
-                    continue _continueLabel[180603] _continueLabel[180603]
+                    (180502 call = start[180454](180500 call + i[180592] 1))
+                    continue _continueLabel[180557] _continueLabel[180557]
                   }
                 }
-                label _continueLabel[180565]
-                _indexOfInterest[180560]
-                _iterator[180561]
+                label _continueLabel[180519]
+                _indexOfInterest[180514]
+                _iterator[180515]
               }
-              label _breakLabel[180566]
+              label _breakLabel[180520]
             }
-            break _breakLabel[180604] _breakLabel[180604]
+            break _breakLabel[180558] _breakLabel[180558]
           }
-          label _continueLabel[180603]
-          _indexOfInterest[180598]
-          _iterator[180599]
+          label _continueLabel[180557]
+          _indexOfInterest[180552]
+          _iterator[180553]
         }
-        label _breakLabel[180604]
+        label _breakLabel[180558]
       }
     }
-    if(180809 call _cond_test trailing[180404])
+    if(180763 call _cond_test trailing[180358])
     {
-      (180669 call = end[180512](180667 call - 1))
+      (180623 call = end[180466](180621 call - 1))
       {
-        unknown _indexOfInterest[180748] "an _indexOfInterest or chpl__followIdx variable" "temp"
-        unknown _iterator[180749] "expr temp" "temp"
-        (180772 'move' _iterator[180749](180688 call _build_tuple(180761 call _getIterator(180758 call . x[180390] c"indices"))(180769 call _getIterator(180768 call(180765 call . localX[180483] c"chpl_bytes")))))
+        unknown _indexOfInterest[180702] "an _indexOfInterest or chpl__followIdx variable" "temp"
+        unknown _iterator[180703] "expr temp" "temp"
+        (180726 'move' _iterator[180703](180642 call _build_tuple(180715 call _getIterator(180712 call . x[180344] c"indices"))(180723 call _getIterator(180722 call(180719 call . localX[180437] c"chpl_bytes")))))
         Defer
         {
           {
-            (180802 call _freeIterator _iterator[180749])
+            (180756 call _freeIterator _iterator[180703])
           }
         }
         { scopeless type
-          (180777 'move' _indexOfInterest[180748](180774 call iteratorIndex _iterator[180749]))
+          (180731 'move' _indexOfInterest[180702](180728 call iteratorIndex _iterator[180703]))
         }
-        ForLoop[180750]
+        ForLoop[180704]
         {
-          (180782 call _check_tuple_var_decl _indexOfInterest[180748] 2)
-          unknown i[180788] "index var" "insert auto destroy"
-          (180790 'move' i[180788](180786 call _indexOfInterest[180748] 0))
-          unknown xChar[180795] "index var" "insert auto destroy"
-          (180797 'move' xChar[180795](180793 call _indexOfInterest[180748] 1))
+          (180736 call _check_tuple_var_decl _indexOfInterest[180702] 2)
+          unknown i[180742] "index var" "insert auto destroy"
+          (180744 'move' i[180742](180740 call _indexOfInterest[180702] 0))
+          unknown xChar[180749] "index var" "insert auto destroy"
+          (180751 'move' xChar[180749](180747 call _indexOfInterest[180702] 1))
           {
             {
-              unknown _indexOfInterest[180708] "an _indexOfInterest or chpl__followIdx variable" "temp"
-              unknown _iterator[180709] "expr temp" "temp"
-              (180718 'move' _iterator[180709](180716 call _getIterator(180694 call(180691 call . localChars[180494] c"chpl_bytes"))))
+              unknown _indexOfInterest[180662] "an _indexOfInterest or chpl__followIdx variable" "temp"
+              unknown _iterator[180663] "expr temp" "temp"
+              (180672 'move' _iterator[180663](180670 call _getIterator(180648 call(180645 call . localChars[180448] c"chpl_bytes"))))
               Defer
               {
                 {
-                  (180735 call _freeIterator _iterator[180709])
+                  (180689 call _freeIterator _iterator[180663])
                 }
               }
               { scopeless type
-                (180724 'move' _indexOfInterest[180708](180721 call iteratorIndex _iterator[180709]))
+                (180678 'move' _indexOfInterest[180662](180675 call iteratorIndex _iterator[180663]))
               }
-              ForLoop[180710]
+              ForLoop[180664]
               {
-                unknown removeChar[180728] "index var" "insert auto destroy"
-                (180730 'move' removeChar[180728] _indexOfInterest[180708])
+                unknown removeChar[180682] "index var" "insert auto destroy"
+                (180684 'move' removeChar[180682] _indexOfInterest[180662])
                 {
-                  if(180703 call _cond_test(180697 call == xChar[180795] removeChar[180728]))
+                  if(180657 call _cond_test(180651 call == xChar[180749] removeChar[180682]))
                   {
-                    continue _continueLabel[180753] _continueLabel[180753]
+                    continue _continueLabel[180707] _continueLabel[180707]
                   }
                 }
-                label _continueLabel[180713]
-                _indexOfInterest[180708]
-                _iterator[180709]
+                label _continueLabel[180667]
+                _indexOfInterest[180662]
+                _iterator[180663]
               }
-              label _breakLabel[180714]
+              label _breakLabel[180668]
             }
-            (180745 call = end[180512] i[180788])
+            (180699 call = end[180466] i[180742])
           }
-          label _continueLabel[180753]
-          _indexOfInterest[180748]
-          _iterator[180749]
+          label _continueLabel[180707]
+          _indexOfInterest[180702]
+          _iterator[180703]
         }
-        label _breakLabel[180754]
+        label _breakLabel[180708]
       }
     }
-    (180820 return(180819 call localX[180483](180816 call chpl_build_bounded_range start[180500] end[180512])))
+    (180774 return(180773 call localX[180437](180770 call chpl_build_bounded_range start[180454] end[180466])))
   }
   { scopeless type
-    t[180388]
+    t[180342]
   }
-  function doEq[180832](arg a[180829] :
-  unknown t1[180827], arg b[180836] :
-  unknown t2[180834]) : _unknown[51] "inline"
+  function doEq[180786](arg a[180783] :
+  unknown t1[180781], arg b[180790] :
+  unknown t2[180788]) : _unknown[51] "inline"
   {
-    (180859 call assertArgType t1[180827] "doEq")
-    (180866 call assertArgType t2[180834] "doEq")
-    (180898 return(180896 call ==(180894 call _strcmp(180870 call . a[180829] c"buff")(180875 call . a[180829] c"buffLen")(180879 call . a[180829] c"locale_id")(180883 call . b[180836] c"buff")(180887 call . b[180836] c"buffLen")(180891 call . b[180836] c"locale_id")) 0))
+    (180813 call assertArgType t1[180781] "doEq")
+    (180820 call assertArgType t2[180788] "doEq")
+    (180852 return(180850 call ==(180848 call _strcmp(180824 call . a[180783] c"buff")(180829 call . a[180783] c"buffLen")(180833 call . a[180783] c"locale_id")(180837 call . b[180790] c"buff")(180841 call . b[180790] c"buffLen")(180845 call . b[180790] c"locale_id")) 0))
   }
-  function doLessThan[180909](arg a[180906] :
-  unknown t1[180904], arg b[180913] :
-  unknown t2[180911]) : _unknown[51] "inline"
+  function doLessThan[180863](arg a[180860] :
+  unknown t1[180858], arg b[180867] :
+  unknown t2[180865]) : _unknown[51] "inline"
   {
-    (180920 call assertArgType t1[180904] "doEq")
-    (180927 call assertArgType t2[180911] "doEq")
-    (180959 return(180957 call <(180955 call _strcmp(180931 call . a[180906] c"buff")(180936 call . a[180906] c"buffLen")(180940 call . a[180906] c"locale_id")(180944 call . b[180913] c"buff")(180948 call . b[180913] c"buffLen")(180952 call . b[180913] c"locale_id")) 0))
+    (180874 call assertArgType t1[180858] "doEq")
+    (180881 call assertArgType t2[180865] "doEq")
+    (180913 return(180911 call <(180909 call _strcmp(180885 call . a[180860] c"buff")(180890 call . a[180860] c"buffLen")(180894 call . a[180860] c"locale_id")(180898 call . b[180867] c"buff")(180902 call . b[180867] c"buffLen")(180906 call . b[180867] c"locale_id")) 0))
   }
-  function doGreaterThan[180970](arg a[180967] :
-  unknown t1[180965], arg b[180974] :
-  unknown t2[180972]) : _unknown[51] "inline"
+  function doGreaterThan[180924](arg a[180921] :
+  unknown t1[180919], arg b[180928] :
+  unknown t2[180926]) : _unknown[51] "inline"
   {
-    (180981 call assertArgType t1[180965] "doEq")
-    (180988 call assertArgType t2[180972] "doEq")
-    (181020 return(181018 call >(181016 call _strcmp(180992 call . a[180967] c"buff")(180997 call . a[180967] c"buffLen")(181001 call . a[180967] c"locale_id")(181005 call . b[180974] c"buff")(181009 call . b[180974] c"buffLen")(181013 call . b[180974] c"locale_id")) 0))
+    (180935 call assertArgType t1[180919] "doEq")
+    (180942 call assertArgType t2[180926] "doEq")
+    (180974 return(180972 call >(180970 call _strcmp(180946 call . a[180921] c"buff")(180951 call . a[180921] c"buffLen")(180955 call . a[180921] c"locale_id")(180959 call . b[180928] c"buff")(180963 call . b[180928] c"buffLen")(180967 call . b[180928] c"locale_id")) 0))
   }
-  function doLessThanOrEq[181031](arg a[181028] :
-  unknown t1[181026], arg b[181035] :
-  unknown t2[181033]) : _unknown[51] "inline"
+  function doLessThanOrEq[180985](arg a[180982] :
+  unknown t1[180980], arg b[180989] :
+  unknown t2[180987]) : _unknown[51] "inline"
   {
-    (181042 call assertArgType t1[181026] "doEq")
-    (181049 call assertArgType t2[181033] "doEq")
-    (181081 return(181079 call <=(181077 call _strcmp(181053 call . a[181028] c"buff")(181058 call . a[181028] c"buffLen")(181062 call . a[181028] c"locale_id")(181066 call . b[181035] c"buff")(181070 call . b[181035] c"buffLen")(181074 call . b[181035] c"locale_id")) 0))
+    (180996 call assertArgType t1[180980] "doEq")
+    (181003 call assertArgType t2[180987] "doEq")
+    (181035 return(181033 call <=(181031 call _strcmp(181007 call . a[180982] c"buff")(181012 call . a[180982] c"buffLen")(181016 call . a[180982] c"locale_id")(181020 call . b[180989] c"buff")(181024 call . b[180989] c"buffLen")(181028 call . b[180989] c"locale_id")) 0))
   }
-  function doGreaterThanOrEq[181092](arg a[181089] :
-  unknown t1[181087], arg b[181096] :
-  unknown t2[181094]) : _unknown[51] "inline"
+  function doGreaterThanOrEq[181046](arg a[181043] :
+  unknown t1[181041], arg b[181050] :
+  unknown t2[181048]) : _unknown[51] "inline"
   {
-    (181103 call assertArgType t1[181087] "doEq")
-    (181110 call assertArgType t2[181094] "doEq")
-    (181142 return(181140 call >=(181138 call _strcmp(181114 call . a[181089] c"buff")(181119 call . a[181089] c"buffLen")(181123 call . a[181089] c"locale_id")(181127 call . b[181096] c"buff")(181131 call . b[181096] c"buffLen")(181135 call . b[181096] c"locale_id")) 0))
+    (181057 call assertArgType t1[181041] "doEq")
+    (181064 call assertArgType t2[181048] "doEq")
+    (181096 return(181094 call >=(181092 call _strcmp(181068 call . a[181043] c"buff")(181073 call . a[181043] c"buffLen")(181077 call . a[181043] c"locale_id")(181081 call . b[181050] c"buff")(181085 call . b[181050] c"buffLen")(181089 call . b[181050] c"locale_id")) 0))
   }
-  function getHash[181153](arg x[181150] :
-  unknown t[181148]) : _unknown[51] "inline"
+  function getHash[181107](arg x[181104] :
+  unknown t[181102]) : _unknown[51] "inline"
   {
-    (181175 call assertArgType t[181148] "getHash")
-    unknown hash[181182](181181 call int(64)[13] 64)
-    (181185 'end of statement')
-    const tmp[181290] "const" "temp"
-    (181292 'move' tmp[181290](181288 'deref'(181196 'chpl_on_locale_num'(181195 call chpl_buildLocaleID(181190 call . x[181150] c"locale_id") c_sublocid_any[89878]))))
+    (181129 call assertArgType t[181102] "getHash")
+    unknown hash[181136](181135 call int(64)[13] 64)
+    (181139 'end of statement')
+    const tmp[181244] "const" "temp"
+    (181246 'move' tmp[181244](181242 'deref'(181150 'chpl_on_locale_num'(181149 call chpl_buildLocaleID(181144 call . x[181104] c"locale_id") c_sublocid_any[89875]))))
     {
       {
-        unknown locHash[181204] 5381(181200 call int(64)[13] 64)
-        (181207 'end of statement')
+        unknown locHash[181158] 5381(181154 call int(64)[13] 64)
+        (181161 'end of statement')
         {
-          unknown _indexOfInterest[181240] "an _indexOfInterest or chpl__followIdx variable" "temp"
-          unknown _iterator[181241] "expr temp" "temp"
-          (181250 'move' _iterator[181241](181248 call _getIterator(181260 call chpl_direct_counted_range_iter 0(181256 call . x[181150] c"numBytes"))))
+          unknown _indexOfInterest[181194] "an _indexOfInterest or chpl__followIdx variable" "temp"
+          unknown _iterator[181195] "expr temp" "temp"
+          (181204 'move' _iterator[181195](181202 call _getIterator(181214 call chpl_direct_counted_range_iter 0(181210 call . x[181104] c"numBytes"))))
           Defer
           {
             {
-              (181276 call _freeIterator _iterator[181241])
+              (181230 call _freeIterator _iterator[181195])
             }
           }
           { scopeless type
-            (181265 'move' _indexOfInterest[181240](181262 call iteratorIndex _iterator[181241]))
+            (181219 'move' _indexOfInterest[181194](181216 call iteratorIndex _iterator[181195]))
           }
-          ForLoop[181242]
+          ForLoop[181196]
           {
-            unknown c[181269] "index var" "insert auto destroy"
-            (181271 'move' c[181269] _indexOfInterest[181240])
+            unknown c[181223] "index var" "insert auto destroy"
+            (181225 'move' c[181223] _indexOfInterest[181194])
             {
-              (181236 call = locHash[181204](181234 call ^(181225 call +(181222 call << locHash[181204] 5) locHash[181204])(181233 call(181228 call . x[181150] c"buff") c[181269])))
+              (181190 call = locHash[181158](181188 call ^(181179 call +(181176 call << locHash[181158] 5) locHash[181158])(181187 call(181182 call . x[181104] c"buff") c[181223])))
             }
-            label _continueLabel[181245]
-            _indexOfInterest[181240]
-            _iterator[181241]
+            label _continueLabel[181199]
+            _indexOfInterest[181194]
+            _iterator[181195]
           }
-          label _breakLabel[181246]
+          label _breakLabel[181200]
         }
-        (181285 call = hash[181182] locHash[181204])
+        (181239 call = hash[181136] locHash[181158])
       }
-      (181295 'on block' 0 tmp[181290])
+      (181249 'on block' 0 tmp[181244])
     }
-    (181302 return(181300 call _cast uint(64)[115] hash[181182]))
+    (181256 return(181254 call _cast uint(64)[115] hash[181136]))
   }
-  function incrementCodepoints[181312](ref arg lhs[181309] :
-  string[26], arg rhs[181315] :
+  function incrementCodepoints[181266](ref arg lhs[181263] :
+  string[26], arg rhs[181269] :
   string[26]) : _unknown[51] "private" "no return value for void"
   {
-    if(181367 call _cond_test(181336 call ||(181325 call ==(181319 call . lhs[181309] c"cachedNumCodepoints")(181323 call - 1))(181334 call ==(181328 call . rhs[181315] c"cachedNumCodepoints")(181332 call - 1))))
+    if(181321 call _cond_test(181290 call ||(181279 call ==(181273 call . lhs[181263] c"cachedNumCodepoints")(181277 call - 1))(181288 call ==(181282 call . rhs[181269] c"cachedNumCodepoints")(181286 call - 1))))
     {
-      (181345 call =(181339 call . lhs[181309] c"cachedNumCodepoints")(181343 call - 1))
+      (181299 call =(181293 call . lhs[181263] c"cachedNumCodepoints")(181297 call - 1))
     }
     {
-      (181363 call =(181350 call . lhs[181309] c"cachedNumCodepoints")(181361 call +(181354 call . lhs[181309] c"cachedNumCodepoints")(181358 call . rhs[181315] c"cachedNumCodepoints")))
+      (181317 call =(181304 call . lhs[181263] c"cachedNumCodepoints")(181315 call +(181308 call . lhs[181263] c"cachedNumCodepoints")(181312 call . rhs[181269] c"cachedNumCodepoints")))
     }
   }
-  function countNumCodepoints[181380](arg x[181377] :
+  function countNumCodepoints[181334](arg x[181331] :
   string[26]) : _unknown[51]
   {
-    unknown ret[181383] int(64)[13]
-    (181386 'end of statement')
-    const tmp[181417] "const" "temp"
-    (181419 'move' tmp[181417](181415 'deref'(181398 'chpl_on_locale_num'(181397 call chpl_buildLocaleID(181392 call . x[181377] c"locale_id") c_sublocid_any[89878]))))
+    unknown ret[181337] int(64)[13]
+    (181340 'end of statement')
+    const tmp[181371] "const" "temp"
+    (181373 'move' tmp[181371](181369 'deref'(181352 'chpl_on_locale_num'(181351 call chpl_buildLocaleID(181346 call . x[181331] c"locale_id") c_sublocid_any[89875]))))
     {
       {
-        (181411 call = ret[181383](181410 call countNumCodepoints(181402 call . x[181377] c"buff")(181407 call . x[181377] c"buffLen")))
+        (181365 call = ret[181337](181364 call countNumCodepoints(181356 call . x[181331] c"buff")(181361 call . x[181331] c"buffLen")))
       }
-      (181422 'on block' 0 tmp[181417])
+      (181376 'on block' 0 tmp[181371])
     }
-    (181426 return ret[181383])
+    (181380 return ret[181337])
   }
-  function countNumCodepoints[181436](arg buff[181433] :
-  bufferType[172527], arg buffLen[181439] :
+  function countNumCodepoints[181390](arg buff[181387] :
+  bufferType[172481], arg buffLen[181393] :
   int(64)[13]) : _unknown[51]
   {
-    unknown n[181443] 0
-    (181446 'end of statement')
-    unknown i[181449] 0
-    (181452 'end of statement')
+    unknown n[181397] 0
+    (181400 'end of statement')
+    unknown i[181403] 0
+    (181406 'end of statement')
     {
-      unknown tmp[181533] "temp"
-      (181557 'move' tmp[181533](181552 call _cond_test(181554 call < i[181449] buffLen[181439])))
-      WhileDo[181538]
+      unknown tmp[181487] "temp"
+      (181511 'move' tmp[181487](181506 call _cond_test(181508 call < i[181403] buffLen[181393])))
+      WhileDo[181492]
       {
         {
-          (181459 call += i[181449] 1)
+          (181413 call += i[181403] 1)
           {
-            unknown tmp[181483] "temp"
-            (181525 'move' tmp[181483](181511 call _cond_test(181513 call &&(181515 call < i[181449] buffLen[181439])(181519 call !(181521 call isInitialByte(181523 call buff[181433] i[181449]))))))
-            WhileDo[181488]
+            unknown tmp[181437] "temp"
+            (181479 'move' tmp[181437](181465 call _cond_test(181467 call &&(181469 call < i[181403] buffLen[181393])(181473 call !(181475 call isInitialByte(181477 call buff[181387] i[181403]))))))
+            WhileDo[181442]
             {
-              (181480 call += i[181449] 1)
-              label _continueLabel[181486]
-              (181506 'move' tmp[181483](181492 call _cond_test(181494 call &&(181496 call < i[181449] buffLen[181439])(181500 call !(181502 call isInitialByte(181504 call buff[181433] i[181449]))))))
-              tmp[181483]
+              (181434 call += i[181403] 1)
+              label _continueLabel[181440]
+              (181460 'move' tmp[181437](181446 call _cond_test(181448 call &&(181450 call < i[181403] buffLen[181393])(181454 call !(181456 call isInitialByte(181458 call buff[181387] i[181403]))))))
+              tmp[181437]
             }
-            label _breakLabel[181487]
+            label _breakLabel[181441]
           }
-          (181530 call += n[181443] 1)
+          (181484 call += n[181397] 1)
         }
-        label _continueLabel[181536]
-        (181547 'move' tmp[181533](181542 call _cond_test(181544 call < i[181449] buffLen[181439])))
-        tmp[181533]
+        label _continueLabel[181490]
+        (181501 'move' tmp[181487](181496 call _cond_test(181498 call < i[181403] buffLen[181393])))
+        tmp[181487]
       }
-      label _breakLabel[181537]
+      label _breakLabel[181491]
     }
-    (181561 return n[181443])
+    (181515 return n[181397])
   }
-  function isInitialByte[181574](arg b[181571] :
-  (181570 call uint(64)[115] 8)) : _unknown[51] "inline" "no doc"
+  function isInitialByte[181528](arg b[181525] :
+  (181524 call uint(64)[115] 8)) : _unknown[51] "inline" "no doc"
   {
-    (181586 return(181584 call !=(181581 call & b[181571] 192) 128))
+    (181540 return(181538 call !=(181535 call & b[181525] 192) 128))
   }
   { scopeless type
     bool[10]
   }
-  (181610 'require' "ctype.h")
-  function byte_isAscii[181618](arg c[181615] :
-  byteType[172517]) : _unknown[51] "inline"
+  (181564 'require' "ctype.h")
+  function byte_isAscii[181572](arg c[181569] :
+  byteType[172471]) : _unknown[51] "inline"
   {
-    function isascii[181627](arg c[181624] :
-    c_int[20552]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function isascii[181581](arg c[181578] :
+    c_int[20549]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      c_int[20552]
+      c_int[20549]
     }
-    (181644 return(181642 call !=(181640 call isascii(181637 call _cast c_int[20552] c[181615])) 0))
+    (181598 return(181596 call !=(181594 call isascii(181591 call _cast c_int[20549] c[181569])) 0))
   }
   { scopeless type
     bool[10]
   }
-  function byte_isWhitespace[181655](arg c[181652] :
-  byteType[172517]) : _unknown[51] "inline"
+  function byte_isWhitespace[181609](arg c[181606] :
+  byteType[172471]) : _unknown[51] "inline"
   {
-    function isspace[181664](arg c[181661] :
-    c_int[20552]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function isspace[181618](arg c[181615] :
+    c_int[20549]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      c_int[20552]
+      c_int[20549]
     }
-    (181681 return(181679 call !=(181677 call isspace(181674 call _cast c_int[20552] c[181652])) 0))
+    (181635 return(181633 call !=(181631 call isspace(181628 call _cast c_int[20549] c[181606])) 0))
   }
   { scopeless type
     bool[10]
   }
-  function byte_isPrintable[181692](arg c[181689] :
-  byteType[172517]) : _unknown[51] "inline"
+  function byte_isPrintable[181646](arg c[181643] :
+  byteType[172471]) : _unknown[51] "inline"
   {
-    function isprint[181701](arg c[181698] :
-    c_int[20552]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function isprint[181655](arg c[181652] :
+    c_int[20549]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      c_int[20552]
+      c_int[20549]
     }
-    (181718 return(181716 call !=(181714 call isprint(181711 call _cast c_int[20552] c[181689])) 0))
+    (181672 return(181670 call !=(181668 call isprint(181665 call _cast c_int[20549] c[181643])) 0))
   }
   { scopeless type
     bool[10]
   }
-  function byte_isAlpha[181729](arg c[181726] :
-  byteType[172517]) : _unknown[51] "inline"
+  function byte_isAlpha[181683](arg c[181680] :
+  byteType[172471]) : _unknown[51] "inline"
   {
-    function isalpha[181738](arg c[181735] :
-    c_int[20552]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function isalpha[181692](arg c[181689] :
+    c_int[20549]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      c_int[20552]
+      c_int[20549]
     }
-    (181755 return(181753 call !=(181751 call isalpha(181748 call _cast c_int[20552] c[181726])) 0))
+    (181709 return(181707 call !=(181705 call isalpha(181702 call _cast c_int[20549] c[181680])) 0))
   }
   { scopeless type
     bool[10]
   }
-  function byte_isUpper[181766](arg c[181763] :
-  byteType[172517]) : _unknown[51] "inline"
+  function byte_isUpper[181720](arg c[181717] :
+  byteType[172471]) : _unknown[51] "inline"
   {
-    function isupper[181775](arg c[181772] :
-    c_int[20552]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function isupper[181729](arg c[181726] :
+    c_int[20549]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      c_int[20552]
+      c_int[20549]
     }
-    (181792 return(181790 call !=(181788 call isupper(181785 call _cast c_int[20552] c[181763])) 0))
+    (181746 return(181744 call !=(181742 call isupper(181739 call _cast c_int[20549] c[181717])) 0))
   }
   { scopeless type
     bool[10]
   }
-  function byte_isLower[181803](arg c[181800] :
-  byteType[172517]) : _unknown[51] "inline"
+  function byte_isLower[181757](arg c[181754] :
+  byteType[172471]) : _unknown[51] "inline"
   {
-    function islower[181812](arg c[181809] :
-    c_int[20552]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function islower[181766](arg c[181763] :
+    c_int[20549]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      c_int[20552]
+      c_int[20549]
     }
-    (181829 return(181827 call !=(181825 call islower(181822 call _cast c_int[20552] c[181800])) 0))
+    (181783 return(181781 call !=(181779 call islower(181776 call _cast c_int[20549] c[181754])) 0))
   }
   { scopeless type
     bool[10]
   }
-  function byte_isDigit[181840](arg c[181837] :
-  byteType[172517]) : _unknown[51] "inline"
+  function byte_isDigit[181794](arg c[181791] :
+  byteType[172471]) : _unknown[51] "inline"
   {
-    function isdigit[181849](arg c[181846] :
-    c_int[20552]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function isdigit[181803](arg c[181800] :
+    c_int[20549]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      c_int[20552]
+      c_int[20549]
     }
-    (181866 return(181864 call !=(181862 call isdigit(181859 call _cast c_int[20552] c[181837])) 0))
+    (181820 return(181818 call !=(181816 call isdigit(181813 call _cast c_int[20549] c[181791])) 0))
   }
   { scopeless type
     bool[10]
   }
-  function byte_isAlnum[181877](arg c[181874] :
-  byteType[172517]) : _unknown[51] "inline"
+  function byte_isAlnum[181831](arg c[181828] :
+  byteType[172471]) : _unknown[51] "inline"
   {
-    function isalnum[181886](arg c[181883] :
-    c_int[20552]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function isalnum[181840](arg c[181837] :
+    c_int[20549]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      c_int[20552]
+      c_int[20549]
     }
-    (181903 return(181901 call !=(181899 call isalnum(181896 call _cast c_int[20552] c[181874])) 0))
+    (181857 return(181855 call !=(181853 call isalnum(181850 call _cast c_int[20549] c[181828])) 0))
   }
   { scopeless type
     bool[10]
   }
-  function byte_toUpper[181914](arg c[181911] :
-  byteType[172517]) : _unknown[51] "inline"
+  function byte_toUpper[181868](arg c[181865] :
+  byteType[172471]) : _unknown[51] "inline"
   {
-    function toupper[181923](arg c[181920] :
-    c_int[20552]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function toupper[181877](arg c[181874] :
+    c_int[20549]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      c_int[20552]
+      c_int[20549]
     }
-    (181940 return(181938 call _cast byteType[172517](181936 call toupper(181933 call _cast c_int[20552] c[181911]))))
+    (181894 return(181892 call _cast byteType[172471](181890 call toupper(181887 call _cast c_int[20549] c[181865]))))
   }
   { scopeless type
-    byteType[172517]
+    byteType[172471]
   }
-  function byte_toLower[181951](arg c[181948] :
-  byteType[172517]) : _unknown[51] "inline"
+  function byte_toLower[181905](arg c[181902] :
+  byteType[172471]) : _unknown[51] "inline"
   {
-    function tolower[181960](arg c[181957] :
-    c_int[20552]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
+    function tolower[181914](arg c[181911] :
+    c_int[20549]) : _unknown[51] "extern" "local args" "no fn body" "fn synchronization free" "no return value for void"
     {
     }
     { scopeless type
-      c_int[20552]
+      c_int[20549]
     }
-    (181977 return(181975 call _cast byteType[172517](181973 call tolower(181970 call _cast c_int[20552] c[181948]))))
+    (181931 return(181929 call _cast byteType[172471](181927 call tolower(181924 call _cast c_int[20549] c[181902]))))
   }
   { scopeless type
-    byteType[172517]
+    byteType[172471]
   }
-  (355238 'used modules list'(173674 'use' ChapelStandard[20267])(173678 'use' SysCTypes[20943])(173681 'use' ByteBufferHelpers[172505])(173689 'use' NVStringFactory[30567]))
+  (355107 'used modules list'(173628 'use' ChapelStandard[20264])(173632 'use' SysCTypes[20940])(173635 'use' ByteBufferHelpers[172459])(173643 'use' NVStringFactory[30564]))
 }

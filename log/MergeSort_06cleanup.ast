@@ -2,205 +2,205 @@ AST dump for MergeSort after pass cleanup.
 Module use list: 
 
 {
-  (353070 'use' ChapelStandard)
-  (271219 'use' Sort)
-  function mergeSort[271234](arg Data[271231] :
-  (271229 call chpl__buildArrayRuntimeType unknown Dom[271224] unknown eltType[271227]), arg minlen[271237] =
-  16, arg comparator[271243] :
-  unknown rec[271240] =
+  (352940 'use' ChapelStandard)
+  (271109 'use' Sort)
+  function mergeSort[271124](arg Data[271121] :
+  (271119 call chpl__buildArrayRuntimeType unknown Dom[271114] unknown eltType[271117]), arg minlen[271127] =
+  16, arg comparator[271133] :
+  unknown rec[271130] =
   defaultComparator) : _unknown[51] "no return value for void"
   {
-    (271251 call chpl_check_comparator comparator eltType)
-    if(271283 call _cond_test(271259 call !=(271255 call . Dom c"rank") 1))
+    (271141 call chpl_check_comparator comparator eltType)
+    if(271173 call _cond_test(271149 call !=(271145 call . Dom c"rank") 1))
     {
-      (271280 call compilerError "mergeSort() requires 1-D array")
+      (271170 call compilerError "mergeSort() requires 1-D array")
     }
-    unknown Scratch[271289](271288 'typeof' Data)
-    (271292 'end of statement')
-    (271308 call _MergeSort Data Scratch(271298 call . Dom c"alignedLow")(271302 call . Dom c"alignedHigh") minlen comparator 0)
+    unknown Scratch[271179](271178 'typeof' Data)
+    (271182 'end of statement')
+    (271198 call _MergeSort Data Scratch(271188 call . Dom c"alignedLow")(271192 call . Dom c"alignedHigh") minlen comparator 0)
   }
-  function _MergeSort[271322](arg Data[271319] :
-  (271317 call chpl__buildArrayRuntimeType unknown Dom[271314]), arg Scratch[271327] :
-  (271324 call chpl__buildArrayRuntimeType nil[44]), arg lo[271331] :
-  int[13], arg hi[271335] :
-  int[13], arg minlen[271339] =
-  16, arg comparator[271345] :
-  unknown rec[271342] =
-  defaultComparator, arg depth[271350] :
+  function _MergeSort[271212](arg Data[271209] :
+  (271207 call chpl__buildArrayRuntimeType unknown Dom[271204]), arg Scratch[271217] :
+  (271214 call chpl__buildArrayRuntimeType nil[44]), arg lo[271221] :
+  int[13], arg hi[271225] :
+  int[13], arg minlen[271229] =
+  16, arg comparator[271235] :
+  unknown rec[271232] =
+  defaultComparator, arg depth[271240] :
   int[13]) : _unknown[51] "private" "no return value for void"
   {
-    (271366 'import'(271363 call . Sort c"InsertionSort"))
-    const stride[271384] "const"(271381 IfExpr (271370 call . Dom c"stridable") then
+    (271256 'import'(271253 call . Sort c"InsertionSort"))
+    const stride[271274] "const"(271271 IfExpr (271260 call . Dom c"stridable") then
     { scopeless
-      (271379 call abs(271375 call . Dom c"stride"))
+      (271269 call abs(271265 call . Dom c"stride"))
     } else
     { scopeless
       1
     } )
-    const size[271394] "const"(271392 call /(271389 call - hi lo) stride)
-    const mid[271407] "const"(271405 call + lo(271403 call *(271400 call / size 2) stride))
-    (271410 'end of statement')
-    if(271521 call _cond_test(271437 call ||(271416 call <(271413 call + size 1) minlen)(271435 call &&(271423 call ==(271420 call & depth 1) 0)(271433 call <(271427 call + size 1)(271431 call * 2 minlen)))))
+    const size[271284] "const"(271282 call /(271279 call - hi lo) stride)
+    const mid[271297] "const"(271295 call + lo(271293 call *(271290 call / size 2) stride))
+    (271300 'end of statement')
+    if(271411 call _cond_test(271327 call ||(271306 call <(271303 call + size 1) minlen)(271325 call &&(271313 call ==(271310 call & depth 1) 0)(271323 call <(271317 call + size 1)(271321 call * 2 minlen)))))
     {
-      (271451 call(271442 call . InsertionSort c"insertionSort") Data(comparator = comparator) lo hi)
-      if(271515 call _cond_test(271456 call & depth 1))
+      (271341 call(271332 call . InsertionSort c"insertionSort") Data(comparator = comparator) lo hi)
+      if(271405 call _cond_test(271346 call & depth 1))
       {
-        if(271508 call _cond_test(271459 call . Dom c"stridable"))
+        if(271398 call _cond_test(271349 call . Dom c"stridable"))
         {
-          (271488 call =(271474 call Scratch(271471 call chpl_by(271465 call chpl_build_bounded_range lo hi)(271468 call . Dom c"stride")))(271487 call Data(271484 call chpl_by(271478 call chpl_build_bounded_range lo hi)(271481 call . Dom c"stride"))))
+          (271378 call =(271364 call Scratch(271361 call chpl_by(271355 call chpl_build_bounded_range lo hi)(271358 call . Dom c"stride")))(271377 call Data(271374 call chpl_by(271368 call chpl_build_bounded_range lo hi)(271371 call . Dom c"stride"))))
         }
         {
-          (271505 call =(271497 call Scratch(271494 call chpl_build_bounded_range lo hi))(271504 call Data(271501 call chpl_build_bounded_range lo hi)))
+          (271395 call =(271387 call Scratch(271384 call chpl_build_bounded_range lo hi))(271394 call Data(271391 call chpl_build_bounded_range lo hi)))
         }
       }
-      (271519 return _void[55])
+      (271409 return _void[55])
     }
-    if(271642 call _cond_test(271539 call <(271530 call(271526 call . here c"runningTasks"))(271538 call(271532 call . here c"numPUs")(logical = 1))))
+    if(271532 call _cond_test(271429 call <(271420 call(271416 call . here c"runningTasks"))(271428 call(271422 call . here c"numPUs")(logical = 1))))
     {
       {
-        const _cobeginCount[271575] "const" "end count" "temp"
-        (271596 'move' _cobeginCount[271575](271593 call _endCountAlloc 1))
-        (271588 call _upEndCount _cobeginCount[271575] 1 2)
+        const _cobeginCount[271465] "const" "end count" "temp"
+        (271486 'move' _cobeginCount[271465](271483 call _endCountAlloc 1))
+        (271478 call _upEndCount _cobeginCount[271465] 1 2)
         {
           {
-            (271553 call _MergeSort Data Scratch lo mid minlen comparator(271551 call + depth 1))
+            (271443 call _MergeSort Data Scratch lo mid minlen comparator(271441 call + depth 1))
           }
-          (271578 call _downEndCount _cobeginCount[271575] nil[44])
-          (271577 'cobegin block')
+          (271468 call _downEndCount _cobeginCount[271465] nil[44])
+          (271467 'cobegin block')
         }
         {
           {
-            (271572 call _MergeSort Data Scratch(271563 call + mid stride) hi minlen comparator(271570 call + depth 1))
+            (271462 call _MergeSort Data Scratch(271453 call + mid stride) hi minlen comparator(271460 call + depth 1))
           }
-          (271584 call _downEndCount _cobeginCount[271575] nil[44])
-          (271583 'cobegin block')
+          (271474 call _downEndCount _cobeginCount[271465] nil[44])
+          (271473 'cobegin block')
         }
         Defer
         {
           {
-            (271599 call _endCountFree _cobeginCount[271575])
+            (271489 call _endCountFree _cobeginCount[271465])
           }
         }
-        (271604 call _waitEndCount _cobeginCount[271575] 1 2)
+        (271494 call _waitEndCount _cobeginCount[271465] 1 2)
       }
     }
     {
-      (271622 call _MergeSort Data Scratch lo mid minlen comparator(271620 call + depth 1))
-      (271640 call _MergeSort Data Scratch(271631 call + mid stride) hi minlen comparator(271638 call + depth 1))
+      (271512 call _MergeSort Data Scratch lo mid minlen comparator(271510 call + depth 1))
+      (271530 call _MergeSort Data Scratch(271521 call + mid stride) hi minlen comparator(271528 call + depth 1))
     }
-    if(271675 call _cond_test(271651 call ==(271648 call & depth 1) 0))
+    if(271565 call _cond_test(271541 call ==(271538 call & depth 1) 0))
     {
-      (271661 call _Merge Data Scratch lo mid hi comparator)
+      (271551 call _Merge Data Scratch lo mid hi comparator)
     }
     {
-      (271672 call _Merge Scratch Data lo mid hi comparator)
+      (271562 call _Merge Scratch Data lo mid hi comparator)
     }
   }
   where {
-    (271358 call ==(271354 call . Dom c"rank") 1)
+    (271248 call ==(271244 call . Dom c"rank") 1)
   }
-  function _Merge[271694](arg Dst[271691] :
-  (271689 call chpl__buildArrayRuntimeType unknown Dom[271684] unknown eltType[271687]), arg Src[271699] :
-  (271696 call chpl__buildArrayRuntimeType nil[44]), arg lo[271703] :
-  int[13], arg mid[271707] :
-  int[13], arg hi[271711] :
-  int[13], arg comparator[271717] :
-  unknown rec[271714] =
+  function _Merge[271584](arg Dst[271581] :
+  (271579 call chpl__buildArrayRuntimeType unknown Dom[271574] unknown eltType[271577]), arg Src[271589] :
+  (271586 call chpl__buildArrayRuntimeType nil[44]), arg lo[271593] :
+  int[13], arg mid[271597] :
+  int[13], arg hi[271601] :
+  int[13], arg comparator[271607] :
+  unknown rec[271604] =
   defaultComparator) : _unknown[51] "private" "no return value for void"
   {
-    const stride[271736] "const"(271733 IfExpr (271722 call . Dom c"stridable") then
+    const stride[271626] "const"(271623 IfExpr (271612 call . Dom c"stridable") then
     { scopeless
-      (271731 call abs(271727 call . Dom c"stride"))
+      (271621 call abs(271617 call . Dom c"stride"))
     } else
     { scopeless
       1
     } )
-    (271739 'end of statement')
-    const a1range[271759] "const"(271756 IfExpr (271742 call . Dom c"stridable") then
+    (271629 'end of statement')
+    const a1range[271649] "const"(271646 IfExpr (271632 call . Dom c"stridable") then
     { scopeless
-      (271750 call chpl_by(271747 call chpl_build_bounded_range lo mid) stride)
+      (271640 call chpl_by(271637 call chpl_build_bounded_range lo mid) stride)
     } else
     { scopeless
-      (271754 call chpl_build_bounded_range lo mid)
+      (271644 call chpl_build_bounded_range lo mid)
     } )
-    (271762 'end of statement')
-    const a1max[271764] "const" mid
-    (271767 'end of statement')
-    const a2range[271792] "const"(271789 IfExpr (271769 call . Dom c"stridable") then
+    (271652 'end of statement')
+    const a1max[271654] "const" mid
+    (271657 'end of statement')
+    const a2range[271682] "const"(271679 IfExpr (271659 call . Dom c"stridable") then
     { scopeless
-      (271780 call chpl_by(271777 call chpl_build_bounded_range(271774 call + mid stride) hi) stride)
+      (271670 call chpl_by(271667 call chpl_build_bounded_range(271664 call + mid stride) hi) stride)
     } else
     { scopeless
-      (271787 call chpl_build_bounded_range(271784 call + mid 1) hi)
+      (271677 call chpl_build_bounded_range(271674 call + mid 1) hi)
     } )
-    (271795 'end of statement')
-    const a2max[271797] "const" hi
-    (271800 'end of statement')
-    unknown A1[271805] "ref var"(271804 call Src a1range)
-    (271808 'end of statement')
-    unknown A2[271813] "ref var"(271812 call Src a2range)
-    (271816 'end of statement')
-    unknown a1[271821](271818 call . a1range c"first")
-    (271824 'end of statement')
-    unknown a2[271829](271826 call . a2range c"first")
-    (271832 'end of statement')
-    unknown i[271834] lo
-    (271837 'end of statement')
+    (271685 'end of statement')
+    const a2max[271687] "const" hi
+    (271690 'end of statement')
+    unknown A1[271695] "ref var"(271694 call Src a1range)
+    (271698 'end of statement')
+    unknown A2[271703] "ref var"(271702 call Src a2range)
+    (271706 'end of statement')
+    unknown a1[271711](271708 call . a1range c"first")
+    (271714 'end of statement')
+    unknown a2[271719](271716 call . a2range c"first")
+    (271722 'end of statement')
+    unknown i[271724] lo
+    (271727 'end of statement')
     {
-      unknown tmp[271912] "temp"
-      (271948 'move' tmp[271912](271937 call _cond_test(271939 call &&(271941 call <= a1 a1max)(271945 call <= a2 a2max))))
-      WhileDo[271917]
+      unknown tmp[271802] "temp"
+      (271838 'move' tmp[271802](271827 call _cond_test(271829 call &&(271831 call <= a1 a1max)(271835 call <= a2 a2max))))
+      WhileDo[271807]
       {
         {
-          if(271907 call _cond_test(271861 call <=(271859 call chpl_compare(271852 call A1 a1)(271857 call A2 a2) comparator) 0))
+          if(271797 call _cond_test(271751 call <=(271749 call chpl_compare(271742 call A1 a1)(271747 call A2 a2) comparator) 0))
           {
-            (271871 call =(271866 call Dst i)(271870 call A1 a1))
-            (271877 call += a1 stride)
-            (271882 call += i stride)
+            (271761 call =(271756 call Dst i)(271760 call A1 a1))
+            (271767 call += a1 stride)
+            (271772 call += i stride)
           }
           {
-            (271893 call =(271888 call Dst i)(271892 call A2 a2))
-            (271899 call += a2 stride)
-            (271904 call += i stride)
+            (271783 call =(271778 call Dst i)(271782 call A2 a2))
+            (271789 call += a2 stride)
+            (271794 call += i stride)
           }
         }
-        label _continueLabel[271915]
-        (271932 'move' tmp[271912](271921 call _cond_test(271923 call &&(271925 call <= a1 a1max)(271929 call <= a2 a2max))))
-        tmp[271912]
+        label _continueLabel[271805]
+        (271822 'move' tmp[271802](271811 call _cond_test(271813 call &&(271815 call <= a1 a1max)(271819 call <= a2 a2max))))
+        tmp[271802]
       }
-      label _breakLabel[271916]
+      label _breakLabel[271806]
     }
     {
-      unknown tmp[271977] "temp"
-      (272001 'move' tmp[271977](271996 call _cond_test(271998 call <= a1 a1max)))
-      WhileDo[271982]
+      unknown tmp[271867] "temp"
+      (271891 'move' tmp[271867](271886 call _cond_test(271888 call <= a1 a1max)))
+      WhileDo[271872]
       {
         {
-          (271963 call =(271958 call Dst i)(271962 call A1 a1))
-          (271969 call += a1 stride)
-          (271974 call += i stride)
+          (271853 call =(271848 call Dst i)(271852 call A1 a1))
+          (271859 call += a1 stride)
+          (271864 call += i stride)
         }
-        label _continueLabel[271980]
-        (271991 'move' tmp[271977](271986 call _cond_test(271988 call <= a1 a1max)))
-        tmp[271977]
+        label _continueLabel[271870]
+        (271881 'move' tmp[271867](271876 call _cond_test(271878 call <= a1 a1max)))
+        tmp[271867]
       }
-      label _breakLabel[271981]
+      label _breakLabel[271871]
     }
     {
-      unknown tmp[272030] "temp"
-      (272054 'move' tmp[272030](272049 call _cond_test(272051 call <= a2 a2max)))
-      WhileDo[272035]
+      unknown tmp[271920] "temp"
+      (271944 'move' tmp[271920](271939 call _cond_test(271941 call <= a2 a2max)))
+      WhileDo[271925]
       {
         {
-          (272016 call =(272011 call Dst i)(272015 call A2 a2))
-          (272022 call += a2 stride)
-          (272027 call += i stride)
+          (271906 call =(271901 call Dst i)(271905 call A2 a2))
+          (271912 call += a2 stride)
+          (271917 call += i stride)
         }
-        label _continueLabel[272033]
-        (272044 'move' tmp[272030](272039 call _cond_test(272041 call <= a2 a2max)))
-        tmp[272030]
+        label _continueLabel[271923]
+        (271934 'move' tmp[271920](271929 call _cond_test(271931 call <= a2 a2max)))
+        tmp[271920]
       }
-      label _breakLabel[272034]
+      label _breakLabel[271924]
     }
   }
 }

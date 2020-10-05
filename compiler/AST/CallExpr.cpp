@@ -61,6 +61,38 @@ CallExpr::CallExpr(BaseAST* base,
   gCallExprs.add(this);
 }
 
+CallExpr::CallExpr(BaseAST* base,
+                   PrimitiveTag prim,
+                   BaseAST* arg1,
+                   BaseAST* arg2,
+                   BaseAST* arg3,
+                   BaseAST* arg4,
+                   BaseAST* arg5) : Expr(E_CallExpr) {
+  primitive  = primitives[prim];
+  baseExpr   = NULL;
+  partialTag = false;
+  methodTag  = false;
+  square     = false;
+  tryTag     = TRY_TAG_NONE;
+
+  if (Symbol* b = toSymbol(base)) {
+    baseExpr = new SymExpr(b);
+  } else if (Expr* b = toExpr(base)) {
+    baseExpr = b;
+  } else {
+    INT_FATAL(this, "Bad baseExpr in CallExpr constructor");
+  }
+
+  callExprHelper(this, arg1);
+  callExprHelper(this, arg2);
+  callExprHelper(this, arg3);
+  callExprHelper(this, arg4);
+  callExprHelper(this, arg5);
+
+  argList.parent = this;
+
+  gCallExprs.add(this);
+}
 
 CallExpr::CallExpr(PrimitiveOp* prim,
                    BaseAST*     arg1,
@@ -243,7 +275,6 @@ void CallExpr::verify() {
     case PRIM_BLOCK_WHILEDO_LOOP:
     case PRIM_BLOCK_DOWHILE_LOOP:
     case PRIM_BLOCK_FOR_LOOP:
-    case PRIM_BLOCK_FORALL_LOOP:
     case PRIM_BLOCK_BEGIN:
     case PRIM_BLOCK_COBEGIN:
     case PRIM_BLOCK_COFORALL:

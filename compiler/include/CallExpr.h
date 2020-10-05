@@ -47,6 +47,14 @@ public:
            BaseAST*     arg3 = NULL,
            BaseAST*     arg4 = NULL,
            BaseAST*     arg5 = NULL);
+           
+  CallExpr(BaseAST*     base,
+           PrimitiveTag prim,
+           BaseAST*     arg1 = NULL,
+           BaseAST*     arg2 = NULL,
+           BaseAST*     arg3 = NULL,
+           BaseAST*     arg4 = NULL,
+           BaseAST*     arg5 = NULL);
 
   CallExpr(PrimitiveOp* prim,
            BaseAST*     arg1 = NULL,

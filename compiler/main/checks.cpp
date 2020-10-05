@@ -601,6 +601,7 @@ checkResolveRemovedPrims(void) {
         case PRIM_IS_TUPLE_TYPE:
         case PRIM_IS_STAR_TUPLE_TYPE:
         case PRIM_IS_SUBTYPE:
+        case PRIM_SCAN:
         case PRIM_REDUCE:
         case PRIM_REDUCE_ASSIGN:
         case PRIM_TUPLE_EXPAND:
