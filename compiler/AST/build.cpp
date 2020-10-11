@@ -2206,18 +2206,19 @@ void replaceWithGPUExpression(BlockStmt* block){
     if (call->isPrimitive(PRIM_REDUCE))
     {
       // TODO: replace to GPU reduce Call expression
-      call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
-                    new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
+      // call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
+                    // new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
     }
+    // Scan expression has a secondary primitive. 
+    // Different from reduce using primitive expression straightway.
     if (call -> isSecPrimitive(PRIM_SCAN))
     {
       // TODO: replace to GPU scan Call expression
-      // Currently replaced with one value in a CallExpr. 
-      // The required return type is iterator, we can return one value because Chapel allows scalar arguments promotion.
-      call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
-                    new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
+      // Currently replaced with one value in a CallExpr. The required return type 
+      // is iterator, scalar value will be promoted and assigned to every element of the iterator.
+      // call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
+                    // new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
     }
-    
   }
   // find forall expression
   std::vector<ForallStmt*> forallVector;
