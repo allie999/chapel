@@ -38,8 +38,6 @@
 #include "wellknown.h"
 
 #include <algorithm>
-// for debugging
-#include <iostream> 
 
 //
 // The function that represents the compiler-generated entry point
@@ -1641,7 +1639,6 @@ VarSymbol *new_StringOrBytesSymbol(const char *str, AggregateType *t) {
 }
 
 VarSymbol *new_CStringSymbol(const char *str) {
-  // std::cout << "new_CStringSymbol in symbol.cpp, input: " << astr(str) << std::endl;
   Immediate imm;
   imm.const_kind = CONST_KIND_STRING;
   imm.string_kind = STRING_KIND_C_STRING;

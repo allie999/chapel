@@ -196,11 +196,6 @@ module ChapelLocale {
     return chpl_localeID_to_locale(here_id);
   }
 
-  // // Temp for testing
-  // inline proc GPU{
-  //   writeln("debug: ChapelLocale GPU line 201");
-  //   return chpl_localeID_to_locale(here_id);
-  // }
 
   // Locale methods we want to have show up in chpldoc start here:
 
@@ -210,7 +205,6 @@ module ChapelLocale {
     :rtype: string
   */
   inline proc locale.hostname {
-    writeln("in locale.hostname line 212");
     return this._value.hostname;
   }
 
@@ -334,7 +328,6 @@ module ChapelLocale {
     var callStackSize: size_t;
 
     proc id : int return chpl_nodeFromLocaleID(__primitive("_wide_get_locale", this));
-    // proc GPU : locale return chpl_localeID_to_locale(here_id);
 
     pragma "no doc"
     proc localeid : chpl_localeID_t return __primitive("_wide_get_locale", this);

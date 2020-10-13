@@ -151,6 +151,7 @@ false            return processToken(yyscanner, TFALSE);
 for              return processToken(yyscanner, TFOR);
 forall           return processToken(yyscanner, TFORALL);
 forwarding       return processToken(yyscanner, TFORWARDING);
+GPU              return processToken(yyscanner, TGPU);
 if               return processToken(yyscanner, TIF);
 imag             return processToken(yyscanner, TIMAG);
 import           return processToken(yyscanner, TIMPORT);
@@ -221,7 +222,7 @@ while            return processToken(yyscanner, TWHILE);
 with             return processToken(yyscanner, TWITH);
 yield            return processToken(yyscanner, TYIELD);
 zip              return processToken(yyscanner, TZIP);
-GPU              return processToken(yyscanner, TGPU);
+
 "_"              return processToken(yyscanner, TUNDERSCORE);
 
 "="              return processToken(yyscanner, TASSIGN);

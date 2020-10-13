@@ -1136,10 +1136,6 @@ initPrimitive() {
   prim_def(PRIM_VERSION_MINOR, "version minor", returnInfoDefaultInt);
   prim_def(PRIM_VERSION_UPDATE, "version update", returnInfoDefaultInt);
   prim_def(PRIM_VERSION_SHA, "version sha", returnInfoString);
-
-  // GPU related primitives
-  prim_def(PRIM_GPU_REDUCE, "chpl_gpu_reduce", returnInfoFirst, true, true);
-  prim_def(PRIM_IS_GPU, "chpl_is_gpu", returnInfoBool, true, true);
 }
 
 static Map<const char*, VarSymbol*> memDescsMap;

@@ -625,28 +625,6 @@ llvm::LoadInst* codegenLoadLLVM(GenRet ptr,
 #endif
 
 static
-GenRet codegenIsGPUSublocale(void)
-{
-  // testing with 1, alwasy GPU
-  // Modify to use value from AST instead of runtime
-  GenRet ret(1);
-  // codegenCallExpr("chpl_gen_isGPUSublocale");
-  // ret.chplType = dtBool;
-
-// #ifdef HAVE_LLVM
-//   GenInfo* info = gGenInfo;
-//   if (!info->cfile ) {
-//     // Make sure that the result of gen_getLocaleID is
-//     // the right type (since clang likes to fold int32/int32 into int32).
-//     GenRet expectType = dtBool;
-//     ret.val = convertValueToType(ret.val, expectType.type);
-//     assert(ret.val);
-//   }
-// #endif
-  return ret;
-}
-
-static
 GenRet codegenUseGlobal(const char* global)
 {
   GenInfo* info = gGenInfo;
@@ -5432,21 +5410,6 @@ GenRet CallExpr::codegenPrimitive() {
   } else if (codegenFn != NULL) {
     // use a registered DEFINE_PRIM function from above
     codegenFn(this, ret);
-  } else if (tag == PRIM_IS_GPU){
-    ret = codegenIsGPUSublocale();
-  } else if (tag == PRIM_GPU_REDUCE ){
-    Type *data_type = this->get(1)->typeInfo();
-      /*FIXME: After gpu kernels for all possible reductions have
-      * been implemented, remove this conditional.
-      */
-    if (is_int_type(data_type)) {
-      // ret = GenRet(1);
-      // Testing
-      ret = codegenCallExpr("printf", "--------- exectue on GPU GPU ----------");
-    } else {
-      INT_FATAL(data_type, "gpu reduction not implemented for given "
-                          "element type");
-    }
   } else {
     // otherwise, error
     INT_FATAL(this, "primitive codegen fail; should it still be in the AST?");
