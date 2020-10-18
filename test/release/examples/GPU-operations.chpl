@@ -6,6 +6,7 @@ var C = 0.0;
 on GPU Locales[0] do {
     // reduce example
     C = + reduce A;
+    writeln(C);
     // forall example
     forall a in A {
 	    a += a + 0.1;

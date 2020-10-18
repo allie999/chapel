@@ -104,6 +104,16 @@ void collectMyCallExprs(BaseAST* ast, std::vector<CallExpr*>& callExprs,
       callExprs.push_back(callExpr);
 }
 
+void collectCallExprsAndForallStmts(BaseAST* ast, std::vector<Expr*>& Exprs) {
+  AST_CHILDREN_CALL(ast, collectCallExprsAndForallStmts, Exprs);
+   if (CallExpr* callExpr = toCallExpr(ast)){
+      Exprs.push_back(callExpr);
+   }else if (ForallStmt* forall = toForallStmt(ast)){
+      Exprs.push_back(forall);
+   }
+  
+}
+
 void collectGotoStmts(BaseAST* ast, std::vector<GotoStmt*>& gotoStmts) {
   AST_CHILDREN_CALL(ast, collectGotoStmts, gotoStmts);
   if (GotoStmt* gotoStmt = toGotoStmt(ast))

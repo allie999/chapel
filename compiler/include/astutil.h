@@ -55,6 +55,7 @@ void collectCallExprs(BaseAST* ast, std::vector<CallExpr*>& callExprs);
 void collectMyCallExprs(BaseAST* ast,
                         std::vector<CallExpr*>& callExprs,
                         FnSymbol* fn);
+void collectCallExprsAndForallStmts(BaseAST* ast, std::vector<Expr*>& exprs);                 
 void collectGotoStmts(BaseAST* ast, std::vector<GotoStmt*>& gotoStmts);
 void collectSymExprs(BaseAST* ast, std::vector<SymExpr*>& symExprs);
 void collectSymExprsFor(BaseAST* ast, Symbol* sym, std::vector<SymExpr*>& symExprs);

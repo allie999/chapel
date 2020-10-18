@@ -41,7 +41,6 @@
 
 #include <map>
 #include <utility>
-#include <iostream>
 
 static BlockStmt* findStmtWithTag(PrimitiveTag tag, BlockStmt* blockStmt);
 
@@ -2199,34 +2198,32 @@ static Expr* extractLocaleID(Expr* expr) {
 // Find all reduce, forall and scan expression, replace them with GPU version expression.
 void replaceWithGPUExpression(BlockStmt* block){
   // find reduce expression
-  std::vector<CallExpr *> callsVector;
-  collectCallExprs(block, callsVector);
-  for_vector(CallExpr, call, callsVector)
+  std::vector<Expr *> exprVector;
+  collectCallExprsAndForallStmts(block, exprVector);
+  for_vector(Expr, e, exprVector)
   {
-    if (call->isPrimitive(PRIM_REDUCE))
+    if (CallExpr* call = toCallExpr(e))
     {
-      // TODO: replace to GPU reduce Call expression
-      // call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
-                    // new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
+      if (call->isPrimitive(PRIM_REDUCE))
+      {
+        // TODO: replace to GPU reduce Call expression
+        call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
+                      new CallExpr("chpl__buildArrayExpr", buildIntLiteral("12345"))));
+      }
+      // Scan expression has a secondary primitive. 
+      // Different from reduce using primitive expression straightway.
+      if (call -> isSecPrimitive(PRIM_SCAN))
+      {
+        // TODO: replace to GPU scan Call expression
+        // Currently replaced with one value in a CallExpr. The required return type 
+        // is iterator, scalar value will be promoted and assigned to every element of the iterator.
+        call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
+                      new CallExpr("chpl__buildArrayExpr", buildIntLiteral("123"))));
+      }
+    }else if(ForallStmt* forall = toForallStmt(e)){
+      // TODO: replace to GPU forall expression, there may contains nested forall.
+      forall -> replace(new CallExpr(new UnresolvedSymExpr("writeln"), buildStringLiteral("0xbeef")));
     }
-    // Scan expression has a secondary primitive. 
-    // Different from reduce using primitive expression straightway.
-    if (call -> isSecPrimitive(PRIM_SCAN))
-    {
-      // TODO: replace to GPU scan Call expression
-      // Currently replaced with one value in a CallExpr. The required return type 
-      // is iterator, scalar value will be promoted and assigned to every element of the iterator.
-      // call->replace(buildReduceExpr(new UnresolvedSymExpr("SumReduceScanOp"), 
-                    // new CallExpr("chpl__buildArrayExpr", buildIntLiteral("0xbeef"))));
-    }
-  }
-  // find forall expression
-  std::vector<ForallStmt*> forallVector;
-  collectForallStmts(block, forallVector);
-  for_vector(ForallStmt, forall, forallVector)
-  {
-       // TODO: replace to GPU forall expression, there may contains nested forall.
-      // forall -> replace(new CallExpr(new UnresolvedSymExpr("writeln"), buildStringLiteral("beef ")));
   }
 }
 
@@ -2249,11 +2246,9 @@ buildOnGPUStmt(Expr* expr, Expr* stmt) {
   if (!requireOutlinedOn()) {
     BlockStmt* block = new BlockStmt(stmt);
     if (BlockStmt *blockstmt = toBlockStmt(stmt))
-    {
       replaceWithGPUExpression(blockstmt);
-    }else{
+    else
       replaceWithGPUExpression(block);
-    }
     Symbol* tmp = newTempConst();
     block->insertAtHead(new CallExpr(PRIM_MOVE, tmp, onExpr)); // evaluate the expression for side effects
     block->insertAtHead(new DefExpr(tmp));
@@ -2263,11 +2258,9 @@ buildOnGPUStmt(Expr* expr, Expr* stmt) {
 
   if (beginBlock) {
     if (BlockStmt *blockstmt = toBlockStmt(stmt))
-    {
       replaceWithGPUExpression(blockstmt);
-    }else{
+    else
       replaceWithGPUExpression(body);
-    }
 
     // OPTIMIZATION: If "on x" is immediately followed by a "begin", then collapse
     // remote_fork (node) {
@@ -2293,11 +2286,10 @@ buildOnGPUStmt(Expr* expr, Expr* stmt) {
     onBlock->blockInfoSet(new CallExpr(PRIM_BLOCK_ON, gFalse, tmp));
     block->insertAtTail(onBlock);
     if (BlockStmt *blockstmt = toBlockStmt(stmt))
-    {
       replaceWithGPUExpression(blockstmt);
-    }else{
+    else
       replaceWithGPUExpression(onBlock);
-    }
+
     return block;
   }
 }
