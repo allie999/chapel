@@ -1,8 +1,17 @@
-# To add new program for testing, add the name of the program without extension
-# to programArr, separate by space. 
-# Modify pathToBin to correct chpl binary
-# Make sure bash shell is used, the output of time command varies.
 
+: '
+Chapel Compiler Optimisations for GPU Support
+by Yihan Zhou
+21/10/2020
+Measure compilation time of Chapel programs
+
+- To add new program for time measurement, add the name of the program 
+  without extension to programArr, separate by space. 
+
+- Modify pathToBin to correct chpl binary
+- Make sure bash shell is used, the output of time command varies 
+  on different shell.
+'
 numOfRuns=2
 # e.g /Users/xxx/chapel/bin/darwin-x86_64/chpl
 pathToBin=/path-to-chapel-bin
