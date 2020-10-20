@@ -69,5 +69,7 @@ echo "=            Final Result            ="
 echo "======================================"
 
 for i in ${!timeNamesArr[@]}; do
-  echo "${timeNamesArr[$i]}: ${timeValArr[$i]}"
+  averageTime=$(python3 -c "print(\"{:.5f}\".format(round(float(${timeValArr[$i]}) / float($numOfRuns),5)))")
+  totalTime=$(python3 -c "print(\"{:.5f}\".format(round(${timeValArr[$i]},5)))")
+  echo "${timeNamesArr[$i]}: $totalTime Time Per round: $averageTime"
 done
