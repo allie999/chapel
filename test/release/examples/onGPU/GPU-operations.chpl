@@ -1,5 +1,3 @@
-use Time;
-
 var A : [1..10] real = 2.0;
 var B : [1..10] real = 2.0;
 var C = 0.0;
