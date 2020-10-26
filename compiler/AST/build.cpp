@@ -2222,7 +2222,7 @@ void replaceWithGPUExpression(BlockStmt* block){
       }
     }else if(ForallStmt* forall = toForallStmt(e)){
       // TODO: replace to GPU forall expression, there may contains nested forall.
-      forall -> replace(new CallExpr(new UnresolvedSymExpr("writeln"), buildStringLiteral("0xbeef")));
+      // forall -> replace(new CallExpr(new UnresolvedSymExpr("writeln"), buildStringLiteral("0xbeef")));
     }
   }
 }

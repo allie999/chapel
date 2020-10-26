@@ -39,7 +39,7 @@ for i in $(seq 1 $numOfRuns); do
   outputArr=()
   # save outputs from time command
   for t in ${programArr[@]}; do
-    output=$((time $pathToBin -o $t ${t}.chpl)  2>&1 > /dev/null | grep -E "m[0-9]*.[0-9]*s" -o)
+    output=$((time $pathToBin --baseline -o $t ${t}.chpl)  2>&1 > /dev/null | grep -E "m[0-9]*.[0-9]*s" -o)
     outputArr+=($output)
   done
 
