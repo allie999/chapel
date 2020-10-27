@@ -12,3 +12,16 @@ on GPU Locales[0] do {
     // scan example
     writeln(+ scan A);
 }
+
+// Operations will not be affected in normal on stmt
+on Locales[0] do {
+    // reduce example
+    C = + reduce A;
+    writeln(C);
+    // forall example
+    forall a in A {
+	    a += a + 0.1;
+    }
+    // scan example
+    writeln(+ scan A);
+}
